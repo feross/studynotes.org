@@ -1,1 +1,0 @@
-# [StudyNotes](http://studynotes.org)
