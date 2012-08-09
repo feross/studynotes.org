@@ -1,0 +1,352 @@
+@page {
+    margin: 1.5cm 1.5cm;
+}
+
+body {
+    max-width: auto;
+    font-family: Arial, Times New Roman, sans-serif;
+}
+
+.network {
+    margin-left: 0;
+    padding-left: 0;
+}
+    .network img {
+        max-width: 250px;
+    }
+
+body,
+input,
+textarea,
+button {
+    color: #333;
+    font-size: 100%;
+    line-height: 1.4em;
+}
+
+h2 {
+    font-size: 2.5em;
+    line-height: 1.3em;
+    padding-bottom: 0;
+    margin-bottom: 0.25em;
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: normal;
+}
+    h2 a {
+        text-decoration: none;
+    }
+
+sup {
+    vertical-align: top;
+    position: relative;
+    left: -2px;
+    top: -3px;
+}
+
+article,
+.entry {
+    margin-bottom: 4em !important;
+}
+
+h3 {
+    font-size: 1.75em;
+    margin: 1.75em 0 0.75em 0;
+    line-height: 1.2em;
+}
+h4,
+h5,
+h6 {
+    letter-spacing: 0.125em;
+    padding: 1.5em 0 0 0;
+    margin-bottom: 0;
+    text-transform: uppercase;
+}
+a {
+    color: #41b7d8;
+    text-decoration: none;
+}
+p a {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding-bottom: 1px;
+}
+pre,
+code {
+    background: #fefeec;
+}
+img {
+    max-width: 100%;
+    margin: 0.3em 0;
+}
+#category {
+    border-bottom: 5px solid #eee;
+}
+.gravatar {
+    float: right !important;
+    width: 10%;
+    padding: 2.5% 1% 2.5% 1.5em;
+}
+.about {
+    width: 80%;
+}
+.gravatar img {
+    border-radius: 50%;
+}
+.postmetadata {
+    padding: 0 0 1em 0;
+    margin: 0;
+    color: #fafafa;
+    font-size: 0.95em !important;
+}
+    .postmetadata a {
+        text-decoration: none;
+    }
+
+li ul, 
+li ol {
+    margin: 0 1.5em;
+}
+ul,
+ol {
+    margin: 1.5em;
+}
+ul {
+    list-style-type: disc;
+}
+ol {
+    list-style-type: decimal;
+}
+li {
+    padding:0.5em 0;
+}
+
+li.author {
+    font-size: 1.3em;
+    font-style: italic;
+    font-family: Georgia, Times New Roman, serif;
+    padding: 0 0 1.15em 0 !important;
+}
+.date:before {
+    content: "Published on ";
+    white-space: pre;
+    color: #ccc;
+} 
+.date:after {
+    content: " in ";
+    color: #ccc;
+} 
+.tags:after {
+    content: " with ";
+    color: #ccc;
+} 
+
+.postmetadata li {
+    display: inline-block;
+}
+.postmetadata .author {
+    float: left;
+    width: 100%;
+    padding-bottom: 1.5em;
+}
+.postmetadata .date {
+    clear: both;
+    padding-left: 0;
+    margin-left: 0;
+}
+.postmetadata {
+    padding-bottom: 0.5em;
+    margin-bottom: 2em;
+    border-bottom: 1px solid #e3e3e3;
+}
+li.tags a {
+    text-decoration: none;
+    color: #fafafa;
+}
+li.date {
+    margin-left: 2em;
+}
+
+article.post {
+    border: none;
+}
+
+* {
+    background: transparent !important;
+    color: #444 !important;
+    text-shadow: none;
+}
+a, 
+a:visited {
+    border:none !important;
+    color: #444 !important;
+    text-decoration: underline;
+}
+
+h2 a:after, 
+li.author a:after, 
+li.current a:after, 
+.ir a:after {
+    content: "";
+}
+img {
+    max-width: 500px;
+    page-break-inside: avoid;
+}
+p,
+blockquote,
+h2,
+h3,
+h4 {
+    orphans: 3;
+    widows: 3;
+}
+h2,
+h3 {
+    page-break-after: avoid;
+}
+.bio {
+    margin-top: 2em;
+    padding-top: 1.5em;
+    border-top: 5px solid #ccc;
+}
+.about {
+    float: left;
+}
+pre,
+blockquote {
+    page-break-inside: avoid;
+}
+
+.gravatar {
+    float: left;
+    width: 100px;
+}
+.about {
+    float: left;
+    padding-bottom: 0.5em;
+}
+.bio {
+    padding-bottom: 1em;
+}
+
+.statement {
+    clear: both;
+    padding-top: 1.5em;
+    border-top: 1px solid #e3e3e3;
+} 
+.statement a {
+    text-decoration: none;
+    }
+.statement:after {
+    text-decoration: underline;
+    clear: both;
+    content: " http://www.smashingmagazine.com";
+}
+
+
+.grid + p a,
+.fp-related-articles,
+.wp-pagenavi,
+.continue-reading,
+.current,
+.related-articles,
+div.sub-tabs,
+.advertisement,
+.adjacentposts,
+.post-edit-link,
+.post-thumb,
+.postmetadata .tags,
+.share-it,
+#logoedtarget,
+#textadtarget,
+.postmetadata .comments,
+.about .post-author,
+div.mini, 
+nav.sections, 
+nav.toplevel ul.network li, 
+nav.toplevel ul.channels, 
+#search, 
+#discussion,
+.backtotop,
+.share-on-twitter, 
+.footer-arrows,
+.contribute, 
+p.tags,
+div.toolbar,
+ul.sub-tabs, 
+.commentmeta, 
+#respond,
+#the-smashing-cat, 
+#edpool, 
+.ed, 
+.ad, 
+.col.side,
+#wpsidebar,
+.wp-search-form,
+.spnsrlistwrapper,
+.inner,
+.sidebar-smash-box,
+.sidebartabs,
+.two,
+.ads, .share-on-twitter.single, .tagsdata {
+    display: none !important;
+}
+
+nav.toplevel ul.network li.current {
+    background: none;
+    border: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    display: block !important;
+    width: 6em !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+}
+    nav.toplevel ul.network li.current a {
+        height: auto;
+    }
+
+#container {
+    margin-right: 0 !important;
+}
+    #container .fluid {
+        background: none;
+        border: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+    }
+
+.col.main {
+    width: 100% !important;
+}
+
+.print_only_notelist {
+    display: block;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+    .print_only_notelist h4 { 
+        padding-bottom: 1.5em; 
+    }
+
+.print_only {
+    display: inline;
+}
+
+#discussion {
+    page-break-before: always;
+}
+#discussion:before {
+    content: "Comments";
+}
+
+article.post h2 .catch_headline {
+    font-size: 0.45em;
+}
+
+article.post h2 .headline {
+    font-size: 1.25em;
+    display: block;
+}

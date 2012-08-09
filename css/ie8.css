@@ -1,0 +1,15 @@
+.search_submit{border:none !important; padding-bottom:0.5999em !important}
+.wp-search-form input{position:relative; top:-1px}
+.wp-pagenavi{border-top:none !important}
+nav.sections ul li a{border-bottom:1px solid #DDD}
+nav.sections ul li ul li a{color:#888}
+nav .network li{border-right:1px solid #e6e6e6 !important; border-bottom:1px solid #e6e6e6 !important}
+nav .network li.current{border-right:1px solid #e6e6e6 !important; border-bottom:1px solid #e6e6e6 !important}
+nav .network li a{color:#b2b2b2}
+nav .network li a:hover{color:#333}
+ul.postmetadata li.author{border-bottom:1px solid #DDD}
+#twitter li:after{display:none !important}
+.commentlist .comment-author{width:100%}
+.commentlist .comment-author .comment-author{width:auto}
+.commentlist .authormeta{display:block}
+nav .channels .modal:after{display: none !important;}

@@ -1,3 +1,7 @@
+js/*.js
+
+# --- DEFAULTS BELOW ---
+
 # Numerous always-ignore extensions
 *.diff
 *.err

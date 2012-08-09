@@ -9,76 +9,586 @@
     
     <title>StudyNotes</title>
     <meta name="description" content="TODO">
-    
-    <meta name="viewport" content="width=device-width">
-    <!-- TODO: try this:
+    <meta name="keywords" content="TODO"/>
+    <!-- Add open graph tags -->
+
+    <!-- <link rel="canonical" href="TODO" /> -->
+    <!-- <link rel="prev" href="TODO" /> -->
+    <!-- <link rel="next" href="TODO" /> -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- TODO: try these other options:
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     -->
+    <!-- <meta name="viewport" content="width=device-width"> -->
+
+    <!-- TODO: add rss feed, see: https://github.com/opensearch.xml -->
+    <!-- <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="StudyNotes" /> -->
+
     
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/master.css">
-    
-    <!--[if IE]>
-        <link rel="stylesheet" type="text/css" href="css/ie.css" />
-    ![endif]-->
-    
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- TODO: look at print.css -->
+    <link rel="stylesheet" href="css/print.css" media="print">
+
+    <!-- TODO: look at ie8.css -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" href="http://media.smashingmagazine.com/themes/smashingv4/stylesheets/ie8.css" />
+    <![endif]-->
+        
     <!-- TYPEKIT -->
-    <!-- <script type="text/javascript" src="http://use.typekit.net/djj4afz.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+    <script type="text/javascript" src="http://use.typekit.net/djj4afz.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     <!-- TYPEKIT -->
     
     <script src="js/libs/modernizr-2.5.3.min.js"></script>
+
+    <!-- TODO: move these scripts to the bottom -->
+    <!-- TODO: add https://github.com/scottjehl/Respond/
+               add
+    -->
+
 </head>
-<body>
+<body class="home blog www-section">
+    <a id="top"></a>
+    <nav class="toplevel clearfix">
+        <div class="mini">
+            <a href="http://www.smashingmagazine.com/"><img src="http://media.smashingmagazine.com/themes/smashingv4/images/logo.png" alt="Smashing Magazine" title="Jump to the front page" /></a>
+            <select name="network" id="networkselection">
+                <option value="network" selected="selected">- select -</option>
+                <option value="http://www.smashingmagazine.com/books/">Books</option>
+                <option value="http://www.smashingmagazine.com/ebooks/">eBooks</option>
+                <option value="http://jobs.smashingmagazine.com/">Job Board</option>
+                <option value="https://shop.smashingmagazine.com/">Shop</option>
+            </select>
+        </div>
+        <ul class="network clearfix">           
+            <li class="current"><a href="http://www.smashingmagazine.com/"><img src="http://media.smashingmagazine.com/themes/smashingv4/images/logo.png" alt="Smashing Magazine" title="Jump to the front page" /></a></li>
+            <li><a href="http://www.smashingmagazine.com/books/">Books</a></li>
+            <li><a href="http://www.smashingmagazine.com/ebooks/">eBooks</a></li>
+            <li><a href="http://jobs.smashingmagazine.com/">Job Board</a></li>
+            <li><a href="https://shop.smashingmagazine.com/">Shop</a></li>
+        </ul>
+        <ul class="channels">
+            <li class="rss"><a href="http://rss1.smashingmagazine.com/feed/" title="Subscribe to our RSS-feed (900K)">RSS</a></li>
+            <li class="facebook"><a href="http://www.facebook.com/smashmag" title="Join our Facebook page! (94k)">Facebook</a></li>
+            <li class="twitter"><a href="http://twitter.com/smashingmag" title="Follow us on Twitter! (584K)">Twitter</a></li>
+            <li class="newsletter"><a href="http://www.smashingmagazine.com/the-smashing-newsletter/" title="Subscribe to our Email Newsletter (107K)">Newsletter</a></li>
+        </ul>
+    </nav>
+
+<div id="container">
+    <div class="fluid clearfix">
+        <div class="grid clearfix">
+            <div class="mini-search wp-search-form" >           
+                <form id="search" method="get" action="http://www.smashingmagazine.com/search-results/" target="_top">
+                    <input name="q" type="text" placeholder="e.g. JavaScript" />
+                    <button class="search_submit" type="submit"><span class="first-type">Search</span><span class="last-type">Go!</span></button>
+                    <input type="hidden" name="cx" value="partner-pub-6779860845561969:5884617103">
+                    <input type="hidden" name="cof" value="FORID:10">
+                    <input type="hidden" name="ie" value="UTF-8">
+                </form>
+            </div>
+            <div class="col sidebar">
+                <nav class="sections">
+                <div class="mini">
+                    <select name="sections" id="subsection-select">
+                        <option value="network" selected="selected">- select -</option>
+                        <optgroup label="Smashing Categories">
+                            <option value="http://www.smashingmagazine.com/books/">Books</option>
+                            <option value="http://www.smashingmagazine.com/ebooks/">eBooks</option>
+                            <option value="http://jobs.smashingmagazine.com/">Job Board</option>
+                            <option value="https://shop.smashingmagazine.com/">Shop</option>                                
+                        </optgroup>
+                        <optgroup label="Smashing Sections">
+                            <option value="http://coding.smashingmagazine.com/">Coding</option>
+                            <option value="http://www.smashingmagazine.com/category/design/">Design</option>
+                            <option value="http://mobile.smashingmagazine.com">Mobile</option>
+                            <option value="http://www.smashingmagazine.com/category/graphics/">Graphics</option>
+                            <option value="http://uxdesign.smashingmagazine.com">UX Design</option>
+                            <option value="http://wp.smashingmagazine.com">WordPress</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <ul class="clearfix">
+                    <li class="coding">
+                        <a href="http://coding.smashingmagazine.com">Coding</a>
+                        <ul>
+                            <li><a href="http://coding.smashingmagazine.com/tag/css/">CSS</a></li>
+                            <li><a href="http://coding.smashingmagazine.com/tag/html/">HTML</a></li>
+                            <li><a href="http://coding.smashingmagazine.com/tag/javascript/">JavaScript</a></li>
+                            <li><a href="http://coding.smashingmagazine.com/tag/techniques/">Techniques</a></li>
+                        </ul>
+                    </li>
+                    <li class="design">
+                        <a href="http://www.smashingmagazine.com/category/design/">Design</a>
+                        <ul>
+                            <li><a href="http://www.smashingmagazine.com/tag/web-design/">Web Design</a></li>
+                            <li><a href="http://www.smashingmagazine.com/tag/typography/">Typography</a></li>
+                            <li><a href="http://www.smashingmagazine.com/tag/inspiration/">Inspiration</a></li>
+                            <li><a href="http://www.smashingmagazine.com/tag/business/">Business</a></li>
+                        </ul>
+                    </li>
+                    <li class="community">
+                        <a href="http://mobile.smashingmagazine.com">Mobile</a>
+                        <ul>
+                            <li><a href="http://mobile.smashingmagazine.com/tag/responsive-design/">Responsive</a></li>
+                            <li><a href="http://mobile.smashingmagazine.com/tag/ios/">iPhone &amp; iPad</a></li>
+                            <li><a href="http://mobile.smashingmagazine.com/tag/android/">Android</a></li>
+                            <li><a href="http://mobile.smashingmagazine.com/tag/design-patterns/">Design Patterns</a></li>
+                        </ul>
+                    </li>
+                    <li class="graphics">
+                        <a href="http://www.smashingmagazine.com/category/graphics/">Graphics</a>
+                        <ul>
+                            <li><a href="http://www.smashingmagazine.com/tag/photoshop/">Photoshop</a></li>
+                            <li><a href="http://www.smashingmagazine.com/tag/illustrator/">Illustrator</a></li>
+                            <li><a href="http://www.smashingmagazine.com/tag/wallpapers/">Wallpapers</a></li>
+                            <li><a href="http://www.smashingmagazine.com/tag/freebies/">Freebies</a></li>
+                        </ul>
+                    </li>
+                    <li class="ux">
+                        <a href="http://uxdesign.smashingmagazine.com">UX Design</a>
+                        <ul>
+                            <li><a href="http://uxdesign.smashingmagazine.com/tag/usability/">Usability</a></li>
+                            <li><a href="http://uxdesign.smashingmagazine.com/tag/user-experience/">User Experience</a></li>
+                            <li><a href="http://uxdesign.smashingmagazine.com/tag/ui/">UI Design</a></li>
+                            <li><a href="http://uxdesign.smashingmagazine.com/tag/e-commerce/">E-Commerce</a></li>
+                        </ul>
+                    </li>
+                    <li class="wordpress">
+                        <a href="http://wp.smashingmagazine.com" class="clearfix"><span class="short">WP</span><span class="long"><span>Word</span><span>Press</span></span></a>
+                        <ul>
+                            <li><a href="http://wp.smashingmagazine.com/tag/essentials/">Essentials</a></li>
+                            <li><a href="http://wp.smashingmagazine.com/tag/techniques/">Techniques</a></li>
+                            <li><a href="http://wp.smashingmagazine.com/tag/plugins/">Plugins</a></li>
+                            <li><a href="http://wp.smashingmagazine.com/tag/themes/">Themes</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <br class="nasty" />
+            </nav>
+        </div><!-- .col.sidebar -->
+        <div class="col main home">
+    
+
+
+
+
+
+    
+                    
+    <article  class="post-140190 post type-post status-publish format-standard hentry category-wordpress post">
+
+            <h2><a href="http://wp.smashingmagazine.com/2012/08/08/help-us-help-wordpress/" rel="bookmark" title="Read 'Help Us Help WordPress'"><span class="catch_headline">Usability Testing In WordPress</span><span class="headline">Help Us Help WordPress</span></a></h2>
+        
+ <ul class="postmetadata clearfix">
+        <li class="author">By <a rel="author" href="http://wp.smashingmagazine.com/author/shane-pearlman/?rel=author" title="Posts by Shane Pearlman" >Shane Pearlman</a></li>
+        
+        <li id="logoedtarget" class="inline"></li>      
+        <li class="date">August 8th, 2012</li>
+
+    <li class="tags"><a href="http://wp.smashingmagazine.com/tag/plugins/">Plugins</a>, <a href="http://wp.smashingmagazine.com/tag/usability/">Usability</a></li>          <li class="comments"><a href="http://wp.smashingmagazine.com/2012/08/08/help-us-help-wordpress/#comments" title="Help Us Help WordPress">15 Comments</a></li>
+          </ul>
+
+      <p>This is a personal request from your user, a rallying cry from a compatriot. I personally love WordPress. I make my living from it. The average user, though, couldn’t care less about it.</p>
+<p><a href="http://wp.smashingmagazine.com/2012/08/08/help-us-help-wordpress/"><img src="http://media.smashingmagazine.com/wp-content/uploads/2012/07/featured-image.png" width="500" height="275" alt="Usability for WordPress by Modern Tribe" /></a></p>
+<p>They just want to run their business, tell their family history, organize their church, share their photos or live their life online with a minimum of impedance. In its evolution from simple blogging tool to CMS, framework and software ecosystem, <strong>WordPress is losing its way</strong>. It needs us to help bring it back and cultivate simple genius.</p>
+      <a href="http://wp.smashingmagazine.com/2012/08/08/help-us-help-wordpress/" class="continue-reading">Read more...</a>
+
+</article>
+
+                        
+    <article  class="post-136732 post type-post status-publish format-standard hentry category-global-web-design tag-content post">
+
+            <h2><a href="http://www.smashingmagazine.com/2012/08/07/content-blessing-bubble-burden/" rel="bookmark" title="Read 'Content: A Blessing, A Bubble, A Burden'"><span class="catch_headline">Content Strategy</span><span class="headline">Content: A Blessing, A Bubble, A Burden</span></a></h2>
+        
+ <ul class="postmetadata clearfix">
+        <li class="author">By <a rel="author" href="http://www.smashingmagazine.com/author/christopher-butler/?rel=author" title="Posts by Christopher Butler" >Christopher Butler</a></li>
+        
+                
+        <li class="date">August 7th, 2012</li>
+
+        <li class="tags"><a href="http://www.smashingmagazine.com/tag/content/">Content</a></li>
+
+                    <li class="comments"><a href="http://www.smashingmagazine.com/2012/08/07/content-blessing-bubble-burden/#comments" title="Comment on Content: A Blessing, A Bubble, A Burden">17 Comments</a> </li>
+          </ul>
+
+      <p>Everyone is talking about content. Googling the phrase “content strategy” retrieves almost 50 million results &mdash; a clear indicator that interest in content is very much in the zeitgeist. By the time you read this, I expect that number will have grown even higher.</p>
+
+<p><a href="http://www.smashingmagazine.com/2012/08/07/content-blessing-bubble-burden/"><img src="http://media.smashingmagazine.com/wp-content/uploads/2012/07/corporateblogs.png" width="500" height="258" alt="Content: A Blessing, A Bubble, A Burden" title="Content: A Blessing, A Bubble, A Burden" /></a></p>
+
+<p>But I also suspect that the substance of the talk would be quite different if content were truly respected. I believe this because the way we talk about content is beginning to sound a lot like the way we talk about money.</p>
+      <a href="http://www.smashingmagazine.com/2012/08/07/content-blessing-bubble-burden/" class="continue-reading">Read more...</a>
+
+</article>
+
+        
+            <div class="ed homepagepremedtargetwrapper clearfix">
+            <span class="declare">Advertisement</span>
+            <span class="awithus"><a class="sprite ed-us" title="Advertise with us!" href="mailto:&#97;&#100;&#118;&#101;&#114;&#116;&#105;&#115;&#105;&#110;&#103;&#64;&#115;&#109;&#97;&#115;&#104;&#105;&#110;&#103;&#109;&#97;&#103;&#97;&#122;&#105;&#110;&#101;&#46;&#99;&#111;&#109;">Advertise with us!</a></span>
+            <div id="homepagepremedtarget"></div>
+        </div>
+                        
+    <article id="jump" class="post-125092 post type-post status-publish format-standard hentry category-fonts tag-typography post">
+
+            <h2><a href="http://www.smashingmagazine.com/2012/08/06/legitima-experience-fossils-revivals/" rel="bookmark" title="Read 'Legitima Typeface: An Experience Of Fossils And Revivals'"><span class="catch_headline">A Practical Case-Study</span><span class="headline">Legitima Typeface: An Experience Of Fossils And Revivals</span></a></h2>
+        
+ <ul class="postmetadata clearfix">
+        <li class="author">By <a rel="author" href="http://www.smashingmagazine.com/author/cesar-puertas/?rel=author" title="Posts by César Puertas" >César Puertas</a></li>
+        
+                
+        <li class="date">August 6th, 2012</li>
+
+        <li class="tags"><a href="http://www.smashingmagazine.com/tag/typography/">Typography</a></li>
+
+                    <li class="comments"><a href="http://www.smashingmagazine.com/2012/08/06/legitima-experience-fossils-revivals/#comments" title="Comment on Legitima Typeface: An Experience Of Fossils And Revivals">8 Comments</a> </li>
+          </ul>
+
+      <p>Just as living species depend on mutation and adaptation to survive, typefaces too depend on their features to optimize the performance of text in a given environment. This principle seems to determine, in a way, the degree of failure or success that printing types (old and new) have in the physical world.</p>
+
+<p><a href="http://www.smashingmagazine.com/2012/08/06/legitima-experience-fossils-revivals/"><img src="http://media.smashingmagazine.com/wp-content/uploads/2012/02/3_garalde_types_2.png" width="500" height="301" alt="Legitima: An Experience Of Fossils And Revivals" title="Legitima: An Experience Of Fossils And Revivals" /></a></p>
+
+<p>Typeface revivals (i.e. old typefaces beautiful enough to see a second digital life) are a virtually never-ending source of inspiration, as well as a good opportunity for graphic designers to learn some history. After taking part in the practice, I can say without doubt that the similarities between this process and the work of palaeontologists when reconstructing the appearance of dinosaurs and other extinct animals from fossils are striking.</p>
+      <a href="http://www.smashingmagazine.com/2012/08/06/legitima-experience-fossils-revivals/" class="continue-reading">Read more...</a>
+
+</article>
+
+                        
+    <article  class="post-132370 post type-post status-publish format-standard hentry category-global-web-design category-graphics category-inspiration tag-creativity tag-inspiration tag-workflow-2 post">
+
+            <h2><a href="http://www.smashingmagazine.com/2012/08/03/i-draw-pictures-all-day/" rel="bookmark" title="Read '&#8220;I Draw Pictures All Day&#8221;'"><span class="catch_headline">Why Doodling Is Important</span><span class="headline">&#8220;I Draw Pictures All Day&#8221;</span></a></h2>
+        
+ <ul class="postmetadata clearfix">
+        <li class="author">By <a rel="author" href="http://www.smashingmagazine.com/author/alma-hoffmann/?rel=author" title="Posts by Alma Hoffmann" >Alma Hoffmann</a></li>
+        
+                
+        <li class="date">August 3rd, 2012</li>
+
+        <li class="tags"><a href="http://www.smashingmagazine.com/tag/creativity/">Creativity</a>, <a href="http://www.smashingmagazine.com/tag/inspiration/">Inspiration</a>, <a href="http://www.smashingmagazine.com/tag/workflow-2/">Workflow</a></li>
+
+                    <li class="comments"><a href="http://www.smashingmagazine.com/2012/08/03/i-draw-pictures-all-day/#comments" title="Comment on &#8220;I Draw Pictures All Day&#8221;">71 Comments</a> </li>
+          </ul>
+
+      <p>“So, you do nothing all day.” That’s how many people would respond to someone who says they spend the day with a pen or pencil in their hand. It’s often considered an empty practice, a waste of time. They’re seen as an empty mind puttering along with the busy work of scribbling.</p>
+
+<p><a href="http://www.smashingmagazine.com/2012/08/03/i-draw-pictures-all-day/"><img src="http://media.smashingmagazine.com/wp-content/uploads/2012/05/lightbulb.jpg" width="500" height="334" alt="I Draw Pictures All Day" title="I Draw Pictures All Day" /></a></p>
+
+<p>But for us designers and artists, drawing pictures all day is integral to our process and to who we are as creative people, and despite the idea that those who doodle waste time, we still get our work done. So, then, why are those of us who draw pictures all day even tempted to think that someone who is doodling or drawing pictures in a meeting or lecture is not paying attention?</p>
+      <a href="http://www.smashingmagazine.com/2012/08/03/i-draw-pictures-all-day/" class="continue-reading">Read more...</a>
+
+</article>
+
+                        
+    <article  class="post-138261 post type-post status-publish format-standard hentry category-graphics tag-contests tag-inspiration tag-smashing-magazine post">
+
+            <h2><a href="http://www.smashingmagazine.com/2012/08/01/poster-design-contest-redesign-the-web-redesign-the-world-best-entries/" rel="bookmark" title="Read 'Poster Design Contest &#8220;Redesign The Web&#8221;: The Best Entries'"><span class="catch_headline">Winners of the Contest</span><span class="headline">Poster Design Contest &#8220;Redesign The Web&#8221;: The Best Entries</span></a></h2>
+        
+ <ul class="postmetadata clearfix">
+        <li class="author">By <a rel="author" href="http://www.smashingmagazine.com/author/admin/?rel=author" title="Posts by Smashing Editorial" >Smashing Editorial</a></li>
+        
+                
+        <li class="date">August 1st, 2012</li>
+
+        <li class="tags"><a href="http://www.smashingmagazine.com/tag/contests/">Contests</a>, <a href="http://www.smashingmagazine.com/tag/inspiration/">Inspiration</a>, <a href="http://www.smashingmagazine.com/tag/smashing-magazine/">Smashing Magazine</a></li>
+
+                    <li class="comments"><a href="http://www.smashingmagazine.com/2012/08/01/poster-design-contest-redesign-the-web-redesign-the-world-best-entries/#comments" title="Comment on Poster Design Contest &#8220;Redesign The Web&#8221;: The Best Entries">39 Comments</a> </li>
+          </ul>
+
+      <p>Yes, it's time to announce the winners! A couple of weeks ago we had announced the <a href="http://www.smashingmagazine.com/2012/07/06/poster-contest-redesign-world-redesign-web/">"Redesign The Web" Poster Design Contest</a> that encouraged you to design a thought-provoking poster. We wanted to encourage everyone to actively get involved in making the Web a more accessible and usable place today.</p>
+
+<p><a href="http://www.smashingmagazine.com/2012/08/01/poster-design-contest-redesign-the-web-redesign-the-world-best-entries/"><img src="http://media.smashingmagazine.com/wp-content/uploads/2012/07/500RafalTomal-RedesignTheWeb_prev.jpg" alt="Redesign the Web Poster" title="The 'Redesign The Web' Contest Winner" width="500" height="707" class="alignnone size-full wp-image-139386" /></a></p>
+
+<p>Among the entries, many have picked up the idea of the globe. We received clean and minimalistic designs, complex artworks, illustrations, inspirational quotes and call-ups, as well as a comic strip. One participant even produced a poster using only HTML5 and CSS3 (including the bleed and trim marks inside the print style sheet).</p>
+
+<p>We'd like to sincerely thank all the contributors who had taken on this challenge and had sent us their work! Overall, we've received <strong>over 150 entries</strong>, and in a thorough review process, selected 35 of the best entries (which are now presented in the article below). And trust us&mdash;it was no piece of cake to choose the best from many excellent poster submissions. Of course, the owner of each poster owns all the copyrights for their artwork.</p>
+      <a href="http://www.smashingmagazine.com/2012/08/01/poster-design-contest-redesign-the-web-redesign-the-world-best-entries/" class="continue-reading">Read more...</a>
+
+</article>
+
+                        
+    <article  class="post-139555 post type-post status-publish format-standard hentry category-graphics tag-wallpapers post">
+
+            <h2><a href="http://www.smashingmagazine.com/2012/07/31/desktop-wallpaper-calendar-august-2012/" rel="bookmark" title="Read 'Desktop Wallpaper Calendar: August 2012'"><span class="catch_headline">Refresh Your Desktop</span><span class="headline">Desktop Wallpaper Calendar: August 2012</span></a></h2>
+        
+ <ul class="postmetadata clearfix">
+        <li class="author">By <a rel="author" href="http://www.smashingmagazine.com/author/admin/?rel=author" title="Posts by Smashing Editorial" >Smashing Editorial</a></li>
+        
+                
+        <li class="date">July 31st, 2012</li>
+
+        <li class="tags"><a href="http://www.smashingmagazine.com/tag/wallpapers/">Wallpapers</a></li>
+
+                    <li class="comments"><a href="http://www.smashingmagazine.com/2012/07/31/desktop-wallpaper-calendar-august-2012/#comments" title="Comment on Desktop Wallpaper Calendar: August 2012">66 Comments</a> </li>
+          </ul>
+
+      <p>We always try our best to challenge your artistic abilities and produce some interesting, beautiful and creative artwork. And as designers we usually turn to different sources of inspiration. As a matter of fact, we’ve discovered the best one—<strong>desktop wallpapers</strong> that are a little more distinctive than the usual crowd. This creativity mission <a href="http://www.smashingmagazine.com/tag/wallpapers/">has been going on for over four years now</a>, and we are very thankful to all designers who have contributed and are still diligently contributing each month.</p>
+
+<p><a href="http://www.smashingmagazine.com/2012/07/31/desktop-wallpaper-calendar-august-2012/"><img width="500" height="312" alt="Smashing Wallpaper - August 12" src="http://files.smashingmagazine.com/wallpapers/august-12/images/the_lady_with_red_coat__51.jpg" /></a></p> 
+
+<p>We continue to nourish you with a monthly spoon of inspiration. This post features <strong>free desktop wallpapers</strong> created by artists across the globe for August 2012. Both versions with a calendar and without a calendar can be downloaded for free. It’s time to freshen up your wallpaper!</p>
+
+<p>Please note that:</p>
+<ul>
+    <li>All <strong>images can be clicked on</strong> and lead to the preview of the wallpaper,</li>
+    <li>You can <a href="http://www.smashingmagazine.com/2008/03/19/desktop-wallpaper-calendar-join-in/">feature your work in our magazine</a> by taking part in our Desktop Wallpaper Calendar series. We are regularly looking for creative designers and artists to be featured on Smashing Magazine. Are you one of them?</li>
+</ul>
+      <a href="http://www.smashingmagazine.com/2012/07/31/desktop-wallpaper-calendar-august-2012/" class="continue-reading">Read more...</a>
+
+</article>
+
+                        
+    <article  class="post-139255 post type-post status-publish format-standard hentry category-coding post">
+
+            <h2><a href="http://coding.smashingmagazine.com/2012/07/27/journey-through-the-javascript-mvc-jungle/" rel="bookmark" title="Read 'Journey Through The JavaScript MVC Jungle'"><span class="catch_headline">Review of JavaScript Frameworks</span><span class="headline">Journey Through The JavaScript MVC Jungle</span></a></h2>
+        
+ <ul class="postmetadata clearfix">
+        <li class="author">By <a rel="author" href="http://coding.smashingmagazine.com/author/addy-osmani/?rel=author" title="Posts by Addy Osmani" >Addy Osmani</a></li>
+        
+                
+        <li class="date">July 27th, 2012</li>
+
+    <li class="tags"><a href="http://coding.smashingmagazine.com/tag/essentials/">Essentials</a>, <a href="http://coding.smashingmagazine.com/tag/javascript/">JavaScript</a>, <a href="http://coding.smashingmagazine.com/tag/mvc/">MVC</a>, <a href="http://coding.smashingmagazine.com/tag/tools/">Tools</a></li>            <li class="comments"><a href="http://coding.smashingmagazine.com/2012/07/27/journey-through-the-javascript-mvc-jungle/#comments" title="Journey Through The JavaScript MVC Jungle">54 Comments</a></li>
+          </ul>
+
+      <p>When writing a web application from scratch, it’s easy to feel like we can get by simply by relying on a <a href="https://developer.mozilla.org/en/DOM/About_the_Document_Object_Model">DOM</a> manipulation library (like <a href="http://jquery.com">jQuery</a>) and a handful of utility plugins. The problem with this is that it doesn’t take long to get lost in a nested pile of jQuery callbacks and DOM elements without any real structure in place for our applications.</p>
+
+<p><a href="http://coding.smashingmagazine.com/2012/07/27/journey-through-the-javascript-mvc-jungle/"><img src="http://media.smashingmagazine.com/wp-content/uploads/2012/07/juggling-monkey.jpg" width="500" height="483" alt="Journey Through The JavaScript MVC Jungle" title="Journey Through The JavaScript MVC Jungle" /></a></p>
+
+<p>In short, we’re stuck with <a href="http://en.wikipedia.org/wiki/Spaghetti_code">spaghetti code</a>. Fortunately there are modern JavaScript frameworks that can assist with bringing structure and organization to our projects, improving how easily maintainable they are in the long-run.</p>
+      <a href="http://coding.smashingmagazine.com/2012/07/27/journey-through-the-javascript-mvc-jungle/" class="continue-reading">Read more...</a>
+
+</article>
+
+                        
+    <article  class="post-139169 post type-post status-publish format-standard hentry category-mobile post">
+
+            <h2><a href="http://mobile.smashingmagazine.com/2012/07/26/android-design-tips/" rel="bookmark" title="Read 'Designing For Android: Tips And Techniques'"><span class="catch_headline">Workflow Optimization</span><span class="headline">Designing For Android: Tips And Techniques</span></a></h2>
+        
+ <ul class="postmetadata clearfix">
+        <li class="author">By <a rel="author" href="http://mobile.smashingmagazine.com/author/jamie-mcdonald/?rel=author" title="Posts by Jamie McDonald" >Jamie McDonald</a></li>
+        
+                
+        <li class="date">July 26th, 2012</li>
+
+    <li class="tags"><a href="http://mobile.smashingmagazine.com/tag/android/">Android</a></li>         <li class="comments"><a href="http://mobile.smashingmagazine.com/2012/07/26/android-design-tips/#comments" title="Designing For Android: Tips And Techniques">12 Comments</a></li>
+          </ul>
+
+      <p>Android is an attractive platform for developers, but not all designers share our enthusiasm. Making an app look and feel great across hundreds of devices with different combinations of screen size, pixel density and aspect ratio is no mean feat. Android's diversity provides plenty of challenges, but creating apps that run on an entire ecosystem of devices is rewarding too.</p>
+
+<p><a href="http://mobile.smashingmagazine.com/2012/07/26/android-design-tips/"><img src="http://media.smashingmagazine.com/wp-content/uploads/2012/03/da_devices.png" title="Designing For Android: Tips And Techniques" alt="Designing For Android: Tips And Techniques" width="500" /></a></p>
+
+<p>At Novoda, we build Android software for brands, start-ups and device manufacturers. We often work with visual designers who are new to Android. The new <a title="Android Design" href="http://developer.android.com/design">Android Design</a> site is the first resource we recommend. You should definitely check it out. However, there is plenty more to pick up! The goal is to create apps that people love to use. Thoughtful UX and aesthetically pleasing visual designs help us get there.</p>
+      <a href="http://mobile.smashingmagazine.com/2012/07/26/android-design-tips/" class="continue-reading">Read more...</a>
+
+</article>
+
+                        
+    <article  class="post-139095 post type-post status-publish format-standard hentry category-wordpress post">
+
+            <h2><a href="http://wp.smashingmagazine.com/2012/07/26/adopting-responsive-wordpress-theme/" rel="bookmark" title="Read 'Adopting A Responsive WordPress Theme Is More Than Install-And-Go'"><span class="catch_headline">Performance Study</span><span class="headline">Adopting A Responsive WordPress Theme Is More Than Install-And-Go</span></a></h2>
+        
+ <ul class="postmetadata clearfix">
+        <li class="author">By <a rel="author" href="http://wp.smashingmagazine.com/author/ben-gremillion/?rel=author" title="Posts by Ben Gremillion" >Ben Gremillion</a></li>
+        
+                
+        <li class="date">July 26th, 2012</li>
+
+    <li class="tags"><a href="http://wordpress.smashingmagazine.com/tag/techniques/">Techniques</a>, <a href="http://wordpress.smashingmagazine.com/tag/themes/">Themes</a>, <a href="http://wordpress.smashingmagazine.com/tag/tips/">Tips</a></li>            <li class="comments"><a href="http://wp.smashingmagazine.com/2012/07/26/adopting-responsive-wordpress-theme/#comments" title="Adopting A Responsive WordPress Theme Is More Than Install-And-Go">18 Comments</a></li>
+          </ul>
+
+      <p>As iOS, Android, and Windows 8 take the Web to smaller screens, designers are adopting techniques to make their websites usable on handheld devices. Responsive Web designs present different formatting and layout to suit the device on which their pages are displayed. Browsers choose the appropriate styles on page load, freeing website owners from having to maintain different sets of pages for different display scenarios.</p>
+
+<p><a href="http://wp.smashingmagazine.com/2012/07/26/adopting-responsive-wordpress-theme/"><img src="http://media.smashingmagazine.com/wp-content/uploads/2012/07/responsive-wp-teaser.png" alt="Adopting A Responsive WordPress Theme Is More Than Install-And-Go" width="500" height="300" class="alignnone size-full wp-image-106539" /></a></p>
+
+<p>The most common responsive method is to use CSS media queries to serve different style sheets (or parts of style sheets) based on the number of pixels available. Most often, this is applied to handheld devices such as smartphones, but it could be applied to 13-inch laptops, 30-inch TVs or Kindle-sized readers. Responsive designs respond to their environment.</p>
+      <a href="http://wp.smashingmagazine.com/2012/07/26/adopting-responsive-wordpress-theme/" class="continue-reading">Read more...</a>
+
+</article>
+
+        <div class="wp-pagenavi clearfix">
+<div class="pagenavi clearfix"><div class="previous"></div><div class="pagelist clearfix"><span class="current">1</span><a href="http://www.smashingmagazine.com/page/2/" class="page" title="2">2</a><a href="http://www.smashingmagazine.com/page/3/" class="page" title="3">3</a><a href="http://www.smashingmagazine.com/page/4/" class="page" title="4">4</a><a href="http://www.smashingmagazine.com/page/5/" class="page" title="5">5</a><a href="http://www.smashingmagazine.com/page/6/" class="page" title="6">6</a><a href="http://www.smashingmagazine.com/page/7/" class="page" title="7">7</a><a href="http://www.smashingmagazine.com/page/8/" class="page" title="8">8</a><a href="http://www.smashingmagazine.com/page/9/" class="page" title="9">9</a><a href="http://www.smashingmagazine.com/page/10/" class="page" title="10">10</a></div><div class="next"><a href="http://www.smashingmagazine.com/page/2/" >next &raquo;</a></div></div></div>
+<!-- <span class="current-pages">Page 1 of 163 ... redundante information...</span> -->                 </div><!-- .col.main -->                                
+                </div><!-- .grid -->
+                <p><a href="#top" class="backtotop" title="Jump to the top of the page">&uarr; Back to top</a></p>
+            </div><!-- .fluid -->
+        </div><!-- #container -->
+            <div id="wpsidebar">    
+        <div class="col side">
+            <div class="sm-search wp-search-form">          
+                <form method="get" action="http://www.smashingmagazine.com/search-results/" target="_top">
+                    <span class="declare">Search on Smashing Magazine</span>
+                    <input name="q" type="text" placeholder="e.g. Responsive design" />
+                    <button class="search_submit" type="submit"><span class="first-type">Search</span><span class="last-type">Go!</span></button>
+                    <input type="hidden" name="cx" value="partner-pub-6779860845561969:5884617103">
+                    <input type="hidden" name="cof" value="FORID:10">
+                    <input type="hidden" name="ie" value="UTF-8">
+                </form>
+            </div>
+            <div class="ed spnsrlistwrapper">
+                                <span class="declare">Advertisement</span>
+                <span class="awithus"><a href="mailto:&#97;&#100;&#118;&#101;&#114;&#116;&#105;&#115;&#105;&#110;&#103;&#64;&#115;&#109;&#97;&#115;&#104;&#105;&#110;&#103;&#109;&#97;&#103;&#97;&#122;&#105;&#110;&#101;&#46;&#99;&#111;&#109;" title="Advertise with us!" class="sprite ed-us">Advertise with us!</a></span>
+                            <div id="spnsrlisttarget"></div><!-- /#spnsrlisttarget -->
+        </div><!-- /.ed.spnsrlistwrapper -->
+        <div class="inner">
+        
+                                        <div class="textwidget"><div class="sidebartabs"><div id="smashing-highlights" class="smashingwidget"><h3><a href="http://www.smashingmagazine.com/smashing-highlights/"><span>Smashing Highlights</span><img src="http://www.smashingmagazine.com/files/smashing-widget/v006/img/sm-highlights.png" alt="Smashing Highlights"></a></h3>
+<p>In this section, we present to you the most valued and appreciated articles from the last few years on Smashing Magazine.</p>
+<ul class="topiclist">
+<li><a href="http://www.smashingmagazine.com/2011/11/03/%E2%80%9Cbut-the-client-wants-ie-6-support%E2%80%9D/">“But The Client Wants IE 6 Support!”</a><p> The developers are stuck with the same Web development techniques that we used five to ten years ago. Their clients just don’t “get” graceful degradation. How can we solve this problem?</p></li>
+<li><a href="http://www.smashingmagazine.com/2011/06/13/the-story-of-scandinavian-design-combining-function-and-aesthetics/">The Story Of Scandinavian Design</a><p>While the countries of Scandinavia have extreme differences, they do have some similarities. This article gives an overview of the influences and state of art and design in the Nordic countries.</p></li>
+<li><a href="http://www.smashingmagazine.com/2010/09/07/showcase-of-interesting-navigation-designs/">Showcase of Interesting Navigation Designs</a><p>Everyone is always looking for interesting and effective ways to organize their website, but there’s a fine line between unexpected and unusable. Here are some unusual navigation design examples.</p></li>
+</ul></div><!-- /#highlights --></div></div>
+                
+                    
+    
+            <div id="sidebarspecialtarget"></div><!-- /#sidebarspecialtarget -->
+            <div class="sidebar-smash-box smashingbook-printed">            <div class="textwidget"><a href="http://www.smashingbook.com"><img src=" http://media.smashingmagazine.com/wp-content/uploads/2012/03/small_cover.png" alt="Smashing Printed Books"></a>
+                <p><strong>Get Your Smashing Book #3!</strong><br>This book is the best printed book we've produced so far: it is a valuable, cutting-edge, high-quality book that any Web designer should have on their bookshelf. <strong><a href="http://www.smashingbook.com"> Get your book now: printed or eBook!</a></strong></p></div>
+        </div><!-- /.smashingbook-printed -->
+            <div class="sidebartabs">
+                <div id="newsletter_widget" class="smashingwidget">
+                    <h3><a href="http://www.smashingmagazine.com/the-smashing-newsletter/"><span>The Smashing Newsletter</span><img src="http://media.smashingmagazine.com/wp-content/uploads/files/smashing-widget/v006/img/smnl.png" alt="Smashing Newsletter"></a></h3>
+                    <div id="mc_embed_signup" class="sm-search">
+                        <p>Subscribe to our email newsletter for useful tips and valuable resources, sent out every second Tuesday.</p>
+                        <form action="http://smashingmagazine.us1.list-manage1.com/subscribe/post?u=16b832d9ad4b28edf261f34df&amp;id=a1666656e0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate">
+                            <input name="EMAIL" type="text" placeholder="email address" />
+                            <button class="search_submit" type="submit"><span class="first-type">Subscribe</span></button>
+                            <div class="clearfix">
+                            <div class="num-subscribers"><script type="text/javascript" src="http://smashingmagazine.us1.list-manage1.com/subscriber-count?b=34&#038;u=e768e688-36c3-4c2d-88fa-982d9d3f254b&#038;id=a1666656e0"></script></div>
+                            </div>
+                        </form>
+                    </div>
+                </div><!-- /#network_widget -->
+            </div><!-- /.sidebartabs -->
+
+            <div class="sidebar-smash-box smashingmag-conference">          <div class="textwidget"><a href="http://lanyrd.com/profile/smashingmag/"><img src="http://media.smashingmagazine.com/wp-content/uploads/2012/07/frontendconf.png" width="100" height="100" alt="Conference" title="Conference"></a>
+<p><strong>Let's meet!</strong><br />Smashing Magazine's editor-in-chief Vitaly Friedman will be speaking at the <strong>Front End Conf</strong> conference in Zurich, Switzerland. <strong><a href="http://lanyrd.com/profile/smashingmag/">Let's grab a beer</a></strong>!</p>
+</div>
+        </div><!-- /.smashingmag-conference -->         
+            <div class="sidebartabs">
+                <div id="jobs" class="smashingwidget">
+                    <h3><a href="http://jobs.smashingmagazine.com/?pk_campaign=sm&amp;piwik_kwd=widget"><span>Smashing Job Board</span><img src="http://www.smashingmagazine.com/files/smashing-widget/v006/img/sm-jobs.png" alt="Smashing Jobs"></a></h3>
+                    <ul class="topiclist">
+                        <li style="display:none;"></li>
+                        <li class="clearfix"><a href="http://feedproxy.google.com/~r/smjobs/~3/W90Kvc_yEsI/2041533">Senior Digital Designer - Webplace - (Melbourne, Australia) - FullTime</a><p>About us: Webplace is a fast-growing digital agency located in Abbotsford, Melbourne with interstate offices in Adelaide and Sydney. Our clients are as&#8230;</p></li><li class="clearfix"><a href="http://feedproxy.google.com/~r/smjobs/~3/OCX5nZrYlts/2041486">Flash Designer/Illustrator - IXL Learning - (San Mateo, CA) - FullTime</a><p>IXL Learning seeks a creative, talented Flash Designer to join our team. As a Flash Designer at IXL, you will create stunning visuals for a series of animated educational&#8230;</p></li>                 </ul>
+                    <p class="view-more"><a href="http://jobs.smashingmagazine.com?pk_campaign=sm&amp;piwik_kwd=widget">View more job openings&hellip;</a></p>
+                </div><!-- /#jobs -->
+            </div><!-- /.sidebartabs -->
+            
+            <div class="sidebar-smash-box smashingmag-meetup">          <div class="textwidget"></div>
+        </div><!-- /.smashingmag-meetup -->                 </div><!-- /.inner -->
+
+        <div class="sidebar-smash-box smashingmag-promo-field">         <div class="textwidget"><a href="http://www.smashingmagazine.com/ebooks/"><img src="http://media.smashingmagazine.com/uploads/2012/01/best-of-no-150px.png" alt="Smashing Anniversary eBook"></a>
+<p><strong>Free eBook: "Best of Smashing Magazine"</strong><br />We've got a gift for you! To celebrate our birthday, we've released a free eBook with best articles published here on Smashing Magazine over all these years. In PDF, ePUB and Mobi. <strong><a href="http://www.smashingmagazine.com/ebooks/">Get it now for free!</a></strong></p></div>
+        </div><!-- /.smashingmag-promo-field -->
+        
+        <div class="two clearfix">
+            <div class="left">
+                            <div class="textwidget"><div class="inner popular-posts-area">
+    <h2 class="popular">Tags</h2>
+<ul class="popular-list sidelist">
+<li><a href="http://mobile.smashingmagazine.com/tag/android/">Android</a></li>
+<li><a href="http://www.smashingmagazine.com/tag/branding/">Branding</a></li>
+</ul>
+</div></div>
+                    </div><!-- /.left -->
+            <div class="right">
+                <div id="twitter">
+                    <div class="inner">
+                        <h2 class="icon twitter">Twitter</h2>
+                        <a href="http://twitter.com/smashingmag" class="follow-us">Follow Us</a></div>
+                        <ul id="tweetlist">
+                            <li style="display:none;"></li>
+                            <li class="twitter-item"> <a href="http://twitter.com/studentwebguide" class="twitter-user">@studentwebguide</a> Thank you for your support!, Janna! <a href="http://twitter.com/smashingmag/statuses/233440211240112128" class="tweet-status" title="2012-08-09T07:50:00+02:00"></a></li><li class="twitter-item"> A Photoshop tutorilal: Learn To Design a Book Landing Page In Photoshop (Video) by <a href="http://twitter.com/nathanbarry" class="twitter-user">@nathanbarry</a> - <a href="http://t.co/ZP3MT4Ly">http://t.co/ZP3MT4Ly</a> <a href="http://twitter.com/smashingmag/statuses/233321832294531074" class="tweet-status" title="2012-08-09T00:00:00+02:00"></a></li><li class="twitter-item"> <a href="http://twitter.com/brad_frost" class="twitter-user">@brad_frost</a> Can't wait! :-) <a href="http://twitter.com/smashingmag/statuses/233307833347739648" class="tweet-status" title="2012-08-08T23:04:00+02:00"></a></li><li class="twitter-item"> Double checking the preparations for the upcoming <a href="http://twitter.com/#search?q=smashingconf" class="twitter-link">#smashingconf</a>. Looking forward to meeting some of you in our home city Freiburg, Germany! <a href="http://twitter.com/smashingmag/statuses/233307401799999489" class="tweet-status" title="2012-08-08T23:03:00+02:00"></a></li><li class="twitter-item"> Singularity: a grid system for Sass and Compass for responsive designs - <a href="http://t.co/pv4tfL5Q">http://t.co/pv4tfL5Q</a> <a href="http://twitter.com/#search?q=rwd" class="twitter-link">#rwd</a> <a href="http://twitter.com/smashingmag/statuses/233286505567772673" class="tweet-status" title="2012-08-08T21:40:00+02:00"></a></li><li class="twitter-item"> New on SmashingMag: On Usability Testing In WordPress: Help Us Help WordPress - <a href="http://t.co/mhhv5HPC">http://t.co/mhhv5HPC</a> <a href="http://twitter.com/smashingmag/statuses/233251840584736769" class="tweet-status" title="2012-08-08T19:22:00+02:00"></a></li>                       </ul>
+                    </div><!-- /#twitter -->
+                    <div class="ed sidebared">
+                        <div id="sidebaredtarget"></div>
+                    </div><!-- /.ed.sidebared -->
+                    <div class="ed sidebared">
+                        <div id="sidebaredthreetarget"></div>
+                    </div>
+                    <div class="inner interact-area">
+                        <h2 class="icon interact">Connect</h2>
+                        <ul class="interact-list sidelist">
+                            <li><a href="http://www.smashingmagazine.com/about/">About us</a></li>
+                            <li><a href="http://www.smashingmagazine.com/contact/">Contact us</a></li>
+                            <li><a href="http://www.smashingmagazine.com/publishing-policy/">Publishing Policy</a></li>
+                            <li><a href="http://www.smashingmagazine.com/the-smashing-newsletter/">Email Newsletter</a></li>
+                            <li><a href="http://www.smashingmagazine.com/how-to-become-a-smashing-magazine-author/">Become an Author</a></li>   <li><a href="/the-smashing-newsletter/">Smashing Newsletter</a></li>
+                            <li><a href="http://www.noupe.com">Noupe Design Blog</a></li>
+                            <li class="twitter"><a href="http://twitter.com/smashingmag">Follow us on Twitter</a></li>
+                            <li class="facebook"><a href="http://www.facebook.com/smashmag">Join us on Facebook</a></li>
+                            <li class="rss"><a href="http://rss1.smashingmagazine.com/feed/">Subscribe to RSS-Feed</a></li>
+                        </ul>
+                    </div>
+                </div><!-- /.right -->
+            </div><!-- /.two -->
+        </div><!-- .col.ads -->
+    </div>      <div id="footer">
+            <div id="the-smashing-cat">
+                <a href="http://www.smashingmagazine.com/about/"><img title="The Smashing Cat" alt="The Smashing Cat" src="http://media.smashingmagazine.com/themes/smashingv4/images/smashing-cat.png"></a>
+            </div> 
+                <div class="contribute">
+                    <h4>Best of Design</h4>
+                <ul>
+                    <li><a href="http://www.smashingmagazine.com/responsive-web-design-guidelines-tutorials/">Responsive Design</a></li>
+                    <li><a href="http://www.smashingmagazine.com/professional-photoshop-techniques-tutorials/">Photoshop</a></li>
+                    <li><a href="http://www.smashingmagazine.com/typography-guidelines-and-references/">Typography</a></li>
+                    <li><a href="http://www.smashingmagazine.com/guidelines-for-mobile-web-development/">Mobile Design</a></li>
+                    <li><a href="http://www.smashingmagazine.com/usability-and-user-experience/">Usability and UX</a></li>
+                    <li><a href="http://www.smashingmagazine.com/web-design-essentials-examples-and-best-practices/">Web Design Showcases</a></li>
+                </ul>
+                </div>
+                <div class="contribute">
+                    <h4>Best of Coding</h4>
+                <ul>
+                    <li><a href="http://www.smashingmagazine.com/learning-javascript-essentials-guidelines-tutorials/">JavaScript &amp; jQuery</a></li>
+                    <li><a href="http://www.smashingmagazine.com/learning-wordpress-useful-wordpress-tips-tutorials/">WordPress Techniques</a></li>
+                    <li><a href="http://www.smashingmagazine.com/coding-with-html5-tutorials-guidelines/">HTML5 Tutorials</a></li>
+                    <li><a href="http://www.smashingmagazine.com/mastering-css-principles-comprehensive-reference-guide/">CSS</a>, <a href="http://www.smashingmagazine.com/learning-css3-useful-reference-guide/">CSS3</a></li>
+                    <li><a href="http://www.smashingmagazine.com/time-savers-tools-useful-services-web-design/">Useful Time Savers</a></li>
+                    <li><a href="http://www.smashingmagazine.com/bored-the-curious-side-of-smashing-magazine/">Bored?</a></li>
+                </ul>
+                </div>
+                <div class="contribute our-content">
+                    <h4>Smashing Hub</h4>
+                    <ul>
+                        <li><a href="http://www.smashingmagazine.com">Smashing Magazine</a></li>
+                        <li><a href="http://www.smashingmagazine.com/books/">Smashing Books</a></li>
+                        <li><a href="http://www.smashingmagazine.com/ebooks/">Smashing eBooks</a></li>
+                        <li><a href="http://www.smashingmagazine.com/the-smashing-newsletter/">Smashing Email Newsletter</a></li>
+                        <li><a href="http://shop.smashingmagazine.com">Smashing Shop</a></li>
+                        <li><a href="http://jobs.smashingmagazine.com/">Smashing Job Board</a></li>
+                    </ul>
+                </div>
+                <div class="contribute">
+                    <h4>Other Resources</h4>
+                    <ul>
+                        <li><a href="http://www.smashingmagazine.com/2011/09/08/to-five-smashing-years-and-a-free-anniversary-ebook-treat/">Free Anniversary eBook</a></li>
+                        <li><a href="http://www.smashingmagazine.com/smashing-book-1/">Smashing Book 1 in HTML</a></li>
+                        <li><a href="http://www.smashingmagazine.com/the-lost-files/">Smashing Book 2 Extras</a></li>
+                        <li><a href="http://www.smashingmagazine.com/publishing-policy/">Publishing Policy</a></li>
+                        <li><a href="http://www.smashingmagazine.com/about/">About us</a></li>
+                        <li><a href="http://www.smashingmagazine.com/contact/">Contact us</a></li>
+                    </ul>
+            </div>
+            <p class="statement"><em>With a commitment to quality content for the design community.</em><br /><a href="http://www.smashingmagazine.com/about/">Smashing Media GmbH</a>. Made in Germany. 2006-2012.</p>
+        </div>
+</body>
+<!-- <body>
     <div class="container">
-        <header id="header_wrap" class="row span_24">
-            <h1 id="logo" class="col span_7">
-                <img src="img/logo-600x302.png" alt="Study Notes" />
+        <header id="header_wrap">
+            <h1 id="logo">
+                <img src="http://placekitten.com/100/100" alt="Study Notes" />
             </h1>
             
-            <h2 id="description" class="col span_15 fl_right">The best site for 100% FREE AP notes! We offer free study materials to high school students seeking to prepare for Advanced Placement classes and exams.</h2>
+            <h2 id="description">The best site for 100% FREE AP notes! We offer free study materials to high school students seeking to prepare for Advanced Placement classes and exams.</h2>
         </header>
-        <section class="row span_24" role="main">
+        <section role="main">
         
-            <article class="col span_8">
-            
-                <a class="btn" title="AP Class Notes" href="/ap">Study for AP Classes</a>
-                
-                <h1>AP Classes</h1>
 
-                <p>
-                    We have notes for these classes:
-
-                    <ul>
-                        <li>AP U.S. History</li>
-                        <li>AP U.S. Government</li>
-                        <li>AP English Language &amp; Literature</li>
-                    </ul>
-                </p>
-                
-            </article>
-            
-            
-            <article class="col span_8">
-            
-                <a class="btn" title="Download 16 Column Grid" href="/responsive.gs.16col.zip" onClick="javascript: _gaq.push(['_trackPageview', '/16col']);">Study for SAT &amp; ACT Tests</a>
-                
-                <h1>16 Column Grid</h1>
-                
-                <p>The 16 column grid is only dividable by 2, 4 and 8 but has a column width that is small enough to be used for extra gutter space if needed.</p>
-                
-            </article>
-            
-            
-            <article class="col span_8">
-            
-                <a class="btn" title="Download 24 Column Grid" href="/responsive.gs.24col.zip" onClick="javascript: _gaq.push(['_trackPageview', '/24col']);">Buy Study Guides</a>
-                
-                <h1>24 Column Grid</h1>
-                
-                <p>The 24 column grid is the most flexible of the three because it is dividable by 2, 3, 4, 6, 8 and 12 making it the ultimate templating solution.</p>
-                
-            </article>
         
         </section>
         <footer>
@@ -93,7 +603,7 @@
     <script src="js/plugins.js"></script>
     <script src="js/script.js"></script>
     
-    <!-- TODO:
+    <!-- TODO: add google analytics here
     <script>
         var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
         (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
@@ -101,5 +611,7 @@
         s.parentNode.insertBefore(g,s)}(document,'script'));
     </script>
     -->
-</body>
+
+    <!-- TODO: add other tracking here -->
+</body> -->
 </html>
