@@ -1,0 +1,215 @@
+
+<!DOCTYPE HTML> 
+<html>
+<head>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <title>Responsive Grid System</title>
+    
+    <meta name="description" content="Responsive Grid System is a fluid grid CSS framework for fast, intuitive development of responsive websites. Available in 12, 16 and 24 columns with media queries for all standard devices, clearfix, and optional reset." />
+
+    <link rel="stylesheet" media="all" href="css/master.css" />
+    
+    <!--[if IE]>
+        <link rel="stylesheet" type="text/css" href="ie.css" />
+    ![endif]-->
+    
+    <!-- TYPEKIT -->
+    <!-- <script type="text/javascript" src="http://use.typekit.net/djj4afz.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+    <!-- TYPEKIT -->
+    
+    <!-- PRETTIFY -->
+    <link href="css/prettify.css" type="text/css" rel="stylesheet" />
+    <script src="js/prettify.js" type="text/javascript"></script>
+    <!-- PRETTIFY -->
+    
+    
+</head>
+
+<body onload="prettyPrint()">
+
+    <div class="container">
+    
+        <header id="header_wrap" class="row span_24">
+        
+            <h1 id="logo" class="col span_7">
+                <img src="img/logo-600x302.png" alt="Responsive Grid System" />
+            </h1>
+            
+            <h2 id="description" class="col span_15 fl_right">Fluid grid CSS framework for fast, intuitive development of responsive websites. Available in 12, 16 and 24 columns with media queries for all standard devices, clearfix, and optional reset.</h2>
+        
+        </header><!-- site_header span_24 -->
+        
+        
+        
+        <section class="primary row span_24">
+        
+            <article class="col span_8">
+            
+                <a class="btn" title="Download 12 Column Grid" href="/responsive.gs.12col.zip" onClick="javascript: _gaq.push(['_trackPageview', '/12col']);">Download 12 Column</a>
+                
+                <h1>12 Column Grid</h1>
+                
+                <p>The 12 column grid is probably the most popular because it has fewer columns to keep track of. It is dividable by 2, 3, 4 and 6 which is usually suitable for just about any project.</p>
+                
+            </article><!-- span_8 -->
+            
+            
+            <article class="col span_8">
+            
+                <a class="btn" title="Download 16 Column Grid" href="/responsive.gs.16col.zip" onClick="javascript: _gaq.push(['_trackPageview', '/16col']);">Download 16 Column</a>
+                
+                <h1>16 Column Grid</h1>
+                
+                <p>The 16 column grid is only dividable by 2, 4 and 8 but has a column width that is small enough to be used for extra gutter space if needed.</p>
+                
+            </article><!-- span_8 -->
+            
+            
+            <article class="col span_8">
+            
+                <a class="btn" title="Download 24 Column Grid" href="/responsive.gs.24col.zip" onClick="javascript: _gaq.push(['_trackPageview', '/24col']);">Download 24 Column</a>
+                
+                <h1>24 Column Grid</h1>
+                
+                <p>The 24 column grid is the most flexible of the three because it is dividable by 2, 3, 4, 6, 8 and 12 making it the ultimate templating solution.</p>
+                
+            </article><!-- span_8 -->
+        
+        </section><!-- content_wrap span_24 -->
+        
+        
+        
+        <section class="secondary row span_24">
+        
+            <article class="module col span_12">
+            
+                <h1>Marking It Up</h1>
+                
+                <code class="prettyprint">
+                
+                    <p class="first_level">&lt;div id="page_wrap" class="container row"&gt;</p>
+
+                        <p class="second_level">&lt;header class="row span_12"&gt;</p>
+
+                            <p class="third_level">&lt;hgroup class="row span_12"&gt;</p>
+                                
+                                <p class="fourth_level">&lt;h1 class="col span_4"&gt;Site Title&lt;/h1&gt;</p>
+
+                                <p class="fourth_level">&lt;h2 class="col span_8"&gt;Site Description&lt;/h2&gt;</p>
+
+                            <p class="third_level">&lt;/hgroup>&lt;!-- span_12 --&gt;</p>
+
+                            <p class="third_level">&lt;nav id="global_nav" class="row span_12"&gt;</p>
+
+                                <p class="fourth_level">Insert global nav here.</p>
+
+                            <p class="third_level">&lt;/nav>&lt;!-- span_12 --&gt;</p>
+
+                        <p class="second_level">&lt;/header>&lt;!-- span_12 --&gt;</p>
+
+                        <p class="second_level">&lt;section id="content_wrap" class="row span_12"&gt;</p>
+
+                            <p class="third_level">&lt;article class="col span_8 clr"&gt;</p>
+
+                                <p class="fourth_level">Insert page content here.</p>
+    
+                            <p class="third_level">&lt;/article&gt;&lt;!-- span_8 --&gt;</p>
+                    
+                            <p class="third_level">&lt;sidebar class="col span_4 clr"&gt;</p>
+                        
+                                <p class="fourth_level">Insert sidebar stuff here.</p>
+                    
+                            <p class="third_level">&lt;/sidebar&gt;&lt;!-- span_4 --&gt;</p>
+                    
+                        <p class="second_level">&lt;/section&gt;&lt;!-- content_wrap span_12 --&gt;</p>
+                    
+                        <p class="second_level">&lt;footer class="row span_24"&gt;</p>
+                        
+                            <p class="third_level">Insert footer stuff here.</p>
+                    
+                        <p class="second_level">&lt;/footer&gt;&lt;!-- span_24 --&gt;</p>
+                    
+                    <p class="first_level">&lt;/div>&lt;!-- page_wrap --&gt;</p>
+            
+                </code>
+                
+            </article><!-- span_8 -->
+            
+            <article class="module col span_12">
+            
+                <h1>How It Works</h1>
+                
+                <h2><span class="sel">container</span></h2>
+                <p>Add this class to your page wrapper to center it to the browser window and set the width of the page.</p>
+                
+                <h2><span class="sel">row</h2>
+                <p>Add this class to any element that spans the entire width of your container to clear any floating child elements. Also allows you to define spacing between rows.</p>
+                
+                <h2><span class="sel">col</h2>
+                <p>Add this class to child elements of a <code class="sel">row</code> to float left and add the default gutter width. This class must be used in conjuction with one of the span classes below.</p>
+                
+                <h2><span class="sel">span_1</span>, <span class="sel">span_2</span>, <span class="sel">span_3</span>, <span class="sel">span_4</span>, <span class="sel">span_5</span>, <span class="sel">span_6</span>, <span class="sel">span_7</span>, <span class="sel">span_8</span>, <span class="sel">span_9</span>, <span class="sel">span_10</span>, <span class="sel">span_11</span>, <span class="sel">span_12</span></h2>
+                <p>Add one of these classes to each <code class="sel">col</code> element to set it’s fluid width. On smaller screen sizes these elements will default to stack vertically.</p>
+                
+                <h2><span class="sel">clr</span>, <span class="sel">group</span></h2>
+                <p>Add either of these two classes to an element, whichever one you're used to, to clear it’s floating child elements. Uses the 'clearfix method'.</p>
+                
+                <h1>Things to Know</h1>
+                
+                <h2><span class="sel">col:first-child</span></h2>
+                <p>The first <code class="sel">col</code> element gets the left margin removed with the <code class="sel">col:first-child</code> pseudo selector in order to fit within it’s parent element along with it’s siblings. The browser support for this goes as far back as IE7 so if you’re still having to support IE6 then you’ll need to add an additional <code class="sel">first</code> class to your markup and CSS to remove the left margins.</p>
+                
+            </article><!-- span_8 -->
+        
+        </section><!-- content_wrap span_24 -->
+        
+        
+        <footer class="row span_24">
+        
+            <section class="module col span_8">
+            
+                <h1>About Responsive GS</h1>
+                
+                <p>Responsive GS was created by Denis Leblanc from <a title="Link to snapsize.com" href="http://snapsize.com">Studio Snapsize</a> and inspired by many other published grid systems. The reason I put this framework together is because I'm obsessed with reducing everything to it's simplest form possible.</p>
+                
+                <p>You might also be interested in some of my other personal projects, <a title="Link to cssfontstack.com" href="http://cssfontstack.com">CSS Font Stacks</a>, <a title="Link to minimalwpthemes.com" href="http://minimalwpthemes.com">Minimal WP Themes</a>, and <a title="Link to brixxletterpress.com" href="http://brixxletterpress.com">Brixx Letterpress</a>.</p>
+            
+            </section>
+            
+            <section class="module col span_8">
+            
+                <h1>Using Responsive GS</h1>
+                
+                <p>Responsive GS is free to use on any project, personal or commercial, though it would be super rad if you left the author credits at the top of the CSS files. If you use it on a cool project or find bugs please <a title="contact us" href="mailto:info@snapsize.com">drop me a line</a>.</p>
+                
+                <p>Responsive GS is licensed under a Creative Commons Attribution 3.0 License. Now available on <a title="Responsive Grid System on GitHub" href="https://github.com/StudioSnapsize/responsive-gs">GitHub</a>.</p>
+            
+            </section>
+            
+            <section class="module col span_8">
+            
+                <h1>Sharing Responsive GS</h1>
+                
+                <p>Sharing is fun. If you like Responsive GS please share it with your following or circle of friends.</p>
+                
+                <div id="social_buttons" class="group">
+        
+
+                
+                </div><!-- social_buttons -->
+                            
+            </section>
+        
+        </footer>
+
+    
+    </div><!-- container -->
+
+    
+</body>
+</html>

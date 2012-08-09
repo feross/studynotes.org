@@ -1,0 +1,308 @@
+/* HTML5 Boilerplate  */
+
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display: block; }
+audio, canvas, video { display: inline-block; *display: inline; *zoom: 1; }
+audio:not([controls]) { display: none; }
+[hidden] { display: none; }
+
+html { font-size: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+html, button, input, select, textarea { font-family: sans-serif; color: #222; }
+body { margin: 0; font-size: 1em; line-height: 1.4; }
+
+::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
+::selection { background: #fe57a1; color: #fff; text-shadow: none; }
+
+a { color: #00e; }
+a:visited { color: #551a8b; }
+a:hover { color: #06e; }
+a:focus { outline: thin dotted; }
+a:hover, a:active { outline: 0; }
+abbr[title] { border-bottom: 1px dotted; }
+b, strong { font-weight: bold; }
+blockquote { margin: 1em 40px; }
+dfn { font-style: italic; }
+hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0; }
+ins { background: #ff9; color: #000; text-decoration: none; }
+mark { background: #ff0; color: #000; font-style: italic; font-weight: bold; }
+pre, code, kbd, samp { font-family: monospace, serif; _font-family: 'courier new', monospace; font-size: 1em; }
+pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; }
+
+q { quotes: none; }
+q:before, q:after { content: ""; content: none; }
+small { font-size: 85%; }
+sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+
+ul, ol { margin: 1em 0; padding: 0 0 0 40px; }
+dd { margin: 0 0 0 40px; }
+nav ul, nav ol { list-style: none; list-style-image: none; margin: 0; padding: 0; }
+
+img { border: 0; -ms-interpolation-mode: bicubic; vertical-align: middle; }
+svg:not(:root) { overflow: hidden; }
+figure { margin: 0; }
+
+form { margin: 0; }
+fieldset { border: 0; margin: 0; padding: 0; }
+
+label { cursor: pointer; }
+legend { border: 0; *margin-left: -7px; padding: 0; white-space: normal; }
+button, input, select, textarea { font-size: 100%; margin: 0; vertical-align: baseline; *vertical-align: middle; }
+button, input { line-height: normal; }
+button, input[type="button"], input[type="reset"], input[type="submit"] { cursor: pointer; -webkit-appearance: button; *overflow: visible; }
+button[disabled], input[disabled] { cursor: default; }
+input[type="checkbox"], input[type="radio"] { box-sizing: border-box; padding: 0; *width: 13px; *height: 13px; }
+input[type="search"] { -webkit-appearance: textfield; -moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box; }
+input[type="search"]::-webkit-search-decoration, input[type="search"]::-webkit-search-cancel-button { -webkit-appearance: none; }
+button::-moz-focus-inner, input::-moz-focus-inner { border: 0; padding: 0; }
+textarea { overflow: auto; vertical-align: top; resize: vertical; }
+input:valid, textarea:valid {  }
+input:invalid, textarea:invalid { background-color: #f0dddd; }
+
+table { border-collapse: collapse; border-spacing: 0; }
+td { vertical-align: top; }
+
+
+
+
+
+
+/* COLOR PALETTE 
+
+CYAN        00AFEF
+MAGENTA     EB008C
+
+*/
+
+
+@import url("reset.css");
+@import url("responsive-gs-24col.css");
+
+
+/* GLOBAL */
+body                            { padding: 30px 0;
+                                  font-size: 0.875em; /* 14/16 */
+                                  font-family: sans-serif;
+                                  color: #333;
+                                  line-height: 1.5; }
+
+a                               { text-decoration: underline;
+                                  color: #333; }
+a:hover                         { text-decoration: underline;
+                                  color: #666; }
+
+
+/* TYPOGRAPHY */
+h1, h2, h3, h4, h5, h6          { margin: 0 0 .5em 0;
+                                  line-height: 1.2; }
+h1                              { font-size: 2.14285714285714em; /* 30/14 */
+                                  font-family: "bebas-neue" }
+h2                              { font-size: 1.28571428571429em; /* 23/14 */
+                                  font-family: Consolas, monaco, "Andale Mono", AndaleMono, monospace; }
+h3                              { font-size: 1.6em; }
+h4                              { font-size: 1.4em; }
+h5                              { font-size: 1.2em; }
+h6                              { font-size: 1em; }
+
+p                               { margin-bottom: 20px; }
+
+code p                          { margin-bottom: 12px; }
+code                            { font-family: Consolas, monaco, "Andale Mono", AndaleMono, monospace; }
+
+/* REUSABLE CLASSES */
+.fl_left                        { float: left; }
+.fl_right                       { float: right; }
+
+.pad                            { padding: 15px; }  
+
+.btn                            { display: block;
+                                  height: 85px;
+                                  margin: 0 0 20px 0;
+                                  text-align: center;
+                                  line-height: 85px;
+                                  font-size: 1.57142857142857em; /* 22/14 */
+                                  font-style: italic;
+                                  font-weight: 200;
+                                  text-decoration: none;
+                                  color: #FFF;
+                                  background: #333; }
+.btn:hover                      { text-decoration: none;
+                                  color: #FFF;
+                                  background: #666; }
+
+.share                          { margin-left: 10px; 
+                                  overflow: hidden; }
+
+.secondary .module              { padding: 20px;
+                                  -webkit-box-sizing: border-box;
+                                  -moz-box-sizing: border-box;
+                                  box-sizing: border-box;
+                                  color: #FFF;
+                                  background: #333; }
+
+.first_level                    { text-indent: 0; }
+.second_level                   { text-indent: 30px; }
+.third_level                    { text-indent: 60px; }
+.fourth_level                   { text-indent: 90px; }
+
+.sel                            { color: #859900 }
+
+/* HEADER */
+header                          { position: relative;
+                                  padding: 0 0 15px 0; }
+
+#logo                           { line-height: 1;
+                                  margin-bottom: 0; }
+#logo img                       { max-width: 100%; }                              
+
+#description                    { position: absolute; 
+                                  bottom: 15px; 
+                                  right: 0;
+                                  margin-bottom: 0; 
+                                  font-size: 1.64285714285714em; /* 23/14 */
+                                  font-weight: 200;
+                                  font-style: italic;
+                                  font-family: sans-serif;
+                                  line-height: 1.4; }
+
+/* FOOTER */
+footer                          { padding: 10px 0 0 0;
+                                  border-top: 1px solid #EFEFEF;
+                                  font-size: 80%; }
+
+                          
+/* SMARTPHONES - PORTRAIT & LANDSCAPE */
+@media
+only screen and (min-device-width: 240px) and (max-device-width: 480px),
+only screen and (min-width: 240px) and (max-width: 480px) {
+    
+    body                            { padding: 10px 0; }
+    
+    .container                      { width: 95%; }
+    
+    .col                            { margin: 0;
+                                      width: 100%; }
+    
+    .span_1, .span_2, .span_3,
+    .span_4, .span_5, .span_6,
+    .span_7, .span_8, .span_9,
+    .span_10, .span_11, .span_12,
+    .span_13, .span_14, .span_15,
+    .span_16, .span_17, .span_18,
+    .span_19, .span_20, .span_21,
+    .span_22, .span_23              { width: 100%; }
+    
+    
+    header                          { padding: 0; }
+    #description                    { position: relative;
+                                      font-size: 1em;
+                                      top: 5px;
+                                      position: relative;
+                                      width: 100%;  }
+    
+    .btn                            { margin: 0 0 10px; }
+    article h1                      { margin: 0; }
+    p                               { -webkit-text-size-adjust: none; }
+}
+
+/* SMARTPHONES - LANDSCAPE */
+@media 
+only screen and (min-width: 321px) { }
+
+/* SMARTPHONES - PORTRAIT */
+@media 
+only screen and (max-width: 320px) { }
+
+/* IPADS - PORTRAIT & LANDSCAPE */
+@media 
+only screen and (min-device-width: 481px) and (max-device-width: 1024px),
+only screen and (min-width: 481px) and (max-width: 1024px) {
+    
+    .container                      { width: 95%; }
+    
+    header .span_7,
+    header .span_15                 { width: 48%; }
+    header .span_15                 { float: right; }
+    #description                    { font-size: 1.2em; /* 18/14 */ }
+    
+}
+
+/* IPADS - LANDSCAPE */
+@media 
+only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+    
+    .container                      { width: 95%; }
+    
+}
+
+/* IPADS - PORTRAIT */
+@media 
+only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+    
+    .container                      { width: 95%; }
+    
+}
+
+
+/* DESKTOPS & LAPTOPS */
+@media 
+only screen and (min-width: 1024px) {
+    
+    .container                      { max-width: 1000px; }
+    
+}
+
+@media 
+only screen and (min-width: 1224px) {
+    
+    .container                      { max-width: 1200px; }
+    
+}
+
+/* LARGE SCREENS */
+@media 
+only screen and (min-width : 1824px) {
+    
+    .container                      { max-width: 1800px; }
+    
+}
+
+/* RETINA DISPLAY */
+@media
+only screen and (-webkit-min-device-pixel-ratio : 1.5),
+only screen and (min-device-pixel-ratio : 1.5) {
+/* Styles */
+}                                 
+                                  
+
+
+
+
+
+
+
+
+.ir { display: block; border: 0; text-indent: -999em; overflow: hidden; background-color: transparent; background-repeat: no-repeat; text-align: left; direction: ltr; *line-height: 0; }
+.ir br { display: none; }
+.hidden { display: none !important; visibility: hidden; }
+.visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
+.invisible { visibility: hidden; }
+.clearfix:before, .clearfix:after { content: ""; display: table; }
+.clearfix:after { clear: both; }
+.clearfix { *zoom: 1; }
+
+@media print {
+  * { background: transparent !important; color: black !important; box-shadow:none !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; } 
+  a, a:visited { text-decoration: underline; }
+  a[href]:after { content: " (" attr(href) ")"; }
+  abbr[title]:after { content: " (" attr(title) ")"; }
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; } 
+  pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
+  thead { display: table-header-group; } 
+  tr, img { page-break-inside: avoid; }
+  img { max-width: 100% !important; }
+  @page { margin: 0.5cm; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+  h2, h3 { page-break-after: avoid; }
+}
