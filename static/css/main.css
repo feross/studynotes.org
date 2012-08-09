@@ -339,13 +339,13 @@ body,
 input,
 textarea,
 button {
-    font-family: "Proxima Nova Regular","Helvetica Neue",Arial,Helvetica,sans-serif;
+    font-family: "proxima-nova","Helvetica Neue",Arial,Helvetica,sans-serif;
     font-style: normal;
     font-weight: 400;
 }
 
 em {
-    font-family: "Proxima Nova Italic","Helvetica Neue",Arial,Helvetica,sans-serif;
+    font-family: "proxima-nova","Helvetica Neue",Arial,Helvetica,sans-serif;
     font-style: italic;
     font-weight: 400;
 }
@@ -353,14 +353,14 @@ em {
 h4,
 h5,
 h6 {
-    font-family: "Proxima Nova Bold","Helvetica Neue",Arial,Helvetica,sans-serif;
+    font-family: "proxima-nova","Helvetica Neue",Arial,Helvetica,sans-serif;
     font-style: normal;
     font-weight: 700;
 }
 
 strong em,
 em strong {
-    font-family: "Proxima Nova Bold Italic","Helvetica Neue",Arial,Helvetica,sans-serif;
+    font-family: "proxima-nova","Helvetica Neue",Arial,Helvetica,sans-serif;
     font-style: italic;
     font-weight: 700;
 }
@@ -370,7 +370,7 @@ ul.postmetadata+p,
 div.ad+p,
 div.entry p:first-child,
 legend {
-    font-family: "Skolar Regular","Times New Roman",serif;
+    font-family: "skolar","Times New Roman",serif;
     font-style: normal;
     font-weight: 400;
 }
@@ -378,7 +378,7 @@ legend {
 ul.postmetadata+p em,
 div.ad+p em,
 div.entry p:first-child em {
-    font-family: "Skolar Italic","Times New Roman",serif;
+    font-family: "skolar","Times New Roman",serif;
     font-style: italic;
     font-weight: 400;
 }
@@ -388,20 +388,20 @@ h3,
 ul.postmetadata+p strong,
 div.ad+p strong,
 div.entry p:first-child strong {
-    font-family: "Skolar Bold","Times New Roman",serif;
+    font-family: "skolar","Times New Roman",serif;
     font-style: normal;
     font-weight: 700;
 }
 
 h2 em,
 h3 em {
-    font-family: "Skolar Bold Italic","Times New Roman",serif;
+    font-family: "skolar","Times New Roman",serif;
     font-style: italic;
     font-weight: 700;
 }
 
 strong {
-    font-family: "Proxima Nova Bold","Helvetica Neue",Arial,Helvetica,sans-serif;
+    font-family: "proxima-nova","Helvetica Neue",Arial,Helvetica,sans-serif;
     font-style: normal;
     font-weight: 700;
 }
@@ -544,7 +544,7 @@ article li {
 form label {
     display: block;
     padding-bottom: .25em;
-    font-family: "Skolar Bold","Times New Roman",serif;
+    font-family: "skolar","Times New Roman",serif;
     font-style: normal;
     font-weight: 700;
 }
@@ -639,7 +639,7 @@ form p {
     -moz-border-radius: 5px;
     -khtml-border-radius: 5px;
     border-radius: 5px;
-    font-family: "Proxima Nova Regular","Helvetica Neue",Arial,Helvetica,sans-serif;
+    font-family: "proxima-nova","Helvetica Neue",Arial,Helvetica,sans-serif;
     font-style: normal;
     font-weight: 400;
     color: #444;
@@ -648,11 +648,11 @@ form p {
     -ms-border-radius: 5px;
 }
 .smashform label {
-    font-family: "Proxima Nova Regular","Proxima Nova";
+    font-family: "proxima-nova";
     font-weight: 400;
 }
 .smashform label em {
-    font-family: "Proxima Nova Italic";
+    font-family: "proxima-nova";
     font-weight: 400;
 }
 .smashform input.radio {
@@ -1190,7 +1190,7 @@ a.designinformer-thumbnail {
 }
 
 .bio .about .post-author {
-    font-family: "Skolar Bold","Times New Roman",serif;
+    font-family: "skolar","Times New Roman",serif;
     font-size: 1.5em;
     font-style: normal;
     font-weight: 700;
@@ -1455,7 +1455,7 @@ div.sidebartabs ul.sidebar-nav li a {
 }
 
 div.sidebartabs ul.sidebar-nav li a strong {
-    font-family: "Proxima Nova Regular","Helvetica Neue",Arial,Helvetica,sans-serif;
+    font-family: "proxima-nova","Helvetica Neue",Arial,Helvetica,sans-serif;
     font-weight: 400;
 }
 
@@ -1797,7 +1797,7 @@ ul.interact-list li.facebook a:hover {
 }
 
 .sub-tabs a.active:after {
-    content: "";height:10px;right:43%;width:0;position:absolute}.no-rgba .sub-tabs li{border-right:1px solid #e5e5e5}.no-rgba .sub-tabs a{color:#b2b2b2}.commentlist{list-style:none;padding:0}.commentlist li{margin-bottom:2em;position:relative}.commentlist li:nth-child(even).comment-text{background-color:rgba(0,0,0,.025)}.no-rgba .commentlist li:nth-child(even).comment-text{background-color:#fafafa}.commentlist li:nth-child(odd).children li:nth-child(even).comment-text{background-color:#fff}.commentlist li:nth-child(even).commentnumber{color:#ebebeb}.commentlist li.bypostauthor>.comment .comment-author h3:after{content:"post author";color:#f3a48f;font-size:.58333333333333em;font-style:italic}.commentlist li.bypostauthor>.comment .comment-text{background-color:rgba(233,92,51,.1);border:1px solid rgba(233,92,51,.5)}.no-rgba .commentlist li.bypostauthor>.comment .comment-text{background-color:#fdeeea;border:1px solid #f3a48f}.commentlist li.bypostauthor>.commentnumber{color:rgba(233,92,51,.5)}.no-rgba .commentlist li.bypostauthor>.commentnumber{color:#f3a48f}.commentlist .children{clear:both;margin-left:5.5%;padding:1em 0 0}.commentlist .children li{margin-bottom:0}.commentlist .commentnumber{color:rgba(0,0,0,.05);font-size:3.5em;position:absolute;right:10px;top:60px;z-index:10}.commentlist .commentnumber{color:#f0f0f0}.commentlist .comment-author{float:left;margin-right:20px;padding-bottom:.5em}.commentlist .comment-author img,.commentlist .comment-author h3,.commentlist .comment-author .datetime{float:left;margin:0 20px 0 0;padding:0}.commentlist .authormeta{float:left}.commentlist .comment-author .datetime{float:left;clear:left;color:rgba(0,0,0,.4);font-size:.875em;line-height:1em;margin-right:0;margin-top:5px}.commentlist .comment-text{border:1px solid rgba(0,0,0,.1);clear:left;float:left;padding:0 10% 0 2.5%;width:87.5%}.no-rgba .commentlist .comment-text{border:1px solid #e5e5e5}.commentlist .comment-text *{position:relative;z-index:15}.commentlist .comment-text p{padding:0}.commentlist .comment-text p:last-child{padding:0 0 0}.commentlist .commentmeta{clear:both;padding:.5em 2.55% 0;width:94%}.commentlist .commentmeta .commentrating,.commentlist .commentmeta .reply{float:right;position:relative}.commentlist .commentmeta .commentrating{bottom:0;margin:3px 0 0;right:0}.commentlist .commentmeta .reply{margin-left:20px}.commentlist .commentmeta .reply a:hover{border-bottom:1px solid}.ratebtn,.ratebtn:hover,.ratebtn:active{border:0}#respond{margin:0 5.5% 2em;position:relative}#respond div,#respond form{position:static;margin-top:1em}#discussion #respond{margin:0}#respond .cancel-comment-reply{position:absolute;right:0;top:2.5em}#respond .cancel-comment-reply:hover{border-bottom:1px solid}#footer{clear:both;margin:2em 0;padding:2em 5.5% 0 0;font-size:.9em}#footer div{float:left;padding:0 0 2em 5.5%}#footer div h4{transition:color .3s;-moz-transition:-color .3s;-ms-transition:color .3s;-o-transition:color .3s;-webkit-transition:color .3s}#footer div:hover h4{color:#e53b2c}#footer #the-smashing-cat{margin-top:21px;display:none}#footer div:nth-child(2n){clear:left}#footer div{width:100%;clear:both}#footer .contribute{background-color:rgba(255,255,255,.8);border-bottom:10px solid rgba(0,0,0,.025)}#footer div li{display:block;width:94.5%;float:left;font-size:.95em}#footer li{padding:.125em 0}#footer a{border-bottom:1px solid rgba(0,0,0,.1)}#footer a:hover{border-bottom:1px solid #41b7d8}#footer a:active,#footer a:focus{background-color:#e53b2c;border:0}.sidelist{padding-top:15px}.interact-area,.popular-posts-area{padding:0 10px 15px 20px;position:relative;left:-20px;border-top-right-radius:10px;border-bottom-right-radius:10px;margin-right:-20px}.interact-area ul,.popular-posts-area ul{font-size:.9em}#footer .statement{margin:0 0 2em 5.5%;clear:both;color:rgba(0,0,0,.35);font-size:.8em;text-align:left}.print_only_notelist{list-style-type:none;margin:20px 0;display:none}.print_only{display:none}.adjacentposts{float:left;clear:both;padding-top:2em;padding-bottom:1em;background-color:#fafafa;border-top-left-radius:5px;border-bottom-left-radius:5px}.adjacentpost{padding:0 5.5% 1em}.adjacentpost a{border-bottom:1px solid rgba(0,0,0,.1)}.adjacentpost a:active,.adjacentpost a:focus{border-bottom:0}.adjacentpost span{display:inline-block;margin-left:20px;font-weight:700;margin-left:.75em}.adjacentpost strong{margin:0 10px 10px 0}.adjacentpost a:last-child{margin:0}.related-articles{border-bottom:5px solid rgba(0,0,0,.1);overflow:hidden;clear:both;margin:2em 0 2em 5.5%;padding-right:2em}.related-article{float:left;margin:2em 0;padding:0 7% 0 0;width:27.5%}.related-article:nth-child(4){margin-right:0;padding-right:0}.related-article h3{font-size:1em;font-family:"Proxima Nova Bold","Skolar Regular";margin:10px 0 5px;padding:.5em 0 0;padding-top:.5em;line-height:1.3em}.related-article a{display:block;transition:color .3s linear;-o-transition:color .3s linear;-moz-transition:color .3s linear;-webkit-transition:color .3s linear}.related-article a.post-picture img{border:1px solid rgba(0,0,0,.1)}.related-article:hover a{color:#e53b2c}.related-article a img{display:block}.related-article em{color:#999;font-size:1em;font-family:"Skolar Italic",Georgia,"Times New Roman",serif;
+    content: "";height:10px;right:43%;width:0;position:absolute}.no-rgba .sub-tabs li{border-right:1px solid #e5e5e5}.no-rgba .sub-tabs a{color:#b2b2b2}.commentlist{list-style:none;padding:0}.commentlist li{margin-bottom:2em;position:relative}.commentlist li:nth-child(even).comment-text{background-color:rgba(0,0,0,.025)}.no-rgba .commentlist li:nth-child(even).comment-text{background-color:#fafafa}.commentlist li:nth-child(odd).children li:nth-child(even).comment-text{background-color:#fff}.commentlist li:nth-child(even).commentnumber{color:#ebebeb}.commentlist li.bypostauthor>.comment .comment-author h3:after{content:"post author";color:#f3a48f;font-size:.58333333333333em;font-style:italic}.commentlist li.bypostauthor>.comment .comment-text{background-color:rgba(233,92,51,.1);border:1px solid rgba(233,92,51,.5)}.no-rgba .commentlist li.bypostauthor>.comment .comment-text{background-color:#fdeeea;border:1px solid #f3a48f}.commentlist li.bypostauthor>.commentnumber{color:rgba(233,92,51,.5)}.no-rgba .commentlist li.bypostauthor>.commentnumber{color:#f3a48f}.commentlist .children{clear:both;margin-left:5.5%;padding:1em 0 0}.commentlist .children li{margin-bottom:0}.commentlist .commentnumber{color:rgba(0,0,0,.05);font-size:3.5em;position:absolute;right:10px;top:60px;z-index:10}.commentlist .commentnumber{color:#f0f0f0}.commentlist .comment-author{float:left;margin-right:20px;padding-bottom:.5em}.commentlist .comment-author img,.commentlist .comment-author h3,.commentlist .comment-author .datetime{float:left;margin:0 20px 0 0;padding:0}.commentlist .authormeta{float:left}.commentlist .comment-author .datetime{float:left;clear:left;color:rgba(0,0,0,.4);font-size:.875em;line-height:1em;margin-right:0;margin-top:5px}.commentlist .comment-text{border:1px solid rgba(0,0,0,.1);clear:left;float:left;padding:0 10% 0 2.5%;width:87.5%}.no-rgba .commentlist .comment-text{border:1px solid #e5e5e5}.commentlist .comment-text *{position:relative;z-index:15}.commentlist .comment-text p{padding:0}.commentlist .comment-text p:last-child{padding:0 0 0}.commentlist .commentmeta{clear:both;padding:.5em 2.55% 0;width:94%}.commentlist .commentmeta .commentrating,.commentlist .commentmeta .reply{float:right;position:relative}.commentlist .commentmeta .commentrating{bottom:0;margin:3px 0 0;right:0}.commentlist .commentmeta .reply{margin-left:20px}.commentlist .commentmeta .reply a:hover{border-bottom:1px solid}.ratebtn,.ratebtn:hover,.ratebtn:active{border:0}#respond{margin:0 5.5% 2em;position:relative}#respond div,#respond form{position:static;margin-top:1em}#discussion #respond{margin:0}#respond .cancel-comment-reply{position:absolute;right:0;top:2.5em}#respond .cancel-comment-reply:hover{border-bottom:1px solid}#footer{clear:both;margin:2em 0;padding:2em 5.5% 0 0;font-size:.9em}#footer div{float:left;padding:0 0 2em 5.5%}#footer div h4{transition:color .3s;-moz-transition:-color .3s;-ms-transition:color .3s;-o-transition:color .3s;-webkit-transition:color .3s}#footer div:hover h4{color:#e53b2c}#footer #the-smashing-cat{margin-top:21px;display:none}#footer div:nth-child(2n){clear:left}#footer div{width:100%;clear:both}#footer .contribute{background-color:rgba(255,255,255,.8);border-bottom:10px solid rgba(0,0,0,.025)}#footer div li{display:block;width:94.5%;float:left;font-size:.95em}#footer li{padding:.125em 0}#footer a{border-bottom:1px solid rgba(0,0,0,.1)}#footer a:hover{border-bottom:1px solid #41b7d8}#footer a:active,#footer a:focus{background-color:#e53b2c;border:0}.sidelist{padding-top:15px}.interact-area,.popular-posts-area{padding:0 10px 15px 20px;position:relative;left:-20px;border-top-right-radius:10px;border-bottom-right-radius:10px;margin-right:-20px}.interact-area ul,.popular-posts-area ul{font-size:.9em}#footer .statement{margin:0 0 2em 5.5%;clear:both;color:rgba(0,0,0,.35);font-size:.8em;text-align:left}.print_only_notelist{list-style-type:none;margin:20px 0;display:none}.print_only{display:none}.adjacentposts{float:left;clear:both;padding-top:2em;padding-bottom:1em;background-color:#fafafa;border-top-left-radius:5px;border-bottom-left-radius:5px}.adjacentpost{padding:0 5.5% 1em}.adjacentpost a{border-bottom:1px solid rgba(0,0,0,.1)}.adjacentpost a:active,.adjacentpost a:focus{border-bottom:0}.adjacentpost span{display:inline-block;margin-left:20px;font-weight:700;margin-left:.75em}.adjacentpost strong{margin:0 10px 10px 0}.adjacentpost a:last-child{margin:0}.related-articles{border-bottom:5px solid rgba(0,0,0,.1);overflow:hidden;clear:both;margin:2em 0 2em 5.5%;padding-right:2em}.related-article{float:left;margin:2em 0;padding:0 7% 0 0;width:27.5%}.related-article:nth-child(4){margin-right:0;padding-right:0}.related-article h3{font-size:1em;font-family:"proxima-nova","skolar";font-weight:700;margin:10px 0 5px;padding:.5em 0 0;padding-top:.5em;line-height:1.3em}.related-article a{display:block;transition:color .3s linear;-o-transition:color .3s linear;-moz-transition:color .3s linear;-webkit-transition:color .3s linear}.related-article a.post-picture img{border:1px solid rgba(0,0,0,.1)}.related-article:hover a{color:#e53b2c}.related-article a img{display:block}.related-article em{color:#999;font-size:1em;font-family:"skolar",Georgia,"Times New Roman",serif;font-style:italic;
     bottom: 0;
     margin: .5em 0;
     border: 10px solid transparent;
@@ -1829,7 +1829,7 @@ ul.interact-list li.facebook a:hover {
 
 .fp-related-article h3 {
     margin: .5em 0;
-    font-family: "Proxima Nova Bold","Skolar Regular";margin:10px 0 5px;padding:.5em 0 0;padding-top:.5em;line-height:1.3em}.fp-related-article a{transition:color .3s linear;-o-transition:color .3s linear;-moz-transition:color .3s linear;-webkit-transition:color .3s linear}.fp-related-article:hover a{color:#e53b2c}.fp-related-article em{color:#999;font-size:1em;font-family:"Skolar Italic",Georgia,"Times New Roman",serif;
+    font-family: "proxima-nova","skolar";font-weight:700;margin:10px 0 5px;padding:.5em 0 0;padding-top:.5em;line-height:1.3em}.fp-related-article a{transition:color .3s linear;-o-transition:color .3s linear;-moz-transition:color .3s linear;-webkit-transition:color .3s linear}.fp-related-article:hover a{color:#e53b2c}.fp-related-article em{color:#999;font-size:1em;font-family:"skolar",Georgia,"Times New Roman",serif;font-style:italic;
     font-size: 1.1em;
 }
 
@@ -2305,15 +2305,16 @@ blockquote {
     padding: 1em 2em;
     border: 1px solid rgba(0,0,0,.1);
     border-left: 8px solid #41b7db;
-    font: italic 1.05em/1.55em "Skolar Italic","Times New Roman",serif;
+    font: italic 1.05em/1.55em "skolar","Times New Roman",serif;
     color: rgba(0,0,0,.75);
     background-color: #f7f7f7;
 }
 
 aside em,
 blockquote em {
-    font-family: "Skolar Regular";
+    font-family: "skolar";
     font-style: normal;
+    font-weight: 400;
 }
 
 .comment-text {
@@ -2358,7 +2359,7 @@ ul.postmetadata li.inline {
 .inline .inline-ad {
     padding: 0 48px 10px 0;
     text-align: right;
-    font-family: "Proxima Nova Regular",Arial,Verdana;
+    font-family: "proxima-nova",Arial,Verdana;
     font-size: .8em;
     color: #333;
 }
@@ -2411,8 +2412,9 @@ ul.postmetadata li.inline {
 aside strong,
 aside strong,
 blockquote strong {
-    font-family: "Skolar Bold","Times New Roman",serif;
+    font-family: "skolar","Times New Roman",serif;
     font-style: normal;
+    font-weight: 700;
 }
 
 nav.sections ul {
@@ -2421,7 +2423,7 @@ nav.sections ul {
 
 #mc_embed_signup {
     clear: left;
-    font: 16px "Proxima Nova",Helvetica,Arial,sans-serif;
+    font: 16px "proxima-nova",Helvetica,Arial,sans-serif;
 }
 
 #mc_embed_signup form {
@@ -2455,7 +2457,7 @@ nav.sections ul {
 }
 
 #mc_embed_signup p {
-    font-family: "Proxima Nova Regular","Helvetica Neue",Arial,Helvetica,sans-serif;
+    font-family: "proxima-nova","Helvetica Neue",Arial,Helvetica,sans-serif;
     font-size: 1em;
     font-style: normal;
     font-weight: normal;
@@ -2501,8 +2503,9 @@ article.post h2 .catch_headline {
     display: block;
     padding-bottom: .5em;
     text-transform: uppercase;
-    font-family: "Proxima Nova Bold";
+    font-family: "proxima-nova";
     font-size: .45em;
+    font-weight: 700;
     line-height: 1.5em;
     letter-spacing: 1px;
     color: #41b7d8;
@@ -2513,7 +2516,7 @@ article.post h2 .catch_headline {
 }
 
 .daily-container em {
-    font-family: "Proxima Nova Italic","Helvetica Neue",Arial,Helvetica,sans-serif;
+    font-family: "proxima-nova","Helvetica Neue",Arial,Helvetica,sans-serif;
     font-size: 1em;
     font-style: italic;
     font-weight: 400;
@@ -2522,7 +2525,7 @@ article.post h2 .catch_headline {
 
 .daily-container h3 {
     padding: .5em 0 0;
-    font-family: "Proxima Nova Regular","Helvetica Neue",Arial,Helvetica,sans-serif;
+    font-family: "proxima-nova","Helvetica Neue",Arial,Helvetica,sans-serif;
     font-size: 100%;
     font-weight: 400;
 }
@@ -4096,10 +4099,10 @@ a.rss-link:hover {
     display: block;
     padding-bottom: 0.5em;
     text-transform: uppercase;
-    font-family: "Proxima Nova Bold","Helvetica Neue",Arial,Helvetica,sans-serif;
+    font-family: "proxima-nova","Helvetica Neue",Arial,Helvetica,sans-serif;
     font-size: 0.45em;
     font-style: normal;
-    font-weight: bold;
+    font-weight: 700;
     line-height: 1.5em;
     letter-spacing: 1px;
     color: #41b7d8;
