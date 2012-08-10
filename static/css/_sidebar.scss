@@ -1,3 +1,9 @@
+#wpsidebar {
+    display: none;
+    z-index: 1;
+    position: relative;
+}
+
 div.col.side {
     padding: 0 5.5%;
 }
@@ -46,14 +52,6 @@ div.sidebartabs {
     background: rgba(255,255,255,.55);
 }
 
-div.sidebartabs .div-hide {
-    display: none;
-}
-
-div.sidebartabs .div-selected {
-    display: block;
-}
-
 div.two {
     clear: both;
 }
@@ -75,34 +73,34 @@ div.two div.right {
     padding-left: 4%;
 }
 
-div.smashingwidget li {
+div.sidebarwidget li {
     padding: 1em 0;
     border-bottom: 1px solid rgba(0,0,0,.05);
     list-style: none;
 }
 
-div.smashingwidget li div.sw-source,
+div.sidebarwidget li div.sw-source,
 ul.topiclist li p {
     font-size: .85em;
     line-height: 1.4em;
 }
 
-div.smashingwidget h3 {
+div.sidebarwidget h3 {
     position: relative;
     padding-left: 50px;
 }
 
-div.smashingwidget h3 a {
+div.sidebarwidget h3 a {
     position: relative;
 }
 
-div.smashingwidget h3 img {
+div.sidebarwidget h3 img {
     position: absolute;
     top: 3px;
     left: -50px;
 }
 
-div.smashingwidget li:last-child {
+div.sidebarwidget li:last-child {
     border: 0;
 }
 
@@ -181,4 +179,58 @@ ul.interact-list li.facebook a:hover {
 
 .sidelist li a:hover {
     border-bottom: 1px solid;
+}
+
+
+// Sidebar widgets
+// ---------------
+
+.sidebarwidget ul a {
+    border-bottom: 1px solid rgba(0,0,0,.1);
+}
+
+.sidebarwidget ul a:hover {
+    border-bottom: 1px solid;
+}
+
+.sidebarwidget .view-more {
+    padding-top: 1em;
+}
+
+.sidebarwidget .view-more a {
+    -webkit-transition: opacity .2s;
+    -moz-transition: opacity .2s;
+    -ms-transition: opacity .2s;
+    -o-transition: opacity .2s;
+    transition: opacity .2s;
+}
+
+.sidebarwidget .view-more a {
+    background: -moz-linear-gradient(top,rgba(233,92,51,1) 0,rgba(229,59,44,1) 100%);
+    background: -webkit-gradient(linear,left top,left bottom,color-stop(0,rgba(233,92,51,1) ),color-stop(100%,rgba(229,59,44,1) ));
+    background: -webkit-linear-gradient(top,#41b7d8 0,#41b7d8 100%);
+    background: -o-linear-gradient(top,rgba(233,92,51,1) 0,rgba(229,59,44,1) 100%);
+    background: -ms-linear-gradient(top,rgba(233,92,51,1) 0,rgba(229,59,44,1) 100%);
+    filter: progid:dximagetransform.Microsoft.gradient(startcolorstr='#e95c33',endcolorstr='#e53b2c',gradienttype=0);
+    background: linear-gradient(top,rgba(233,92,51,1) 0,rgba(229,59,44,1) 100%);
+    background: -moz-linear-gradient(top,rgba(65,183,216,1) 0,rgba(65,183,216,1) 100%);
+    background: -webkit-gradient(linear,left top,left bottom,color-stop(0,rgba(65,183,216,1) ),color-stop(100%,rgba(65,183,216,1) ));
+    background: -webkit-linear-gradient(top,#41b7d8 0,#41b7d8 100%);
+    background: -o-linear-gradient(top,rgba(65,183,216,1) 0,rgba(65,183,216,1) 100%);
+    background: -ms-linear-gradient(top,rgba(65,183,216,1) 0,rgba(65,183,216,1) 100%);
+    filter: progid:dximagetransform.Microsoft.gradient(startcolorstr='#41b7d8',endcolorstr='#41b7d8',gradienttype=0);
+    padding: 6px 10px;
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 5px;
+    color: #fff;
+    opacity: .75;
+    background: linear-gradient(top,rgba(65,183,216,1) 0,rgba(65,183,216,1) 100%);
+}
+
+.sidebarwidget .view-more a:hover {
+    opacity: 1;
+}
+
+#newsletter_widget img {
+    width: 40px;
 }

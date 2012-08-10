@@ -54,4 +54,15 @@ function footnotes()
         }
     });
 }
+
+.print_only_notelist {
+    display: none;
+    margin: 20px 0;
+    list-style-type: none;
+}
+
+.print_only {
+    display: none;
+}
+
 ###
