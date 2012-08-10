@@ -4,7 +4,8 @@ $ ->
     $('select#subsection-select').change ->
         window.location.href = $(this).val()
 
-
+    # Remove borders from image links
+    $('a img').parent().css border: 0
 
 
 

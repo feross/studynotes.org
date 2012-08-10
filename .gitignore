@@ -1,7 +1,6 @@
-static/js/*.js
-static/css/*.css
 
-# --- DEFAULTS BELOW ---
+
+# --- HTML5 BOILERPLATE DEFAULTS BELOW ---
 
 # Numerous always-ignore extensions
 *.diff
