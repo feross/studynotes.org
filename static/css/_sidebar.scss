@@ -234,3 +234,28 @@ ul.interact-list li.facebook a:hover {
 #newsletter_widget img {
     width: 40px;
 }
+
+
+
+
+
+//
+
+.sidelist {
+    padding-top: 15px;
+}
+
+.interact-area,
+.popular-posts-area {
+    position: relative;
+    left: -20px;
+    margin-right: -20px;
+    padding: 0 10px 15px 20px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.interact-area ul,
+.popular-posts-area ul {
+    font-size: .9em;
+}
