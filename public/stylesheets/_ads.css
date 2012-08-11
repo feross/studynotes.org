@@ -1,0 +1,9 @@
+.homepageadwrapper {
+    float: right;
+    width: 89%;
+    padding: 0 5.5% 4em 0;
+}
+
+.homepageadwrapper span.awithus {
+    margin-right: 8px;
+}
