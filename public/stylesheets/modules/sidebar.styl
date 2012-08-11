@@ -39,7 +39,8 @@ div.sidebartabs
   border-top: 1px solid rgba(0,0,0,.1)
   border-right: 1px solid rgba(0,0,0,.1)
   border-bottom: 1px solid rgba(0,0,0,.1)
-  @includeborder-radius(010px10px0);background: rgba(255,255,255,.55)
+  border-radius: 0 10px 10px 0
+  background: rgba(255,255,255,.55)
 
 div.two
   clear: both
@@ -106,7 +107,8 @@ ul.interact-list li.facebook a:hover
 #twitter li
   margin-bottom: 1.5em
   padding: .75em
-  @includeborder-radius(5px);color: #fff
+  border-radius: 5px
+  color: #fff
   background: #333
 
 #twitter li:after
@@ -117,7 +119,7 @@ ul.interact-list li.facebook a:hover
   bottom: -11px
   width: 51px
   height: 25px
-  background: url(/img/twitter_badge.png)
+  background: url(/images/twitter_badge.png)
 
 #twitter li a
   border-bottom: 1px solid #999
@@ -158,15 +160,10 @@ ul.interact-list li.facebook a:hover
   padding-top: 1em
 
 .sidebarwidget .view-more a
-  -webkit-transition: opacity .2s
-  -moz-transition: opacity .2s
-  -ms-transition: opacity .2s
-  -o-transition: opacity .2s
   transition: opacity .2s
 
 .sidebarwidget .view-more a
   background: linear-gradient(top,rgba(65,183,216,1) 0,rgba(65,183,216,1) 100%)
-  filter: progid:dximagetransform.Microsoft.gradient(startcolorstr='#41b7d8',endcolorstr='#41b7d8',gradienttype=0)
   padding: 6px 10px
   border: 1px solid rgba(0,0,0,.1)
   border-radius: 5px
@@ -179,7 +176,7 @@ ul.interact-list li.facebook a:hover
 #newsletter_widget img
   width: 40px
 
-//.sidelist
+.sidelist
   padding-top: 15px
 
 .interact-area,
