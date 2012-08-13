@@ -53,8 +53,7 @@ conn = db.connect()
 
 app.get '/', (req, res) ->
   res.render 'index',
-    x:
-      forceTitle: 'StudyNotes.org - Study better with Free AP Course Notes'
+    forceTitle: 'StudyNotes.org - Study better with Free AP Course Notes'
 
 app.get '/ap-notes/:courseSlug/:noteTypeSlug/:noteSlug', routes.note
 # app.get '*', routes.notfound
