@@ -6,9 +6,11 @@
     "start": "node app"
   },
   "dependencies": {
+    "coffee-script": "*",
     "express": "*",
     "jade": "*",
     "stylus": "*",
-    "nib": "*"
+    "nib": "*",
+    "mysql": ">= 2.0.0-alpha3"
   }
 }

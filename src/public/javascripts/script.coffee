@@ -1,4 +1,5 @@
 
+
 $ ->
     # Redirect page when user selects from the subsection selector  
     $('select#subsection-select').change ->
