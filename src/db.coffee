@@ -1,5 +1,4 @@
 mysql = require 'mysql'
-config = require './config'
 
 exports.connect = ->
   conn = mysql.createConnection config.mysql

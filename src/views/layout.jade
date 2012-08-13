@@ -27,6 +27,8 @@ body.home.blog.www-section
   include includes/sidebar
 
   include includes/footer
+
+  include includes/scripts
   
 //- <body>
 //-   <div class="container">
@@ -45,24 +47,6 @@ body.home.blog.www-section
       
 //-       </footer>
 //-   </div>
-script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
-script
-  if (!window.jQuery) {
-    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-    g.src='/javascripts/lib/jquery-1.7.1.js';
-    s.parentNode.insertBefore(g,s)}(document,'script'));
-  }
 
-script(src='javascripts/script.js')
-
-// TODO: add https://github.com/scottjehl/Respond/ 
-// TODO: add google analytics here
-script
-  var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-  s.parentNode.insertBefore(g,s)}(document,'script')); 
-      
-// TODO: add other tracking here 
 
 </html>

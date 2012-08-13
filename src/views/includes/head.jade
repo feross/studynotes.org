@@ -1,6 +1,11 @@
 meta(charset='utf-8')
 meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
-title= title
+
+- if (x.forceTitle)
+  title= x.forceTitle
+- else
+  title #{x.title} - Study Notes
+
 meta(name='description', content='TODO')
 meta(name='keywords', content='TODO')
 
@@ -18,9 +23,9 @@ meta(name='viewport', content='width=device-width, initial-scale=1.0')
 // TODO: add rss feed, see: https://github.com/opensearch.xml 
 // <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="StudyNotes" /> 
 
-link(rel='stylesheet', href='stylesheets/main.css')
+link(rel='stylesheet', href='/stylesheets/main.css')
 
-link(rel='stylesheet', href='stylesheets/print.css', media='print')
+link(rel='stylesheet', href='/stylesheets/print.css', media='print')
 
 // TODO: look at ie8.css, print.css
 //if IE 8
@@ -32,4 +37,4 @@ script(type='text/javascript')
   try{Typekit.load();}catch(e){}
 
 // Modernizr 
-script(src='javascripts/libs/modernizr-2.5.3.min.js')
+script(src='/javascripts/libs/modernizr-2.5.3.min.js')

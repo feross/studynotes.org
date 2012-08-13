@@ -1,3 +1,6 @@
+global.config = require './config'
+global._ = require 'underscore'
+
 http = require 'http'
 path = require 'path'
 fs = require 'fs'
@@ -7,7 +10,6 @@ express = require 'express'
 stylus = require 'stylus'
 nib = require 'nib'
 
-config = require './config'
 db = require './db'
 routes = require './routes'
 
@@ -32,7 +34,9 @@ app.use app.router
 app.use stylus.middleware
   src: __dirname + '/public'
   compile: compileStylus
+
 app.use express.static path.join __dirname, 'public'
+
 
 # Serve .coffee files as .js
 app.get '/javascripts/:script.js', (req, res) ->
@@ -46,10 +50,14 @@ if app.get 'env' == 'development'
 
 conn = db.connect()
 
-  
 
-app.get '/', routes.index
+app.get '/', (req, res) ->
+  res.render 'index',
+    x:
+      forceTitle: 'StudyNotes.org - Study better with Free AP Course Notes'
 
+app.get '/ap-notes/:courseSlug/:noteTypeSlug/:noteSlug', routes.note
+# app.get '*', routes.notfound
 
 http.createServer(app).listen app.get('port'), ->
   console.log 'Express server listening on port ' + app.get('port')
