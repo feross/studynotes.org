@@ -24,9 +24,8 @@ COURSES = {
 }
 
 exports.index = (req, res) ->
-  app.render 'index',
-    locals:
-      forceTitle: 'StudyNotes.org - Study better with Free AP Course Notes'
+  res.render 'index',
+    forceTitle: 'StudyNotes.org - Study better with Free AP Course Notes'
 
 exports.note = (req, res) ->
   {courseSlug, noteTypeSlug, noteSlug} = req.params
@@ -37,8 +36,8 @@ exports.note = (req, res) ->
   noteType = _.find NOTE_TYPES, (n) ->
     n.slug == noteTypeSlug
 
-  if not course or not noteType
-    res.send 404, res.render 'index', title: '404 Not Found'
+  # if not course or not noteType
+  #   res.send 404, res.render 'index', title: '404 Not Found'
 
   # conn.query
 

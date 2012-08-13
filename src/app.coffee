@@ -30,12 +30,12 @@ app.use express.bodyParser()
 app.use express.methodOverride()
 app.use express.cookieParser('your secret here') # TODO
 app.use express.session()
+app.use express.static path.join __dirname, 'public'
 app.use app.router
 app.use stylus.middleware
   src: __dirname + '/public'
   compile: compileStylus
 
-app.use express.static path.join __dirname, 'public'
 
 
 # Serve .coffee files as .js
@@ -51,12 +51,9 @@ if app.get 'env' == 'development'
 conn = db.connect()
 
 
-app.get '/', (req, res) ->
-  res.render 'index',
-    forceTitle: 'StudyNotes.org - Study better with Free AP Course Notes'
-
+app.get '/', routes.index
 app.get '/ap-notes/:courseSlug/:noteTypeSlug/:noteSlug', routes.note
-# app.get '*', routes.notfound
+app.get '*', routes.notfound
 
 http.createServer(app).listen app.get('port'), ->
   console.log 'Express server listening on port ' + app.get('port')
