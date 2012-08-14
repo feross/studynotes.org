@@ -23,6 +23,9 @@ COURSES = {
   },
 }
 
+not_found = (res) ->
+  res.status(404).render('index', title: 'Page Not Found - 404 Error')
+
 exports.index = (req, res) ->
   res.render 'index',
     forceTitle: 'StudyNotes.org - Study better with Free AP Course Notes'
@@ -36,13 +39,13 @@ exports.note = (req, res) ->
   noteType = _.find NOTE_TYPES, (n) ->
     n.slug == noteTypeSlug
 
-  # if not course or not noteType
-  #   res.send 404, res.render 'index', title: '404 Not Found'
+  if not course or not noteType
+    not_found(res)
 
   # conn.query
 
   res.render 'note',
     title: "#{noteSlug} - #{courseSlug} - #{noteTypeSlug}"
 
-exports.notfound = (req, res) ->
-  res.render 'notfound'
+exports.not_found = (req, res) ->
+  not_found(res)
