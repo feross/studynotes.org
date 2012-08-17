@@ -5,7 +5,7 @@ http = require 'http'
 path = require 'path'
 fs = require 'fs'
 
-coffee = require 'coffee-script'
+coffee = require 'iced-coffee-script'
 express = require 'express'
 stylus = require 'stylus'
 nib = require 'nib'

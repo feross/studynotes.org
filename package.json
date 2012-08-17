@@ -6,12 +6,12 @@
     "start": "node app"
   },
   "dependencies": {
-    "coffee-script": "*",
+    "iced-coffee-script": "*",
+    "sequelize": "*",
     "express": "*",
     "jade": "*",
+    "underscore": "*",
     "stylus": "*",
-    "nib": "*",
-    "mysql": ">= 2.0.0-alpha3",
-    "underscore": "*"
+    "nib": "*"
   }
 }
