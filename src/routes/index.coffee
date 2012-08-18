@@ -1,30 +1,9 @@
-NOTE_TYPES = {
-  VOCAB: {
-    id: 1
-    name: 'Vocabulary Terms'
-    slug: 'vocabulary'
-  }
-  CHAPTER_OUTLINE: {
-    id: 2
-    name: 'Chapter Outlines'
-    slug: 'chapter-outlines'
-  }
-}
+{Course, NoteType, Note} = require './../model'
 
-COURSES = {
-  US_HISTORY: {
-    id: 1
-    name: 'AP US History'
-    slug: 'ap-us-history'
-    ntypes: [
-      NOTE_TYPES.VOCAB,
-      NOTE_TYPES.CHAPTER_OUTLINE
-    ]
-  },
-}
-
-not_found = (res) ->
-  res.status(404).render('index', title: 'Page Not Found - 404 Error')
+# Render 404 page, and log error message
+renderNotFound = (res, err) ->
+  console.log err
+  res.status(404).render('notfound', title: 'Page Not Found - 404 Error')
 
 exports.index = (req, res) ->
   res.render 'index',
@@ -33,19 +12,38 @@ exports.index = (req, res) ->
 exports.note = (req, res) ->
   {courseSlug, noteTypeSlug, noteSlug} = req.params
 
-  course = _.find COURSES, (c) ->
-    c.slug == courseSlug 
+  await
+    Course.find(where: {slug: courseSlug})
+      .done defer err, course
+    NoteType.find(where: {slug: noteTypeSlug})
+      .done defer err, noteType
 
-  noteType = _.find NOTE_TYPES, (n) ->
-    n.slug == noteTypeSlug
+  console.error err if err
 
   if not course or not noteType
-    not_found(res)
+    renderNotFound res, 'No course or note type with that slug'
+    return
 
-  # conn.query
+  if not course.hasNoteType noteType
+    renderNotFound res, 'Course does not have this note type' 
+    return
+
+  await
+    Note.find(
+      where:
+        slug: noteSlug
+        CourseId: course.id
+        NoteTypeId: noteType.id  
+    ).done defer err, note
+
+  console.error err if err
+
+  if not note
+    renderNotFound res, 'No note with that slug'
+    return
 
   res.render 'note',
-    title: "#{noteSlug} - #{courseSlug} - #{noteTypeSlug}"
+    title: "#{note.name} - #{course.name} - #{noteType.name}"
 
-exports.not_found = (req, res) ->
-  not_found(res)
+exports.notFound = (req, res) ->
+  renderNotFound(res, '')

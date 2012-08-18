@@ -1,5 +1,6 @@
 global.config = require './config'
 global._ = require 'underscore'
+global.async = require 'async'
 
 http = require 'http'
 path = require 'path'
@@ -10,8 +11,15 @@ express = require 'express'
 stylus = require 'stylus'
 nib = require 'nib'
 
-db = require './db'
+require './db'
+
+models = require './model'
 routes = require './routes'
+
+
+#
+# Express Settings
+#
 
 app = express()
 
@@ -36,8 +44,6 @@ app.use stylus.middleware
   src: __dirname + '/public'
   compile: compileStylus
 
-
-
 # Serve .coffee files as .js
 app.get '/javascripts/:script.js', (req, res) ->
   res.header 'Content-Type', 'application/x-javascript'
@@ -48,12 +54,19 @@ app.get '/javascripts/:script.js', (req, res) ->
 if app.get 'env' == 'development'
   app.use express.errorHandler()
 
-conn = db.connect()
 
+#
+# Routes
+#
 
 app.get '/', routes.index
 app.get '/ap-notes/:courseSlug/:noteTypeSlug/:noteSlug', routes.note
 app.get '*', routes.notfound
+
+
+#
+# Server
+#
 
 http.createServer(app).listen app.get('port'), ->
   console.log 'Express server listening on port ' + app.get('port')
