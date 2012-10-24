@@ -1,0 +1,52 @@
+!!! 5
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+head
+  include includes/head
+
+body.home.blog.www-section
+  a#top
+
+  include includes/nav-network
+  
+  #container
+    .fluid.clearfix
+      .grid.clearfix
+        
+        include includes/mini-search
+        include includes/nav-content
+        
+        .col.main.home
+          block content
+
+      p
+        a.backtotop(href='#top', title='Jump to the top of the page') ↑ Back to top
+  
+  include includes/sidebar
+
+  include includes/footer
+
+  include includes/scripts
+  
+//- <body>
+//-   <div class="container">
+//-       <header id="header_wrap">
+//-           <h1 id="logo">
+//-               <img src="http://placekitten.com/100/100" alt="Study Notes" />
+//-           </h1>
+          
+//-           <h2 id="description">The best site for 100% FREE AP notes! We offer free study materials to high school students seeking to prepare for Advanced Placement classes and exams.</h2>
+//-       </header>
+//-       <section role="main">
+      
+      
+//-       </section>
+//-       <footer>
+      
+//-       </footer>
+//-   </div>
+
+
+</html>

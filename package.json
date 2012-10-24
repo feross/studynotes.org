@@ -1,12 +1,11 @@
 {
-  "name": "application-name",
+  "name": "StudyNotes",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node app"
   },
   "dependencies": {
-    "iced-coffee-script": "*",
     "sequelize": "*",
     "express": "*",
     "jade": "*",

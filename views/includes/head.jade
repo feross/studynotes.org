@@ -1,0 +1,74 @@
+//- TODO: set these tags in nginx
+//- TODO: verify with curl -I
+//- meta(charset='utf-8')
+//- meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+
+- if (typeof forceTitle !== 'undefined')
+  title= forceTitle
+- else
+  title #{title} - Study Notes
+
+meta(name='description', content='TODO')
+meta(name='keywords', content='TODO')
+
+// TODO: Add open graph tags 
+// <link rel="canonical" href="TODO" /> 
+// <link rel="prev" href="TODO" /> 
+// <link rel="next" href="TODO" /> 
+
+// TODO:
+//- <title>StudyNotes.org</title>
+//- <meta property="og:title" content="StudyNotes.org" />
+
+//- <meta name="description" content="Free AP notes">
+//- <meta property="og:description" content="Free AP notes" />
+
+//- <!--
+//- <meta property="og:type" content="article" />
+
+//- <meta property="og:image" content="" />
+
+//- <meta property="article:author" content="http://feross.org/about/" />
+//- <meta property="fb:admins" content="1347524341" />
+//- <meta property="fb:app_id" content="" />
+
+//- <link rel="canonical" href="" />
+//- <meta property="og:url" content="" />
+
+//- <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+//- <link rel="alternate" type="application/atom+xml" title="" href="" />
+
+meta(name='viewport', content='width=device-width, initial-scale=1.0')
+
+// TODO: try these other options:
+// <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">  
+// <meta name="viewport" content="width=device-width">
+
+// TODO: add rss feed, see: https://github.com/opensearch.xml 
+// <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="StudyNotes" /> 
+
+link(rel='stylesheet', href='/stylesheets/main.css')
+
+//- TODO:
+//- link(rel='stylesheet', href='/stylesheets/print.css', media='print')
+
+// Async Typekit loader, modified to add "wf-active" class on successful load.
+style
+  .wf-loading{
+    opacity: 0;
+  }
+  .wf-active, .wf-inactive {
+    opacity: 1 !important;
+    -moz-transition: 0.2s opacity ease-in;
+    -webkit-transition: 0.2s opacity ease-in;
+    transition: 0.2s opacity ease-in;
+  }
+script
+  (function() {
+    var config = {
+      kitId: 'djj4afz',
+      scriptTimeout: 1000
+    };
+    var h=document.getElementsByTagName("html")[0];h.className+=" wf-loading";var t=setTimeout(function(){h.className=h.className.replace(/(\s|^)wf-loading(\s|$)/g," ");h.className+=" wf-inactive"},config.scriptTimeout);var tk=document.createElement("script"),d=false;tk.src='//use.typekit.net/'+config.kitId+'.js';tk.type="text/javascript";tk.async="true";tk.onload=tk.onreadystatechange=function(){var a=this.readyState;if(d||a&&a!="complete"&&a!="loaded")return;d=true;clearTimeout(t);try{Typekit.load(config);h.className+="wf-active"}catch(b){}};var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(tk,s)
+  })();
