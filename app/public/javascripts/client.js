@@ -1,16 +1,11 @@
-
 $(function() {
   // Redirect page when user selects from the subsection selector  
   $('select#subsection-select').change(function() {
     window.location.href = $(this).val();
-  }
+  });
   // Remove borders from image links
   $('a img').parent().css({border: 0});
 });
-
-
-
-
 
 
 
