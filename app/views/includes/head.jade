@@ -3,57 +3,49 @@
 //- meta(charset='utf-8')
 //- meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
 
-- if (typeof forceTitle !== 'undefined')
+- if (forceTitle)
   title= forceTitle
+  meta(property='og:title', content='#{forceTitle}')
 - else
   title #{title} - Study Notes
+  meta(property='og:title', content='#{title} - Study Notes')
 
-meta(name='description', content='TODO')
-meta(name='keywords', content='TODO')
+//- TODO: SEO
+//- meta(name='description', content='TODO')
+//- meta(property='og:description' content='')
+//- meta(name='keywords', content='TODO')
 
-// TODO: Add open graph tags 
-// <link rel="canonical" href="TODO" /> 
-// <link rel="prev" href="TODO" /> 
-// <link rel="next" href="TODO" /> 
-
-// TODO:
-//- <title>StudyNotes.org</title>
-//- <meta property="og:title" content="StudyNotes.org" />
-
-//- <meta name="description" content="Free AP notes">
-//- <meta property="og:description" content="Free AP notes" />
-
-//- <!--
+//- TODO: Add open graph tags
 //- <meta property="og:type" content="article" />
-
 //- <meta property="og:image" content="" />
-
 //- <meta property="article:author" content="http://feross.org/about/" />
 //- <meta property="fb:admins" content="1347524341" />
 //- <meta property="fb:app_id" content="" />
 
-//- <link rel="canonical" href="" />
+//- TODO: run facebook lint tool
+
+//- TODO: SEO
+//- <link rel="canonical" href="TODO" /> 
 //- <meta property="og:url" content="" />
 
-//- <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//- <link rel="prev" href="TODO" /> 
+//- <link rel="next" href="TODO" /> 
 
+//- TODO: responsive layout
+//- meta(name='viewport', content='width=device-width, initial-scale=1.0')
+
+//- TODO: add rss support
 //- <link rel="alternate" type="application/atom+xml" title="" href="" />
 
-meta(name='viewport', content='width=device-width, initial-scale=1.0')
-
-// TODO: try these other options:
-// <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">  
-// <meta name="viewport" content="width=device-width">
-
-// TODO: add rss feed, see: https://github.com/opensearch.xml 
-// <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="StudyNotes" /> 
+//- TODO: add search service?, see: https://github.com/opensearch.xml 
+//- <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="StudyNotes" /> 
 
 link(rel='stylesheet', href='/stylesheets/main.css')
 
-//- TODO:
+//- TODO: add print stylesheet. should this be a media query in main file?
 //- link(rel='stylesheet', href='/stylesheets/print.css', media='print')
 
-// Async Typekit loader, modified to add "wf-active" class on successful load.
+//- Async Typekit loader, modified to add "wf-active" class on successful load.
 style
   .wf-loading{
     opacity: 0;
