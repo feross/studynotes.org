@@ -1,16 +1,9 @@
-mixin logo
-  a(href='/')
-    img(src='/images/logo.png', alt='Study Notes', title='Jump to the front page of Study Notes')
-
-nav.toplevel.clearfix
-  .mini
-    mixin logo
-  
-  ul.network.clearfix
-    li.current
-      mixin logo
-
-    li: a(href='/study-guides/') Study Books
+nav#topnav.clearfix
+  ul.network
+    li#logo.current
+      a(href='/', title='Jump to the front page of Study Notes').
+        Study <br> Notes
+    li: a(href='/study-guides/') Bookstore
   
   ul.channels
     li.rss: a(href='#', title='Subscribe to our RSS feed') RSS

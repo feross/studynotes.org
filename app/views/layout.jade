@@ -9,11 +9,23 @@ head
 
 body.home
 
-  #container
-    p hi
-  
-  script(src='/javascripts/libs/jquery-1.8.2.js')
+  include includes/topnav
 
+  #container-outer
+    #container-inner.clearfix
+      include includes/subnav
+
+      #content
+        block content
+
+  aside#sidebar
+    include includes/sidebar
+
+  footer#footer
+    include includes/footer
+  
+  //- Scripts
+  script(src='/javascripts/libs/jquery-1.8.2.js')
   script(src='/javascripts/client.js')
 
   //- TODO: add https://github.com/scottjehl/Respond/

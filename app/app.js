@@ -33,7 +33,6 @@ app.use(express.methodOverride());
 app.use(express.cookieParser('your secret here')); // TODO
 app.use(express.session());
 
-console.log(__dirname + '/stylesheets');
 app.use(stylus.middleware({
   // "/stylesheets" gets automatically appended to the paths
   src: __dirname,
@@ -41,6 +40,7 @@ app.use(stylus.middleware({
   compile: function(str, path) {
     return stylus(str)
       .set('filename', path)
+      .define('url', stylus.url({ paths: [__dirname + '/public/images'] }))
       .set('compress', app.get('env' !== 'development'))
       .use(nib());
   }
