@@ -1,0 +1,15 @@
+form.search(method='get', action='#')
+  span.declare Search on Study Notes
+  input(name='q', type='text', placeholder='e.g. US History')
+  button(type='submit')
+    span Search
+
+.ads
+  span.declare Advertisement
+  
+  - if (locals.env == 'development')
+    img(src='//placekitten.com/336/280')
+  - else
+    include ads/adsense-large-rectangle
+ 
+

@@ -3,16 +3,23 @@ var model = require('./../model')
   , NoteType = model.NoteType
   , Note = model.Note;
 
+// Render 404 page, and log error message
 renderNotFound = function(res, err) {
   console.log(err);
-  res.status(404).render('notfound', {
-    title: 'Page Not Found - 404 Error'
+  res.status(404).render('not-found', {
+    forceTitle: 'Page Not Found - 404 Error'
   });
 };
 
 exports.index = function(req, res) {
   res.render('index', {
     forceTitle: 'StudyNotes.org - Study better with Free AP Course Notes'
+  });
+};
+
+exports.astore = function(req, res) {
+  res.render('astore', {
+    title: 'Buy AP Study Guides'
   });
 };
 
@@ -72,5 +79,5 @@ exports.note = function(req, res) {
 };
 
 exports.notFound = function(req, res) {
-  renderNotFound(res, '');
+  renderNotFound(res, 'msg');
 };

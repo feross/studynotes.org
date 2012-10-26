@@ -40,7 +40,7 @@ app.use(stylus.middleware({
   compile: function(str, path) {
     return stylus(str)
       .set('filename', path)
-      .define('url', stylus.url({ paths: [__dirname + '/public/images'] }))
+      .define('url', stylus.url())
       .set('compress', app.get('env' !== 'development'))
       .use(nib());
   }
@@ -48,6 +48,9 @@ app.use(stylus.middleware({
 
 app.use(express["static"](path.join(__dirname, 'public')));
 app.use(app.router);
+
+// Allow access to the current environment from Jade
+app.locals.env = app.get('env');
 
 if (app.get('env') === 'development') {
   app.locals.pretty = true;
@@ -59,7 +62,8 @@ if (app.get('env') === 'development') {
 
 app.get('/', routes.index);
 app.get('/ap-notes/:courseSlug/:noteTypeSlug/:noteSlug', routes.note);
-app.get('*', routes.notfound);
+app.get('/study-guides', routes.astore);
+app.get('*', routes.notFound);
 
 
 // Start the server

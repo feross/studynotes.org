@@ -5,28 +5,44 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 
 head
-  include includes/head
+  include head
 
 body.home
 
-  include includes/topnav
+  nav
+    ul#topnav.network
+      li#logo.current
+        a(href='/', title='Jump to the front page of Study Notes')
+          img(src='/images/logo.png', alt="Study Notes")
+      li: a(href='/study-guides') Book Store
+      li: a(href='/submit') Submit Notes
+    
+    //- ul.channels
+    //-   li.rss: a(href='#', title='Subscribe to our RSS feed') RSS
+    //-   li.facebook: a(href='http://www.facebook.com/StudyNotesApp', title='Like us on Facebook!') Facebook
+    //-   li.twitter: a(href='http://twitter.com/StudyNotesApp', title='Follow us on Twitter!') Twitter
+    //-   li.newsletter: a(href='http://www.smashingmagazine.com/the-smashing-newsletter/', title='Subscribe to our Email Newsletter (107K)') Newsletter
 
   #container-outer
     #container-inner.clearfix
-      include includes/subnav
-
+      nav
+        include nav
       #content
         block content
 
   aside#sidebar
-    include includes/sidebar
+    include sidebar
 
   footer#footer
-    include includes/footer
+    include footer
   
   //- Scripts
   script(src='/javascripts/libs/jquery-1.8.2.js')
   script(src='/javascripts/client.js')
+
+  - if (env == "development")
+    script
+      document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')
 
   //- TODO: add https://github.com/scottjehl/Respond/
 
