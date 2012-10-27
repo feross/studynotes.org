@@ -1,16 +1,16 @@
-// Dependencies
-
 @import 'nib'
+@import 'util'
 
 // Fonts
 
-$serif = "skolar", Caslon,Baskerville, Palatino, "Palatino Linotype", "Hoefler Text", Garamond, "URW Palladio L", "Book Antiqua", Georgia, serif
-$title-font = "ff-prater-script-web", $serif
+$serif = "skolar", Caslon, Baskerville, Palatino, "Palatino Linotype", "Hoefler Text", Garamond, "URW Palladio L", "Book Antiqua", Georgia, serif
 $sans-serif = "proxima-nova", Helvetica, sans-serif
+$title-font = "ff-prater-script-web", $serif
 
 // Colors
 
-$red = #E22C29
+$red = #E0162B
+$blue = #0052A5
 
 $lightest-gray = #EEE
 $lighter-gray = #CCC
@@ -20,68 +20,40 @@ $dark-gray = #555
 $darker-gray = #333
 
 $border-color = rgba(0, 0, 0, 0.1)
-$light-border-color = rgba(0, 0, 0, 0.05)
 
-// Layout variables
-$sidebar-width = 350px
+// Layout
 
-// For convenience when styling links
-$link = '&:link, &:visited'
-$focus = '&:hover, &:focus, &:active'
+$topnav-width = 10%
+$container-outer-width = 100% - $topnav-width
+
+$nav-width = 20%
+$content-width = 100% - $nav-width
+
+$sidebar-width = 336px
+
 
 //
-// STRUCTURE
+// STRUCTURE AND TYPOGRAPHY
 //
 
-// *
-//   box-sizing: border-box
+*
+  box-sizing: border-box
 
 html
   overflow-y: scroll
 
 body
   border-top: 3px solid $red
-  background: url('../images/body.gif')
   color: $darker-gray
   font-family: $sans-serif
   -webkit-font-smoothing: antialiased
   font-size: 16px
+  image: '../images/body.png' 60px 60px
+  // background-image: url('../images/body.png')
   line-height: 24px
   margin: 0
   padding: 15px 0 0 0
   position: relative
-
-#topnav
-  float: left
-  width: 10%
-
-#subnav
-  float: left
-
-#sidebar
-  float: left
-  margin: 0 10px 0 20px
-  position: relative
-  top: auto
-  width: $sidebar-width
-
-#container-outer
-  float: left
-  margin-right: - ($sidebar-width + 30px)
-  padding-bottom: 1em
-  width: 90%
-
-#container-inner
-  margin-right: ($sidebar-width + 30px)
-  background-color: white
-  border: 1px solid $border-color
-  border-radius: 0 10px 10px 10px
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 10px 1px
-  padding-top: 60px
-
-#footer
-  clear: both
-  width: 100%
 
 img
   max-width: 100%
@@ -91,44 +63,81 @@ ul
   margin: 0
   padding: 0
 
+li a
+  {$link}
+    color: $light-gray
+    display: block
+
+  &.current, {$focus}
+    background-color: rgba(yellow, 0.6)
+    color: $dark-gray
+    text-decoration: none
+
+a
+  {$link}
+    color: $blue
+    text-decoration: none
+
+  {$focus}
+    text-decoration: underline
+
+
+//
+// CONTAINER
+//
+
+#container-outer
+  float: left
+  margin-right: - ($sidebar-width + 40px)
+  padding-bottom: 50px
+  width: $container-outer-width
+
+#container-inner
+  margin-right: ($sidebar-width + 40px)
+  background-color: white
+  border: 1px solid $border-color
+  border-radius: 0 10px 10px 10px
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 5px 1px
+  padding-top: 80px
+
 
 //
 // TOPNAV
 //
 
 #topnav
-  li
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05)
+  float: left
+  width: $topnav-width
 
   a
-    color: $light-gray
-    display: block
-    padding: 15px 0 15px 20px
-    text-decoration: none
-
+    {$link}
+      border-bottom: 1px solid $border-color
+      padding: 15px 0 15px 20px
+      text-shadow: 0 1px rgba(255,255,255,0.5);
     {$focus}
-      background-color: rgba(yellow, 0.6)
-      color: $darker-gray
+      color: $gray
 
-  // Note: #logo is an <li>
-  #logo
-    background-color: white
-    border-top: 1px solid $border-color
-    border-bottom: 1px solid $border-color
-    margin: 0 -1px 0 0
-    position: relative
-    z-index: 2
 
-    a
+// Note: #logo is an <li>
+#logo
+  background-color: #fff
+  border-top: 1px solid $border-color
+  border-bottom: 1px solid $border-color
+  margin: 0 -1px 0 0
+  position: relative
+  z-index: 2
+
+  a
+    {$link}
       padding: 20px 0 10px 20px
 
-      {$focus}
-        background-color: inherit
-      &:focus, &:active
-        img
-          position: relative
-          margin-top: 1px
-          margin-bottom: -1px
+    {$focus}
+      background-color: inherit
+
+    &:focus, &:active
+      img
+        position: relative
+        top: 1px
 
 
 //
@@ -137,15 +146,35 @@ ul
 
 #nav
   float: left
-  width: 20%
-
-  a
-    text-decoration: none
+  width: $nav-width
 
   & > li
-    padding: 5px 0 5px 20%
-    margin: 0 20% 40px 0
+    margin-bottom: 30px
 
+    // All links in nav
+    a
+      {$link}
+        margin: 0
+        padding: 4px 0 4px 20%
+
+    // Top-level links
+    & > a
+      {$link}
+        border-bottom: 1px solid $border-color
+        color: $blue
+        letter-spacing: 1px
+        text-transform: uppercase
+
+    // Second-level links
+    & li a
+      {$link}
+        color: $light-gray
+
+    // On hover over top <li>, make second-level links darker
+    &:hover, &:focus, &:active
+      & li a
+        {$link}
+          color: $dark-gray
 
 //
 // CONTENT
@@ -153,10 +182,27 @@ ul
 
 #content
   float: right
-  width: 80%
+  padding: 0 0 0 4%
+  width: $content-width
 
 
+//
+// SIDEBAR
+//
 
-// Imports
+#sidebar
+  float: left
+  margin: 0 20px 0 20px
+  position: relative
+  top: auto
+  width: $sidebar-width
 
-@import 'util'
+
+//
+// FOOTER
+//
+
+#footer
+  clear: both
+  width: 100%
+

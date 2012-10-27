@@ -1,28 +1,89 @@
-var model = require('./../model')
+var model = require('./model')
   , Course = model.Course
   , NoteType = model.NoteType
   , Note = model.Note;
 
+
+var topnav = {
+  index: {
+    url: '/', 
+    title: 'StudyNotes.org - Study better with Free AP Course Notes',
+    forceTitle: true,
+    shortname: '',
+  },
+
+  add: {
+    url: '/add',
+    title: 'Add Notes',
+    shortname: 'Add Notes',
+  },
+
+  astore: {
+    url: '/study-guides',
+    title: 'Buy Amazon.com AP Study Guides',
+    shortname: 'Bookstore',
+  }
+};
+
+
+var other = {
+  notfound: {
+    url: '*',
+    handler: function(req, res) {
+      render404(res);
+    }
+  }
+};
+
+
+/*
+ * Render a template.
+ *
+ * Adds variables that all templates will expect. We use this function so we
+ * have one location to add all these variables.
+ *
+ * Use this function instead of calling res.render() directly. 
+ */
+function render(res, templateName, locals) {
+  res.render(templateName, _.extend(locals, {
+    cls: templateName,
+    topnav: topnav,
+    config: config
+  }));
+}
+
 // Render 404 page, and log error message
-renderNotFound = function(res, err) {
-  console.log(err);
-  res.status(404).render('not-found', {
-    forceTitle: 'Page Not Found - 404 Error'
+function render404(res, err) {
+  if (err)
+    console.log(err);
+
+  res.status(404);
+  render(res, 'notfound', {
+    title: 'Page Not Found - 404 Error',
+    forceTitle: true,
+    err: err
   });
 };
 
-exports.index = function(req, res) {
-  res.render('index', {
-    forceTitle: 'StudyNotes.org - Study better with Free AP Course Notes'
+// Initializes and registers the app's routes
+exports.init = function(app) {
+  var routes = _.extend({}, topnav, other);
+
+  // TODO
+  app.get('/ap-notes/:courseSlug/:noteTypeSlug/:noteSlug', routes.note);
+
+  _.each(routes, function(locals, templateName) {
+    app.get(locals.url, function(req, res) {
+      if (locals.handler) {
+        locals.handler(req, res);
+      } else {
+        render(res, templateName, locals);
+      }
+    });
   });
 };
 
-exports.astore = function(req, res) {
-  res.render('astore', {
-    title: 'Buy AP Study Guides'
-  });
-};
-
+// TODO
 exports.note = function(req, res) {
   var courseSlug = req.params.courseSlug
   , noteSlug = req.params.noteSlug
@@ -44,12 +105,12 @@ exports.note = function(req, res) {
       }
       
       if (!course || !noteType) {
-        renderNotFound(res, 'No course or note type with that slug');
+        render404(res, 'No course or note type with that slug');
         return;
       }
       
       if (!course.hasNoteType(noteType)) {
-        renderNotFound(res, 'Course does not have this note type');
+        render404(res, 'Course does not have this note type');
         return;
       }
       
@@ -66,18 +127,14 @@ exports.note = function(req, res) {
         }
         
         if (!note) {
-          renderNotFound(res, 'No note with that slug');
+          render404(res, 'No note with that slug');
           return;
         }
         
-        res.render('note', {
+        render(res, 'note', {
           title: "" + note.name + " - " + course.name + " - " + noteType.name
         });
       });
     });
   });
-};
-
-exports.notFound = function(req, res) {
-  renderNotFound(res, 'msg');
 };

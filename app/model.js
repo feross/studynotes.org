@@ -4,12 +4,12 @@ var Sequelize = require('sequelize');
 // Models
 
 var Course = exports.Course = sequelize.define('Course', {
-  name: {
+  title: {
     type: Sequelize.STRING,
     allowNull: false,
     unique: true
   },
-  description: {
+  desc: {
     type: Sequelize.TEXT,
     allowNull: false
   },
@@ -24,12 +24,12 @@ var Course = exports.Course = sequelize.define('Course', {
 });
 
 var NoteType = exports.NoteType = sequelize.define('NoteType', {
-  name: {
+  title: {
     type: Sequelize.STRING,
     allowNull: false,
     unique: true
   },
-  description: {
+  desc: {
     type: Sequelize.TEXT,
     allowNull: false
   },
@@ -44,7 +44,7 @@ var NoteType = exports.NoteType = sequelize.define('NoteType', {
 });
 
 var Note = exports.Note = sequelize.define('Note', {
-  name: {
+  title: {
     type: Sequelize.STRING,
     allowNull: false,
     unique: true
@@ -77,6 +77,10 @@ var Schema = exports.Schema = sequelize.define('Schema', {
 // Associations
 
 Course.hasMany(NoteType);
-NoteType.hasMany(Course);
 Course.hasMany(Note);
+
+// NoteType.hasOne(Course);
 NoteType.hasMany(Note);
+
+// Note.hasOne(Course);
+// Note.hasOne(NoteType);

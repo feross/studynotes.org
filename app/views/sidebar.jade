@@ -7,9 +7,9 @@ form.search(method='get', action='#')
 .ads
   span.declare Advertisement
   
-  - if (locals.env == 'development')
+  if (locals.env == 'development')
     img(src='//placekitten.com/336/280')
-  - else
+  else
     include ads/adsense-large-rectangle
  
 

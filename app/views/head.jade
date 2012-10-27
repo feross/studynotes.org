@@ -3,10 +3,10 @@
 //- meta(charset='utf-8')
 //- meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
 
-- if (locals.forceTitle)
-  title= forceTitle
+if (locals.forceTitle)
+  title= title
   meta(property='og:title', content='#{forceTitle}')
-- else if (locals.title)
+else if (locals.title)
   title #{title} - Study Notes
   meta(property='og:title', content='#{title} - Study Notes')
 

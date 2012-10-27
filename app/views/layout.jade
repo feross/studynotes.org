@@ -7,16 +7,18 @@
 head
   include head
 
-body.home
+body(class='{locals.cls}')
 
   nav
     ul#topnav.network
-      li#logo.current
+      li#logo.home
         a(href='/', title='Jump to the front page of Study Notes')
           img(src='/images/logo.png', alt="Study Notes")
-      li: a(href='/study-guides') Book Store
-      li: a(href='/submit') Submit Notes
+      each item, cls in locals.topnav
+        if cls != 'index'
+          li: a(href='#{item.url}', class='#{cls} #{locals.cls == cls ? 'current' : ''}')= item.shortname
     
+    //- TODO: add social media links
     //- ul.channels
     //-   li.rss: a(href='#', title='Subscribe to our RSS feed') RSS
     //-   li.facebook: a(href='http://www.facebook.com/StudyNotesApp', title='Like us on Facebook!') Facebook

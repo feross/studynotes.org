@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1 Page Not Found!
+  p Sorry, I couldn’t find that page for you! :(
+  p Feel free to send me a strongly-worded email expressing the depths of your sorrows at being unable to find whatever it is you were trying to find. I’ll fix it as quickly as possible!
+  p.
+    You should try <a href="/">checking out the homepage</a>. You’ll probably find what you want from there.
+
+  //- 404 help from Google
+  script
+    var GOOG_FIXURL_LANG = 'en';
+    var GOOG_FIXURL_SITE = '#{locals.config.siteurl}';
+  script(src="http://linkhelp.clients.google.com/tbproxy/lh/wm/fixurl.js")

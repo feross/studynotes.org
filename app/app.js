@@ -57,14 +57,7 @@ if (app.get('env') === 'development') {
   app.use(express.errorHandler());
 }
 
-
-// Routes
-
-app.get('/', routes.index);
-app.get('/ap-notes/:courseSlug/:noteTypeSlug/:noteSlug', routes.note);
-app.get('/study-guides', routes.astore);
-app.get('*', routes.notFound);
-
+routes.init(app);
 
 // Start the server
 

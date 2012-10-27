@@ -26,28 +26,28 @@ migrations = {
     return async.series({
       ap_us_history: function(cb) {
         return m.Course.create({
-          name: 'AP US History',
-          description: 'a cool class',
+          title: 'AP US History',
+          desc: 'a cool class',
           slug: 'ap-us-history'
         }).done(cb);
       },
       ap_world_history: function(cb) {
         return m.Course.create({
-          name: 'AP World History',
-          description: 'a really cool class',
+          title: 'AP World History',
+          desc: 'a really cool class',
           slug: 'ap-world-history'
         }).done(cb);
       },
       vocabulary: function(cb) {
         return m.NoteType.create({
-          name: 'Vocabulary Terms',
-          description: 'blah',
+          title: 'Vocabulary Terms',
+          desc: 'blah',
           slug: 'vocabulary'
         }).done(cb);
       },
       chapter_1: function(cb) {
         return m.Note.create({
-          name: "Chapter 1",
+          title: "Chapter 1",
           body: "These are some vocab words...",
           slug: "chapter-1"
         }).done(cb);
@@ -56,10 +56,9 @@ migrations = {
       console.log('results');
       if (!err) {
         r.ap_us_history.addNoteType(r.vocabulary);
-        r.ap_world_history.addNoteType(r.vocabulary);
-        debugger;
-        r.chapter_1.setNoteType(r.vocabulary);
-        r.chapter_1.setCourse(r.ap_us_history);
+
+        r.ap_us_history.addNote(r.chapter_1);
+        r.vocabulary.addNote(r.chapter_1);
       }
       return cb(err);
     });
