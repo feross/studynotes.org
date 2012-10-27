@@ -6,12 +6,10 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "sequelize": "*",
     "express": "*",
     "jade": "*",
     "underscore": "*",
     "stylus": "*",
-    "nib": "*",
-    "async": "*",
+    "nib": "*"
   }
 }
