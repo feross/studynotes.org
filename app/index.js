@@ -1,5 +1,10 @@
-// Dependencies
+// Globally-available Dependencies
+global.u = require('underscore');
+global.u.str = require('underscore.string');
+global.async = require('async');
+global.util = require('util');
 
+// Dependencies
 var http = require('http')
   , path = require('path')
   , fs = require('fs')
@@ -42,26 +47,29 @@ app.use(stylus.middleware({
 app.locals.env = app.get('env');
 
 if (app.get('env') === 'development') {
+  // Pretty html while developing
   app.locals.pretty = true;
+
+  // SSH tunnel to "athena" so we can access mongo database while developing locally
+  var tunnel = require('child_process').spawn("ssh", ['-L', '27017:localhost:27017', '-N', 'feross@athena']);
+
+  // TODO: what is this?
   app.use(express.errorHandler());
 }
 
-// Globally-available dependencies
-
+// Load config after "app" is set up, since we access it there
 global.config = require('./config');
-global._ = require('underscore');
+
 
 // Dependencies
 
 var model = require('./model')(function() {
   
-  console.log('model and db are loaded')
-
   var routes = require('./routes');
 
   // Initialize routes
 
-  routes.init(app);
+  routes.init();
 
   // Start the server
 
@@ -70,3 +78,6 @@ var model = require('./model')(function() {
   });
 });
 
+process.on('uncaughtException', function (err) {
+  console.log('WARNING: Node uncaughtException: ', err, err.stack);
+});
