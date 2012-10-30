@@ -12,6 +12,9 @@
     "stylus": "*",
     "nib": "*",
     "mongoose": "*",
-    "async": "*"
+    "async": "*",
+    "underscore.string": "*"
+  },
+  "devDependencies": {
   }
 }

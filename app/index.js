@@ -63,16 +63,11 @@ global.config = require('./config');
 
 // Dependencies
 
-var model = require('./model')(function() {
-  
+require('./models')(function () {
+
   var routes = require('./routes');
 
-  // Initialize routes
-
-  routes.init();
-
   // Start the server
-
   http.createServer(app).listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
   });
