@@ -1,7 +1,4 @@
-var model = require('./model')
-  , Course = model.Course
-  , NoteType = model.NoteType
-  , Note = model.Note;
+var async = require('async');
 
 
 var topnav = {
@@ -25,15 +22,27 @@ var topnav = {
   }
 };
 
-
 var other = {
   notfound: {
     url: '*',
-    handler: function(req, res) {
+    handler: function (req, res) {
       render404(res);
     }
   }
 };
+
+var courses = undefined;
+async.waterfall([
+  function (cb) {
+    m.Course.find(cb);
+  },
+  function (courses, cb) {
+    courses = courses;
+
+    
+  }
+]);
+
 
 
 /*
@@ -66,13 +75,13 @@ function render404(res, err) {
 };
 
 // Initializes and registers the app's routes
-exports.init = function(app) {
+exports.init = function (app) {
   var routes = _.extend({}, topnav, other);
 
   // TODO
   app.get('/ap-notes/:courseSlug/:noteTypeSlug/:noteSlug', routes.note);
 
-  _.each(routes, function(locals, templateName) {
+  _.each(routes, function (locals, templateName) {
     app.get(locals.url, function(req, res) {
       if (locals.handler) {
         locals.handler(req, res);
@@ -84,7 +93,7 @@ exports.init = function(app) {
 };
 
 // TODO
-exports.note = function(req, res) {
+exports.note = function (req, res) {
   var courseSlug = req.params.courseSlug
   , noteSlug = req.params.noteSlug
   , noteTypeSlug = req.params.noteTypeSlug;
@@ -93,12 +102,12 @@ exports.note = function(req, res) {
     where: {
       slug: courseSlug
     }
-  }).done(function(err, course) {
+  }).done(function (err, course) {
     NoteType.find({
       where: {
         slug: noteTypeSlug
       }
-    }).done(function(err, noteType) {
+    }).done(function (err, noteType) {
       
       if (err) {
         console.error(err);
@@ -120,7 +129,7 @@ exports.note = function(req, res) {
           CourseId: course.id,
           NoteTypeId: noteType.id
         }
-      }).done(function(err, note) {
+      }).done(function (err, note) {
         
         if (err) {
           console.error(err);

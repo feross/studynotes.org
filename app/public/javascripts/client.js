@@ -1,6 +1,6 @@
-$(function() {
+$(function () {
   // Redirect page when user selects from the subsection selector  
-  $('select#subsection-select').change(function() {
+  $('select#subsection-select').change(function () {
     window.location.href = $(this).val();
   });
   // Remove borders from image links
@@ -18,7 +18,7 @@ $(function() {
 //     var i = 0;
     
 //     $('<li>', { html: '<h4>Footnotes:</h4>' }).appendTo(notelist);
-//     $.each(links, function(){
+//     $.each(links, function (){
 //         var parent_class = $(this).parent().attr('class');
 //         if(parent_class.indexOf('author') == -1 && parent_class.indexOf('tags') === -1 && parent_class.indexOf('edit') === -1 && parent_class.indexOf('social-icons') === -1)
 //         {

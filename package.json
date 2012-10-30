@@ -10,6 +10,8 @@
     "jade": "*",
     "underscore": "*",
     "stylus": "*",
-    "nib": "*"
+    "nib": "*",
+    "mongoose": "*",
+    "async": "*"
   }
 }

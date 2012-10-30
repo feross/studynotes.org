@@ -1,9 +1,9 @@
 module.exports = {
   db: {
-    host: 'feross.net',
-    user: 'studynotes_new',
-    password: 'nzxPRLPQhWJXarVu',
-    database: 'studynotes_new'
+    host: global.app.get('env') == 'development' ? 'localhost' :'192.168.176.246',
+    user: 'studynotes',
+    port: '27017',
+    database: 'studynotes'
   },
   siteurl: 'http://apstudynotes.org'
 };
