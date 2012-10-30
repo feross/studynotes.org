@@ -1,8 +1,9 @@
 // Globally-available Dependencies
 global.u = require('underscore');
 global.u.str = require('underscore.string');
+global.u.util = require('./utils');
+
 global.async = require('async');
-global.util = require('util');
 
 // Dependencies
 var http = require('http')
@@ -11,6 +12,8 @@ var http = require('http')
   , express = require('express')
   , stylus = require('stylus')
   , nib = require('nib');
+
+
 
 // Make all globals accessible from command line
 module.exports = global;
@@ -53,15 +56,14 @@ if (app.get('env') === 'development') {
   // SSH tunnel to "athena" so we can access mongo database while developing locally
   var tunnel = require('child_process').spawn("ssh", ['-L', '27017:localhost:27017', '-N', 'feross@athena']);
 
+  require('sleep').sleep(1);
+
   // TODO: what is this?
   app.use(express.errorHandler());
 }
 
 // Load config after "app" is set up, since we access it there
 global.config = require('./config');
-
-
-// Dependencies
 
 require('./models')(function () {
 

@@ -31,13 +31,16 @@ var other = {
 var courses = undefined;
 async.waterfall([
   function (cb) {
-    m.Course.find(cb);
-  },
-  function (courses, cb) {
-    courses = courses;
-    console.log(courses);
+    m.Course
+      .find()
+      .populate('notetypes')
+      .exec(cb);
   }
-]);
+], function (err, result) {
+  if (err) console.log(err);
+
+  courses = result;
+});
 
 
 
@@ -53,14 +56,14 @@ function render(res, templateName, locals) {
   res.render(templateName, u.extend(locals, {
     cls: templateName,
     topnav: topnav,
+    courses: courses,
     config: config
   }));
 }
 
 // Render 404 page, and log error message
 function render404(res, err) {
-  if (err)
-    console.log(err);
+  if (err) console.log(err);
 
   res.status(404);
   render(res, 'notfound', {

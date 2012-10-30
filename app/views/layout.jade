@@ -28,7 +28,14 @@ body(class='{locals.cls}')
   #container-outer
     #container-inner.clearfix
       nav
-        include nav
+        ul#nav
+          each course in locals.courses
+            li
+              a(href='/ap-notes/#{course.slug}')= course.name
+              ul
+                each notetype in course.notetypes
+                  li: a(href='/ap-notes/#{course.slug}/#{notetype.slug}')= notetype.name
+
       #content
         block content
 

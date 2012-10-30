@@ -7,9 +7,9 @@ var mongoose = require('mongoose')
 // Slug fields all pretty much look like this
 var SLUG = {
   type: String,
-  required: true,
   match: /[-a-z0-9]+/i,
-  lowercase: true
+  lowercase: true,
+  unique: true
 };
 var SLUG_UNIQUE = u.extend(SLUG, { unique: true });
 
@@ -17,46 +17,24 @@ var SLUG_UNIQUE = u.extend(SLUG, { unique: true });
 var schemas = {
   
   Course: {
-    slug: SLUG_UNIQUE,
-    name: {
-      type: String,
-      required: true,
-      unique: true
-    },
+    name: { type: String, required: true, unique: true },
     desc: String,
-    notetypes: [String] // TODO
+    notetypes: [{ type: Schema.Types.ObjectId, ref: 'Notetype'}],
+    slug: SLUG_UNIQUE
   },
 
   Notetype: {
-    slug: SLUG_UNIQUE,
-    name: {
-      type: String,
-      required: true,
-      unique: true
-    },
-    desc: {
-      type: String
-    }
+    name: { type: String, required: true, unique: true },
+    desc: String,
+    slug: SLUG_UNIQUE
   },
 
   Note: {
+    name: { type: String, required: true },
+    body: { type: String, required: true },
+    courseId: { type: Schema.Types.ObjectId, ref: 'Course', required: true },
+    notetypeId: { type: Schema.Types.ObjectId, ref: 'Notetype', required: true },
     slug: SLUG,
-    name: {
-      type: String,
-      required: true
-    },
-    body: {
-      type: String,
-      required: true
-    },
-    courseId: {
-      type: String,
-      required: true
-    },
-    notetypeId: {
-      type: String,
-      required: true
-    },
     setup: function() {
       // No duplicate names or slugs for a course+notetype.
       this.index({ courseId: 1, notetypeId: 1, slug: 1 }, { unique: true });
@@ -66,10 +44,11 @@ var schemas = {
     }
   }
 
-
 }
 
-// Setup up schemas and models.
+/*
+ * Setup up schemas and models.
+ */
 
 var models = {};
 u.each(schemas, function (fields, name) {
@@ -81,7 +60,7 @@ u.each(schemas, function (fields, name) {
   var setup = fields.setup;
   fields = u.omit(fields, 'setup');
 
-  var schema = new Schema(fields, { strict: true });
+  var schema = new Schema(fields);
 
   /*
    * Automatic slug generation.
@@ -91,27 +70,32 @@ u.each(schemas, function (fields, name) {
    */
   if (fields.slug) {
     schema.pre('save', function(next) {
+      var doc = this;
+
       // If no slug is set, automatically generate one
-      if (!this.slug) {
+      if (!doc.slug) {
         var potentialSlug, initialSlug, num, done;
 
-        potentialSlug = initialSlug = util.slugify(this.name);
-        num = 1; // number to try appending to slug in order to make it unique
+        potentialSlug = initialSlug = u.util.slugify(doc.name);
+        num = 0; // number to try appending to slug in order to make it unique
         
         async.whilst(
           function () {
-            // Try appending a number to the end of the slug
-            potentialSlug = initialSlug + '-' + num;
+            // Try appending a number to the end of the slug, after the first try
+            if (num > 0) {
+              potentialSlug = initialSlug + '-' + num;
+            }
             num += 1;
             return !done;
           },
           function (cb) {
-            this.count({ slug: potentialSlug }, function (err, count) {
+            doc.model(name).count({ slug: potentialSlug }, function (err, count) {
               if (err) console.error(err);
               if (count == 0) {
-                this.slug = potentialSlug;
+                doc.slug = potentialSlug;
                 done = true;
               }
+              cb();
             });
           },
           function (err) { 
