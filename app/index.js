@@ -38,6 +38,9 @@ app.use(stylus.middleware({
   src: __dirname,
   dest: __dirname + '/public',
   compile: function (str, path) {
+    console.log('compile');
+    console.log(str);
+    console.log(path);
     return stylus(str)
       .set('filename', path)
       .define('url', stylus.url())
