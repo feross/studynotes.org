@@ -35,8 +35,8 @@ app.use(express["static"](path.join(__dirname, 'public')));
 app.use(app.router);
 app.use(stylus.middleware({
   // "/stylesheets" gets automatically appended to the paths
-  src: __dirname,
-  dest: __dirname + '/public',
+  src: __dirname + '/stylesheets',
+  dest: __dirname + '/public/stylesheets',
   compile: function (str, path) {
     console.log('compile');
     console.log(str);
