@@ -49,6 +49,8 @@ app.use(stylus.middleware({
 // Allow access to the current environment from Jade
 app.locals.env = app.get('env');
 
+console.log(app.get('env'));
+
 if (app.get('env') === 'development') {
   // Pretty html while developing
   app.locals.pretty = true;
