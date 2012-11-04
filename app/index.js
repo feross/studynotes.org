@@ -22,6 +22,8 @@ module.exports = global;
 // TODO: figure out what all these options actually do!
 global.app = express();
 
+console.log('App running in "' + app.get('env') + '" mode.');
+
 app.set('port', process.env.PORT || 4000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
@@ -31,16 +33,13 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.cookieParser('your secret here')); // TODO
 app.use(express.session());
-app.use(express["static"](path.join(__dirname, 'public')));
-app.use(app.router);
 app.use(stylus.middleware({
   // "/stylesheets" gets automatically appended to the paths
-  src: __dirname + '/stylesheets',
-  dest: __dirname + '/public/stylesheets',
+  src: __dirname,
+  dest: __dirname + '/public',
+  force: true,
+  // debug: true,
   compile: function (str, path) {
-    console.log('compile');
-    console.log(str);
-    console.log(path);
     return stylus(str)
       .set('filename', path)
       .define('url', stylus.url())
@@ -48,11 +47,12 @@ app.use(stylus.middleware({
       .use(nib());
   }
 }));
+app.use(express["static"](path.join(__dirname, 'public')));
+app.use(app.router);
 
 // Allow access to the current environment from Jade
 app.locals.env = app.get('env');
 
-console.log(app.get('env'));
 
 if (app.get('env') === 'development') {
   // Pretty html while developing
