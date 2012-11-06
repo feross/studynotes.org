@@ -6,11 +6,11 @@ var topnav = {
     shortname: '',
   },
 
-  add: {
-    url: '/add',
-    title: 'Add Notes',
-    shortname: 'Add Notes',
-  },
+  // add: {
+  //   url: '/add',
+  //   title: 'Add Notes',
+  //   shortname: 'Add Notes',
+  // },
 
   astore: {
     url: '/study-guides',
@@ -20,6 +20,62 @@ var topnav = {
 };
 
 var other = {
+  notetype: {
+    url: '/ap-notes/:courseSlug/:notetypeSlug',
+    handler: function (req, res) {
+      var p = req.params;
+
+      m.Course
+      .findOne({ slug: p.courseSlug })
+      .populate('notetypes')
+      .exec(function (err, course) {
+        if (err) {
+          console.log(err);
+          return;
+        }
+
+        if (!course) {
+          render404(res, 'No course with that slug');
+          return;
+        }
+
+        var notetype = u.where(course.notetypes, { slug: p.notetypeSlug });
+        console.log(notetype);
+        if (!notetype.length) {
+          render404(res, 'Course has no notetype with that slug');
+          return;
+        }
+        notetype = notetype[0];
+        
+        render(res, 'notetype', {
+          title: notetype.name
+        });
+
+        // Note.find({
+        //   where: {
+        //     slug: noteSlug,
+        //     CourseId: course.id,
+        //     NoteTypeId: noteType.id
+        //   }
+        // }).done(function (err, note) {
+          
+        //   if (err) {
+        //     console.error(err);
+        //   }
+          
+        //   if (!note) {
+        //     render404(res, 'No note with that slug');
+        //     return;
+        //   }
+          
+        //   render(res, 'note', {
+        //     title: "" + note.name + " - " + course.name + " - " + noteType.name
+        //   });
+        // });
+      
+      });
+    }
+  },
   notfound: {
     url: '*',
     handler: function (req, res) {
@@ -32,9 +88,9 @@ var courses = undefined;
 async.waterfall([
   function (cb) {
     m.Course
-      .find()
-      .populate('notetypes')
-      .exec(cb);
+    .find()
+    .populate('notetypes')
+    .exec(cb);
   }
 ], function (err, result) {
   if (err) console.log(err);
@@ -76,8 +132,6 @@ function render404(res, err) {
 // Initialize and registers the app's routes
 var routes = u.extend({}, topnav, other);
 
-app.get('/ap-notes/:courseSlug/:noteTypeSlug/:noteSlug', routes.note); // TODO
-
 u.each(routes, function (locals, templateName) {
   app.get(locals.url, function(req, res) {
     if (locals.handler) {
@@ -87,59 +141,3 @@ u.each(routes, function (locals, templateName) {
     }
   });
 });
-
-// TODO
-// exports.note = function (req, res) {
-//   var courseSlug = req.params.courseSlug
-//   , noteSlug = req.params.noteSlug
-//   , noteTypeSlug = req.params.noteTypeSlug;
-
-//   Course.find({
-//     where: {
-//       slug: courseSlug
-//     }
-//   }).done(function (err, course) {
-//     NoteType.find({
-//       where: {
-//         slug: noteTypeSlug
-//       }
-//     }).done(function (err, noteType) {
-      
-//       if (err) {
-//         console.error(err);
-//       }
-      
-//       if (!course || !noteType) {
-//         render404(res, 'No course or note type with that slug');
-//         return;
-//       }
-      
-//       if (!course.hasNoteType(noteType)) {
-//         render404(res, 'Course does not have this note type');
-//         return;
-//       }
-      
-//       Note.find({
-//         where: {
-//           slug: noteSlug,
-//           CourseId: course.id,
-//           NoteTypeId: noteType.id
-//         }
-//       }).done(function (err, note) {
-        
-//         if (err) {
-//           console.error(err);
-//         }
-        
-//         if (!note) {
-//           render404(res, 'No note with that slug');
-//           return;
-//         }
-        
-//         render(res, 'note', {
-//           title: "" + note.name + " - " + course.name + " - " + noteType.name
-//         });
-//       });
-//     });
-//   });
-// };
