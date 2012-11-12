@@ -61,8 +61,6 @@ if (app.get('env') === 'development') {
   // SSH tunnel to "athena" so we can access mongo database while developing locally
   var tunnel = require('child_process').spawn("ssh", ['-L', '27017:localhost:27017', '-N', 'feross@athena']);
 
-  require('sleep').sleep(1);
-
   // TODO: what is this?
   app.use(express.errorHandler());
 }

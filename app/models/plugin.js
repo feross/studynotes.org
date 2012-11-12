@@ -9,7 +9,7 @@ exports.modifyDate = function (schema, options) {
   if (options && options.index) {
     schema.path('modifyDate').index(options.index);
   }
-}
+};
 
 exports.createDate = function (schema, options) {
   schema.add({ createDate: Date });
@@ -24,5 +24,12 @@ exports.createDate = function (schema, options) {
   if (options && options.index) {
     schema.path('createDate').index(options.index);
   }
-}
+};
 
+exports.hits = function (schema, options) {
+  schema.add({ hits: Number });
+
+  if (options && options.index) {
+    schema.path('hits').index(options.index);
+  }
+};

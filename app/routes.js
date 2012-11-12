@@ -84,21 +84,6 @@ var other = {
   }
 };
 
-var courses = undefined;
-async.waterfall([
-  function (cb) {
-    m.Course
-    .find()
-    .populate('notetypes')
-    .exec(cb);
-  }
-], function (err, result) {
-  if (err) console.log(err);
-
-  courses = result;
-});
-
-
 
 /*
  * Render a template.
@@ -112,7 +97,7 @@ function render(res, templateName, locals) {
   res.render(templateName, u.extend(locals, {
     cls: templateName,
     topnav: topnav,
-    courses: courses,
+    courses: m.cache.courses,
     config: config
   }));
 }
