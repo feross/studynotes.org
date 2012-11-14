@@ -59,7 +59,7 @@ if (app.get('env') === 'development') {
   app.locals.pretty = true;
 
   // SSH tunnel to "athena" so we can access mongo database while developing locally
-  var tunnel = require('child_process').spawn("ssh", ['-L', '27017:localhost:27017', '-N', 'feross@athena']);
+  // var tunnel = require('child_process').spawn("ssh", ['-L', '27017:localhost:27017', '-N', 'feross@athena']);
 
   // TODO: what is this?
   app.use(express.errorHandler());
@@ -69,9 +69,8 @@ if (app.get('env') === 'development') {
 global.config = require('./config');
 
 require('./models')(function () {
-
   var routes = require('./routes');
-  console.log('routes are loaded, starting server');
+
   // Start the server
   http.createServer(app).listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
