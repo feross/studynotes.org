@@ -1,15 +1,14 @@
 var topnav = {
-  home: {
-    url: '/', 
-    title: 'StudyNotes.org - Study better with Free AP Course Notes',
-    forceTitle: true,
-    shortname: '',
+  browse: {
+    url: '#',
+    title: 'Browse all AP study notes',
+    shortname: 'Courses',
   },
 
-  browse: {
-    url: '/browse',
-    title: 'Browse all AP study notes',
-    shortname: 'Browse',
+  astore: {
+    url: '/study-guides',
+    title: 'Buy Amazon.com AP Study Guides',
+    shortname: 'Book Store',
   },
 
   add: {
@@ -18,14 +17,20 @@ var topnav = {
     shortname: 'Add Notes',
   },
 
-  astore: {
-    url: '/study-guides',
-    title: 'Buy Amazon.com AP Study Guides',
-    shortname: 'Book Store',
+  login: {
+    url: '/login',
+    title: 'Log In to StudyNotes',
+    shortname: 'Log In',
   },
 };
 
 var other = {
+  home: {
+    url: '/', 
+    title: 'StudyNotes.org - Study better with Free AP Course Notes',
+    forceTitle: true,
+    shortname: '',
+  },
   notetype: {
     url: '/ap-notes/:courseSlug/:notetypeSlug',
     handler: function (req, res) {
@@ -82,6 +87,16 @@ var other = {
       });
     }
   },
+  search: {
+    url: '/search',
+    handler: function(req, res) {
+      var q = req.query.q;
+      render(res, 'search', {
+        title: 'Search Results for ' + q,
+        search_term: q
+      })
+    }
+  },
   notfound: {
     url: '*',
     handler: function (req, res) {
@@ -95,17 +110,20 @@ var other = {
  * Render a template.
  *
  * Adds variables that all templates will expect. We use this function so we
- * have one location to add all these variables.
+ * have one location to add all these variables. We also allow caller to
+ * override the default values specified here by simply declaring them in the
+ * object they pass as `locals`.
  *
  * Use this function instead of calling res.render() directly. 
  */
 function render(res, templateName, locals) {
-  res.render(templateName, u.extend(locals, {
+  res.render(templateName, u.extend({
     cls: templateName,
     topnav: topnav,
     courses: m.cache.courses,
+    search_term: '',
     config: config
-  }));
+  }, locals));
 }
 
 // Render 404 page, and log error message
@@ -124,6 +142,9 @@ function render404(res, err) {
 var routes = u.extend({}, topnav, other);
 
 u.each(routes, function (locals, templateName) {
+  if (locals.url == '#') {
+    return;
+  }
   app.get(locals.url, function(req, res) {
     if (locals.handler) {
       locals.handler(req, res);

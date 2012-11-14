@@ -7,35 +7,28 @@
 head
   include head
 
-body(class='{locals.cls}')
+body(class='#{locals.cls}')
 
   #container
     header#header
       ul.left
         li.home
-          a(href='/', title='Go to the front page of StudyNotes') Study Notes
+          a(href='/', title='Go to the front page of StudyNotes', class='home #{locals.cls == 'home' ? 'current' : ''}') Study Notes
         li.search
-          input(autocorrect='off', autocomplete='off', type='text', placeholder='Search...')
+          form(action='/search', method='GET')
+            input(autocorrect='off', autocomplete='off', name='q', placeholder='Search...', type='text', value='#{locals.search_term}')
       ul.right
         each item, cls in locals.topnav
-          if cls != 'home'
-            li: a(href='#{item.url}', class='#{cls} #{locals.cls == cls ? 'current' : ''}')= item.shortname
-    nav#browse
-      ul
+          li: a(href='#{item.url}', class='#{cls} #{locals.cls == cls ? 'current' : ''}')= item.shortname
+
+    #browse-wrapper
+      ul#browse
         each course in locals.courses
           li
             h2: a(href='/ap-notes/#{course.slug}')= course.name
             ul
               each notetype in course.notetypes
                 li: a(href='/ap-notes/#{course.slug}/#{notetype.slug}')= notetype.name
-      ul
-        li: a(href='#') Link
-        li: a(href='#') Link
-        li: a(href='#') Link
-        li: a(href='#') Link
-        li: a(href='#') Link
-        li: a(href='#') Link
-        li: a(href='#') Link
 
     #content
       block content

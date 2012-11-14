@@ -17,6 +17,13 @@ $(function() {
   });
   // Remove borders from image links
   $('a img').parent().css({border: 0});
+
+  $('#header .browse').on('click', function(e) {
+    $('#browse').toggleClass('on');
+    $(this).toggleClass('on');
+
+    e.preventDefault();
+  });
 });
 
 // $(window).load(function () {
