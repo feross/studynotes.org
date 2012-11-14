@@ -139,7 +139,7 @@ module.exports = function(callback) {
     },
     function (result, cb) {
       // MIGRATE
-/*      courses = result;
+      /*courses = result;
 
       var mysql = require('mysql');
 
