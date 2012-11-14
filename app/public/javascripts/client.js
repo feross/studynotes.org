@@ -1,4 +1,16 @@
-$(function () {
+// jQuery throttle debounce (http://benalman.com/projects/jquery-throttle-debounce-plugin/)
+(function(b,c){var $=b.jQuery||b.Cowboy||(b.Cowboy={}),a;$.throttle=a=function(e,f,j,i){var h,d=0;if(typeof f!=="boolean"){i=j;j=f;f=c}function g(){var o=this,m=+new Date()-d,n=arguments;function l(){d=+new Date();j.apply(o,n)}function k(){h=c}if(i&&!h){l()}h&&clearTimeout(h);if(i===c&&m>e){l()}else{if(f!==true){h=setTimeout(i?k:l,i===c?e-m:e)}}}if($.guid){g.guid=j.guid=j.guid||$.guid++}return g};$.debounce=function(d,e,f){return f===c?a(d,e,false):a(d,f,e!==false)}})(this);
+
+var $header = $('#header');
+var $header_right = $header.find('.right');
+var $header_home = $header.find('.home');
+var $header_search = $header.find('.search');
+function onResize (e) {
+  var width = $header.width() - $header_right.width() - $header_home.width() - 6;
+  $header_search.width(width);
+}
+
+$(function() {
   // Redirect page when user selects from the subsection selector  
   $('select#subsection-select').change(function () {
     window.location.href = $(this).val();
@@ -6,6 +18,11 @@ $(function () {
   // Remove borders from image links
   $('a img').parent().css({border: 0});
 });
+
+// $(window).load(function () {
+//   $(window).resize(onResize);
+//   onResize();
+// });
 
 
 

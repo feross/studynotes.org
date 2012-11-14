@@ -9,41 +9,58 @@ head
 
 body(class='{locals.cls}')
 
-  nav
-    ul#topnav.network
-      li#logo.home
-        a(href='/', title='Jump to the front page of Study Notes')
-          img(src='/images/logo.png', alt="Study Notes")
-      each item, cls in locals.topnav
-        if cls != 'index'
-          li: a(href='#{item.url}', class='#{cls} #{locals.cls == cls ? 'current' : ''}')= item.shortname
-    
-    //- TODO: add social media links
-    //- ul.channels
-    //-   li.rss: a(href='#', title='Subscribe to our RSS feed') RSS
-    //-   li.facebook: a(href='http://www.facebook.com/StudyNotesApp', title='Like us on Facebook!') Facebook
-    //-   li.twitter: a(href='http://twitter.com/StudyNotesApp', title='Follow us on Twitter!') Twitter
-    //-   li.newsletter: a(href='http://www.smashingmagazine.com/the-smashing-newsletter/', title='Subscribe to our Email Newsletter (107K)') Newsletter
+  #container
+    header#header
+      ul.left
+        li.home
+          a(href='/', title='Go to the front page of StudyNotes') Study Notes
+        li.search
+          input(autocorrect='off', autocomplete='off', type='text', placeholder='Search...')
+      ul.right
+        each item, cls in locals.topnav
+          if cls != 'home'
+            li: a(href='#{item.url}', class='#{cls} #{locals.cls == cls ? 'current' : ''}')= item.shortname
+    nav#browse
+      ul
+        each course in locals.courses
+          li
+            h2: a(href='/ap-notes/#{course.slug}')= course.name
+            ul
+              each notetype in course.notetypes
+                li: a(href='/ap-notes/#{course.slug}/#{notetype.slug}')= notetype.name
+      ul
+        li: a(href='#') Link
+        li: a(href='#') Link
+        li: a(href='#') Link
+        li: a(href='#') Link
+        li: a(href='#') Link
+        li: a(href='#') Link
+        li: a(href='#') Link
+
+    #content
+      block content
+
+  //- nav
+  //-   ul#topnav.network
+  //-     li#logo.home
+  //-       a(href='/', title='Jump to the front page of Study Notes')
+  //-         img(src='/images/logo.png', alt="Study Notes")
+  //-     each item, cls in locals.topnav
+  //-       if cls != 'index'
+  //-         li: a(href='#{item.url}', class='#{cls} #{locals.cls == cls ? 'current' : ''}')= item.shortname
 
   #container-outer
     #container-inner.clearfix
       nav
-        ul#nav
-          each course in locals.courses
-            li
-              a(href='/ap-notes/#{course.slug}')= course.name
-              ul
-                each notetype in course.notetypes
-                  li: a(href='/ap-notes/#{course.slug}/#{notetype.slug}')= notetype.name
 
-      #content
-        block content
 
-  aside#sidebar
-    include sidebar
 
-  footer#footer
-    include footer
+
+  //- aside#sidebar
+  //-   include sidebar
+
+  //- footer#footer
+  //-   include footer
   
   //- Scripts
   if (locals.env == "development")

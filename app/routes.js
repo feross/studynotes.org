@@ -1,22 +1,28 @@
 var topnav = {
-  index: {
+  home: {
     url: '/', 
     title: 'StudyNotes.org - Study better with Free AP Course Notes',
     forceTitle: true,
     shortname: '',
   },
 
-  // add: {
-  //   url: '/add',
-  //   title: 'Add Notes',
-  //   shortname: 'Add Notes',
-  // },
+  browse: {
+    url: '/browse',
+    title: 'Browse all AP study notes',
+    shortname: 'Browse',
+  },
+
+  add: {
+    url: '/add',
+    title: 'Add Notes',
+    shortname: 'Add Notes',
+  },
 
   astore: {
     url: '/study-guides',
     title: 'Buy Amazon.com AP Study Guides',
-    shortname: 'Bookstore',
-  }
+    shortname: 'Book Store',
+  },
 };
 
 var other = {
