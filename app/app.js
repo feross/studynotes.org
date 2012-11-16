@@ -11,9 +11,19 @@ var http = require('http')
   , fs = require('fs')
   , express = require('express')
   , stylus = require('stylus')
-  , nib = require('nib');
+  , nib = require('nib')
+  , slashes = require('connect-slashes');
 
-
+// Logging functions for convenience
+global.log = function () {
+  var args = Array.prototype.slice.call(arguments, 0);
+  console.log.apply(console.log, args);
+}
+global.error = function () {
+  var args = Array.prototype.slice.call(arguments, 0);
+  args.unshift('ERROR:');
+  console.error.apply(console.error, args);
+}
 
 // Make all globals accessible from command line
 module.exports = global;
@@ -48,6 +58,7 @@ app.use(stylus.middleware({
   }
 }));
 app.use(express["static"](path.join(__dirname, 'public')));
+app.use(slashes());
 app.use(app.router);
 
 // Allow access to the current environment from Jade
@@ -78,5 +89,5 @@ require('./models')(function () {
 });
 
 process.on('uncaughtException', function (err) {
-  console.log('WARNING: Node uncaughtException: ', err, err.stack);
+  console.error('WARNING: Node uncaughtException: ', err.stack);
 });

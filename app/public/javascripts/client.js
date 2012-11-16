@@ -1,35 +1,62 @@
 // jQuery throttle debounce (http://benalman.com/projects/jquery-throttle-debounce-plugin/)
 (function(b,c){var $=b.jQuery||b.Cowboy||(b.Cowboy={}),a;$.throttle=a=function(e,f,j,i){var h,d=0;if(typeof f!=="boolean"){i=j;j=f;f=c}function g(){var o=this,m=+new Date()-d,n=arguments;function l(){d=+new Date();j.apply(o,n)}function k(){h=c}if(i&&!h){l()}h&&clearTimeout(h);if(i===c&&m>e){l()}else{if(f!==true){h=setTimeout(i?k:l,i===c?e-m:e)}}}if($.guid){g.guid=j.guid=j.guid||$.guid++}return g};$.debounce=function(d,e,f){return f===c?a(d,e,false):a(d,f,e!==false)}})(this);
 
-var $header = $('#header');
-var $header_right = $header.find('.right');
-var $header_home = $header.find('.home');
-var $header_search = $header.find('.search');
-function onResize (e) {
-  var width = $header.width() - $header_right.width() - $header_home.width() - 6;
-  $header_search.width(width);
+// Logging functions for convenience
+window.log = function () {
+  var args = Array.prototype.slice.call(arguments, 0);
+  console.log.apply(console, args);
+}
+window.error = function () {
+  var args = Array.prototype.slice.call(arguments, 0);
+  args.unshift('ERROR:');
+  console.error.apply(console, args);
 }
 
-$(function() {
-  // Redirect page when user selects from the subsection selector  
-  $('select#subsection-select').change(function () {
-    window.location.href = $(this).val();
-  });
-  // Remove borders from image links
-  $('a img').parent().css({border: 0});
+// Set search bar's width so it fills the header correctly.
+// Need to ensure this gets called after Typekit fonts are loaded.
+var $header_left = $('#header .left');
+var $header_right = $('#header .right');
+var $header_search = $('#header .search');
+function updateHeaderSearchWidth() {
+  var header_left_width = $header_left.width();
+  var header_right_width = $header_right.width();
+  $header_search
+    .css({
+      'margin-left': header_left_width,
+      'margin-right': header_right_width
+    })
+    .removeClass('off');
 
+  // Continue to set the width every 100ms until fonts are done loading.
+  // If fonts don't load, then wf-loading gets removed automatically after
+  // 1000ms, so this won't run forever. 
+  if ($('html').hasClass('wf-loading')) {
+    setTimeout(updateHeaderSearchWidth, 100);
+  }
+}
+
+function toggleBrowseMenu (_switch) {
+  $('#browse').toggleClass('on', _switch);
+  $('#header .browse').toggleClass('on', _switch);
+}
+
+$(function () {
+  // Browse menu dropdown
   $('#header .browse').on('click', function(e) {
-    $('#browse').toggleClass('on');
-    $(this).toggleClass('on');
-
     e.preventDefault();
+    toggleBrowseMenu();
   });
+
+  $header_search.on('focusin', function(e) {
+    toggleBrowseMenu(false);
+  });
+
+  updateHeaderSearchWidth();
 });
 
-// $(window).load(function () {
-//   $(window).resize(onResize);
-//   onResize();
-// });
+$(window).load(function () {
+
+});
 
 
 

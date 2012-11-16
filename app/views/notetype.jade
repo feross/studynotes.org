@@ -1,4 +1,9 @@
 extends layout
 
 block content
-  p(style="border: 1px solid red;") this is a notetype page
+  include includes/breadcrumbs
+  h1= locals.title
+  p
+    ul
+      each note in locals.notes
+        li: a(href='#{note.slug}/')= note.name

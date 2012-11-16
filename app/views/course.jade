@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  include includes/breadcrumbs
+  h1= locals.title
+  p
+    ul
+      each notetype in locals.notetypes
+        li: a(href='#{notetype.slug}/')= notetype.name

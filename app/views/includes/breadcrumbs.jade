@@ -1,0 +1,7 @@
+div.breadcrumbs
+  a(href='/') Home
+  span  > 
+  each link, i in breadcrumbs
+    a(href='#{link.url}')= link.name
+    if i != breadcrumbs.length - 1
+      span  > 

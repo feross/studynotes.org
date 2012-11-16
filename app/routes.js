@@ -6,19 +6,19 @@ var topnav = {
   },
 
   astore: {
-    url: '/study-guides',
+    url: '/study-guides/',
     title: 'Buy Amazon.com AP Study Guides',
     shortname: 'Book Store',
   },
 
   add: {
-    url: '/add',
+    url: '/add/',
     title: 'Add Notes',
     shortname: 'Add Notes',
   },
 
   login: {
-    url: '/login',
+    url: '/login/',
     title: 'Log In to StudyNotes',
     shortname: 'Log In',
   },
@@ -31,60 +31,113 @@ var other = {
     forceTitle: true,
     shortname: '',
   },
-  notetype: {
-    url: '/ap-notes/:courseSlug/:notetypeSlug',
+  course: {
+    url: '/:courseSlug',
     handler: function (req, res) {
       var p = req.params;
 
-      m.Course
-      .findOne({ slug: p.courseSlug })
-      .populate('notetypes')
-      .exec(function (err, course) {
-        if (err) {
-          console.log(err);
-          return;
-        }
+      var course = m.cache.courses[p.courseSlug];
 
-        if (!course) {
-          render404(res, 'No course with that slug');
-          return;
-        }
+      if (!course) {
+        render404(res, 'No course with that slug');
+        return;
+      }
 
-        var notetype = u.where(course.notetypes, { slug: p.notetypeSlug });
-        console.log(notetype);
-        if (!notetype.length) {
-          render404(res, 'Course has no notetype with that slug');
-          return;
-        }
-        notetype = notetype[0];
-        
+      render(res, 'course', {
+        breadcrumbs: [
+          { name: course.name, url: '/' + course.slug + '/'}
+        ],
+        course: course,
+        notetypes: course.notetypes,
+        title: course.name
+      });
+    }
+  },
+  notetype: {
+    url: '/:courseSlug/:notetypeSlug',
+    handler: function (req, res) {
+      var p = req.params;
+
+      var course = m.cache.courses[p.courseSlug];
+
+      if (!course) {
+        render404(res, 'No course with that slug');
+        return;
+      }
+
+      var notetype = u.where(course.notetypes, { slug: p.notetypeSlug });
+      if (!notetype.length) {
+        render404(res, 'Course has no notetype with that slug');
+        return;
+      }
+      notetype = notetype[0];
+      
+      m.Note
+      .find({ courseId: course._id, notetypeId: notetype._id })
+      .exec(function (err, notes) {
+        if (err) { error(err); return; }
+
+        if (!notes) {
+          render404(res, 'Unable to load notes');
+          return;  
+        } 
+
         render(res, 'notetype', {
+          breadcrumbs: [
+            { name: course.name, url: '/' + course.slug + '/' },
+            { name: notetype.name, url: '/' + course.slug + '/' + notetype.slug + '/' }
+          ],
+          course: course,
+          notetype: notetype,
+          notes: notes,
           title: notetype.name
         });
 
-        // Note.find({
-        //   where: {
-        //     slug: noteSlug,
-        //     CourseId: course.id,
-        //     NoteTypeId: noteType.id
-        //   }
-        // }).done(function (err, note) {
-          
-        //   if (err) {
-        //     console.error(err);
-        //   }
-          
-        //   if (!note) {
-        //     render404(res, 'No note with that slug');
-        //     return;
-        //   }
-          
-        //   render(res, 'note', {
-        //     title: "" + note.name + " - " + course.name + " - " + noteType.name
-        //   });
-        // });
-      
       });
+    }
+  },
+  note: {
+    url: '/:courseSlug/:notetypeSlug/:noteSlug',
+    handler: function (req, res) {
+      var p = req.params;
+
+      var course = m.cache.courses[p.courseSlug];
+
+      if (!course) {
+        render404(res, 'No course with that slug');
+        return;
+      }
+
+      var notetype = u.where(course.notetypes, { slug: p.notetypeSlug });
+      if (!notetype.length) {
+        render404(res, 'Course has no notetype with that slug');
+        return;
+      }
+      notetype = notetype[0];
+      
+      m.Note
+        .findOne({ courseId: course._id, notetypeId: notetype._id, slug: p.noteSlug })
+        .exec(function (err, note) {
+          if (err) { error(err); return; }
+
+          if (!note) {
+            render404(res, 'Unable to load note');
+            return;
+          } 
+
+          render(res, 'note', {
+            breadcrumbs: [
+              { name: course.name, url: '/' + course.slug + '/' },
+              { name: notetype.name, url: '/' + course.slug + '/' + notetype.slug + '/' },
+              { name: note.name, url: '/' + course.slug + '/' + notetype.slug + '/' + note.slug + '/' }
+            ],
+            course: course,
+            notetype: notetype,
+            note: note,
+            title: note.name
+          });
+
+        });
     }
   },
   search: {
@@ -127,14 +180,14 @@ function render(res, templateName, locals) {
 }
 
 // Render 404 page, and log error message
-function render404(res, err) {
-  if (err) console.log(err);
-
+function render404(res, msg) {
+  if (msg) { error(msg); } // don't return since we want to serve a 404 page
+  
   res.status(404);
   render(res, 'notfound', {
     title: 'Page Not Found - 404 Error',
     forceTitle: true,
-    err: err
+    err: msg
   });
 };
 

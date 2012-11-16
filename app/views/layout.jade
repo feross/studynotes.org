@@ -1,11 +1,9 @@
 !!! 5
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if lt IE 9]> <html class="no-js ie8" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 
 head
-  include head
+  include includes/head
 
 body(class='#{locals.cls}')
 
@@ -14,9 +12,9 @@ body(class='#{locals.cls}')
       ul.left
         li.home
           a(href='/', title='Go to the front page of StudyNotes', class='home #{locals.cls == 'home' ? 'current' : ''}') Study Notes
-        li.search
-          form(action='/search', method='GET')
-            input(autocorrect='off', autocomplete='off', name='q', placeholder='Search...', type='text', value='#{locals.search_term}')
+      div.search.off
+        form(action='/search/', method='GET')
+          input(autocorrect='off', autocomplete='off', autofocus, name='q', placeholder='Search...', type='text', value='#{locals.search_term}')
       ul.right
         each item, cls in locals.topnav
           li: a(href='#{item.url}', class='#{cls} #{locals.cls == cls ? 'current' : ''}')= item.shortname
@@ -25,39 +23,23 @@ body(class='#{locals.cls}')
       ul#browse
         each course in locals.courses
           li
-            h2: a(href='/ap-notes/#{course.slug}')= course.name
+            h2: a(href='/#{course.slug}/')= course.name
             ul
               each notetype in course.notetypes
-                li: a(href='/ap-notes/#{course.slug}/#{notetype.slug}')= notetype.name
+                li: a(href='/#{course.slug}/#{notetype.slug}/')= notetype.name
 
     #content
       block content
 
-  //- nav
-  //-   ul#topnav.network
-  //-     li#logo.home
-  //-       a(href='/', title='Jump to the front page of Study Notes')
-  //-         img(src='/images/logo.png', alt="Study Notes")
-  //-     each item, cls in locals.topnav
-  //-       if cls != 'index'
-  //-         li: a(href='#{item.url}', class='#{cls} #{locals.cls == cls ? 'current' : ''}')= item.shortname
-
-  #container-outer
-    #container-inner.clearfix
-      nav
-
-
-
-
-  //- aside#sidebar
-  //-   include sidebar
-
   //- footer#footer
-  //-   include footer
+  //-   include includes/footer
   
   //- Scripts
+  //- TODO: concat all scripts together into one.
+
   if (locals.env == "development")
     script(src='/javascripts/libs/jquery-1.8.2.js')
+
   else
     script(src='/javascripts/libs/jquery-1.8.2.min.js')
 

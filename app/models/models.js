@@ -92,7 +92,7 @@ module.exports = function(callback) {
             },
             function (cb) {
               doc.model(name).count({ slug: potentialSlug }, function (err, count) {
-                if (err) console.error(err);
+                if (err) { cb(err); return; }
                 if (count == 0) {
                   doc.slug = potentialSlug;
                   done = true;
@@ -100,7 +100,8 @@ module.exports = function(callback) {
                 cb();
               });
             },
-            function (err) { 
+            function (err) {
+              if (err) { error(err); }
               next();
             }
           );
@@ -136,42 +137,47 @@ module.exports = function(callback) {
       .find()
       .populate('notetypes')
       .exec(cb);
-    },
-    function (result, cb) {
-      // MIGRATE
-      /*courses = result;
-
-      var mysql = require('mysql');
-
-      var connection = mysql.createConnection({
-        host     : '74.207.246.197',
-        user     : 'studynotes',
-        password : 'Fh37sfblss',
-        database : 'studynotes_ap'
-      });
-
-      connection.connect();
-
-      connection.query('SELECT * FROM apsn_content WHERE sectionid = 6 AND catid = 65 AND state = 1', function(err, rows, fields) {
-        if (err) throw err;
-
-        for (var i = 0; i < rows.length; i++) {
-          var row = rows[i];
-          console.log(row.title);
-          var note = new m.Note({
-            name: row.name,
-            slug: row.alias,
-            body: row.introtext,
-            createDate: Date(row.created),
-            courseId: u.(courses, function(course) { return course.slug == 'ap-us-his'});
-          });
-        }
-      });*/
-      cb(null, result);
     }
   ], function (err, result) {
-    if (err) console.log(err);
-    global.m.cache.courses = result;
+    if (err) { error(err); callback(err); return; }
+
+    var courses = {};
+    u.each(result, function(course) { courses[course.slug] = course; });
+    global.m.cache.courses = courses;
+
+    // MIGRATE
+    // var mysql = require('mysql');
+
+    // var connection = mysql.createConnection({
+    //   host     : '74.207.246.197',
+    //   user     : 'studynotes',
+    //   password : 'Fh37sfblss',
+    //   database : 'studynotes_ap'
+    // });
+
+    // connection.connect();
+
+    // connection.query('SELECT * FROM apsn_content WHERE sectionid = 6 AND catid = 65 AND state = 1', function(err, rows, fields) {
+    //   if (err) throw err;
+
+    //   for (var i = 0; i < rows.length; i++) {
+    //     var row = rows[i];
+    //     console.log(row.title);
+    //     var note = m.Note({
+    //       name: row.title,
+    //       slug: row.alias,
+    //       body: row.introtext,
+    //       createDate: Date(row.created),
+    //       courseId: courses['us-history']._id,
+    //       notetypeId: u.find(courses['us-history'].notetypes, function(val) {
+    //         return val['slug'] == 'vocabulary-terms';
+    //       })
+    //     });
+
+    //     note.save();
+    //   }
+    // });
+
     callback(null);
   });
 

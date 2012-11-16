@@ -1,4 +1,5 @@
 block head
+
   //- TODO: set these tags in nginx
   //- TODO: verify with curl -I
   //- meta(charset='utf-8')
@@ -6,7 +7,7 @@ block head
 
   if (locals.forceTitle)
     title= title
-    meta(property='og:title', content='#{forceTitle}')
+    meta(property='og:title', content='#{title}')
   else if (locals.title)
     title #{title} - Study Notes
     meta(property='og:title', content='#{title} - Study Notes')
@@ -24,6 +25,8 @@ block head
   //- <meta property="fb:app_id" content="" />
 
   //- TODO: run facebook lint tool
+
+  //- TODO: look at art.sy <head> for good ideas
 
   //- TODO: SEO
   //- <link rel="canonical" href="TODO" /> 

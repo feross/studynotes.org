@@ -59,6 +59,7 @@ a
     text-decoration: underline
 
 h1, h2, h3, h4, h5
+  font-family: $serif
   font-weight: bold
 h1
   font-size: 2.8rem
@@ -92,10 +93,14 @@ $header_border = 3px solid #000
 #header
   border-bottom: 1px solid $lighter_gray
   height: $header_height
+  position: relative
 
   ul
+    position: absolute
+    top: 0
+
     &.left
-      float: left
+      left: 0
 
       li a
         {$link}
@@ -104,33 +109,8 @@ $header_border = 3px solid #000
           border: $header_border
           padding: 15px 16px 0 15px
 
-      .home h1
-        font-size: inherit
-
-      .search
-        font-weight: normal
-        padding: 3px
-        text-transform: none
-
-        {$focus}
-          border: $header_border
-          padding: 0
-
-        input
-          border: 0
-          font-size: 1.4rem
-          height: $header_height - 7
-          outline: 0
-          padding-left: 20px
-          width: 100%
-
-        ::-webkit-input-placeholder
-          color: #000
-        :-moz-placeholder
-          color: #000
-
     &.right
-      float: right
+      right: 0
 
       li a
         {$link}
@@ -164,7 +144,28 @@ $header_border = 3px solid #000
           {$link}
             color: $red
 
+  .search
+    font-weight: normal
+    padding: 3px
+    text-transform: none
+    // width: 100%
 
+    {$focus}
+      border: $header_border
+      padding: 0
+
+    input
+      border: 0
+      font-size: 1.4rem
+      height: $header_height - 7
+      outline: 0
+      padding-left: 20px
+      width: 100%
+
+    ::-webkit-input-placeholder
+      color: #000
+    :-moz-placeholder
+      color: #000
 
 
 //
@@ -203,7 +204,7 @@ $header_border = 3px solid #000
       border-right: 0
 
     h2
-      font-size: 1.8rem
+      font-size: 1.9rem
       margin-top: 0
       text-transform: uppercase
 
@@ -219,16 +220,6 @@ $header_border = 3px solid #000
       text-overflow: ellipsis
       white-space: nowrap
       width: 100%
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -252,81 +243,6 @@ $header_border = 3px solid #000
 
 
 // //
-// // TOPNAV
-// //
-
-// #topnav
-//   float: left
-//   width: $topnav-width
-
-//   a
-//     {$link}
-//       border-bottom: 1px solid $border-color
-//       padding: 15px 0 15px 20px
-//       text-shadow: 0 1px rgba(255,255,255,0.5)
-//     {$focus}
-//       color: $gray
-
-
-// // Note: #logo is an <li>
-// #logo
-//   background-color: #fff
-//   border-top: 1px solid $border-color
-//   border-bottom: 1px solid $border-color
-//   margin: 0 -1px 0 0
-//   position: relative
-//   z-index: 2
-
-//   a
-//     {$link}
-//       padding: 20px 0 10px 20px
-
-//     {$focus}
-//       background-color: inherit
-
-//     &:focus, &:active
-//       img
-//         position: relative
-//         top: 1px
-
-
-// //
-// // NAV
-// //
-
-// #nav
-//   float: left
-//   width: $nav-width
-
-//   & > li
-//     margin-bottom: 30px
-
-//     // All links in nav
-//     a
-//       {$link}
-//         margin: 0
-//         padding: 4px 0 4px 20%
-
-//     // Top-level links
-//     & > a
-//       {$link}
-//         border-bottom: 1px solid $border-color
-//         color: $blue
-//         letter-spacing: 1px
-//         text-transform: uppercase
-
-//     // Second-level links
-//     & li a
-//       {$link}
-//         color: $light_gray
-
-//     // On hover over top <li>, make second-level links darker
-//     &:hover, &:focus, &:active
-//       & li a
-//         {$link}
-//           color: $dark_gray
-
-// //
 // // CONTENT
 // //
 
@@ -334,12 +250,6 @@ $header_border = 3px solid #000
 //   float: right
 //   padding: 0 0 0 4%
 //   width: $content-width
-
-// //
-// // NOTETYPE
-// //
-
-
 
 
 // //
@@ -358,7 +268,7 @@ $header_border = 3px solid #000
 // // FOOTER
 // //
 
-// #footer
-//   clear: both
-//   width: 100%
+#footer
+  clear: both
+  width: 100%
 
