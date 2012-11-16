@@ -47,13 +47,12 @@ app.use(stylus.middleware({
   // "/stylesheets" gets automatically appended to the paths
   src: __dirname,
   dest: __dirname + '/public',
-  force: true,
-  // debug: true,
+  debug: app.get('env') == 'development',
   compile: function (str, path) {
     return stylus(str)
       .set('filename', path)
       .define('url', stylus.url())
-      .set('compress', app.get('env' !== 'development'))
+      .set('compress', app.get('env') != 'development')
       .use(nib());
   }
 }));
