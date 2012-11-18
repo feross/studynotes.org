@@ -7,29 +7,37 @@ head
 
 body(class='#{locals.cls}')
 
+  header#header
+    ul.left
+      li.home
+        a(href='/', title='Go to the front page of StudyNotes', class='home #{locals.cls == 'home' ? 'current' : ''}') Study Notes
+    div.search.off
+      form(action='/search/', method='GET')
+        input(autocorrect='off', autocomplete='off', autofocus, name='q', placeholder='Search...', type='text', value='#{locals.search_term}')
+    ul.right
+      each item, cls in locals.topnav
+        li: a(href='#{item.url}', class='#{cls} #{locals.cls == cls ? 'current' : ''}')= item.shortname
+
+  #browseWrapper
+    ul#browse
+      each course in locals.courses
+        li
+          h2: a(href='/#{course.slug}/')= course.name
+          ul
+            each notetype in course.notetypes
+              li: a(href='/#{course.slug}/#{notetype.slug}/')= notetype.name
+
   #container
-    header#header
-      ul.left
-        li.home
-          a(href='/', title='Go to the front page of StudyNotes', class='home #{locals.cls == 'home' ? 'current' : ''}') Study Notes
-      div.search.off
-        form(action='/search/', method='GET')
-          input(autocorrect='off', autocomplete='off', autofocus, name='q', placeholder='Search...', type='text', value='#{locals.search_term}')
-      ul.right
-        each item, cls in locals.topnav
-          li: a(href='#{item.url}', class='#{cls} #{locals.cls == cls ? 'current' : ''}')= item.shortname
 
-    #browse-wrapper
-      ul#browse
-        each course in locals.courses
-          li
-            h2: a(href='/#{course.slug}/')= course.name
-            ul
-              each notetype in course.notetypes
-                li: a(href='/#{course.slug}/#{notetype.slug}/')= notetype.name
+    #contentWrapper
+      #content
+        block content
 
-    #content
-      block content
+    #sidebar
+      if env == "development"
+        img(src='http://placekitten.com/336/280')
+      else
+        include ads/adsense-large-rectangle
 
   //- footer#footer
   //-   include includes/footer

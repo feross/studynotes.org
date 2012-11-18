@@ -11,17 +11,17 @@ var topnav = {
     shortname: 'Book Store',
   },
 
-  add: {
-    url: '/add/',
-    title: 'Add Notes',
-    shortname: 'Add Notes',
-  },
+  // add: {
+  //   url: '/add/',
+  //   title: 'Add Notes',
+  //   shortname: 'Add Notes',
+  // },
 
-  login: {
-    url: '/login/',
-    title: 'Log In to StudyNotes',
-    shortname: 'Log In',
-  },
+  // login: {
+  //   url: '/login/',
+  //   title: 'Log In to StudyNotes',
+  //   shortname: 'Log In',
+  // },
 };
 
 var other = {
@@ -29,7 +29,17 @@ var other = {
     url: '/', 
     title: 'StudyNotes.org - Study better with Free AP Course Notes',
     forceTitle: true,
-    shortname: '',
+    shortname: ''
+  },
+  search: {
+    url: '/search',
+    handler: function(req, res) {
+      var q = req.query.q;
+      render(res, 'search', {
+        title: 'Search Results for ' + q,
+        search_term: q
+      })
+    }
   },
   course: {
     url: '/:courseSlug',
@@ -44,9 +54,7 @@ var other = {
       }
 
       render(res, 'course', {
-        breadcrumbs: [
-          { name: course.name, url: '/' + course.slug + '/'}
-        ],
+        breadcrumbs: [],
         course: course,
         notetypes: course.notetypes,
         title: course.name
@@ -73,8 +81,9 @@ var other = {
       notetype = notetype[0];
       
       m.Note
-      .find({ courseId: course._id, notetypeId: notetype._id })
-      .exec(function (err, notes) {
+      .find( { courseId: course._id, notetypeId: notetype._id } )
+      .sort( 'ordering' )
+      .exec( function ( err, notes ) {
         if (err) { error(err); return; }
 
         if (!notes) {
@@ -85,7 +94,6 @@ var other = {
         render(res, 'notetype', {
           breadcrumbs: [
             { name: course.name, url: '/' + course.slug + '/' },
-            { name: notetype.name, url: '/' + course.slug + '/' + notetype.slug + '/' }
           ],
           course: course,
           notetype: notetype,
@@ -129,7 +137,6 @@ var other = {
             breadcrumbs: [
               { name: course.name, url: '/' + course.slug + '/' },
               { name: notetype.name, url: '/' + course.slug + '/' + notetype.slug + '/' },
-              { name: note.name, url: '/' + course.slug + '/' + notetype.slug + '/' + note.slug + '/' }
             ],
             course: course,
             notetype: notetype,
@@ -138,16 +145,6 @@ var other = {
           });
 
         });
-    }
-  },
-  search: {
-    url: '/search',
-    handler: function(req, res) {
-      var q = req.query.q;
-      render(res, 'search', {
-        title: 'Search Results for ' + q,
-        search_term: q
-      })
     }
   },
   notfound: {

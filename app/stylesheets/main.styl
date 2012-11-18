@@ -1,23 +1,28 @@
 @import 'nib'
 @import 'util'
 
-// Fonts
+//
+// FONTS
+//
 
 $serif = "skolar", Caslon, Baskerville, Palatino, "Palatino Linotype", "Hoefler Text", Garamond, "URW Palladio L", "Book Antiqua", Georgia, serif
 $sans-serif = "proxima-nova", Helvetica, sans-serif
 $title-font = "ff-prater-script-web", $serif
 
-// Colors
+//
+// COLORS
+//
 
 $red = #E0162B
-$blue = #0052A5
+$blue = #41B7D8
 
-$lightest_gray = #EEE
-$lighter_gray = #CCC
-$light_gray = #999
+$lightestGray = #EEE
+$lighterGray = #CCC
+$lightGray = #999
 $gray = #666
-$dark_gray = #555
-$darker_gray = #333
+$darkGray = #555
+$darkerGray = #333
+
 
 //
 // STRUCTURE AND TYPOGRAPHY
@@ -25,22 +30,21 @@ $darker_gray = #333
 
 *
   box-sizing: border-box
+  line-height: 1.4em
 
 html
   font-size: 10px
-  line-height: 15px
   overflow-y: scroll
 
 body
-  color: $darker_gray
+  color: $darkerGray
   font-family: $sans-serif
   font-size: 1.6rem
-  -webkit-font-smoothing: antialiased
-  line-height: 1.6rem
   margin: 0
   max-width: 1800px
   padding: 0
   position: relative
+  -webkit-font-smoothing: antialiased
 
 img
   max-width: 100%
@@ -61,39 +65,37 @@ a
 h1, h2, h3, h4, h5
   font-family: $serif
   font-weight: bold
+  line-height: 1.2em
 h1
-  font-size: 2.8rem
-  line-height: 2.8rem
+  font-size: 3.2rem
 h2
   font-size: 2.4rem
-  line-height: 2.4rem
 h3
   font-size: 2.0rem
-  line-height: 2.0rem
 h4
   font-size: 1.8rem
-  line-height: 1.8rem
 h5
   font-size: 1.6rem
-  line-height: 1.6rem
 
-
-//
-// CONTAINER
-//
+p
+  margin: 1em 0
 
 
 //
 // HEADER
 //
 
-$header_height = 50px
-$header_border = 3px solid #000
+$headerHeight = 50px
+$headerBorder = 3px solid #000
 
 #header
-  border-bottom: 1px solid $lighter_gray
-  height: $header_height
-  position: relative
+  background: #FFF
+  border-bottom: 1px solid $lighterGray
+  height: $headerHeight
+  left: 0
+  position: fixed
+  top: 0
+  width: 100%
 
   ul
     position: absolute
@@ -104,39 +106,40 @@ $header_border = 3px solid #000
 
       li a
         {$link}
-          border-right: 1px solid $lighter_gray
+          border-right: 1px solid $lighterGray
         {$focus}
-          border: $header_border
-          padding: 15px 16px 0 15px
+          border: $headerBorder
+          padding: 14px 16px 0 15px
 
     &.right
       right: 0
 
       li a
         {$link}
-          border-left: 1px solid $lighter_gray
+          border-left: 1px solid $lighterGray
         {$focus}
-          border: $header_border
-          padding: 15px 15px 0 16px
+          border: $headerBorder
+          padding: 14px 15px 0 16px
         &.on
           background-color: #000
-          border: $header_border
-          height: $header_height // to cover up 1px gray bottom border
-          padding: 15px 15px 0 16px
-          color: #fff
+          border: $headerBorder
+          height: $headerHeight // to cover up 1px gray bottom border
+          padding: 14px 15px 0 16px
+          color: #FFF
 
     li
       float: left
       font-weight: bold
       font-size: 1.35rem
+      line-height: 1.0em
       text-transform: uppercase
 
       a
         {$link}
           color: #000
           display: block
-          height: $header_height - 1
-          padding: 18px 18px 0 18px
+          height: $headerHeight - 1
+          padding: 17px 18px 0 18px
         {$focus}
           text-decoration: none
 
@@ -151,13 +154,13 @@ $header_border = 3px solid #000
     // width: 100%
 
     {$focus}
-      border: $header_border
+      border: $headerBorder
       padding: 0
 
     input
       border: 0
       font-size: 1.4rem
-      height: $header_height - 7
+      height: $headerHeight - 7
       outline: 0
       padding-left: 20px
       width: 100%
@@ -172,15 +175,17 @@ $header_border = 3px solid #000
 // BROWSE
 //
 
-#browse-wrapper
+#browseWrapper
   background-color: #000
   padding: 0 30px
+  position: fixed
+  top: $headerHeight
+  width: 100%
 
 #browse
   height: 0
   padding: 0
   overflow: hidden
-  width: 100%
   z-index: 10
 
   transition-property: padding, height
@@ -194,7 +199,7 @@ $header_border = 3px solid #000
     transition-duration: .5s
 
   & > li
-    border-right: 1px solid $darker_gray
+    border-right: 1px solid $darkerGray
     display: inline-block
     padding: 0 15px
     vertical-align: top
@@ -210,11 +215,11 @@ $header_border = 3px solid #000
 
     li
       font-family: $serif
-      padding: 5px 0
+      margin: 5px 0
 
   a
     {$link}
-      color: #fff
+      color: #FFF
       display: block
       overflow: hidden
       text-overflow: ellipsis
@@ -222,53 +227,70 @@ $header_border = 3px solid #000
       width: 100%
 
 
-
 //
 // CONTAINER
 //
 
-// #container-outer
-//   float: left
-//   margin-right: - ($sidebar-width + 40px)
-//   padding-bottom: 50px
-//   width: $container-outer-width
-
-// #container-inner
-//   margin-right: ($sidebar-width + 40px)
-//   background-color: white
-//   border: 1px solid $border-color
-//   border-radius: 0 10px 10px 10px
-//   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 5px 1px
-//   padding-top: 80px
+#container
+  margin-top: 90px
 
 
-// //
-// // CONTENT
-// //
+//
+// CONTENT
+//
 
-// #content
-//   float: right
-//   padding: 0 0 0 4%
-//   width: $content-width
+$sidebarWidth = 336px
+$sidebarMarginLeft = 100px
+$sidebarMarginRight = 20px
+
+#contentWrapper
+  float: left
+  padding-left: 131px
+  margin-right: - ($sidebarWidth + $sidebarMarginLeft + $sidebarMarginRight)
+  padding-bottom: 50px
+  width: 100%
+
+#content
+  margin-right: ($sidebarWidth + $sidebarMarginLeft + $sidebarMarginRight)
+
+  h1
+    border-bottom: 1px solid $lightestGray
+    margin: 10px 0 30px 0
+    padding-bottom: 20px
+
+  ul, ol
+    list-style-type: disc
+    margin: 0
+    padding-left: 20px
 
 
-// //
-// // SIDEBAR
-// //
+.breadcrumbs
+  font-size: 1.5rem
+  font-weight: bold
+  text-transform: uppercase
 
-// #sidebar
-//   float: left
-//   margin: 0 20px 0 20px
-//   position: relative
-//   top: auto
-//   width: $sidebar-width
+  .divider::before
+    content: '\2192'
+    margin: 0 7px
 
 
-// //
-// // FOOTER
-// //
+
+//
+// SIDEBAR
+//
+
+#sidebar
+  // background: url('/images/sidebar.gif')
+  float: right
+  margin: 0 $sidebarMarginRight 0 $sidebarMarginLeft
+  width: $sidebarWidth
+  height: 100px
+
+
+//
+// FOOTER
+//
 
 #footer
   clear: both
   width: 100%
-
