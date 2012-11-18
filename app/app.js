@@ -51,12 +51,11 @@ app.use(stylus.middleware({
   compile: function (str, path) {
     return stylus(str)
       .set('filename', path)
-      .define('url', stylus.url())
-      .set('compress', app.get('env') != 'development')
+      .set('compress', true)
       .use(nib());
   }
 }));
-app.use(express["static"](path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(slashes());
 app.use(app.router);
 
