@@ -1,4 +1,42 @@
 extends layout
 
 block content
-  p this is the homepage
+  h1 Welcome to the new StudyNotes.org!
+  p This website offers <strong>awesome study notes</strong> that will help you with <strong>Advanced Placement homework and AP exams</strong>. We offer <strong>free study materials</strong> for the following Advanced Placement subjects:
+  p
+    ul
+      li: a(href='/us-history/') AP US History (APUSH)
+      li: a(href='/us-government/') AP US Government and Politics (AP Gov)
+      li: a(href='/english/') AP English Language
+      li: a(href='/english/') AP English Literature
+  p Over the coming weeks, we will have notes for the following courses:
+    ul 
+      li AP Psychology (AP Psych)
+      li AP Economics (AP Econ)
+      li AP Calculus (AB &amp; BC)
+      li AP Statistics
+      li AP Physics (B &amp; C)
+      li AP Biology
+      li AP Environmental Science
+      li AP Chemistry
+   p Our <strong>free AP notes</strong> include:
+   p
+    ul
+      li course guides
+      li chapter outlines
+      li topic outlines
+      li vocabulary &amp; key terms
+      li important historical documents
+      li biographies
+      li timelines
+      li formulas
+      li practice quizzes
+      li practice tests
+      li cram sheets
+      li course information
+  
+  //
+    each course in courses
+      .card
+        h2= course.name
+        img(src='/images/#{course.image}')
