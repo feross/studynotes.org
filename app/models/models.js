@@ -11,10 +11,8 @@ module.exports = function(callback) {
     type: String,
     match: /[-a-z0-9]+/i,
     lowercase: true,
-    unique: true
   };
-  var SLUG_UNIQUE = u.extend(SLUG, { unique: true });
-
+  var SLUG_UNIQUE = u.extend({}, SLUG, { unique: true });
 
   var schemas = {
     
@@ -22,12 +20,14 @@ module.exports = function(callback) {
       name: { type: String, required: true, unique: true },
       desc: String,
       notetypes: [{ type: Schema.Types.ObjectId, ref: 'Notetype'}],
-      slug: SLUG_UNIQUE
+      slug: SLUG_UNIQUE,
+      image: String
     },
 
     Notetype: {
       name: { type: String, required: true, unique: true },
       desc: String,
+      ordering: Number,
       slug: SLUG_UNIQUE
     },
 
@@ -36,6 +36,7 @@ module.exports = function(callback) {
       body: { type: String, required: true },
       courseId: { type: Schema.Types.ObjectId, ref: 'Course', required: true },
       notetypeId: { type: Schema.Types.ObjectId, ref: 'Notetype', required: true },
+      ordering: Number,
       slug: SLUG,
       setup: function() {
         // No duplicate names or slugs for a course+notetype.
@@ -144,39 +145,6 @@ module.exports = function(callback) {
     var courses = {};
     u.each(result, function(course) { courses[course.slug] = course; });
     global.m.cache.courses = courses;
-
-    // MIGRATE
-    // var mysql = require('mysql');
-
-    // var connection = mysql.createConnection({
-    //   host     : '74.207.246.197',
-    //   user     : 'studynotes',
-    //   password : 'Fh37sfblss',
-    //   database : 'studynotes_ap'
-    // });
-
-    // connection.connect();
-
-    // connection.query('SELECT * FROM apsn_content WHERE sectionid = 6 AND catid = 65 AND state = 1', function(err, rows, fields) {
-    //   if (err) throw err;
-
-    //   for (var i = 0; i < rows.length; i++) {
-    //     var row = rows[i];
-    //     console.log(row.title);
-    //     var note = m.Note({
-    //       name: row.title,
-    //       slug: row.alias,
-    //       body: row.introtext,
-    //       createDate: Date(row.created),
-    //       courseId: courses['us-history']._id,
-    //       notetypeId: u.find(courses['us-history'].notetypes, function(val) {
-    //         return val['slug'] == 'vocabulary-terms';
-    //       })
-    //     });
-
-    //     note.save();
-    //   }
-    // });
 
     callback(null);
   });
