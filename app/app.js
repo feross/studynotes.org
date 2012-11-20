@@ -44,7 +44,10 @@ app.use(express.methodOverride());
 app.use(express.cookieParser('your secret here')); // TODO
 app.use(express.session());
 
-fs.unlinkSync(path.join(__dirname, 'public', 'stylesheets', 'main.css'));
+var mainCss = path.join(__dirname, 'public', 'stylesheets', 'main.css');
+if ( fs.existsSync( mainCss ) ) {
+  fs.unlinkSync(mainCss); 
+}
 
 app.use(stylus.middleware({
   // "/stylesheets" gets automatically appended to the paths
