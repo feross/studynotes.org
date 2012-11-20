@@ -13,7 +13,7 @@ body(class='#{locals.cls}')
         a(href='/', title='Go to the front page of StudyNotes', class='home #{locals.cls == 'home' ? 'current' : ''}') Study Notes
     div.search.off
       form(action='/search/', method='GET')
-        input(autocorrect='off', autocomplete='off', autofocus, name='q', placeholder='Search...', type='text', value='#{locals.search_term}')
+        input(autocorrect='off', autocomplete='off', autofocus, name='q', placeholder='Search for Courses and Topics...', type='text', value='#{locals.search_term}')
     ul.right
       each item, cls in locals.topnav
         li: a(href='#{item.url}', class='#{cls} #{locals.cls == cls ? 'current' : ''}')= item.shortname
@@ -34,10 +34,7 @@ body(class='#{locals.cls}')
         block content
 
     #sidebar
-      if env == "development"
-        img(src='http://placekitten.com/336/280')
-      else
-        include ads/adsense-large-rectangle
+      include includes/sidebar
 
   //- footer#footer
   //-   include includes/footer

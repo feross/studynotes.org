@@ -86,9 +86,9 @@ var other = {
       .exec( function ( err, notes ) {
         if (err) { error(err); return; }
 
-        if (!notes) {
-          render404(res, 'Unable to load notes');
-          return;  
+        if ( !notes ) {
+          render404( res, 'Unable to load notes' );
+          return;
         } 
 
         render(res, 'notetype', {
@@ -147,7 +147,7 @@ var other = {
         });
     }
   },
-  notfound: {
+  notFound: {
     url: '*',
     handler: function (req, res) {
       render404(res);
