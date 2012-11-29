@@ -138,6 +138,16 @@ var other = {
           return note.slug == p.noteSlug;
         } );
 
+        var noteOrdering = note.ordering;
+
+        var noteNext = u.find(notes, function (note) {
+          return note.ordering == noteOrdering + 1;
+        } );
+
+        var notePrev = u.find(notes, function (note) {
+          return note.ordering == noteOrdering - 1;
+        } );
+
         render(res, 'note', {
           breadcrumbs: [
             { name: course.name, url: '/' + course.slug + '/' },
@@ -146,6 +156,8 @@ var other = {
           course: course,
           notetype: notetype,
           note: note,
+          noteNext: noteNext,
+          notePrev: notePrev,
           relatedNotes: notes,
           title: note.name
         });

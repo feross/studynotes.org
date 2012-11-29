@@ -5,6 +5,12 @@ block content
   h1= locals.title
   p !{note.body}
 
+  p.noteNav
+    if notePrev
+      a.prev(href='#{notePrev.slug}') Previous: #{notePrev.name}
+    if noteNext
+      a.next(href='#{noteNext.slug}') Next: #{noteNext.name}
+
 append sidebar
   if locals.relatedNotes
     include includes/relatedNotes
