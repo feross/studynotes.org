@@ -1,4 +1,5 @@
-// jQuery throttle debounce (http://benalman.com/projects/jquery-throttle-debounce-plugin/)
+// jQuery throttle debounce
+// http://benalman.com/projects/jquery-throttle-debounce-plugin/
 (function(b,c){var $=b.jQuery||b.Cowboy||(b.Cowboy={}),a;$.throttle=a=function(e,f,j,i){var h,d=0;if(typeof f!=="boolean"){i=j;j=f;f=c}function g(){var o=this,m=+new Date()-d,n=arguments;function l(){d=+new Date();j.apply(o,n)}function k(){h=c}if(i&&!h){l()}h&&clearTimeout(h);if(i===c&&m>e){l()}else{if(f!==true){h=setTimeout(i?k:l,i===c?e-m:e)}}}if($.guid){g.guid=j.guid=j.guid||$.guid++}return g};$.debounce=function(d,e,f){return f===c?a(d,e,false):a(d,f,e!==false)}})(this);
 
 // Logging functions for convenience
@@ -28,8 +29,8 @@ function updateHeaderSearchWidth() {
     .removeClass('off');
 
   // Continue to set the width every 100ms until fonts are done loading.
-  // If fonts don't load, then wf-loading gets removed automatically after
-  // 1000ms, so this won't run forever. 
+  // If fonts don't load, then wf-loading gets removed automatically
+  // after 1000ms, so this won't run forever. 
   if ($('html').hasClass('wf-loading')) {
     setTimeout(updateHeaderSearchWidth, 100);
   }
@@ -41,15 +42,26 @@ function toggleBrowseMenu (_switch) {
 }
 
 $(function () {
+
   // Browse menu dropdown
   $('#header .browse').on('click', function(e) {
+    // Only handle left-clicks
+    if ( event.which != 1 )
+      return;
+
     e.preventDefault();
     toggleBrowseMenu();
   });
 
+  // Close browse menu on search focus
   $header_search.on('focusin', function(e) {
     toggleBrowseMenu(false);
   });
+
+  // Close browse menu on page scroll
+  $(window).on('scroll', $.throttle(200, function () {
+    toggleBrowseMenu(false);
+  }));
 
   updateHeaderSearchWidth();
 });
