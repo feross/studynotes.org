@@ -155,10 +155,8 @@ $headerBorder = 3px solid #000
           text-decoration: none
 
   .search
-    font-weight: normal
     padding: 3px
     text-transform: none
-    // width: 100%
 
     {$focus}
       border: $headerBorder
@@ -177,11 +175,14 @@ $headerBorder = 3px solid #000
     :-moz-placeholder
       color: #000
 
-  .browse:after
-    content: "\25bc"
-    font-size: 1.2rem
-    padding-left: 8px 
+  .browse
+    &:after
+      content: "\25bc"
+      font-size: 1.2rem
+      padding-left: 8px 
 
+    &.on:after
+      content: "\25b2" 
 
 
 //
@@ -285,6 +286,17 @@ $sidebarMarginRight = 40px
     content: '\2192'
     margin: 0 7px
 
+.noteNav
+  font-weight: bold
+
+  .prev:before
+    content: "\25c0"
+    font-size: 1.2rem    
+    padding-right: 5px
+  .next:after
+    content: "\25b6"
+    font-size: 1.2rem
+    padding-left: 5px
 
 
 //
@@ -292,7 +304,6 @@ $sidebarMarginRight = 40px
 //
 
 #sidebar
-  // background: url('/images/sidebar.gif')
   float: right
   margin: 0 $sidebarMarginRight 0 $sidebarMarginLeft
   width: $sidebarWidth
