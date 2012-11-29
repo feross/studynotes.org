@@ -199,10 +199,10 @@ function render404(res, msg) {
   
   res.status(404);
   render(res, 'notfound', {
-    err: msg
+    err: msg,
     forceTitle: true,
     noAds: true,
-    title: 'Page Not Found - 404 Error',
+    title: 'Page Not Found - 404 Error'
   });
 };
 
