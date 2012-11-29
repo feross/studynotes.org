@@ -5,9 +5,8 @@
 // FONTS
 //
 
-$serif = "skolar", Caslon, Baskerville, Palatino, "Palatino Linotype", "Hoefler Text", Garamond, "URW Palladio L", "Book Antiqua", Georgia, serif
-$sans-serif = "proxima-nova", Helvetica, sans-serif
-$title-font = "ff-prater-script-web", $serif
+$titleFont = "freight-sans-pro", Helvetica, sans-serif
+$bodyFont = "proxima-nova", Helvetica, sans-serif
 
 //
 // COLORS
@@ -38,7 +37,7 @@ html
 
 body
   color: $darkerGray
-  font-family: $sans-serif
+  font-family: $bodyFont
   font-size: 1.6rem
   margin: 0
   max-width: 1800px
@@ -50,7 +49,6 @@ img
   max-width: 100%
 
 ul, ol
-  list-style-type: none
   margin: 0
   padding: 0
 
@@ -63,11 +61,11 @@ a
     text-decoration: underline
 
 h1, h2, h3, h4, h5
-  font-family: $serif
-  font-weight: bold
+  font-family: $titleFont
   line-height: 1.2em
+  font-weight: 500
 h1
-  font-size: 3.2rem
+  font-size: 3.6rem
 h2
   font-size: 2.4rem
 h3
@@ -80,6 +78,14 @@ h5
 p
   margin: 1em 0
 
+ul.listing
+  list-style-type: none
+  li
+    background: #EEE
+    color: $darkerGray
+    padding: 15px
+  li:nth-child(odd)
+    background: #FFF
 
 //
 // HEADER
@@ -99,11 +105,15 @@ $headerBorder = 3px solid #000
   z-index: 10
 
   ul
+    list-style-type: none
     position: absolute
     top: 0
 
     &.left
       left: 0
+
+      .home
+        color: $red
 
       li a
         {$link}
@@ -144,10 +154,6 @@ $headerBorder = 3px solid #000
         {$focus}
           text-decoration: none
 
-        &.current
-          {$link}
-            color: $red
-
   .search
     font-weight: normal
     padding: 3px
@@ -170,6 +176,12 @@ $headerBorder = 3px solid #000
       color: #000
     :-moz-placeholder
       color: #000
+
+  .browse:after
+    content: "\25bc"
+    font-size: 1.2rem
+    padding-left: 8px 
+
 
 
 //
@@ -211,11 +223,11 @@ $headerBorder = 3px solid #000
 
     h2
       font-size: 1.9rem
+      font-weight: bold
       margin-top: 0
       text-transform: uppercase
 
     li
-      font-family: $serif
       margin: 5px 0
 
   a
@@ -242,7 +254,7 @@ $headerBorder = 3px solid #000
 
 $sidebarWidth = 336px
 $sidebarMarginLeft = 100px
-$sidebarMarginRight = 20px
+$sidebarMarginRight = 40px
 
 #contentWrapper
   float: left
@@ -260,7 +272,6 @@ $sidebarMarginRight = 20px
     padding-bottom: 20px
 
   ul, ol
-    list-style-type: disc
     margin: 0
     padding-left: 20px
 
@@ -285,7 +296,6 @@ $sidebarMarginRight = 20px
   float: right
   margin: 0 $sidebarMarginRight 0 $sidebarMarginLeft
   width: $sidebarWidth
-  height: 100px
 
 
 //

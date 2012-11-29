@@ -2,7 +2,7 @@ var topnav = {
   browse: {
     url: '#',
     title: 'Browse all AP study notes',
-    shortname: 'Courses',
+    shortname: 'AP Courses',
   },
 
   astore: {
@@ -122,29 +122,34 @@ var other = {
         return;
       }
       notetype = notetype[0];
-      
+     
       m.Note
-        .findOne({ courseId: course._id, notetypeId: notetype._id, slug: p.noteSlug })
-        .exec(function (err, note) {
-          if (err) { error(err); return; }
+      .find( { courseId: course._id, notetypeId: notetype._id } )
+      .sort( 'ordering' )
+      .exec( function ( err, notes ) {
+        if (err) { error(err); return; }
 
-          if (!note) {
-            render404(res, 'Unable to load note');
-            return;
-          } 
+        if ( !notes ) {
+          render404( res, 'Unable to load notes' );
+          return;
+        }
 
-          render(res, 'note', {
-            breadcrumbs: [
-              { name: course.name, url: '/' + course.slug + '/' },
-              { name: notetype.name, url: '/' + course.slug + '/' + notetype.slug + '/' },
-            ],
-            course: course,
-            notetype: notetype,
-            note: note,
-            title: note.name
-          });
+        var note = u.find(notes, function (note) {
+          return note.slug == p.noteSlug;
+        } );
 
+        render(res, 'note', {
+          breadcrumbs: [
+            { name: course.name, url: '/' + course.slug + '/' },
+            { name: notetype.name, url: '/' + course.slug + '/' + notetype.slug + '/' },
+          ],
+          course: course,
+          notetype: notetype,
+          note: note,
+          relatedNotes: notes,
+          title: note.name
         });
+      });
     }
   },
   notFound: {
