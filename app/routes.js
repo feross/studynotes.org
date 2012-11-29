@@ -186,10 +186,10 @@ var other = {
 function render(res, templateName, locals) {
   res.render(templateName, u.extend({
     cls: templateName,
-    topnav: topnav,
+    config: config,
     courses: m.cache.courses,
     search_term: '',
-    config: config
+    topnav: topnav
   }, locals));
 }
 
@@ -199,9 +199,10 @@ function render404(res, msg) {
   
   res.status(404);
   render(res, 'notfound', {
-    title: 'Page Not Found - 404 Error',
-    forceTitle: true,
     err: msg
+    forceTitle: true,
+    noAds: true,
+    title: 'Page Not Found - 404 Error',
   });
 };
 
