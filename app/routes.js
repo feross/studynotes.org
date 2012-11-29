@@ -185,6 +185,7 @@ var other = {
  */
 function render(res, templateName, locals) {
   res.render(templateName, u.extend({
+    ads: true,
     cls: templateName,
     config: config,
     courses: m.cache.courses,
@@ -201,7 +202,7 @@ function render404(res, msg) {
   render(res, 'notfound', {
     err: msg,
     forceTitle: true,
-    noAds: true,
+    ads: false,
     title: 'Page Not Found - 404 Error'
   });
 };
