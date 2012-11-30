@@ -4,7 +4,7 @@ block content
   include includes/breadcrumbs
   h1= locals.notetype.name
   p
-    ul
+    ul.listing
       each note in locals.notes
         li: a(href='#{note.slug}/')= note.name
 

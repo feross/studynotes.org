@@ -15,9 +15,9 @@ window.error = function () {
 
 // Set search bar's width so it fills the header correctly.
 // Need to ensure this gets called after Typekit fonts are loaded.
-var $header_left = $('#header .left');
-var $header_right = $('#header .right');
-var $header_search = $('#header .search');
+var $header_left = $('.header .left');
+var $header_right = $('.header .right');
+var $header_search = $('.header .search');
 function updateHeaderSearchWidth() {
   var header_left_width = $header_left.width();
   var header_right_width = $header_right.width();
@@ -37,14 +37,14 @@ function updateHeaderSearchWidth() {
 }
 
 function toggleBrowseMenu (_switch) {
-  $('#browse').toggleClass('on', _switch);
-  $('#header .browse').toggleClass('on', _switch);
+  $('.browse').toggleClass('on', _switch);
+  $('.header .browse').toggleClass('on', _switch);
 }
 
 $(function () {
 
   // Browse menu dropdown
-  $('#header .browse').on('click', function(e) {
+  $('.header .browse').on('click', function(e) {
     // Only handle left-clicks
     if ( event.which != 1 )
       return;

@@ -7,19 +7,10 @@ head
 
 body(class='#{locals.cls}')
 
-  header#header
-    ul.left
-      li.home
-        a(href='/', title='Go to the front page of StudyNotes', class='home #{locals.cls == 'home' ? 'current' : ''}') Study Notes
-    div.search.off
-      form(action='/search/', method='GET')
-        input(autocorrect='off', autocomplete='off', autofocus, name='q', placeholder='Search for AP Courses and Topics...', type='text', value='#{locals.search_term}')
-    ul.right
-      each item, cls in locals.topnav
-        li: a(href='#{item.url}', class='#{cls} #{locals.cls == cls ? 'current' : ''}')= item.shortname
+  include includes/header
 
-  #browseWrapper
-    ul#browse
+  .browseWrapper
+    ul.browse
       each course in locals.courses
         li
           h2: a(href='/#{course.slug}/')= course.name
@@ -27,17 +18,16 @@ body(class='#{locals.cls}')
             each notetype in course.notetypes
               li: a(href='/#{course.slug}/#{notetype.slug}/')= notetype.name
 
-  #container
+  .container
 
-    #contentWrapper
-      #content
+    .contentWrapper
+      .content
         block content
 
-    #sidebar
+    .sidebar
       include includes/sidebar
 
-  //- footer#footer
-  //-   include includes/footer
+  include includes/footer
   
   //- Scripts
   //- TODO: concat all scripts together into one.

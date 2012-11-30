@@ -80,9 +80,11 @@ p
 
 ul.listing
   list-style-type: none
+  padding-left: 0;
   li
     background: #EEE
     color: $darkerGray
+    ellipsis()
     padding: 15px
   li:nth-child(odd)
     background: #FFF
@@ -94,7 +96,7 @@ ul.listing
 $headerHeight = 50px
 $headerBorder = 3px solid #000
 
-#header
+header
   background: #FFF
   border-bottom: 1px solid $lighterGray
   height: $headerHeight
@@ -189,7 +191,7 @@ $headerBorder = 3px solid #000
 // BROWSE
 //
 
-#browseWrapper
+.browseWrapper
   background-color: #000
   padding: 0 30px
   position: fixed
@@ -197,7 +199,7 @@ $headerBorder = 3px solid #000
   width: 100%
   z-index: 10
 
-#browse
+.browse
   height: 0
   padding: 0
   overflow: hidden
@@ -235,9 +237,7 @@ $headerBorder = 3px solid #000
     {$link}
       color: #FFF
       display: block
-      overflow: hidden
-      text-overflow: ellipsis
-      white-space: nowrap
+      ellipsis()
       width: 100%
 
 
@@ -245,7 +245,7 @@ $headerBorder = 3px solid #000
 // CONTAINER
 //
 
-#container
+.container
   margin-top: 90px
 
 
@@ -257,14 +257,14 @@ $sidebarWidth = 336px
 $sidebarMarginLeft = 100px
 $sidebarMarginRight = 40px
 
-#contentWrapper
+.contentWrapper
   float: left
   padding-left: 131px
   margin-right: - ($sidebarWidth + $sidebarMarginLeft + $sidebarMarginRight)
   padding-bottom: 50px
   width: 100%
 
-#content
+.content
   margin-right: ($sidebarWidth + $sidebarMarginLeft + $sidebarMarginRight)
 
   h1
@@ -303,13 +303,16 @@ $sidebarMarginRight = 40px
 // SIDEBAR
 //
 
-#sidebar
+.sidebar
   float: right
   margin: 0 $sidebarMarginRight 0 $sidebarMarginLeft
   width: $sidebarWidth
 
+  .ad
+    margin-bottom: 15px
 
-// ADS
+
+// AMAZON
 
 .amazon
   border-top: 1px solid $lighterGray
@@ -327,6 +330,6 @@ $sidebarMarginRight = 40px
 // FOOTER
 //
 
-#footer
+footer
   clear: both
   width: 100%
