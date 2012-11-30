@@ -35,7 +35,7 @@ global.app = express();
 console.log('App running in "' + app.get('env') + '" mode.');
 
 app.set('port', process.env.PORT || 4000);
-app.set('views', __dirname + '/views');
+app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'jade');
 app.use(express.favicon());
 app.use(express.logger('dev'));
@@ -51,8 +51,8 @@ if ( fs.existsSync( mainCss ) ) {
 
 app.use(stylus.middleware({
   // "/stylesheets" gets automatically appended to the paths
-  src: __dirname,
-  dest: __dirname + '/public',
+  src: path.join(__dirname, '..'),
+  dest: path.join(__dirname, '..', 'public'),
   debug: app.get('env') == 'development',
   compile: function (str, path) {
     return stylus(str)
@@ -61,7 +61,7 @@ app.use(stylus.middleware({
       .use(nib());
   }
 }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use(slashes());
 app.use(app.router);
 
