@@ -79,7 +79,7 @@ module.exports = function(callback) {
         if (!doc.slug) {
           var potentialSlug, initialSlug, num, done;
 
-          potentialSlug = initialSlug = u.util.slugify(doc.name);
+          potentialSlug = initialSlug = util.slugify(doc.name);
           num = 0; // number to try appending to slug in order to make it unique
           
           async.whilst(
@@ -113,7 +113,7 @@ module.exports = function(callback) {
       });
     }
 
-    // Add date fields to all schemas
+    // Add date and hits fields to all schemas
     schema.plugin(plugin.modifyDate);
     schema.plugin(plugin.createDate);
     schema.plugin(plugin.hits);

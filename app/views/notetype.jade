@@ -2,8 +2,10 @@ extends layout
 
 block content
   include includes/breadcrumbs
-  h1= locals.title
+  h1= locals.notetype.name
   p
     ul
       each note in locals.notes
         li: a(href='#{note.slug}/')= note.name
+
+  include ads/amazon

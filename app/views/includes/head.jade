@@ -5,13 +5,13 @@ block head
   //- meta(charset='utf-8')
   //- meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
 
-  if (locals.forceTitle)
-    title= title
-    meta(property='og:title', content='#{title}')
-  else if (locals.title)
-    title #{title} - Study Notes
-    meta(property='og:title', content='#{title} - Study Notes')
-
+  if ( locals.title && !locals.forceTitle )
+    - var title = util.titleify(title, "Study Notes");
+  else ( !locals.title )
+    - var title = "Study Notes";
+  title= locals.title
+  meta(property='og:title', content='#{locals.title}')
+  
   //- TODO: SEO
   //- meta(name='description', content='TODO')
   //- meta(property='og:description' content='')

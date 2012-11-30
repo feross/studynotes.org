@@ -1,0 +1,15 @@
+if amazon
+  - var amazon = amazon[u.random(amazon.length - 1)];
+
+  - var productUrl = 'http://www.amazon.com/gp/product/' + amazon.productId + '/ref=as_li_ss_il?ie=UTF8&camp=1789&creative=390957&creativeASIN=' + amazon.productId + '&linkCode=as2&tag=studynotesorg-20';
+  - var productImg = 'http://ws.assoc-amazon.com/widgets/q?_encoding=UTF8&ASIN=' + amazon.productId + '&Format=_SL160_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=studynotesorg-20';
+  - var trackingImg = 'http://www.assoc-amazon.com/e/ir?t=studynotesorg-20&l=as2&o=1&a=' + amazon.productId;
+
+  .amazon.clearfix
+    h2 Want to study like a boss? Try this!
+    a(href='#{productUrl}', target='_blank')
+      img(src='#{productImg}')
+    h3: a(href='#{productUrl}', target='_blank') #{amazon.name}
+    p !{amazon.body}
+    p: a(href='#{productUrl}', target='_blank') Buy this item at Amazon.com now!
+    img(src='#{trackingImg}', width='1', height='1', alt='', style='border:none !important; margin:0px !important;')

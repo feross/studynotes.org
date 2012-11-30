@@ -1,4 +1,5 @@
-h3 More #{course.name} #{notetype.name}
-ul.listing
-  each note in locals.relatedNotes
-    li: a(href='#{note.slug}/')= note.name
+if locals.relatedNotes
+  h3 More #{course.name} #{notetype.name}
+  ul.listing
+    each note in locals.relatedNotes
+      li: a(href='#{note.slug}/')= note.name

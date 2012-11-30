@@ -1,3 +1,5 @@
+var amazons = require('./amazons');
+
 var topnav = {
   browse: {
     url: '#',
@@ -54,11 +56,14 @@ var other = {
       }
 
       render(res, 'course', {
+        amazon: amazons[course.slug],
         breadcrumbs: [],
         course: course,
         notetypes: course.notetypes,
         title: course.name
       });
+
+
     }
   },
   notetype: {
@@ -92,14 +97,16 @@ var other = {
         } 
 
         render(res, 'notetype', {
+          amazon: amazons[course.slug],
           breadcrumbs: [
             { name: course.name, url: '/' + course.slug + '/' },
           ],
           course: course,
           notetype: notetype,
           notes: notes,
-          title: notetype.name
+          title: course.name + ' ' + notetype.name
         });
+
 
       });
     }
@@ -148,7 +155,10 @@ var other = {
           return note.ordering == noteOrdering - 1;
         } );
 
+        log(amazons[course.slug]);
+
         render(res, 'note', {
+          amazon: amazons[course.slug],
           breadcrumbs: [
             { name: course.name, url: '/' + course.slug + '/' },
             { name: notetype.name, url: '/' + course.slug + '/' + notetype.slug + '/' },
@@ -159,8 +169,10 @@ var other = {
           noteNext: noteNext,
           notePrev: notePrev,
           relatedNotes: notes,
-          title: note.name
+          title: util.titleify(note.name, course.name + ' ' + notetype.name)
         });
+
+
       });
     }
   },
@@ -207,7 +219,7 @@ function render404(res, msg) {
   });
 };
 
-// Initialize and registers the app's routes
+// Initialize and register the app's routes
 var routes = u.extend({}, topnav, other);
 
 u.each(routes, function (locals, templateName) {

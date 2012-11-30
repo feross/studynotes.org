@@ -1,7 +1,7 @@
 // Globally-available Dependencies
 global.u = require('underscore');
 global.u.str = require('underscore.string');
-global.u.util = require('./utils');
+global.util = require('./util');
 
 global.async = require('async');
 
