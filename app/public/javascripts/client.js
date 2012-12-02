@@ -38,13 +38,13 @@ function updateHeaderSearchWidth() {
 
 function toggleBrowseMenu (_switch) {
   $('.browse').toggleClass('on', _switch);
-  $('.header .browse').toggleClass('on', _switch);
+  $('.header .courses').toggleClass('on', _switch);
 }
 
 $(function () {
 
   // Browse menu dropdown
-  $('.header .browse').on('click', function(e) {
+  $('.header .courses').on('click', function(e) {
     // Only handle left-clicks
     if ( event.which != 1 )
       return;
@@ -58,9 +58,24 @@ $(function () {
     toggleBrowseMenu(false);
   });
 
+  var $html = $('html');
+  var $hero = $('.hero');
+  var $header = $('.header');
+  var heroBottom = $hero.offset().top + $hero.height() - $header.height();
+  var $window = $(window);
+
   // Close browse menu on page scroll
-  $(window).on('scroll', $.throttle(200, function () {
+  $(window).on('scroll', $.throttle(50, function () {
     toggleBrowseMenu(false);
+
+    // Toggle header text color
+    var windowScrollTop = $window.scrollTop();
+    var className = 'solidHeader';
+    if ( $html.hasClass(className) && windowScrollTop < heroBottom ) {
+      $html.removeClass(className);
+    } else if ( ! $html.hasClass(className) && windowScrollTop >= heroBottom ) {
+      $html.addClass('solidHeader');
+    }
   }));
 
   updateHeaderSearchWidth();

@@ -1,7 +1,7 @@
 var amazons = require('./amazons');
 
 var topnav = {
-  browse: {
+  courses: {
     url: '#',
     title: 'Browse all AP study notes',
     shortname: 'AP Courses',

@@ -80,7 +80,6 @@ p
 
 ul.listing
   list-style-type: none
-  padding-left: 0;
   li
     background: #EEE
     color: $darkerGray
@@ -94,11 +93,16 @@ ul.listing
 //
 
 $headerHeight = 50px
-$headerBorder = 3px solid #000
 
-header
-  background: #FFF
-  border-bottom: 1px solid $lighterGray
+$headerBorder = 1px solid rgba(255, 255, 255, 0.3)
+$solidHeaderBorder = 1px solid $lighterGray
+
+$headerBorderFocus = 3px solid #FFF
+$solidHeaderBorderFocus = 3px solid #000
+
+.header
+  background-color: transparent
+  border-bottom: $headerBorder
   height: $headerHeight
   left: 0
   position: fixed
@@ -106,39 +110,53 @@ header
   width: 100%
   z-index: 10
 
+  .solidHeader &
+    background-color: #FFF
+    border-bottom: $solidHeaderBorder
+
   ul
     list-style-type: none
+    padding: 0 // reset global ul padding
     position: absolute
     top: 0
 
     &.left
       left: 0
 
-      .home
-        color: $red
-
       li a
         {$link}
-          border-right: 1px solid $lighterGray
+          border-right: $headerBorder
         {$focus}
-          border: $headerBorder
+          border: $headerBorderFocus
           padding: 14px 16px 0 15px
+
+        .solidHeader &
+          {$link}
+            border-right: $solidHeaderBorder
+          {$focus}
+            border: $solidHeaderBorderFocus
 
     &.right
       right: 0
 
       li a
         {$link}
-          border-left: 1px solid $lighterGray
+          border-left: $headerBorder
         {$focus}
-          border: $headerBorder
+          border: $headerBorderFocus
           padding: 14px 15px 0 16px
         &.on
-          background-color: #000
-          border: $headerBorder
-          height: $headerHeight // to cover up 1px gray bottom border
+          border: $headerBorderFocus
+          height: $headerHeight - 1
           padding: 14px 15px 0 16px
-          color: #FFF
+
+        .solidHeader &
+          {$link}
+            border-left: $solidHeaderBorder
+          {$focus}
+            border: $solidHeaderBorderFocus
+          &.on
+            border: $solidHeaderBorderFocus
 
     li
       float: left
@@ -149,35 +167,60 @@ header
 
       a
         {$link}
-          color: #000
+          color: #FFF
           display: block
           height: $headerHeight - 1
           padding: 17px 18px 0 18px
+
         {$focus}
           text-decoration: none
+
+        .solidHeader &
+          {$link}
+            color: #000
 
   .search
     padding: 3px
     text-transform: none
 
     {$focus}
-      border: $headerBorder
+      border: $headerBorderFocus
       padding: 0
 
+    .solidHeader &
+      {$focus}
+        border: $solidHeaderBorderFocus
+
     input
+      background-color: transparent
       border: 0
+      color: #FFF
       font-size: 1.4rem
       height: $headerHeight - 7
       outline: 0
       padding-left: 20px
       width: 100%
 
-    ::-webkit-input-placeholder
-      color: #000
-    :-moz-placeholder
-      color: #000
+      .solidHeader &
+        color: #000
 
-  .browse
+
+    ::-webkit-input-placeholder
+      color: #FFF
+    :-moz-placeholder
+      color: #FFF
+    :-ms-input-placeholder
+      color: #FFF
+
+    .solidHeader &
+      ::-webkit-input-placeholder
+        color: #000
+      :-moz-placeholder
+        color: #000
+      :-ms-input-placeholder
+        color: #000
+
+  .courses
     &:after
       content: "\25bc"
       font-size: 1.2rem
@@ -191,24 +234,26 @@ header
 // BROWSE
 //
 
+$browseHeight = 400px
 .browseWrapper
   background-color: #000
   padding: 0 30px
   position: fixed
   top: $headerHeight
   width: 100%
-  z-index: 10
+  z-index: 50
 
 .browse
   height: 0
   padding: 0
   overflow: hidden
 
+  transform: translateZ(0);
   transition-property: padding, height
   transition-duration: .5s
 
   &.on
-    height: 320px
+    height: $browseHeight
     padding: 30px 0
 
     transition-property: padding, height
@@ -240,13 +285,21 @@ header
       ellipsis()
       width: 100%
 
-
 //
-// CONTAINER
+// HERO
 //
 
-.container
-  margin-top: 90px
+$heroHeight = $browseHeight + $headerHeight
+.hero
+  background-image: url('/images/hero/sample.jpg')
+  background-position: center center
+  background-repeat: no-repeat
+  background-size: cover
+  height: $heroHeight
+  left: 0
+  position: fixed
+  top: 0
+  width: 100%
 
 
 //
@@ -258,10 +311,12 @@ $sidebarMarginLeft = 100px
 $sidebarMarginRight = 40px
 
 .contentWrapper
+  background: #FFF
   float: left
-  padding-left: 131px
   margin-right: - ($sidebarWidth + $sidebarMarginLeft + $sidebarMarginRight)
-  padding-bottom: 50px
+  margin-top: $heroHeight
+  padding: 50px 0 50px 131px
+  position: relative
   width: 100%
 
 .content
@@ -271,10 +326,6 @@ $sidebarMarginRight = 40px
     border-bottom: 1px solid $lightestGray
     margin: 10px 0 30px 0
     padding-bottom: 20px
-
-  ul, ol
-    margin: 0
-    padding-left: 20px
 
 .breadcrumbs
   font-size: 1.5rem
@@ -296,7 +347,6 @@ $sidebarMarginRight = 40px
     content: "\25b6"
     font-size: 1.2rem
     padding-left: 5px
-
 
 
 //
@@ -330,6 +380,6 @@ $sidebarMarginRight = 40px
 // FOOTER
 //
 
-footer
+.footer
   clear: both
   width: 100%
