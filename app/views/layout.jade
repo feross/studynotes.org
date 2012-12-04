@@ -18,14 +18,14 @@ body(class='#{locals.cls}')
             each notetype in course.notetypes
               li: a(href='/#{course.slug}/#{notetype.slug}/')= notetype.name
 
-  .hero
+  include includes/hero
 
   .contentWrapper
     .content
       block content
+        p This page has no content.
 
-  .sidebar
-    include includes/sidebar
+  include includes/sidebar
 
   include includes/footer
   
@@ -33,12 +33,13 @@ body(class='#{locals.cls}')
   //- TODO: concat all scripts together into one.
 
   if (locals.env == "development")
-    script(src='/javascripts/libs/jquery-1.8.2.js')
+    script(src='/js/lib/jquery-1.8.2.js')
 
   else
-    script(src='/javascripts/libs/jquery-1.8.2.min.js')
+    script(src='/js/lib/jquery-1.8.2.min.js')
 
-  script(src='/javascripts/client.js')
+  script(src='/js/lib/jquery.ba-throttle-debounce.js')
+  script(src='/js/client.js')
 
   if (locals.env == "development")
     | <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>

@@ -31,7 +31,9 @@ var other = {
     url: '/', 
     title: 'StudyNotes.org - Study better with Free AP Course Notes',
     forceTitle: true,
-    shortname: ''
+    shortname: '',
+    heroTitle: 'Study Notes',
+    heroDesc: 'Awesome, free study tools for AP* students.'
   },
   search: {
     url: '/search',

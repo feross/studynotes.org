@@ -57,7 +57,7 @@ app.use(stylus.middleware({
   compile: function (str, path) {
     return stylus(str)
       .set('filename', path)
-      .set('compress', true)
+      .set('compress', app.get('env') == 'production')
       .use(nib());
   }
 }));

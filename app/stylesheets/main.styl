@@ -5,6 +5,7 @@
 // FONTS
 //
 
+$heroFont = "adelle", Georgia, serif
 $titleFont = "freight-sans-pro", Helvetica, sans-serif
 $bodyFont = "proxima-nova", Helvetica, sans-serif
 
@@ -64,6 +65,7 @@ h1, h2, h3, h4, h5
   font-family: $titleFont
   line-height: 1.2em
   font-weight: 500
+  text-rendering: optimizelegibility
 h1
   font-size: 3.6rem
 h2
@@ -187,6 +189,10 @@ $solidHeaderBorderFocus = 3px solid #000
       border: $headerBorderFocus
       padding: 0
 
+    html:not(.solidHeader) &
+      background-image: linear-gradient(top, rgba(255,255,255,0.1), rgba(255,255,255,0.15))
+      box-shadow: inset 0 2px 2px rgba(0,0,0,0.5)
+
     .solidHeader &
       {$focus}
         border: $solidHeaderBorderFocus
@@ -234,7 +240,7 @@ $solidHeaderBorderFocus = 3px solid #000
 // BROWSE
 //
 
-$browseHeight = 400px
+$browseHeight = 450px
 .browseWrapper
   background-color: #000
   padding: 0 30px
@@ -285,13 +291,14 @@ $browseHeight = 400px
       ellipsis()
       width: 100%
 
+
 //
 // HERO
 //
 
 $heroHeight = $browseHeight + $headerHeight
 .hero
-  background-image: url('/images/hero/sample.jpg')
+  background-image: linear-gradient(top, rgba(0,0,0,0.4), rgba(0,0,0,0.2)), url('/images/hero/outdoor-ipad-books.jpg')
   background-position: center center
   background-repeat: no-repeat
   background-size: cover
@@ -300,6 +307,27 @@ $heroHeight = $browseHeight + $headerHeight
   position: fixed
   top: 0
   width: 100%
+  // -webkit-filter: blur(1px);
+
+  .text
+    color: #FFF
+    margin: 120px 50px 50px 50px
+    text-align: center
+    // background: rgba(0,0,0,0.5)
+
+  h1, h2, h3
+    font-family: $heroFont
+    text-shadow: 1px 1px 1px #000
+  h1
+    font-size: 10.0rem
+    font-weight: bold
+    text-shadow: 2px 2px 2px #000
+    margin-bottom: 1rem
+  h2
+    font-size: 4.0rem
+  h3
+    font-size: 3.0rem
+    
 
 
 //
@@ -326,6 +354,9 @@ $sidebarMarginRight = 40px
     border-bottom: 1px solid $lightestGray
     margin: 10px 0 30px 0
     padding-bottom: 20px
+
+  ul
+    padding-left: 20px
 
 .breadcrumbs
   font-size: 1.5rem
@@ -355,7 +386,9 @@ $sidebarMarginRight = 40px
 
 .sidebar
   float: right
-  margin: 0 $sidebarMarginRight 0 $sidebarMarginLeft
+  margin: $heroHeight $sidebarMarginRight 0 $sidebarMarginLeft
+  padding-top: 50px
+  position: relative
   width: $sidebarWidth
 
   .ad
@@ -381,5 +414,8 @@ $sidebarMarginRight = 40px
 //
 
 .footer
+  background: #FFF
   clear: both
+  height: 500px
+  position: relative
   width: 100%

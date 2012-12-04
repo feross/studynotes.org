@@ -1,10 +1,11 @@
 header.header
-  ul.left
-    li.home
-      a(href='/', title='Go to the front page of StudyNotes', class='home #{locals.cls == 'home' ? 'current' : ''}') Study Notes
-  div.search.off
-    form(action='/search/', method='GET')
-      input(autocorrect='off', autocomplete='off', autofocus, name='q', placeholder='Search for AP Courses and Topics...', type='text', value='#{locals.search_term}')
-  ul.right
-    each item, cls in locals.topnav
-      li: a(href='#{item.url}', class='#{cls} #{locals.cls == cls ? 'current' : ''}')= item.shortname
+  block header
+    ul.left
+      li.home
+        a(href='/', title='Go to the front page of StudyNotes', class='home #{locals.cls == 'home' ? 'current' : ''}') Study Notes
+    div.search.off
+      form(action='/search/', method='GET')
+        input(autocorrect='off', autocomplete='off', autofocus, name='q', placeholder='Search for AP Courses and Topics...', type='text', value='#{locals.search_term}')
+    ul.right
+      each item, cls in locals.topnav
+        li: a(href='#{item.url}', class='#{cls} #{locals.cls == cls ? 'current' : ''}')= item.shortname
