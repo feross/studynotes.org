@@ -33,13 +33,13 @@ body(class='#{locals.cls}')
   //- TODO: concat all scripts together into one.
 
   if (locals.env == "development")
-    script(src='/js/lib/jquery-1.8.2.js')
+    != js('lib/jquery-1.8.2')
 
   else
-    script(src='/js/lib/jquery-1.8.2.min.js')
+    != js('lib/jquery-1.8.2.min')
 
-  script(src='/js/lib/jquery.ba-throttle-debounce.js')
-  script(src='/js/client.js')
+  != js('lib/jquery.ba-throttle-debounce')
+  != js('client')
 
   if (locals.env == "development")
     | <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>

@@ -33,7 +33,7 @@ var other = {
     forceTitle: true,
     shortname: '',
     heroTitle: 'Study Notes',
-    heroDesc: 'Awesome, free study tools for AP* students.'
+    heroDesc: 'Fast, free study tools for AP* students.'
   },
   search: {
     url: '/search',
@@ -53,7 +53,7 @@ var other = {
       var course = m.cache.courses[p.courseSlug];
 
       if (!course) {
-        render404(res, 'No course with that slug');
+        render404(res, 'No course with slug ' + p.courseSlug);
         return;
       }
 
@@ -76,13 +76,13 @@ var other = {
       var course = m.cache.courses[p.courseSlug];
 
       if (!course) {
-        render404(res, 'No course with that slug');
+        render404(res, 'No course with slug ' + p.courseSlug);
         return;
       }
 
       var notetype = u.where(course.notetypes, { slug: p.notetypeSlug });
       if (!notetype.length) {
-        render404(res, 'Course has no notetype with that slug');
+        render404(res, 'Course has no notetype with slug ' + p.notetypeSlug);
         return;
       }
       notetype = notetype[0];
@@ -121,13 +121,13 @@ var other = {
       var course = m.cache.courses[p.courseSlug];
 
       if (!course) {
-        render404(res, 'No course with that slug');
+        render404(res, 'No course with slug ' + p.courseSlug);
         return;
       }
 
       var notetype = u.where(course.notetypes, { slug: p.notetypeSlug });
       if (!notetype.length) {
-        render404(res, 'Course has no notetype with that slug');
+        render404(res, 'Course has no notetype with slug ' + p.notetypeSlug);
         return;
       }
       notetype = notetype[0];

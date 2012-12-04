@@ -8,6 +8,7 @@
   "dependencies": {
     "express": "*",
     "jade": "*",
+    "coffee-script": "*",
     "underscore": "*",
     "stylus": "*",
     "nib": "*",

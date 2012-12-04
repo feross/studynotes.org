@@ -49,18 +49,24 @@ if ( fs.existsSync( mainCss ) ) {
   fs.unlinkSync(mainCss); 
 }
 
-app.use(stylus.middleware({
-  // "/stylesheets" gets automatically appended to the paths
+// app.use(stylus.middleware({
+//   // "/stylesheets" gets automatically appended to the paths
+//   src: path.join(__dirname, '..'),
+//   dest: path.join(__dirname, '..', 'public'),
+//   debug: app.get('env') == 'development',
+//   compile: function (str, path) {
+//     return stylus(str)
+//       .set('filename', path)
+//       .set('compress', app.get('env') == 'production')
+//       .use(nib());
+//   }
+// }));
+
+app.use(require('connect-assets')({
   src: path.join(__dirname, '..'),
-  dest: path.join(__dirname, '..', 'public'),
-  debug: app.get('env') == 'development',
-  compile: function (str, path) {
-    return stylus(str)
-      .set('filename', path)
-      .set('compress', app.get('env') == 'production')
-      .use(nib());
-  }
-}));
+  buildDir: false
+}))
+
 app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use(slashes());
 app.use(app.router);
