@@ -63,8 +63,8 @@ a
 
 h1, h2, h3, h4, h5
   font-family: $titleFont
-  line-height: 1.2em
   font-weight: 500
+  line-height: 1.2em
   text-rendering: optimizelegibility
 h1
   font-size: 3.6rem
@@ -101,6 +101,8 @@ $solidHeaderBorder = 1px solid $lighterGray
 
 $headerBorderFocus = 3px solid #FFF
 $solidHeaderBorderFocus = 3px solid #000
+
+$logoWidth = 131px
 
 .header
   background-color: transparent
@@ -297,6 +299,7 @@ $browseHeight = 450px
 //
 
 $heroHeight = $browseHeight + $headerHeight
+$heroMiniHeight = 250px + $headerHeight
 .hero
   background-image: linear-gradient(top, rgba(0,0,0,0.4), rgba(0,0,0,0.2)), url('/images/hero/outdoor-ipad-books.jpg')
   background-position: center center
@@ -316,17 +319,30 @@ $heroHeight = $browseHeight + $headerHeight
   h1, h2, h3
     font-family: $heroFont
     text-shadow: 1px 1px 1px #000
+    margin: 0.3em 0
   h1
     font-size: 10.0rem
     font-weight: bold
     text-shadow: 2px 2px 2px #000
-    margin-bottom: 1rem
   h2
-    font-size: 4.0rem
+    font-size: 4.5rem
   h3
     font-size: 3.0rem
     
+.heroMini
+  @extend .hero
+  height: $heroMiniHeight
 
+  .text
+    margin: 110px 50px 50px $logoWidth
+    text-align: left
+
+  h1
+    font-size: 5.0rem
+  h2
+    font-size: 3.0rem
+  h3
+    font-size: 2.0rem
 
 //
 // CONTENT
@@ -335,15 +351,22 @@ $heroHeight = $browseHeight + $headerHeight
 $sidebarWidth = 336px
 $sidebarMarginLeft = 100px
 $sidebarMarginRight = 40px
+$contentPaddingTop = 50px
 
 .contentWrapper
   background: #FFF
   float: left
   margin-right: - ($sidebarWidth + $sidebarMarginLeft + $sidebarMarginRight)
-  margin-top: $heroHeight
-  padding: 50px 0 50px 131px
+  margin-top: $headerHeight
+  padding: $contentPaddingTop 0 50px $logoWidth
   position: relative
   width: 100%
+
+  .isHero &
+    margin-top: $heroHeight
+  .isHeroMini &
+    margin-top: $heroMiniHeight
+
 
 .content
   margin-right: ($sidebarWidth + $sidebarMarginLeft + $sidebarMarginRight)
@@ -383,11 +406,17 @@ $sidebarMarginRight = 40px
 //
 
 .sidebar
+  background: #FFF
   float: right
-  margin: $heroHeight $sidebarMarginRight 0 $sidebarMarginLeft
-  padding-top: 50px
+  margin: $contentPaddingTop $sidebarMarginRight 0 $sidebarMarginLeft
+  padding-top: $headerHeight
   position: relative
   width: $sidebarWidth
+
+  .isHero &
+    margin-top: $heroHeight
+  .isHeroMini &
+    margin-top: $heroMiniHeight
 
   .ad
     margin-bottom: 15px
@@ -414,6 +443,6 @@ $sidebarMarginRight = 40px
 .footer
   background: #FFF
   clear: both
-  height: 500px
+  height: 100px
   position: relative
   width: 100%

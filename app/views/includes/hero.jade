@@ -1,6 +1,6 @@
-if (locals.heroTitle)
-  .hero
+if (locals.hero)
+  div(class="#{ (locals.hero.mini) ? 'heroMini' : 'hero' }")
     .text
-      h1= heroTitle
-      if (locals.heroDesc)
-        h2= heroDesc
+      h1= hero.title
+      if (locals.hero.desc)
+        h2= hero.desc

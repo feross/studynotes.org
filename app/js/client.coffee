@@ -1,3 +1,5 @@
+#= require lib/jquery.ba-throttle-debounce
+
 # Logging functions for convenience
 window.log = ->
   args = Array.prototype.slice.call(arguments, 0)
@@ -26,7 +28,7 @@ updateHeaderSearchWidth = ->
   # Continue to set the width every 100ms until fonts are done loading.
   # If fonts don't load, then wf-loading gets removed automatically
   # after 1000ms, so this won't run forever. 
-  if $('html').hasClass('wf-loading')
+  if ($('html').hasClass('wf-loading'))
     setTimeout(updateHeaderSearchWidth, 100)
 
 toggleBrowseMenu = (_switch) ->
@@ -38,7 +40,7 @@ $(->
   # Browse menu dropdown
   $('.header .courses').on('click', (e) ->
     # Only handle left-clicks
-    if ( event.which != 1 )
+    if (event.which != 1)
       return
 
     e.preventDefault()
@@ -50,10 +52,10 @@ $(->
     toggleBrowseMenu(false)
   )
 
-  $html = $('html')
-  $hero = $('.hero')
+  $hero = $('.hero, .heroMini')
+  $html = $('html')    
   $header = $('.header')
-  heroBottom = $hero.offset().top + $hero.height() - $header.height()
+  heroBottom = $hero.offset?()?.top + $hero.height?() - $header.height()
   $window = $(window)
 
   # Close browse menu on page scroll
@@ -61,12 +63,13 @@ $(->
     toggleBrowseMenu(false)
 
     # Toggle header text color
-    windowScrollTop = $window.scrollTop()
-    className = 'solidHeader'
-    if $html.hasClass(className) && windowScrollTop < heroBottom
-      $html.removeClass(className)
-    else if !$html.hasClass(className) && windowScrollTop >= heroBottom
-      $html.addClass('solidHeader')
+    if ($hero.length)
+      windowScrollTop = $window.scrollTop()
+      className = 'solidHeader'
+      if ($html.hasClass(className) && windowScrollTop < heroBottom)
+        $html.removeClass(className)
+      else if (!$html.hasClass(className) && windowScrollTop >= heroBottom)
+        $html.addClass('solidHeader')
   ))
 
   updateHeaderSearchWidth()
