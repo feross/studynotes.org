@@ -1,134 +1,77 @@
-// Logging functions for convenience
-window.log = function () {
-  var args = Array.prototype.slice.call(arguments, 0);
-  console.log.apply(console, args);
-}
-window.error = function () {
-  var args = Array.prototype.slice.call(arguments, 0);
-  args.unshift('ERROR:');
-  console.error.apply(console, args);
-}
+# Logging functions for convenience
+window.log = ->
+  args = Array.prototype.slice.call(arguments, 0)
+  console.log.apply(console, args)
 
-// Set search bar's width so it fills the header correctly.
-// Need to ensure this gets called after Typekit fonts are loaded.
-var $header_left = $('.header .left');
-var $header_right = $('.header .right');
-var $header_search = $('.header .search');
-function updateHeaderSearchWidth() {
-  var header_left_width = $header_left.width();
-  var header_right_width = $header_right.width();
-  $header_search
+window.error = ->
+  args = Array.prototype.slice.call(arguments, 0)
+  args.unshift('ERROR:')
+  console.error.apply(console, args)
+
+# Set search bar's width so it fills the header correctly.
+# Need to ensure this gets called after Typekit fonts are loaded.
+$headerLeft = $('.header .left')
+$headerRight = $('.header .right')
+$headerSearch = $('.header .search')
+updateHeaderSearchWidth = ->
+  headerLeftWidth = $headerLeft.width()
+  headerRightWidth = $headerRight.width()
+  $headerSearch
     .css({
-      'margin-left': header_left_width,
-      'margin-right': header_right_width
+      'margin-left': headerLeftWidth,
+      'margin-right': headerRightWidth
     })
-    .removeClass('off');
+    .removeClass('off')
 
-  // Continue to set the width every 100ms until fonts are done loading.
-  // If fonts don't load, then wf-loading gets removed automatically
-  // after 1000ms, so this won't run forever. 
-  if ($('html').hasClass('wf-loading')) {
-    setTimeout(updateHeaderSearchWidth, 100);
-  }
-}
+  # Continue to set the width every 100ms until fonts are done loading.
+  # If fonts don't load, then wf-loading gets removed automatically
+  # after 1000ms, so this won't run forever. 
+  if $('html').hasClass('wf-loading')
+    setTimeout(updateHeaderSearchWidth, 100)
 
-function toggleBrowseMenu (_switch) {
-  $('.browse').toggleClass('on', _switch);
-  $('.header .courses').toggleClass('on', _switch);
-}
+toggleBrowseMenu = (_switch) ->
+  $('.browse').toggleClass('on', _switch)
+  $('.header .courses').toggleClass('on', _switch)
 
-$(function () {
+$(->
 
-  // Browse menu dropdown
-  $('.header .courses').on('click', function(e) {
-    // Only handle left-clicks
+  # Browse menu dropdown
+  $('.header .courses').on('click', (e) ->
+    # Only handle left-clicks
     if ( event.which != 1 )
-      return;
+      return
 
-    e.preventDefault();
-    toggleBrowseMenu();
-  });
+    e.preventDefault()
+    toggleBrowseMenu()
+  )
 
-  // Close browse menu on search focus
-  $header_search.on('focusin', function(e) {
-    toggleBrowseMenu(false);
-  });
+  # Close browse menu on search focus
+  $headerSearch.on('focusin', (e) ->
+    toggleBrowseMenu(false)
+  )
 
-  var $html = $('html');
-  var $hero = $('.hero');
-  var $header = $('.header');
-  var heroBottom = $hero.offset().top + $hero.height() - $header.height();
-  var $window = $(window);
+  $html = $('html')
+  $hero = $('.hero')
+  $header = $('.header')
+  heroBottom = $hero.offset().top + $hero.height() - $header.height()
+  $window = $(window)
 
-  // Close browse menu on page scroll
-  $(window).on('scroll', $.throttle(50, function () {
-    toggleBrowseMenu(false);
+  # Close browse menu on page scroll
+  $(window).on('scroll', $.throttle(50, () ->
+    toggleBrowseMenu(false)
 
-    // Toggle header text color
-    var windowScrollTop = $window.scrollTop();
-    var className = 'solidHeader';
-    if ( $html.hasClass(className) && windowScrollTop < heroBottom ) {
-      $html.removeClass(className);
-    } else if ( ! $html.hasClass(className) && windowScrollTop >= heroBottom ) {
-      $html.addClass('solidHeader');
-    }
-  }));
+    # Toggle header text color
+    windowScrollTop = $window.scrollTop()
+    className = 'solidHeader'
+    if $html.hasClass(className) && windowScrollTop < heroBottom
+      $html.removeClass(className)
+    else if !$html.hasClass(className) && windowScrollTop >= heroBottom
+      $html.addClass('solidHeader')
+  ))
 
-  updateHeaderSearchWidth();
-});
+  updateHeaderSearchWidth()
+)
 
-$(window).load(function () {
+$(window).load(->
 
-});
-
-
-
-// Footnote link generator in Print view
-// function footnotes()
-// {
-
-//     var links = $('.post p:not(.longtags) a[href]:not([href^=#],[href^=mailto],[rel=nofollow]), .post ul a[href]:not([href^=#],[href^=mailto],[rel=nofollow])');
-//     var notelist = $('<ul class="print_only_notelist"></ul>').insertAfter($('.post'));
-//     var i = 0;
-    
-//     $('<li>', { html: '<h4>Footnotes:</h4>' }).appendTo(notelist);
-//     $.each(links, function (){
-//         var parent_class = $(this).parent().attr('class');
-//         if(parent_class.indexOf('author') == -1 && parent_class.indexOf('tags') === -1 && parent_class.indexOf('edit') === -1 && parent_class.indexOf('social-icons') === -1)
-//         {
-//             var link_url = $(this).attr('href');
-//             var link_text = $(this).text();
-//             if(link_url !== '' && (/^https?:\/\//.test(link_url)))
-//             {
-//                 if(link_url.search(/\.(jpg|jpeg|gif|png|ico|css|js|zip|tgz|gz|rar|bz2|doc|xls|exe|pdf|ppt|txt|tar|mid|midi|wav|bmp|mp3)/) === -1)
-//                 {
-//                     if(link_text.search(/Share|On|Twitter/i) === -1)
-//                     {
-//                         if(link_url.search(/pk_campaign|pk_kwd/i) === -1)
-//                         {                   
-//                             i = i+1;
-//                             $('<sup>',{text:' '+i+''}).addClass('print_only').insertAfter($(this));             
-//                             if(link_text.length > 0)
-//                             {
-//                                 var ftext = link_text+' - '+link_url;
-//                             }else{
-//                                 var ftext = link_url;
-//                             }
-//                             $('<li>', { html: '<sup>'+i+'</sup> '+ftext }).appendTo(notelist);
-//                         }
-//                     }
-//                 }
-//             }
-//         }
-//     });
-// }
-
-// .print_only_notelist {
-//     display: none;
-//     margin: 20px 0;
-//     list-style-type: none;
-// }
-
-// .print_only {
-//     display: none;
-// }
+)
