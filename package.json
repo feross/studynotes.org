@@ -14,8 +14,8 @@
     "mongoose": "*",
     "async": "*",
     "underscore.string": "*",
-    "connect-slashes": "git://github.com/brunogfranca/connect-slashes-modified.git",
-    "mysql": "*"
+    "connect-slashes": "*",
+    "connect-assets": "*"
   },
   "devDependencies": {}
 }
