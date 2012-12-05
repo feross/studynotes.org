@@ -25,6 +25,10 @@ module.exports = (callback) ->
       notetypes: [{ type: Schema.Types.ObjectId, ref: 'Notetype'}]
       slug: SLUG_UNIQUE
       image: String
+      setup: () ->
+        this.virtual('url').get(() ->
+          "/#{this.slug}/"
+        )
     }
 
     Notetype: {
@@ -32,6 +36,8 @@ module.exports = (callback) ->
       desc: String
       ordering: Number
       slug: SLUG_UNIQUE
+      setup: () ->
+
     }
 
     Note: {
@@ -47,6 +53,16 @@ module.exports = (callback) ->
         this.index({ courseId: 1, notetypeId: 1, name: 1 }, { unique: true })
 
         this.index({ courseId: 1, notetypeId: 1})
+
+        this.virtual('url').get(() ->
+          course = u.find(m.cache.courses, (c) =>
+            u.isEqual(c._id, this.courseId)
+          )
+          notetype = u.find(m.cache.notetypes, (n) =>
+            u.isEqual(n._id, this.notetypeId)
+          )
+          return "/#{course.slug}/#{notetype.slug}/#{this.slug}/"
+        )
     }
 
   }
@@ -69,10 +85,10 @@ module.exports = (callback) ->
     # 
     # Automatic slug generation.
     # 
-    # If schema has a slug field, set up a pre-save hook to check for existence of slug.
+    # If schema has a "slug" field, set up a pre-save hook to check for existence of slug.
     # When no slug is set at save time, we automatically generate one.
     # 
-    if (fields.slug)
+    if (fields['slug'])
       schema.pre('save', (next) ->
         doc = this
 
@@ -132,22 +148,28 @@ module.exports = (callback) ->
   # Cache commonly accessed data
   # 
   global.m.cache = {}
-  async.waterfall([
-    (cb) ->
+  async.parallel({
+    courses: (cb) ->
       m.Course
         .find()
         .populate('notetypes')
         .exec(cb)
+
+    notetypes: (cb) ->
+      m.Notetype.find(cb)
     
-  ],
-  (err, result) ->
+  },
+  (err, results) ->
     if (err) then error(err); callback(err); return
 
-    courses = {}
-    u.each(result, (course) ->
-      courses[course.slug] = course
+    global.m.cache.courses = {}
+    u.each(results.courses, (course) ->
+      global.m.cache.courses[course.slug] = course
     )
-    global.m.cache.courses = courses
+    global.m.cache.notetypes = {}
+    u.each(results.notetypes, (notetype) ->
+      global.m.cache.notetypes[notetype.slug] = notetype
+    )
 
     callback(null)
   )

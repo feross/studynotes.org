@@ -76,7 +76,10 @@ other = {
     shortname: ''
     hero: {
       title: 'Study Notes'
-      desc: 'Fast, free study tools for AP* students.'
+      # desc: 'Fast, free study tools for AP* students.'
+      desc: 'The best AP* study guides.'
+      # desc: 'Study tools for smart students.'
+      # desc: 'The secret to getting a 5 on the AP* exam.'
     }
   }
 
@@ -126,12 +129,12 @@ other = {
         render404(res, "No course with slug #{ p.courseSlug }")
         return
 
-      notetype = u.where(course.notetypes, { slug: p.notetypeSlug })
-      if (!notetype.length)
+      notetype = u.find(course.notetypes, (n) ->
+        n.slug == p.notetypeSlug
+      )
+      if (!notetype)
         render404(res, "Course has no notetype with slug #{ p.notetypeSlug }")
         return
-      
-      notetype = notetype[0]
       
       m.Note
       .find({ courseId: course._id, notetypeId: notetype._id })
@@ -146,7 +149,7 @@ other = {
         render(res, 'notetype', {
           amazon: amazons[course.slug]
           breadcrumbs: [
-            { name: course.name, url: '/' + course.slug + '/' }
+            { name: course.name, url: course.url }
           ]
           course: course
           notetype: notetype
@@ -168,13 +171,13 @@ other = {
         render404(res, "No course with slug #{ p.courseSlug }")
         return
 
-      notetype = u.where(course.notetypes, { slug: p.notetypeSlug })
-      if (!notetype.length)
+      notetype = u.find(course.notetypes, (n) ->
+        n.slug == p.notetypeSlug
+      )
+      if (!notetype)
         render404(res, 'Course has no notetype with slug ' + p.notetypeSlug)
         return
-      
-      notetype = notetype[0]
-     
+           
       m.Note
       .find({ courseId: course._id, notetypeId: notetype._id })
       .sort('ordering')
@@ -185,24 +188,24 @@ other = {
           render404(res, 'Unable to load notes')
           return
 
-        note = u.find(notes, (note) ->
-          return note.slug == p.noteSlug
+        note = u.find(notes, (n) ->
+          n.slug == p.noteSlug
         )
 
         noteOrdering = note.ordering
 
         noteNext = u.find(notes, (note) ->
-          return note.ordering == noteOrdering + 1
+          note.ordering == noteOrdering + 1
         )
 
         notePrev = u.find(notes, (note) ->
-          return note.ordering == noteOrdering - 1
+          note.ordering == noteOrdering - 1
         )
 
         render(res, 'note', {
           amazon: amazons[course.slug]
           breadcrumbs: [
-            { name: course.name, url: '/' + course.slug + '/' }
+            { name: course.name, url: course.url }
             { name: notetype.name, url: '/' + course.slug + '/' + notetype.slug + '/' }
           ],
           course: course

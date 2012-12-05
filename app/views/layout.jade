@@ -21,7 +21,7 @@ body(class='#{locals.cls}')
     ul.browse
       each course in locals.courses
         li
-          h2: a(href='/#{course.slug}/')= course.name
+          h2: a(href='#{course.url}')= course.name
           ul
             each notetype in course.notetypes
               li: a(href='/#{course.slug}/#{notetype.slug}/')= notetype.name

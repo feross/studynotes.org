@@ -40,7 +40,7 @@ $(->
   # Browse menu dropdown
   $('.header .courses').on('click', (e) ->
     # Only handle left-clicks
-    if (event.which != 1)
+    if (e.which != 1)
       return
 
     e.preventDefault()

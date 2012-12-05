@@ -5,11 +5,16 @@ block content
   h1= locals.note.name
   | !{note.body}
 
-  p.noteNav
+  .noteNav.clearfix
     if notePrev
-      a.prev(href='#{notePrev.slug}') Previous: #{notePrev.name}
+      a.prev(href='#{notePrev.url}')
+        .prevArrow &#9664;
+        span Previous: #{notePrev.name}
+
     if noteNext
-      a.next(href='#{noteNext.slug}') Next: #{noteNext.name}
+      a.next(href='#{noteNext.url}')
+        span Next: #{noteNext.name}
+        .nextArrow &#9654;
 
   include ads/amazon
 

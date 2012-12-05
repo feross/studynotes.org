@@ -14,7 +14,10 @@ $bodyFont = "proxima-nova", Helvetica, sans-serif
 //
 
 $red = #E0162B
-$blue = #41B7D8
+
+$lightBlue = #41B7D8
+$blue = #08C
+$darkBlue = #005580
 
 $lightestGray = #EEE
 $lighterGray = #CCC
@@ -59,6 +62,7 @@ a
     text-decoration: none
 
   {$focus}
+    color: $darkBlue
     text-decoration: underline
 
 h1, h2, h3, h4, h5
@@ -390,13 +394,29 @@ $contentPaddingTop = 50px
 
 .noteNav
   font-weight: bold
+  margin-top: 30px
 
-  .prev:before
-    content: "\25c0"
+  .prev, .next
+    width: 50%
+    span
+      display: inline-block
+      ellipsis()
+      width: 100%
+
+  .prev, .prev span
+    float: left
+
+  .next, .next span
+    float: right
+    text-align: right
+
+  .prevArrow
+    float: left
     font-size: 1.2rem    
     padding-right: 5px
-  .next:after
-    content: "\25b6"
+
+  .nextArrow
+    float: right
     font-size: 1.2rem
     padding-left: 5px
 
