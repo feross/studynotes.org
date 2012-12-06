@@ -77,6 +77,46 @@ require('./models')(->
   http.createServer(app).listen(app.get('port'), ->
     console.log("Express server listening on port #{ app.get('port') }")
   )
+
+  # import view data from google analytics to mongo
+  # csv = require('csv')
+  # fs = require('fs')
+
+  # fs.createReadStream(__dirname + '/pages.csv').pipe(csv()).on('record', (data, index) ->
+  #   if (index == 0)
+  #     return
+  #   if (index > 250)
+  #     return
+
+  #   url = data[0]
+  #   pageviews = parseInt(data[1].replace(',', ''))
+
+  #   matches = url.match(/\/([-a-zA-Z0-9]+)\/([-a-zA-Z0-9]+)\/([-a-zA-Z0-9]+)\//)
+    
+  #   if !matches
+  #     return
+
+  #   courseSlug = matches[1]
+  #   notetypeSlug = matches[2]
+  #   noteSlug = matches[3]
+
+  #   course = m.cache.courses[courseSlug]
+
+  #   if !course then return
+
+  #   notetype = u.find(course.notetypes, (n) ->
+  #     n.slug == notetypeSlug
+  #   )
+
+  #   if !notetype then return
+    
+  #   m.Note.update({ courseId: course._id, notetypeId: notetype._id, slug: noteSlug }, {$set: {hits: pageviews}}, () ->
+  #     log("updated #{noteSlug} to #{pageviews}")
+  #   )
+
+  #   # log(data)
+  # )
+
 )
 
 # Ultimate fallback to catch and log exceptions so the node process doesn't crash
