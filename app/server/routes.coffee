@@ -202,6 +202,8 @@ other = {
           note.ordering == noteOrdering - 1
         )
 
+        note.update({ $inc: { hits: 1 } }, { upsert: true }, () ->)
+
         render(res, 'note', {
           amazon: amazons[course.slug]
           breadcrumbs: [

@@ -7,14 +7,10 @@ block content
 
   .noteNav.clearfix
     if notePrev
-      a.prev(href='#{notePrev.url}')
-        .prevArrow &#9664;
-        span Previous: #{notePrev.name}
+      a.prev(href='#{notePrev.url}') Previous: #{notePrev.name}
 
     if noteNext
-      a.next(href='#{noteNext.url}')
-        span Next: #{noteNext.name}
-        .nextArrow &#9654;
+      a.next(href='#{noteNext.url}') Next: #{noteNext.name}
 
   include ads/amazon
 

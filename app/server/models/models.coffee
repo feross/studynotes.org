@@ -2,10 +2,54 @@ module.exports = (callback) ->
 
   mongoose = require('mongoose')
   Schema = mongoose.Schema
-  plugin = require('./plugin')
+
+  #
+  # Mongoose plugins
+  #
+  plugin = {
+    modifyDate: (schema, options) ->
+      schema.add({ modifyDate: Date })
+      
+      schema.pre('save', (next) ->
+        this.modifyDate = new Date
+        next()
+      )
+      
+      if (options && options.index)
+        schema.path('modifyDate').index(options.index)
+
+
+    createDate: (schema, options) ->
+      schema.add({ createDate: Date })
+      
+      schema.pre('save', (next) ->
+        if (!this.createDate)
+          this.createDate = new Date
+        
+        next()
+      )
+      
+      if (options && options.index)
+        schema.path('createDate').index(options.index)
+
+
+    hits: (schema, options) ->
+      schema.add({ hits: { type: Number, default: 0 } })
+
+      schema.pre('save', (next) ->
+        if (!this.hits)
+          this.hits = 0
+
+        next()
+      )
+
+      if (options && options.index)
+        schema.path('hits').index(options.index)
+
+  }
 
   # 
-  # Fields that are re-used many times.
+  # Fields that are re-used many times
   # 
   SLUG = {
     type: String
@@ -25,6 +69,7 @@ module.exports = (callback) ->
       notetypes: [{ type: Schema.Types.ObjectId, ref: 'Notetype'}]
       slug: SLUG_UNIQUE
       image: String
+
       setup: () ->
         this.virtual('url').get(() ->
           "/#{this.slug}/"
@@ -47,6 +92,7 @@ module.exports = (callback) ->
       notetypeId: { type: Schema.Types.ObjectId, ref: 'Notetype', required: true }
       ordering: Number
       slug: SLUG
+      hits: Number
       setup: () ->
         # No duplicate names or slugs for a course+notetype.
         this.index({ courseId: 1, notetypeId: 1, slug: 1 }, { unique: true })
@@ -56,10 +102,10 @@ module.exports = (callback) ->
 
         this.virtual('url').get(() ->
           course = u.find(m.cache.courses, (c) =>
-            u.isEqual(c._id, this.courseId)
+            c.id == this.courseId.toString()
           )
           notetype = u.find(m.cache.notetypes, (n) =>
-            u.isEqual(n._id, this.notetypeId)
+            n.id == this.notetypeId.toString()
           )
           return "/#{course.slug}/#{notetype.slug}/#{this.slug}/"
         )
