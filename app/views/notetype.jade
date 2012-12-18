@@ -2,7 +2,8 @@ extends layout
 
 block content
   include includes/breadcrumbs
-  h1= locals.notetype.name
+  h1= notetype.name
+  p!= notetype.desc || notetype.shortDesc
   p
     ul.listing
       each note in locals.notes

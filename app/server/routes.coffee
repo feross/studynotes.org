@@ -106,10 +106,11 @@ other = {
       render(res, 'course', {
         amazon: amazons[course.slug]
         breadcrumbs: []
+        cls: "course #{course.slug}"
         course: course
         hero: {
           title: course.name
-          desc: 'Desc here.'
+          desc: 'Online Prep and Review'
           mini: true
         }
         notetypes: course.notetypes

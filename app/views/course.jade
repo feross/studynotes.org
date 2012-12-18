@@ -2,10 +2,12 @@ extends layout
 
 block content
   include includes/breadcrumbs
-  h1= locals.course.name
-  p
-    ul
-      each notetype in locals.notetypes
-        li: a(href='#{notetype.slug}/')= notetype.name
+
+  .notetypes.clearfix
+    each notetype in locals.notetypes
+      div.notetype
+        h2(class='#{notetype.slug}')
+          a(href='#{notetype.url}')= notetype.name
+          span.desc!= notetype.shortDesc
 
   include ads/amazon

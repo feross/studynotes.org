@@ -1,7 +1,7 @@
 module.exports = {
   
   db: {
-    host: if global.app.get('env') == 'development' then 'localhost' else '192.168.176.154'
+    host: if global.app.get('env') == 'development' then 'localhost' else 'athena.feross.net'
     port: '27017'
     database: 'studynotes'
   }

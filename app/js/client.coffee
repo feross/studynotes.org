@@ -1,14 +1,5 @@
 #= require lib/jquery.ba-throttle-debounce
-
-# Logging functions for convenience
-window.log = ->
-  args = Array.prototype.slice.call(arguments, 0)
-  console.log.apply(console, args)
-
-window.error = ->
-  args = Array.prototype.slice.call(arguments, 0)
-  args.unshift('ERROR:')
-  console.error.apply(console, args)
+#= require util
 
 # Set search bar's width so it fills the header correctly.
 # Need to ensure this gets called after Typekit fonts are loaded.
@@ -31,10 +22,12 @@ updateHeaderSearchWidth = ->
   if ($('html').hasClass('wf-loading'))
     setTimeout(updateHeaderSearchWidth, 100)
 
+# Show or hide the browse menu
 toggleBrowseMenu = (_switch) ->
   $('.browse').toggleClass('on', _switch)
   $('.header .courses').toggleClass('on', _switch)
 
+# On DOM ready
 $(->
 
   # Browse menu dropdown
@@ -73,8 +66,13 @@ $(->
   ))
 
   updateHeaderSearchWidth()
+
+  # Page-specific JS
+  # if ($('body').hasClass('course'))
+
 )
 
+# On DOM load
 $(window).load(->
 
 )

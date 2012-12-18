@@ -1,6 +1,6 @@
-module.exports = (callback) ->
-  mongoose = require('mongoose')
+mongoose = require('mongoose')
 
+module.exports = (callback) ->
   mongoose.set('debug', app.get('env') == 'development')
 
   async.series([

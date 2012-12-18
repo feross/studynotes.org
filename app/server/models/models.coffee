@@ -1,8 +1,7 @@
+mongoose = require('mongoose')
+Schema = mongoose.Schema
+
 module.exports = (callback) ->
-
-  mongoose = require('mongoose')
-  Schema = mongoose.Schema
-
   #
   # Mongoose plugins
   #
@@ -66,7 +65,6 @@ module.exports = (callback) ->
     Course: {
       name: { type: String, required: true, unique: true }
       desc: String
-      notetypes: [{ type: Schema.Types.ObjectId, ref: 'Notetype'}]
       slug: SLUG_UNIQUE
       image: String
 
@@ -74,15 +72,29 @@ module.exports = (callback) ->
         this.virtual('url').get(() ->
           "/#{this.slug}/"
         )
+        this.methods.getNotetypes = (cb) ->
+          this.model('Notetype').find({courseId: this.id}).sort('ordering').exec(cb)
+
     }
 
     Notetype: {
-      name: { type: String, required: true, unique: true }
+      name: { type: String, required: true }
+      shortDesc: type: String
       desc: String
+      courseId: { type: Schema.Types.ObjectId, ref: 'Course', required: true }
       ordering: Number
-      slug: SLUG_UNIQUE
-      setup: () ->
+      slug: SLUG
 
+      setup: () ->
+        this.index({ courseId: 1, slug: 1 }, { unique: true })
+        this.index({ courseId: 1 })
+
+        this.virtual('url').get(() ->
+          course = u.find(m.cache.courses, (c) =>
+            c.id == this.courseId.toString()
+          )
+          return "/#{course.slug}/#{this.slug}/"
+        )
     }
 
     Note: {
@@ -92,7 +104,7 @@ module.exports = (callback) ->
       notetypeId: { type: Schema.Types.ObjectId, ref: 'Notetype', required: true }
       ordering: Number
       slug: SLUG
-      hits: Number
+
       setup: () ->
         # No duplicate names or slugs for a course+notetype.
         this.index({ courseId: 1, notetypeId: 1, slug: 1 }, { unique: true })
@@ -104,7 +116,7 @@ module.exports = (callback) ->
           course = u.find(m.cache.courses, (c) =>
             c.id == this.courseId.toString()
           )
-          notetype = u.find(m.cache.notetypes, (n) =>
+          notetype = u.find(course.notetypes, (n) =>
             n.id == this.notetypeId.toString()
           )
           return "/#{course.slug}/#{notetype.slug}/#{this.slug}/"
@@ -196,10 +208,7 @@ module.exports = (callback) ->
   global.m.cache = {}
   async.parallel({
     courses: (cb) ->
-      m.Course
-        .find()
-        .populate('notetypes')
-        .exec(cb)
+      m.Course.find(cb)
 
     notetypes: (cb) ->
       m.Notetype.find(cb)
@@ -209,15 +218,19 @@ module.exports = (callback) ->
     if (err) then error(err); callback(err); return
 
     global.m.cache.courses = {}
-    u.each(results.courses, (course) ->
+    async.forEachSeries(results.courses, (course, cb) ->
       global.m.cache.courses[course.slug] = course
-    )
-    global.m.cache.notetypes = {}
-    u.each(results.notetypes, (notetype) ->
-      global.m.cache.notetypes[notetype.slug] = notetype
-    )
 
-    callback(null)
+      course.getNotetypes((err, notetypes) ->
+        if (err) then error(err); callback(err); return
+        course.notetypes = notetypes
+        cb(null)
+      )
+
+    , (err) ->
+
+      callback(null)
+    )
   )
 
 
