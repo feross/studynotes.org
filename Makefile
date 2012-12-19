@@ -3,7 +3,7 @@ app_dir = /home/feross/www/studynotes.org
 # Trigger a deploy
 # (from remote CI server)
 trigger:
-	git pull
+	cd $(app_dir); git pull
 	ssh feross@future.feross.net -p 44444 make -f /home/feross/www/studynotes.org/Makefile deploy
 
 # Update code and restart server
