@@ -63,10 +63,12 @@ else if (app.get('env') == 'production')
 # Serve client coffeescript and stylus files
 app.use(assets({
   src: path.join(__dirname, '..')
-  buildDir: 'app/public' # in production, assets will be built here
+  build: true
+  buildDir: 'builtAssets' # in production, assets will compiled and saved here
 }))
 
-app.use(express.static(path.join(__dirname, '..', 'public')))
+# TODO: static serving only in dev
+app.use(express.static(path.join(__dirname, '..', '..', 'public')))
 app.use(slashes())
 app.use(app.router)
 
