@@ -1,3 +1,6 @@
+# Ignore compiled css and js assets
+builtAssets/
+
 # Numerous always-ignore extensions
 *.diff
 *.err

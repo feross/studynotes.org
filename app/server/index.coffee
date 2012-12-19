@@ -41,6 +41,7 @@ PORT = if process.argv.length > 2 then process.argv[2] else 4000
 app.set('port', PORT)
 app.set('views', path.join(__dirname, '../views'))
 app.set('view engine', 'jade')
+app.disable('x-powered-by')
 app.use(express.favicon())
 app.use(express.bodyParser()) # TODO: what does this do?
 app.use(express.methodOverride()) # TODO: what does this do?
@@ -63,7 +64,6 @@ else if (app.get('env') == 'production')
 # Serve client coffeescript and stylus files
 app.use(assets({
   src: path.join(__dirname, '..')
-  build: true
   buildDir: 'builtAssets' # in production, assets will compiled and saved here
 }))
 
