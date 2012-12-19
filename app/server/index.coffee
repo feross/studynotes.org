@@ -34,7 +34,8 @@ global.app = express()
 
 console.log("App running in '#{ app.get('env') }' mode.")
 
-app.set('port', process.env.PORT || 4000)
+PORT = if process.argv.length > 2 then process.argv[2] else 4000
+app.set('port', PORT)
 app.set('views', path.join(__dirname, '../views'))
 app.set('view engine', 'jade')
 app.use(express.favicon())
