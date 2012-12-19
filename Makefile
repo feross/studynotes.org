@@ -2,8 +2,8 @@ app_dir = /home/feross/www/studynotes.org
 
 # Trigger a deploy
 # (from remote CI server)
+# Note: When updating this, manually "git pull" on the CI server so it will see the newest Makefile
 trigger:
-	cd $(app_dir); git pull
 	ssh feross@future.feross.net -p 44444 make -f /home/feross/www/studynotes.org/Makefile deploy
 
 # Update code and restart server
