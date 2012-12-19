@@ -20,7 +20,7 @@ os = require('os')
 # Make all globals accessible from command line
 module.exports = global
 
-numCPUs = os.cpus().length
+numCPUs = 1 #os.cpus().length
 if (cluster.isMaster)
   log("Spawning #{numCPUs} worker processes...")
   # Fork workers.
@@ -47,8 +47,8 @@ else
 
   app.set('views', path.join(__dirname, '../views'))
   app.set('view engine', 'jade')
-  # if (app.get('env') == 'production')
-  #   app.enable('view cache')
+  if (app.get('env') == 'production')
+    app.enable('view cache')
 
   app.disable('x-powered-by')
   app.enable('trust proxy') # express is behind nginx reverse proxy
