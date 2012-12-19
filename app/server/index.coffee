@@ -47,20 +47,6 @@ app.use(express.methodOverride()) # TODO: what does this do?
 app.use(express.cookieParser('your secret here')) # TODO
 app.use(express.session()) # TODO: what does this do?
 
-# Serve client coffeescript and stylus files
-app.use(assets({
-  src: path.join(__dirname, '..')
-  buildDir: false
-}))
-
-app.use(express.static(path.join(__dirname, '..', 'public')))
-app.use(slashes())
-app.use(app.router)
-
-# Allow access to the current environment from Jade
-app.locals.env = app.get('env')
-
-
 if (app.get('env') == 'development')
   # Pretty html while developing
   app.locals.pretty = true
@@ -72,6 +58,21 @@ if (app.get('env') == 'development')
 
 else if (app.get('env') == 'production')
   app.use(express.logger('short'))
+
+
+# Serve client coffeescript and stylus files
+app.use(assets({
+  src: path.join(__dirname, '..')
+  buildDir: 'app/public' # in production, assets will be built here
+}))
+
+app.use(express.static(path.join(__dirname, '..', 'public')))
+app.use(slashes())
+app.use(app.router)
+
+# Allow access to the current environment from Jade
+app.locals.env = app.get('env')
+
 
 # Load config after "app" is set up, since we access it there
 global.config = require('./config')
