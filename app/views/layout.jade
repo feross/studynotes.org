@@ -42,9 +42,11 @@ body(class='#{locals.cls}')
 
   if (locals.env == "development")
     != js('lib/jquery-1.8.2')
+    != js('lib/underscore-1.4.3')
 
   else
     != js('lib/jquery-1.8.2.min')
+    != js('lib/underscore-1.4.3.min')
 
   != js('client')
 

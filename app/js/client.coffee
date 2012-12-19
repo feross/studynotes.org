@@ -1,5 +1,6 @@
-#= require lib/jquery.ba-throttle-debounce
 #= require util
+
+window.u = _
 
 # Set search bar's width so it fills the header correctly.
 # Need to ensure this gets called after Typekit fonts are loaded.
@@ -52,7 +53,7 @@ $(->
   $window = $(window)
 
   # Close browse menu on page scroll
-  $(window).on('scroll', $.throttle(50, () ->
+  $(window).on('scroll', u.throttle(->
     toggleBrowseMenu(false)
 
     # Toggle header text color
@@ -63,7 +64,7 @@ $(->
         $html.removeClass(className)
       else if (!$html.hasClass(className) && windowScrollTop >= heroBottom)
         $html.addClass('solidHeader')
-  ))
+  , 100))
 
   updateHeaderSearchWidth()
 
