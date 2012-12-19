@@ -20,11 +20,11 @@ os = require('os')
 # Make all globals accessible from command line
 module.exports = global
 
-numCPUs = os.cpus().length
+numCPUs = os.cpus().length * 2
 if (cluster.isMaster)
   log("Spawning #{numCPUs} worker processes...")
   # Fork workers.
-  cluster.fork() for i in [0...numCPUs]
+  cluster.fork() for i in [1..numCPUs]
 
   cluster.on('exit', (worker, code, signal) ->
     log('worker ' + worker.process.pid + ' died')
