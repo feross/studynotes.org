@@ -9,5 +9,6 @@ trigger:
 # Update code and restart server
 # (from app server)
 deploy:
+	cd $(app_dir); rm -rf builtAssets
 	cd $(app_dir); git pull
 	sudo supervisorctl restart studynotes:
