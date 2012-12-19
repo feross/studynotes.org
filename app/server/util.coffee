@@ -1,3 +1,17 @@
+cluster = require('cluster')
+
+# Logging functions for convenience
+global.log = ->
+  args = Array.prototype.slice.call(arguments, 0)
+  args.unshift("[#{cluster.worker.id}]") if cluster.isWorker
+  console.log.apply(console.log, args)
+
+global.error = ->
+  args = Array.prototype.slice.call(arguments, 0)
+  args.unshift("[#{cluster.worker.id}]") if cluster.isWorker
+  args.unshift('ERROR:')
+  console.error.apply(console.error, args)
+
 module.exports = {
 
   slugify: (v) ->

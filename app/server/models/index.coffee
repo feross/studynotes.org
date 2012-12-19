@@ -5,7 +5,7 @@ module.exports = (callback) ->
 
   async.series([
     (cb) ->
-      global.db = mongoose.createConnection("mongodb://#{ config.db.user }:#{ config.db.pass }@#{ config.db.host }:#{ config.db.port }/#{ config.db.database }")
+      global.db = mongoose.createConnection("mongodb://#{ config.db.user }:#{ config.db.pass }@#{ config.db.host }:#{ config.db.port }/#{ config.db.database }", { server: { poolSize: 20 }})
 
       global.db.on('error', (err) ->
         cb(err)
