@@ -32,14 +32,16 @@ module.exports = global
 # TODO: figure out what all these options actually do!
 global.app = express()
 
-console.log("App running in '#{ app.get('env') }' mode.")
+log('============')
+log('SERVER START')
+log('============')
+log("App running in '#{ app.get('env') }' mode.")
 
 PORT = if process.argv.length > 2 then process.argv[2] else 4000
 app.set('port', PORT)
 app.set('views', path.join(__dirname, '../views'))
 app.set('view engine', 'jade')
 app.use(express.favicon())
-app.use(express.logger('dev')) # TODO: what does this do?
 app.use(express.bodyParser()) # TODO: what does this do?
 app.use(express.methodOverride()) # TODO: what does this do?
 app.use(express.cookieParser('your secret here')) # TODO
@@ -65,8 +67,11 @@ if (app.get('env') == 'development')
 
   # SSH tunnel to "athena" so we can access mongo database while developing locally
   # tunnel = require('child_process').spawn("ssh", ['-L', '27017:localhost:27017', '-N', 'feross@athena'])
-
+  app.use(express.logger('dev')) # concise output colored by response status
   app.use(express.errorHandler()) # TODO: what is this?
+
+else if (app.get('env') == 'production')
+  app.use(express.logger('short'))
 
 # Load config after "app" is set up, since we access it there
 global.config = require('./config')
