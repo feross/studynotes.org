@@ -67,8 +67,10 @@ app.use(assets({
   buildDir: 'builtAssets' # in production, assets will compiled and saved here
 }))
 
-# TODO: static serving only in dev
-app.use(express.static(path.join(__dirname, '..', '..', 'public')))
+# Serve static files from Node only during development
+if (app.get('env') == 'development')
+  app.use(express.static(path.join(__dirname, '..', '..', 'public')))
+
 app.use(slashes())
 app.use(app.router)
 
