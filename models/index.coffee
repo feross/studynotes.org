@@ -1,7 +1,7 @@
 mongoose = require('mongoose')
 
 module.exports = (callback) ->
-  mongoose.set('debug', app.get('env') == 'development')
+  mongoose.set('debug', !PRODUCTION)
 
   async.series([
     (cb) ->

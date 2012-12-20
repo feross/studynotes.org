@@ -12,7 +12,7 @@ amazons = require('./amazons')
 # 
 render = (res, templateName, locals) ->
   res.render(templateName, u.extend({
-    ads: true,
+    ads: PRODUCTION,
     cls: templateName,
     config: config,
     courses: m.cache.courses,

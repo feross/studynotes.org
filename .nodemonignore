@@ -1,0 +1,5 @@
+# Don't restart node when files in these folders change:
+
+builtAssets/
+*.md
+*.txt
