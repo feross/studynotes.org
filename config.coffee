@@ -6,6 +6,6 @@ module.exports = {
     database: 'studynotes'
   }
 
-  siteurl: 'http://apstudynotes.org'
+  siteurl: 'http://www.apstudynotes.org'
 
 }
