@@ -193,6 +193,10 @@ other = {
           n.slug == p.noteSlug
         )
 
+        if (!note)
+          render404(res, 'Course+notetype have no note with slug ' + p.noteSlug)
+          return
+
         noteOrdering = note.ordering
 
         noteNext = u.find(notes, (note) ->
