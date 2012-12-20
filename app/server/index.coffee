@@ -20,7 +20,7 @@ os = require('os')
 # Make all globals accessible from command line
 module.exports = global
 
-numCPUs = os.cpus().length * 2
+numCPUs = os.cpus().length
 if (cluster.isMaster)
   log("Spawning #{numCPUs} worker processes...")
   # Fork workers.
@@ -66,7 +66,7 @@ else
     # SSH tunnel to "athena" so we can access mongo database while developing locally
     # tunnel = require('child_process').spawn("ssh", ['-L', '27017:localhost:27017', '-N', 'feross@athena'])
     app.use(express.logger('dev')) # concise output colored by response status
-    app.use(express.errorHandler()) # TODO: what is this?
+    app.use(express.errorHandler({showStack: true, dumpExceptions: true})) # TODO: what is this?
 
   else if (app.get('env') == 'production')
     app.use(express.logger('short'))

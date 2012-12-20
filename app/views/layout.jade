@@ -41,14 +41,14 @@ body(class='#{locals.cls}')
   //- TODO: concat all scripts together into one.
 
   if (locals.env == "development")
-    != js('lib/jquery-1.8.2')
-    != js('lib/underscore-1.4.3')
+    script(src='/js/lib/jquery-1.8.2.js')
+    script(src='/js/lib/underscore-1.4.3.js')
 
   else
-    != js('lib/jquery-1.8.2.min')
-    != js('lib/underscore-1.4.3.min')
+    script(src='/js/lib/jquery-1.8.2.min.js')
+    script(src='/js/lib/underscore-1.4.3.min.js')
 
-  != js('client')
+  script(src='/js/client.js')
 
   if (locals.env == "development")
     | <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
