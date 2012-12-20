@@ -8,15 +8,13 @@
   "dependencies": {
     "express": "*",
     "jade": "*",
-    "coffee-script": "*",
     "underscore": "*",
     "stylus": "*",
     "nib": "*",
     "mongoose": "*",
     "async": "*",
     "underscore.string": "*",
-    "connect-slashes": "*",
-    "connect-assets": "*"
+    "connect-slashes": "*"
   },
   "devDependencies": {}
 }

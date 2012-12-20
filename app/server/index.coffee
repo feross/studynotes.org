@@ -15,6 +15,7 @@ slashes = require('connect-slashes')
 assets = require('connect-assets')
 cluster = require('cluster')
 os = require('os')
+child_process = require('child_process')
 
 
 # Make all globals accessible from command line
@@ -22,13 +23,23 @@ module.exports = global
 
 numCPUs = os.cpus().length
 if (cluster.isMaster)
-  log("Spawning #{numCPUs} worker processes...")
-  # Fork workers.
-  cluster.fork() for i in [1..numCPUs]
+  # build stylus files
+  buildStylus = 'mkdir -p builtAssets; ./node_modules/stylus/bin/stylus stylus/main.styl --use ./node_modules/nib/lib/nib --compress --out builtAssets'
+  child_process.exec(buildStylus, {
+    cwd: path.join(__dirname, '..', '..') }
+    , (err, stdout, stderr) ->
+      if (err) then error(err); return
 
-  cluster.on('exit', (worker, code, signal) ->
-    log('worker ' + worker.process.pid + ' died')
-  )
+      log("Spawning #{numCPUs} worker processes...")
+      # Fork workers.
+      cluster.fork() for i in [1..numCPUs]
+
+      cluster.on('exit', (worker, code, signal) ->
+        log('worker ' + worker.process.pid + ' died')
+      )
+    )
+
+
 else
   # Workers can share any TCP connection
 
@@ -70,12 +81,6 @@ else
 
   else if (app.get('env') == 'production')
     app.use(express.logger('short'))
-
-  # Serve client coffeescript and stylus files
-  app.use(assets({
-    src: path.join(__dirname, '..')
-    buildDir: 'builtAssets' # in production, assets will compiled and saved here
-  }))
 
   # Serve static files from Node only during development
   if (app.get('env') == 'development')
