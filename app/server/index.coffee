@@ -24,12 +24,13 @@ module.exports = global
 numCPUs = os.cpus().length
 if (cluster.isMaster)
   # build stylus files
+  log('Compiling stylus...')
   buildStylus = 'mkdir -p builtAssets; ./node_modules/stylus/bin/stylus stylus/main.styl --use ./node_modules/nib/lib/nib --compress --out builtAssets'
   child_process.exec(buildStylus, {
     cwd: path.join(__dirname, '..', '..') }
     , (err, stdout, stderr) ->
       if (err) then error(err); return
-
+      log('Done.')
       log("Spawning #{numCPUs} worker processes...")
       # Fork workers.
       cluster.fork() for i in [1..numCPUs]
