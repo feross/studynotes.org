@@ -79,7 +79,7 @@ else
 
   # Serve static files from Node only during development
   if (app.get('env') == 'development')
-    app.use(express.static(path.join(__dirname, '..', '..', 'public')))
+    app.use(express.static(path.join(__dirname, '..', '..', 'static')))
 
   app.use(slashes())
   app.use(app.router)

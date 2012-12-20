@@ -62,9 +62,9 @@ $(function() {
     , $header = $('.header')
     , $window = $(window);
 
-  if ($hero.length) {
-    var heroBottom = $hero.offset().top + $hero.height() - $header.height();
-  }
+  var heroBottom = $hero.length
+    ? $hero.offset().top + $hero.height() - $header.height()
+    : undefined;
 
   // Close browse menu on page scroll
   $(window).on('scroll', u.throttle(function() {
