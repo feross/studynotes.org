@@ -25,5 +25,5 @@ ellipsis()
   text-overflow: ellipsis
   white-space: nowrap
 
-background-gradient-image(gradientOpacityStart, gradientOpacityEnd, imgSrc)
-  background-image: linear-gradient(top, rgba(0,0,0,gradientOpacityStart), rgba(0,0,0,gradientOpacityEnd)), url(s(imgSrc))
+hero-image(imgSrc, opacityStart = 0.2, opacityEnd = 0.1)
+  background-image: linear-gradient-image(100px top, rgba(0,0,0,opacityStart), rgba(0,0,0,opacityEnd)), imgSrc
