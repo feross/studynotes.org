@@ -2,10 +2,11 @@ extends layout
 
 block content
   include includes/breadcrumbs
-  h1= locals.note.name
+  h1= note.name
   | !{note.body}
 
   .noteNav.clearfix
+    p.center.gray You just finished studying <strong>#{note.name}</strong>. Keep studying!
     if notePrev
       a.prev(href='#{notePrev.url}') Previous: #{notePrev.name}
 
