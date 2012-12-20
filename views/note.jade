@@ -6,7 +6,7 @@ block content
   | !{note.body}
 
   .noteNav.clearfix
-    p.center.gray You just finished studying <strong>#{note.name}</strong>. Keep studying!
+    p.center.gray You just finished studying <strong>#{note.name}</strong> for <strong>#{course.name}</strong>. Keep studying!
     if notePrev
       a.prev(href='#{notePrev.url}') Previous: #{notePrev.name}
 
