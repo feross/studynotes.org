@@ -23,4 +23,5 @@ trigger:
 # (from app server)
 deploy:
 	cd $(app_dir); git pull
+	cd $(app_dir); npm install
 	sudo supervisorctl restart studynotes:
