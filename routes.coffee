@@ -28,7 +28,7 @@ render404 = (res, msg) ->
   if (msg) then error(msg) # don't return since we want to serve a 404 page
   
   res.status(404)
-  render(res, 'notfound', {
+  render(res, 'notFound', {
     err: msg
     ads: false
     meta: {
