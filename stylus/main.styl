@@ -110,7 +110,7 @@ ul.listing
 
 $headerHeight = 50px
 
-$headerBorder = 1px solid rgba(255, 255, 255, 0.3)
+$headerBorder = 1px solid rgba(255, 255, 255, 0.4)
 $solidHeaderBorder = 1px solid $lighterGray
 
 $headerBorderFocus = 3px solid #FFF
@@ -206,7 +206,7 @@ $logoWidth = 131px
       padding: 0
 
     html:not(.solidHeader) &
-      background-image: linear-gradient(top, rgba(255,255,255,0.1), rgba(255,255,255,0.15))
+      background-image: linear-gradient(top, rgba(255,255,255,0.2), rgba(255,255,255,0.25))
       box-shadow: inset 0 2px 2px rgba(0,0,0,0.5)
 
     .solidHeader &
@@ -313,11 +313,8 @@ $browseHeight = 450px
 //
 
 $heroHeight = $browseHeight + $headerHeight
-$heroMiniHeight = 250px + $headerHeight
+$heroMiniHeight = $heroHeight - 150px
 .hero
-  background-position: center center
-  background-repeat: no-repeat
-  background-size: cover
   height: $heroHeight
   left: 0
   position: fixed
@@ -325,13 +322,13 @@ $heroMiniHeight = 250px + $headerHeight
   width: 100%
 
   body.home &
-    hero-image: url('/images/hero/outdoor-ipad-books.jpg'), .4, .2
+    hero-image: '/images/hero/outdoor-ipad-books.jpg'
   body.course.english &
-    hero-image: url('/images/hero/english.jpg')
+    hero-image: '/images/hero/english.jpg'
   body.course.us-government &
-    hero-image: url('/images/hero/us-government.jpg')
+    hero-image: '/images/hero/us-government.jpg'
   body.course.us-history &
-    hero-image: url('/images/hero/us-history-2.jpg')
+    hero-image: '/images/hero/us-history-2.jpg'
 
   .text
     color: #FFF

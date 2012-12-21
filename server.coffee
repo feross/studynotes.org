@@ -46,10 +46,7 @@ else
   # Express application
   global.app = express()
 
-  log('============')
-  log('SERVER START')
-  log('============')
-  log("App running in '#{ app.get('env') }' mode.")
+  log("SERVER START in '#{ app.get('env') }' mode.")
 
   PORT = if process.argv.length > 2 then process.argv[2] else 4000
   app.set('port', PORT)

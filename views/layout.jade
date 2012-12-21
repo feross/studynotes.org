@@ -10,12 +10,92 @@ else
 <!--[if lt IE 9]> <html class="no-js ie8 #{ htmlClasses }" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js #{ htmlClasses }" lang="en"> <!--<![endif]-->
 
-head
-  include includes/head
+block head
+  
+  if (!locals.meta)
+    - locals.meta = {}
+
+  if (locals.meta.title && !locals.meta.forceTitle)
+    - var title = util.titleify(meta.title, config.siteTitle)
+  else if (!locals.meta.title)
+    - var title = util.titleify(config.siteTitle, 'Free AP Notes')
+  title= title
+  meta(property='og:title', content='#{title}')
+
+  meta(name='robots', content='index, follow')
+  
+  if (!locals.meta.description)
+    - meta.description = "100% Free AP Test Prep website that offers study material to high school students seeking to prepare for AP exams. Enterprising students use this website to learn AP class material, study for class quizzes and tests, and to brush up on course material before the big exam day."
+  meta(name='description', content='#{meta.description}')
+  meta(property='og:description', content='#{meta.description}')
+
+  if (!locals.meta.keywords)
+    - meta.keywords = "ap study notes, ap, advanced placement, ap notes, AP US History, ap u.s. history, apush, american pageant, the american pageant, AP US Government and Politics, ap government, ap gov, AP World History, AP English, AP Psychology, AP Economics, AP Calculus, AP Statistics, AP Physics, AP Biology, AP Environmental Science, AP Chemistry, course guides, chapter outlines, chapter notes, topic outlines, vocabulary words, key terms, important historical documents, ap practice quizzes, ap practice tests, ap cram sheets, course notes"  
+  meta(name='keywords', content='#{meta.keywords}')
+
+  meta(property='og:type', content='website')
+  //- meta(property='og:image', content='')
+  //- meta(property='article:author', content='')
+  meta(property='fb:admins', content='1347524341')
+  meta(property='fb:app_id', content='466476846723021')
+
+
+  if (locals.meta.url)
+    meta(property='og:url', content='#{locals.meta.url}')
+    link(rel='canonical', href='#{locals.meta.url}')
+
+
+  //- TODO: responsive layout
+  //- meta(name='viewport', content='width=device-width, initial-scale=1.0')
+
+  //- TODO: add rss support
+  //- <link rel="alternate" type="application/atom+xml" title="" href="" />
+
+  //- TODO: add search service?, see: https://github.com/opensearch.xml 
+  //- <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="StudyNotes" /> 
+
+
+  link(rel='stylesheet', href='/css/main.css')
+
+  //- TODO: add print stylesheet. should this be a media query in main file?
+  //- link(rel='stylesheet', href='/stylesheets/print.css', media='print')
+
+  script(src='/js/lib/modernizr.custom.js')
+
+  //- Async Typekit loader, modified to add "wf-active" class on successful load.
+  style
+    .wf-loading{
+      opacity: 0;
+    }
+    .wf-active, .wf-inactive {
+      opacity: 1 !important;
+      -moz-transition: 0.2s opacity ease-in;
+      -webkit-transition: 0.2s opacity ease-in;
+      transition: 0.2s opacity ease-in;
+    }
+  script
+    (function () {
+      var config = {
+        kitId: 'djj4afz',
+        scriptTimeout: 1000
+      };
+      var h=document.getElementsByTagName("html")[0];h.className+=" wf-loading";var t=setTimeout(function(){h.className=h.className.replace(/(\s|^)wf-loading(\s|$)/g," ");h.className+=" wf-inactive"},config.scriptTimeout);var tk=document.createElement("script"),d=false;tk.src='//use.typekit.net/'+config.kitId+'.js';tk.type="text/javascript";tk.async="true";tk.onload=tk.onreadystatechange=function(){var a=this.readyState;if(d||a&&a!="complete"&&a!="loaded")return;d=true;clearTimeout(t);try{Typekit.load(config);h.className+="wf-active"}catch(b){}};var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(tk,s)
+    })();
+
 
 body(class='#{locals.cls}')
 
-  include includes/header
+  header.header
+    block header
+      ul.left
+        li.home
+          a(href='/', title='Go to the front page of StudyNotes', class='home #{locals.cls == 'home' ? 'current' : ''}')= config.siteTitle
+      div.search.off
+        form(action='/search/', method='GET')
+          input(autocorrect='off', autocomplete='off', autofocus, name='q', placeholder='Search for AP Courses and Topics...', type='text', value='#{locals.search_term}')
+      ul.right
+        each item, cls in locals.topnav
+          li: a(href='#{item.url}', class='#{cls} #{locals.cls == cls ? 'current' : ''}')= item.shortname
 
   .browseWrapper
     ul.browse
