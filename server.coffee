@@ -27,7 +27,7 @@ numCPUs = if PRODUCTION then os.cpus().length else 1
 if (cluster.isMaster)
   # build stylus files
   log('Compiling stylus...')
-  buildStylus = 'rm -rf builtAssets; mkdir -p builtAssets/css; ./node_modules/stylus/bin/stylus stylus/main.styl --use ./node_modules/nib/lib/nib --compress --out builtAssets/css'
+  buildStylus = 'rm -rf static/css; mkdir -p static/css; ./node_modules/stylus/bin/stylus stylus/main.styl --use ./node_modules/nib/lib/nib --compress --out static/css'
   child_process.exec(buildStylus, {
     cwd: __dirname }
     , (err, stdout, stderr) ->
@@ -82,7 +82,6 @@ else
   
     # Serve static files from Node only during development
     app.use(express.static(path.join(__dirname, 'static')))
-    app.use(express.static(path.join(__dirname, 'builtAssets')))
 
 
   app.use(slashes())

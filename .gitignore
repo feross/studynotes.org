@@ -1,8 +1,8 @@
 # Ignore node_modules, use "npm shrinkwrap" instead
 node_modules/
 
-# Ignore compiled css and js assets
-builtAssets/
+# Ignore compiled css assets
+static/css/
 
 # Numerous always-ignore extensions
 *.diff
