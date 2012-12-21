@@ -75,7 +75,7 @@ other = {
     url: '/'
     shortname: ''
     hero: {
-      title: 'Study Notes'
+      title: 'AP Study Notes'
       # desc: 'Fast, free study tools for AP* students.'
       desc: 'The best AP* study guides.'
       # desc: 'Study tools for smart students.'
