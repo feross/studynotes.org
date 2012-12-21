@@ -50,6 +50,16 @@ body(class='#{locals.cls}')
   script(src='/js/client.js')
 
 
+  // User Voice Feedback Widget
+  script
+    var uvOptions = {};
+    (function() {
+      var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+      uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/U9x5qCiQoRKJsSMwO0htQ.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+    })();
+
+
   // Quantcast
   script
     var _qevents = _qevents || [];
@@ -70,6 +80,7 @@ body(class='#{locals.cls}')
     div(style='display:none;')
       img(src='//pixel.quantserve.com/pixel/p-69FZJwoXOxhpY.gif', height='1', width='1', alt='Quantcast', style='border: none;')
 
+
   // Google Analytics
   script
     var _gaq = _gaq || [];
@@ -82,6 +93,7 @@ body(class='#{locals.cls}')
       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
+  
   
   // StatCounter
   script
