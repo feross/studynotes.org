@@ -1,11 +1,5 @@
 block head
 
-
-  //- TODO: set these tags in nginx
-  //- TODO: verify with curl -I
-  //- meta(charset='utf-8')
-  //- meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
-
   if ( locals.title && !locals.forceTitle )
     - var title = util.titleify(title, "Study Notes");
   else ( !locals.title )
