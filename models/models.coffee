@@ -45,6 +45,11 @@ module.exports = (callback) ->
       if (options && options.index)
         schema.path('hits').index(options.index)
 
+    absoluteUrl: (schema, options) ->
+      if (schema.virtualpath('url'))
+        schema.virtual('absoluteUrl').get(() ->
+          "#{config.siteUrl}#{this.url}"
+        )
   }
 
   # 
@@ -188,14 +193,15 @@ module.exports = (callback) ->
         
       )
 
+    # run setup function (usually to set up multi-indices) if one exists
+    if (setup)
+      setup.call(schema)
+
     # Add date and hits fields to all schemas
     schema.plugin(plugin.modifyDate)
     schema.plugin(plugin.createDate)
     schema.plugin(plugin.hits)
-
-    # run setup function (usually to set up multi-indices) if one exists
-    if (setup)
-      setup.call(schema)
+    schema.plugin(plugin.absoluteUrl)
 
     models[name] = db.model(name, schema)
   )

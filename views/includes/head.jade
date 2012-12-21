@@ -1,34 +1,37 @@
 block head
-
-  if ( locals.title && !locals.forceTitle )
-    - var title = util.titleify(title, "Study Notes");
-  else ( !locals.title )
-    - var title = "Study Notes";
-  title= locals.title
-  meta(property='og:title', content='#{locals.title}')
   
-  //- TODO: SEO
-  //- meta(name='description', content='TODO')
-  //- meta(property='og:description' content='')
-  //- meta(name='keywords', content='TODO')
+  if (!locals.meta)
+    - locals.meta = {}
 
-  //- TODO: Add open graph tags
-  //- <meta property="og:type" content="article" />
-  //- <meta property="og:image" content="" />
-  //- <meta property="article:author" content="http://feross.org/about/" />
-  //- <meta property="fb:admins" content="1347524341" />
-  //- <meta property="fb:app_id" content="" />
+  if (locals.meta.title && !locals.meta.forceTitle)
+    - var title = util.titleify(meta.title, config.siteTitle)
+  else if (!locals.meta.title)
+    - var title = util.titleify(config.siteTitle, 'Free AP Notes')
+  title= title
+  meta(property='og:title', content='#{title}')
 
-  //- TODO: run facebook lint tool
+  meta(name='robots', content='index, follow')
+  
+  if (!locals.meta.description)
+    - meta.description = "100% Free AP Test Prep website that offers study material to high school students seeking to prepare for AP exams. Enterprising students use this website to learn AP class material, study for class quizzes and tests, and to brush up on course material before the big exam day."
+  meta(name='description', content='#{meta.description}')
+  meta(property='og:description', content='#{meta.description}')
 
-  //- TODO: look at art.sy <head> for good ideas
+  if (!locals.meta.keywords)
+    - meta.keywords = "ap study notes, ap, advanced placement, ap notes, AP US History, ap u.s. history, apush, american pageant, the american pageant, AP US Government and Politics, ap government, ap gov, AP World History, AP English, AP Psychology, AP Economics, AP Calculus, AP Statistics, AP Physics, AP Biology, AP Environmental Science, AP Chemistry, course guides, chapter outlines, chapter notes, topic outlines, vocabulary words, key terms, important historical documents, ap practice quizzes, ap practice tests, ap cram sheets, course notes"  
+  meta(name='keywords', content='#{meta.keywords}')
 
-  //- TODO: SEO
-  //- <link rel="canonical" href="TODO" /> 
-  //- <meta property="og:url" content="" />
+  meta(property='og:type', content='website')
+  //- meta(property='og:image', content='')
+  //- meta(property='article:author', content='')
+  meta(property='fb:admins', content='1347524341')
+  meta(property='fb:app_id', content='466476846723021')
 
-  //- <link rel="prev" href="TODO" /> 
-  //- <link rel="next" href="TODO" /> 
+
+  if (locals.meta.url)
+    meta(property='og:url', content='#{locals.meta.url}')
+    link(rel='canonical', href='#{locals.meta.url}')
+
 
   //- TODO: responsive layout
   //- meta(name='viewport', content='width=device-width, initial-scale=1.0')
@@ -38,6 +41,7 @@ block head
 
   //- TODO: add search service?, see: https://github.com/opensearch.xml 
   //- <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="StudyNotes" /> 
+
 
   link(rel='stylesheet', href='/css/main.css')
 

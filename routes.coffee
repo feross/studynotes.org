@@ -30,9 +30,11 @@ render404 = (res, msg) ->
   res.status(404)
   render(res, 'notfound', {
     err: msg
-    forceTitle: true
     ads: false
-    title: 'Page Not Found - 404 Error'
+    meta: {
+      title: 'Page Not Found - 404 Error'
+      forceTitle: true
+    }
   })
 
 #
@@ -41,25 +43,25 @@ render404 = (res, msg) ->
 topnav = {
   courses: {
     url: '#'
-    title: 'Browse all AP study notes'
+    meta: { title: 'Browse all AP study notes' }
     shortname: 'AP Courses'
   }
 
   astore: {
-    url: '/study-guides/'
-    title: 'Buy Amazon.com AP Study Guides'
+    url: '/study-guides'
+    meta: { title: 'Buy Amazon.com AP Study Guides' }
     shortname: 'Book Store'
   }
 
   # add: {
   #   url: '/add/'
-  #   title: 'Add Notes'
+  #   meta: { title: 'Add Notes' }
   #   shortname: 'Add Notes'
   # }
 
   # login: {
   #   url: '/login/'
-  #   title: 'Log In to StudyNotes'
+  #   meta: { title: 'Log In to StudyNotes' }
   #   shortname: 'Log In'
   # }
 }
@@ -71,8 +73,6 @@ other = {
 
   home: {
     url: '/'
-    title: 'StudyNotes.org - Study better with Free AP Course Notes'
-    forceTitle: true
     shortname: ''
     hero: {
       title: 'Study Notes'
@@ -88,7 +88,7 @@ other = {
     handler: (req, res) ->
       q = req.query.q
       render(res, 'search', {
-        title: 'Search Results for ' + q
+        meta: { title: 'Search Results for ' + q }
         search_term: q
       })
   }
@@ -114,7 +114,10 @@ other = {
           mini: true
         }
         notetypes: course.notetypes
-        title: course.name
+        meta: {
+          url: course.absoluteUrl
+          title: course.name
+        }
       })
 
 
@@ -155,7 +158,10 @@ other = {
           course: course
           notetype: notetype
           notes: notes
-          title: course.name + ' ' + notetype.name
+          meta: {
+            url: notetype.absoluteUrl
+            title: course.name + ' ' + notetype.name
+          }
         })
 
 
@@ -213,7 +219,7 @@ other = {
           amazon: amazons[course.slug]
           breadcrumbs: [
             { name: course.name, url: course.url }
-            { name: notetype.name, url: '/' + course.slug + '/' + notetype.slug + '/' }
+            { name: notetype.name, url: notetype.url }
           ],
           course: course
           notetype: notetype
@@ -221,7 +227,10 @@ other = {
           noteNext: noteNext
           notePrev: notePrev
           relatedNotes: notes
-          title: util.titleify(note.name, course.name + ' ' + notetype.name)
+          meta: {
+            url: note.absoluteUrl
+            title: util.titleify(note.name, course.name + ' ' + notetype.name)
+          }
         })
 
 
@@ -246,6 +255,16 @@ u.each(routes, (locals, templateName) ->
     return
 
   app.get(locals.url, (req, res) ->
+
+    # If locals.meta is missing `url`, try to add it  
+    if ((!locals.meta || !locals.meta.url) && locals.url.indexOf(':') == -1 && locals.url.indexOf('*') == -1)
+      locals.meta = locals.meta || {}
+      absoluteUrl = config.siteUrl + locals.url
+      if (absoluteUrl[absoluteUrl.length - 1] != '/')
+        absoluteUrl += '/'
+
+      locals.meta.url = absoluteUrl
+
     if (locals.handler)
       locals.handler(req, res)
     else
