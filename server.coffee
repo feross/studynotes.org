@@ -44,9 +44,7 @@ if (cluster.isMaster)
 
 
 else
-
   # Express application
-  # TODO: figure out what all these options actually do!
   global.app = express()
 
   log('============')
@@ -67,9 +65,9 @@ else
 
   app.use(express.bodyParser())
 
-  # app.use(express.methodOverride()) # TODO: what does this do?
-  # app.use(express.cookieParser('your secret here')) # TODO
-  # app.use(express.session()) # TODO: what does this do?
+  # app.use(express.methodOverride())
+  # app.use(express.cookieParser('your secret here'))
+  # app.use(express.session())
 
   if (PRODUCTION)
     app.use(express.logger('short'))
@@ -80,7 +78,7 @@ else
     # SSH tunnel to "athena" so we can access mongo database while developing locally
     # tunnel = require('child_process').spawn("ssh", ['-L', '27017:localhost:27017', '-N', 'feross@athena'])
     app.use(express.logger('dev')) # concise output colored by response status
-    app.use(express.errorHandler({showStack: true, dumpExceptions: true})) # TODO: what is this?
+    app.use(express.errorHandler({showStack: true, dumpExceptions: true}))
   
     # Serve static files from Node only during development
     app.use(express.static(path.join(__dirname, 'static')))

@@ -159,7 +159,7 @@ module.exports = (callback) ->
         if (!doc.slug)
           potentialSlug = initialSlug = util.slugify(doc.name)
           num = 0 # number to try appending to slug in order to make it unique
-          done = false # TODO: is this a bug??? Dec 3, 2012
+          done = false
 
           async.whilst(
             () ->
