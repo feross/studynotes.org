@@ -17,7 +17,6 @@ cluster = require('cluster')
 express = require('express')
 stylus = require('stylus')
 nib = require('nib')
-slashes = require('connect-slashes')
 
 
 # Make all globals accessible from command line
@@ -84,7 +83,6 @@ else
     app.use(express.static(path.join(__dirname, 'static')))
 
 
-  app.use(slashes())
   app.use(app.router)
 
   # Allow access to the current environment from Jade
