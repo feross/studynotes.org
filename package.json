@@ -11,7 +11,7 @@
     "nib": "*",
     "mongoose": "*",
     "async": "*",
-    "underscore.string": "*",
+    "underscore.string": "*"
   },
   "devDependencies": {}
 }
