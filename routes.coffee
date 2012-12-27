@@ -76,8 +76,8 @@ other = {
     shortname: ''
     hero: {
       title: 'AP Study Notes'
-      # desc: 'Fast, free study tools for AP* students.'
-      desc: 'The best AP* study guides.'
+      desc: 'Fast, free study tools for AP* students.'
+      # desc: 'The best AP* study guides.'
       # desc: 'Study tools for smart students.'
       # desc: 'The secret to getting a 5 on the AP* exam.'
     }
