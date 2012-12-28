@@ -88,13 +88,16 @@ $(function() {
     toggleBrowseMenu(false)
   })
 
-  var $hero = $('.hero, .heroMini')
-    , $html = $('html')    
-    , $header = $('.header')
+  var $html = $('html')
     , $window = $(window)
+    , $hero = $('.hero, .heroMini')
+    , $heroText = $('.hero .text')
+    , headerHeight = $('.header').height()
+    , heroTextTop = 75
+    , modernizrTransition = Modernizr.csstransitions
 
   var heroBottom = $hero.length
-    ? $hero.offset().top + $hero.height() - $header.height()
+    ? $hero.offset().top + $hero.height() - headerHeight
     : undefined
 
   // Close browse menu on page scroll
@@ -104,15 +107,28 @@ $(function() {
     // Toggle header text color
     if ($hero.length) {
       var windowScrollTop = $window.scrollTop()
-        , className = 'solidHeader'
-        , htmlHasClass = $html.hasClass(className)
+        , isSolid = $html.hasClass('solidHeader')
+        , isHeroDim = $hero.hasClass('dim')
 
-      if (htmlHasClass && windowScrollTop < heroBottom) {
-        $html.removeClass(className)
-      } else if (!htmlHasClass && windowScrollTop >= heroBottom) {
-        $html.addClass(className)
+      // Set header solidness
+      if (isSolid && windowScrollTop < heroBottom) {
+        $html.removeClass('solidHeader')
+      } else if (!isSolid && windowScrollTop >= heroBottom) {
+        $html.addClass('solidHeader')
       }
     
+      // Fade out text when under header and search box
+      if (isHeroDim && windowScrollTop < heroTextTop) {
+        $hero.removeClass('dim')
+        if (!modernizrTransition) {
+          $heroText.animate({ opacity: 1 }, 500)
+        }
+      } else if (!isHeroDim && windowScrollTop >= heroTextTop) {
+        $hero.addClass('dim')
+        if (!modernizrTransition) {
+          $heroText.animate({ opacity: 0 }, 500)
+        }
+      }
     }
   }, 100))
 
@@ -121,13 +137,13 @@ $(function() {
 
   // Load polyfills for old browsers
   Modernizr.load(
-    { test: Modernizr.placeholder
-    , nope: '/js/lib/jquery.placeholder.min.js'
-    , callback: function(url, result, key) {
-        if (!result) $('input, textarea').placeholder()
-        log('hey')
+    [ { test: Modernizr.placeholder
+      , nope: '/js/lib/polyfill/jquery.placeholder.min.js'
+      , callback: function(url, result, key) {
+          if (!result) $('input, textarea').placeholder()
+        }
       }
-    }
+    ]
   )
 
 })
