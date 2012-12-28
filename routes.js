@@ -113,14 +113,14 @@ var other =
           , course = m.cache.courses[p.courseSlug]
 
         if (!course) {
-          render404(res, "No course with slug #{ p.courseSlug }")
+          render404(res, 'No course with slug ' + p.courseSlug)
           return
         }
 
         render(res, 'course',
           { amazon: amazons[course.slug]
           , breadcrumbs: []
-          , cls: "course #{course.slug}"
+          , cls: 'course ' + course.slug
           , course: course
           , hero:
             { title: course.name
@@ -144,7 +144,7 @@ var other =
           , course = m.cache.courses[p.courseSlug]
 
         if (!course) {
-          render404(res, "No course with slug #{ p.courseSlug }")
+          render404(res, 'No course with slug ' + p.courseSlug)
           return
         }
 
@@ -152,7 +152,7 @@ var other =
           return n.slug == p.notetypeSlug
         })
         if (!notetype) {
-          render404(res, "Course has no notetype w/ slug #{ p.notetypeSlug }")
+          render404(res, 'Course has no notetype w/ slug ' + p.notetypeSlug)
           return
         }
         
@@ -193,7 +193,7 @@ var other =
         , course = m.cache.courses[p.courseSlug]
 
         if (!course) {
-          render404(res, "No course with slug #{ p.courseSlug }")
+          render404(res, 'No course with slug ' + p.courseSlug)
           return
         }
 

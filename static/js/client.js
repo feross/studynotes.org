@@ -72,8 +72,10 @@ function toggleBrowseMenu(_switch) {
 // On DOM ready
 $(function() {
 
+  updateHeaderSearchWidth()
+
   // Browse menu dropdown
-  $('.header .courses').on('click', function (e) {
+  $('.header .courses').on('click', function (e){
     // Only handle left-clicks
     if (e.which != 1) return
     
@@ -82,7 +84,7 @@ $(function() {
   })
 
   // Close browse menu on search focus
-  $headerSearch.on('focusin', function (e) {
+  $headerSearch.on('focusin', function (e){
     toggleBrowseMenu(false)
   })
 
@@ -96,7 +98,7 @@ $(function() {
     : undefined
 
   // Close browse menu on page scroll
-  $(window).on('scroll', u.throttle(function() {
+  $(window).on('scroll', u.throttle(function(){
     toggleBrowseMenu(false)
 
     // Toggle header text color
@@ -114,20 +116,19 @@ $(function() {
     }
   }, 100))
 
-  updateHeaderSearchWidth()
-
   // Page-specific JS
   // if ($('body').hasClass('course'))
 
   // Load polyfills for old browsers
-  Modernizr.load({
-    test: Modernizr.placeholder,
-    nope: '/js/lib/jquery.placeholder.min.js',
-    callback: function(url, result, key) {
-      if (!result) $('input, textarea').placeholder()
-      log('hey')
+  Modernizr.load(
+    { test: Modernizr.placeholder
+    , nope: '/js/lib/jquery.placeholder.min.js'
+    , callback: function(url, result, key) {
+        if (!result) $('input, textarea').placeholder()
+        log('hey')
+      }
     }
-  })
+  )
 
 })
 

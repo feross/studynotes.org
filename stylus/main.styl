@@ -1,6 +1,12 @@
 @import 'nib'
 @import 'util'
 
+@keyframes border-pulsate {
+    0%   { border-color: rgba(255, 255, 255, 0); }
+    50%  { border-color: rgba(255, 255, 255, 1); }
+    100% { border-color: rgba(255, 255, 255, 0); }
+}
+
 //
 // FONTS
 //
@@ -200,6 +206,13 @@ $logoWidth = 131px
   .search
     padding: 3px
     text-transform: none
+
+    .home &
+      animation: border-pulsate 1s 1s 3
+      border-color: rgba(255,255,255,0)
+      border-style: solid
+      border-width: 3px
+      padding: 0
 
     {$focus}
       border: $headerBorderFocus

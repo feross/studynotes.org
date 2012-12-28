@@ -92,7 +92,7 @@ body(class='#{locals.cls}')
       ul.left
         li.home
           a(href='/', title='Go to the front page of StudyNotes', class='home #{locals.cls == 'home' ? 'current' : ''}')= config.siteTitle
-      div.search.off
+      div.search
         form(action='/search/', method='GET')
           input(autocorrect='off', autocomplete='off', autofocus, name='q', placeholder='Search for AP Courses and Topics...', type='text', value='#{locals.search_term}')
       ul.right
