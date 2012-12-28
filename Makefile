@@ -4,7 +4,7 @@ app_dir = /home/feross/www/studynotes.org
 # (this is the default task if `make` is invoked without args)
 all:
 	ssh -L 27017:localhost:27017 -N feross@athena &
-	nodemon --delay 0.4 server.coffee
+	nodemon --delay 0.4 server.js
 
 
 # Run the server
