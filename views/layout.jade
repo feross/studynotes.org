@@ -62,9 +62,15 @@ block head
 
   script(src='/js/lib/modernizr.custom.js')
 
+  //- IE7-9 text shadow support
+  //if lte IE 9
+    script(src='/js/lib/polyfill/css-sandpaper/EventHelpers.js')
+    script(src='/js/lib/polyfill/css-sandpaper/textshadow.js')
+    script(src='/js/lib/polyfill/css-sandpaper/cssQuery-p.js')
+    script(src='/js/lib/polyfill/css-sandpaper/cssSandpaper.js')
+
   //- Async Typekit loader, modified to add "wf-active" class on successful load.
   style
-    /*
     .wf-loading{
       opacity: 0;
     }
@@ -74,7 +80,6 @@ block head
       -webkit-transition: 0.2s opacity ease-in;
       transition: 0.2s opacity ease-in;
     }
-    */
   script
     (function () {
       var config = {
@@ -92,7 +97,8 @@ body(class='#{locals.cls}')
       ul.left
         li.home
           a(href='/', title='Go to the front page of StudyNotes', class='home #{locals.cls == 'home' ? 'current' : ''}')= config.siteTitle
-      div.search
+      //- "off" class gets removed after search bar is positioned in JS
+      div.search.off
         form(action='/search/', method='GET')
           input(autocorrect='off', autocomplete='off', autofocus, name='q', placeholder='Search for AP Courses and Topics...', type='text', value='#{locals.search_term}')
       ul.right
