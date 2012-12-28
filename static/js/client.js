@@ -91,7 +91,7 @@ $(function() {
   var $html = $('html')
     , $window = $(window)
     , $hero = $('.hero, .heroMini')
-    , $heroText = $('.hero .text')
+    , $heroText = $('.hero .text, .heroMini .text')
     , headerHeight = $('.header').height()
     , heroTextTop = 75
     , modernizrTransition = Modernizr.csstransitions
