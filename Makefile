@@ -9,7 +9,7 @@ all:
 
 # Run the server
 run:
-	coffee server.coffee
+	node server.js
 
 
 # Trigger a deploy
