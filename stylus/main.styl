@@ -12,7 +12,6 @@
 //
 
 $heroFont = 'adelle', Georgia, serif
-// $titleFont = 'freight-sans-pro', Helvetica, sans-serif
 $bodyFont = 'proxima-nova', Helvetica, sans-serif
 
 
@@ -132,6 +131,9 @@ $logoWidth = 131px
   width: 100%
   z-index: 10
 
+  html:not(.solidHeader) &
+    background-color: rgba(0,0,0,0.1)
+
   .solidHeader &
     background-color: #FFF
     border-bottom: $solidHeaderBorder
@@ -217,8 +219,9 @@ $logoWidth = 131px
       padding: 0
 
     html:not(.solidHeader) &
-      background-image: linear-gradient(top, rgba(255,255,255,0.2), rgba(255,255,255,0.3))
-      box-shadow: inset 0 2px 2px rgba(0,0,0,0.4)
+      background-image: linear-gradient-image(100px top, rgba(255,255,255,0.3), rgba(255,255,255,0.4))
+      background-size: 100% 100%
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.4)
 
     .solidHeader &
       {$focus}
@@ -334,7 +337,7 @@ $heroMiniHeight = $heroHeight - 70px
   width: 100%
 
   body.home &
-    hero-image: '/images/hero/outdoor-ipad-books.jpg'
+    hero-image: '/images/hero/outdoor-ipad-books.jpg', top
   body.course.english &
     hero-image: '/images/hero/english.jpg'
   body.course.us-government &

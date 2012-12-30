@@ -25,8 +25,8 @@ ellipsis()
   text-overflow: ellipsis
   white-space: nowrap
 
-hero-image(imgSrc, opacityStart = 0.4, opacityEnd = 0.1)
+hero-image(imgSrc, direction = left, opacityStart = 0.2, opacityEnd = 0.05)
   // -ms-filter: '"progid:DXImageTransform.Microsoft.AlphaImageLoader(src=%s,sizingMethod=scale)"' % imgSrc
   background: 'url(%s)' % (imgSrc)
-  background: center center linear-gradient-image($heroHeight top, rgba(0,0,0,opacityStart), rgba(0,0,0,opacityEnd)) repeat, center center 'url(%s)' % (imgSrc) no-repeat
+  background: center center linear-gradient-image(100px direction, rgba(0,0,0,opacityStart), rgba(0,0,0,opacityEnd)) repeat, center center 'url(%s)' % (imgSrc) no-repeat
   background-size: 100% 100%, cover
