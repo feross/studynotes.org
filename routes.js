@@ -125,7 +125,7 @@ var other =
           , hero:
             { title: course.name
             , desc: 'Online Prep and Review'
-            , mini: true
+            , tabs: course.notetypes
             }
           , notetypes: course.notetypes
           , meta:

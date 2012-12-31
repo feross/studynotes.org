@@ -90,8 +90,9 @@ $(function() {
 
   var $html = $('html')
     , $window = $(window)
-    , $hero = $('.hero, .heroMini')
-    , $heroText = $('.hero .text, .heroMini .text')
+    , $hero = $('.hero')
+    , $heroText = $('.hero .text')
+    , $heroTabs = $('.hero .tabs')
     , headerHeight = $('.header').height()
     , heroTextTop = 75
     , modernizrTransition = Modernizr.csstransitions
@@ -122,11 +123,13 @@ $(function() {
         $hero.removeClass('dim')
         if (!modernizrTransition) {
           $heroText.animate({ opacity: 1 }, 500)
+          $heroTabs.animate({ opacity: 1 }, 500)
         }
       } else if (!isHeroDim && windowScrollTop >= heroTextTop) {
         $hero.addClass('dim')
         if (!modernizrTransition) {
           $heroText.animate({ opacity: 0 }, 500)
+          $heroTabs.animate({ opacity: 0 }, 500)
         }
       }
     }

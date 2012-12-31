@@ -7,31 +7,30 @@
     100% { border-color: rgba(255, 255, 255, 0); }
 }
 
-//
-// FONTS
-//
+HERO_FONT = 'adelle', Georgia, serif
+BODY_FONT = 'proxima-nova', Helvetica, sans-serif
 
-$heroFont = 'adelle', Georgia, serif
-$bodyFont = 'proxima-nova', Helvetica, sans-serif
+// Cheer up emo kid
+// http://www.colourlovers.com/palette/1930/cheer_up_emo_kid
 
+MIGHTY_SLATE = rgb(85,98,112)
+PACIFICA = rgb(78,205,196)
+APPLE_CHIC = rgb(199,244,100)
+CHEERY_PINK = rgb(255,107,107)
+GRANDMAS_PILLOW = rgb(196,77,88)
 
-//
-// COLORS
-//
+LIGHT_BLUE = #41B7D8
+BLUE = #08C
+DARK_BLUE = #005580
 
-$red = #E0162B
+LIGHTEST_GRAY = #EEE
+LIGHTER_GRAY = #CCC
+LIGHT_GRAY = #999
+GRAY = #666
+DARK_GRAY = #555
+DARKER_GRAY = #333
 
-$lightBlue = #41B7D8
-$blue = #08C
-$darkBlue = #005580
-
-$lightestGray = #EEE
-$lighterGray = #CCC
-$lightGray = #999
-$gray = #666
-$darkGray = #555
-$darkerGray = #333
-
+LOGO_WIDTH = 131px
 
 //
 // STRUCTURE AND TYPOGRAPHY
@@ -45,8 +44,8 @@ html
   overflow-y: scroll
 
 body
-  color: $darkerGray
-  font-family: $bodyFont
+  color: DARKER_GRAY
+  font-family: BODY_FONT
   font-size: 16px
   margin: 0
   padding: 0
@@ -61,16 +60,16 @@ ul, ol
   padding: 0
 
 a
-  {$link}
-    color: $blue
+  {LINK}
+    color: BLUE
     text-decoration: none
 
-  {$focus}
-    color: $darkBlue
+  {HOVER}
+    color: DARK_BLUE
     text-decoration: underline
 
 h1, h2, h3, h4, h5
-  font-family: $heroFont
+  font-family: HERO_FONT
   font-weight: 500
   line-height: 1.2em
   text-rendering: optimizelegibility
@@ -92,7 +91,7 @@ ul.listing
   list-style: none
   li
     background: #EEE
-    color: $darkerGray
+    color: DARKER_GRAY
     ellipsis()
     padding: 10px 25px
   li:nth-child(even)
@@ -102,7 +101,7 @@ ul.listing
     font-weight: bold
 
 .gray
-  color: $lightGray
+  color: LIGHT_GRAY
 
 .center
   text-align: center
@@ -111,20 +110,18 @@ ul.listing
 // HEADER
 //
 
-$headerHeight = 50px
+HEADER_HEIGHT = 50px
 
-$headerBorder = 1px solid rgba(255, 255, 255, 0.6)
-$solidHeaderBorder = 1px solid $lighterGray
+HEADER_BORDER = 1px solid rgba(255, 255, 255, 0.6)
+SOLID_HEADER_BORDER = 1px solid LIGHTER_GRAY
 
-$headerBorderFocus = 3px solid #FFF
-$solidHeaderBorderFocus = 3px solid #000
-
-$logoWidth = 131px
+HEADER_BORDER_FOCUS = 3px solid #FFF
+SOLID_HEADER_BORDER_FOCUS = 3px solid #000
 
 .header
   background-color: transparent
-  border-bottom: $headerBorder
-  height: $headerHeight
+  border-bottom: HEADER_BORDER
+  height: HEADER_HEIGHT
   left: 0
   position: fixed
   top: 0
@@ -136,7 +133,7 @@ $logoWidth = 131px
 
   .solidHeader &
     background-color: #FFF
-    border-bottom: $solidHeaderBorder
+    border-bottom: SOLID_HEADER_BORDER
 
   ul
     list-style: none
@@ -148,39 +145,39 @@ $logoWidth = 131px
       left: 0
 
       li a
-        {$link}
-          border-right: $headerBorder
-        {$focus}
-          border: $headerBorderFocus
+        {LINK}
+          border-right: HEADER_BORDER
+        {HOVER}
+          border: HEADER_BORDER_FOCUS
           padding: 14px 16px 0 15px
 
         .solidHeader &
-          {$link}
-            border-right: $solidHeaderBorder
-          {$focus}
-            border: $solidHeaderBorderFocus
+          {LINK}
+            border-right: SOLID_HEADER_BORDER
+          {HOVER}
+            border: SOLID_HEADER_BORDER_FOCUS
 
     &.right
       right: 0
 
       li a
-        {$link}
-          border-left: $headerBorder
-        {$focus}
-          border: $headerBorderFocus
+        {LINK}
+          border-left: HEADER_BORDER
+        {HOVER}
+          border: HEADER_BORDER_FOCUS
           padding: 14px 15px 0 16px
         &.on
-          border: $headerBorderFocus
-          height: $headerHeight - 1
+          border: HEADER_BORDER_FOCUS
+          height: HEADER_HEIGHT - 1
           padding: 14px 15px 0 16px
 
         .solidHeader &
-          {$link}
-            border-left: $solidHeaderBorder
-          {$focus}
-            border: $solidHeaderBorderFocus
+          {LINK}
+            border-left: SOLID_HEADER_BORDER
+          {HOVER}
+            border: SOLID_HEADER_BORDER_FOCUS
           &.on
-            border: $solidHeaderBorderFocus
+            border: SOLID_HEADER_BORDER_FOCUS
 
     li
       float: left
@@ -190,17 +187,17 @@ $logoWidth = 131px
       text-transform: uppercase
 
       a
-        {$link}
+        {LINK}
           color: #FFF
           display: block
-          height: $headerHeight - 1
+          height: HEADER_HEIGHT - 1
           padding: 17px 18px 0 18px
 
-        {$focus}
+        {HOVER}
           text-decoration: none
 
         .solidHeader &
-          {$link}
+          {LINK}
             color: #000
 
   .search
@@ -214,8 +211,8 @@ $logoWidth = 131px
       border-width: 3px
       padding: 0
 
-    {$focus}
-      border: $headerBorderFocus
+    {HOVER}
+      border: HEADER_BORDER_FOCUS
       padding: 0
 
     html:not(.solidHeader) &
@@ -224,15 +221,15 @@ $logoWidth = 131px
       box-shadow: inset 0 1px 3px rgba(0,0,0,0.4)
 
     .solidHeader &
-      {$focus}
-        border: $solidHeaderBorderFocus
+      {HOVER}
+        border: SOLID_HEADER_BORDER_FOCUS
 
     input
       background-color: transparent
       border: 0
       color: #FFF
       font-size: 14px
-      height: $headerHeight - 7
+      height: HEADER_HEIGHT - 7
       outline: 0
       padding-left: 20px
       width: 100%
@@ -270,12 +267,15 @@ $logoWidth = 131px
 // BROWSE
 //
 
-$browseHeight = 330px
+HERO_HEIGHT = 250px + HEADER_HEIGHT
+HERO_HOME_HEIGHT = HERO_HEIGHT + 60px
+BROWSE_HEIGHT = HERO_HOME_HEIGHT - HEADER_HEIGHT
+
 .browseWrapper
   background-color: #000
   padding: 0 30px
   position: fixed
-  top: $headerHeight
+  top: HEADER_HEIGHT
   width: 100%
   z-index: 50
 
@@ -289,14 +289,14 @@ $browseHeight = 330px
   transition-duration: .5s
 
   &.on
-    height: $browseHeight
+    height: BROWSE_HEIGHT
     padding: 30px 0
 
     transition-property: padding, height
     transition-duration: .5s
 
   & > li
-    border-right: 1px solid $darkerGray
+    border-right: 1px solid DARKER_GRAY
     display: inline-block
     padding: 0 15px
     vertical-align: top
@@ -316,7 +316,7 @@ $browseHeight = 330px
       margin: 5px 0
 
   a
-    {$link}
+    {LINK}
       color: #FFF
       display: block
       ellipsis()
@@ -324,19 +324,21 @@ $browseHeight = 330px
 
 
 //
-// HERO
+// HERO & HERO TABS
 //
 
-$heroHeight = $browseHeight + $headerHeight
-$heroMiniHeight = $heroHeight - 70px
+TAB_HEIGHT = 35px
+
 .hero
-  height: $heroHeight
+  border-bottom: 1px solid LIGHT_GRAY
+  height: HERO_HEIGHT
   left: 0
   position: absolute
   top: 0
   width: 100%
 
   body.home &
+    height: HERO_HOME_HEIGHT
     hero-image: '/images/hero/outdoor-ipad-books.jpg', top
   body.course.english &
     hero-image: '/images/hero/english.jpg'
@@ -347,71 +349,109 @@ $heroMiniHeight = $heroHeight - 70px
 
   .text
     color: #FFF
-    margin: 110px 50px 50px $logoWidth
-    text-align: center
+    margin: 110px 50px 50px LOGO_WIDTH
+    text-align: left
     transition: 0.5s opacity linear
+    body.home &
+      text-align: center
 
   h1, h2, h3
-    font-family: $heroFont
+    font-family: HERO_FONT
     text-shadow: 1px 1px 2px rgba(#000, 0.8)
     margin: 0.3em 0
   h1
-    font-size: 80px
+    font-size: 50px
     font-weight: bold
     text-shadow: 2px 2px 3px rgba(#000, 0.8)
+    body.home &
+      font-size: 80px
   h2
-    font-size: 40px
+    font-size: 30px
+    body.home &
+      font-size: 40px
   h3
-    font-size: 25px
+    font-size: 20px
+    body.home &
+      font-size: 25px
 
   .csstransitions &.dim
     .text
       opacity: 0
-    
-.heroMini
-  @extend .hero
-  height: $heroMiniHeight
+    .tabs
+      opacity: 0
 
-  .text
-    text-align: left
+  .tabs
+    height: TAB_HEIGHT
+    left: 0
+    list-style: none
+    padding-left: LOGO_WIDTH
+    position: absolute
+    transition: 0.5s opacity linear
+    top: HERO_HEIGHT - TAB_HEIGHT - 1 // for border
+    width: 100%
 
-  h1
-    font-size: 50px
-  h2
-    font-size: 30px
-  h3
-    font-size: 20px
+    li
+      float: left
+      margin-right: 8px
+      padding: 0
+
+      a
+        {LINK}
+          background: top left linear-gradient-image(TAB_HEIGHT top, #FFF, LIGHTEST_GRAY) repeat-x
+          border-top: 1px solid LIGHT_GRAY
+          border-left: 1px solid LIGHT_GRAY
+          border-right: 1px solid LIGHT_GRAY
+          border-top-left-radius: 5px
+          border-top-right-radius: 5px
+          box-shadow: 0 0 3px rgba(0, 0, 0, 0.1)
+          color: DARKER_GRAY
+          display: block
+          height: TAB_HEIGHT
+          padding: 7px 12px 0 12px
+          font-weight: bold
+          text-shadow: #FFF 1px 1px 1px
+
+        {HOVER}
+          background: APPLE_CHIC
+          text-decoration: none
+
+
+      &.on a
+        {LINK}
+          background: #FFF
+          border-bottom: 1px solid #FFF
+          height: TAB_HEIGHT + 1
 
 
 //
 // CONTENT
 //
 
-$sidebarWidth = 336px
-$sidebarMarginLeft = 100px
-$sidebarMarginRight = 40px
-$contentPaddingTop = 50px
+SIDEBAR_WIDTH = 336px
+SIDEBAR_MARGIN_LEFT = 100px
+SIDEBAR_MARGIN_RIGHT = 40px
+CONTENT_PADDING_TOP = 50px
 
 .contentWrapper
   background: #FFF
   float: left
-  margin-right: - ($sidebarWidth + $sidebarMarginLeft + $sidebarMarginRight)
-  margin-top: $headerHeight
-  padding: $contentPaddingTop 0 50px $logoWidth
+  margin-right: - (SIDEBAR_WIDTH + SIDEBAR_MARGIN_LEFT + SIDEBAR_MARGIN_RIGHT)
+  margin-top: HEADER_HEIGHT
+  padding: CONTENT_PADDING_TOP 0 50px LOGO_WIDTH
   position: relative
   width: 100%
 
   .isHero &
-    margin-top: $heroHeight
-  .isHeroMini &
-    margin-top: $heroMiniHeight
+    margin-top: HERO_HEIGHT
+  .isHero body.home &
+    margin-top: HERO_HOME_HEIGHT
 
 
 .content
-  margin-right: ($sidebarWidth + $sidebarMarginLeft + $sidebarMarginRight)
+  margin-right: (SIDEBAR_WIDTH + SIDEBAR_MARGIN_LEFT + SIDEBAR_MARGIN_RIGHT)
 
   h1
-    border-bottom: 1px solid $lightestGray
+    border-bottom: 1px solid LIGHTEST_GRAY
     margin: 10px 0 30px 0
     padding-bottom: 20px
 
@@ -464,15 +504,15 @@ $contentPaddingTop = 50px
 .sidebar
   background: #FFF
   float: right
-  margin: $contentPaddingTop $sidebarMarginRight 0 $sidebarMarginLeft
-  padding-top: $headerHeight
+  margin: CONTENT_PADDING_TOP SIDEBAR_MARGIN_RIGHT 0 SIDEBAR_MARGIN_LEFT
+  padding-top: HEADER_HEIGHT
   position: relative
-  width: $sidebarWidth
+  width: SIDEBAR_WIDTH
 
   .isHero &
-    margin-top: $heroHeight
-  .isHeroMini &
-    margin-top: $heroMiniHeight
+    margin-top: HERO_HEIGHT
+  .isHero body.home &
+    margin-top: HERO_HOME_HEIGHT
 
   .ad
     margin-bottom: 15px
@@ -482,54 +522,13 @@ $contentPaddingTop = 50px
 // PAGE-SPECIFIC STYLES
 //
 
-body.course
-  .notetype
-    display: block
-    float: left
-    height: 200px
-    padding: 0 10px 10px 0
-    width: 50%
-
-    h2
-      background-size: cover
-      background-repeat: no-repeat, no-repeat
-      height: 100%
-      width: 100%
-      
-      background-image: linear-gradient-image(200px top, rgba(0,0,0,0.3), rgba(0,0,0,0.1))
-      &.vocabulary
-        background-image: linear-gradient-image(200px top, rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('/images/course/vocabulary.jpg')
-        background-position: top left, center right
-
-      &.outlines
-        background-image: linear-gradient-image(200px top, rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('/images/course/outlines.jpg')
-        background-position: top left, center right
-
-    a
-      {$link}
-        color: #FFF
-        display: block
-        font-size: 38px
-        height: 100%
-        padding-top: 70px
-        width: 100%
-        text-align: center
-        text-shadow: 0 1px 1px rgba(#000, 0.5)
-
-      {$focus}
-        background-color: rgba(lighten($blue, 40%), 0.6)
-        color: #FFF
-        text-decoration: none
-
-    .desc
-      display: none
 
 
 //
 // AMAZON
 //
 .amazon
-  border-top: 1px solid $lighterGray
+  border-top: 1px solid LIGHTER_GRAY
   margin-top: 40px
 
   h3
