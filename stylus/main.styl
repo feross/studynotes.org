@@ -1,12 +1,6 @@
 @import 'nib'
 @import 'util'
 
-@keyframes border-pulsate {
-    0%   { border-color: rgba(255, 255, 255, 0); }
-    50%  { border-color: rgba(255, 255, 255, 1); }
-    100% { border-color: rgba(255, 255, 255, 0); }
-}
-
 HERO_FONT = 'adelle', Georgia, serif
 BODY_FONT = 'proxima-nova', Helvetica, sans-serif
 
@@ -203,13 +197,6 @@ SOLID_HEADER_BORDER_FOCUS = 3px solid #000
   .search
     padding: 3px
     text-transform: none
-
-    .home &
-      animation: border-pulsate 1s 1s 3
-      border-color: rgba(255,255,255,0)
-      border-style: solid
-      border-width: 3px
-      padding: 0
 
     {HOVER}
       border: HEADER_BORDER_FOCUS
