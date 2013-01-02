@@ -2,8 +2,6 @@
 # node_modules/
 
 # Ignore binary files in native npm modules
-bin
-scripts
 node_modules/**/out
 node_modules/**/build
 
