@@ -23,5 +23,5 @@ trigger:
 # (from app server)
 deploy:
 	cd $(app_dir); git pull
-	cd $(app_dir); npm install
+	cd $(app_dir); npm rebuild
 	sudo supervisorctl restart studynotes:
