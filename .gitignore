@@ -2,8 +2,8 @@
 # node_modules/
 
 # Ignore binary files in native npm modules
-node_modules/**/out
-node_modules/**/build
+out
+build
 
 # Ignore compiled css assets
 static/css/
