@@ -1,9 +1,10 @@
 // Globally-available dependencies
-global.u = require('underscore')
+global.u = global._ = require('underscore')
 global.util = require('./util')
 global.async = require('async')
 
 global.PRODUCTION = process.env.NODE_ENV == 'production'
+global.config = require('./config')
 
 // Constants
 var PORT = (process.argv.length > 2)
@@ -25,8 +26,6 @@ var http = require('http')
   , express = require('express')
   , stylus = require('stylus')
   , nib = require('nib')
-
-
 
 // Make all globals accessible from command line
 module.exports = global
@@ -101,9 +100,7 @@ if (cluster.isMaster) {
 
   // Allow access to the current environment from Jade
   app.locals.PRODUCTION = PRODUCTION
-
-  // Load config after "app" is set up, since we access it there
-  global.config = require('./config')
+  app.locals.util = util
 
   require('./models')(function (){
     var routes = require('./routes')

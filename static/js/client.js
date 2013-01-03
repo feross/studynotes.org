@@ -101,24 +101,24 @@ $(function() {
     ? $hero.offset().top + $hero.height() - headerHeight
     : undefined
 
-  // Close browse menu on page scroll
+  // Scroll events  
   $(window).on('scroll', u.throttle(function(){
+    // Close browse menu on page scroll
     toggleBrowseMenu(false)
 
-    // Toggle header text color
     if ($hero.length) {
       var windowScrollTop = $window.scrollTop()
         , isSolid = $html.hasClass('solidHeader')
         , isHeroDim = $hero.hasClass('dim')
 
-      // Set header solidness
+      // Toggle header change: solid <-> transparent
       if (isSolid && windowScrollTop < heroBottom) {
         $html.removeClass('solidHeader')
       } else if (!isSolid && windowScrollTop >= heroBottom) {
         $html.addClass('solidHeader')
       }
     
-      // Fade out text when under header and search box
+      // Fade out hero text when underneath header
       if (isHeroDim && windowScrollTop < heroTextTop) {
         $hero.removeClass('dim')
         if (!modernizrTransition) {
@@ -135,8 +135,15 @@ $(function() {
     }
   }, 100))
 
+  // TODO: Autocomplete
+  var $search = $('.search')
+    , $searchInput = $('.search input')
+
+
   // Page-specific JS
   // if ($('body').hasClass('course'))
+
+
 
   // Load polyfills for old browsers
   Modernizr.load(

@@ -1,4 +1,5 @@
-amazons = require('./amazons')
+var amazons = require('./amazons')
+  , search = require('./search')
 
 /**
  * Render a template
@@ -103,6 +104,23 @@ var other =
           , search_term: q
           }
         )
+      }
+    }
+
+  , autocomplete_endpoint:
+    { url: '/autocomplete_endpoint'
+    , handler: function (req, res){
+        q = req.query.q
+        
+        search.autocomplete(q, function(err, results){
+          if (err) {
+            error(err)
+            res.send(500, {error: 'Search error'})
+            return
+          }
+          res.send({results: results})
+        })
+        
       }
     }
     
