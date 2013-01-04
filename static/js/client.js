@@ -221,6 +221,9 @@ $(function() {
                 },
                 'data-position': function (params) { // position
                   return this.position
+                },
+                'class': function (params) {
+                  return params.element.className + ' ' + this.type.toLowerCase()
                 }
               }
             })
