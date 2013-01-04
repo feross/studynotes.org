@@ -150,7 +150,7 @@ $(function() {
     , $headerAutocomplete = $('.header .autocomplete')
     , lastAutocompleteTime = +(new Date)
     , lastAutocompleteQuery
-    , searchSelection = 0 // 0 means nothing is selected, 1 is the first result
+    , searchSelection = 1 // 0 means nothing is selected, 1 is the first result
 
   var setSearchSelection = function (position) {
     searchSelection = position
@@ -172,17 +172,12 @@ $(function() {
   }
 
   var doSearchAutocomplete = function () {
-    var autocompleteDirectives = {
-          result: {
-            href: function(params) {
-              return this.url
-            }
-          }
-        }
 
-    if ($searchInput.val() == lastAutocompleteQuery)
+    if ($searchInput.val() === lastAutocompleteQuery &&
+        !$headerAutocomplete.hasClass('off')) {
       return
-    else if ($searchInput.val() == '') {
+
+    } else if ($searchInput.val() == '') {
       $search.removeClass('searching')
       $headerAutocomplete.addClass('off')
     
@@ -193,7 +188,7 @@ $(function() {
       var time = +(new Date)
       $.get('/autocomplete_endpoint/', params, function(data) {
         
-        if (data.results.length == 0 || $searchInput.val() == '') {
+        if ($searchInput.val() == '') {
           $headerAutocomplete.addClass('off')
 
         } else if (time >= lastAutocompleteTime) {
@@ -201,7 +196,18 @@ $(function() {
           lastAutocompleteQuery = data.q
 
           $headerAutocomplete
-            .render(data.results, autocompleteDirectives)
+            .render(data.results, { // template directives
+              name: {
+                html: function(params) {
+                  return this.name
+                }
+              },
+              result: {
+                href: function(params) {
+                  return this.url
+                }
+              }
+            })
             .removeClass('off')
 
           setSearchSelection(searchSelection)
@@ -218,25 +224,25 @@ $(function() {
   })
   $searchInput.on('keyup', doSearchAutocomplete)
   $searchInput.on('keydown', function (e) {
-    if (e.which == 38) { // up
+    if (e.which == 38) { // up key
       e.preventDefault()
       e.stopPropagation()
 
       setSearchSelection(searchSelection - 1)
 
-    } else if (e.which == 40) { // down
+    } else if (e.which == 40) { // down key
       e.preventDefault()
       e.stopPropagation()
 
       setSearchSelection(searchSelection + 1)
     }
   })
-  $('.header .search form').on('submit', function (e) {
+
+  $('.header .search form').on('submit', function (e) { // enter key
     if (searchSelection != 0) {
       e.preventDefault()
 
       var $selected = $('.header .autocomplete .result.selected')
-      log($selected)
       window.location = $selected.attr('href')
     }
   })

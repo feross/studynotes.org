@@ -2,7 +2,11 @@ var async = require('async')
   , _ = require('underscore')
   , util = require('./util')
   , escapeRegExp = util.escapeRegExp
-  , MAX_RESULTS = 6
+  , MAX_RESULTS = 8
+
+/* Weights */
+var EXACT_MATCH = 1000
+  , WORD_MATCH = 100
 
 exports.autocomplete = function (query, cb) {
   var results = []
@@ -57,11 +61,11 @@ exports.autocomplete = function (query, cb) {
     // Only return necessary information
     results = _.map(results, function (result) {
       return {
-        name: result.model.name,
         desc: result.model.searchDesc,
+        name: exports.highlight(result.model.name, query),
         type: result.model.constructor.modelName,
         url: result.model.absoluteUrl,
-        weight: result.weight,
+        weight: result.weight
       }
     })
     
@@ -92,9 +96,13 @@ exports.regexForQuery = function (query) {
   return new RegExp(str, 'i')
 }
 
-var EXACT_MATCH = 1000
-  , WORD_MATCH = 100
 
+/**
+ * Calculate the weight of a result, for a given query
+ * @param  {Object} result
+ * @param  {String} query
+ * @return {Number} weight
+ */
 exports.weight = function (result, query) {
   var weight = 0
     , words = query.split(' ')
@@ -123,6 +131,27 @@ exports.weight = function (result, query) {
   })
 
   return weight
+}
+
+
+/**
+ * Highlights occurances of the words in `query` in a given string `str` by surrounding
+ * occurrances with a <strong> tag.
+ * 
+ * @param  {String} str   String to search over
+ * @param  {String} query Query string
+ * @return {String} HTML string containing highlights 
+ */
+
+exports.highlight = function (str, query) {
+  var words = query.split(' ')
+
+  words.forEach(function (word) {
+    var re = new RegExp('(^|\\s)[^a-z]*' + escapeRegExp(word), 'gi')
+    str = str.replace(re, '<strong>$&</strong>')
+  })
+
+  return str
 }
 
 
