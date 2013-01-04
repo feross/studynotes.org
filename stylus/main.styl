@@ -13,13 +13,13 @@ APPLE_CHIC = rgb(199,244,100)
 CHEERY_PINK = rgb(255,107,107)
 GRANDMAS_PILLOW = rgb(196,77,88)
 
-LIGHT_BLUE = #41B7D8
 BLUE = #08C
+LIGHT_BLUE = lighten(BLUE, 50)
 DARK_BLUE = #005580
 
 LIGHTEST_GRAY = #EEE
 LIGHTER_GRAY = #CCC
-LIGHT_GRAY = #999
+LIGHT_GRAY = #AAA
 GRAY = #666
 DARK_GRAY = #555
 DARKER_GRAY = #333
@@ -195,11 +195,26 @@ SOLID_HEADER_BORDER_FOCUS = 3px solid #000
           {LINK}
             color: #000
 
+
+  .courses
+    &:after
+      content: "\25bc"
+      font-size: 12px
+      padding-left: 8px 
+
+    &.on:after
+      content: "\25b2"
+
+
+  /**
+   * SEARCH
+   */
+
   .search
     padding: 3px
     text-transform: none
 
-    {HOVER}
+    &.searching, {HOVER}
       border: HEADER_BORDER_FOCUS
       padding: 0
 
@@ -209,20 +224,23 @@ SOLID_HEADER_BORDER_FOCUS = 3px solid #000
       box-shadow: inset 0 1px 3px rgba(0,0,0,0.4)
 
     .solidHeader &
-      {HOVER}
+      &.searching, {HOVER}
         border: SOLID_HEADER_BORDER_FOCUS
 
     input
-      background-color: transparent
+      background: 12px center url('/images/search-white.png') no-repeat
+      background-size: 18px 18px
       border: 0
       color: #FFF
       font-size: 14px
       height: HEADER_HEIGHT - 7
       outline: 0
-      padding-left: 20px
+      padding-left: 42px
       width: 100%
 
       .solidHeader &
+        background: 12px center url('/images/search-black.png') no-repeat
+        background-size: 18px 18px
         color: #000
 
 
@@ -235,20 +253,37 @@ SOLID_HEADER_BORDER_FOCUS = 3px solid #000
 
     .solidHeader &
       ::-webkit-input-placeholder
-        color: LIGHT_GRAY
+        color: #000
       :-moz-placeholder
-        color: LIGHT_GRAY
+        color: #000
       :-ms-input-placeholder
-        color: LIGHT_GRAY
+        color: #000
 
-  .courses
-    &:after
-      content: "\25bc"
-      font-size: 12px
-      padding-left: 8px 
 
-    &.on:after
-      content: "\25b2" 
+  /**
+   * AUTOCOMPLETE
+   */
+
+  .autocomplete
+    background: #FFF
+    border: 1px solid LIGHTER_GRAY 
+
+    a.result
+      {LINK}
+        display: block
+        padding: 8px 14px
+        width: 100%
+        ellipsis()
+
+      {HOVER}
+        text-decoration: none
+
+      &.selected
+        background-color: LIGHT_BLUE
+
+      .desc
+        color: LIGHTER_GRAY
+        padding-left: 12px
 
 
 //

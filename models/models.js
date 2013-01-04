@@ -47,7 +47,7 @@ module.exports = function (callback){
     , absoluteUrl: function (schema, options){
         if (schema.virtualpath('url'))
           schema.virtual('absoluteUrl').get(function (){
-            return "//{config.siteUrl}//{this.url}"
+            return config.siteUrl + this.url
           })
       }
   }
@@ -76,6 +76,10 @@ module.exports = function (callback){
             return '/' + this.slug + '/'
           })
 
+          this.virtual('searchDesc').get(function () {
+            return 'Course'
+          })
+
           // TODO: remove this hack
           this.methods.getNotetypes = function (cb){
             this.model('Notetype')
@@ -88,6 +92,7 @@ module.exports = function (callback){
 
     , Notetype:
       { name: { type: String, required: true }
+      , singularName: String
       , shortDesc: String
       , desc: String
       , courseId: { type: Schema.Types.ObjectId, ref: 'Course', required: true }
@@ -128,16 +133,32 @@ module.exports = function (callback){
 
           this.index({ courseId: 1, notetypeId: 1})
 
-          this.virtual('url').get(function(){
-            var self = this
+          this.virtual('url').get(function () {
+            var courseId = this.courseId.toString()
+              , notetypeId = this.notetypeId.toString()
+
             course = u.find(m.cache.courses, function (c){
-              return c.id == self.courseId.toString()
+              return c.id == courseId
             })
             notetype = u.find(course.notetypes, function (n){
-              return n.id == self.notetypeId.toString()
+              return n.id == notetypeId
             })
 
             return '/' + course.slug + '/' + notetype.slug + '/' + this.slug + '/'
+          })
+
+          this.virtual('searchDesc').get(function () {
+            var courseId = this.courseId.toString()
+              , notetypeId = this.notetypeId.toString()
+
+            course = u.find(m.cache.courses, function (c){
+              return c.id == courseId
+            })
+            notetype = u.find(course.notetypes, function (n){
+              return n.id == notetypeId
+            })
+
+            return course.name + ' ' + (notetype.singularName || notetype.name)
           })
         }
       }

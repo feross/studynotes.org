@@ -2,7 +2,7 @@ app_dir = /home/feross/www/studynotes.org
 
 # Run the server in development mode
 # (this is the default task if `make` is invoked without args)
-all:
+default:
 	ssh -L 27017:localhost:27017 -N feross@athena &
 	nodemon --delay 0.4 server.js
 

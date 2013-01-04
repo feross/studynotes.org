@@ -1,15 +1,15 @@
+// Constants
+global.PRODUCTION = process.env.NODE_ENV == 'production'
+global.PORT = (process.argv.length > 2)
+  ? process.argv[2]
+  : 4000
+
 // Globally-available dependencies
 global.u = global._ = require('underscore')
 global.util = require('./util')
 global.async = require('async')
-
-global.PRODUCTION = process.env.NODE_ENV == 'production'
 global.config = require('./config')
 
-// Constants
-var PORT = (process.argv.length > 2)
-  ? process.argv[2]
-  : 4000
 
 // Paths to command-line programs
 var STYLUS_PATH = './node_modules/stylus/bin/stylus'

@@ -39,27 +39,41 @@ window.error = function() {
 
 window.u = _
 
-// Set search bar's width so it fills the header correctly.
-// Need to ensure this gets called after Typekit fonts are loaded.
 var $headerLeft = $('.header .left')
   , $headerRight = $('.header .right')
-  , $headerSearch = $('.header .search')
+  , $search = $('.header .search')
+  , $searchAndAutocomplete = $('.header .search, .header .autocomplete')
+  , $html = $('html')
+  , $window = $(window)
+  , $hero = $('.hero')
+  , $heroText = $('.hero .text')
+  , $heroTabs = $('.hero .tabs')
+  , heroTextTop = 75
+  , modernizrTransition = Modernizr.csstransitions
 
-function updateHeaderSearchWidth() {
+// Disable caching of AJAX responses
+$.ajaxSetup ({
+    cache: false
+})
+
+// Set search bar's width so it fills the header correctly.
+// Need to ensure this gets called after Typekit fonts are loaded.
+function updatesearchWidth() {
   var headerLeftWidth = $headerLeft.width()
     , headerRightWidth = $headerRight.width()
-  $headerSearch
-    .css({
-      'margin-left': headerLeftWidth,
-      'margin-right': headerRightWidth
-    })
-    .removeClass('off')
+  $searchAndAutocomplete
+  .css({
+    'margin-left': headerLeftWidth,
+    'margin-right': headerRightWidth
+  })
+
+  $search.removeClass('off')
 
   // Continue to set the width every 100ms until fonts are done loading.
   // If fonts don't load, then wf-loading gets removed automatically
   // after 1000ms, so this won't run forever. 
   if ($('html').hasClass('wf-loading')) {
-    setTimeout(updateHeaderSearchWidth, 100)
+    setTimeout(updatesearchWidth, 100)
   }
 }
 
@@ -72,7 +86,7 @@ function toggleBrowseMenu(_switch) {
 // On DOM ready
 $(function() {
 
-  updateHeaderSearchWidth()
+  updatesearchWidth()
 
   // Browse menu dropdown
   $('.header .courses').on('click', function (e){
@@ -84,27 +98,23 @@ $(function() {
   })
 
   // Close browse menu on search focus
-  $headerSearch.on('focusin', function (e){
+  $search.on('focusin', function (e){
     toggleBrowseMenu(false)
   })
 
-  var $html = $('html')
-    , $window = $(window)
-    , $hero = $('.hero')
-    , $heroText = $('.hero .text')
-    , $heroTabs = $('.hero .tabs')
-    , headerHeight = $('.header').height()
-    , heroTextTop = 75
-    , modernizrTransition = Modernizr.csstransitions
-
+  var headerHeight = $('.header').height()
   var heroBottom = $hero.length
     ? $hero.offset().top + $hero.height() - headerHeight
     : undefined
 
   // Scroll events  
-  $(window).on('scroll', u.throttle(function(){
+  $window.on('scroll', u.throttle(function(){
     // Close browse menu on page scroll
     toggleBrowseMenu(false)
+
+    // Hide autocomplete dropdown
+    $search.removeClass('searching')
+    $headerAutocomplete.addClass('off')
 
     if ($hero.length) {
       var windowScrollTop = $window.scrollTop()
@@ -135,14 +145,108 @@ $(function() {
     }
   }, 100))
 
-  // TODO: Autocomplete
-  var $search = $('.search')
-    , $searchInput = $('.search input')
+  // Autocomplete
+  var $searchInput = $('.header .search input')
+    , $headerAutocomplete = $('.header .autocomplete')
+    , lastAutocompleteTime = +(new Date)
+    , lastAutocompleteQuery
+    , searchSelection = 0 // 0 means nothing is selected, 1 is the first result
 
+  var setSearchSelection = function (position) {
+    searchSelection = position
 
-  // Page-specific JS
-  // if ($('body').hasClass('course'))
+    var $results = $('.header .autocomplete .result')
+      , len = $results.length
 
+    // Wrap around
+    if (searchSelection < 0) {
+      searchSelection = len
+    }
+    searchSelection %= (len + 1)
+
+    $results.removeClass('selected')
+    if (searchSelection != 0) {
+      var result = $results[searchSelection - 1]
+      $(result).addClass('selected')
+    }
+  }
+
+  var doSearchAutocomplete = function () {
+    var autocompleteDirectives = {
+          result: {
+            href: function(params) {
+              return this.url
+            }
+          }
+        }
+
+    if ($searchInput.val() == lastAutocompleteQuery)
+      return
+    else if ($searchInput.val() == '') {
+      $search.removeClass('searching')
+      $headerAutocomplete.addClass('off')
+    
+    } else {
+      $search.addClass('searching')
+      
+      var params = { q: $searchInput.val() }
+      var time = +(new Date)
+      $.get('/autocomplete_endpoint/', params, function(data) {
+        
+        if (data.results.length == 0 || $searchInput.val() == '') {
+          $headerAutocomplete.addClass('off')
+
+        } else if (time >= lastAutocompleteTime) {
+          lastAutocompleteTime = time
+          lastAutocompleteQuery = data.q
+
+          $headerAutocomplete
+            .render(data.results, autocompleteDirectives)
+            .removeClass('off')
+
+          setSearchSelection(searchSelection)
+        }
+      })
+    }
+  }
+
+  $searchInput.on('focus', function (e) {
+    if ($searchInput.val() != '') {
+      $search.addClass('searching')
+      $headerAutocomplete.removeClass('off')
+    }
+  })
+  $searchInput.on('keyup', doSearchAutocomplete)
+  $searchInput.on('keydown', function (e) {
+    if (e.which == 38) { // up
+      e.preventDefault()
+      e.stopPropagation()
+
+      setSearchSelection(searchSelection - 1)
+
+    } else if (e.which == 40) { // down
+      e.preventDefault()
+      e.stopPropagation()
+
+      setSearchSelection(searchSelection + 1)
+    }
+  })
+  $('.header .search form').on('submit', function (e) {
+    if (searchSelection != 0) {
+      e.preventDefault()
+
+      var $selected = $('.header .autocomplete .result.selected')
+      log($selected)
+      window.location = $selected.attr('href')
+    }
+  })
+  
+  $searchInput.on('blur', function (e) {
+    window.setTimeout(function () {
+      $search.removeClass('searching')
+      $headerAutocomplete.addClass('off')
+    }, 100)
+  })
 
 
   // Load polyfills for old browsers

@@ -2,6 +2,7 @@ var async = require('async')
   , _ = require('underscore')
   , util = require('./util')
   , escapeRegExp = util.escapeRegExp
+  , MAX_RESULTS = 6
 
 exports.autocomplete = function (query, cb) {
   var results = []
@@ -12,14 +13,14 @@ exports.autocomplete = function (query, cb) {
     function(cb) {
       m.Course
       .find({name: exports.regexForQuery(q)})
-      .limit(50)
-      .select('name')
+      .limit(10)
+      .sort('-hits')
       .exec(function(err, courses){
         if (err) { cb(err); return }
         courses.forEach(function(course) {
           results.push({
             weight: exports.weight(course, query),
-            result: course
+            model: course
           })
         })
         cb(null)
@@ -29,14 +30,14 @@ exports.autocomplete = function (query, cb) {
     function(cb) {
       m.Note
       .find({name: exports.regexForQuery(q)})
-      .limit(50)
-      .select('name')
+      .limit(10)
+      .sort('-hits')
       .exec(function(err, notes) {
         if (err) { cb(err); return }
         notes.forEach(function (note) {
           results.push({
             weight: exports.weight(note, query),
-            result: note
+            model: note
           })
         })
         cb(null)
@@ -47,7 +48,21 @@ exports.autocomplete = function (query, cb) {
 
     // Sort results by weight
     results = _.sortBy(results, function (result) {
-      return -result.weight
+      return -1 * result.weight
+    })
+
+    // Return small number of results
+    results.splice(MAX_RESULTS)
+
+    // Only return necessary information
+    results = _.map(results, function (result) {
+      return {
+        name: result.model.name,
+        desc: result.model.searchDesc,
+        type: result.model.constructor.modelName,
+        url: result.model.absoluteUrl,
+        weight: result.weight,
+      }
     })
     
     cb(null, results)
@@ -68,19 +83,17 @@ exports.autocomplete = function (query, cb) {
  */
 exports.regexForQuery = function (query) {
   var tokens = query.split(' ')
-    , str = '(^' + escapeRegExp(tokens[0]) + '|\\s' + escapeRegExp(tokens[0]) + ')'
+    , str = '(^[^a-z]*' + escapeRegExp(tokens[0]) + '|\\s[^a-z]*' + escapeRegExp(tokens[0]) + ')'
 
   for(var i = 1, len = tokens.length; i < len; i++) {
-    str += '.*' + tokens[i]
+    str += '.*\\s[^a-z]*' + escapeRegExp(tokens[i])
   }
 
   return new RegExp(str, 'i')
 }
 
-var EXACT_MATCH = 10000
-  , WORD_MATCH = 1000
-  , COURSE = 10
-  , NOTE = 0
+var EXACT_MATCH = 1000
+  , WORD_MATCH = 100
 
 exports.weight = function (result, query) {
   var weight = 0
@@ -89,10 +102,10 @@ exports.weight = function (result, query) {
   // Model-specific weights
   switch (result.constructor.modelName) {
     case 'Course':
-      weight += COURSE
+      weight += 10
       break
     case 'Note':
-      weight += NOTE
+      weight += 0
       break
   }
 

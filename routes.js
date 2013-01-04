@@ -118,7 +118,10 @@ var other =
             res.send(500, {error: 'Search error'})
             return
           }
-          res.send({results: results})
+          res.send({
+            q: q,
+            results: results
+          })
         })
         
       }
