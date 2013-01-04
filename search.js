@@ -89,7 +89,7 @@ exports.autocomplete = function (query, cb) {
  */
 exports.regexForQuery = function (query) {
   var tokens = query.split(' ')
-    , str = '(^[^a-z]*' + escapeRegExp(tokens[0]) + '|\\s[^a-z]*' + escapeRegExp(tokens[0]) + ')'
+    , str = '(^|\\s)[^a-z]*' + escapeRegExp(tokens[0])
 
   for(var i = 1, len = tokens.length; i < len; i++) {
     str += '.*\\s[^a-z]*' + escapeRegExp(tokens[i])
@@ -146,14 +146,18 @@ exports.weight = function (result, query) {
  */
 
 exports.highlight = function (str, query) {
-  var words = query.split(' ')
+  var tokens = query.split(' ')
+    , reStr = ''
 
-  words.forEach(function (word) {
-    var re = new RegExp('(^|\\s)[^a-z]*' + escapeRegExp(word), 'gi')
-    str = str.replace(re, '<strong>$&</strong>')
+  tokens.forEach(function (token, i) {
+    log(i)
+    if (i != 0) {
+      reStr += '|'
+    }
+    reStr += '((^|\\s)[^a-z]*' + escapeRegExp(tokens[i]) + ')'
   })
+
+  str = str.replace(new RegExp(reStr, 'gi'), '<strong>$&</strong>')
 
   return str
 }
-
-
