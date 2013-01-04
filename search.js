@@ -59,10 +59,11 @@ exports.autocomplete = function (query, cb) {
     results.splice(MAX_RESULTS)
 
     // Only return necessary information
-    results = _.map(results, function (result) {
+    results = _.map(results, function (result, i) {
       return {
         desc: result.model.searchDesc,
         name: exports.highlight(result.model.name, query),
+        position: i + 1,
         type: result.model.constructor.modelName,
         url: result.model.absoluteUrl,
         weight: result.weight
@@ -72,6 +73,7 @@ exports.autocomplete = function (query, cb) {
     cb(null, results)
   })
 }
+
 
 /**
  * Given a search query, returns a regular expression that matches

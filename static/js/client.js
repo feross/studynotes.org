@@ -145,32 +145,44 @@ $(function() {
     }
   }, 100))
 
+
   // Autocomplete
+
   var $searchInput = $('.header .search input')
     , $headerAutocomplete = $('.header .autocomplete')
     , lastAutocompleteTime = +(new Date)
     , lastAutocompleteQuery
-    , searchSelection = 1 // 0 means nothing is selected, 1 is the first result
+    , autocompletePosition = 1 // 0 means nothing is selected, 1 is the first result
 
-  var setSearchSelection = function (position) {
-    searchSelection = position
+
+  /**
+   * Set the selected result in the autocomplete view to the item at `position`.
+   *
+   * @param {Number} position index (0 = nothing selected, 1 = first result, etc.)
+   */
+  var setAutocompletePosition = function (position) {
+    autocompletePosition = position
 
     var $results = $('.header .autocomplete .result')
       , len = $results.length
 
-    // Wrap around
-    if (searchSelection < 0) {
-      searchSelection = len
+    // Handle numbers that are negative or too big by wrapping around.
+    if (autocompletePosition < 0) {
+      autocompletePosition = len
     }
-    searchSelection %= (len + 1)
+    autocompletePosition %= (len + 1)
 
     $results.removeClass('selected')
-    if (searchSelection != 0) {
-      var result = $results[searchSelection - 1]
+    if (autocompletePosition != 0) {
+      var result = $results[autocompletePosition - 1]
       $(result).addClass('selected')
     }
   }
 
+
+  /**
+   * Perform search for autocomplete results and display them
+   */
   var doSearchAutocomplete = function () {
 
     if ($searchInput.val() === lastAutocompleteQuery &&
@@ -198,19 +210,23 @@ $(function() {
           $headerAutocomplete
             .render(data.results, { // template directives
               name: {
-                html: function(params) {
+                // don't escape search result name, to show formatting
+                html: function (params) { 
                   return this.name
                 }
               },
               result: {
-                href: function(params) {
+                href: function (params) {
                   return this.url
+                },
+                'data-position': function (params) { // position
+                  return this.position
                 }
               }
             })
             .removeClass('off')
 
-          setSearchSelection(searchSelection)
+          setAutocompletePosition(autocompletePosition)
         }
       })
     }
@@ -223,23 +239,30 @@ $(function() {
     }
   })
   $searchInput.on('keyup', doSearchAutocomplete)
+
+  $('.header .autocomplete').on('mouseover', '.result', function (e) {
+    var position = parseInt($(this).attr('data-position'))
+    setAutocompletePosition(position)
+  })
+
+  // Autocomplete keyboard shortcuts
+
   $searchInput.on('keydown', function (e) {
     if (e.which == 38) { // up key
       e.preventDefault()
       e.stopPropagation()
 
-      setSearchSelection(searchSelection - 1)
+      setAutocompletePosition(autocompletePosition - 1)
 
     } else if (e.which == 40) { // down key
       e.preventDefault()
       e.stopPropagation()
 
-      setSearchSelection(searchSelection + 1)
+      setAutocompletePosition(autocompletePosition + 1)
     }
   })
-
   $('.header .search form').on('submit', function (e) { // enter key
-    if (searchSelection != 0) {
+    if (autocompletePosition != 0) {
       e.preventDefault()
 
       var $selected = $('.header .autocomplete .result.selected')
