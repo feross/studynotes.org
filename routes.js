@@ -1,5 +1,6 @@
 var amazons = require('./amazons')
   , search = require('./search')
+  , randomquote = require('./randomquote')
 
 /**
  * Render a template
@@ -22,6 +23,7 @@ function render(res, templateName, locals) {
     , config: config
     , courses: m.cache.courses
     , search_term: ''
+    , randomquote: randomquote()
     }
 
   res.render(templateName, u.extend(defaultLocals, locals))

@@ -27,11 +27,11 @@ DARK_BLUE = #005580
 LIGHTEST_GRAY = #EEE
 LIGHTER_GRAY = #CCC
 LIGHT_GRAY = #AAA
-GRAY = #666
+GRAY = #888
 DARK_GRAY = #555
 DARKER_GRAY = #333
 
-LOGO_WIDTH = 50px
+LOGO_WIDTH = 131px
 TEXTURE_BACKGROUND = #F4F4F4 url('/images/body.gif')
 
 //
@@ -75,13 +75,12 @@ h1, h2, h3, h4, h5
   font-family: HERO_FONT
   font-weight: 500
   line-height: 1.2em
+  margin: 1em 0 .5em 0
   text-rendering: optimizelegibility
 h1
   font-size: 36px
 h2
   font-size: 24px
-  margin-top: 1em
-  margin-bottom: 0.6em
 h3
   font-size: 20px
 h4
@@ -111,6 +110,13 @@ ul.listing
 
 .center
   text-align: center
+
+.col
+  float: left
+
+.row
+  clear: both
+
 
 //
 // HEADER
@@ -329,7 +335,7 @@ BROWSE_HEIGHT = HERO_HOME_HEIGHT - HEADER_HEIGHT
   padding: 0
   overflow: hidden
 
-  transform: translateZ(0);
+  transform: translateZ(0)
   transition-property: padding, height
   transition-duration: .5s
 
@@ -394,11 +400,12 @@ TAB_HEIGHT = 35px
 
   .text
     display: block
-    margin: 100px 50px 50px LOGO_WIDTH
+    margin: 100px 25px 25px (LOGO_WIDTH / 2)
     text-align: left
     transition: 0.5s opacity linear
     
     body.home &
+      margin: 100px 25px 25px 25px
       text-align: center
 
     a
@@ -428,7 +435,7 @@ TAB_HEIGHT = 35px
     .tabs
       opacity: 0
 
-  .tabs
+  ul.tabs
     height: TAB_HEIGHT
     left: 0
     list-style: none
@@ -498,7 +505,7 @@ CONTENT_PADDING_TOP = 35px
   box-shadow: 0 0 10px 1px rgba(0, 0, 0, .05)
   margin-left: 10px
   margin-right: (SIDEBAR_WIDTH + SIDEBAR_MARGIN_LEFT + SIDEBAR_MARGIN_RIGHT)
-  padding: CONTENT_PADDING_TOP 50px 50px (LOGO_WIDTH - 10px)
+  padding: CONTENT_PADDING_TOP 50px 50px 50px
   z-index: 10
 
   h1
@@ -594,12 +601,70 @@ CONTENT_PADDING_TOP = 35px
     float: left
     padding: 0 20px 0 0
 
+
 //
 // FOOTER
 //
 
 .footer
   clear: both
-  padding: 50px 20px 50px LOGO_WIDTH
+  font-size: 15px
+  padding: 40px 20px 30px (LOGO_WIDTH / 2)
   position: relative
   width: 100%
+
+  .randomquote
+    color: LIGHT_GRAY
+    font-size: 22px
+
+    q
+      font-style: italic
+      quotes: none
+
+      &::before
+        content: '\201C'
+        font-size: 30px
+      &::after
+        content: '\201D'
+        font-size: 30px
+
+    .author::before
+      content: '\2013' // en dash
+      padding: 0 4px
+
+  .col
+    margin-bottom: 40px
+    width: 20%
+
+    &.about-this-site
+      width: 40%
+
+  a
+    {LINK}
+      border-bottom: 1px solid LIGHTER_GRAY
+      text-decoration: none
+    {HOVER}
+      border-bottom: 1px solid BLUE
+      color: BLUE
+
+  h4
+    font-size: 18px
+    font-weight: bold
+    text-transform: uppercase
+
+  ul
+    list-style: none
+    li
+      padding: 5px 0
+
+  small
+    color: GRAY
+    display: block
+    margin: 5px 0
+
+    &.light
+      color: LIGHT_GRAY
+
+
+
+

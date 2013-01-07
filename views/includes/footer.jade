@@ -1,8 +1,28 @@
 footer.footer
   block footer
-    p © 2013 Study Notes. All Rights Reserved.
+    .row
+      p!= randomquote
 
-    h3 What is this website?
-    p AP StudyNotes.org is the premiere online resource for 100% FREE AP notes! We offer free study materials to high school students seeking to prepare for AP (Advanced Placement) classes and exams. Students use this website to learn AP class material, study for quizzes and tests, and brush up on course material before the big exam day.
+    .row
+      .col
+        h4 AP Courses
+        ul
+          each course in locals.courses
+            li: a(href='#{course.url}')= course.name
 
-    small * Advanced Placement, AP, and SAT are registered trademarks of the College Board. All other trademarks. All other products and services may be trademarks of their respective owners.
+      .col
+        h4 Site Links
+        ul
+          li: a(href='/about/') About This Site
+          li: a(href='/contact/') Contact Us
+          li: a(href='/plagiarism/') Plagiarism Policy
+
+      .col.about-this-site
+        h4 What is StudyNotes.org?
+        ul
+          li That's easy &mdash; it's the best way to study for AP* classes and AP* exams! StudyNotes.org offers <strong>fast, free study tools for AP* students</strong>. Our AP* study guides, practice tests, and notes are the best on the web because they're contributed by students and teachers like you. Always 100% free.
+
+    .row
+      small: i With a commitment to quality educational content for students and teachers.
+      small Copyright © 2006-2013 <a href="/">Study Notes</a>. Made in Stanford, California. <a href="/privacy/">Privacy</a>.
+      small.light * Advanced Placement, AP, and SAT are registered trademarks of the College Board.
