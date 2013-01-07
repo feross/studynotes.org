@@ -115,7 +115,7 @@ module.exports = function (callback){
       }
 
     , Note:
-      { name: { type: String, required: true }
+      { name: { type: String, required: true, index: true }
       , body: { type: String, required: true }
       , courseId: { type: Schema.Types.ObjectId, ref: 'Course', required: true }
       , notetypeId:
