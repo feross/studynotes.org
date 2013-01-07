@@ -7,11 +7,18 @@ BODY_FONT = 'proxima-nova', Helvetica, sans-serif
 // Cheer up emo kid
 // http://www.colourlovers.com/palette/1930/cheer_up_emo_kid
 
-MIGHTY_SLATE = rgb(85,98,112)
-PACIFICA = rgb(78,205,196)
-APPLE_CHIC = rgb(199,244,100)
-CHEERY_PINK = rgb(255,107,107)
-GRANDMAS_PILLOW = rgb(196,77,88)
+// MIGHTY_SLATE = rgb(85,98,112)
+// PACIFICA = rgb(78,205,196)
+// APPLE_CHIC = rgb(199,244,100)
+// CHEERY_PINK = rgb(255,107,107)
+// GRANDMAS_PILLOW = rgb(196,77,88)
+
+// Happy colors
+HAPPY_RED = rgb(249,124,117)
+HAPPY_ORANGE = rgb(255,231,135)
+HAPPY_BLUE = rgb(88,241,252)
+HAPPY_GREEN = rgb(199,244,100)
+HAPPY_PURPLE = rgb(214,164,210)
 
 BLUE = #08C
 LIGHT_BLUE = lighten(BLUE, 50)
@@ -24,7 +31,8 @@ GRAY = #666
 DARK_GRAY = #555
 DARKER_GRAY = #333
 
-LOGO_WIDTH = 131px
+LOGO_WIDTH = 50px
+TEXTURE_BACKGROUND = #F4F4F4 url('/images/body.gif')
 
 //
 // STRUCTURE AND TYPOGRAPHY
@@ -38,6 +46,7 @@ html
   overflow-y: scroll
 
 body
+  background: TEXTURE_BACKGROUND
   color: DARKER_GRAY
   font-family: BODY_FONT
   font-size: 16px
@@ -71,6 +80,8 @@ h1
   font-size: 36px
 h2
   font-size: 24px
+  margin-top: 1em
+  margin-bottom: 0.6em
 h3
   font-size: 20px
 h4
@@ -83,7 +94,7 @@ p
 
 ul.listing
   list-style: none
-  margin-bottom: 20px
+  margin: 25px 0
   li
     background: #EEE
     color: DARKER_GRAY
@@ -195,7 +206,6 @@ SOLID_HEADER_BORDER_FOCUS = 3px solid #000
           {LINK}
             color: #000
 
-
   .courses
     &:after
       content: "\25bc"
@@ -211,12 +221,12 @@ SOLID_HEADER_BORDER_FOCUS = 3px solid #000
    */
 
   .search
-    padding: 3px
+    padding: 3px 18px 3px 3px
     text-transform: none
 
     &.searching, {HOVER}
       border: HEADER_BORDER_FOCUS
-      padding: 0
+      padding: 0 15px 0 0
 
     html:not(.solidHeader) &
       background-image: linear-gradient-image(100px top, rgba(255,255,255,0.3), rgba(255,255,255,0.4))
@@ -228,18 +238,18 @@ SOLID_HEADER_BORDER_FOCUS = 3px solid #000
         border: SOLID_HEADER_BORDER_FOCUS
 
     input
-      background: 12px center url('/images/search-white.png') no-repeat
+      background: right center url('/images/search-white.png') no-repeat
       background-size: 18px 18px
       border: 0
       color: #FFF
       font-size: 14px
       height: HEADER_HEIGHT - 7
       outline: 0
-      padding-left: 42px
+      padding-left: 18px
       width: 100%
 
       .solidHeader &
-        background: 12px center url('/images/search-black.png') no-repeat
+        background: right center url('/images/search-black.png') no-repeat
         background-size: 18px 18px
         color: #000
 
@@ -301,7 +311,8 @@ SOLID_HEADER_BORDER_FOCUS = 3px solid #000
 // BROWSE
 //
 
-HERO_HEIGHT = 250px + HEADER_HEIGHT
+HERO_EXTRA_HEIGHT_FOR_FADE = 100px
+HERO_HEIGHT = 240px + HEADER_HEIGHT
 HERO_HOME_HEIGHT = HERO_HEIGHT + 60px
 BROWSE_HEIGHT = HERO_HOME_HEIGHT - HEADER_HEIGHT
 
@@ -364,15 +375,15 @@ BROWSE_HEIGHT = HERO_HOME_HEIGHT - HEADER_HEIGHT
 TAB_HEIGHT = 35px
 
 .hero
-  border-bottom: 1px solid LIGHT_GRAY
-  height: HERO_HEIGHT
+  display: block
+  height: HERO_HEIGHT + HERO_EXTRA_HEIGHT_FOR_FADE
   left: 0
   position: absolute
   top: 0
   width: 100%
 
   body.home &
-    height: HERO_HOME_HEIGHT
+    height: HERO_HOME_HEIGHT + HERO_EXTRA_HEIGHT_FOR_FADE
     hero-image: '/images/hero/outdoor-ipad-books.jpg', top
   body.course.english &
     hero-image: '/images/hero/english.jpg'
@@ -382,31 +393,34 @@ TAB_HEIGHT = 35px
     hero-image: '/images/hero/us-history-2.jpg'
 
   .text
-    color: #FFF
-    margin: 110px 50px 50px LOGO_WIDTH
+    display: block
+    margin: 100px 50px 50px LOGO_WIDTH
     text-align: left
     transition: 0.5s opacity linear
+    
     body.home &
       text-align: center
 
-  h1, h2, h3
-    font-family: HERO_FONT
-    text-shadow: 1px 1px 2px rgba(#000, 0.8)
-    margin: 0.3em 0
-  h1
-    font-size: 50px
-    font-weight: bold
-    text-shadow: 2px 2px 3px rgba(#000, 0.8)
-    body.home &
-      font-size: 80px
-  h2
-    font-size: 30px
-    body.home &
-      font-size: 40px
-  h3
-    font-size: 20px
-    body.home &
+    a
+      {LINK}
+        color: #FFF
+      {HOVER}
+        text-decoration: none
+
+    h1, h2
+      font-family: HERO_FONT
+      text-shadow: 1px 1px 2px rgba(#000, 0.8)
+      margin: 0.3em 0
+    h1
+      font-size: 50px
+      font-weight: bold
+      text-shadow: 2px 2px 3px rgba(#000, 0.8)
+      body.home &
+        font-size: 80px
+    h2
       font-size: 25px
+      body.home &
+        font-size: 40px
 
   .csstransitions &.dim
     .text
@@ -418,42 +432,40 @@ TAB_HEIGHT = 35px
     height: TAB_HEIGHT
     left: 0
     list-style: none
-    padding-left: LOGO_WIDTH
+    padding-left: 20px
     position: absolute
     transition: 0.5s opacity linear
-    top: HERO_HEIGHT - TAB_HEIGHT - 1 // for border
+    top: HERO_HEIGHT - TAB_HEIGHT
     width: 100%
+    z-index: 5
 
     li
       float: left
-      margin-right: 8px
+      margin-right: 6px
       padding: 0
 
       a
         {LINK}
-          background: top left linear-gradient-image(TAB_HEIGHT top, #FFF, LIGHTEST_GRAY) repeat-x
-          border-top: 1px solid LIGHT_GRAY
-          border-left: 1px solid LIGHT_GRAY
-          border-right: 1px solid LIGHT_GRAY
-          border-top-left-radius: 5px
-          border-top-right-radius: 5px
-          box-shadow: 0 0 3px rgba(0, 0, 0, 0.1)
+          background: rgba(LIGHTEST_GRAY,0.9)
+          border-bottom: none
+          border-radius: 6px 6px 0 0
+          box-shadow: 0 -2px 2px rgba(0, 0, 0, 0.1)
           color: DARKER_GRAY
           display: block
           height: TAB_HEIGHT
-          padding: 7px 12px 0 12px
+          padding: 7px 10px 0 10px
           font-weight: bold
-          text-shadow: #FFF 1px 1px 1px
 
         {HOVER}
-          background: APPLE_CHIC
+          background: rgba(LIGHTEST_GRAY,1)
+          color: BLUE
           text-decoration: none
-
 
       &.on a
         {LINK}
           background: #FFF
           border-bottom: 1px solid #FFF
+          box-shadow: 0 -2px 2px rgba(0, 0, 0, 0.2)
           height: TAB_HEIGHT + 1
 
 
@@ -462,16 +474,14 @@ TAB_HEIGHT = 35px
 //
 
 SIDEBAR_WIDTH = 336px
-SIDEBAR_MARGIN_LEFT = 100px
+SIDEBAR_MARGIN_LEFT = 30px
 SIDEBAR_MARGIN_RIGHT = 40px
-CONTENT_PADDING_TOP = 50px
+CONTENT_PADDING_TOP = 35px
 
 .contentWrapper
-  background: #FFF
   float: left
   margin-right: - (SIDEBAR_WIDTH + SIDEBAR_MARGIN_LEFT + SIDEBAR_MARGIN_RIGHT)
   margin-top: HEADER_HEIGHT
-  padding: CONTENT_PADDING_TOP 0 50px LOGO_WIDTH
   position: relative
   width: 100%
 
@@ -482,24 +492,37 @@ CONTENT_PADDING_TOP = 50px
 
 
 .content
+  background: #FFF
+  border: 1px solid rgba(0, 0, 0, .1)
+  border-radius: 6px
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, .05)
+  margin-left: 10px
   margin-right: (SIDEBAR_WIDTH + SIDEBAR_MARGIN_LEFT + SIDEBAR_MARGIN_RIGHT)
+  padding: CONTENT_PADDING_TOP 50px 50px (LOGO_WIDTH - 10px)
+  z-index: 10
 
   h1
     border-bottom: 1px solid LIGHTEST_GRAY
     margin: 10px 0 30px 0
     padding-bottom: 20px
 
+  h2:first-child
+    margin-top: 10px
+
   ul:not(.listing)
     padding-left: 20px
 
+
 .breadcrumbs
-  font-size: 15px
+  font-size: 16px
   font-weight: bold
   text-transform: uppercase
 
   .divider::before
-    content: '\2192'
-    margin: 0 7px
+    content: '/'
+    // content: '\2192'
+    font-weight: bold
+    margin: 0 12px
 
 .noteNav
   margin-top: 30px
@@ -536,12 +559,10 @@ CONTENT_PADDING_TOP = 50px
 //
 
 .sidebar
-  background: #FFF
-  float: right
-  margin: CONTENT_PADDING_TOP SIDEBAR_MARGIN_RIGHT 0 SIDEBAR_MARGIN_LEFT
-  padding-top: HEADER_HEIGHT
+  float: left
+  padding: CONTENT_PADDING_TOP SIDEBAR_MARGIN_RIGHT 0 SIDEBAR_MARGIN_LEFT
   position: relative
-  width: SIDEBAR_WIDTH
+  width: SIDEBAR_WIDTH + SIDEBAR_MARGIN_LEFT + SIDEBAR_MARGIN_RIGHT
 
   .isHero &
     margin-top: HERO_HEIGHT
@@ -578,9 +599,7 @@ CONTENT_PADDING_TOP = 50px
 //
 
 .footer
-  background: #FFF
   clear: both
-  margin-bottom: 0
-  padding-bottom: 50px
+  padding: 50px 20px 50px LOGO_WIDTH
   position: relative
   width: 100%

@@ -1,5 +1,11 @@
 .breadcrumbs
-  each link, i in breadcrumbs
-    a(href='#{link.url}')= link.name
-    if i != breadcrumbs.length - 1
-      span.divider
+  a(href='/') Home
+  span.divider
+  if (locals.breadcrumbs)
+    each link, i in locals.breadcrumbs
+      if (link.url)
+        a(href='#{link.url}')= link.name
+      else
+        span= link.name
+      if (i != breadcrumbs.length - 1)
+        span.divider

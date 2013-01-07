@@ -150,7 +150,6 @@ exports.highlight = function (str, query) {
     , reStr = ''
 
   tokens.forEach(function (token, i) {
-    log(i)
     if (i != 0) {
       reStr += '|'
     }

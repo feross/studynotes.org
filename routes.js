@@ -22,7 +22,6 @@ function render(res, templateName, locals) {
     , config: config
     , courses: m.cache.courses
     , search_term: ''
-    , topnav: topnav
     }
 
   res.render(templateName, u.extend(defaultLocals, locals))
@@ -49,42 +48,13 @@ function render404(res, msg) {
   )
 }
 
-//
-// Top header links
-//
-var topnav =
-  { courses:
-    { url: '#'
-    , meta: { title: 'Browse all AP study notes' }
-    , shortname: 'AP Courses'
-    }
-
-  , astore:
-    { url: '/study-guides'
-    , meta: { title: 'Buy Amazon.com AP Study Guides' }
-    , shortname: 'Book Store'
-    }
-
-  // add: {
-  //   url: '/add/'
-  //   meta: { title: 'Add Notes' }
-  //   shortname: 'Add Notes'
-  // }
-
-  // login: {
-  //   url: '/login/'
-  //   meta: { title: 'Log In to StudyNotes' }
-  //   shortname: 'Log In'
-  // }
-  }
 
 //
-// Other routes without header links 
+// All routes
 //
-var other =
+var routes =
   { home:
     { url: '/'
-    , shortname: ''
     , hero:
       { title: 'AP Study Notes'
       , desc: 'Fast, free study tools for AP* students.'
@@ -93,6 +63,11 @@ var other =
       // desc: 'The secret to getting a 5 on the AP* exam.'
       }
     }
+
+  , astore:
+      { url: '/study-guides'
+      , meta: { title: 'Buy Amazon.com AP Study Guides' }
+      }
 
   , search:
     { url: '/search'
@@ -140,12 +115,11 @@ var other =
 
         render(res, 'course',
           { amazon: amazons[course.slug]
-          , breadcrumbs: []
           , cls: 'course ' + course.slug
           , course: course
           , hero:
             { title: course.name
-            , desc: 'Online Prep and Review'
+            , url: course.absoluteUrl
             , tabs: course.notetypes
             }
           , notetypes: course.notetypes
@@ -194,7 +168,13 @@ var other =
           render(res, 'notetype',
             { amazon: amazons[course.slug]
             , breadcrumbs: [ { name: course.name, url: course.url } ]
+            , cls: 'course ' + course.slug
             , course: course
+            , hero:
+            { title: course.name
+            , url: course.absoluteUrl
+            , tabs: course.notetypes
+            }
             , notetype: notetype
             , notes: notes
             , meta:
@@ -268,7 +248,13 @@ var other =
               [ { name: course.name, url: course.url }
               , { name: notetype.name, url: notetype.url }
               ]
+            , cls: 'course ' + course.slug
             , course: course
+            , hero:
+            { title: course.name
+            , url: course.absoluteUrl
+            , tabs: course.notetypes
+            }
             , notetype: notetype
             , note: note
             , noteNext: noteNext
@@ -296,7 +282,6 @@ var other =
 //
 // Initialize and register the app's routes
 //
-var routes = u.extend({}, topnav, other)
 
 u.each(routes, function (locals, templateName){
   if (locals.url == '#')

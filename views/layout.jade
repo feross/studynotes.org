@@ -82,33 +82,7 @@ block head
 
 body(class='#{locals.cls}')
 
-  header.header
-    block header
-      ul.left
-        li.home
-          a(href='/', title='Go to the front page of StudyNotes', class='home #{locals.cls == 'home' ? 'current' : ''}')= config.siteTitle
-      //- "off" class gets removed after search bar is positioned in JS
-      .search.off
-        form(action='/search/', method='GET')
-          input(autocorrect='off', autocomplete='off', autofocus, spellcheck='false', name='q', placeholder='Search for AP Courses and Topics...', type='text', value='#{locals.search_term}')
-      .autocomplete.off
-        a.result(href='#')
-          span.name
-          span.desc
-
-      ul.right
-        each item, cls in locals.topnav
-          li: a(href='#{item.url}', class='#{cls} #{locals.cls == cls ? 'current' : ''}')= item.shortname
-
-  .browseWrapper
-    ul.browse
-      each course in locals.courses
-        li
-          h2: a(href='#{course.url}')= course.name
-          ul
-            each notetype in course.notetypes
-              li: a(href='/#{course.slug}/#{notetype.slug}/')= notetype.name
-
+  include includes/header
   include includes/hero
 
   .contentWrapper

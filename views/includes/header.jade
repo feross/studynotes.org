@@ -1,0 +1,30 @@
+header.header
+  block header
+    ul.left
+      li.home
+        a(href='/', title='Go to the front page of StudyNotes', class='home #{locals.cls == 'home' ? 'current' : ''}')= config.siteTitle
+    
+    //- "off" class gets removed after search bar is positioned in JS
+    .search.off
+      form(action='/search/', method='GET')
+        input(autocorrect='off', autocomplete='off', autofocus, spellcheck='false', name='q', placeholder='Search for AP Courses and Topics...', type='text', value='#{locals.search_term}')
+    
+    .autocomplete.off
+      a.result(href='#')
+        span.name
+        span.desc
+
+    ul.right
+      li: a(href='#', class='courses', title='Browse all AP study notes').
+        Pick an AP Course
+      li: a(href='/study-guides/', class='study-guides', title='Buy Amazon.com AP Study Guides').
+        Book Store
+
+.browseWrapper
+  ul.browse
+    each course in locals.courses
+      li
+        h2: a(href='#{course.url}')= course.name
+        ul
+          each notetype in course.notetypes
+            li: a(href='/#{course.slug}/#{notetype.slug}/')= notetype.name

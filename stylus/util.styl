@@ -28,5 +28,5 @@ ellipsis()
 hero-image(imgSrc, direction = left, opacityStart = 0.2, opacityEnd = 0.05)
   // -ms-filter: '"progid:DXImageTransform.Microsoft.AlphaImageLoader(src=%s,sizingMethod=scale)"' % imgSrc
   background: 'url(%s)' % (imgSrc)
-  background: center center linear-gradient-image(100px direction, rgba(0,0,0,opacityStart), rgba(0,0,0,opacityEnd)) repeat, center center 'url(%s)' % (imgSrc) no-repeat
-  background-size: 100% 100%, cover
+  background: bottom left url('/images/hero-body-mask.png') repeat-x, center center linear-gradient-image(100px direction, rgba(0,0,0,opacityStart), rgba(0,0,0,opacityEnd)) repeat, center center 'url(%s)' % (imgSrc) no-repeat
+  background-size: auto auto, 100% 100%, cover
