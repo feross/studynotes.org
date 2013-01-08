@@ -138,7 +138,7 @@ SOLID_HEADER_BORDER_FOCUS = 3px solid #000
   border-bottom: HEADER_BORDER
   height: HEADER_HEIGHT
   left: 0
-  position: fixed
+  position: absolute
   top: 0
   width: 100%
   z-index: 10
@@ -408,7 +408,6 @@ TAB_HEIGHT = 35px
     display: block
     margin: 100px 25px 25px (LOGO_WIDTH / 2)
     text-align: left
-    transition: 0.5s opacity linear
     
     body.home &
       margin: 100px 25px 25px 25px
@@ -434,12 +433,6 @@ TAB_HEIGHT = 35px
       font-size: 25px
       body.home &
         font-size: 40px
-
-  .csstransitions &.dim
-    .text
-      opacity: 0
-    .tabs
-      opacity: 0
 
   ul.tabs
     height: TAB_HEIGHT

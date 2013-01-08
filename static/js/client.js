@@ -39,17 +39,14 @@ window.error = function() {
 
 window.u = _
 
-var $headerLeft = $('.header .left')
+var $browse = $('.browse')
+  , $coursesButton = $('.header .courses')
+  , $headerLeft = $('.header .left')
   , $headerRight = $('.header .right')
   , $search = $('.header .search')
   , $searchAndAutocomplete = $('.header .search, .header .autocomplete')
   , $html = $('html')
   , $window = $(window)
-  , $hero = $('.hero')
-  , $heroText = $('.hero .text')
-  , $heroTabs = $('.hero .tabs')
-  , heroTextTop = 75
-  , modernizrTransition = Modernizr.csstransitions
 
 // Disable caching of AJAX responses
 $.ajaxSetup ({
@@ -72,15 +69,17 @@ function updatesearchWidth() {
   // Continue to set the width every 100ms until fonts are done loading.
   // If fonts don't load, then wf-loading gets removed automatically
   // after 1000ms, so this won't run forever. 
-  if ($('html').hasClass('wf-loading')) {
+  if ($html.hasClass('wf-loading')) {
     setTimeout(updatesearchWidth, 100)
   }
 }
 
 // Show or hide the browse menu
 function toggleBrowseMenu(_switch) {
-  $('.browse').toggleClass('on', _switch)
-  $('.header .courses').toggleClass('on', _switch)
+  if ($browse.hasClass('on') != _switch) {
+    $browse.toggleClass('on', _switch)
+    $coursesButton.toggleClass('on', _switch)
+  }
 }
 
 // On DOM ready
@@ -102,11 +101,6 @@ $(function() {
     toggleBrowseMenu(false)
   })
 
-  var headerHeight = $('.header').height()
-  var heroBottom = $hero.length
-    ? $hero.offset().top + $hero.height() - headerHeight
-    : undefined
-
   // Scroll events  
   $window.on('scroll', u.throttle(function(){
     // Close browse menu on page scroll
@@ -116,33 +110,6 @@ $(function() {
     $search.removeClass('searching')
     $headerAutocomplete.addClass('off')
 
-    if ($hero.length) {
-      var windowScrollTop = $window.scrollTop()
-        , isSolid = $html.hasClass('solidHeader')
-        , isHeroDim = $hero.hasClass('dim')
-
-      // Toggle header change: solid <-> transparent
-      if (isSolid && windowScrollTop < heroBottom) {
-        $html.removeClass('solidHeader')
-      } else if (!isSolid && windowScrollTop >= heroBottom) {
-        $html.addClass('solidHeader')
-      }
-    
-      // Fade out hero text when underneath header
-      if (isHeroDim && windowScrollTop < heroTextTop) {
-        $hero.removeClass('dim')
-        if (!modernizrTransition) {
-          $heroText.animate({ opacity: 1 }, 500)
-          $heroTabs.animate({ opacity: 1 }, 500)
-        }
-      } else if (!isHeroDim && windowScrollTop >= heroTextTop) {
-        $hero.addClass('dim')
-        if (!modernizrTransition) {
-          $heroText.animate({ opacity: 0 }, 500)
-          $heroTabs.animate({ opacity: 0 }, 500)
-        }
-      }
-    }
   }, 100))
 
 
