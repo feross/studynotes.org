@@ -1,5 +1,6 @@
 var mongoose = require('mongoose')
   , Schema = mongoose.Schema
+  , _ = require('underscore')
 
 module.exports = function (callback){
   // Mongoose plugins
@@ -59,7 +60,7 @@ module.exports = function (callback){
     , lowercase: true
     }
 
-  var SLUG_UNIQUE = u.extend({}, SLUG, { unique: true })
+  var SLUG_UNIQUE = _.extend({}, SLUG, { unique: true })
 
   //
   // Model schemas
@@ -105,7 +106,7 @@ module.exports = function (callback){
 
           this.virtual('url').get(function(){
             var self = this
-            course = u.find(m.cache.courses, function (c){
+            course = _.find(m.cache.courses, function (c){
               return c.id == self.courseId.toString()
             })
 
@@ -137,10 +138,10 @@ module.exports = function (callback){
             var courseId = this.courseId.toString()
               , notetypeId = this.notetypeId.toString()
 
-            course = u.find(m.cache.courses, function (c){
+            course = _.find(m.cache.courses, function (c){
               return c.id == courseId
             })
-            notetype = u.find(course.notetypes, function (n){
+            notetype = _.find(course.notetypes, function (n){
               return n.id == notetypeId
             })
 
@@ -151,10 +152,10 @@ module.exports = function (callback){
             var courseId = this.courseId.toString()
               , notetypeId = this.notetypeId.toString()
 
-            course = u.find(m.cache.courses, function (c){
+            course = _.find(m.cache.courses, function (c){
               return c.id == courseId
             })
-            notetype = u.find(course.notetypes, function (n){
+            notetype = _.find(course.notetypes, function (n){
               return n.id == notetypeId
             })
 
@@ -166,12 +167,12 @@ module.exports = function (callback){
 
   // Setup up schemas and models.
   var models = {}
-  u.each(schemas, function (fields, name){
+  _.each(schemas, function (fields, name){
     
     // Remove the setup function from the fields object before creating a Schema,
     // but save it to be invoked later.
     var setup = fields.setup
-      , fields = u.omit(fields, 'setup')
+      , fields = _.omit(fields, 'setup')
       
       , schema = new Schema(fields)
 

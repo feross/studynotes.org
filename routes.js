@@ -1,6 +1,7 @@
 var amazons = require('./amazons')
   , search = require('./search')
   , randomquote = require('./randomquote')
+  , _ = require('underscore')
 
 var routes = {
   home: {
@@ -51,7 +52,7 @@ var routes = {
     meta: { title: 'Privacy Policy' },
     hero: {
       title: 'Privacy Policy',
-      desc: '(good bedtime reading)'
+      desc: 'i.e. excellent bedtime reading!'
     }
   },
 
@@ -98,7 +99,7 @@ var routes = {
       }
 
       render(res, 'course', {
-        amazon: amazons[course.slug],
+        amazon: amazonForCourse(course),
         cls: 'course ' + course.slug,
         course: course,
         hero: heroForCourse(course),
@@ -122,7 +123,7 @@ var routes = {
         return
       }
 
-      var notetype = u.find(course.notetypes, function (n){
+      var notetype = _.find(course.notetypes, function (n){
         return n.slug == p.notetypeSlug
       })
       if (!notetype) {
@@ -145,7 +146,7 @@ var routes = {
         }
 
         render(res, 'notetype', {
-          amazon: amazons[course.slug],
+          amazon: amazonForCourse(course),
           breadcrumbs: [ { name: course.name, url: course.url } ],
           cls: 'course ' + course.slug,
           course: course,
@@ -172,7 +173,7 @@ var routes = {
         return
       }
 
-      var notetype = u.find(course.notetypes, function (n){
+      var notetype = _.find(course.notetypes, function (n){
         return n.slug == p.notetypeSlug
       })
       if (!notetype) {
@@ -194,7 +195,7 @@ var routes = {
           return
         }
 
-        var note = u.find(notes, function (n){
+        var note = _.find(notes, function (n){
           return n.slug == p.noteSlug
         })
 
@@ -205,11 +206,11 @@ var routes = {
 
         var noteOrdering = note.ordering
 
-        var noteNext = u.find(notes, function (note){
+        var noteNext = _.find(notes, function (note){
           return note.ordering == noteOrdering + 1
         })
 
-        var notePrev = u.find(notes, function (note){
+        var notePrev = _.find(notes, function (note){
           return note.ordering == noteOrdering - 1
         })
 
@@ -217,7 +218,7 @@ var routes = {
         note.update({ $inc: { hits: 1 } }, { upsert: true }, util.noop)
 
         render(res, 'note', {
-          amazon: amazons[course.slug],
+          amazon: amazonForCourse(course),
           breadcrumbs: [
             { name: course.name, url: course.url },
             { name: notetype.name, url: notetype.url }
@@ -251,7 +252,7 @@ var routes = {
 // Initialize and register the app's routes
 //
 
-u.each(routes, function (locals, templateName){
+_.each(routes, function (locals, templateName){
   app.get(locals.url, function (req, res){
 
     // If locals.meta is missing `url`, try to add it
@@ -275,6 +276,12 @@ u.each(routes, function (locals, templateName){
     }
   })
 })
+
+
+function amazonForCourse (course) {
+  var amazon = amazons[course.slug]
+  return amazon[_.random(amazon.length - 1)]
+}
 
 
 function heroForCourse (course) {
@@ -310,7 +317,7 @@ function render(res, templateName, locals) {
     randomquote: randomquote()
   }
 
-  res.render(templateName, u.extend(defaultLocals, locals))
+  res.render(templateName, _.extend(defaultLocals, locals))
 }
 
 

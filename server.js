@@ -5,7 +5,6 @@ global.PORT = (process.argv.length > 2)
   : 4000
 
 // Globally-available dependencies
-global.u = global._ = require('underscore')
 global.util = require('./util')
 global.async = require('async')
 global.config = require('./config')
@@ -23,6 +22,7 @@ var http = require('http')
   , child_process = require('child_process')
   , cluster = require('cluster')
   
+  , _ = require('underscore')
   , express = require('express')
   , stylus = require('stylus')
   , nib = require('nib')
@@ -51,7 +51,7 @@ if (cluster.isMaster) {
     }
 
     // Fork workers.
-    u.times(numCPUs, function(i){
+    _.times(numCPUs, function(i){
       cluster.fork()
     })
 

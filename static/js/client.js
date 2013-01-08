@@ -37,8 +37,6 @@ window.error = function() {
 
 ;(function() {
 
-window.u = _
-
 var $browse = $('.browse')
   , $coursesButton = $('.header .courses')
   , $headerLeft = $('.header .left')
@@ -55,7 +53,7 @@ $.ajaxSetup ({
 
 // Set search bar's width so it fills the header correctly.
 // Need to ensure this gets called after Typekit fonts are loaded.
-function updatesearchWidth() {
+function updateSearchWidth() {
   var headerLeftWidth = $headerLeft.width()
     , headerRightWidth = $headerRight.width()
   $searchAndAutocomplete
@@ -70,7 +68,7 @@ function updatesearchWidth() {
   // If fonts don't load, then wf-loading gets removed automatically
   // after 1000ms, so this won't run forever. 
   if ($html.hasClass('wf-loading')) {
-    setTimeout(updatesearchWidth, 100)
+    setTimeout(updateSearchWidth, 100)
   }
 }
 
@@ -85,7 +83,12 @@ function toggleBrowseMenu(_switch) {
 // On DOM ready
 $(function() {
 
-  updatesearchWidth()
+  updateSearchWidth()
+
+  // Make external links open in new window
+  $("a[href^='http:'], a[href^='https:']")
+    .not("[href*='www.apstudynotes.org']")
+    .attr('target','_blank')
 
   // Browse menu dropdown
   $('.header .courses').on('click', function (e){
@@ -102,7 +105,7 @@ $(function() {
   })
 
   // Scroll events  
-  $window.on('scroll', u.throttle(function(){
+  $window.on('scroll', _.throttle(function(){
     // Close browse menu on page scroll
     toggleBrowseMenu(false)
 
