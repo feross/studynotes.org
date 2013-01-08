@@ -112,6 +112,7 @@ $(function() {
     // Hide autocomplete dropdown
     $search.removeClass('searching')
     $headerAutocomplete.addClass('off')
+    setAutocompletePosition(0)
 
   }, 100))
 
@@ -122,7 +123,7 @@ $(function() {
     , $headerAutocomplete = $('.header .autocomplete')
     , lastAutocompleteTime = +(new Date)
     , lastAutocompleteQuery
-    , autocompletePosition = 1 // 0 means nothing is selected, 1 is the first result
+    , autocompletePosition = 0 // 0 means nothing is selected, 1 is the first result
 
 
   /**
@@ -131,7 +132,9 @@ $(function() {
    * @param {Number} position index (0 = nothing selected, 1 = first result, etc.)
    */
   var setAutocompletePosition = function (position){
-    autocompletePosition = position
+    autocompletePosition = _.isNaN(position)
+      ? 1
+      : position
 
     var $results = $('.header .autocomplete .result')
       , len = $results.length
@@ -162,6 +165,7 @@ $(function() {
     } else if ($searchInput.val() == '') {
       $search.removeClass('searching')
       $headerAutocomplete.addClass('off')
+      setAutocompletePosition(0)
     
     } else {
       $search.addClass('searching')
@@ -170,10 +174,8 @@ $(function() {
       var time = +(new Date)
       $.get('/autocomplete-endpoint/', params, function(data) {
         
-        if ($searchInput.val() == '') {
-          $headerAutocomplete.addClass('off')
+        if ($searchInput.val() != '' && time >= lastAutocompleteTime) {
 
-        } else if (time >= lastAutocompleteTime) {
           lastAutocompleteTime = time
           lastAutocompleteQuery = data.q
 
@@ -199,7 +201,7 @@ $(function() {
             })
             .removeClass('off')
 
-          setAutocompletePosition(autocompletePosition)
+          setAutocompletePosition(1)
         }
       })
     }
@@ -223,30 +225,37 @@ $(function() {
   $searchInput.on('keydown', function (e){
     if (e.which == 38) { // up key
       e.preventDefault()
-      e.stopPropagation()
-
       setAutocompletePosition(autocompletePosition - 1)
 
     } else if (e.which == 40) { // down key
       e.preventDefault()
-      e.stopPropagation()
-
       setAutocompletePosition(autocompletePosition + 1)
     }
   })
   $('.header .search form').on('submit', function (e){ // enter key
-    if (autocompletePosition != 0) {
-      e.preventDefault()
+    if (autocompletePosition == 0) {
+      if ($searchInput.val().length) {
+        return // go to search page
+      } else {
+        e.preventDefault()
+        return // do nothing
+      }
+    }
 
-      var $selected = $('.header .autocomplete .result.selected')
+    e.preventDefault()
+
+    var $selected = $('.header .autocomplete .result.selected')
+    if ($selected.length) {
       window.location = $selected.attr('href')
     }
+
   })
   
   $searchInput.on('blur', function (e){
     window.setTimeout(function (){
       $search.removeClass('searching')
       $headerAutocomplete.addClass('off')
+      setAutocompletePosition(0)
     }, 100)
   })
 
