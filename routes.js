@@ -56,6 +56,14 @@ var routes = {
     }
   },
 
+  'photo-credits': {
+    url: '/photo-credits',
+    meta: { title: 'Photo Credits' },
+    hero: {
+      title: 'Photo Credits'
+    }
+  },
+
   search: {
     url: '/search',
     handler: function (req, res){
@@ -238,13 +246,6 @@ var routes = {
         })
       })
     }
-  },
-
-  notFound: {
-    url: '*',
-    handler: function (req, res){
-      render404(res)
-    }
   }
 }
 
@@ -331,7 +332,7 @@ function render404(res, msg) {
   if (msg) error(msg) // don't return since we want to serve a 404 page
   
   res.status(404)
-  render(res, 'notFound',
+  render(res, 'not-found',
     { err: msg
     , ads: false
     , meta:
