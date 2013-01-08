@@ -301,13 +301,14 @@ function heroForCourse (course) {
  * @param  {Object} locals       Local variables to make available to template
  */
 function render(res, templateName, locals) {
-  var defaultLocals =
-    { cls: templateName
-    , config: config
-    , courses: m.cache.courses
-    , search_term: ''
-    , randomquote: randomquote()
-    }
+  var defaultLocals = {
+    ads: PRODUCTION,
+    cls: templateName,
+    config: config,
+    courses: m.cache.courses,
+    search_term: '',
+    randomquote: randomquote()
+  }
 
   res.render(templateName, u.extend(defaultLocals, locals))
 }

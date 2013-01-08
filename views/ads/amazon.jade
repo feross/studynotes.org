@@ -7,9 +7,9 @@ if amazon
 
   .amazon
     h3 Want to study like a boss? Try this!
+    h4: a(href='#{productUrl}', target='_blank') #{amazon.name}
     a(href='#{productUrl}', target='_blank')
       img(src='#{productImg}')
-    h4: a(href='#{productUrl}', target='_blank') #{amazon.name}
     p !{amazon.body}
     p: a(href='#{productUrl}', target='_blank') Buy this item at Amazon.com now!
     img(src='#{trackingImg}', width='1', height='1', alt='', style='border:none !important; margin:0px !important;')

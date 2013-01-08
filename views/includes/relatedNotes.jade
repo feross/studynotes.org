@@ -1,5 +1,5 @@
 if locals.relatedNotes
-  h3 More #{course.name} #{notetype.name}
+  h3 More #{notetype.name} for #{course.name}
   ul.listing
     each note in locals.relatedNotes
       li: a(href='#{note.url}')= note.name
