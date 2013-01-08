@@ -36,11 +36,9 @@ block head
   meta(property='fb:admins', content='1347524341')
   meta(property='fb:app_id', content='466476846723021')
 
-
   if (locals.meta.url)
     meta(property='og:url', content='#{locals.meta.url}')
     link(rel='canonical', href='#{locals.meta.url}')
-
 
   //- TODO: responsive layout
   //- meta(name='viewport', content='width=device-width, initial-scale=1.0')
@@ -50,7 +48,6 @@ block head
 
   //- TODO: add search service?, see: https://github.com/opensearch.xml 
   //- <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="StudyNotes" /> 
-
 
   link(rel='stylesheet', href='/css/main.css')
 
@@ -71,7 +68,7 @@ block head
       transition: 0.2s opacity ease-in;
     }
   script
-    (function () {
+    (function (){
       var config = {
         kitId: 'djj4afz',
         scriptTimeout: 1000

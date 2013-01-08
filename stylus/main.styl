@@ -34,6 +34,12 @@ DARKER_GRAY = #333
 LOGO_WIDTH = 131px
 TEXTURE_BACKGROUND = #F4F4F4 url('/images/body.gif')
 
+.gray
+  color: LIGHT_GRAY
+
+.red
+  color: red
+
 //
 // STRUCTURE AND TYPOGRAPHY
 //
@@ -104,9 +110,6 @@ ul.listing
 
   .content &
     font-weight: bold
-
-.gray
-  color: LIGHT_GRAY
 
 .center
   text-align: center
@@ -397,8 +400,11 @@ TAB_HEIGHT = 35px
     hero-image: '/images/hero/us-government.jpg'
   body.course.us-history &
     hero-image: '/images/hero/us-history-2.jpg'
-
+  body.privacy &, body.about &, body.contact &, body.plagiarism & 
+    hero-image: '/images/hero/fine-print.jpg'
+  
   .text
+    color: #FFF
     display: block
     margin: 100px 25px 25px (LOGO_WIDTH / 2)
     text-align: left

@@ -15,11 +15,12 @@ var quotes = [
   ['Well done is better than well said.', 'Benjamin Franklin'],
   ['Who seeks shall find.', 'Sophocles'],
   ['Learning is not attained by chance, it must be sought for with ardor and diligence.', 'Abigail Adams'],
-  ['Stay hungry, stay foolish.', 'Steve Jobs']
+  ['Stay hungry, stay foolish.', 'Steve Jobs'],
+  ['To teach is to learn twice.', 'Joseph Joubert']
 ]
 
 module.exports = function() {
   var quote = quotes[_.random(quotes.length - 1)]
   return '<span class="randomquote"><q>' + quote[0] + '</q> <span class="author">' +
-         quote[1] + '</span></span>'
+         quote[1].replace(' ', '&nbsp;') + '</span></span>'
 }

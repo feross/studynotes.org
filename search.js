@@ -8,7 +8,7 @@ var async = require('async')
 var EXACT_MATCH = 1000
   , WORD_MATCH = 100
 
-exports.autocomplete = function (query, cb) {
+exports.autocomplete = function (query, cb){
   var results = []
 
   query = query.trim()
@@ -38,7 +38,7 @@ exports.autocomplete = function (query, cb) {
       .sort('-hits')
       .exec(function(err, notes) {
         if (err) { cb(err); return }
-        notes.forEach(function (note) {
+        notes.forEach(function (note){
           results.push({
             weight: exports.weight(note, query),
             model: note
@@ -51,7 +51,7 @@ exports.autocomplete = function (query, cb) {
   ], function(err){
 
     // Sort results by weight
-    results = _.sortBy(results, function (result) {
+    results = _.sortBy(results, function (result){
       return -1 * result.weight
     })
 
@@ -59,7 +59,7 @@ exports.autocomplete = function (query, cb) {
     results.splice(MAX_RESULTS)
 
     // Only return necessary information
-    results = _.map(results, function (result, i) {
+    results = _.map(results, function (result, i){
       return {
         desc: result.model.searchDesc,
         name: exports.highlight(result.model.name, query),
@@ -87,7 +87,7 @@ exports.autocomplete = function (query, cb) {
  * @param  {String} q search query
  * @return {RegExp}
  */
-exports.regexForQuery = function (query) {
+exports.regexForQuery = function (query){
   var tokens = query.split(' ')
     , str = '(^|\\s)[^a-z]*' + escapeRegExp(tokens[0])
 
@@ -105,7 +105,7 @@ exports.regexForQuery = function (query) {
  * @param  {String} query
  * @return {Number} weight
  */
-exports.weight = function (result, query) {
+exports.weight = function (result, query){
   var weight = 0
     , words = query.split(' ')
 
@@ -125,7 +125,7 @@ exports.weight = function (result, query) {
   }
 
   // Word match
-  words.forEach(function (word) {
+  words.forEach(function (word){
     var re = new RegExp('(^|\\s)' + escapeRegExp(word) + '($|\\s)', 'i')
     if (re.test(result.name)) {
       weight += WORD_MATCH
@@ -145,11 +145,11 @@ exports.weight = function (result, query) {
  * @return {String} HTML string containing highlights 
  */
 
-exports.highlight = function (str, query) {
+exports.highlight = function (str, query){
   var tokens = query.split(' ')
     , reStr = ''
 
-  tokens.forEach(function (token, i) {
+  tokens.forEach(function (token, i){
     if (i != 0) {
       reStr += '|'
     }

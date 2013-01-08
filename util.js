@@ -7,7 +7,7 @@ var cluster = require('cluster')
  * @arguments Stuff to log
  */
 
-global.log = function () {
+global.log = function (){
   var args = Array.prototype.slice.call(arguments, 0)
   if (cluster.isWorker) {
     args.unshift('[' + cluster.worker.id + ']')
@@ -22,7 +22,7 @@ global.log = function () {
  * @arguments Stuff to log
  */
 
-global.error = function () {
+global.error = function (){
   var args = Array.prototype.slice.call(arguments, 0)
   if (cluster.isWorker) {
     args.unshift('[' + cluster.worker.id + ']')
@@ -46,7 +46,7 @@ module.exports = exports = require('underscore.string')
  * @return {String} URL slug
  */
 
-exports.slugify = function (v) {
+exports.slugify = function (v){
   var str = (v || '')
   .toLowerCase()
   .replace(/[^-a-z0-9 ]/g, '')
@@ -63,7 +63,7 @@ exports.slugify = function (v) {
  * @return Dash-separated String
  */
   
-exports.titleify = function (/* ... */) {
+exports.titleify = function (/* ... */){
   var args = Array.prototype.slice.call(arguments, 0)
   return args.join(' - ')
 }
@@ -74,7 +74,7 @@ exports.titleify = function (/* ... */) {
  * @param {Integer} x The number
  */
 
-exports.addCommasToInteger = function (x) {
+exports.addCommasToInteger = function (x){
   x += ''
   var rgx = /(\d+)(\d{3})/
   

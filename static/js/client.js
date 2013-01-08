@@ -160,7 +160,7 @@ $(function() {
    *
    * @param {Number} position index (0 = nothing selected, 1 = first result, etc.)
    */
-  var setAutocompletePosition = function (position) {
+  var setAutocompletePosition = function (position){
     autocompletePosition = position
 
     var $results = $('.header .autocomplete .result')
@@ -183,7 +183,7 @@ $(function() {
   /**
    * Perform search for autocomplete results and display them
    */
-  var doSearchAutocomplete = function () {
+  var doSearchAutocomplete = function (){
 
     if ($searchInput.val() === lastAutocompleteQuery &&
         !$headerAutocomplete.hasClass('off')) {
@@ -198,7 +198,7 @@ $(function() {
       
       var params = { q: $searchInput.val() }
       var time = +(new Date)
-      $.get('/autocomplete_endpoint/', params, function(data) {
+      $.get('/autocomplete-endpoint/', params, function(data) {
         
         if ($searchInput.val() == '') {
           $headerAutocomplete.addClass('off')
@@ -211,18 +211,18 @@ $(function() {
             .render(data.results, { // template directives
               name: {
                 // don't escape search result name, to show formatting
-                html: function (params) { 
+                html: function (params){ 
                   return this.name
                 }
               },
               result: {
-                href: function (params) {
+                href: function (params){
                   return this.url
                 },
-                'data-position': function (params) { // position
+                'data-position': function (params){ // position
                   return this.position
                 },
-                'class': function (params) {
+                'class': function (params){
                   return params.element.className + ' ' + this.type.toLowerCase()
                 }
               }
@@ -235,7 +235,7 @@ $(function() {
     }
   }
 
-  $searchInput.on('focus', function (e) {
+  $searchInput.on('focus', function (e){
     if ($searchInput.val() != '') {
       $search.addClass('searching')
       $headerAutocomplete.removeClass('off')
@@ -243,14 +243,14 @@ $(function() {
   })
   $searchInput.on('keyup', doSearchAutocomplete)
 
-  $('.header .autocomplete').on('mouseover', '.result', function (e) {
+  $('.header .autocomplete').on('mouseover', '.result', function (e){
     var position = parseInt($(this).attr('data-position'))
     setAutocompletePosition(position)
   })
 
   // Autocomplete keyboard shortcuts
 
-  $searchInput.on('keydown', function (e) {
+  $searchInput.on('keydown', function (e){
     if (e.which == 38) { // up key
       e.preventDefault()
       e.stopPropagation()
@@ -264,7 +264,7 @@ $(function() {
       setAutocompletePosition(autocompletePosition + 1)
     }
   })
-  $('.header .search form').on('submit', function (e) { // enter key
+  $('.header .search form').on('submit', function (e){ // enter key
     if (autocompletePosition != 0) {
       e.preventDefault()
 
@@ -273,8 +273,8 @@ $(function() {
     }
   })
   
-  $searchInput.on('blur', function (e) {
-    window.setTimeout(function () {
+  $searchInput.on('blur', function (e){
+    window.setTimeout(function (){
       $search.removeClass('searching')
       $headerAutocomplete.addClass('off')
     }, 100)

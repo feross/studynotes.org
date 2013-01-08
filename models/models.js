@@ -76,7 +76,7 @@ module.exports = function (callback){
             return '/' + this.slug + '/'
           })
 
-          this.virtual('searchDesc').get(function () {
+          this.virtual('searchDesc').get(function (){
             return 'Course'
           })
 
@@ -133,7 +133,7 @@ module.exports = function (callback){
 
           this.index({ courseId: 1, notetypeId: 1})
 
-          this.virtual('url').get(function () {
+          this.virtual('url').get(function (){
             var courseId = this.courseId.toString()
               , notetypeId = this.notetypeId.toString()
 
@@ -147,7 +147,7 @@ module.exports = function (callback){
             return '/' + course.slug + '/' + notetype.slug + '/' + this.slug + '/'
           })
 
-          this.virtual('searchDesc').get(function () {
+          this.virtual('searchDesc').get(function (){
             var courseId = this.courseId.toString()
               , notetypeId = this.notetypeId.toString()
 
