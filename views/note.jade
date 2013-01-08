@@ -13,8 +13,7 @@ block content
     if noteNext
       a.next(href='#{noteNext.url}') Next: #{noteNext.name}
 
-  include ads/amazon
-
 append sidebar
-  include includes/noteInfo
   include includes/relatedNotes
+  include ads/amazon
+  include includes/noteInfo

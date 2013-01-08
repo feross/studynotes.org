@@ -99,7 +99,7 @@ p
 
 ul.listing
   list-style: none
-  margin: 25px 0
+  margin-bottom: 25px
   li
     background: #EEE
     color: DARKER_GRAY
@@ -566,7 +566,7 @@ CONTENT_PADDING_TOP = 35px
 
 .sidebar
   float: left
-  padding: CONTENT_PADDING_TOP SIDEBAR_MARGIN_RIGHT 0 SIDEBAR_MARGIN_LEFT
+  padding: 5px SIDEBAR_MARGIN_RIGHT 0 SIDEBAR_MARGIN_LEFT
   position: relative
   width: SIDEBAR_WIDTH + SIDEBAR_MARGIN_LEFT + SIDEBAR_MARGIN_RIGHT
 
@@ -577,6 +577,18 @@ CONTENT_PADDING_TOP = 35px
 
   .ad
     margin-bottom: 15px
+
+  h1, h2, h3, h4
+    font-family: BODY_FONT
+
+  h3
+    border-top: 1px solid rgba(0,0,0,0.075)
+    font-size: 18px
+    font-weight: bold
+    margin-top: 1em
+    margin-bottom: 0.25em
+    padding-top: 0.75em
+
 
 
 //
@@ -589,8 +601,7 @@ CONTENT_PADDING_TOP = 35px
 // AMAZON
 //
 .amazon
-  border-top: 1px solid LIGHTER_GRAY
-  margin-top: 40px
+  margin: 20px 0
 
   h3
     margin-bottom: 10px

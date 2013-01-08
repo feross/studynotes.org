@@ -253,6 +253,21 @@ var routes = {
 
 u.each(routes, function (locals, templateName){
   app.get(locals.url, function (req, res){
+
+    // If locals.meta is missing `url`, try to add it
+    // This is so that static pages will get the canonical url meta tag
+    if ((!locals.meta || !locals.meta.url)
+        && locals.url.indexOf(':') == -1
+        && locals.url.indexOf('*') == -1) {
+      
+      var absoluteUrl = config.siteUrl + locals.url
+      if (absoluteUrl[absoluteUrl.length - 1] != '/')
+        absoluteUrl += '/'
+
+      locals.meta = locals.meta || {}
+      locals.meta.url = absoluteUrl
+    }
+
     if (locals.handler) {
       locals.handler(req, res)
     } else {
@@ -293,20 +308,6 @@ function render(res, templateName, locals) {
     , search_term: ''
     , randomquote: randomquote()
     }
-
-  // If locals.meta is missing `url`, try to add it
-  // This is so that static pages will get the canonical url meta tag
-  if ((!locals.meta || !locals.meta.url)
-      && locals.url.indexOf(':') == -1
-      && locals.url.indexOf('*') == -1) {
-    
-    var absoluteUrl = config.siteUrl + locals.url
-    if (absoluteUrl[absoluteUrl.length - 1] != '/')
-      absoluteUrl += '/'
-
-    locals.meta = locals.meta || {}
-    locals.meta.url = absoluteUrl
-  }
 
   res.render(templateName, u.extend(defaultLocals, locals))
 }
