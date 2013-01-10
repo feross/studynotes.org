@@ -421,17 +421,17 @@ TAB_HEIGHT = 35px
       {HOVER}
         text-decoration: none
 
-    h1, h2
+    h2, h3
       font-family: HERO_FONT
       text-shadow: 1px 1px 2px rgba(#000, 0.8)
       margin: 0.3em 0
-    h1
+    h2
       font-size: 50px
       font-weight: bold
       text-shadow: 2px 2px 3px rgba(#000, 0.8)
       body.home &
         font-size: 80px
-    h2
+    h3
       font-size: 25px
       body.home &
         font-size: 40px
@@ -532,34 +532,6 @@ CONTENT_PADDING_TOP = 35px
     font-weight: bold
     margin: 0 12px
 
-.noteNav
-  margin-top: 30px
-
-  .prev, .next
-    display: inline-block
-    ellipsis()
-    font-weight: bold
-    width: 45%      
-
-  .prev
-    float: left
-
-    &:before
-      content: '\25c0'
-      float: left
-      font-size: 12px
-      padding-right: 10px
-
-  .next
-    float: right
-    text-align: right
-
-    &:before
-      content: '\25b6'
-      float: right
-      font-size: 12px
-      padding-left: 10px
-   
 
 
 //
@@ -616,6 +588,45 @@ body.about
     padding: 0 0 20px 20px
     width: 40%
 
+
+//
+// NOTE PAGE
+// 
+
+.keepStudying
+  color: GRAY
+  margin-top: 40px
+  text-align: center
+
+.noteNav
+  .prev, .next
+    display: inline-block
+    ellipsis()
+    font-weight: bold
+    width: 45%      
+
+  .prev
+    float: left
+
+    &:before
+      content: '\25c0'
+      float: left
+      font-size: 12px
+      padding-right: 10px
+
+  .next
+    float: right
+    text-align: right
+
+    &:before
+      content: '\25b6'
+      float: right
+      font-size: 12px
+      padding-left: 10px
+
+.cite
+  padding-left: 55px
+  text-indent: -55px
 
 //
 // FOOTER

@@ -3,15 +3,20 @@ extends layout
 block content
   include includes/breadcrumbs
   h1= note.name
+
   | !{note.body}
 
+  p.keepStudying You just finished <strong>"#{note.name}"</strong>. Keep&nbsp;studying!
+
   .noteNav.clearfix
-    p.center.gray You just finished <strong>"#{note.name}" for #{course.name}</strong>. Keep&nbsp;studying!
     if notePrev
       a.prev(href='#{notePrev.url}') Previous: #{notePrev.name}
 
     if noteNext
       a.next(href='#{noteNext.url}') Next: #{noteNext.name}
+
+  h2 How to cite this note (with MLA)
+  .cite Aboukhadijeh, Feross. "#{note.name}" StudyNotes.org. StudyNotes, Inc., #{moment(note.createDate).format('DD MMM. YYYY.')} Web. #{moment().format('DD MMM. YYYY.')} &lt;#{note.absoluteUrl}&gt;.
 
 append sidebar
   include includes/relatedNotes

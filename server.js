@@ -26,6 +26,7 @@ var http = require('http')
   , express = require('express')
   , stylus = require('stylus')
   , nib = require('nib')
+  , moment = require('moment')
 
 // Make all globals accessible from command line
 module.exports = global
@@ -101,6 +102,7 @@ if (cluster.isMaster) {
   // Allow access to the current environment from Jade
   app.locals.PRODUCTION = PRODUCTION
   app.locals.util = util
+  app.locals.moment = moment
 
   require('./models')(function (){
     var routes = require('./routes')

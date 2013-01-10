@@ -3,13 +3,13 @@ if (locals.hero)
     .text
       if (locals.hero.url)
         a(href='#{hero.url}')
-          h1!= hero.title
+          h2!= hero.title
           if (locals.hero.desc)
-            h2!= hero.desc
+            h3!= hero.desc
       else
-        h1!= hero.title
+        h2!= hero.title
         if (locals.hero.desc)
-          h2!= hero.desc
+          h3!= hero.desc
 
     if (locals.hero.tabs)
       ul.tabs.clearfix
