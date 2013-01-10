@@ -71,6 +71,7 @@ module.exports = function (callback){
       , desc: String
       , slug: SLUG_UNIQUE
       , image: String
+      , examDate: Date
 
       , setup: function (){
           this.virtual('url').get(function(){

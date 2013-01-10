@@ -65,7 +65,7 @@ exports.autocomplete = function (query, cb){
         name: exports.highlight(result.model.name, query),
         position: i + 1,
         type: result.model.constructor.modelName,
-        url: result.model.absoluteUrl,
+        url: result.model.url,
         weight: result.weight
       }
     })

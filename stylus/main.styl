@@ -34,12 +34,6 @@ DARKER_GRAY = #333
 LOGO_WIDTH = 131px
 TEXTURE_BACKGROUND = #F4F4F4 url('/images/body.gif')
 
-.gray
-  color: LIGHT_GRAY
-
-.red
-  color: red
-
 //
 // STRUCTURE AND TYPOGRAPHY
 //
@@ -110,15 +104,6 @@ ul.listing
 
   .content &
     font-weight: bold
-
-.center
-  text-align: center
-
-.col
-  float: left
-
-.row
-  clear: both
 
 
 //
@@ -408,10 +393,12 @@ TAB_HEIGHT = 35px
   .text
     color: #FFF
     display: block
+    float: left
     margin: 100px 25px 25px (LOGO_WIDTH / 2)
     text-align: left
     
     body.home &
+      float: none
       margin: 100px 25px 25px 25px
       text-align: center
 
@@ -549,7 +536,7 @@ CONTENT_PADDING_TOP = 35px
   .isHero body.home &
     margin-top: HERO_HOME_HEIGHT
 
-  div
+  & > div
     margin: 1.2em 0
 
   h1, h2, h3, h4
@@ -627,6 +614,43 @@ body.about
 .cite
   padding-left: 55px
   text-indent: -55px
+
+
+//
+// COUNTDOWN
+// 
+
+.countdown
+  color: LIGHTEST_GRAY
+  float: right
+  margin: 85px 60px 0 0
+  width: 300px
+
+  .time
+    float: left
+    width: 25%
+
+    div
+      font-size: 35px
+      line-height: 1.1em
+      margin: 0
+      text-align: center
+    span
+      display: block
+      font-size: 13px
+      margin: 0
+      text-align: center
+
+  h3
+    font-family: BODY_FONT
+    font-size: 24px
+    // font-weight: bold
+    margin: 15px 0
+    text-align: center
+    text-transform: uppercase
+
+    &.date
+      font-weight: normal
 
 //
 // FOOTER

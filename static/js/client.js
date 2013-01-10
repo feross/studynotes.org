@@ -1,42 +1,5 @@
 ;(function() {
 
-// Avoid `console` errors in browsers that lack a console.
-var method
-  , noop = function noop() {}
-  , methods = [
-  'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
-  'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
-  'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
-  'timeStamp', 'trace', 'warn']
-  , length = methods.length
-  , console = (window.console = window.console || {})
-
-while (length--) {
-  method = methods[length]
-
-  // Only stub undefined methods.
-  if (!console[method]) {
-    console[method] = noop
-  }
-}
-
-// Short-named logging functions for convenience
-window.log = function() {
-  var args = Array.prototype.slice.call(arguments, 0)
-  if (console.log.apply) console.log.apply(console, args)
-}
-window.error = function() {
-  var args = Array.prototype.slice.call(arguments, 0)
-  args.unshift('ERROR:')
-  if (console.error.apply) console.error.apply(console, args)
-}
-
-}())
-
-
-
-;(function() {
-
 var $browse = $('.browse')
   , $coursesButton = $('.header .courses')
   , $headerLeft = $('.header .left')
@@ -104,7 +67,9 @@ $(function() {
     toggleBrowseMenu(false)
   })
 
-  // Scroll events  
+  /**
+   * Browser scroll event
+   */
   $window.on('scroll', _.throttle(function(){
     // Close browse menu on page scroll
     toggleBrowseMenu(false)
@@ -220,19 +185,23 @@ $(function() {
     setAutocompletePosition(position)
   })
 
-  // Autocomplete keyboard shortcuts
+
+  /**
+   * Autocomplete keyboard shortcuts
+   */
 
   $searchInput.on('keydown', function (e){
-    if (e.which == 38) { // up key
+    if (e.which == 38) { // UP
       e.preventDefault()
       setAutocompletePosition(autocompletePosition - 1)
 
-    } else if (e.which == 40) { // down key
+    } else if (e.which == 40) { // DOWN
       e.preventDefault()
       setAutocompletePosition(autocompletePosition + 1)
     }
   })
-  $('.header .search form').on('submit', function (e){ // enter key
+
+  $('.header .search form').on('submit', function (e){ // ENTER
     if (autocompletePosition == 0) {
       if ($searchInput.val().length) {
         return // go to search page
@@ -260,7 +229,9 @@ $(function() {
   })
 
 
-  // Load polyfills for old browsers
+  /**
+   * Load polyfills for old browsers.
+   */
   Modernizr.load(
     [ { test: Modernizr.placeholder
       , nope: '/js/lib/polyfill/jquery.placeholder.min.js'
@@ -273,9 +244,14 @@ $(function() {
 
 })
 
-// On DOM load
+
+/**
+ * Executed when DOM is fully loaded.
+ */
 $(window).load(function() {
 
 })
+
+
 
 }())

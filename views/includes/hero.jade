@@ -16,3 +16,6 @@ if (locals.hero)
         each tab in hero.tabs
           li(class='#{locals.notetype && tab.slug == notetype.slug ? "on" : ""}')
             a(href='#{tab.url}')= tab.name
+
+    if (locals.course)
+      include countdown

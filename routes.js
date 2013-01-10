@@ -290,7 +290,7 @@ function heroForCourse (course) {
   return {
     title: course.name,
     desc: 'Class Notes, Test Prep, Review Materials, and More',
-    url: course.absoluteUrl,
+    url: course.url,
     tabs: course.notetypes
   }
 }
