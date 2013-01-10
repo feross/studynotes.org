@@ -19,6 +19,8 @@ block content
   .cite Aboukhadijeh, Feross. "#{note.name}" StudyNotes.org. StudyNotes, Inc., #{moment(note.createDate).format('DD MMM. YYYY.')} Web. #{moment().format('DD MMM. YYYY.')} &lt;#{note.absoluteUrl}&gt;.
 
 append sidebar
+  include includes/noteInfo
   include includes/relatedNotes
   include ads/amazon
-  include includes/noteInfo
+  if (locals.course)
+    include includes/countdown

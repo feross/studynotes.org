@@ -393,12 +393,10 @@ TAB_HEIGHT = 35px
   .text
     color: #FFF
     display: block
-    float: left
     margin: 100px 25px 25px (LOGO_WIDTH / 2)
     text-align: left
     
     body.home &
-      float: none
       margin: 100px 25px 25px 25px
       text-align: center
 
@@ -545,10 +543,40 @@ CONTENT_PADDING_TOP = 35px
   h3
     font-size: 19px
     font-weight: bold
-    margin-top: 1em
-    padding-top: 1em
+    margin: 2em 0 1em 0
 
+  //
+  // COUNTDOWN
+  // 
 
+  .countdown
+    margin-top: 2em
+
+    .time
+      float: left
+      width: 25%
+
+      div
+        font-size: 35px
+        line-height: 1.1em
+        margin: 0
+        text-align: center
+      span
+        display: block
+        font-size: 13px
+        margin: 0
+        text-align: center
+
+    h3
+      text-align: center
+      text-transform: uppercase
+
+      &.left-to-study
+        font-weight: normal
+        margin-top: 1em
+
+    // .date
+    //   display: none
 
 //
 // AMAZON
@@ -556,6 +584,10 @@ CONTENT_PADDING_TOP = 35px
 .amazon
   background-color: rgba(0,0,0,0.05)
   padding: 0 15px 10px 15px
+
+  h3
+    margin-top: 1em
+    padding-top: 1em
 
   h4
     font-weight: bold
@@ -616,41 +648,6 @@ body.about
   text-indent: -55px
 
 
-//
-// COUNTDOWN
-// 
-
-.countdown
-  color: LIGHTEST_GRAY
-  float: right
-  margin: 85px 60px 0 0
-  width: 300px
-
-  .time
-    float: left
-    width: 25%
-
-    div
-      font-size: 35px
-      line-height: 1.1em
-      margin: 0
-      text-align: center
-    span
-      display: block
-      font-size: 13px
-      margin: 0
-      text-align: center
-
-  h3
-    font-family: BODY_FONT
-    font-size: 24px
-    // font-weight: bold
-    margin: 15px 0
-    text-align: center
-    text-transform: uppercase
-
-    &.date
-      font-weight: normal
 
 //
 // FOOTER
