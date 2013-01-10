@@ -2,17 +2,22 @@ extends layout
 
 block content
 
-  h2 Welcome to the new AP* Study Notes!
-  p This website offers <strong>awesome study notes</strong> that will help you with <strong>Advanced Placement* homework and AP exams</strong>. We offer <strong>free study materials</strong> for the following Advanced Placement subjects:
-  ul
-    li: a(href='/us-history/') AP U.S. History (APUSH)
-    li: a(href='/us-government/') AP U.S. Government &amp; Politics (AP Gov)
-    li: a(href='/english/') AP English Language and Composition
-    li: a(href='/english/') AP English Literature and Composition
+  h1 Welcome to the new AP* Study Notes!
 
-  p APstudynotes.org is <strong>the premiere resource for AP Gov, AP USH, and AP English notes</strong> on the Internet!
+  p We have the best Advanced Placement* study guides, practice tests, and notes on the web, contributed and curated by students and teachers like yourself. <strong>The site is used by millions of students in all 50 U.S. states to prepare for AP* courses and exams.</strong>
+
+  h2 We have <strong>free notes</strong> for the following AP* classes:
+  
+  ul
+    li: h3: a(href='/us-history/') AP U.S. History (APUSH)
+    li: h3: a(href='/us-government/') AP U.S. Government &amp; Politics (AP Gov)
+    li: h3: a(href='/english/') AP English Language and Composition
+    li: h3: a(href='/english/') AP English Literature and Composition
+
+  p: br
 
   p <strong>Over the coming weeks</strong>, we will have notes for the following courses:
+  
   ul
     li AP Art History
     li AP Biology (AP Bio)
@@ -41,6 +46,7 @@ block content
     li AP World History (APWH)
 
   p Our <strong>free AP notes</strong> include:
+  
   ul
     li course guides
     li chapter outlines
@@ -55,16 +61,4 @@ block content
     li cram sheets
     li course information
   
-  p Welcome to APstudynotes.org, the premiere resource for AP Gov, AP USH, and AP English notes on the Internet!
-
-  p <strong>Free. $0. Zilch. Nada.</strong><br />That's how much it will cost you to use StudyNotes!
-  ul
-    li Post on the <strong>forum</strong> (coming soon) where you can receive help with your homework from other members
-    li Receive <strong>tips and tricks</strong> on how to prepare for the <strong>AP tests</strong>
-    li Complain about how hard your class is to other students who feel your pain!
-
-  //
-    each course in courses
-      .card
-        h2= course.name
-        img(src='/images/#{course.image}')
+  p StudyNotes is the best place for AP Gov, AP USH, and AP English notes and we'll soon be the best for all AP classes!

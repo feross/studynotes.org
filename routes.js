@@ -7,7 +7,7 @@ var routes = {
   home: {
     url: '/',
     hero: {
-      title: 'AP* Study Notes',
+      title: 'Study Notes',
       desc: 'Fast, free study tools for AP* students'
       // desc: 'The best AP* study guides'
       // desc: 'Study tools for smart students'
