@@ -284,16 +284,23 @@ $(function() {
 
   $searchInput.on('keydown', function (e){
     if (e.which == 38) { // UP
-      e.preventDefault()
-      setAutocompletePosition(autocompletePosition - 1)
+      if ($searchInput.val() == '') {
+        $searchInput.trigger('blur') // User meant to scroll page down -- not type into search box
+      } else {
+        e.preventDefault()
+        setAutocompletePosition(autocompletePosition - 1)
+      }
 
     } else if (e.which == 40) { // DOWN
-      e.preventDefault()
-      setAutocompletePosition(autocompletePosition + 1)
+      if ($searchInput.val() == '') {
+        $searchInput.trigger('blur')
+      } else {
+        e.preventDefault()
+        setAutocompletePosition(autocompletePosition + 1)
+      }
 
     } else if (e.which == 32) { // SPACE
       if ($searchInput.val() == '') {
-        // User meant to scroll page down -- not type into search box
         $searchInput.trigger('blur')
       }
     }
