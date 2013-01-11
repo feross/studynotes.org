@@ -12,6 +12,8 @@ var $browse = $('.browse')
   , $searchAndAutocomplete = $('.header .search, .header .autocomplete')
   , $html = $('html')
   , $window = $(window)
+  , $searchInput = $('.header .search input')
+  , $headerAutocomplete = $('.header .autocomplete')
   , $content = $('.content')
   , $contentToolbar = $('.content .toolbar')
 
@@ -176,9 +178,7 @@ $(function() {
   /**
    * Autocomplete
    */
-  var $searchInput = $('.header .search input')
-    , $headerAutocomplete = $('.header .autocomplete')
-    , lastAutocompleteTime = +(new Date)
+  var lastAutocompleteTime = +(new Date)
     , lastAutocompleteQuery
     , autocompletePosition = 0 // 0 means nothing is selected, 1 is the first result
 
@@ -322,6 +322,27 @@ $(function() {
     }, 100)
   })
 
+  /**
+   * Filter keystrokes from keymaster when user is searching. 
+   * https://github.com/madrobby/keymaster
+   */
+  key.filter = function (event){
+    log($)
+    return $searchInput.val() == ''
+  }
+
+  key('left', function () {
+    var $prev = $('.noteNav .prev')
+    if ($prev.length) {
+      window.location = $prev.attr('href')
+    }
+  })
+  key('right', function () {
+    var $next = $('.noteNav .next')
+    if ($next.length) {
+      window.location = $next.attr('href')
+    }
+  })
 
   /**
    * Load polyfills for old browsers.
