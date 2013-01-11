@@ -1,25 +1,77 @@
 // Dependencies
 var child_process = require('child_process')
+  , fs = require('fs')
+  , path = require('path')
+  , async = require('async')
+  , _ = require('underscore')
+  , md5 = require('md5')
 
-// Paths to command-line programs
-var STYLUS_BINARY = './node_modules/stylus/bin/stylus'
-  , NIB_BINARY = './node_modules/nib/lib/nib'
+// Constants
+var STYLUS = './node_modules/stylus/bin/stylus'
+  , NIB = './node_modules/nib/lib/nib'
+  , UGLIFY = './node_modules/uglify-js/bin/uglifyjs'
+  , OUT_PATH = 'static/build'
+
+/**
+ * List of all client JS files.
+ * @type {Array}
+ */
+exports.JS_FILENAMES = [
+    ['lib/jquery-1.8.2.js', 'lib/jquery-1.8.2.min.js']
+  , ['lib/underscore-1.4.3.js', 'lib/underscore-1.4.3.min.js']
+  , ['lib/transparency-0.7.5.js', 'lib/transparency-0.7.5.min.js']
+  , ['lib/moment-1.7.2.js', 'lib/moment-1.7.2.min.js']
+  , ['lib/keymaster-1.0.2.js', 'lib/keymaster-1.0.2.min.js']
+  , 'util.js'
+  , 'countdown.js'
+  , 'client.js'
+]
+
+var prefix = 'js/'
+exports.JS_FILENAMES = _.map(exports.JS_FILENAMES, function (file) {
+  if (_.isArray(file)) {
+    return prefix + (PRODUCTION ? file[1] : file[0])
+  } else {
+    return prefix + file
+  }
+})
+
+var COMPILED_PATHS = {
+  css: OUT_PATH + '/css/main.css',
+  js: OUT_PATH + '/js/main.js'
+}
 
 
 /**
  * Build all app static resources (Stylus, JS contcatenation & minification)
- * @param  {Function} cb Called when done
+ * @param  {Function} cb
  */
 exports.buildAll = function (cb) {
-  exports.buildStylus(function (err) {
+  async.auto({
+      makeBuildDir: exports.makeBuildDir
+    , buildStylus: ['makeBuildDir', exports.buildStylus]
+    , buildJS: ['makeBuildDir', exports.buildJS]
+    , generateMd5s: ['makeBuildDir', 'buildStylus', 'buildJS', exports.generateMd5s]
+    , renameToMd5s: ['makeBuildDir', 'buildStylus', 'buildJS', 'generateMd5s', exports.renameToMd5s]
+  }, function(err, results) {
     if (err) {
       error(err)
-      cb('Building static resources failed. Can\'t proceed')
-      return
+      cb('Building static resources failed.')
+    } else {
+      var md5s = results.generateMd5s
+      cb(null, md5s)
     }
-
-    cb(null)
   })
+
+}
+
+/**
+ * Delete and re-create the directory where static resources will be stored.
+ * @param  {Function} cb
+ */
+exports.makeBuildDir = function (cb) {
+  var command = 'rm -rf ' + OUT_PATH + '; mkdir -p ' + OUT_PATH + '/css; mkdir -p ' + OUT_PATH + '/js;'
+  child_process.exec(command, { cwd: __dirname }, cb)
 }
 
 /**
@@ -27,10 +79,85 @@ exports.buildAll = function (cb) {
  * @param  {Function} cb
  */
 exports.buildStylus = function (cb) {
-  var command = 'rm -rf static/css; mkdir -p static/css; ' + STYLUS_BINARY + ' stylus/main.styl ' + '--use ' + NIB_BINARY + (PRODUCTION ? ' --compress' : '') + ' --out static/css'
+  var command = STYLUS + ' stylus/main.styl ' + '--use ' + NIB + (PRODUCTION ? ' --compress' : '') + ' --out ' + OUT_PATH+'/css'
+  child_process.exec(command, { cwd: __dirname }, cb)
+}
 
-  child_process.exec(command, { cwd: __dirname }, function(err, stdout, stderr){
-    cb(err)
+/**
+ * Concat and minify JS files
+ * @param  {Function} cb
+ */
+exports.buildJS = function (cb) {
+  // Don't compile JS while developing. We include scripts individually in `layout.jade`.
+  if (!PRODUCTION) {
+    cb(null)
+    return
+  }
+
+  var prefix = 'static/'
+  var files = _.map(exports.JS_FILENAMES, function (file) {
+    if (_.isArray(file)) {
+      return prefix + (PRODUCTION ? file[1] : file[0])
+    } else {
+      return prefix + file
+    }
   })
+
+  var command = UGLIFY + ' ' + files.join(' ') + ' -o ' + OUT_PATH+'/js/main.js'
+  child_process.exec(command, { cwd: __dirname }, cb)
+}
+
+/**
+ * Generates md5s for the compiled JS and CSS resources.
+ * (Note: filenames are hardcoded.)
+ * 
+ * @param  {Function} cb
+ */
+exports.generateMd5s = function (cb) {
+  async.parallel({
+    css: fs.readFile.bind(undefined, path.join(__dirname, COMPILED_PATHS.css)),
+    js: function (cb) {
+      if (PRODUCTION) {
+        fs.readFile(path.join(__dirname, COMPILED_PATHS.js), cb)
+      } else {
+        cb(null)
+      }
+    }
+  }, function(err, results) {
+    if (err) {
+      error(err)
+      return
+    }
+
+    var md5s = {}
+    _.each(results, function (fileData, resourceType) {
+      if (!fileData) return
+      md5s[resourceType] = md5(fileData)
+    })
+
+    cb(null, md5s)
+  })
+
+}
+
+/**
+ * Renames the compiled JS and CSS resources to include their MD5 checksums
+ * in the filename.
+ * @param  {Function} cb
+ * @param  {Object}   results   Results of functions that have been completed from the `async.auto` call in `buildAll`
+ *                              See: https://github.com/caolan/async#auto
+ */
+exports.renameToMd5s = function (cb, results) {
+  md5s = _.pairs(results.generateMd5s)
+  async.forEach(md5s, function (md5Pair, cb) {
+    var resourceType = md5Pair[0]
+      , md5 = md5Pair[1]
+      , re = new RegExp('\.' + resourceType + '$', 'i')
+      , oldFilename = COMPILED_PATHS[resourceType]
+      , newFilename = COMPILED_PATHS[resourceType].replace(re, '-' + md5 + '.' + resourceType)
+    
+    var command = 'cp ' + oldFilename + ' ' + newFilename
+    child_process.exec(command, { cwd: __dirname }, cb)
+  }, cb)
 }
 

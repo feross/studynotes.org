@@ -12,7 +12,9 @@
     "mongoose": "*",
     "async": "*",
     "underscore.string": "*",
-    "moment": "*"
+    "moment": "*",
+    "uglify-js": "*",
+    "MD5": "*"
   },
   "devDependencies": {}
 }

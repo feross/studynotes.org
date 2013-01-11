@@ -48,8 +48,11 @@ block head
 
   //- TODO: add search service?, see: https://github.com/opensearch.xml 
   //- <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="StudyNotes" /> 
-
-  link(rel='stylesheet', href='/css/main.css')
+  
+  if (PRODUCTION)
+    link(rel='stylesheet', href='/build/css/main-#{locals.CSS_MD5}.css')
+  else
+    link(rel='stylesheet', href='/build/css/main.css')
 
   //- TODO: add print stylesheet. should this be a media query in main file?
   //- link(rel='stylesheet', href='/stylesheets/print.css', media='print')
@@ -94,29 +97,16 @@ body(class='#{locals.cls}')
 
   include includes/footer
   
-  //- Scripts
-  //- TODO: concat all scripts together into one.
   block scripts
-    
-    //- Libraries
+
     if (PRODUCTION)
-      script(src='/js/lib/jquery-1.8.2.min.js')
-      script(src='/js/lib/underscore-1.4.3.min.js')
-      script(src='/js/lib/transparency-0.7.5.min.js')
-      script(src='/js/lib/moment-1.7.2.min.js')
-      script(src='/js/lib/keymaster-1.0.2.min.js')
+      script(src='/build/js/main-#{locals.JS_MD5}.js')
     else
-      script(src='/js/lib/jquery-1.8.2.js')
-      script(src='/js/lib/underscore-1.4.3.js')
-      script(src='/js/lib/transparency-0.7.5.js')
-      script(src='/js/lib/moment-1.7.2.js')
-      script(src='/js/lib/keymaster-1.0.2.js')
+      each file in locals.JS_FILENAMES
+        script(src='/#{file}')
       | <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 
-    //- StudyNotes code
-    script(src='/js/util.js')
-    script(src='/js/countdown.js')
-    script(src='/js/client.js')
+    
 
     //- Countdown script
     if (locals.course)

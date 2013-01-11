@@ -3,5 +3,5 @@
     if (locals.meta.url)
       div(class='fb-like', data-href='#{locals.meta.url}', data-send='false', data-width='400', data-show-faces='false')
     if noteNext
-      a.next(href='#{noteNext.url}') Next →
+      a.next(href='#{noteNext.url}', title='Next: #{noteNext.name}') Next →
     .navigate-msg Use ← → keys to navigate

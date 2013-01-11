@@ -5,8 +5,8 @@
 out
 build
 
-# Ignore compiled css assets
-static/css/
+# Ignore compiled assets
+static/build/
 
 # Numerous always-ignore extensions
 *.diff

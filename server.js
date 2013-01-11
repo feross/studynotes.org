@@ -27,28 +27,32 @@ var http = require('http')
 module.exports = global
 
 // Number of cluster children to spawn
-var numCPUs = PRODUCTION
+var NUM_CPUS = PRODUCTION
   ? os.cpus().length
   : 1
 
 if (cluster.isMaster) {
-
-  build.buildAll(function (err) {
+  build.buildAll(function (err, md5s) {
     if (err) { error(err); return }
 
     // Fork workers.
-    _.times(numCPUs, function(i){
-      cluster.fork()
+    _.times(NUM_CPUS, function (i){
+      var childEnv = {
+        'CSS_MD5': md5s.css,
+        'JS_MD5': md5s.js
+      }
+      cluster.fork(childEnv)
     })
 
     cluster.on('exit', function (worker, code, signal){
       log('worker ' + worker.process.pid + ' died')
     })
 
-    log('Spawned ' + numCPUs + ' worker processes.')
+    log('Spawned ' + NUM_CPUS + ' worker processes.')
   })
 
 } else {
+
   // Express application
   global.app = express()
 
@@ -69,11 +73,18 @@ if (cluster.isMaster) {
   // app.use(express.cookieParser('your secret here'))
   // app.use(express.session())
 
+  // Make certain JS libraries available to Jade templates
+  app.locals.PRODUCTION = PRODUCTION
+  app.locals.util = util
+  app.locals.moment = moment
+  app.locals.CSS_MD5 = process.env['CSS_MD5']
+  app.locals.JS_MD5 = process.env['JS_MD5']
+  
   if (PRODUCTION) {
     app.use(express.logger('short'))
   } else {
-    // Pretty html while developing
     app.locals.pretty = true
+    app.locals.JS_FILENAMES = build.JS_FILENAMES
 
     app.use(express.logger('dev')) // concise output colored by response status
     app.use(express.errorHandler({showStack: true, dumpExceptions: true}))
@@ -84,10 +95,7 @@ if (cluster.isMaster) {
 
   app.use(app.router)
 
-  // Allow access to the current environment from Jade
-  app.locals.PRODUCTION = PRODUCTION
-  app.locals.util = util
-  app.locals.moment = moment
+
 
   require('./models')(function (err){
     if (err) {

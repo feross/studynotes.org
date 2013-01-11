@@ -1,4 +1,3 @@
-;(function() {
 
 /**
  * Cache DOM element references that are used in DOM events that get triggered
@@ -100,7 +99,6 @@ window.fbAsyncInit = function() {
  */
 $(function() {
 
-  // Run this ASAP so search bar looks good.
   updateSearchWidth()
 
   loadFacebookSDK()
@@ -367,6 +365,3 @@ $(window).load(function() {
 
 })
 
-
-
-}())
