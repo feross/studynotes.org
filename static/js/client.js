@@ -290,6 +290,12 @@ $(function() {
     } else if (e.which == 40) { // DOWN
       e.preventDefault()
       setAutocompletePosition(autocompletePosition + 1)
+
+    } else if (e.which == 32) { // SPACE
+      if ($searchInput.val() == '') {
+        // User meant to scroll page down -- not type into search box
+        $searchInput.trigger('blur')
+      }
     }
   })
 
@@ -325,7 +331,6 @@ $(function() {
    * https://github.com/madrobby/keymaster
    */
   key.filter = function (event){
-    log($)
     return $searchInput.val() == ''
   }
 
