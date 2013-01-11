@@ -278,14 +278,16 @@ SOLID_HEADER_BORDER_FOCUS = 3px solid #000
   .autocomplete
     background: #FFF
     border: 1px solid LIGHT_GRAY 
+    z-index: 50
 
     a.result
       {LINK}
         color: black
         display: block
+        ellipsis()
         padding: 8px 14px
         width: 100%
-        ellipsis()
+        z-index: 50
 
       {HOVER}
         color: black
@@ -386,11 +388,11 @@ TAB_HEIGHT = 35px
   body.home &
     height: HERO_HOME_HEIGHT + HERO_EXTRA_HEIGHT_FOR_FADE
     hero-image: 'outdoor-ipad-books.jpg', top
-  body.course.english &
+  body.course-english &
     hero-image: 'english.jpg'
-  body.course.us-government &
+  body.course-us-government &
     hero-image: 'us-government.jpg'
-  body.course.us-history &
+  body.course-us-history &
     hero-image: 'us-history-2.jpg'
   body.privacy &, body.about &, body.contact &, body.plagiarism & 
     hero-image: 'fine-print.jpg'
@@ -496,6 +498,7 @@ CONTENT_PADDING_TOP = 35px
   border: 1px solid rgba(0, 0, 0, .1)
   border-radius: 6px
   box-shadow: 0 0 10px 1px rgba(0, 0, 0, .05)
+  position: relative
   margin-left: 10px
   margin-right: (SIDEBAR_WIDTH + SIDEBAR_MARGIN_LEFT + SIDEBAR_MARGIN_RIGHT)
   padding: CONTENT_PADDING_TOP 50px 50px 50px
@@ -506,11 +509,57 @@ CONTENT_PADDING_TOP = 35px
     margin: 10px 0 30px 0
     padding-bottom: 20px
 
+    body.note &
+      border-bottom: none
+      margin-bottom: 0 // since toolbar will add the border
+
   h2:first-child
     margin-top: 10px
 
   ul:not(.listing)
     padding-left: 20px
+
+  //
+  // CONTENT TOOLBAR
+  //
+  .ghost
+    height: 56px
+    width: 100%
+
+  .toolbar
+    @extend .content .ghost
+    background: #FFF
+    border-top: 1px solid LIGHTEST_GRAY
+    border-bottom: 1px solid LIGHTEST_GRAY
+    z-index: 20
+
+    &.sticky
+      border-bottom: 1px solid LIGHTER_GRAY
+      position: fixed
+      top: 0
+
+    .fb-like
+      float: left
+      margin-top: 15px
+
+    a.next
+      {LINK}
+        background: BLUE
+        border-radius: 3px
+        color: #FFF
+        float: right
+        font-size: 19px
+        font-weight: bold
+        height: 35px
+        line-height: 1.9em
+        margin-top: 10px
+        padding: 0 0 0 15px
+        text-transform: uppercase
+        width: 100px
+      
+      {HOVER}
+        background: DARK_BLUE
+        text-decoration: none
 
 
 .breadcrumbs
@@ -523,6 +572,8 @@ CONTENT_PADDING_TOP = 35px
     // content: '\2192'
     font-weight: bold
     margin: 0 12px
+
+
 
 
 
@@ -715,9 +766,6 @@ body.about
     color: GRAY
     display: block
     margin: 5px 0
-
-    &.light
-      color: LIGHT_GRAY
 
 
 

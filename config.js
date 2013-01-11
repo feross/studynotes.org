@@ -18,6 +18,6 @@ module.exports = {
   siteTitle: 'Study Notes',
   siteUrl: PRODUCTION // no trailing slash
     ? 'http://www.apstudynotes.org'
-    : 'http://localhost:' + PORT
+    : 'http://local.apstudynotes.org:' + PORT
 
 }

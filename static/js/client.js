@@ -1,5 +1,9 @@
 ;(function() {
 
+/**
+ * Cache DOM element references that are used in DOM events that get triggered
+ * frequently (e.g. scroll, resize)
+ */
 var $browse = $('.browse')
   , $coursesButton = $('.header .courses')
   , $headerLeft = $('.header .left')
@@ -8,14 +12,23 @@ var $browse = $('.browse')
   , $searchAndAutocomplete = $('.header .search, .header .autocomplete')
   , $html = $('html')
   , $window = $(window)
+  , $content = $('.content')
+  , $contentToolbar = $('.content .toolbar')
 
-// Disable caching of AJAX responses
+
+/**
+ * Disable caching of jQuery AJAX responses
+ * (workaround for callbacks not firing if the response was cached)
+ */
 $.ajaxSetup ({
     cache: false
 })
 
-// Set search bar's width so it fills the header correctly.
-// Need to ensure this gets called after Typekit fonts are loaded.
+
+/**
+ * Set search bar's width so it fills the header correctly.
+ * (Need to ensure this gets called after Typekit fonts are loaded.)
+ */
 function updateSearchWidth() {
   var headerLeftWidth = $headerLeft.width()
     , headerRightWidth = $headerRight.width()
@@ -27,33 +40,79 @@ function updateSearchWidth() {
 
   $search.removeClass('off')
 
-  // Continue to set the width every 100ms until fonts are done loading.
-  // If fonts don't load, then wf-loading gets removed automatically
-  // after 1000ms, so this won't run forever. 
+  /**
+   * Continue to set the width every 100ms until fonts are done loading.
+   * 
+   * (If fonts don't load, then wf-loading gets removed automatically
+   * after 1000ms, so this won't run forever.)
+   */
   if ($html.hasClass('wf-loading')) {
     setTimeout(updateSearchWidth, 100)
   }
 }
 
-// Show or hide the browse menu
+
+/**
+ * Show or hide the browse menu.
+ */
 function toggleBrowseMenu(_switch) {
-  if ($browse.hasClass('on') != _switch) {
-    $browse.toggleClass('on', _switch)
-    $coursesButton.toggleClass('on', _switch)
-  }
+  $browse.toggleClass('on', _switch)
+  $coursesButton.toggleClass('on', _switch)
 }
 
-// On DOM ready
+
+/**
+ * Loads the Facebook SDK asynchronously. Calls `window.fbAsyncInit` when done loading.
+ */
+function loadFacebookSDK() {
+  (function(d){
+     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0]
+     if (d.getElementById(id)) {return}
+     js = d.createElement('script'); js.id = id; js.async = true
+     js.src = "//connect.facebook.net/en_US/all.js"
+     ref.parentNode.insertBefore(js, ref)
+   }(document))
+}
+
+
+/**
+ * Executed when the Facebook SDK is ready.
+ */
+window.fbAsyncInit = function() {
+  // init the FB JS SDK
+  FB.init({
+    appId      : '466476846723021', // App ID from the App Dashboard
+    channelUrl : '//www.apstudynotes.org/channel.html', // Channel File for x-domain communication
+    status     : true, // check the login status upon init?
+    cookie     : true, // set sessions cookies to allow your server to access the session?
+    xfbml      : true  // parse XFBML tags on this page?
+  });
+
+  // Additional initialization code such as adding Event Listeners goes here
+
+};
+
+
+/**
+ * Executed when `document` is ready.
+ */
 $(function() {
 
+  // Run this ASAP so search bar looks good.
   updateSearchWidth()
 
-  // Make external links open in new window
+  loadFacebookSDK()
+
+  /**
+   * Make external links open in new window
+   */
   $("a[href^='http:'], a[href^='https:']")
     .not("[href*='www.apstudynotes.org']")
     .attr('target','_blank')
 
-  // Browse menu dropdown
+  /**
+   * Browse menu dropdown
+   */
   $('.header .courses').on('click', function (e){
     // Only handle left-clicks
     if (e.which != 1) return
@@ -62,15 +121,33 @@ $(function() {
     e.preventDefault()
   })
 
-  // Close browse menu on search focus
+  /**
+   * Close browse menu on search focus
+   */
   $search.on('focusin', function (e){
     toggleBrowseMenu(false)
   })
 
   /**
+   * Browser resize event
+   */
+  var contentToolbarTop
+    , contentWidth
+  $window.on('resize', _.throttle(function (){
+    $contentToolbar.removeClass('sticky')
+    contentToolbarTop = $contentToolbar.length
+      ? $contentToolbar.offset().top
+      : null
+    contentWidth = $content.width()
+
+    $window.trigger('scroll')
+  }, 100))
+  $window.trigger('resize')
+
+  /**
    * Browser scroll event
    */
-  $window.on('scroll', _.throttle(function(){
+  $window.on('scroll', _.throttle(function (){
     // Close browse menu on page scroll
     toggleBrowseMenu(false)
 
@@ -79,11 +156,26 @@ $(function() {
     $headerAutocomplete.addClass('off')
     setAutocompletePosition(0)
 
+    if (contentToolbarTop) {
+      var scrollTop = $window.scrollTop() // current vertical position from the top
+      
+      if (scrollTop > contentToolbarTop) { 
+        $contentToolbar
+          .addClass('sticky')
+          .css({width: contentWidth})
+      } else {
+        $contentToolbar
+          .removeClass('sticky')
+          .css({width: ''})
+      }
+    }
+
   }, 100))
 
 
-  // Autocomplete
-
+  /**
+   * Autocomplete
+   */
   var $searchInput = $('.header .search input')
     , $headerAutocomplete = $('.header .autocomplete')
     , lastAutocompleteTime = +(new Date)
@@ -96,6 +188,7 @@ $(function() {
    *
    * @param {Number} position index (0 = nothing selected, 1 = first result, etc.)
    */
+  
   var setAutocompletePosition = function (position){
     autocompletePosition = _.isNaN(position)
       ? 1
@@ -121,6 +214,7 @@ $(function() {
   /**
    * Perform search for autocomplete results and display them
    */
+  
   var doSearchAutocomplete = function (){
 
     if ($searchInput.val() === lastAutocompleteQuery &&
@@ -187,7 +281,7 @@ $(function() {
 
 
   /**
-   * Autocomplete keyboard shortcuts
+   * Autocomplete keyboard navigation
    */
 
   $searchInput.on('keydown', function (e){

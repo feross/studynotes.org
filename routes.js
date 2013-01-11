@@ -109,7 +109,7 @@ var routes = {
 
       render(res, 'course', {
         amazon: amazonForCourse(course),
-        cls: 'course ' + course.slug,
+        cls: 'course course-' + course.slug,
         course: course,
         hero: heroForCourse(course),
         notetypes: course.notetypes,
@@ -157,7 +157,7 @@ var routes = {
         render(res, 'notetype', {
           amazon: amazonForCourse(course),
           breadcrumbs: [ { name: course.name, url: course.url } ],
-          cls: 'course ' + course.slug,
+          cls: 'notetype course-'+course.slug,
           course: course,
           hero: heroForCourse(course),
           notetype: notetype,
@@ -232,7 +232,7 @@ var routes = {
             { name: course.name, url: course.url },
             { name: notetype.name, url: notetype.url }
           ],
-          cls: 'course ' + course.slug,
+          cls: 'note course-'+course.slug,
           course: course,
           hero: heroForCourse(course),
           notetype: notetype,
