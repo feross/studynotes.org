@@ -4,7 +4,7 @@ var child_process = require('child_process')
   , path = require('path')
   , async = require('async')
   , _ = require('underscore')
-  , md5 = require('md5')
+  , md5 = require('MD5')
 
 // Constants
 var STYLUS = './node_modules/stylus/bin/stylus'
