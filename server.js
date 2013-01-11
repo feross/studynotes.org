@@ -104,7 +104,11 @@ if (cluster.isMaster) {
   app.locals.util = util
   app.locals.moment = moment
 
-  require('./models')(function (){
+  require('./models')(function (err){
+    if (err) {
+      error('Connecting to DB or loading models has failed, so server cannot start')
+      return
+    }
     var routes = require('./routes')
 
     // Start the server -- workers will all share a TCP connection

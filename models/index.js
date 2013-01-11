@@ -7,8 +7,7 @@ module.exports = function (callback){
     [ function (cb){
         global.db =
           mongoose.createConnection( 'mongodb://' + 
-                                     config.db.user + ':' +
-                                     config.db.pass + '@' + 
+                                     config.db.user + '@' + 
                                      config.db.host + ':' + 
                                      config.db.port + '/' + 
                                      config.db.database
