@@ -9,8 +9,6 @@ block content
     p.desc!= notetype.shortDesc
 
 append sidebar
-  include ads/amazon
-
-prepend sidebar
   if (locals.course)
     include includes/countdown
+  include ads/amazon
