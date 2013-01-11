@@ -15,6 +15,7 @@ block content
     if noteNext
       a.next(href='#{noteNext.url}') Next: #{noteNext.name}
 
+  hr
   h2 How to cite this note (with MLA)
   .cite Aboukhadijeh, Feross. "#{note.name}" StudyNotes.org. StudyNotes, Inc., #{moment(note.createDate).format('DD MMM. YYYY.')} Web. #{moment().format('DD MMM. YYYY.')} &lt;#{note.absoluteUrl}&gt;.
 
@@ -22,5 +23,3 @@ append sidebar
   include includes/noteInfo
   include includes/relatedNotes
   include ads/amazon
-  if (locals.course)
-    include includes/countdown
