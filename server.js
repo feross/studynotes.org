@@ -9,24 +9,19 @@ global.util = require('./util')
 global.async = require('async')
 global.config = require('./config')
 
-
-// Paths to command-line programs
-var STYLUS_PATH = './node_modules/stylus/bin/stylus'
-  , NIB_PATH = './node_modules/nib/lib/nib'
-
 // Dependencies
 var http = require('http')
   , path = require('path')
   , fs = require('fs')
   , os = require('os')
-  , child_process = require('child_process')
   , cluster = require('cluster')
-  
   , _ = require('underscore')
   , express = require('express')
   , stylus = require('stylus')
   , nib = require('nib')
   , moment = require('moment')
+
+  , build = require('./build')
 
 // Make all globals accessible from command line
 module.exports = global
@@ -37,19 +32,9 @@ var numCPUs = PRODUCTION
   : 1
 
 if (cluster.isMaster) {
-  // Build stylus files
-  var buildStylus =
-    'rm -rf static/css; mkdir -p static/css; ' +
-    STYLUS_PATH + ' stylus/main.styl ' + 
-    '--use ' + NIB_PATH + ' --compress --out static/css'
 
-  child_process.exec( buildStylus
-                    , { cwd: __dirname }
-                    , function(err, stdout, stderr){
-    if (err) {
-      error(err)
-      return
-    }
+  build.buildAll(function (err) {
+    if (err) { error(err); return }
 
     // Fork workers.
     _.times(numCPUs, function(i){
