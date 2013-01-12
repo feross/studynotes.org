@@ -1,10 +1,21 @@
 extends layout
 
+append toolbar
+  if noteNext
+    a.btn.next(href='#{noteNext.url}', title='Next: #{noteNext.name}') Next →
+    .navigate-msg Use ← → keys to navigate
+
+append sidebar
+  include includes/ads/adsense-rect
+  include includes/noteInfo
+  include includes/relatedNotes
+  include includes/ads/adsense-rect
+
 block content
   include includes/breadcrumbs
   h1= note.name
 
-  include includes/contentToolbar
+  include includes/toolbar
 
   | !{note.body}
 
@@ -21,7 +32,5 @@ block content
   h2 How to cite this note (with MLA)
   .cite Aboukhadijeh, Feross. "#{note.name}" StudyNotes.org. StudyNotes, Inc., #{moment(note.createDate).format('DD MMM. YYYY.')} Web. #{moment().format('DD MMM. YYYY.')} &lt;#{note.absoluteUrl}&gt;.
 
-append sidebar
-  include includes/noteInfo
-  include includes/relatedNotes
-  include ads/amazon
+
+

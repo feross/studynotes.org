@@ -503,12 +503,15 @@ CONTENT_PADDING_TOP = 35px
   padding: CONTENT_PADDING_TOP 50px 50px 50px
   z-index: 10
 
+  .like
+    height: 26px
+
   h1
     border-bottom: 1px solid LIGHTEST_GRAY
     margin: 10px 0 30px 0
     padding-bottom: 20px
 
-    body.note &
+    body.note &, body.notetype &, body.course &
       border-bottom: none
       margin-bottom: 0 // since toolbar will add the border
 
@@ -596,7 +599,7 @@ a.btn
   width: SIDEBAR_WIDTH + SIDEBAR_MARGIN_LEFT + SIDEBAR_MARGIN_RIGHT
 
   .isHero &
-    margin-top: HERO_HEIGHT
+    margin-top: 120px
   .isHero body.home &
     margin-top: HERO_HOME_HEIGHT
 
@@ -634,15 +637,15 @@ a.btn
         text-align: center
 
     h3
+      font-size: 24px
       text-align: center
       text-transform: uppercase
 
       &.left-to-study
+        font-size: 20px
         font-weight: normal
         margin-top: 1em
 
-    // .date
-    //   display: none
 
 //
 // AMAZON

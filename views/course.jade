@@ -1,13 +1,13 @@
 extends layout
 
+append sidebar
+  include includes/ads/adsense-rect
+  include includes/countdown
+
 block content
-  //- include includes/breadcrumbs
+  h1 #{course.name} Notes
+  include includes/toolbar
 
   each notetype in locals.notetypes
     h2: a(href='#{notetype.url}')= notetype.name
     p.desc!= notetype.shortDesc
-
-append sidebar
-  if (locals.course)
-    include includes/countdown
-  include ads/amazon

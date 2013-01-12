@@ -1,13 +1,17 @@
 extends layout
 
+append sidebar
+  include includes/ads/adsense-rect
+  include includes/countdown
+
 block content
   include includes/breadcrumbs
   h1= notetype.name
+  
+  include includes/toolbar
+
   p!= notetype.desc || notetype.shortDesc
   
   ul.listing
     each note in locals.notes
       li: a(href='#{note.slug}/')= note.name
-
-append sidebar
-  include ads/amazon

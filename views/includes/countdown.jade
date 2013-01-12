@@ -1,19 +1,18 @@
-.countdown
+if (locals.course)
+  .countdown
+    h3 #{course.name} Exam
+    .clearfix
+      .time
+        .days
+        span DAYS
+      .time
+        .hours
+        span HOURS
+      .time
+        .minutes
+        span MINUTES
+      .time
+        .seconds
+        span SECONDS
 
-  h3 #{course.name} Exam Countdown
-
-  .clearfix
-    .time
-      .days
-      span DAYS
-    .time
-      .hours
-      span HOURS
-    .time
-      .minutes
-      span MINUTES
-    .time
-      .seconds
-      span SECONDS
-
-  h3.left-to-study until <span class="date"></span>
+    h3.left-to-study until <span class="date"></span>

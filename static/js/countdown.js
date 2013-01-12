@@ -5,6 +5,10 @@
  */
 function Countdown(selector, date) {
   this.$elem = $(selector)
+
+  if (this.$elem.length == 0)
+    return
+
   this.date = moment(date)
   this.interval = window.setInterval(this.update.bind(this), 1000)
 

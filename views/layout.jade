@@ -98,15 +98,14 @@ body(class='#{locals.cls}')
   include includes/footer
   
   block scripts
-
     if (PRODUCTION)
       script(src='/build/js/main-#{locals.JS_MD5}.js')
+
     else
       each file in locals.JS_FILENAMES
         script(src='/#{file}')
+      
       | <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
-
-    
 
     //- Countdown script
     if (locals.course)
@@ -114,60 +113,60 @@ body(class='#{locals.cls}')
       script
         var countdown = new Countdown('.countdown', countdownDate)
 
-  // User Voice Feedback Widget
-  script
-    var uvOptions = {};
-    (function() {
-      var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
-      uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/U9x5qCiQoRKJsSMwO0htQ.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
-    })();
+    // User Voice Feedback Widget
+    script
+      var uvOptions = {};
+      (function() {
+        var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+        uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/U9x5qCiQoRKJsSMwO0htQ.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+      })();
 
 
-  // Quantcast
-  script
-    var _qevents = _qevents || [];
+    // Quantcast
+    script
+      var _qevents = _qevents || [];
 
-    (function() {
-    var elem = document.createElement('script');
-    elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
-    elem.async = true;
-    elem.type = "text/javascript";
-    var scpt = document.getElementsByTagName('script')[0];
-    scpt.parentNode.insertBefore(elem, scpt);
-    })();
+      (function() {
+      var elem = document.createElement('script');
+      elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+      elem.async = true;
+      elem.type = "text/javascript";
+      var scpt = document.getElementsByTagName('script')[0];
+      scpt.parentNode.insertBefore(elem, scpt);
+      })();
 
-    _qevents.push({
-    qacct:"p-69FZJwoXOxhpY"
-    });
-  noscript
-    div(style='display:none;')
-      img(src='//pixel.quantserve.com/pixel/p-69FZJwoXOxhpY.gif', height='1', width='1', alt='Quantcast', style='border: none;')
+      _qevents.push({
+      qacct:"p-69FZJwoXOxhpY"
+      });
+    noscript
+      div(style='display:none;')
+        img(src='//pixel.quantserve.com/pixel/p-69FZJwoXOxhpY.gif', height='1', width='1', alt='Quantcast', style='border: none;')
 
 
-  // Google Analytics
-  script
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-3898076-4']);
-    _gaq.push(['_setDomainName', 'apstudynotes.org']);
-    _gaq.push(['_trackPageview']);
-  
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  
+    // Google Analytics
+    script
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-3898076-4']);
+      _gaq.push(['_setDomainName', 'apstudynotes.org']);
+      _gaq.push(['_trackPageview']);
+    
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    
 
-  // StatCounter
-  script
-    var sc_project=3533945; 
-    var sc_invisible=1; 
-    var sc_security="1577ef81";
-  script(src='http://www.statcounter.com/counter/counter.js')
-  noscript
-    div.statcounter
-      img.statcounter(src='http://c.statcounter.com/3533945/0/1577ef81/1/', alt='')
+    // StatCounter
+    script
+      var sc_project=3533945; 
+      var sc_invisible=1; 
+      var sc_security="1577ef81";
+    script(src='http://www.statcounter.com/counter/counter.js')
+    noscript
+      div.statcounter
+        img.statcounter(src='http://c.statcounter.com/3533945/0/1577ef81/1/', alt='')
 
 
 </html>
