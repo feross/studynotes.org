@@ -63,6 +63,24 @@ function toggleBrowseMenu(_switch) {
 
 
 /**
+ * Executed when the Facebook SDK is ready.
+ */
+window.fbAsyncInit = function() {
+  // init the FB JS SDK
+  FB.init({
+    appId      : '466476846723021', // App ID from the App Dashboard
+    channelUrl : '//www.apstudynotes.org/channel.html', // Channel File for x-domain communication
+    status     : true, // check the login status upon init?
+    cookie     : true, // set sessions cookies to allow your server to access the session?
+    xfbml      : true  // parse XFBML tags on this page?
+  })
+
+  // Additional initialization code such as adding Event Listeners goes here
+
+}
+
+
+/**
  * Loads the Facebook SDK asynchronously. Calls `window.fbAsyncInit` when done loading.
  */
 function loadFacebookSDK() {
@@ -74,24 +92,7 @@ function loadFacebookSDK() {
      ref.parentNode.insertBefore(js, ref)
    }(document))
 }
-
-
-/**
- * Executed when the Facebook SDK is ready.
- */
-window.fbAsyncInit = function() {
-  // init the FB JS SDK
-  FB.init({
-    appId      : '466476846723021', // App ID from the App Dashboard
-    channelUrl : '//www.apstudynotes.org/channel.html', // Channel File for x-domain communication
-    status     : true, // check the login status upon init?
-    cookie     : true, // set sessions cookies to allow your server to access the session?
-    xfbml      : true  // parse XFBML tags on this page?
-  });
-
-  // Additional initialization code such as adding Event Listeners goes here
-
-};
+loadFacebookSDK()
 
 
 /**
@@ -100,8 +101,6 @@ window.fbAsyncInit = function() {
 $(function() {
 
   updateSearchWidth()
-
-  loadFacebookSDK()
 
   /**
    * Make external links open in new window
