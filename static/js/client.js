@@ -132,12 +132,17 @@ $(function() {
    * Browser resize event
    */
   var contentToolbarTop
+    , contentBottom
     , contentWidth
   $window.on('resize', _.throttle(function (){
     $contentToolbar.removeClass('sticky')
     contentToolbarTop = $contentToolbar.length
       ? $contentToolbar.offset().top
       : null
+    contentBottom = $content.length
+      ? $content.offset().top + $content.height()
+      : null
+
     contentWidth = $content.width()
 
     $window.trigger('scroll')
@@ -159,7 +164,7 @@ $(function() {
     if (contentToolbarTop) {
       var scrollTop = $window.scrollTop() // current vertical position from the top
       
-      if (scrollTop > contentToolbarTop) { 
+      if (contentToolbarTop < scrollTop && scrollTop < contentBottom) { 
         $contentToolbar
           .addClass('sticky')
           .css({width: contentWidth})
