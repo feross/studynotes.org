@@ -22,6 +22,7 @@ exports.JS_FILENAMES = [
   , ['lib/transparency-0.7.5.js', 'lib/transparency-0.7.5.min.js']
   , ['lib/moment-1.7.2.js', 'lib/moment-1.7.2.min.js']
   , ['lib/keymaster-1.0.2.js', 'lib/keymaster-1.0.2.min.js']
+  // , ['lib/async-0.1.23.js', 'lib/async-0.1.23.min.js']
   , 'util.js'
   , 'countdown.js'
   , 'client.js'
