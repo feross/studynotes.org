@@ -2,7 +2,6 @@ extends layout
 
 block content
   //- include includes/breadcrumbs
-  h1.off= course.name
 
   each notetype in locals.notetypes
     h2: a(href='#{notetype.url}')= notetype.name

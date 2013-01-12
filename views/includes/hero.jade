@@ -3,13 +3,25 @@ if (locals.hero)
     .text
       if (locals.hero.url)
         a(href='#{hero.url}')
-          h2!= hero.title
-          if (locals.hero.desc)
-            h3!= hero.desc
+          if (locals.notetype || locals.note)
+            //- notetype and note pages already have a h1 in the content
+            h2.title!= hero.title
+            if (locals.hero.desc)
+              h3.desc!= hero.desc
+          else
+            h1.title!= hero.title
+            if (locals.hero.desc)
+              h2.desc!= hero.desc
       else
-        h2!= hero.title
-        if (locals.hero.desc)
-          h3!= hero.desc
+        if (locals.notetype || locals.note)
+          //- notetype and note pages already have a h1 in the content
+          h2.title!= hero.title
+          if (locals.hero.desc)
+            h3.desc!= hero.desc
+        else
+          h1.title!= hero.title
+          if (locals.hero.desc)
+            h2.desc!= hero.desc
 
     if (locals.hero.tabs)
       ul.tabs.clearfix

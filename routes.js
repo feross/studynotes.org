@@ -26,7 +26,6 @@ var routes = {
     hero: {
       title: 'Say Hello to StudyNotes!',
       desc: 'Fast, free study tools for AP* students'
-      // desc: 'We <span class="red">&hearts;</span> students and teachers!'
     }
   },
 
