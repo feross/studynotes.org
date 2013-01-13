@@ -1,5 +1,5 @@
 // Constants
-global.PRODUCTION = process.env.NODE_ENV == 'production'
+global.PRODUCTION = true // process.env.NODE_ENV == 'production'
 global.PORT = (process.argv.length > 2)
   ? process.argv[2]
   : 4000
