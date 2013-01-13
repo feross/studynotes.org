@@ -3,3 +3,4 @@
 static/build/
 *.md
 *.txt
+node_modules/cctv.js/static/stylesheets/style.css

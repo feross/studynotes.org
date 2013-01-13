@@ -22,6 +22,7 @@ var http = require('http')
   , moment = require('moment')
 
   , build = require('./build')
+  , cctv = require('./node_modules/cctv')
 
 // Make all globals accessible from command line
 module.exports = global
@@ -89,25 +90,36 @@ if (cluster.isMaster) {
     app.use(express.logger('dev')) // concise output colored by response status
     app.use(express.errorHandler({showStack: true, dumpExceptions: true}))
   
-    // Serve static files from Node only during development
-    app.use(express.static(path.join(__dirname, 'static')))
   }
 
-  app.use(app.router)
+  // HACK: app.router() used to be here
 
-
+  // Serve static files from Node only during development
+  // HACK: Using this in production for hackathon
+  app.use(express.static(path.join(__dirname, 'static')))
 
   require('./models')(function (err){
     if (err) {
       error('Connecting to DB or loading models has failed, so server cannot start')
       return
     }
-    var routes = require('./routes')
 
     // Start the server -- workers will all share a TCP connection
-    http.createServer(app).listen(app.get('port'), function (){
+    var server = http.createServer(app)
+    cctv.listen(app, server)
+
+    var routes = require('./routes')
+
+
+    // HACK 
+    app.use(app.router)
+
+    server.listen(app.get('port'), function (){
       log('Express server listening on port ' + app.get('port'))
     })
+    // server.listen(80, '192.155.85.126', function (){
+    //   log('Express server listening on port ' + app.get('port'))
+    // })
 
   })
 
