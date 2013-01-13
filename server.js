@@ -28,9 +28,9 @@ var http = require('http')
 module.exports = global
 
 // Number of cluster children to spawn
-var NUM_CPUS = PRODUCTION
-  ? os.cpus().length
-  : 1
+var NUM_CPUS = 1 //PRODUCTION
+  // ? os.cpus().length
+  // : 1
 
 if (cluster.isMaster) {
   build.buildAll(function (err, md5s) {
