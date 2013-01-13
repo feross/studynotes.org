@@ -114,12 +114,12 @@ if (cluster.isMaster) {
     // HACK 
     app.use(app.router)
 
-    server.listen(app.get('port'), function (){
-      log('Express server listening on port ' + app.get('port'))
-    })
-    // server.listen(80, '192.155.85.126', function (){
+    // server.listen(app.get('port'), function (){
     //   log('Express server listening on port ' + app.get('port'))
     // })
+    server.listen(80, '192.155.85.126', function (){
+      log('Express server listening on port ' + app.get('port'))
+    })
 
   })
 
