@@ -17,23 +17,33 @@ var STYLUS = './node_modules/stylus/bin/stylus'
  * @type {Array}
  */
 exports.JS_FILENAMES = [
-    ['lib/jquery-1.8.2.js', 'lib/jquery-1.8.2.min.js']
-  , ['lib/underscore-1.4.3.js', 'lib/underscore-1.4.3.min.js']
-  , ['lib/transparency-0.7.5.js', 'lib/transparency-0.7.5.min.js']
-  , ['lib/moment-1.7.2.js', 'lib/moment-1.7.2.min.js']
-  , ['lib/keymaster-1.0.2.js', 'lib/keymaster-1.0.2.min.js']
-  // , ['lib/async-0.1.23.js', 'lib/async-0.1.23.min.js']
-  , 'util.js'
-  , 'countdown.js'
-  , 'client.js'
+  [
+    'components/jquery/jquery.js',
+    'components/jquery/jquery.min.js'
+  ]
+  , [
+    'components/underscore/underscore.js',
+    'components/underscore/underscore-min.js'
+  ]
+  , [
+    'components/transparency/lib/transparency.js',
+    'components/transparency/lib/transparency.min.js'
+  ]
+  , [
+    'components/keymaster/keymaster.js',
+    'components/keymaster/keymaster.min.js'
+  ]
+  , 'components/moment/moment.js'
+  , 'js/util.js'
+  , 'js/countdown.js'
+  , 'js/client.js'
 ]
 
-var prefix = 'js/'
 exports.JS_FILENAMES = _.map(exports.JS_FILENAMES, function (file) {
   if (_.isArray(file)) {
-    return prefix + (PRODUCTION ? file[1] : file[0])
+    return PRODUCTION ? file[1] : file[0]
   } else {
-    return prefix + file
+    return file
   }
 })
 
