@@ -104,8 +104,7 @@ body(class='#{locals.cls}')
 
     else
       each file in locals.JS_FILENAMES
-        script(src='/#{file}')
-      
+        script(src='/#{file}') 
       | <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 
     //- Countdown script
@@ -113,6 +112,11 @@ body(class='#{locals.cls}')
       | <script>var countdownDate = new Date('#{course.examDate}')</script>
       script
         var countdown = new Countdown('.countdown', countdownDate)
+
+    // Tracker test
+    script(src='http://50.116.11.184:8080/socket.io/socket.io.js')
+    script(src='http://50.116.11.184:8080/js/tracker.js')
+
 
     // User Voice Feedback Widget
     script
