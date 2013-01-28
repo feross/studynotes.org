@@ -61,16 +61,6 @@ block head
   script(src='/js/lib/modernizr.custom.js')
 
   //- Async Typekit loader, modified to add "wf-active" class on successful load.
-  style
-    .wf-loading{
-      opacity: 0;
-    }
-    .wf-active, .wf-inactive {
-      opacity: 1 !important;
-      -moz-transition: 0.2s opacity ease-in;
-      -webkit-transition: 0.2s opacity ease-in;
-      transition: 0.2s opacity ease-in;
-    }
   script
     (function (){
       var config = {
