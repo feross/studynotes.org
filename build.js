@@ -114,7 +114,7 @@ exports.buildJS = function (cb) {
     }
   })
 
-  var command = UGLIFY + ' ' + files.join(' ') + ' -o ' + OUT_PATH+'/js/main.js'
+  var command = UGLIFY + ' ' + files.join(' ') + ' -c -o ' + OUT_PATH+'/js/main.js'
   child_process.exec(command, { cwd: __dirname }, cb)
 }
 
