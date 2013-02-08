@@ -6,7 +6,7 @@ append toolbar
     .navigate-msg Use ← → keys to navigate
 
 append sidebar
-  include includes/ads/adsense-rect
+  include includes/ads/yahoo-rect
   include includes/noteInfo
   include includes/relatedNotes
   include includes/ads/adsense-rect
@@ -16,6 +16,8 @@ block content
   h1= note.name
 
   include includes/toolbar
+
+  include includes/ads/yahoo-xlarge
 
   | !{note.body}
 
