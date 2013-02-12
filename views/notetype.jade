@@ -1,7 +1,7 @@
 extends layout
 
 append sidebar
-  include includes/ads/adsense-rect
+  include includes/ads/adsense-rect-skyscraper
   include includes/countdown
   include includes/ads/adsense-rect
 
@@ -16,3 +16,6 @@ block content
   ul.listing
     each note in locals.notes
       li: a(href='#{note.slug}/')= note.name
+
+  hr
+  include includes/ads/adsense-link-unit

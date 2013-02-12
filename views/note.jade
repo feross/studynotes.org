@@ -6,7 +6,7 @@ append toolbar
     .navigate-msg Use ← → keys to navigate
 
 append sidebar
-  include includes/ads/yahoo-rect
+  include includes/ads/adsense-rect
   include includes/noteInfo
   include includes/relatedNotes
   include includes/ads/adsense-rect
@@ -17,7 +17,7 @@ block content
 
   include includes/toolbar
 
-  include includes/ads/yahoo-xlarge
+  include includes/ads/adsense-inline-rect
 
   | !{note.body}
 
@@ -30,6 +30,8 @@ block content
     if noteNext
       a.btn.next(href='#{noteNext.url}', title='Next: #{noteNext.name}') Next →
 
+  hr
+  include includes/ads/adsense-link-unit
   hr
   h2 How to cite this note (with MLA)
   .cite Aboukhadijeh, Feross. "#{note.name}" StudyNotes.org. StudyNotes, Inc., #{moment(note.createDate).format('DD MMM. YYYY.')} Web. #{moment().format('DD MMM. YYYY.')} &lt;#{note.absoluteUrl}&gt;.

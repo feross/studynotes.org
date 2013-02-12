@@ -1,7 +1,7 @@
 extends layout
 
 append sidebar
-  include includes/ads/adsense-rect
+  include includes/ads/adsense-rect-skyscraper
   include includes/countdown
   include includes/ads/adsense-rect
 
@@ -12,3 +12,6 @@ block content
   each notetype in locals.notetypes
     h2: a(href='#{notetype.url}')= notetype.name
     p.desc!= notetype.shortDesc
+
+  hr
+  include includes/ads/adsense-link-unit
