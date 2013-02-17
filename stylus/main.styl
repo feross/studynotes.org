@@ -211,7 +211,7 @@ SOLID_HEADER_BORDER_FOCUS = 3px solid #000
     &:after
       content: "\25bc"
       font-size: 12px
-      padding-left: 8px 
+      padding-left: 8px
 
     &.on:after
       content: "\25b2"
@@ -277,7 +277,7 @@ SOLID_HEADER_BORDER_FOCUS = 3px solid #000
 
   .autocomplete
     background: #FFF
-    border: 1px solid LIGHT_GRAY 
+    border: 1px solid LIGHT_GRAY
     z-index: 50
 
     a.result
@@ -394,17 +394,17 @@ TAB_HEIGHT = 35px
     hero-image: 'us-government.jpg'
   body.course-us-history &
     hero-image: 'us-history-2.jpg'
-  body.privacy &, body.about &, body.contact &, body.plagiarism & 
+  body.privacy &, body.about &, body.contact &, body.plagiarism &
     hero-image: 'fine-print.jpg'
   body.photo-credits &
     hero-image: 'parliament-thames-london.jpg'
-  
+
   .text
     color: #FFF
     display: block
     margin: 100px 25px 25px (LOGO_WIDTH / 2)
     text-align: left
-    
+
     body.home &
       margin: 100px 25px 25px 25px
       text-align: center
@@ -506,7 +506,11 @@ CONTENT_PADDING_TOP = 35px
   .like
     height: 26px
 
-  .ad-inline
+  .ad-inline-left
+    margin: 15px 15px 15px 0
+    float: left
+
+  .ad-inline-right
     margin: 15px 0 15px 15px
     float: right
 
@@ -573,7 +577,7 @@ a.btn
     line-height: 1.9em
     padding: 0 15px 0 15px
     text-transform: uppercase
-  
+
   {HOVER}
     background: DARK_BLUE
     text-decoration: none
@@ -621,7 +625,7 @@ a.btn
 
   //
   // COUNTDOWN
-  // 
+  //
 
   .countdown
 
@@ -681,7 +685,7 @@ body.about
 
 //
 // NOTE PAGE
-// 
+//
 
 .keepStudying
   color: GRAY

@@ -75,11 +75,12 @@ if (cluster.isMaster) {
 
   // Make certain JS libraries available to Jade templates
   app.locals.PRODUCTION = PRODUCTION
+  app.locals._ = _
   app.locals.util = util
   app.locals.moment = moment
   app.locals.CSS_MD5 = process.env['CSS_MD5']
   app.locals.JS_MD5 = process.env['JS_MD5']
-  
+
   if (PRODUCTION) {
     app.use(express.logger('short'))
   } else {
@@ -88,7 +89,7 @@ if (cluster.isMaster) {
 
     app.use(express.logger('dev')) // concise output colored by response status
     app.use(express.errorHandler({showStack: true, dumpExceptions: true}))
-  
+
     // Serve static files from Node only during development
     app.use(express.static(path.join(__dirname, 'static')))
   }
