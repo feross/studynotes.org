@@ -15,6 +15,11 @@ var routes = {
     }
   },
 
+  'burst-rect-frame': {
+    url: '/burst-rect-frame',
+    meta: { title: 'Burst Ad' }
+  },
+
   'study-guides': {
     url: '/study-guides',
     meta: { title: 'Buy Amazon.com AP Study Guides' }
@@ -68,7 +73,7 @@ var routes = {
     url: '/search',
     handler: function (req, res){
       q = req.query.q
-      
+
       render(res, 'search', {
         meta: { title: 'Search Results for ' + q },
         search_term: q
@@ -80,7 +85,7 @@ var routes = {
     url: '/autocomplete-endpoint',
     handler: function (req, res){
       q = req.query.q
-      
+
       search.autocomplete(q, function(err, results){
         if (err) {
           error(err)
@@ -94,7 +99,7 @@ var routes = {
       })
     }
   },
-    
+
   course: {
     url: '/:courseSlug',
     handler: function (req, res){
@@ -138,7 +143,7 @@ var routes = {
         render404(res, 'Course has no notetype w/ slug ' + p.notetypeSlug)
         return
       }
-      
+
       m.Note
       .find({ courseId: course._id, notetypeId: notetype._id })
       .sort('ordering')
@@ -188,7 +193,7 @@ var routes = {
         render404(res, 'Course has no notetype with slug ' + p.notetypeSlug)
         return
       }
-           
+
       m.Note
       .find({ courseId: course._id, notetypeId: notetype._id })
       .sort('ordering')
@@ -261,7 +266,7 @@ _.each(routes, function (locals, templateName){
     if ((!locals.meta || !locals.meta.url)
         && locals.url.indexOf(':') == -1
         && locals.url.indexOf('*') == -1) {
-      
+
       var absoluteUrl = config.siteUrl + locals.url
       if (absoluteUrl[absoluteUrl.length - 1] != '/')
         absoluteUrl += '/'
@@ -301,9 +306,9 @@ function heroForCourse (course) {
  * have one location to add all these variables. We also allow caller to
  * override the default values specified here by simply declaring them in the
  * object they pass as `locals`.
- * 
- * Use this function instead of calling res.render() directly. 
- * 
+ *
+ * Use this function instead of calling res.render() directly.
+ *
  * @param  {Object} res          Response Object
  * @param  {String} templateName Name of the template to render
  * @param  {Object} locals       Local variables to make available to template
@@ -324,13 +329,13 @@ function render(res, templateName, locals) {
 
 /**
  * Render 404 page, and log error message
- * 
+ *
  * @param  {Object} res Response Object
  * @param  {String} msg Error message to log
  */
 function render404(res, msg) {
   if (msg) error(msg) // don't return since we want to serve a 404 page
-  
+
   res.status(404)
   render(res, 'not-found',
     { err: msg

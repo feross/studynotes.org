@@ -1,12 +1,1 @@
-div(class='#{_.random(1) ? 'ad-inline-left' : 'ad-inline-right'}')
-  if locals.ads
-    script
-      rnum=Math.round(Math.random() * 100000);
-      ts=String.fromCharCode(60);
-      if (window.self != window.top) {nf=''} else {nf='NF/'};
-      document.write(ts+'script src="http://www.burstnet.com/cgi-bin/ads/ad13074b.cgi/v=2.3S/sz=300x250A|300x600A/'+rnum+'/'+nf+'RETURN-CODE/JS/">'+ts+'/script>');
-    noscript
-      a(href='http://www.burstnet.com/ads/ad13074b-map.cgi/ns/v=2.3S/sz=300x250A|300x600A/', target='_top')
-        img(src='http://www.burstnet.com/cgi-bin/ads/ad13074b.cgi/ns/v=2.3S/sz=300x250A|300x600A/', border='0', alt='Click Here')
-  else
-    img(src='http://lorempixel.com/336/280')
+iframe(src='/burst-rect-frame', style='border: 0; width: 336px; height: 600px;')
