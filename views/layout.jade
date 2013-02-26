@@ -8,7 +8,7 @@ else
 <!--[if gt IE 8]><!--> <html class="no-js #{ htmlClasses }" lang="en"> <!--<![endif]-->
 
 block head
-  
+
   if (!locals.meta)
     - locals.meta = {}
 
@@ -20,14 +20,14 @@ block head
   meta(property='og:title', content='#{title}')
 
   meta(name='robots', content='index, follow')
-  
+
   if (!locals.meta.description)
     - meta.description = "100% Free AP Test Prep website that offers study material to high school students seeking to prepare for AP exams. Enterprising students use this website to learn AP class material, study for class quizzes and tests, and to brush up on course material before the big exam day."
   meta(name='description', content='#{meta.description}')
   meta(property='og:description', content='#{meta.description}')
 
   if (!locals.meta.keywords)
-    - meta.keywords = "ap study notes, ap, advanced placement, ap notes, AP US History, ap u.s. history, apush, american pageant, the american pageant, AP US Government and Politics, ap government, ap gov, AP World History, AP English, AP Psychology, AP Economics, AP Calculus, AP Statistics, AP Physics, AP Biology, AP Environmental Science, AP Chemistry, course guides, chapter outlines, chapter notes, topic outlines, vocabulary words, key terms, important historical documents, ap practice quizzes, ap practice tests, ap cram sheets, course notes"  
+    - meta.keywords = "ap study notes, ap, advanced placement, ap notes, AP US History, ap u.s. history, apush, american pageant, the american pageant, AP US Government and Politics, ap government, ap gov, AP World History, AP English, AP Psychology, AP Economics, AP Calculus, AP Statistics, AP Physics, AP Biology, AP Environmental Science, AP Chemistry, course guides, chapter outlines, chapter notes, topic outlines, vocabulary words, key terms, important historical documents, ap practice quizzes, ap practice tests, ap cram sheets, course notes"
   meta(name='keywords', content='#{meta.keywords}')
 
   meta(property='og:type', content='website')
@@ -47,9 +47,9 @@ block head
   //- TODO: add rss support
   //- <link rel="alternate" type="application/atom+xml" title="" href="" />
 
-  //- TODO: add search service?, see: https://github.com/opensearch.xml 
-  //- <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="StudyNotes" /> 
-  
+  //- TODO: add search service?, see: https://github.com/opensearch.xml
+  //- <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="StudyNotes" />
+
   if (PRODUCTION)
     link(rel='stylesheet', href='/build/css/main-#{locals.CSS_MD5}.css')
   else
@@ -97,14 +97,14 @@ body(class='#{locals.cls}')
   include includes/sidebar
 
   include includes/footer
-  
+
   block scripts
     if (PRODUCTION)
       script(src='/build/js/main-#{locals.JS_MD5}.js')
 
     else
       each file in locals.JS_FILENAMES
-        script(src='/#{file}') 
+        script(src='/#{file}')
       | <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 
     //- Countdown script
@@ -155,18 +155,18 @@ body(class='#{locals.cls}')
       _gaq.push(['_setAccount', 'UA-3898076-4']);
       _gaq.push(['_setDomainName', 'apstudynotes.org']);
       _gaq.push(['_trackPageview']);
-    
+
       (function() {
         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
-    
+
 
     // StatCounter
     script
-      var sc_project=3533945; 
-      var sc_invisible=1; 
+      var sc_project=3533945;
+      var sc_invisible=1;
       var sc_security="1577ef81";
     script(src='http://www.statcounter.com/counter/counter.js')
     noscript

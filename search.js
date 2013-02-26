@@ -1,6 +1,5 @@
 var async = require('async')
   , _ = require('underscore')
-  , util = require('./util')
   , escapeRegExp = util.escapeRegExp
   , MAX_RESULTS = 8
 
@@ -69,7 +68,7 @@ exports.autocomplete = function (query, cb){
         weight: result.weight
       }
     })
-    
+
     cb(null, results)
   })
 }
@@ -83,7 +82,7 @@ exports.autocomplete = function (query, cb){
  *
  *   regexForQuery('Hist')  // matches 'AP History', 'History'
  *   regexForQuery('Eng Lit')  // matches 'English Literature'
- * 
+ *
  * @param  {String} q search query
  * @return {RegExp}
  */
@@ -139,10 +138,10 @@ exports.weight = function (result, query){
 /**
  * Highlights occurances of the words in `query` in a given string `str` by surrounding
  * occurrances with a <strong> tag.
- * 
+ *
  * @param  {String} str   String to search over
  * @param  {String} query Query string
- * @return {String} HTML string containing highlights 
+ * @return {String} HTML string containing highlights
  */
 
 exports.highlight = function (str, query){

@@ -5,9 +5,11 @@ global.PORT = (process.argv.length > 2)
   : 4000
 
 // Globally-available dependencies
-global.util = require('./util')
+global.util = require('futils')
 global.async = require('async')
 global.config = require('./config')
+
+util.easyLog()
 
 // Dependencies
 var http = require('http')
@@ -20,8 +22,36 @@ var http = require('http')
   , stylus = require('stylus')
   , nib = require('nib')
   , moment = require('moment')
+  , build = require('simple-build')
 
-  , build = require('./build')
+build = build({
+  outPath: path.join(__dirname, 'static/build'),
+  production: PRODUCTION,
+  jsPrefix: path.join(__dirname, 'static'),
+  js: [
+    [
+      'components/jquery/jquery.js',
+      'components/jquery/jquery.min.js'
+    ]
+    , [
+      'components/underscore/underscore.js',
+      'components/underscore/underscore-min.js'
+    ]
+    , [
+      'components/transparency/lib/transparency.js',
+      'components/transparency/lib/transparency.min.js'
+    ]
+    , [
+      'components/keymaster/keymaster.js',
+      'components/keymaster/keymaster.min.js'
+    ]
+    , 'components/moment/moment.js'
+    , 'js/util.js'
+    , 'js/countdown.js'
+    , 'js/client.js'
+  ],
+  stylus: path.join(__dirname, 'stylus/main.styl')
+})
 
 // Make all globals accessible from command line
 module.exports = global
@@ -32,14 +62,15 @@ var NUM_CPUS = PRODUCTION
   : 1
 
 if (cluster.isMaster) {
-  build.buildAll(function (err, md5s) {
+  build.build(function (err, output) {
     if (err) { error(err); return }
 
+    log(output.JS_FILENAMES)
     // Fork workers.
     _.times(NUM_CPUS, function (i){
       var childEnv = {
-        'CSS_MD5': md5s.css,
-        'JS_MD5': md5s.js
+        'CSS_MD5': output.css,
+        'JS_MD5': output.js,
       }
       cluster.fork(childEnv)
     })
@@ -78,11 +109,11 @@ if (cluster.isMaster) {
   app.locals._ = _
   app.locals.util = util
   app.locals.moment = moment
-  app.locals.CSS_MD5 = process.env['CSS_MD5']
-  app.locals.JS_MD5 = process.env['JS_MD5']
 
   if (PRODUCTION) {
     app.use(express.logger('short'))
+    app.locals.CSS_MD5 = process.env['CSS_MD5']
+    app.locals.JS_MD5 = process.env['JS_MD5']
   } else {
     app.locals.pretty = true
     app.locals.JS_FILENAMES = build.JS_FILENAMES

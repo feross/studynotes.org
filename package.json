@@ -5,16 +5,17 @@
   "dependencies": {
     "express": "*",
     "jade": "*",
-    "underscore": "*",
+    "underscore": "~1.4.4",
     "stylus": "*",
-    "canvas": "*",
+    "canvas": "< 1.0",
     "nib": "*",
     "mongoose": "*",
-    "async": "*",
+    "async": "~0.2.5",
     "underscore.string": "*",
     "moment": "*",
     "uglify-js": "*",
-    "MD5": "*"
+    "MD5": "*",
+    "futils": "*"
   },
   "devDependencies": {}
 }
