@@ -25,7 +25,7 @@ var http = require('http')
   , build = require('simple-build')
 
 build = build({
-  outPath: path.join(__dirname, 'static/build'),
+  outPath: path.join(__dirname, 'static', 'build'),
   production: PRODUCTION,
   jsPrefix: path.join(__dirname, 'static'),
   js: [
