@@ -15,7 +15,8 @@
     "moment": "*",
     "uglify-js": "*",
     "MD5": "*",
-    "futils": "*"
+    "futils": "*",
+    "simple-build": "*"
   },
   "devDependencies": {}
 }
