@@ -16,7 +16,7 @@
     "uglify-js": "*",
     "MD5": "*",
     "futils": "*",
-    "simple-build": "*"
+    "simple-build": "0.1.2"
   },
   "devDependencies": {}
 }
