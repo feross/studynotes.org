@@ -7,7 +7,6 @@
     "jade": "*",
     "underscore": "~1.4.4",
     "stylus": "*",
-    "canvas": "< 1.0",
     "nib": "*",
     "mongoose": "*",
     "async": "~0.2.5",
@@ -16,7 +15,7 @@
     "uglify-js": "*",
     "MD5": "*",
     "futils": "*",
-    "simple-build": "0.1.2"
+    "simple-build": "*"
   },
   "devDependencies": {}
 }
