@@ -16,7 +16,9 @@ block head
     - var title = util.titleify(meta.title, config.siteTitle)
   else if (!locals.meta.title)
     - var title = util.titleify(config.siteTitle, 'Free AP Notes')
-  title= locals.meta.title
+  else
+    - var title = locals.meta.title
+  title= title
   meta(property='og:title', content='#{title}')
 
   meta(name='robots', content='index, follow')
