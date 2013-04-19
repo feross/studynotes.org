@@ -11,6 +11,8 @@ block head
 
   //- PeerCDN test
   script(src='http://tracker.peercdn.com/1/instant.js')
+  script
+    PeerCDN.init()
 
   if (!locals.meta)
     - locals.meta = {}
