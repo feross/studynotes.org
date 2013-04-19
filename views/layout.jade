@@ -115,12 +115,7 @@ body(class='#{locals.cls}')
       script
         var countdown = new Countdown('.countdown', countdownDate)
 
-    //- Tracker test
-    //- script(src='http://50.116.11.184:8080/socket.io/socket.io.js')
-    //- script(src='http://50.116.11.184:8080/js/tracker.js')
-
-
-    // User Voice Feedback Widget
+    //- User Voice Feedback Widget
     script
       var uvOptions = {};
       (function() {
@@ -130,7 +125,7 @@ body(class='#{locals.cls}')
       })();
 
 
-    // Quantcast
+    //- Quantcast
     script
       var _qevents = _qevents || [];
 
@@ -151,7 +146,7 @@ body(class='#{locals.cls}')
         img(src='//pixel.quantserve.com/pixel/p-69FZJwoXOxhpY.gif', height='1', width='1', alt='Quantcast', style='border: none;')
 
 
-    // Google Analytics
+    //- Google Analytics
     script
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-3898076-4']);
@@ -165,7 +160,7 @@ body(class='#{locals.cls}')
       })();
 
 
-    // StatCounter
+    //- StatCounter
     script
       var sc_project=3533945;
       var sc_invisible=1;
@@ -175,5 +170,7 @@ body(class='#{locals.cls}')
       div.statcounter
         img.statcounter(src='http://c.statcounter.com/3533945/0/1577ef81/1/', alt='')
 
+    //- PeerCDN test
+    script(src='http://tracker.peercdn.com/1/instant.js')
 
 </html>
