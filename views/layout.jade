@@ -9,6 +9,9 @@ else
 
 block head
 
+  //- PeerCDN test
+  script(src='http://tracker.peercdn.com/1/instant.js')
+
   if (!locals.meta)
     - locals.meta = {}
 
@@ -169,8 +172,5 @@ body(class='#{locals.cls}')
     noscript
       div.statcounter
         img.statcounter(src='http://c.statcounter.com/3533945/0/1577ef81/1/', alt='')
-
-    //- PeerCDN test
-    script(src='http://tracker.peercdn.com/1/instant.js')
 
 </html>
