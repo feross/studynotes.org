@@ -6,14 +6,14 @@
     "express": "3.1.x",
     "jade": "0.28.x",
     "underscore": "~1.4.4",
-    "stylus": "0.32.x",
     "nib": "0.9.x",
     "mongoose": "3.5.x",
     "async": "0.2.x",
     "underscore.string": "*",
     "moment": "2.0.x",
     "futils": "0.4.x",
-    "simple-build": "0.1.x"
+    "simple-build": "0.1.x",
+    "stylus": "*"
   },
   "devDependencies": {}
 }
