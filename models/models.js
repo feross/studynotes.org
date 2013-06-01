@@ -7,26 +7,26 @@ module.exports = function (callback){
   var plugin =
     { modifyDate: function (schema, options){
         schema.add({ modifyDate: Date })
-        
+
         schema.pre('save', function (next){
           this.modifyDate = new Date
           next()
         })
-        
+
         if (options && options.index)
           schema.path('modifyDate').index(options.index)
       }
 
     , createDate: function (schema, options){
         schema.add({ createDate: Date })
-        
+
         schema.pre('save', function (next){
           if (!this.createDate)
             this.createDate = new Date
-          
+
           next()
         })
-        
+
         if (options && options.index)
           schema.path('createDate').index(options.index)
       }
@@ -127,7 +127,7 @@ module.exports = function (callback){
         }
       , ordering: Number
       , slug: SLUG
- 
+
       , setup: function (){
           // No duplicate names or slugs for a course+notetype.
           this.index({ courseId: 1, notetypeId: 1, slug: 1 }, { unique: true })
@@ -169,17 +169,17 @@ module.exports = function (callback){
   // Setup up schemas and models.
   var models = {}
   _.each(schemas, function (fields, name){
-    
+
     // Remove the setup function from the fields object before creating a Schema,
     // but save it to be invoked later.
     var setup = fields.setup
       , fields = _.omit(fields, 'setup')
-      
+
       , schema = new Schema(fields)
 
     /**
      * Automatic slug generation.
-     * 
+     *
      * If schema has a "slug" field, set up a pre-save hook to check for
      * existence of slug. When no slug is set at save time, we automatically
      * generate one.
@@ -198,10 +198,10 @@ module.exports = function (callback){
           potentialSlug = initialSlug = util.slugify(doc.name)
 
           async.whilst(function (){
-            // After the first try, append a number to end of slug 
+            // After the first try, append a number to end of slug
             if (num > 0)
               potentialSlug = initialSlug + '-' + num
-            
+
             num += 1
             return !done
           }
@@ -213,7 +213,7 @@ module.exports = function (callback){
                   cb(err)
                   return
                 }
-                
+
                 if (count == 0) {
                   doc.slug = potentialSlug
                   done = true
@@ -223,7 +223,7 @@ module.exports = function (callback){
               })
             }
           , function (err){
-            if (err) error(err)
+            if (err) log.error(err)
             next()
           })
 
@@ -248,9 +248,9 @@ module.exports = function (callback){
 
   global.m = models
 
-  // 
+  //
   // Cache commonly accessed data
-  // 
+  //
   global.m.cache = {}
   async.parallel(
     { courses: function (cb){
@@ -262,20 +262,20 @@ module.exports = function (callback){
     }
   , function (err, results){
       if (err) {
-        error(err)
+        log.error(err)
         callback(err)
         return
       }
 
       global.m.cache.courses = {}
-      
+
       // TODO: remove this hack
       async.forEachSeries(results.courses, function (course, cb){
         global.m.cache.courses[course.slug] = course
 
         course.getNotetypes(function (err, notetypes){
           if (err) {
-            error(err)
+            log.error(err)
             callback(err)
             return
           }

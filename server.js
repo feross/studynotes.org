@@ -63,9 +63,8 @@ var NUM_CPUS = PRODUCTION
 
 if (cluster.isMaster) {
   build.build(function (err, output) {
-    if (err) { error(err); return }
+    if (err) { log.error(err); return }
 
-    log(output.JS_FILENAMES)
     // Fork workers.
     _.times(NUM_CPUS, function (i){
       var childEnv = {
@@ -131,7 +130,7 @@ if (cluster.isMaster) {
 
   require('./models')(function (err){
     if (err) {
-      error('Connecting to DB or loading models has failed, so server cannot start')
+      log.error('Connecting to DB or loading models has failed, so server cannot start')
       return
     }
     var routes = require('./routes')
@@ -145,6 +144,6 @@ if (cluster.isMaster) {
 
   // Catch and log exceptions so the node process doesn't crash
   process.on('uncaughtException', function (err){
-    error('WARNING: Node uncaughtException: ', err.stack)
+    log.error('WARNING: Node uncaughtException: ', err.stack)
   })
 }

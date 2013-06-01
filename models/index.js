@@ -6,10 +6,10 @@ module.exports = function (callback){
   async.series(
     [ function (cb){
         global.db =
-          mongoose.createConnection( 'mongodb://' + 
-                                     config.db.user + '@' + 
-                                     config.db.host + ':' + 
-                                     config.db.port + '/' + 
+          mongoose.createConnection( 'mongodb://' +
+                                     config.db.user + '@' +
+                                     config.db.host + ':' +
+                                     config.db.port + '/' +
                                      config.db.database
                                      , { server: { poolSize: 20 } } )
 
@@ -26,7 +26,7 @@ module.exports = function (callback){
     ]
   , function (err){
     if (err) {
-      error("Error connecting to database.", err)
+      log.error("Error connecting to database.", err)
       callback(err)
     } else {
       console.log('Connected to database successfully.')

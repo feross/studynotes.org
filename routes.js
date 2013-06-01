@@ -88,7 +88,7 @@ var routes = {
 
       search.autocomplete(q, function(err, results){
         if (err) {
-          error(err)
+          log.error(err)
           res.send(500, { error: 'Search error' })
           return
         }
@@ -149,7 +149,7 @@ var routes = {
       .sort('ordering')
       .exec(function (err, notes){
         if (err) {
-          error(err)
+          log.error(err)
           return
         }
 
@@ -199,7 +199,7 @@ var routes = {
       .sort('ordering')
       .exec(function (err, notes){
         if (err) {
-          error(err)
+          log.error(err)
           return
         }
 
@@ -334,7 +334,7 @@ function render(res, templateName, locals) {
  * @param  {String} msg Error message to log
  */
 function render404(res, msg) {
-  if (msg) error(msg) // don't return since we want to serve a 404 page
+  if (msg) log.error(msg) // don't return since we want to serve a 404 page
 
   res.status(404)
   render(res, 'not-found',
