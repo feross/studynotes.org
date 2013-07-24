@@ -10,6 +10,10 @@ else
 block head
 
   //- PeerCDN test
+  script
+    window.PeerCDN = {
+      lazyLoadThreshold: 0
+    }
   script(src='http://cdn.peercdn.com/instant.js')
 
   if (!locals.meta)
