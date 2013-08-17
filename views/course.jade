@@ -9,6 +9,8 @@ block content
   h1 #{course.name} Notes
   include includes/toolbar
 
+  include includes/ads/adsense-inline-rect
+
   each notetype in locals.notetypes
     h2: a(href='#{notetype.url}')= notetype.name
     p.desc!= notetype.shortDesc
