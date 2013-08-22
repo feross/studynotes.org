@@ -111,7 +111,6 @@ if (cluster.isMaster) {
 
   if (PRODUCTION) {
     app.use(express.logger('short'))
-    console.log(req.ip)
     app.locals.CSS_MD5 = process.env['CSS_MD5']
     app.locals.JS_MD5 = process.env['JS_MD5']
   } else {
