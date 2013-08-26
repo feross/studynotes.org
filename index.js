@@ -275,10 +275,10 @@ Site.prototype.start = function (done) {
 }
 
 Site.prototype.canonicalize = function (req, res, next) {
-  if (req.host !== 'essaysite.com') {
+  if (req.host !== 'www.apstudynotes.org') {
     // redirect alternate domains to homepage
     res.redirect(301, config.siteOrigin)
-  } else if (req.protocol !== 'https') {
+  } else if (req.protocol !== 'http') {
     // redirect HTTP to HTTPS
     res.redirect(301, config.siteOrigin + req.url)
   } else {
