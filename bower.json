@@ -2,10 +2,11 @@
   "name": "studynotes",
   "version": "0.0.1",
   "dependencies": {
+    "humane-js": "*",
     "jquery": "*",
-    "keymaster": "latest",
-    "moment": "~1.7.2",
-    "underscore": "~1.4.3",
-    "transparency": "~0.7.5"
+    "keymaster": "*",
+    "moment": "*",
+    "transparency": "*",
+    "underscore": "*"
   }
 }
