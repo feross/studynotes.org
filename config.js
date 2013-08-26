@@ -1,3 +1,4 @@
+var os = require('os')
 var path = require('path')
 
 exports.isProd = (process.env.NODE_ENV === 'production')
