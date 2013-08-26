@@ -2,8 +2,8 @@
 out
 build
 
-# Ignore compiled assets
 static/out
+secret.js
 
 # Numerous always-ignore extensions
 *.diff

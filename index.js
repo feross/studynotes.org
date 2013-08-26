@@ -94,14 +94,14 @@ Site.prototype.start = function (done) {
     app.locals.CSS_MD5 = process.env['CSS_MD5']
     app.locals.JS_MD5 = process.env['JS_MD5']
 
-    // app.use(expressValidator()) // validate user input
+    app.use(expressValidator()) // validate user input
 
-    // app.use(express.cookieParser(config.cookieSecret))
+    app.use(express.cookieParser(secret.cookieSecret))
     app.use(express.bodyParser())
-    // app.use(express.session({
-    //   secret: config.cookieSecret, // prevent cookie tampering
-    //   proxy: true // trust the reverse proxy
-    // }))
+    app.use(express.session({
+      secret: secret.cookieSecret, // prevent cookie tampering
+      proxy: true // trust the reverse proxy
+    }))
 
 
     // Passport
