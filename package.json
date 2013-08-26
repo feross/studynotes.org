@@ -1,19 +1,37 @@
 {
-  "name": "StudyNotes",
-  "version": "0.0.1",
+  "name": "studynotes",
+  "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "express": "3.1.x",
-    "jade": "0.28.x",
-    "underscore": "~1.4.4",
-    "nib": "0.9.x",
-    "mongoose": "3.5.x",
-    "async": "0.2.x",
-    "underscore.string": "*",
-    "moment": "2.0.x",
-    "futils": "0.4.x",
-    "simple-build": "0.1.x",
-    "stylus": "*"
+  "engines": {
+    "node": ">=0.10.0"
   },
-  "devDependencies": {}
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/feross/StudyNotes.org.git"
+  },
+  "dependencies": {
+    "async": "*",
+    "bcrypt": "*",
+    "beepbeep": "*",
+    "connect-flash": "*",
+    "debug": "*",
+    "express": "*",
+    "express-validator": "*",
+    "jade": "*",
+    "MD5": "*",
+    "mkdirp": "*",
+    "moment": "*",
+    "mongoose": "*",
+    "nib": "*",
+    "node-uuid": "*",
+    "once": "*",
+    "optimist": "*",
+    "passport": "*",
+    "passport-local": "*",
+    "stylus": "*",
+    "touch": "*",
+    "uglify-js": "*",
+    "underscore": "*",
+    "underscore.string": "*"
+  }
 }
