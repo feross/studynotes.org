@@ -7,7 +7,7 @@ var bcrypt = require('bcrypt')
 var builder = require('./builder')
 var cluster = require('cluster')
 var config = require('./config')
-var debug = require('debug')('site')
+var debug = global.debug = require('debug')('site')
 var express = require('express')
 var expressValidator = require('express-validator')
 var flash = require('connect-flash')
@@ -21,6 +21,7 @@ var os = require('os')
 var passport = require('passport')
 var passportLocal = require('passport-local')
 var path = require('path')
+var secret = require('./secret')
 var util = require('./util')
 
 function Site (opts, cb) {
@@ -55,17 +56,17 @@ Site.prototype.start = function (done) {
 
   } else {
 
-    var app = self.app = express()
+    global.app = express()
     self.server = http.createServer(app)
 
     // Readable logs that are hidden by default. Enable with DEBUG=*
-    self.app.use(util.expressLogger(debug))
+    app.use(util.expressLogger(debug))
 
     // Trust the X-Forwarded-* headers from the router
-    self.app.enable('trust proxy')
+    app.enable('trust proxy')
 
     // Disable express advertising header
-    self.app.disable('x-powered-by')
+    app.disable('x-powered-by')
 
     // Gzip
     app.use(express.compress())
@@ -312,7 +313,6 @@ Site.prototype.addHeaders = function (req, res, next) {
 
 Site.prototype.connectDB = function (cb) {
   var self = this
-  var app = self.app
 
   mongoose.set('debug', !config.isProd)
   app.db = mongoose.createConnection('mongodb://' +

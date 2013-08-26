@@ -82,17 +82,7 @@ html(class='no-js #{ htmlClasses }', lang='en')
     //- For Facebook SDK
     #fb-root
 
-    include includes/header
-    include includes/hero
-
-    .contentWrapper
-      .content.clearfix
-        block content
-          p This page has no content.
-
-    include includes/sidebar
-
-    include includes/footer
+    block body
 
     block scripts
       script(src='/out/js/main-#{locals.JS_MD5}.js')

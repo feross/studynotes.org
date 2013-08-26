@@ -1,4 +1,4 @@
-module.exports = function (app) {
+module.exports = function () {
   app.get('/search', function (req, res) {
     var q = req.query.q
 

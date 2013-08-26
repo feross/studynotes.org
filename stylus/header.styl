@@ -1,0 +1,191 @@
+HEADER_HEIGHT = 50px
+
+HEADER_BORDER = 1px solid rgba(255, 255, 255, 0.6)
+SOLID_HEADER_BORDER = 1px solid LIGHTER_GRAY
+
+HEADER_BORDER_FOCUS = 3px solid #FFF
+SOLID_HEADER_BORDER_FOCUS = 3px solid #000
+
+.header
+  background-color: transparent
+  border-bottom: HEADER_BORDER
+  height: HEADER_HEIGHT
+  left: 0
+  position: absolute
+  top: 0
+  width: 100%
+  z-index: 10
+
+  html:not(.solidHeader) &
+    background-color: rgba(0,0,0,0.1)
+
+  .solidHeader &
+    background-color: #FFF
+    border-bottom: SOLID_HEADER_BORDER
+
+  ul
+    list-style: none
+    padding: 0 // reset global ul padding
+    position: absolute
+    top: 0
+
+    &.left
+      left: 0
+
+      li a
+        {LINK}
+          border-right: HEADER_BORDER
+        {HOVER}
+          border: HEADER_BORDER_FOCUS
+          padding: 14px 16px 0 15px
+
+        .solidHeader &
+          {LINK}
+            border-right: SOLID_HEADER_BORDER
+          {HOVER}
+            border: SOLID_HEADER_BORDER_FOCUS
+
+    &.right
+      right: 0
+
+      li a
+        {LINK}
+          border-left: HEADER_BORDER
+        {HOVER}
+          border: HEADER_BORDER_FOCUS
+          padding: 14px 15px 0 16px
+        &.on
+          border: HEADER_BORDER_FOCUS
+          height: HEADER_HEIGHT - 1
+          padding: 14px 15px 0 16px
+
+        .solidHeader &
+          {LINK}
+            border-left: SOLID_HEADER_BORDER
+          {HOVER}
+            border: SOLID_HEADER_BORDER_FOCUS
+          &.on
+            border: SOLID_HEADER_BORDER_FOCUS
+
+    li
+      float: left
+      font-weight: bold
+      font-size: 13.5px
+      line-height: 1.0em
+      text-transform: uppercase
+
+      a
+        {LINK}
+          color: #FFF
+          display: block
+          height: HEADER_HEIGHT - 1
+          padding: 17px 18px 0 18px
+
+        {HOVER}
+          text-decoration: none
+
+        .solidHeader &
+          {LINK}
+            color: #000
+
+  .courses
+    &:after
+      content: "\25bc"
+      font-size: 12px
+      padding-left: 8px
+
+    &.on:after
+      content: "\25b2"
+
+
+  /**
+   * SEARCH
+   */
+
+  .search
+    padding: 3px 18px 3px 3px
+    text-transform: none
+
+    &.searching, {HOVER}
+      border: HEADER_BORDER_FOCUS
+      padding: 0 15px 0 0
+
+    html:not(.solidHeader) &
+      background: linear-gradient(top, rgba(255,255,255,0.3), rgba(255,255,255,0.4))
+      background-size: 100% 100%
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.4)
+
+    .solidHeader &
+      &.searching, {HOVER}
+        border: SOLID_HEADER_BORDER_FOCUS
+
+    input
+      background: right center url('/images/search-white.png') no-repeat
+      background-size: 18px 18px
+      border: 0
+      color: #FFF
+      font-size: 14px
+      height: HEADER_HEIGHT - 7
+      outline: 0
+      padding-left: 18px
+      width: 100%
+
+      .solidHeader &
+        background: right center url('/images/search-black.png') no-repeat
+        background-size: 18px 18px
+        color: #000
+
+
+    ::-webkit-input-placeholder
+      color: #FFF
+    :-moz-placeholder
+      color: #FFF
+    :-ms-input-placeholder
+      color: #FFF
+
+    .solidHeader &
+      ::-webkit-input-placeholder
+        color: #000
+      :-moz-placeholder
+        color: #000
+      :-ms-input-placeholder
+        color: #000
+
+
+  /**
+   * AUTOCOMPLETE
+   */
+
+  .autocomplete
+    background: #FFF
+    border: 1px solid LIGHT_GRAY
+    z-index: 50
+
+    a.result
+      {LINK}
+        color: black
+        display: block
+        ellipsis()
+        padding: 8px 14px
+        width: 100%
+        z-index: 50
+
+      {HOVER}
+        color: black
+        text-decoration: none
+
+      &.selected
+        background-color: LIGHT_BLUE
+
+      .desc
+        color: LIGHT_GRAY
+        padding-left: 12px
+
+      // &.course
+      //   background: 12px center url('/images/course.png') no-repeat
+      //   background-size: 18px 18px
+      //   padding-left: 45px
+      // &.note
+      //   background: 12px center url('/images/note.png') no-repeat
+      //   background-size: 18px 18px
+      //   padding-left: 45px

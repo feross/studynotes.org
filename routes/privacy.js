@@ -1,4 +1,4 @@
-module.exports = function (app) {
+module.exports = function () {
   app.get('/privacy', function (req, res) {
     res.render('privacy', {
       url: '/privacy',

@@ -1,6 +1,6 @@
 var search = require('../search')
 
-module.exports = function (app) {
+module.exports = function () {
   app.get('/autocomplete', function (req, res) {
     var q = req.query.q
 

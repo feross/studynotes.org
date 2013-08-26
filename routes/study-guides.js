@@ -1,4 +1,4 @@
-module.exports = function (app) {
+module.exports = function () {
   app.get('/study-guides', function (req, res) {
     res.render('study-guides', {
       url: '/study-guides',

@@ -1,0 +1,114 @@
+//
+// HERO & HERO TABS
+//
+
+TAB_HEIGHT = 35px
+
+.hero
+  display: block
+  height: HERO_HEIGHT + HERO_EXTRA_HEIGHT_FOR_FADE
+  left: 0
+  position: absolute
+  top: 0
+  width: 100%
+
+  body.home &
+    height: HERO_HOME_HEIGHT + HERO_EXTRA_HEIGHT_FOR_FADE
+    background: url('/images/hero/outdoor-ipad-books.jpg')
+    background: bottom left url('/images/hero-body-mask.png') repeat-x, center center linear-gradient(left, rgba(0,0,0,0.2), rgba(0,0,0,0.05)) repeat, center center url('/images/hero/outdoor-ipad-books.jpg') no-repeat
+    background-size: auto auto, 100% 100%, cover
+  body.course-english &
+    background: url('/images/hero/english.jpg')
+    background: bottom left url('/images/hero-body-mask.png') repeat-x, center center linear-gradient(left, rgba(0,0,0,0.2), rgba(0,0,0,0.05)) repeat, center center url('/images/hero/english.jpg') no-repeat
+    background-size: auto auto, 100% 100%, cover
+  body.course-us-government &
+    background: url('/images/hero/us-government.jpg')
+    background: bottom left url('/images/hero-body-mask.png') repeat-x, center center linear-gradient(left, rgba(0,0,0,0.2), rgba(0,0,0,0.05)) repeat, center center url('/images/hero/us-government.jpg') no-repeat
+    background-size: auto auto, 100% 100%, cover
+  body.course-us-history &
+    background: url('/images/hero/us-history-2.jpg')
+    background: bottom left url('/images/hero-body-mask.png') repeat-x, center center linear-gradient(left, rgba(0,0,0,0.2), rgba(0,0,0,0.05)) repeat, center center url('/images/hero/us-history-2.jpg') no-repeat
+    background-size: auto auto, 100% 100%, cover
+  body.privacy &, body.about &, body.contact &, body.plagiarism &
+    background: url('/images/hero/fine-print.jpg')
+    background: bottom left url('/images/hero-body-mask.png') repeat-x, center center linear-gradient(left, rgba(0,0,0,0.2), rgba(0,0,0,0.05)) repeat, center center url('/images/hero/fine-print.jpg') no-repeat
+    background-size: auto auto, 100% 100%, cover
+  body.photo-credits &, body.study-guides &
+    background: url('/images/hero/parliament-thames-london.jpg')
+    background: bottom left url('/images/hero-body-mask.png') repeat-x, center center linear-gradient(left, rgba(0,0,0,0.2), rgba(0,0,0,0.05)) repeat, center center url('/images/hero/parliament-thames-london.jpg') no-repeat
+    background-size: auto auto, 100% 100%, cover
+  body.not-found &
+    background: url('/images/hero/cat-not-found.gif')
+    background: bottom left url('/images/hero-body-mask.png') repeat-x, center center linear-gradient(left, rgba(0,0,0,0.2), rgba(0,0,0,0.05)) repeat, center center url('/images/hero/cat-not-found.gif') no-repeat
+    background-size: auto auto, 100% 100%, cover
+
+  .text
+    color: #FFF
+    display: block
+    margin: 100px 25px 25px (LOGO_WIDTH / 2)
+    text-align: left
+
+    body.home &
+      margin: 100px 25px 25px 25px
+      text-align: center
+
+    a
+      {LINK}
+        color: #FFF
+      {HOVER}
+        text-decoration: none
+
+    .title, .desc
+      font-family: HERO_FONT
+      text-shadow: 1px 1px 2px rgba(#000, 0.8)
+      margin: 0.3em 0
+    .title
+      font-size: 50px
+      font-weight: bold
+      text-shadow: 2px 2px 3px rgba(#000, 0.8)
+      body.home &
+        font-size: 80px
+    .desc
+      font-size: 25px
+      body.home &
+        font-size: 40px
+
+  ul.tabs
+    height: TAB_HEIGHT
+    left: 0
+    list-style: none
+    padding-left: 20px
+    position: absolute
+    transition: 0.5s opacity linear
+    top: HERO_HEIGHT - TAB_HEIGHT
+    width: 100%
+    z-index: 5
+
+    li
+      float: left
+      margin-right: 6px
+      padding: 0
+
+      a
+        {LINK}
+          background: rgba(LIGHTEST_GRAY,0.9)
+          border-bottom: none
+          border-radius: 6px 6px 0 0
+          box-shadow: 0 -2px 2px rgba(0, 0, 0, 0.1)
+          color: DARKER_GRAY
+          display: block
+          height: TAB_HEIGHT
+          padding: 7px 10px 0 10px
+          font-weight: bold
+
+        {HOVER}
+          background: rgba(LIGHTEST_GRAY,1)
+          color: BLUE
+          text-decoration: none
+
+      &.on a
+        {LINK}
+          background: #FFF
+          border-bottom: 1px solid #FFF
+          box-shadow: 0 -2px 2px rgba(0, 0, 0, 0.2)
+          height: TAB_HEIGHT + 1

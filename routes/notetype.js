@@ -1,7 +1,7 @@
 var _ = require('underscore')
 var heroForCourse = require('./course').hero
 
-module.exports = function (app) {
+module.exports = function () {
   app.get('/:courseSlug/:notetypeSlug', function (req, res, next) {
     var courseSlug = req.params.courseSlug
     var notetypeSlug = req.params.notetypeSlug
@@ -17,7 +17,7 @@ module.exports = function (app) {
     m.Note
     .find({ courseId: course._id, notetypeId: notetype._id })
     .sort('ordering')
-    .exec(function (err, notes){
+    .exec(function (err, notes) {
       if (err) return next(err)
       if (!notes) return next(new Error('Unable to load notes'))
 

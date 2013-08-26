@@ -4,7 +4,7 @@ var config = require('../config')
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 
-module.exports = function (app) {
+module.exports = function () {
   // Mongoose plugins
   var plugin = {
     modifyDate: function (schema, options) {
@@ -23,9 +23,7 @@ module.exports = function (app) {
       schema.add({ createDate: Date })
 
       schema.pre('save', function (next) {
-        if (!this.createDate)
-          this.createDate = new Date
-
+        if (!this.createDate) this.createDate = new Date
         next()
       })
 
@@ -37,21 +35,21 @@ module.exports = function (app) {
       schema.add({ hits: { type: Number, default: 0 } })
 
       schema.pre('save', function (next) {
-        if (!this.hits)
-          this.hits = 0
-
+        if (!this.hits) this.hits = 0
         next()
       })
 
-      if (options && options.index)
+      if (options && options.index) {
         schema.path('hits').index(options.index)
+      }
     },
 
     absoluteUrl: function (schema, options) {
-      if (schema.virtualpath('url'))
+      if (schema.virtualpath('url')) {
         schema.virtual('absoluteUrl').get(function () {
           return config.siteOrigin + this.url
         })
+      }
     }
   }
 

@@ -4,7 +4,7 @@ var path = require('path')
 var randomquote = require('../randomquote')
 var util = require('../util')
 
-module.exports = function (app) {
+module.exports = function () {
   /*
    * Adds variables that all templates will expect.
    */
@@ -32,18 +32,18 @@ module.exports = function (app) {
     render.call(app, view, options, fn)
   }
 
-  require('./home')(app)
-  require('./study-guides')(app)
-  require('./about')(app)
-  require('./contact')(app)
-  require('./plagiarism')(app)
-  require('./privacy')(app)
-  require('./photo-credits')(app)
-  require('./search')(app)
-  require('./autocomplete')(app)
-  require('./course')(app)
-  require('./notetype')(app)
-  require('./note')(app)
+  require('./home')()
+  require('./study-guides')()
+  require('./about')()
+  require('./contact')()
+  require('./plagiarism')()
+  require('./privacy')()
+  require('./photo-credits')()
+  require('./search')()
+  require('./autocomplete')()
+  require('./course')()
+  require('./notetype')()
+  require('./note')()
 
   if (!config.isProd) {
     // Server static resources in dev (nginx handles it in prod)
@@ -51,5 +51,5 @@ module.exports = function (app) {
   }
 
   // Error pages
-  require('./error')(app)
+  require('./error')()
 }

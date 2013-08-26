@@ -1,4 +1,4 @@
-module.exports = function (app) {
+module.exports = function () {
   app.get('/plagiarism', function (req, res) {
     res.render('plagiarism', {
       url: '/plagiarism',

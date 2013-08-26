@@ -1,0 +1,55 @@
+HERO_EXTRA_HEIGHT_FOR_FADE = 100px
+HERO_HEIGHT = 240px + HEADER_HEIGHT
+HERO_HOME_HEIGHT = HERO_HEIGHT + 60px
+BROWSE_HEIGHT = HERO_HOME_HEIGHT - HEADER_HEIGHT
+
+.browseWrapper
+  background-color: #000
+  padding: 0 30px
+  position: fixed
+  top: HEADER_HEIGHT
+  width: 100%
+  z-index: 50
+
+.browse
+  height: 0
+  padding: 0
+  overflow: hidden
+
+  transform: translateZ(0)
+  transition-property: padding, height
+  transition-duration: .5s
+
+  &.on
+    height: BROWSE_HEIGHT
+    padding: 30px 0
+
+    transition-property: padding, height
+    transition-duration: .5s
+
+  & > li
+    border-right: 1px solid DARKER_GRAY
+    display: inline-block
+    padding: 0 15px
+    vertical-align: top
+    width: 32%
+
+    &:last-child
+      border-right: 0
+
+    h2
+      font-size: 19px
+      font-weight: bold
+      margin-top: 0
+      text-transform: uppercase
+
+    li
+      list-style: none
+      margin: 5px 0
+
+  a
+    {LINK}
+      color: #FFF
+      display: block
+      ellipsis()
+      width: 100%

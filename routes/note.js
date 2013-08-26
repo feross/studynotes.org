@@ -1,7 +1,7 @@
 var _ = require('underscore')
 var heroForCourse = require('./course').hero
 
-module.exports = function (app) {
+module.exports = function () {
   app.get('/:courseSlug/:notetypeSlug/:noteSlug', function (req, res, next) {
     var courseSlug = req.params.courseSlug
     var notetypeSlug = req.params.notetypeSlug

@@ -1,0 +1,50 @@
+.sidebar
+  float: left
+  padding: 5px SIDEBAR_MARGIN_RIGHT 0 SIDEBAR_MARGIN_LEFT
+  position: relative
+  width: SIDEBAR_WIDTH + SIDEBAR_MARGIN_LEFT + SIDEBAR_MARGIN_RIGHT
+
+  .isHero &
+    margin-top: 120px
+  .isHero body.home &
+    margin-top: HERO_HOME_HEIGHT
+
+  & > div:not(.ad)
+    margin: 1.2em 0
+
+  h1, h2, h3, h4
+    font-family: BODY_FONT
+
+  h3
+    font-size: 19px
+    font-weight: bold
+    margin: 2em 0 1em 0
+
+  //
+  // COUNTDOWN
+  //
+
+  .countdown
+
+    .time
+      float: left
+      width: 25%
+
+      div
+        font-size: 35px
+        line-height: 1.1em
+        margin: 0
+        text-align: center
+      span
+        display: block
+        font-size: 15px
+        margin: 0
+        text-align: center
+
+    h3
+      margin-top: 1em
+      text-align: center
+      text-transform: uppercase
+
+      &.left-to-study
+        font-weight: normal

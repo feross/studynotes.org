@@ -1,0 +1,55 @@
+.footer
+  clear: both
+  font-size: 15px
+  padding: 40px 20px 30px (LOGO_WIDTH / 2)
+  position: relative
+  width: 100%
+
+  .randomquote
+    color: LIGHT_GRAY
+    font-size: 22px
+
+    q
+      font-style: italic
+      quotes: none
+
+      &:before
+        content: '\201C'
+        font-size: 30px
+      &::after
+        content: '\201D'
+        font-size: 30px
+
+    .author:before
+      content: '\2013' // en dash
+      padding: 0 4px
+
+  .col
+    margin-bottom: 40px
+    width: 20%
+
+    &.about-this-site
+      width: 40%
+
+  a
+    {LINK}
+      border-bottom: 1px solid LIGHTER_GRAY
+      text-decoration: none
+    {HOVER}
+      border-bottom: 1px solid BLUE
+      color: BLUE
+
+  h4
+    font-size: 18px
+    font-weight: bold
+    text-transform: uppercase
+
+  ul
+    list-style: none
+    li
+      padding: 5px 0
+
+  small
+    color: GRAY
+    display: block
+    margin: 5px 0

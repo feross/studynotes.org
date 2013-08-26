@@ -1,0 +1,32 @@
+.ghost
+  height: 56px
+  width: 100%
+
+.toolbar
+  @extend .ghost
+  background: #FFF
+  border-top: 1px solid LIGHTEST_GRAY
+  border-bottom: 1px solid LIGHTEST_GRAY
+  z-index: 20
+
+  &.sticky
+    border-bottom: 1px solid LIGHTER_GRAY
+    box-shadow: 0 1px rgba(0, 0, 0, 0.05)
+    position: fixed
+    top: 0
+
+  .fb-like
+    float: left
+    margin-top: 15px
+
+  .navigate-msg
+    color: GRAY
+    float: right
+    font-size: 14px
+    font-style: italic
+    margin: 18px 15px 0 0
+
+  a.next
+    {LINK}
+      float: right
+      margin-top: 10px

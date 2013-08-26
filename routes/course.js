@@ -1,6 +1,6 @@
 var search = require('./search')
 
-module.exports = function (app) {
+module.exports = function () {
   app.get('/:courseSlug', function (req, res, next) {
     var courseSlug = req.params.courseSlug
 
