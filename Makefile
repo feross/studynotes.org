@@ -5,13 +5,13 @@ APP_DIR = /home/feross/www/studynotes.org
 .PHONY : default
 default:
 	ssh -L 27017:localhost:27017 -N feross@athena &
-	nodemon .
+	nodemon index.js
 
 
 # Run the server
 .PHONY : run
 run:
-	node server.js
+	node index.js
 
 
 # Trigger a deploy
