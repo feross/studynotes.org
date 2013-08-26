@@ -4,8 +4,8 @@ module.exports = function (app) {
       url: '/study-guides',
       title: 'Buy Amazon.com AP Study Guides',
       hero: {
-        title: 'Learn yourself some good AP stuffs',
-        desc: '^ Maybe start with AP English'
+        title: 'Book Store',
+        desc: 'Get extra help with study guides from Amazon.com'
       }
     })
   })

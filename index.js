@@ -13,7 +13,10 @@ var expressValidator = require('express-validator')
 var flash = require('connect-flash')
 var fs = require('fs')
 var http = require('http')
+var models = require('./models')
 var moment = require('moment')
+var mongoose = require('mongoose')
+var once = require('once')
 var os = require('os')
 var passport = require('passport')
 var passportLocal = require('passport-local')
@@ -258,18 +261,23 @@ Site.prototype.start = function (done) {
     //   })
     // }
 
-    require('./models')(function (err){
-      if (err) {
-        console.error('Connecting to DB or loading models has failed, so server cannot start')
-        return
+    require('./routes')(app)
+
+    async.parallel([
+      self.connectDB.bind(self),
+      function (cb) {
+        models(app)
+        models.warmCache(cb)
+      },
+      function (cb) {
+        // Start HTTP server -- workers will all share a TCP connection
+        self.server.listen(self.port, cb)
       }
-      require('./routes')(app)
-
-      // Start the server -- workers will all share a TCP connection
-      http.createServer(app).listen(self.port, function (){
+    ], function (err) {
+      if (!err) {
         debug('StudyNotes listening on ' + self.port)
-      })
-
+      }
+      done(err)
     })
   }
 }
@@ -300,6 +308,23 @@ Site.prototype.addHeaders = function (req, res, next) {
   res.header('X-UA-Compatible', 'IE=Edge,chrome=1')
 
   next()
+}
+
+Site.prototype.connectDB = function (cb) {
+  var self = this
+  var app = self.app
+
+  mongoose.set('debug', !config.isProd)
+  app.db = mongoose.createConnection('mongodb://' +
+    config.db.user + '@' + config.db.host + ':' +
+    config.db.port + '/' + config.db.database, {
+      server: { poolSize: 20 }
+  })
+  cb = once(cb)
+  app.db.on('error', cb)
+  app.db.on('open', function () {
+    cb(null)
+  })
 }
 
 if (require.main === module) {
