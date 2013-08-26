@@ -3,3 +3,5 @@
 static/build/
 *.md
 *.txt
+
+out

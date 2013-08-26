@@ -89,7 +89,7 @@ var routes = {
 
       search.autocomplete(q, function(err, results){
         if (err) {
-          log.error(err)
+          console.error(err)
           res.send(500, { error: 'Search error' })
           return
         }
@@ -150,7 +150,7 @@ var routes = {
       .sort('ordering')
       .exec(function (err, notes){
         if (err) {
-          log.error(err)
+          console.error(err)
           return
         }
 
@@ -200,7 +200,7 @@ var routes = {
       .sort('ordering')
       .exec(function (err, notes){
         if (err) {
-          log.error(err)
+          console.error(err)
           return
         }
 
@@ -247,7 +247,7 @@ var routes = {
           relatedNotes: notes,
           meta: {
             url: note.absoluteUrl,
-            title: util.titleify(note.name, course.name + ' ' + notetype.name)
+            title: [note.name, course.name + ' ' + notetype.name].join(' - ')
           }
         })
       })
@@ -268,7 +268,7 @@ _.each(routes, function (locals, templateName){
         && locals.url.indexOf(':') == -1
         && locals.url.indexOf('*') == -1) {
 
-      var absoluteUrl = config.siteUrl + locals.url
+      var absoluteUrl = config.siteOrigin + locals.url
       if (absoluteUrl[absoluteUrl.length - 1] != '/')
         absoluteUrl += '/'
 
@@ -335,7 +335,7 @@ function render(res, templateName, locals) {
  * @param  {String} msg Error message to log
  */
 function render404(res, msg) {
-  if (msg) log.error(msg) // don't return since we want to serve a 404 page
+  if (msg) console.error(msg) // don't return since we want to serve a 404 page
 
   res.status(404)
   render(res, 'not-found',

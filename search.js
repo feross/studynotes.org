@@ -1,11 +1,12 @@
+var _ = require('underscore')
 var async = require('async')
-  , _ = require('underscore')
-  , escapeRegExp = util.escapeRegExp
-  , MAX_RESULTS = 8
+var util = require('./util')
 
-/* Weights */
+// Weights
 var EXACT_MATCH = 1000
-  , WORD_MATCH = 100
+var WORD_MATCH = 100
+
+var MAX_RESULTS = 8
 
 exports.autocomplete = function (query, cb){
   var results = []
@@ -88,10 +89,10 @@ exports.autocomplete = function (query, cb){
  */
 exports.regexForQuery = function (query){
   var tokens = query.split(' ')
-    , str = '(^|\\s)[^a-z]*' + escapeRegExp(tokens[0])
+    , str = '(^|\\s)[^a-z]*' + util.escapeRegExp(tokens[0])
 
   for(var i = 1, len = tokens.length; i < len; i++) {
-    str += '.*\\s[^a-z]*' + escapeRegExp(tokens[i])
+    str += '.*\\s[^a-z]*' + util.escapeRegExp(tokens[i])
   }
 
   return new RegExp(str, 'i')
@@ -125,7 +126,7 @@ exports.weight = function (result, query){
 
   // Word match
   words.forEach(function (word){
-    var re = new RegExp('(^|\\s)' + escapeRegExp(word) + '($|\\s)', 'i')
+    var re = new RegExp('(^|\\s)' + util.escapeRegExp(word) + '($|\\s)', 'i')
     if (re.test(result.name)) {
       weight += WORD_MATCH
     }
@@ -152,7 +153,7 @@ exports.highlight = function (str, query){
     if (i != 0) {
       reStr += '|'
     }
-    reStr += '((^|\\s)[^a-z]*' + escapeRegExp(tokens[i]) + ')'
+    reStr += '((^|\\s)[^a-z]*' + util.escapeRegExp(tokens[i]) + ')'
   })
 
   str = str.replace(new RegExp(reStr, 'gi'), '<strong>$&</strong>')

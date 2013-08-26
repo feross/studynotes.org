@@ -1,11 +1,11 @@
-app_dir = /home/feross/www/studynotes.org
+APP_DIR = /home/feross/www/studynotes.org
 
 # Run the server in development mode
 # (this is the default task if `make` is invoked without args)
 .PHONY : default
 default:
 	ssh -L 27017:localhost:27017 -N feross@athena &
-	nodemon --delay 0.4 server.js
+	nodemon .
 
 
 # Run the server
@@ -26,6 +26,6 @@ trigger:
 # (from app server)
 .PHONY : deploy
 deploy:
-	cd $(app_dir); git pull
-	cd $(app_dir); npm rebuild
+	cd $(APP_DIR); git pull
+	cd $(APP_DIR); npm rebuild
 	sudo supervisorctl restart studynotes:

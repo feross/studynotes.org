@@ -48,7 +48,7 @@ module.exports = function (callback){
     , absoluteUrl: function (schema, options){
         if (schema.virtualpath('url'))
           schema.virtual('absoluteUrl').get(function (){
-            return config.siteUrl + this.url
+            return config.siteOrigin + this.url
           })
       }
   }
@@ -223,7 +223,7 @@ module.exports = function (callback){
               })
             }
           , function (err){
-            if (err) log.error(err)
+            if (err) console.error(err)
             next()
           })
 
@@ -262,7 +262,7 @@ module.exports = function (callback){
     }
   , function (err, results){
       if (err) {
-        log.error(err)
+        console.error(err)
         callback(err)
         return
       }
@@ -275,7 +275,7 @@ module.exports = function (callback){
 
         course.getNotetypes(function (err, notetypes){
           if (err) {
-            log.error(err)
+            console.error(err)
             callback(err)
             return
           }

@@ -26,7 +26,7 @@ module.exports = function (callback){
     ]
   , function (err){
     if (err) {
-      log.error("Error connecting to database.", err)
+      console.error("Error connecting to database.", err)
       callback(err)
     } else {
       console.log('Connected to database successfully.')

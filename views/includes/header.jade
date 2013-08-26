@@ -2,13 +2,13 @@ header.header
   block header
     ul.left
       li.home
-        a(href='/', title='Go to the front page of StudyNotes', class='home #{locals.cls == 'home' ? 'current' : ''}')= config.siteTitle
-    
+        a(href='/', title='Go to the front page of StudyNotes', class='home') Study Notes
+
     //- "off" class gets removed after search bar is positioned in JS
     .search.off
       form(action='/search/', method='GET')
         input(autocorrect='off', autocomplete='off', autofocus, spellcheck='false', name='q', placeholder='Search for AP Courses and Topics...', type='text', value='#{locals.search_term}')
-    
+
     .autocomplete.off
       a.result(href='#')
         span.name
