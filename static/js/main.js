@@ -43,7 +43,7 @@ function updateSearchWidth() {
 
   /**
    * Continue to set the width every 100ms until fonts are done loading.
-   * 
+   *
    * (If fonts don't load, then wf-loading gets removed automatically
    * after 1000ms, so this won't run forever.)
    */
@@ -115,7 +115,7 @@ $(function() {
   $('.header .courses').on('click', function (e){
     // Only handle left-clicks
     if (e.which != 1) return
-    
+
     toggleBrowseMenu()
     e.preventDefault()
   })
@@ -162,8 +162,8 @@ $(function() {
 
     if (contentToolbarTop) {
       var scrollTop = $window.scrollTop() // current vertical position from the top
-      
-      if (contentToolbarTop < scrollTop && scrollTop < contentBottom) { 
+
+      if (contentToolbarTop < scrollTop && scrollTop < contentBottom) {
         $contentToolbar
           .addClass('sticky')
           .css({width: contentWidth})
@@ -190,7 +190,7 @@ $(function() {
    *
    * @param {Number} position index (0 = nothing selected, 1 = first result, etc.)
    */
-  
+
   var setAutocompletePosition = function (position){
     autocompletePosition = _.isNaN(position)
       ? 1
@@ -216,7 +216,7 @@ $(function() {
   /**
    * Perform search for autocomplete results and display them
    */
-  
+
   var doSearchAutocomplete = function (){
 
     if ($searchInput.val() === lastAutocompleteQuery &&
@@ -227,14 +227,14 @@ $(function() {
       $search.removeClass('searching')
       $headerAutocomplete.addClass('off')
       setAutocompletePosition(0)
-    
+
     } else {
       $search.addClass('searching')
-      
+
       var params = { q: $searchInput.val() }
       var time = +(new Date)
-      $.get('/autocomplete-endpoint/', params, function(data) {
-        
+      $.get('/autocomplete/', params, function(data) {
+
         if ($searchInput.val() != '' && time >= lastAutocompleteTime) {
 
           lastAutocompleteTime = time
@@ -244,7 +244,7 @@ $(function() {
             .render(data.results, { // template directives
               name: {
                 // don't escape search result name, to show formatting
-                html: function (params){ 
+                html: function (params){
                   return this.name
                 }
               },
@@ -328,7 +328,7 @@ $(function() {
     }
 
   })
-  
+
   $searchInput.on('blur', function (e){
     window.setTimeout(function (){
       $search.removeClass('searching')
@@ -338,7 +338,7 @@ $(function() {
   })
 
   /**
-   * Filter keystrokes from keymaster when user is searching. 
+   * Filter keystrokes from keymaster when user is searching.
    * https://github.com/madrobby/keymaster
    */
   key.filter = function (event){

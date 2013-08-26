@@ -12,11 +12,12 @@ exports.db = {
   database: 'studynotes'
 }
 
-exports.siteTitle = 'Study Notes'
-exports.siteOrigin = 'https://essaysite.com' // no trailing slash
-
-exports.cookieSecret = 'GRyXK3xSJ59HfLbl9aLKaDNn6Knz1k'
+exports.siteOrigin = 'http://www.apstudynotes.org' // no trailing slash
 
 exports.root = __dirname
 exports.out = path.join(__dirname, 'static', 'out')
 exports.tmp = path.join(__dirname, 'tmp')
+
+exports.numCluster = exports.isProd
+  ? os.cpus().length
+  : 1

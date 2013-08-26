@@ -1,6 +1,8 @@
+var _ = require('underscore')
+var async = require('async')
+var config = require('../config')
 var mongoose = require('mongoose')
-  , Schema = mongoose.Schema
-  , _ = require('underscore')
+var Schema = mongoose.Schema
 
 module.exports = function (callback){
   // Mongoose plugins

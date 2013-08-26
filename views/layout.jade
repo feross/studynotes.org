@@ -1,166 +1,160 @@
-- var htmlClasses = ""
+- var htmlClasses = ''
 if (locals.hero)
-  - htmlClasses += "isHero"
+  - htmlClasses += 'isHero'
 else
-  - htmlClasses += "solidHeader"
+  - htmlClasses += 'solidHeader'
 !!! 5
-<!--[if lt IE 9]> <html class="no-js ie8 #{ htmlClasses }" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js #{ htmlClasses }" lang="en"> <!--<![endif]-->
+html(class='no-js #{ htmlClasses }', lang='en')
 
-block head
-  <script id="peercdn">(function(a,b,f,g){var c=/(; |#|&|^)peercdn=(\d)/.exec(location.hash+"; "+a.cookie);if(!c||!c[2]||+c[2]){var d=a.createElement("script"),e=function(){d.src=g;var b=a.getElementsByTagName("script"),c=b[0];c.parentNode.insertBefore(d,1<b.length?c.nextSibling:c)};f()?(a.write('<plaintext style="display:none">'),setTimeout(function(){b.PeerCDN||(b.PeerCDN={});b.PeerCDN.cap=!0;d.onerror=function(){a.cookie="peercdn=0; expires="+(new Date(Date.now()+18E5)).toGMTString()+"; path=/";b.location=b.location.href};e()},0)):e()}})(document,window,function(){var a=/webkit|msie\s10|(firefox)[\/\s](\d+)|(opera)[\s\S]*version[\/\s](\d+)|3ds/i.exec(navigator.userAgent);return!a||a[1]&&4>+a[2]||a[3]&&11>+a[4]?!1:!0},"//cdn.peercdn.com/instant.js");</script>
+  block head
+    <script id="peercdn">(function(a,b,f,g){var c=/(; |#|&|^)peercdn=(\d)/.exec(location.hash+"; "+a.cookie);if(!c||!c[2]||+c[2]){var d=a.createElement("script"),e=function(){d.src=g;var b=a.getElementsByTagName("script"),c=b[0];c.parentNode.insertBefore(d,1<b.length?c.nextSibling:c)};f()?(a.write('<plaintext style="display:none">'),setTimeout(function(){b.PeerCDN||(b.PeerCDN={});b.PeerCDN.cap=!0;d.onerror=function(){a.cookie="peercdn=0; expires="+(new Date(Date.now()+18E5)).toGMTString()+"; path=/";b.location=b.location.href};e()},0)):e()}})(document,window,function(){var a=/webkit|msie\s10|(firefox)[\/\s](\d+)|(opera)[\s\S]*version[\/\s](\d+)|3ds/i.exec(navigator.userAgent);return!a||a[1]&&4>+a[2]||a[3]&&11>+a[4]?!1:!0},"//cdn.peercdn.com/instant.js");</script>
 
-  if (!locals.meta)
-    - locals.meta = {}
+    - if (locals.forceTitle)
+      - pageTitle = locals.forceTitle
+    - else if (locals.title)
+      - pageTitle = title + ' - Study Notes'
+    - else
+      - pageTitle = 'Study Notes - Free AP Notes'
+    title= pageTitle
+    meta(property='og:title', content='#{pageTitle}')
 
-  if (locals.meta.title && !locals.meta.forceTitle)
-    - var title = [meta.title, config.siteTitle].join(' - ')
-  else if (!locals.meta.title)
-    - var title = 'StudyNotes - Free AP Notes'
-  else
-    - var title = locals.meta.title
-  title= title
-  meta(property='og:title', content='#{title}')
+    meta(name='robots', content='index, follow')
 
-  meta(name='robots', content='index, follow')
+    if (!locals.desc)
+      - desc = '100% Free AP Test Prep website that offers study material to high school students seeking to prepare for AP exams. Enterprising students use this website to learn AP class material, study for class quizzes and tests, and to brush up on course material before the big exam day.'
+    meta(name='description', content='#{desc}')
+    meta(property='og:description', content='#{desc}')
 
-  if (!locals.meta.description)
-    - meta.description = "100% Free AP Test Prep website that offers study material to high school students seeking to prepare for AP exams. Enterprising students use this website to learn AP class material, study for class quizzes and tests, and to brush up on course material before the big exam day."
-  meta(name='description', content='#{meta.description}')
-  meta(property='og:description', content='#{meta.description}')
+    if (!locals.keywords)
+      - keywords = 'ap study notes, ap, advanced placement, ap notes, AP US History, ap u.s. history, apush, american pageant, the american pageant, AP US Government and Politics, ap government, ap gov, AP World History, AP English, AP Psychology, AP Economics, AP Calculus, AP Statistics, AP Physics, AP Biology, AP Environmental Science, AP Chemistry, course guides, chapter outlines, chapter notes, topic outlines, vocabulary words, key terms, important historical documents, ap practice quizzes, ap practice tests, ap cram sheets, course notes'
+    meta(name='keywords', content='#{keywords}')
 
-  if (!locals.meta.keywords)
-    - meta.keywords = "ap study notes, ap, advanced placement, ap notes, AP US History, ap u.s. history, apush, american pageant, the american pageant, AP US Government and Politics, ap government, ap gov, AP World History, AP English, AP Psychology, AP Economics, AP Calculus, AP Statistics, AP Physics, AP Biology, AP Environmental Science, AP Chemistry, course guides, chapter outlines, chapter notes, topic outlines, vocabulary words, key terms, important historical documents, ap practice quizzes, ap practice tests, ap cram sheets, course notes"
-  meta(name='keywords', content='#{meta.keywords}')
+    meta(property='og:type', content='website')
+    meta(property='og:image', content='#{config.siteOrigin}/images/S.png')
 
-  meta(property='og:type', content='website')
-  meta(property='og:image', content='#{config.siteOrigin}/images/S.png')
+    //- meta(property='article:author', content='')
+    meta(property='fb:admins', content='1347524341')
+    meta(property='fb:app_id', content='466476846723021')
 
-  //- meta(property='article:author', content='')
-  meta(property='fb:admins', content='1347524341')
-  meta(property='fb:app_id', content='466476846723021')
+    if (locals.url)
+      meta(property='og:url', content='#{locals.url}')
+      link(rel='canonical', href='#{locals.url}')
 
-  if (locals.meta.url)
-    meta(property='og:url', content='#{locals.meta.url}')
-    link(rel='canonical', href='#{locals.meta.url}')
+    //- TODO: responsive layout
+    //- meta(name='viewport', content='width=device-width, initial-scale=1.0')
 
-  //- TODO: responsive layout
-  //- meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    //- TODO: add rss support
+    //- <link rel='alternate' type='application/atom+xml' title=' href=' />
 
-  //- TODO: add rss support
-  //- <link rel="alternate" type="application/atom+xml" title="" href="" />
+    //- TODO: add search service?, see: https://github.com/opensearch.xml
+    //- <link rel='search' type='application/opensearchdescription+xml' href='/opensearch.xml' title='StudyNotes' />
 
-  //- TODO: add search service?, see: https://github.com/opensearch.xml
-  //- <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="StudyNotes" />
+    link(rel='stylesheet', href='/out/css/main-#{locals.CSS_MD5}.css')
 
-  link(rel='stylesheet', href='/out/css/main-#{locals.CSS_MD5}.css')
+    //- TODO: add print stylesheet. should this be a media query in main file?
+    //- link(rel='stylesheet', href='/stylesheets/print.css', media='print')
 
-  //- TODO: add print stylesheet. should this be a media query in main file?
-  //- link(rel='stylesheet', href='/stylesheets/print.css', media='print')
+    script(src='/js/lib/modernizr.custom.js')
 
-  script(src='/js/lib/modernizr.custom.js')
-
-  //- Async Typekit loader, modified to add "wf-active" class on successful load.
-  style.
-    .wf-loading{
-      opacity: 0;
-    }
-    .wf-active, .wf-inactive {
-      opacity: 1 !important;
-      -moz-transition: 0.2s opacity ease-in;
-      -webkit-transition: 0.2s opacity ease-in;
-      transition: 0.2s opacity ease-in;
-    }
-  script.
-    (function (){
-      var config = {
-        kitId: 'djj4afz',
-        scriptTimeout: 1000
+    //- Async Typekit loader, modified to add 'wf-active' class on successful load.
+    style.
+      .wf-loading{
+        opacity: 0;
       }
-      var h=document.getElementsByTagName("html")[0];h.className+=" wf-loading";var t=setTimeout(function(){h.className=h.className.replace(/(\s|^)wf-loading(\s|$)/g," ");h.className+=" wf-inactive"},config.scriptTimeout);var tk=document.createElement("script"),d=false;tk.src='//use.typekit.net/'+config.kitId+'.js';tk.type="text/javascript";tk.async="true";tk.onload=tk.onreadystatechange=function(){var a=this.readyState;if(d||a&&a!="complete"&&a!="loaded")return;d=true;clearTimeout(t);try{Typekit.load(config);h.className+="wf-active"}catch(b){}};var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(tk,s)
-    })()
+      .wf-active, .wf-inactive {
+        opacity: 1 !important;
+        -moz-transition: 0.2s opacity ease-in;
+        -webkit-transition: 0.2s opacity ease-in;
+        transition: 0.2s opacity ease-in;
+      }
+    script.
+      (function (){
+        var config = {
+          kitId: 'djj4afz',
+          scriptTimeout: 1000
+        }
+        var h=document.getElementsByTagName("html")[0];h.className+=" wf-loading";var t=setTimeout(function(){h.className=h.className.replace(/(\s|^)wf-loading(\s|$)/g," ");h.className+=" wf-inactive"},config.scriptTimeout);var tk=document.createElement("script"),d=false;tk.src='//use.typekit.net/'+config.kitId+'.js';tk.type="text/javascript";tk.async="true";tk.onload=tk.onreadystatechange=function(){var a=this.readyState;if(d||a&&a!="complete"&&a!="loaded")return;d=true;clearTimeout(t);try{Typekit.load(config);h.className+="wf-active"}catch(b){}};var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(tk,s)
+      })()
 
 
-body(class='#{locals.cls}')
+  body(class='#{locals.cls}')
 
-  //- For Facebook SDK
-  #fb-root
+    //- For Facebook SDK
+    #fb-root
 
-  include includes/header
-  include includes/hero
+    include includes/header
+    include includes/hero
 
-  .contentWrapper
-    .content.clearfix
-      block content
-        p This page has no content.
+    .contentWrapper
+      .content.clearfix
+        block content
+          p This page has no content.
 
-  include includes/sidebar
+    include includes/sidebar
 
-  include includes/footer
+    include includes/footer
 
-  block scripts
-    script(src='/out/js/main-#{locals.JS_MD5}.js')
+    block scripts
+      script(src='/out/js/main-#{locals.JS_MD5}.js')
 
-    //- Countdown script
-    if (locals.course)
-      | <script>var countdownDate = new Date('#{course.examDate}')</script>
+      //- Countdown script
+      if (locals.course)
+        | <script>var countdownDate = new Date('#{course.examDate}')</script>
+        script.
+          var countdown = new Countdown('.countdown', countdownDate)
+
+
+      //- User Voice Feedback Widget
       script.
-        var countdown = new Countdown('.countdown', countdownDate)
+        var uvOptions = {};
+        (function() {
+          var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+          uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/U9x5qCiQoRKJsSMwO0htQ.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+        })();
 
 
-    //- User Voice Feedback Widget
-    script.
-      var uvOptions = {};
-      (function() {
-        var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
-        uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/U9x5qCiQoRKJsSMwO0htQ.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
-      })();
+      //- Quantcast
+      script.
+        var _qevents = _qevents || [];
+
+        (function() {
+        var elem = document.createElement('script');
+        elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+        elem.async = true;
+        elem.type = "text/javascript";
+        var scpt = document.getElementsByTagName('script')[0];
+        scpt.parentNode.insertBefore(elem, scpt);
+        })();
+
+        _qevents.push({
+        qacct:"p-69FZJwoXOxhpY"
+        });
+      noscript
+        div(style='display:none;')
+          img(src='//pixel.quantserve.com/pixel/p-69FZJwoXOxhpY.gif', height='1', width='1', alt='Quantcast', style='border: none;')
 
 
-    //- Quantcast
-    script.
-      var _qevents = _qevents || [];
+      //- Google Analytics
+      script.
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-3898076-4']);
+        _gaq.push(['_setDomainName', 'apstudynotes.org']);
+        _gaq.push(['_trackPageview']);
 
-      (function() {
-      var elem = document.createElement('script');
-      elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
-      elem.async = true;
-      elem.type = "text/javascript";
-      var scpt = document.getElementsByTagName('script')[0];
-      scpt.parentNode.insertBefore(elem, scpt);
-      })();
-
-      _qevents.push({
-      qacct:"p-69FZJwoXOxhpY"
-      });
-    noscript
-      div(style='display:none;')
-        img(src='//pixel.quantserve.com/pixel/p-69FZJwoXOxhpY.gif', height='1', width='1', alt='Quantcast', style='border: none;')
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
 
 
-    //- Google Analytics
-    script.
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-3898076-4']);
-      _gaq.push(['_setDomainName', 'apstudynotes.org']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-
-
-    //- StatCounter
-    script.
-      var sc_project=3533945;
-      var sc_invisible=1;
-      var sc_security="1577ef81";
-    script(src='http://www.statcounter.com/counter/counter.js')
-    noscript
-      div.statcounter
-        img.statcounter(src='http://c.statcounter.com/3533945/0/1577ef81/1/', alt='')
-
-</html>
+      //- StatCounter
+      script.
+        var sc_project=3533945;
+        var sc_invisible=1;
+        var sc_security="1577ef81";
+      script(src='http://www.statcounter.com/counter/counter.js')
+      noscript
+        div.statcounter
+          img.statcounter(src='http://c.statcounter.com/3533945/0/1577ef81/1/', alt='')

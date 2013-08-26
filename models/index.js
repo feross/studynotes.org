@@ -1,3 +1,4 @@
+var async = require('async')
 var config = require('../config')
 var mongoose = require('mongoose')
 
