@@ -229,7 +229,7 @@ var routes = {
         })
 
         // Update hit count -- don't wait for confirmation
-        note.update({ $inc: { hits: 1 } }, { upsert: true }, util.noop)
+        note.update({ $inc: { hits: 1 } }, { upsert: true }, function () {})
 
         render(res, 'note', {
           amazon: amazonForCourse(course),
@@ -316,7 +316,7 @@ function heroForCourse (course) {
  */
 function render(res, templateName, locals) {
   var defaultLocals = {
-    ads: PRODUCTION,
+    ads: config.isProd,
     cls: templateName,
     config: config,
     courses: m.cache.courses,

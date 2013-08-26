@@ -3,7 +3,7 @@ out
 build
 
 # Ignore compiled assets
-out
+static/out
 
 # Numerous always-ignore extensions
 *.diff

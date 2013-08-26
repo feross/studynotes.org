@@ -1,7 +1,8 @@
+var config = require('../config')
 var mongoose = require('mongoose')
 
 module.exports = function (callback){
-  mongoose.set('debug', !PRODUCTION)
+  mongoose.set('debug', !config.isProd)
 
   async.series(
     [ function (cb){

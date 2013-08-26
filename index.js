@@ -1,5 +1,5 @@
-// Constants
-global.PRODUCTION = process.env.NODE_ENV == 'production'
+// module.exports = Site
+
 global.PORT = (process.argv.length > 2)
   ? process.argv[2]
   : 4000
@@ -19,9 +19,10 @@ var nib = require('nib')
 var os = require('os')
 var path = require('path')
 var stylus = require('stylus')
+var util = require('./util')
 
 // Number of cluster children to spawn
-var NUM_CPUS = PRODUCTION
+var NUM_CPUS = config.isProd
   ? os.cpus().length
   : 1
 
@@ -59,7 +60,7 @@ if (cluster.isMaster) {
   app.set('views', path.join(__dirname, 'views'))
   app.set('view engine', 'jade')
 
-  if (PRODUCTION)
+  if (config.isProd)
     app.enable('view cache')
 
   app.disable('x-powered-by')
@@ -68,14 +69,14 @@ if (cluster.isMaster) {
   app.use(express.bodyParser())
 
   // Make certain JS libraries available to Jade templates
-  app.locals.PRODUCTION = PRODUCTION
   app.locals._ = _
   app.locals.moment = moment
+  app.locals.util = util
 
   app.locals.CSS_MD5 = process.env['CSS_MD5']
   app.locals.JS_MD5 = process.env['JS_MD5']
 
-  if (PRODUCTION) {
+  if (config.isProd) {
     app.use(express.logger('short'))
 
   } else {
@@ -102,10 +103,5 @@ if (cluster.isMaster) {
       debug('StudyNotes listening on ' + app.get('port'))
     })
 
-  })
-
-  // Catch and log exceptions so the node process doesn't crash
-  process.on('uncaughtException', function (err){
-    console.error('WARNING: Node uncaughtException: ', err.stack)
   })
 }
