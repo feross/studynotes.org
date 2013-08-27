@@ -15,7 +15,7 @@ exports.autocomplete = function (query, cb){
 
   async.parallel([
     function(cb) {
-      m.Course
+      app.db.Course
       .find({ name: exports.regexForQuery(query) })
       .limit(10)
       .sort('-hits')
@@ -32,7 +32,7 @@ exports.autocomplete = function (query, cb){
     },
 
     function(cb) {
-      m.Note
+      app.db.Note
       .find({ name: exports.regexForQuery(query) })
       .limit(10)
       .sort('-hits')

@@ -13,7 +13,6 @@ var expressValidator = require('express-validator')
 var flash = require('connect-flash')
 var fs = require('fs')
 var http = require('http')
-var models = require('./models')
 var moment = require('moment')
 var mongoose = require('mongoose')
 var once = require('once')
@@ -104,171 +103,52 @@ Site.prototype.start = function (done) {
       proxy: true // trust the reverse proxy
     }))
 
-
     // Passport
-    // app.use(passport.initialize())
-    // app.use(passport.session())
+    app.use(passport.initialize())
+    app.use(passport.session())
 
-    // // Setup passport
-    // passport.serializeUser(function (user, done) {
-    //   done(null, user.username)
-    // })
+    passport.serializeUser(self.serializeUser)
+    passport.deserializeUser(self.deserializeUser)
 
-    // passport.deserializeUser(function (username, done) {
-    //   self.db.get('user!' + username, function (err, user) {
-    //     if (err) {
-    //       done(err)
-    //     } else {
-    //       done(null, user)
-    //     }
-    //   })
-    // })
+    passport.use(new passportLocal.Strategy(
+      function (username, password, done) {
+        self.db.get('user!' + username, function (err, user) {
+          if (err && err.name === 'NotFoundError') {
+            done(null, false, { message: 'Username not found' })
+          } else if (err) {
+            done(err)
+          } else {
+            bcrypt.compare(password, user.password, function (err, res) {
+              if (res) {
+                done(null, user)
+              } else {
+                done(null, false, { message: 'Wrong password' })
+              }
+            })
+          }
+        })
+      }
+    ))
 
-    // passport.use(new passportLocal.Strategy(
-    //   function (username, password, done) {
-    //     self.db.get('user!' + username, function (err, user) {
-    //       if (err && err.name === 'NotFoundError') {
-    //         done(null, false, { message: 'Username not found' })
-    //       } else if (err) {
-    //         done(err)
-    //       } else {
-    //         bcrypt.compare(password, user.password, function (err, res) {
-    //           if (res) {
-    //             done(null, user)
-    //           } else {
-    //             done(null, false, { message: 'Wrong password' })
-    //           }
-    //         })
-    //       }
-    //     })
-    //   }
-    // ))
+    app.auth = function (req, res, next) {
+      if (req.isAuthenticated()) {
+        next()
+      } else {
+        res.redirect('/login')
+      }
+    }
 
-    // app.auth = function (req, res, next) {
-    //   if (req.isAuthenticated()) {
-    //     next()
-    //   } else {
-    //     res.redirect('/login')
-    //   }
-    // }
+    // errors are propogated using `req.flash`
+    app.use(flash())
 
-    // // errors are propogated using `req.flash`
-    // app.use(flash())
-
-    // app.get('/login', function (req, res) {
-    //   if (req.user) {
-    //     res.redirect('/')
-    //   } else {
-    //     var messages = req.flash('error')
-    //     res.render('login', {messages: messages})
-    //     debug(messages)
-    //   }
-    // })
-
-    // app.post('/login', passport.authenticate('local', {
-    //   failureRedirect: '/login',
-    //   successRedirect: '/dashboard',
-    //   failureFlash: true
-    // }))
-
-    // app.post('/logout', function (req, res) {
-    //   req.logout()
-    //   res.redirect('/')
-    // })
-
-    // app.get('/signup', function (req, res) {
-    //   if (req.user) {
-    //     res.redirect('/')
-    //   } else {
-    //     res.render('signup', { messages: req.flash('error') })
-    //   }
-    // })
-
-    // app.post('/signup', function (req, res, next) {
-    //   req.assert('username', 'Not a valid email address').isEmail()
-    //   req.assert('password', 'Password must be greater than 4 characters').len(4).notEmpty()
-
-    //   var errors = req.validationErrors()
-    //   if (errors) {
-    //     errors.forEach(function (error) {
-    //       req.flash('error', error.msg)
-    //       debug('Registration error: ' + error.msg)
-    //     })
-    //     res.redirect('/signup')
-    //     return
-    //   }
-
-    //   // TODO: validate and only store properties that we are expecting
-    //   var username = req.body.username
-    //   self.db.get('user!' + username, function (err) {
-    //     if (err && err.name === 'NotFoundError') {
-    //       // Hash the password and store it
-    //       bcrypt.hash(req.body.password, 8, function (err, hash) {
-    //         if (err) {
-    //           req.flash('error', err.name + ': ' + err.message)
-    //           debug('BCrypt Error: ' + err.message)
-    //           res.redirect('/signup')
-    //         } else {
-    //           req.body.password = hash
-    //           self.db.put('user!' + username, req.body, function (err) {
-    //             if (err) {
-    //               req.flash('error', err.name + ': ' + err.message)
-    //               res.redirect('/signup')
-    //             } else {
-    //               // Automatically login the user upon registration
-    //               req.login(req.body, function (err) {
-    //                 if (err) { return next(err) }
-    //                 return res.redirect('/onboard')
-    //               })
-    //             }
-    //           })
-    //         }
-    //       })
-    //     } else if (err) {
-    //       req.flash('error', err.name + ': ' + err.message)
-    //       debug('LevelDB Error: ' + err.message)
-    //       res.redirect('/signup')
-    //     } else {
-    //       req.flash('error', 'Username is already registered.')
-    //       debug('Username is already registered')
-    //       res.redirect('/signup')
-    //     }
-    //   })
-
-    // })
-
-    // TODO: add users to Mailchimp
-    // module.exports = function (app) {
-    //   app.post('/subscribe', function (req, res) {
-    //     try {
-    //       var api = new MailChimpAPI(config.mailchimp.key, { version : '2.0' })
-    //     } catch (e) {
-    //       console.error(e)
-    //     }
-
-    //     var email = req.body.email
-
-    //     api.call('lists', 'subscribe', {
-    //       email: { email: email },
-    //       id: config.mailchimp.listId
-    //     }, function (err, data) {
-    //       if (err) {
-    //         console.error(err)
-    //         res.send({ status: 'error' })
-    //       } else {
-    //         res.send({ status: 'ok' })
-    //       }
-    //     })
-    //   })
-    // }
-
-    require('./routes')(app)
+    require('./routes')()
 
     async.parallel([
-      self.connectDB.bind(self),
       function (cb) {
-        models(app)
-        models.warmCache(cb)
+        require('./models').connect(cb)
+      },
+      function (cb) {
+        require('./models').warmCache(cb)
       },
       function (cb) {
         // Start HTTP server -- workers will all share a TCP connection
@@ -311,20 +191,18 @@ Site.prototype.addHeaders = function (req, res, next) {
   next()
 }
 
-Site.prototype.connectDB = function (cb) {
+Site.prototype.serializeUser = function (user, done) {
   var self = this
+  process.nextTick(function () {
+    done(null, user._id)
+  })
+}
 
-  mongoose.set('debug', !config.isProd)
-  app.db = mongoose.createConnection('mongodb://' +
-    config.db.user + '@' + config.db.host + ':' +
-    config.db.port + '/' + config.db.database, {
-      server: { poolSize: 20 }
-  })
-  cb = once(cb)
-  app.db.on('error', cb)
-  app.db.on('open', function () {
-    cb(null)
-  })
+Site.prototype.deserializeUser = function (userId, done) {
+  var self = this
+  m.User
+  .findOne({ _id: userId })
+  .exec(done)
 }
 
 if (require.main === module) {

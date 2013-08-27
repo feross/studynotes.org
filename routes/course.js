@@ -4,7 +4,7 @@ module.exports = function () {
   app.get('/:courseSlug', function (req, res, next) {
     var courseSlug = req.params.courseSlug
 
-    var course = m.cache.courses[courseSlug]
+    var course = app.db.cache.courses[courseSlug]
     if (!course) return next()
 
     res.render('course', {

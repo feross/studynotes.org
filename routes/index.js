@@ -12,7 +12,7 @@ module.exports = function () {
   app.render = function (view, options, fn) {
     options.ads || (options.ads = config.isProd)
     options.cls || (options.cls = '')
-    options.courses || (options.courses = m.cache.courses)
+    options.courses || (options.courses = app.db.cache.courses)
     options.randomquote || (options.randomquote = randomquote())
     options.search_term || (options.search_term = '')
 

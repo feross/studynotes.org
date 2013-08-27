@@ -7,7 +7,7 @@ module.exports = function () {
     var notetypeSlug = req.params.notetypeSlug
     var noteSlug = req.params.noteSlug
 
-    var course = m.cache.courses[courseSlug]
+    var course = app.db.cache.courses[courseSlug]
     if (!course) return next()
 
     var notetype = _.find(course.notetypes, function (n) {
@@ -15,7 +15,7 @@ module.exports = function () {
     })
     if (!notetype) return next()
 
-    m.Note
+    app.db.Note
     .find({ courseId: course._id, notetypeId: notetype._id })
     .sort('ordering')
     .exec(function (err, notes){
