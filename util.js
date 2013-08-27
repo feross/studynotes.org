@@ -13,21 +13,21 @@ var touch = require('touch')
 var uuid = require('node-uuid')
 
 /**
- * Copy all of the properties in the source objects over to the destination object,
- * and return the destination object. It's in-order, so the last source will override
- * properties of the same name in previous arguments.
+ * Copy all of the properties in the source objects over to the destination
+ * object, and return the destination object. It's in-order, so the last
+ * source will override properties of the same name in previous arguments.
  * @type {function(Object, ...[Object]): Object}
  */
-exports.extend = function (destination /*, ... */) {
+exports.extend = function (dest /*, ... */) {
   var sources = Array.prototype.slice.call(arguments, 1)
   sources.forEach(function (source) {
     for (var prop in source) {
       if (source[prop] !== undefined) {
-        destination[prop] = source[prop]
+        dest[prop] = source[prop]
       }
     }
   })
-  return destination
+  return dest
 }
 
 /**
