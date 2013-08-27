@@ -44,6 +44,8 @@ module.exports = function () {
   require('./course')()
   require('./notetype')()
   require('./note')()
+  // require('./signup')()
+  // require('./login')()
 
   if (!config.isProd) {
     // Server static resources in dev (nginx handles it in prod)

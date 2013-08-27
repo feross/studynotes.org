@@ -127,6 +127,13 @@ $(function() {
     toggleBrowseMenu(false)
   })
 
+  $('.logout').click(function (e) {
+    e.preventDefault()
+    $.post('/logout', function () {
+      window.location = '/'
+    })
+  })
+
   /**
    * Browser resize event
    */
@@ -372,12 +379,3 @@ $(function() {
   )
 
 })
-
-
-/**
- * Executed when DOM is fully loaded.
- */
-$(window).load(function() {
-
-})
-

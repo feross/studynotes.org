@@ -1,4 +1,20 @@
 extends layouts/login
 
 block content
-  h1 Login, yo
+  h1 Log in to StudyNotes
+  h2 Provide your email and password
+
+  ul.error-msgs
+    each msg in errors
+      li.error-msg= msg
+
+  div.login
+    form(method='POST')
+      .field
+        label email
+        input#email(type='text', name='email')
+      .field
+        label password
+        input#password(type='password', name='password')
+      .field
+        input#submit(type='submit', value='submit')

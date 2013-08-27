@@ -1,4 +1,23 @@
 extends layouts/login
 
 block content
-  h1 Signup, yo
+  h1 Hey there! Let's get started.
+  h2 What would you like to do?
+
+  p Submit an Essay - get paid.
+  p Buy an Essay - get into college.
+
+  ul.error-msgs
+    each msg in errors
+      li.error-msg= msg
+
+  div.signup
+    form(method='POST')
+      .field
+        label email
+        input#email(type='text', name='email')
+      .field
+        label password
+        input#password(type='password', name='password')
+      .field
+        input#submit(type='submit', value='Sign Up!')
