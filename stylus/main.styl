@@ -1,5 +1,6 @@
 @import 'nib'
 @import 'util'
+@import 'colors'
 
 LOGO_WIDTH = 131px
 HERO_FONT = 'adelle', Georgia, serif
@@ -10,8 +11,78 @@ SIDEBAR_MARGIN_LEFT = 30px
 SIDEBAR_MARGIN_RIGHT = 40px
 CONTENT_PADDING_TOP = 35px
 
-@import 'colors'
-@import 'structure'
+*
+  box-sizing: border-box
+  line-height: 1.4em
+
+html
+  overflow-y: scroll
+
+body
+  background: #F4F4F4 url('/images/body.gif')
+  font-family: BODY_FONT
+  font-size: 16px
+  margin: 0
+  padding: 0
+  position: relative
+  -webkit-font-smoothing: antialiased
+
+img
+  max-width: 100%
+
+ul, ol
+  margin: 0
+  padding: 0
+
+a
+  {LINK}
+    color: BLUE
+    text-decoration: none
+
+  {HOVER}
+    color: DARK_BLUE
+    text-decoration: underline
+
+h1, h2, h3, h4, h5
+  font-family: HERO_FONT
+  font-weight: 500
+  line-height: 1.2em
+  margin: 1em 0 .5em 0
+  text-rendering: optimizelegibility
+h1
+  font-size: 36px
+h2
+  font-size: 24px
+h3
+  font-size: 20px
+h4
+  font-size: 18px
+h5
+  font-size: 16px
+
+p
+  margin: 1em 0
+
+ul.listing
+  list-style: none
+  margin-bottom: 25px
+  li
+    background: #EEE
+    color: DARKER_GRAY
+    ellipsis()
+    padding: 10px 25px
+  li:nth-child(even)
+    background: #FFF
+
+  .content &
+    font-weight: bold
+
+hr
+  background-color: LIGHTEST_GRAY
+  border: 0
+  color: LIGHTEST_GRAY
+  height: 1px
+  margin: 30px 0
 
 @import 'header'
 @import 'browseMenu'

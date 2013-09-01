@@ -29,9 +29,7 @@ exports.connect = function (cb) {
   app.db.User = require('./User')
 
   app.db.on('error', cb)
-  app.db.on('open', function () {
-    cb(null)
-  })
+  app.db.on('open', cb)
 }
 
 // Cache commonly accessed data

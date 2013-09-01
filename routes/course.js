@@ -20,9 +20,9 @@ module.exports = function () {
 
 module.exports.hero = function (course) {
   return {
-    title: course.name,
     desc: 'Class Notes, Test Prep, Review Materials, and More',
-    url: course.url,
-    tabs: course.notetypes
+    tabs: course.notetypes,
+    title: course.name,
+    url: course.url
   }
 }

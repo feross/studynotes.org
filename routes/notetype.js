@@ -36,12 +36,3 @@ module.exports = function () {
     })
   })
 }
-
-module.exports.hero = function (course) {
-  return {
-    desc: 'Class Notes, Test Prep, Review Materials, and More',
-    tabs: course.notetypes,
-    title: course.name,
-    url: course.url
-  }
-}
