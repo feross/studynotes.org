@@ -13,7 +13,9 @@ exports.db = {
   database: 'studynotes'
 }
 
-exports.siteOrigin = 'http://www.apstudynotes.org' // no trailing slash
+exports.siteOrigin = exports.isProd
+  ? '//www.apstudynotes.org'
+  : '//localhost:' + exports.port
 
 exports.root = __dirname
 exports.out = path.join(__dirname, 'static', 'out')
