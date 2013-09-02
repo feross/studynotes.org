@@ -94,6 +94,7 @@ Site.prototype.start = function (done) {
     app.locals.CSS_MD5 = process.env['CSS_MD5']
     app.locals.JS_MD5 = process.env['JS_MD5']
 
+    app.use(express.favicon(path.join(config.root, 'static/favicon.ico')))
     app.use(expressValidator()) // validate user input
 
     app.use(express.cookieParser(secret.cookieSecret))
