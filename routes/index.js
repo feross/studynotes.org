@@ -47,11 +47,6 @@ module.exports = function () {
   // require('./signup')()
   // require('./login')()
 
-  if (!config.isProd) {
-    // Server static resources in dev (nginx handles it in prod)
-    app.use(express.static(path.join(config.root, 'static')))
-  }
-
   // Error pages
   require('./error')()
 }

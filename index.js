@@ -1,6 +1,5 @@
 module.exports = Site
 
-// var MailChimpAPI = require('mailchimp').MailChimpAPI
 var _ = require('underscore')
 var async = require('async')
 var bcrypt = require('bcrypt')
@@ -15,8 +14,6 @@ var fs = require('fs')
 var http = require('http')
 var moment = require('moment')
 var mongoose = require('mongoose')
-var once = require('once')
-var os = require('os')
 var passport = require('passport')
 var passportLocal = require('passport-local')
 var path = require('path')
@@ -81,6 +78,9 @@ Site.prototype.start = function (done) {
     } else {
       // Pretty HTML
       app.locals.pretty = true
+
+      // Serve static resources (nginx handles it in prod)
+      app.use(express.static(path.join(config.root, 'static')))
     }
 
     app.use(self.addHeaders)
