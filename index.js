@@ -178,7 +178,7 @@ Site.prototype.canonicalize = function (req, res, next) {
 
 Site.prototype.addSecurityHeaders = function (req, res, next) {
   // Strict transport security (to prevent MITM attacks on the site)
-  res.header('Strict-Transport-Security', 'max-age=500')
+  // res.header('Strict-Transport-Security', 'max-age=500')
 
   // TODO: add more
 
