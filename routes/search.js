@@ -5,7 +5,7 @@ module.exports = function () {
     res.render('search', {
       url: '/search',
       title: 'Search Results for ' + q,
-      search_term: q
+      searchTerm: q
     })
   })
 }

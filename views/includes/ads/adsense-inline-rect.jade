@@ -1,6 +1,6 @@
 //- div(class='#{!locals.inlineRight && _.random(1) ? 'ad-inline-left' : 'ad-inline-right'}')
 div.ad-inline-right
-  if locals.ads
+  if config.isProd
     script(type="text/javascript").
       <!--
       google_ad_client = "ca-pub-7826623632932605";

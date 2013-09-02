@@ -51,7 +51,7 @@ exports.autocomplete = function (query, cb){
   ], function(err){
 
     // Sort results by weight
-    results = _.sortBy(results, function (result){
+    results = _.sortBy(results, function (result) {
       return -1 * result.weight
     })
 
@@ -59,7 +59,7 @@ exports.autocomplete = function (query, cb){
     results.splice(MAX_RESULTS)
 
     // Only return necessary information
-    results = _.map(results, function (result, i){
+    results = _.map(results, function (result, i) {
       return {
         desc: result.model.searchDesc,
         name: exports.highlight(result.model.name, query),
@@ -73,7 +73,6 @@ exports.autocomplete = function (query, cb){
     cb(null, results)
   })
 }
-
 
 /**
  * Given a search query, returns a regular expression that matches
@@ -135,10 +134,9 @@ exports.weight = function (result, query){
   return weight
 }
 
-
 /**
- * Highlights occurances of the words in `query` in a given string `str` by surrounding
- * occurrances with a <strong> tag.
+ * Highlights occurances of the words in `query` in a given string `str` by
+ * surrounding occurrances with a <strong> tag.
  *
  * @param  {String} str   String to search over
  * @param  {String} query Query string

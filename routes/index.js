@@ -14,7 +14,7 @@ module.exports = function () {
     options.cls || (options.cls = '')
     options.courses || (options.courses = app.db.cache.courses)
     options.randomquote || (options.randomquote = randomquote())
-    options.search_term || (options.search_term = '')
+    opts.searchTerm || (opts.searchTerm = '')
 
     // Add view name as class on <body>
     options.cls += ' ' + view
