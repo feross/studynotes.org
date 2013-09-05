@@ -110,7 +110,8 @@ Site.prototype.start = function (done) {
       store: new MongoStore({
         db: config.mongo.database,
         host: config.mongo.host,
-        port: config.mongo.port
+        port: config.mongo.port,
+        auto_reconnect: true
       })
     }))
 
