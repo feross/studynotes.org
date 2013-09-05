@@ -9,6 +9,8 @@ var Course = mongoose.Schema({
   examDate: Date
 })
 
+Course.index({ slug: 1 }, { unique: true })
+
 Course.virtual('url').get(function() {
   return '/' + this.slug + '/'
 })
@@ -17,7 +19,6 @@ Course.virtual('searchDesc').get(function () {
   return 'Course'
 })
 
-// TODO: remove this hack
 Course.methods.populateNotetypes = function (cb) {
   var course = this
 
