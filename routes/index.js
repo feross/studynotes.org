@@ -62,8 +62,8 @@ module.exports = function () {
   require('./course')()
   require('./notetype')()
   require('./note')()
-  // require('./signup')()
-  // require('./login')()
+  require('./signup')()
+  require('./login')()
 
   // Error pages
   require('./error')()
