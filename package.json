@@ -15,6 +15,7 @@
     "beepbeep": "*",
     "connect-flash": "*",
     "connect-mongo": "*",
+    "connect-slashes": "*",
     "debug": "*",
     "express": "*",
     "express-validator": "*",
