@@ -11,6 +11,11 @@ default:
 upload-secret:
 	rsync -a -O -v -e "ssh -p 44444" secret.js feross@$(APP_SERVER):/home/feross/www/studynotes.org/
 
+# Upload secret.js to server
+.PHONY : download-secret
+download-secret:
+	rsync -a -O -v -e "ssh -p 44444" feross@$(APP_SERVER):"$(APP_DIR)/secret.js" .
+
 # Trigger a deploy (from remote CI server)
 .PHONY : trigger
 trigger:
