@@ -13,7 +13,6 @@ var Notetype = mongoose.Schema({
     ref: 'Course',
     required: true
   },
-  ordering: Number,
   slug: model.SLUG
 })
 
@@ -33,6 +32,6 @@ Notetype.plugin(plugin.modifyDate)
 Notetype.plugin(plugin.createDate)
 Notetype.plugin(plugin.slug)
 Notetype.plugin(plugin.absoluteUrl)
-Notetype.plugin(plugin.hits)
+Notetype.plugin(plugin.hits, { index: true })
 
 module.exports = mongoose.model('Notetype', Notetype)

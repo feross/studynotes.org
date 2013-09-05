@@ -24,7 +24,7 @@ Course.methods.populateNotetypes = function (cb) {
 
   model.Notetype
     .find({ courseId: this._id })
-    .sort('ordering')
+    .sort('-hits')
     .exec(function (err, notetypes) {
       if (!err) course.notetypes = notetypes
       cb(err)
@@ -35,6 +35,6 @@ Course.plugin(plugin.modifyDate)
 Course.plugin(plugin.createDate)
 Course.plugin(plugin.absoluteUrl)
 Course.plugin(plugin.slug)
-Course.plugin(plugin.hits)
+Course.plugin(plugin.hits, { index: true })
 
 module.exports = mongoose.model('Course', Course)
