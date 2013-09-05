@@ -6,6 +6,7 @@ var bcrypt = require('bcrypt')
 var builder = require('./builder')
 var cluster = require('cluster')
 var config = require('./config')
+var connectSlashes = require('connect-slashes')
 var debug = global.debug = require('debug')('studynotes')
 var express = require('express')
 var expressValidator = require('express-validator')
@@ -85,6 +86,7 @@ Site.prototype.start = function (done) {
       app.use(express.static(path.join(config.root, 'static')))
     }
 
+    app.use(connectSlashes())
     app.use(self.addHeaders)
 
     // Make variables and functions available to Jade templates
