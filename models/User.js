@@ -42,4 +42,4 @@ User.plugin(plugin.absoluteUrl)
 User.plugin(plugin.slug)
 User.plugin(plugin.hits)
 
-module.exports = app.db.model('User', User)
+module.exports = mongoose.model('User', User)

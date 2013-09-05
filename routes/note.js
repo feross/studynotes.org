@@ -1,5 +1,5 @@
 var _ = require('underscore')
-var heroForCourse = require('./course').hero
+var model = require('../models')
 
 module.exports = function () {
   app.get('/:courseSlug/:notetypeSlug/:noteSlug', function (req, res, next) {
@@ -7,7 +7,7 @@ module.exports = function () {
     var notetypeSlug = req.params.notetypeSlug
     var noteSlug = req.params.noteSlug
 
-    var course = app.db.cache.courses[courseSlug]
+    var course = app.cache.courses[courseSlug]
     if (!course) return next()
 
     var notetype = _.find(course.notetypes, function (n) {
@@ -15,47 +15,41 @@ module.exports = function () {
     })
     if (!notetype) return next()
 
-    app.db.Note
-    .find({ courseId: course._id, notetypeId: notetype._id })
-    .sort('ordering')
-    .exec(function (err, notes){
-      if (err) return next(err)
-      if (!notes) return next(new Error('Unable to load notes'))
+    model.Note
+      .find({ courseId: course._id, notetypeId: notetype._id })
+      .sort('ordering')
+      .exec(function (err, notes) {
+        if (err) return next(err)
 
-      var note = _.find(notes, function (n) {
-        return n.slug === noteSlug
+        var note = _.find(notes, function (n) {
+          return n.slug === noteSlug
+        })
+        if (!note) return next()
+
+        var noteOrdering = note.ordering
+
+        var nextNote = _.find(notes, function (note) {
+          return note.ordering === noteOrdering + 1
+        })
+
+        var prevNote = _.find(notes, function (note) {
+          return note.ordering === noteOrdering - 1
+        })
+
+        res.render('note', {
+          breadcrumbs: [ course, notetype ],
+          course: course,
+          note: note,
+          next: nextNote,
+          prev: prevNote,
+          notetype: notetype,
+          relatedNotes: notes,
+          title: [note.name, course.name + ' ' + notetype.name].join(' - '),
+          url: note.url
+        })
+
+        // Update hit count, asyncronously
+        note.update({ $inc: { hits: 1 } }, { upsert: true }, function () {})
       })
-      if (!note) return next()
-
-      var noteOrdering = note.ordering
-
-      var noteNext = _.find(notes, function (note){
-        return note.ordering === noteOrdering + 1
-      })
-
-      var notePrev = _.find(notes, function (note){
-        return note.ordering === noteOrdering - 1
-      })
-
-      // Async update hit count
-      note.update({ $inc: { hits: 1 } }, { upsert: true }, function () {})
-
-      res.render('note', {
-        breadcrumbs: [
-          { name: course.name, url: course.url },
-          { name: notetype.name, url: notetype.url }
-        ],
-        cls: 'course-' + course.slug,
-        course: course,
-        hero: heroForCourse(course),
-        note: note,
-        noteNext: noteNext,
-        notePrev: notePrev,
-        notetype: notetype,
-        relatedNotes: notes,
-        title: [note.name, course.name + ' ' + notetype.name].join(' - '),
-        url: note.url
-      })
-    })
   })
 }

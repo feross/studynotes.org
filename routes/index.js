@@ -9,27 +9,45 @@ module.exports = function () {
    * Adds variables that all templates will expect.
    */
   var render = app.render
-  app.render = function (view, options, fn) {
-    options.ads || (options.ads = config.isProd)
-    options.cls || (options.cls = '')
-    options.courses || (options.courses = app.db.cache.courses)
-    options.randomquote || (options.randomquote = randomquote())
+  app.render = function (view, opts, fn) {
+    // Set default template local variables
+    opts.cls || (opts.cls = '')
+    opts.courses || (opts.courses = app.cache.courses)
+    opts.randomquote || (opts.randomquote = randomquote())
     opts.searchTerm || (opts.searchTerm = '')
 
-    // Add view name as class on <body>
-    options.cls += ' ' + view
+    if (opts.url) {
+      // Make URL absolute
+      opts.url = config.siteOrigin + opts.url
 
-    if (options.url) {
-      // Make absolute
-      options.url = config.siteOrigin + options.url
-
-      // Force trailing slashes in URLs
-      if (options.url[options.url.length - 1] !== '/') {
-        options.url += '/'
+      // Force trailing slashes in URL
+      if (opts.url[opts.url.length - 1] !== '/') {
+        opts.url += '/'
       }
     }
 
-    render.call(app, view, options, fn)
+    // Add view name as class on <body>
+    opts.cls += ' ' + view
+
+    // If we're rendering a view that is related to a course, then add a
+    // relevant class to <body>
+    if (opts.course) {
+      opts.cls += ' course-' + opts.course.slug
+    }
+
+    // If we're rendering a view that is related to a course, let's set the
+    // hero text
+    if (opts.course) {
+      opts.hero = {
+        desc: 'Class Notes, Test Prep, Review Materials, and More',
+        tabs: opts.course.notetypes,
+        title: opts.course.name,
+        url: opts.course.url
+      }
+    }
+
+    // Call the original express render function
+    render.call(app, view, opts, fn)
   }
 
   require('./home')()

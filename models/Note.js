@@ -27,27 +27,28 @@ Note.index({ courseId: 1, notetypeId: 1, name: 1 }, { unique: true })
 Note.index({ courseId: 1, notetypeId: 1})
 
 Note.virtual('url').get(function () {
+  var note = this
   var courseId = this.courseId.toString()
   var notetypeId = this.notetypeId.toString()
 
-  course = _.find(app.db.cache.courses, function (c){
+  var course = _.find(app.cache.courses, function (c) {
     return c.id == courseId
   })
-  notetype = _.find(course.notetypes, function (n){
+  var notetype = _.find(course.notetypes, function (n) {
     return n.id == notetypeId
   })
 
-  return '/' + course.slug + '/' + notetype.slug + '/' + this.slug + '/'
+  return '/' + course.slug + '/' + notetype.slug + '/' + note.slug + '/'
 })
 
 Note.virtual('searchDesc').get(function () {
   var courseId = this.courseId.toString()
-    , notetypeId = this.notetypeId.toString()
+  var notetypeId = this.notetypeId.toString()
 
-  course = _.find(app.db.cache.courses, function (c){
+  var course = _.find(app.cache.courses, function (c){
     return c.id == courseId
   })
-  notetype = _.find(course.notetypes, function (n){
+  var notetype = _.find(course.notetypes, function (n){
     return n.id == notetypeId
   })
 
@@ -60,4 +61,4 @@ Note.plugin(plugin.absoluteUrl)
 Note.plugin(plugin.slug)
 Note.plugin(plugin.hits)
 
-module.exports = app.db.model('Note', Note)
+module.exports = mongoose.model('Note', Note)

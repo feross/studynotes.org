@@ -22,8 +22,8 @@ Notetype.index({ courseId: 1 })
 
 Notetype.virtual('url').get(function() {
   var self = this
-  course = _.find(app.db.cache.courses, function (c){
-    return c.id == self.courseId.toString()
+  var course = _.find(app.cache.courses, function (c) {
+    return c._id == self.courseId.toString()
   })
 
   return '/' + course.slug + '/' + this.slug + '/'
@@ -34,4 +34,4 @@ Notetype.plugin(plugin.createDate)
 Notetype.plugin(plugin.slug)
 Notetype.plugin(plugin.absoluteUrl)
 
-module.exports = app.db.model('Notetype', Notetype)
+module.exports = mongoose.model('Notetype', Notetype)

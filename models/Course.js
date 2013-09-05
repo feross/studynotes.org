@@ -19,11 +19,16 @@ Course.virtual('searchDesc').get(function () {
 })
 
 // TODO: remove this hack
-Course.methods.getNotetypes = function (cb) {
-  this.model('Notetype')
-    .find({courseId: this.id})
+Course.methods.populateNotetypes = function (cb) {
+  var course = this
+
+  model.Notetype
+    .find({ courseId: this._id })
     .sort('ordering')
-    .exec(cb)
+    .exec(function (err, notetypes) {
+      if (!err) course.notetypes = notetypes
+      cb(err)
+    })
 }
 
 Course.plugin(plugin.modifyDate)
@@ -31,4 +36,4 @@ Course.plugin(plugin.createDate)
 Course.plugin(plugin.absoluteUrl)
 Course.plugin(plugin.slug)
 
-module.exports = app.db.model('Course', Course)
+module.exports = mongoose.model('Course', Course)

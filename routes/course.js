@@ -1,28 +1,17 @@
-var search = require('./search')
+var async = require('async')
+var Course = require('../models').Course
 
 module.exports = function () {
   app.get('/:courseSlug', function (req, res, next) {
     var courseSlug = req.params.courseSlug
 
-    var course = app.db.cache.courses[courseSlug]
+    var course = app.cache.courses[courseSlug]
     if (!course) return next()
 
     res.render('course', {
-      cls: 'course-' + course.slug,
       course: course,
-      hero: module.exports.hero(course),
-      notetypes: course.notetypes,
-      url: course.url,
-      title: course.name
+      title: course.name,
+      url: course.url
     })
   })
-}
-
-module.exports.hero = function (course) {
-  return {
-    desc: 'Class Notes, Test Prep, Review Materials, and More',
-    tabs: course.notetypes,
-    title: course.name,
-    url: course.url
-  }
 }

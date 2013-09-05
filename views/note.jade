@@ -1,8 +1,8 @@
 extends layouts/main
 
 append toolbar
-  if noteNext
-    a.btn.next(href='#{noteNext.url}', title='Next: #{noteNext.name}') Next →
+  if next
+    a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next →
     .navigate-msg Use ← → keys to navigate
 
 append sidebar
@@ -24,11 +24,11 @@ block content
   p.keepStudying You just finished <strong>"#{note.name}"</strong>. Keep&nbsp;studying!
 
   .noteNav.clearfix
-    if notePrev
-      a.btn.prev(href='#{notePrev.url}', title='Previous: #{notePrev.name}') ← Prev
+    if prev
+      a.btn.prev(href='#{prev.url}', title='Previous: #{prev.name}') ← Prev
 
-    if noteNext
-      a.btn.next(href='#{noteNext.url}', title='Next: #{noteNext.name}') Next →
+    if next
+      a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next →
 
   hr
   include includes/ads/adsense-link-unit

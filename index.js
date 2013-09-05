@@ -12,6 +12,7 @@ var expressValidator = require('express-validator')
 var flash = require('connect-flash')
 var fs = require('fs')
 var http = require('http')
+var model = require('./models')
 var moment = require('moment')
 var mongoose = require('mongoose')
 var passport = require('passport')
@@ -144,21 +145,15 @@ Site.prototype.start = function (done) {
 
     require('./routes')()
 
-    async.parallel([
+    async.series([
+      model.connect,
+      model.cacheCourses,
       function (cb) {
-        require('./models').connect(cb)
-      },
-      function (cb) {
-        require('./models').warmCache(cb)
-      },
-      function (cb) {
-        // Start HTTP server -- workers will all share a TCP connection
+        // Start HTTP server -- workers will share TCP connection
         self.server.listen(self.port, cb)
       }
     ], function (err) {
-      if (!err) {
-        debug('StudyNotes listening on ' + self.port)
-      }
+      if (!err) debug('StudyNotes listening on ' + self.port)
       done(err)
     })
   }

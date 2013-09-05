@@ -17,55 +17,32 @@ exports.connect = function (cb) {
   cb = once(cb)
   mongoose.set('debug', !config.isProd)
 
-  app.db = mongoose.createConnection('mongodb://' +
+  mongoose.connect('mongodb://' +
     config.db.user + '@' + config.db.host + ':' +
     config.db.port + '/' + config.db.database, {
       server: { poolSize: 20 }
   })
-
-  app.db.Course = require('./Course')
-  app.db.Notetype = require('./Notetype')
-  app.db.Note = require('./Note')
-  app.db.User = require('./User')
-
-  app.db.on('error', cb)
-  app.db.on('open', cb)
+  mongoose.connection.on('error', cb)
+  mongoose.connection.on('open', cb)
 }
 
+exports.Course = require('./Course')
+exports.Notetype = require('./Notetype')
+exports.Note = require('./Note')
+exports.User = require('./User')
+
+
 // Cache commonly accessed data
-exports.warmCache = function (done) {
-  app.db.cache = {}
-  async.parallel({
-    courses: function (cb) {
-      app.db.Course.find(cb)
-    },
-    notetypes: function (cb) {
-      app.db.Notetype.find(cb)
-    }
-  },
-  function (err, results) {
-    if (err) {
-      done(err)
-    } else {
-      app.db.cache.courses = {}
+exports.cacheCourses = function (done) {
+  app.cache = {}
+  exports.Course.find(function (err, courses) {
+    if (err) return done(err)
 
-      // TODO: remove this hack
-      async.forEachSeries(results.courses, function (course, cb) {
-        app.db.cache.courses[course.slug] = course
+    app.cache.courses = {}
+    async.forEach(courses, function (course, cb) {
+      app.cache.courses[course.slug] = course
 
-        course.getNotetypes(function (err, notetypes) {
-          if (err) {
-            console.error(err)
-            done(err)
-            return
-          }
-          course.notetypes = notetypes
-          cb(null)
-        })
-      },
-      function (err) {
-        done(null)
-      })
-    }
+      course.populateNotetypes(cb)
+    }, done)
   })
 }

@@ -1,12 +1,12 @@
 var _ = require('underscore')
-var heroForCourse = require('./course').hero
+var model = require('../models')
 
 module.exports = function () {
   app.get('/:courseSlug/:notetypeSlug', function (req, res, next) {
     var courseSlug = req.params.courseSlug
     var notetypeSlug = req.params.notetypeSlug
 
-    var course = app.db.cache.courses[courseSlug]
+    var course = app.cache.courses[courseSlug]
     if (!course) return next()
 
     var notetype = _.find(course.notetypes, function (n) {
@@ -14,25 +14,21 @@ module.exports = function () {
     })
     if (!notetype) return next()
 
-    app.db.Note
-    .find({ courseId: course._id, notetypeId: notetype._id })
-    .sort('ordering')
-    .exec(function (err, notes) {
-      if (err) return next(err)
-      if (!notes) return next(new Error('Unable to load notes'))
+    model.Note
+      .find({ courseId: course._id, notetypeId: notetype._id })
+      .select('-body')
+      .sort('ordering')
+      .exec(function (err, notes) {
+        if (err) return next(err)
 
-      res.render('notetype', {
-        breadcrumbs: [
-          { name: course.name, url: course.url }
-        ],
-        cls: 'course-' + course.slug,
-        course: course,
-        hero: heroForCourse(course),
-        notetype: notetype,
-        notes: notes,
-        url: notetype.url,
-        title: course.name + ' ' + notetype.name
+        res.render('notetype', {
+          breadcrumbs: [ course ],
+          course: course,
+          notetype: notetype,
+          notes: notes,
+          title: course.name + ' ' + notetype.name,
+          url: notetype.url
+        })
       })
-    })
   })
 }
