@@ -14,8 +14,8 @@ exports.db = {
 }
 
 exports.siteOrigin = exports.isProd
-  ? '//www.apstudynotes.org'
-  : '//localhost:' + exports.port
+  ? 'http://www.apstudynotes.org'
+  : 'http://localhost:' + exports.port
 
 exports.root = __dirname
 exports.out = path.join(__dirname, 'static', 'out')
