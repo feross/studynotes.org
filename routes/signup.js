@@ -1,4 +1,5 @@
 var bcrpyt = require('bcrypt')
+var model = require('../model')
 
 module.exports = function () {
   app.get('/signup', function (req, res) {

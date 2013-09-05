@@ -13,6 +13,11 @@ exports.SLUG = {
 }
 exports.SLUG_UNIQUE = _.extend({}, exports.SLUG, { unique: true })
 
+exports.Course = require('./Course')
+exports.Notetype = require('./Notetype')
+exports.Note = require('./Note')
+exports.User = require('./User')
+
 exports.connect = function (cb) {
   cb = once(cb)
   mongoose.set('debug', !config.isProd)
@@ -26,13 +31,6 @@ exports.connect = function (cb) {
   mongoose.connection.on('open', cb)
 }
 
-exports.Course = require('./Course')
-exports.Notetype = require('./Notetype')
-exports.Note = require('./Note')
-exports.User = require('./User')
-
-
-// Cache commonly accessed data
 exports.cacheCourses = function (done) {
   app.cache = {}
   exports.Course.find(function (err, courses) {

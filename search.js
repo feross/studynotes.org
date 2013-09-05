@@ -1,6 +1,6 @@
 var _ = require('underscore')
 var async = require('async')
-var model = require('./models')
+var model = require('./model')
 var util = require('./util')
 
 // Weights

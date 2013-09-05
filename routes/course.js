@@ -1,5 +1,5 @@
 var async = require('async')
-var Course = require('../models').Course
+var model = require('../model')
 
 module.exports = function () {
   app.get('/:courseSlug', function (req, res, next) {

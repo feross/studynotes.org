@@ -1,5 +1,5 @@
 var _ = require('underscore')
-var model = require('../models')
+var model = require('../model')
 
 module.exports = function () {
   app.get('/:courseSlug/:notetypeSlug', function (req, res, next) {
