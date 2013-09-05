@@ -5,6 +5,9 @@ append sidebar
   include includes/countdown
   include includes/ads/adsense-rect
 
+  h3 Page Stats
+  p <strong>#{ util.addCommas(course.hits) } people</strong> have viewed this #{ course.name } page.
+
 block content
   h1 #{course.name} Notes
   include includes/toolbar

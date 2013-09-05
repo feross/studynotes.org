@@ -72,7 +72,7 @@ exports.uuid = function () {
  * @return {String} The number with commas
  */
 
-exports.addCommasToInteger = function (x) {
+exports.addCommas = function (x) {
   x += '' // convert to String
   var rgx = /(\d+)(\d{3})/
 

@@ -7,7 +7,14 @@ append toolbar
 
 append sidebar
   include includes/ads/adsense-rect
-  include includes/noteInfo
+
+  h3 Note Stats
+  if (notetype.singularName)
+    p #{ util.addCommas(note.hits) } people have viewed this #{ notetype.singularName.toLowerCase() }.
+  else
+    p #{ util.addCommas(note.hits) } people have viewed these #{ notetype.name.toLowerCase() }.
+
+
   include includes/relatedNotes
   include includes/ads/adsense-rect
 
