@@ -2,10 +2,13 @@ header.header
   block header
     ul.left
       li.home
-        a(href='/', title='Go to the front page of StudyNotes', class='home') Study Notes
+        a(href='/', title='Go to the front page of StudyNotes', class='home')
+          i.icon-home
+          span Study Notes
 
     //- "off" class gets removed after search bar is positioned in JS
     .search.off
+      i.icon-search
       form(action='/search/', method='GET')
         input(autocorrect='off', autocomplete='off', autofocus, spellcheck='false', name='q', placeholder='Search for AP Courses and Topics...', type='text', value='#{locals.searchTerm}')
 
@@ -15,14 +18,27 @@ header.header
         span.desc
 
     ul.right
-      li: a(href='#', class='courses', title='Browse all AP study notes').
-        Pick an AP Course
-      li: a(href='/study-guides/', class='study-guides', title='Buy Amazon.com AP Study Guides').
-        Book Store
-      li: a(href='/signup', class='signup', title='Make a StudyNotes Account').
-        Sign Up
-      li: a(href='/login', class='login', title='Login to StudyNotes').
-        Log In
+      li: a(href='#', class='courses', title='Browse all AP study notes')
+        i.icon-chevron-down
+        span Pick an AP Course
+      li: a(href='/study-guides/', class='study-guides', title='Buy Amazon.com AP Study Guides')
+        i.icon-book
+        span Book Store
+      if (locals.user)
+        li: a(href='#{user.url}', title='Manage your account')
+          img(src='#{ user.gravatarUrl }')
+          i.icon-user
+          span= user.firstName
+        li: a(href='#logout', class='logout', title='Logout of StudyNotes')
+          i.icon-signout
+          span Logout
+      else
+        li: a(href='/signup', title='Create a StudyNotes Account')
+          i.icon-check
+          span Sign Up
+        li: a(href='/login', title='Login to StudyNotes')
+          i.icon-signin
+          span Log In
 
 .browseWrapper
   ul.browse

@@ -1,27 +1,26 @@
-
 /**
  * Cache DOM element references that are used in DOM events that get triggered
  * frequently (e.g. scroll, resize)
  */
 var $browse = $('.browse')
-  , $coursesButton = $('.header .courses')
-  , $headerLeft = $('.header .left')
-  , $headerRight = $('.header .right')
-  , $search = $('.header .search')
-  , $searchAndAutocomplete = $('.header .search, .header .autocomplete')
-  , $html = $('html')
-  , $window = $(window)
-  , $searchInput = $('.header .search input')
-  , $headerAutocomplete = $('.header .autocomplete')
-  , $content = $('.content')
-  , $contentToolbar = $('.content .toolbar')
+var $coursesButton = $('.header .courses')
+var $headerLeft = $('.header .left')
+var $headerRight = $('.header .right')
+var $search = $('.header .search')
+var $searchAndAutocomplete = $('.header .search, .header .autocomplete')
+var $html = $('html')
+var $window = $(window)
+var $searchInput = $('.header .search input')
+var $headerAutocomplete = $('.header .autocomplete')
+var $content = $('.content')
+var $contentToolbar = $('.content .toolbar')
 
 
 /**
  * Disable caching of jQuery AJAX responses
  * (workaround for callbacks not firing if the response was cached)
  */
-$.ajaxSetup ({
+$.ajaxSetup({
     cache: false
 })
 
@@ -30,7 +29,7 @@ $.ajaxSetup ({
  * Set search bar's width so it fills the header correctly.
  * (Need to ensure this gets called after Typekit fonts are loaded.)
  */
-function updateSearchWidth() {
+function updateSearchWidth () {
   var headerLeftWidth = $headerLeft.width()
     , headerRightWidth = $headerRight.width()
   $searchAndAutocomplete
@@ -56,16 +55,31 @@ function updateSearchWidth() {
 /**
  * Show or hide the browse menu.
  */
-function toggleBrowseMenu(_switch) {
+function toggleBrowseMenu (_switch) {
+  if (_switch === undefined) {
+    _switch = !$browse.hasClass('on')
+  }
+
   $browse.toggleClass('on', _switch)
   $coursesButton.toggleClass('on', _switch)
+
+  var icon = $coursesButton.find('i')
+  if (_switch) {
+    icon
+      .removeClass('icon-chevron-down')
+      .addClass('icon-chevron-up')
+  } else {
+    icon
+      .addClass('icon-chevron-down')
+      .removeClass('icon-chevron-up')
+  }
 }
 
 
 /**
  * Executed when the Facebook SDK is ready.
  */
-window.fbAsyncInit = function() {
+window.fbAsyncInit = function () {
   // init the FB JS SDK
   FB.init({
     appId      : '466476846723021', // App ID from the App Dashboard
@@ -83,8 +97,8 @@ window.fbAsyncInit = function() {
 /**
  * Loads the Facebook SDK asynchronously. Calls `window.fbAsyncInit` when done loading.
  */
-function loadFacebookSDK() {
-  (function(d){
+function loadFacebookSDK () {
+  (function (d) {
      var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0]
      if (d.getElementById(id)) {return}
      js = d.createElement('script'); js.id = id; js.async = true
@@ -98,7 +112,7 @@ loadFacebookSDK()
 /**
  * Executed when `document` is ready.
  */
-$(function() {
+$(function () {
 
   updateSearchWidth()
 
@@ -112,7 +126,7 @@ $(function() {
   /**
    * Browse menu dropdown
    */
-  $('.header .courses').on('click', function (e){
+  $('.header .courses').on('click', function (e) {
     // Only handle left-clicks
     if (e.which != 1) return
 
@@ -123,7 +137,7 @@ $(function() {
   /**
    * Close browse menu on search focus
    */
-  $search.on('focusin', function (e){
+  $search.on('focusin', function (e) {
     toggleBrowseMenu(false)
   })
 
@@ -140,7 +154,7 @@ $(function() {
   var contentToolbarTop
     , contentBottom
     , contentWidth
-  $window.on('resize', _.throttle(function (){
+  $window.on('resize', _.throttle(function () {
     $contentToolbar.removeClass('sticky')
     contentToolbarTop = $contentToolbar.length
       ? $contentToolbar.offset().top
@@ -158,7 +172,7 @@ $(function() {
   /**
    * Browser scroll event
    */
-  $window.on('scroll', _.throttle(function (){
+  $window.on('scroll', _.throttle(function () {
     // Close browse menu on page scroll
     toggleBrowseMenu(false)
 
@@ -198,7 +212,7 @@ $(function() {
    * @param {Number} position index (0 = nothing selected, 1 = first result, etc.)
    */
 
-  var setAutocompletePosition = function (position){
+  var setAutocompletePosition = function (position) {
     autocompletePosition = _.isNaN(position)
       ? 1
       : position
@@ -224,7 +238,7 @@ $(function() {
    * Perform search for autocomplete results and display them
    */
 
-  var doSearchAutocomplete = function (){
+  var doSearchAutocomplete = function () {
 
     if ($searchInput.val() === lastAutocompleteQuery &&
         !$headerAutocomplete.hasClass('off')) {
@@ -240,7 +254,7 @@ $(function() {
 
       var params = { q: $searchInput.val() }
       var time = +(new Date)
-      $.get('/autocomplete/', params, function(data) {
+      $.get('/autocomplete/', params, function (data) {
 
         if ($searchInput.val() != '' && time >= lastAutocompleteTime) {
 
@@ -251,18 +265,18 @@ $(function() {
             .render(data.results, { // template directives
               name: {
                 // don't escape search result name, to show formatting
-                html: function (params){
+                html: function (params) {
                   return this.name
                 }
               },
               result: {
-                href: function (params){
+                href: function (params) {
                   return this.url
                 },
-                'data-position': function (params){ // position
+                'data-position': function (params) { // position
                   return this.position
                 },
-                'class': function (params){
+                'class': function (params) {
                   return params.element.className + ' ' + this.type.toLowerCase()
                 }
               }
@@ -275,7 +289,7 @@ $(function() {
     }
   }
 
-  $searchInput.on('focus', function (e){
+  $searchInput.on('focus', function (e) {
     if ($searchInput.val() != '') {
       $search.addClass('searching')
       $headerAutocomplete.removeClass('off')
@@ -283,7 +297,7 @@ $(function() {
   })
   $searchInput.on('keyup', doSearchAutocomplete)
 
-  $('.header .autocomplete').on('mouseover', '.result', function (e){
+  $('.header .autocomplete').on('mouseover', '.result', function (e) {
     var position = parseInt($(this).attr('data-position'))
     setAutocompletePosition(position)
   })
@@ -293,7 +307,7 @@ $(function() {
    * Autocomplete keyboard navigation
    */
 
-  $searchInput.on('keydown', function (e){
+  $searchInput.on('keydown', function (e) {
     if (e.which == 38) { // UP
       if ($searchInput.val() == '') {
         $searchInput.trigger('blur') // User meant to scroll page down -- not type into search box
@@ -317,7 +331,7 @@ $(function() {
     }
   })
 
-  $('.header .search form').on('submit', function (e){ // ENTER
+  $('.header .search form').on('submit', function (e) { // ENTER
     if (autocompletePosition == 0) {
       if ($searchInput.val().length) {
         return // go to search page
@@ -336,8 +350,8 @@ $(function() {
 
   })
 
-  $searchInput.on('blur', function (e){
-    window.setTimeout(function (){
+  $searchInput.on('blur', function (e) {
+    window.setTimeout(function () {
       $search.removeClass('searching')
       $headerAutocomplete.addClass('off')
       setAutocompletePosition(0)
@@ -348,7 +362,7 @@ $(function() {
    * Filter keystrokes from keymaster when user is searching.
    * https://github.com/madrobby/keymaster
    */
-  key.filter = function (event){
+  key.filter = function (event) {
     return $searchInput.val() == ''
   }
 
@@ -371,7 +385,7 @@ $(function() {
   Modernizr.load(
     [ { test: Modernizr.placeholder
       , nope: '/js/lib/polyfill/jquery.placeholder.min.js'
-      , callback: function(url, result, key) {
+      , callback: function (url, result, key) {
           if (!result) $('input, textarea').placeholder()
         }
       }

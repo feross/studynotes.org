@@ -88,14 +88,21 @@ SOLID_HEADER_BORDER_FOCUS = 3px solid #000
           {LINK}
             color: #000
 
-  .courses
-    &:after
-      content: "\25bc"
-      font-size: 12px
-      padding-left: 8px
+  i
+    display: inline-block
+    font-size: 19px
+    margin-right: 12px
+    margin-top: -1px
+    vertical-align: top
 
-    &.on:after
-      content: "\25b2"
+  img
+    border-radius: 5px
+    height: 21px
+    margin-left: -2px
+    margin-top: -2px
+    position: absolute
+    width: 21px
+    vertical-align: top
 
 
   /**
@@ -103,12 +110,13 @@ SOLID_HEADER_BORDER_FOCUS = 3px solid #000
    */
 
   .search
+    color: #FFF
     padding: 3px 18px 3px 3px
+    position: relative
     text-transform: none
 
-    &.searching, {HOVER}
-      border: HEADER_BORDER_FOCUS
-      padding: 0 15px 0 0
+    .solidHeader &
+      color: #000
 
     html:not(.solidHeader) &
       background: linear-gradient(top, rgba(255,255,255,0.3), rgba(255,255,255,0.4))
@@ -116,25 +124,34 @@ SOLID_HEADER_BORDER_FOCUS = 3px solid #000
       box-shadow: inset 0 1px 3px rgba(0,0,0,0.4)
 
     .solidHeader &
-      &.searching, {HOVER}
+      &.searching, &:hover
         border: SOLID_HEADER_BORDER_FOCUS
 
     input
-      background: right center url('/images/search-white.png') no-repeat
-      background-size: 18px 18px
-      border: 0
+      background: transparent
       color: #FFF
+      border: 0
       font-size: 14px
       height: HEADER_HEIGHT - 7
       outline: 0
-      padding-left: 18px
+      padding-left: 44px
       width: 100%
 
       .solidHeader &
-        background: right center url('/images/search-black.png') no-repeat
-        background-size: 18px 18px
         color: #000
 
+    i
+      left: 16px
+      position: absolute
+      top: 16px
+
+    &.searching, &:hover
+      border: HEADER_BORDER_FOCUS
+      padding: 0 15px 0 0
+
+      i
+        left: 13px
+        top: 13px
 
     ::-webkit-input-placeholder
       color: #FFF
