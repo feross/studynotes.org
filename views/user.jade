@@ -1,0 +1,18 @@
+extends layouts/main
+
+append sidebar
+  include includes/ads/adsense-rect
+
+  h3 User Stats
+  p #{ util.addCommas(user.hits) } people have viewed #{ user.name }'s profile.
+
+block content
+  include includes/breadcrumbs
+  h1 #{ user.name }'s Notes
+
+  p Nothing to see here yet
+
+  include includes/toolbar
+
+  hr
+  include includes/ads/adsense-link-unit

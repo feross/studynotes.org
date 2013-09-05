@@ -71,6 +71,7 @@ module.exports = function () {
   require('./note')()
   require('./signup')()
   require('./login')()
+  require('./user')()
 
   // Error pages
   require('./error')()

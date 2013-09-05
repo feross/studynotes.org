@@ -1,4 +1,3 @@
-var async = require('async')
 var model = require('../model')
 
 module.exports = function () {
