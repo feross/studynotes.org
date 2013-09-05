@@ -48,8 +48,7 @@ module.exports = function () {
           url: note.url
         })
 
-        // Update hit count, asyncronously
-        note.update({ $inc: { hits: 1 } }, { upsert: true }, function () {})
+        note.hit()
       })
   })
 }

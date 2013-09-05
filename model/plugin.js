@@ -43,6 +43,12 @@ exports.hits = function (schema, opts) {
   if (opts && opts.index) {
     schema.path('hits').index(opts.index)
   }
+
+  // Update hit count, asyncronously
+  schema.methods.hit = function (cb) {
+    cb || (cb = function () {})
+    this.update({ $inc: { hits: 1 } }, { upsert: true }, cb)
+  }
 }
 
 exports.absoluteUrl = function (schema, opts) {

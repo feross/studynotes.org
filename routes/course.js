@@ -13,5 +13,7 @@ module.exports = function () {
       title: course.name,
       url: course.url
     })
+
+    course.hit()
   })
 }

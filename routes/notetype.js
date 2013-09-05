@@ -29,6 +29,8 @@ module.exports = function () {
           title: course.name + ' ' + notetype.name,
           url: notetype.url
         })
+
+        notetype.hit()
       })
   })
 }

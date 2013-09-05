@@ -33,5 +33,6 @@ Notetype.plugin(plugin.modifyDate)
 Notetype.plugin(plugin.createDate)
 Notetype.plugin(plugin.slug)
 Notetype.plugin(plugin.absoluteUrl)
+Notetype.plugin(plugin.hits)
 
 module.exports = mongoose.model('Notetype', Notetype)
