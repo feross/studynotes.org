@@ -7,17 +7,18 @@ block content
   p Submit an Essay - get paid.
   p Buy an Essay - get into college.
 
-  ul.error-msgs
-    each msg in errors
-      li.error-msg= msg
+  h1 Looking to get into a top college?
+  h2 Sign up now to start reading top essays!
+
+  if (locals.errors)
+    ul.errors
+      each msg in errors
+        li= msg
 
   div.signup
     form(method='POST')
+      input#email(type='text', name='name', placeholder='Full Name')
+      input#email(type='email', name='email', placeholder='Email')
+      input#password(type='password', name='password', placeholder='Password')
       .field
-        label email
-        input#email(type='text', name='email')
-      .field
-        label password
-        input#password(type='password', name='password')
-      .field
-        input#submit(type='submit', value='Sign Up!')
+        input#submit(type='submit', value='Sign Up')

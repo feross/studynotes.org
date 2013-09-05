@@ -10,11 +10,6 @@ block content
 
   div.login
     form(method='POST')
-      .field
-        label email
-        input#email(type='text', name='email')
-      .field
-        label password
-        input#password(type='password', name='password')
-      .field
-        input#submit(type='submit', value='submit')
+      input(type='email', name='email', placeholder='Email')
+      input(type='password', name='password', placeholder='Password')
+      input(type='submit', value='Log In')
