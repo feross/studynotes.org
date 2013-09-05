@@ -27,7 +27,6 @@ function Site (opts, cb) {
   /** @type {number} port */ opts.port || (opts.port = config.port)
 
   util.extend(self, opts)
-
   self.start(cb)
 }
 
@@ -60,7 +59,7 @@ Site.prototype.start = function (done) {
     // Readable logs that are hidden by default. Enable with DEBUG=*
     app.use(util.expressLogger(debug))
 
-    // Trust the X-Forwarded-* headers from the router
+    // Trust the X-Forwarded-* headers from nginx
     app.enable('trust proxy')
 
     // Disable express advertising header
@@ -73,7 +72,7 @@ Site.prototype.start = function (done) {
     app.set('views', path.join(__dirname, 'views'))
     app.set('view engine', 'jade')
 
-    app.use(self.addSecurityHeaders)
+    app.use(self.addHeaders)
 
     if (config.isProd) {
       app.use(self.canonicalize)
@@ -87,7 +86,6 @@ Site.prototype.start = function (done) {
     }
 
     app.use(connectSlashes())
-    app.use(self.addHeaders)
 
     // Make variables and functions available to Jade templates
     app.locals._ = _
@@ -174,7 +172,7 @@ Site.prototype.canonicalize = function (req, res, next) {
   }
 }
 
-Site.prototype.addSecurityHeaders = function (req, res, next) {
+Site.prototype.addHeaders = function (req, res, next) {
   // Enforces secure (HTTP over SSL/TLS) connections to the server. This reduces
   // impact of bugs leaking session data through cookies and external links.
   // TODO: enable when we support HTTPS
@@ -192,11 +190,7 @@ Site.prototype.addSecurityHeaders = function (req, res, next) {
   // particular website if it was disabled by the user.
   res.header('X-XSS-Protection', '1; mode=block')
 
-  next()
-}
-
-Site.prototype.addHeaders = function (req, res, next) {
-  // Opt into the future
+  // Force IE to use latest rendering engine or Chrome Frame
   res.header('X-UA-Compatible', 'IE=Edge,chrome=1')
 
   next()
