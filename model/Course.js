@@ -3,13 +3,11 @@ var mongoose = require('mongoose')
 var plugin = require('./plugin')
 
 var Course = mongoose.Schema({
-  name: { type: String, required: true, unique: true },
+  name: { type: String, required: true },
   desc: String,
   slug: model.SLUG_UNIQUE,
   examDate: Date
 })
-
-Course.index({ slug: 1 }, { unique: true })
 
 Course.virtual('url').get(function() {
   return '/' + this.slug + '/'
