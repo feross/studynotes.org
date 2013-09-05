@@ -6,7 +6,6 @@ var Course = mongoose.Schema({
   name: { type: String, required: true, unique: true },
   desc: String,
   slug: model.SLUG_UNIQUE,
-  image: String,
   examDate: Date
 })
 
