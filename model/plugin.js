@@ -1,6 +1,7 @@
 var _s = require('underscore.string')
 var async = require('async')
 var config = require('../config')
+var mongoose = require('mongoose')
 
 /**
  * Mongoose plugins
@@ -56,6 +57,8 @@ exports.absoluteUrl = function (schema, opts) {
     schema.virtual('absoluteUrl').get(function () {
       return config.siteOrigin + this.url
     })
+  } else {
+    throw new Error('Missing url path, so cannot use plugin.absolutePath')
   }
 }
 
@@ -70,41 +73,36 @@ exports.slug = function (schema, opts) {
   schema.pre('save', function (next) {
     var doc = this
 
-    // If no slug is set, automatically generate one
-    if (!doc.slug) {
-      var num = 0 // number to append to slug to try to make it unique
-      var done = false
-      var potentialSlug
-      var initialSlug
+    if (doc.slug) return next()
 
-      potentialSlug = initialSlug = _s.slugify(doc.name)
+    var num = 0 // number to append to slug to try to make it unique
+    var done = false
+    var potentialSlug
+    var initialSlug
 
-      async.whilst(function () {
-        // After the first try, append a number to end of slug
-        if (num > 0) {
-          potentialSlug = initialSlug + '-' + num
-        }
+    potentialSlug = initialSlug = _s.slugify(doc.name)
 
-        num += 1
-        return !done
-      },
-      function (cb) {
-        doc
-          .model(name)
-          .count({ slug: potentialSlug }, function (err, count) {
-            if (err) return cb(err)
+    async.whilst(function () {
+      return !done
+    },
+    function (cb) {
+      // After the first try, append a number to end of slug
+      if (num > 0) {
+        potentialSlug = initialSlug + '-' + num
+      }
+      num += 1
 
-            if (count === 0) {
-              doc.slug = potentialSlug
-              done = true
-            }
+      mongoose.model(opts.model)
+        .count({ slug: potentialSlug }, function (err, count) {
+          if (err) return cb(err)
 
-            cb()
-          })
-      }, next)
+          if (count === 0) {
+            doc.slug = potentialSlug
+            done = true
+          }
 
-    } else {
-      next()
-    }
+          cb()
+        })
+    }, next)
   })
 }

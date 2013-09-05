@@ -5,7 +5,7 @@ exports.isProd = (process.env.NODE_ENV === 'production')
 
 exports.port = 4000
 
-exports.db = {
+exports.mongo = {
   host: exports.isProd
     ? 'athena.feross.net'
     : 'localhost',

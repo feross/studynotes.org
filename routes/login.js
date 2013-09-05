@@ -1,19 +1,26 @@
+var config = require('../config')
 var passport = require('passport')
+var url = require('url')
 
 module.exports =  function () {
   app.get('/login', function (req, res) {
     if (req.user) {
-      res.redirect('/')
+      var uri = url.parse(req.url)
+      var origin = uri.protocol + '//' + uri.host
+      if (req.cookies.next && origin === config.siteOrigin) {
+        // Only redirect to our own domain, so we're not an "open redirector"
+        res.redirect(req.cookies.next)
+      } else {
+        res.redirect('/')
+      }
     } else {
-      var messages =
       res.render('login', { errors: req.flash('error') })
-      debug(messages)
     }
   })
 
   app.post('/login', passport.authenticate('local', {
     failureRedirect: '/login',
-    successRedirect: '/dashboard',
+    successRedirect: '/',
     failureFlash: true
   }))
 

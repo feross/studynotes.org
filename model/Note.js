@@ -58,7 +58,7 @@ Note.virtual('searchDesc').get(function () {
 Note.plugin(plugin.modifyDate)
 Note.plugin(plugin.createDate)
 Note.plugin(plugin.absoluteUrl)
-Note.plugin(plugin.slug)
+Note.plugin(plugin.slug, { name: 'Note' })
 Note.plugin(plugin.hits)
 
 module.exports = mongoose.model('Note', Note)

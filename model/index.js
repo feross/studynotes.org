@@ -23,8 +23,8 @@ exports.connect = function (cb) {
   mongoose.set('debug', !config.isProd)
 
   mongoose.connect('mongodb://' +
-    config.db.user + '@' + config.db.host + ':' +
-    config.db.port + '/' + config.db.database, {
+    config.mongo.user + '@' + config.mongo.host + ':' +
+    config.mongo.port + '/' + config.mongo.database, {
       server: { poolSize: 20 }
   })
   mongoose.connection.on('error', cb)

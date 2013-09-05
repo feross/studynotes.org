@@ -32,7 +32,7 @@ Course.methods.populateNotetypes = function (cb) {
 Course.plugin(plugin.modifyDate)
 Course.plugin(plugin.createDate)
 Course.plugin(plugin.absoluteUrl)
-Course.plugin(plugin.slug)
+Course.plugin(plugin.slug, { model: 'Course' })
 Course.plugin(plugin.hits, { index: true })
 
 module.exports = mongoose.model('Course', Course)

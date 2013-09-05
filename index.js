@@ -16,6 +16,7 @@ var http = require('http')
 var model = require('./model')
 var moment = require('moment')
 var mongoose = require('mongoose')
+var MongoStore = require('connect-mongo')(express)
 var passport = require('passport')
 var passportLocal = require('passport-local')
 var path = require('path')
@@ -84,6 +85,8 @@ Site.prototype.start = function (done) {
       // Serve static resources (nginx handles it in prod)
       app.use(express.static(path.join(config.root, 'static')))
     }
+    // TODO: use MaxCDN and remove this
+    app.use('/bower_components', express.static(path.join(config.root, 'bower_components')))
 
     app.use(connectSlashes())
 
@@ -102,8 +105,13 @@ Site.prototype.start = function (done) {
     app.use(express.cookieParser(secret.cookieSecret))
     app.use(express.bodyParser())
     app.use(express.session({
+      proxy: true, // trust the reverse proxy
       secret: secret.cookieSecret, // prevent cookie tampering
-      proxy: true // trust the reverse proxy
+      store: new MongoStore({
+        db: config.mongo.database,
+        host: config.mongo.host,
+        port: config.mongo.port
+      })
     }))
 
     // Passport
@@ -113,36 +121,23 @@ Site.prototype.start = function (done) {
     passport.serializeUser(self.serializeUser)
     passport.deserializeUser(self.deserializeUser)
 
-    passport.use(new passportLocal.Strategy(
-      function (username, password, done) {
-        self.db.get('user!' + username, function (err, user) {
-          if (err && err.name === 'NotFoundError') {
-            done(null, false, { message: 'Username not found' })
-          } else if (err) {
-            done(err)
-          } else {
-            bcrypt.compare(password, user.password, function (err, res) {
-              if (res) {
-                done(null, user)
-              } else {
-                done(null, false, { message: 'Wrong password' })
-              }
-            })
-          }
-        })
-      }
-    ))
+    passport.use(new passportLocal.Strategy({
+      usernameField: 'email',
+      passwordField: 'password'
+    }, self.passportStrategy))
 
     app.auth = function (req, res, next) {
       if (req.isAuthenticated()) {
         next()
       } else {
+        res.cookie('next', req.url)
         res.redirect('/login')
       }
     }
 
     // errors are propogated using `req.flash`
     app.use(flash())
+    app.use(self.addTemplateLocals)
 
     require('./routes')()
 
@@ -175,7 +170,7 @@ Site.prototype.canonicalize = function (req, res, next) {
 Site.prototype.addHeaders = function (req, res, next) {
   // Enforces secure (HTTP over SSL/TLS) connections to the server. This reduces
   // impact of bugs leaking session data through cookies and external links.
-  // TODO: enable when we support HTTPS
+  // TODO: enable once we support HTTPS
   // res.header('Strict-Transport-Security', 'max-age=500')
 
   // Prevents IE and Chrome from MIME-sniffing a response. Reduces exposure to
@@ -196,18 +191,46 @@ Site.prototype.addHeaders = function (req, res, next) {
   next()
 }
 
+Site.prototype.addTemplateLocals = function (req, res, next) {
+  // Make user object available to all templates
+  res.locals.user = req.user
+
+  next()
+}
+
 Site.prototype.serializeUser = function (user, done) {
-  var self = this
   process.nextTick(function () {
-    done(null, user._id)
+    done(null, user.email)
   })
 }
 
-Site.prototype.deserializeUser = function (userId, done) {
-  var self = this
-  m.User
-  .findOne({ _id: userId })
-  .exec(done)
+Site.prototype.deserializeUser = function (email, done) {
+  debug('deserializeUser')
+  model.User
+    .findOne({ email: email })
+    .exec(done)
+}
+
+Site.prototype.passportStrategy = function (email, password, done) {
+  model.User
+    .findOne({ email: email })
+    .exec(function (err, user) {
+      if (err) {
+        done(err)
+      } else if (user === null) {
+        done(null, false, { message: 'Username not found' })
+      } else {
+        user.verifyPassword(password, function (err, isMatch) {
+          if (err) {
+            done(err)
+          } else if (isMatch) {
+            done(null, user)
+          } else {
+            done(null, false, { message: 'Wrong password' })
+          }
+        })
+      }
+    })
 }
 
 if (require.main === module) {

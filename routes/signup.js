@@ -1,18 +1,30 @@
+var async = require('async')
 var bcrpyt = require('bcrypt')
 var model = require('../model')
 
 module.exports = function () {
   app.get('/signup', function (req, res) {
     if (req.user) {
-      res.redirect('/')
+      var uri = url.parse(req.url)
+      var origin = uri.protocol + '//' + uri.host
+      if (req.cookies.next && origin === config.siteOrigin) {
+        // Only redirect to our own domain, so we're not an "open redirector"
+        res.redirect(req.cookies.next)
+      } else {
+        res.redirect('/')
+      }
     } else {
       res.render('signup', { errors: req.flash('error') })
     }
   })
 
   app.post('/signup', function (req, res, next) {
-    req.assert('email', 'Not a valid email address').isEmail()
-    req.assert('password', 'Password must be greater than 4 characters').len(4).notEmpty()
+    req.sanitize('name').trim()
+    req.sanitize('email').trim()
+
+    req.assert('name', 'Please use your full name').notEmpty()
+    req.assert('email', 'Email address is not valid').isEmail()
+    req.assert('password', 'Password must be longer than 6 characters').len(4).notEmpty()
 
     var errors = req.validationErrors()
     if (errors) {
@@ -24,35 +36,25 @@ module.exports = function () {
       return
     }
 
-    // TODO: validate and only store properties that we are expecting
-    var email = req.body.email
-    app.db.User
-      .findOne({ email: email})
-      .exec(function (err, user) {
-        if (err && err.name === 'NotFoundError') {
-
-          self.db.put('user!' + email, req.body, function (err) {
-            if (err) {
-              req.flash('error', err.name + ': ' + err.message)
-              res.redirect('/signup')
-            } else {
-              // Automatically login the user upon registration
-              req.login(req.body, function (err) {
-                if (err) { return next(err) }
-                return res.redirect('/onboard')
-              })
-            }
-          })
-        } else if (err) {
-          req.flash('error', err.name + ': ' + err.message)
-          debug('LevelDB Error: ' + err.message)
-          res.redirect('/signup')
-        } else {
-          req.flash('error', 'Username is already registered.')
-          debug('Username is already registered')
-          res.redirect('/signup')
-        }
-      })
+    var user = new model.User({
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password
+    })
+    user.save(function (err) {
+      if (err && err.code === 11000) {
+        req.flash('error', 'A user is already using that email address')
+        res.redirect('/signup')
+      } else if (err) {
+        next(err)
+      } else {
+        // Automatically login the user
+        req.login(user, function (err) {
+          if (err) next(err)
+          else res.redirect('/signup') // for next redirect
+        })
+      }
+    })
   })
 }
 

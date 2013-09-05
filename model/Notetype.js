@@ -30,7 +30,7 @@ Notetype.virtual('url').get(function() {
 
 Notetype.plugin(plugin.modifyDate)
 Notetype.plugin(plugin.createDate)
-Notetype.plugin(plugin.slug)
+Notetype.plugin(plugin.slug, { model: 'Notetype' })
 Notetype.plugin(plugin.absoluteUrl)
 Notetype.plugin(plugin.hits, { index: true })
 
