@@ -393,3 +393,7 @@ $(function () {
   )
 
 })
+
+$(window).load(function () {
+  updateSearchWidth()
+})
