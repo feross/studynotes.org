@@ -18,7 +18,7 @@ exports.autocomplete = function (query, cb) {
     function(cb) {
       model.Course
         .find({ name: exports.regexForQuery(query) })
-        .limit(10)
+        .limit(MAX_RESULTS)
         .sort('-hits')
         .exec(function(err, courses){
           if (err) { cb(err); return }
@@ -35,7 +35,7 @@ exports.autocomplete = function (query, cb) {
     function(cb) {
       model.Note
         .find({ name: exports.regexForQuery(query) })
-        .limit(10)
+        .limit(MAX_RESULTS)
         .sort('-hits')
         .exec(function(err, notes) {
           if (err) { cb(err); return }
