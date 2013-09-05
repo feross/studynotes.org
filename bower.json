@@ -2,6 +2,7 @@
   "name": "studynotes",
   "version": "0.0.1",
   "dependencies": {
+    "font-awesome": "*",
     "humane-js": "*",
     "jquery": "*",
     "keymaster": "*",
