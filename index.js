@@ -72,9 +72,10 @@ Site.prototype.start = function (done) {
     app.set('views', path.join(__dirname, 'views'))
     app.set('view engine', 'jade')
 
+    app.use(self.addSecurityHeaders)
+
     if (config.isProd) {
       app.use(self.canonicalize)
-      app.use(self.addSecurityHeaders)
 
     } else {
       // Pretty HTML
@@ -172,10 +173,22 @@ Site.prototype.canonicalize = function (req, res, next) {
 }
 
 Site.prototype.addSecurityHeaders = function (req, res, next) {
-  // Strict transport security (to prevent MITM attacks on the site)
+  // Enforces secure (HTTP over SSL/TLS) connections to the server. This reduces
+  // impact of bugs leaking session data through cookies and external links.
+  // TODO: enable when we support HTTPS
   // res.header('Strict-Transport-Security', 'max-age=500')
 
-  // TODO: add more
+  // Prevents IE and Chrome from MIME-sniffing a response. Reduces exposure to
+  // drive-by download attacks on sites serving user uploaded content.
+  res.header('X-Content-Type-Options', 'nosniff')
+
+  // Prevent rendering of site within a frame.
+  res.header('X-Frame-Options', 'DENY')
+
+  // Enable the XSS filter built into most recent web browsers. It's usually
+  // enabled by default anyway, so role of this headers is to re-enable for this
+  // particular website if it was disabled by the user.
+  res.header('X-XSS-Protection', '1; mode=block')
 
   next()
 }
