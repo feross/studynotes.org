@@ -205,7 +205,6 @@ Site.prototype.serializeUser = function (user, done) {
 }
 
 Site.prototype.deserializeUser = function (email, done) {
-  debug('deserializeUser')
   model.User
     .findOne({ email: email })
     .exec(done)

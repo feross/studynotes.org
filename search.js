@@ -10,50 +10,58 @@ var WORD_MATCH = 100
 var MAX_RESULTS = 8
 
 exports.autocomplete = function (query, cb) {
-  var results = []
-
   query = query.trim()
 
-  async.parallel([
-    function(cb) {
+  async.auto({
+    courses: function (cb) {
       model.Course
         .find({ name: exports.regexForQuery(query) })
-        .limit(MAX_RESULTS)
         .sort('-hits')
-        .exec(function(err, courses){
-          if (err) { cb(err); return }
-          courses.forEach(function(course) {
-            results.push({
-              weight: exports.weight(course, query),
-              model: course
-            })
-          })
-          cb(null)
-        })
+        .limit(MAX_RESULTS)
+        .select('name slug hits')
+        .exec(cb)
     },
 
-    function(cb) {
+    notetypes: function (cb) {
+      model.Notetype
+        .find({ name: exports.regexForQuery(query) })
+        .sort('-hits')
+        .limit(MAX_RESULTS)
+        .select('name slug hits courseId')
+        .exec(cb)
+    },
+
+    notes: function (cb) {
       model.Note
         .find({ name: exports.regexForQuery(query) })
-        .limit(MAX_RESULTS)
         .sort('-hits')
-        .exec(function(err, notes) {
-          if (err) { cb(err); return }
-          notes.forEach(function (note){
-            results.push({
-              weight: exports.weight(note, query),
-              model: note
-            })
-          })
-          cb(null)
-        })
+        .limit(MAX_RESULTS)
+        .select('name slug hits courseId notetypeId')
+        .exec(cb)
+    },
+
+    users: function (cb) {
+      model.User
+        .find({ name: exports.regexForQuery(query) })
+        .sort('-hits')
+        .limit(MAX_RESULTS)
+        .select('name slug hits')
+        .exec(cb)
     }
 
-  ], function(err) {
+  }, function (err, fetched) {
+    if (err) return cb(err)
+
+    var results = []
+    _.each(fetched, function (models) {
+      _.each(models, function (model) {
+        results.push([ model, exports.weight(model, query) ])
+      })
+    })
 
     // Sort results by weight
     results = _.sortBy(results, function (result) {
-      return -1 * result.weight
+      return -1 * result[1]
     })
 
     // Return small number of results
@@ -62,12 +70,12 @@ exports.autocomplete = function (query, cb) {
     // Only return necessary information
     results = _.map(results, function (result, i) {
       return {
-        desc: result.model.searchDesc,
-        name: exports.highlight(result.model.name, query),
+        desc: result[0].searchDesc,
+        name: exports.highlight(result[0].name, query),
         position: i + 1,
-        type: result.model.constructor.modelName,
-        url: result.model.url,
-        weight: result.weight
+        type: result[0].constructor.modelName,
+        url: result[0].url,
+        weight: result[1]
       }
     })
 
@@ -114,7 +122,13 @@ exports.weight = function (result, query){
     case 'Course':
       weight += 10
       break
+    case 'NoteType':
+      weight += 2
+      break
     case 'Note':
+      weight += 1
+      break
+    case 'User':
       weight += 0
       break
   }

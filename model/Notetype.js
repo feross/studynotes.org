@@ -19,13 +19,20 @@ var Notetype = mongoose.Schema({
 Notetype.index({ courseId: 1, slug: 1 }, { unique: true })
 Notetype.index({ courseId: 1 })
 
-Notetype.virtual('url').get(function() {
-  var self = this
+Notetype.virtual('searchDesc').get(function () {
+  var notetype = this
   var course = _.find(app.cache.courses, function (c) {
-    return c._id == self.courseId.toString()
+    return c._id == notetype.courseId.toString()
   })
+  return course.name + ' Notes'
+})
 
-  return '/' + course.slug + '/' + this.slug + '/'
+Notetype.virtual('url').get(function() {
+  var notetype = this
+  var course = _.find(app.cache.courses, function (c) {
+    return c._id == notetype.courseId.toString()
+  })
+  return '/' + course.slug + '/' + notetype.slug + '/'
 })
 
 Notetype.plugin(plugin.modifyDate)
