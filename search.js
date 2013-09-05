@@ -1,5 +1,6 @@
 var _ = require('underscore')
 var async = require('async')
+var model = require('./models')
 var util = require('./util')
 
 // Weights
@@ -8,47 +9,47 @@ var WORD_MATCH = 100
 
 var MAX_RESULTS = 8
 
-exports.autocomplete = function (query, cb){
+exports.autocomplete = function (query, cb) {
   var results = []
 
   query = query.trim()
 
   async.parallel([
     function(cb) {
-      app.db.Course
-      .find({ name: exports.regexForQuery(query) })
-      .limit(10)
-      .sort('-hits')
-      .exec(function(err, courses){
-        if (err) { cb(err); return }
-        courses.forEach(function(course) {
-          results.push({
-            weight: exports.weight(course, query),
-            model: course
+      model.Course
+        .find({ name: exports.regexForQuery(query) })
+        .limit(10)
+        .sort('-hits')
+        .exec(function(err, courses){
+          if (err) { cb(err); return }
+          courses.forEach(function(course) {
+            results.push({
+              weight: exports.weight(course, query),
+              model: course
+            })
           })
+          cb(null)
         })
-        cb(null)
-      })
     },
 
     function(cb) {
-      app.db.Note
-      .find({ name: exports.regexForQuery(query) })
-      .limit(10)
-      .sort('-hits')
-      .exec(function(err, notes) {
-        if (err) { cb(err); return }
-        notes.forEach(function (note){
-          results.push({
-            weight: exports.weight(note, query),
-            model: note
+      model.Note
+        .find({ name: exports.regexForQuery(query) })
+        .limit(10)
+        .sort('-hits')
+        .exec(function(err, notes) {
+          if (err) { cb(err); return }
+          notes.forEach(function (note){
+            results.push({
+              weight: exports.weight(note, query),
+              model: note
+            })
           })
+          cb(null)
         })
-        cb(null)
-      })
     }
 
-  ], function(err){
+  ], function(err) {
 
     // Sort results by weight
     results = _.sortBy(results, function (result) {
@@ -86,7 +87,7 @@ exports.autocomplete = function (query, cb){
  * @param  {String} q search query
  * @return {RegExp}
  */
-exports.regexForQuery = function (query){
+exports.regexForQuery = function (query) {
   var tokens = query.split(' ')
     , str = '(^|\\s)[^a-z]*' + util.escapeRegExp(tokens[0])
 
@@ -106,7 +107,7 @@ exports.regexForQuery = function (query){
  */
 exports.weight = function (result, query){
   var weight = 0
-    , words = query.split(' ')
+  var words = query.split(' ')
 
   // Model-specific weights
   switch (result.constructor.modelName) {
@@ -119,7 +120,7 @@ exports.weight = function (result, query){
   }
 
   // Exact match
-  if (result.name.toLowerCase() == query.toLowerCase()) {
+  if (result.name.toLowerCase() === query.toLowerCase()) {
     weight += EXACT_MATCH
   }
 
@@ -143,9 +144,9 @@ exports.weight = function (result, query){
  * @return {String} HTML string containing highlights
  */
 
-exports.highlight = function (str, query){
+exports.highlight = function (str, query) {
   var tokens = query.split(' ')
-    , reStr = ''
+  var reStr = ''
 
   tokens.forEach(function (token, i){
     if (i != 0) {
