@@ -52,13 +52,20 @@ module.exports = function () {
 
   require('./home')()
   require('./study-guides')()
+
+  // Static
   require('./about')()
   require('./contact')()
   require('./plagiarism')()
   require('./privacy')()
   require('./photo-credits')()
+  require('./open-source')()
+
+  // Search
   require('./search')()
   require('./autocomplete')()
+
+  // Dynamic
   require('./course')()
   require('./notetype')()
   require('./note')()
