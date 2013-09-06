@@ -6,17 +6,17 @@ module.exports = function () {
 
     model.User
       .findOne({ slug: userSlug })
-      .exec(function (err, user) {
+      .exec(function (err, theUser) {
         if (err) return next(err)
-        if (!user) return next()
+        if (!theUser) return next()
 
         res.render('user', {
-          user: user,
-          title: user.name + '\'s Notes',
-          url: user.url
+          theUser: theUser,
+          title: theUser.name + '\'s Notes',
+          url: theUser.url
         })
 
-        user.hit()
+        theUser.hit()
       })
   })
 }

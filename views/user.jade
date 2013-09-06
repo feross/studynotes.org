@@ -4,11 +4,11 @@ append sidebar
   include includes/ads/adsense-rect
 
   h3 User Stats
-  p <strong>#{ util.addCommas(user.hits) } people</strong> have viewed #{ user.name }'s profile.
+  p <strong>#{ util.addCommas(theUser.hits) } people</strong> have viewed #{ theUser.name }'s profile.
 
 block content
   include includes/breadcrumbs
-  h1 #{ user.name }'s Notes
+  h1 Notes by #{ theUser.name }
 
   p Nothing to see here yet
 
