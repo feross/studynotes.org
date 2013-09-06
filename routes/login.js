@@ -28,4 +28,11 @@ module.exports =  function () {
     req.logout()
     res.redirect('/')
   })
+
+  // TODO
+  app.get('/login/forgot', function (req, res) {
+    res.send('TODO -- this feature is not ready yet. Email feross@studynotes.org.')
+  })
+  // app.post('/login/forgot', function (req, res) {
+  // })
 }

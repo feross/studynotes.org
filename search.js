@@ -97,7 +97,7 @@ exports.autocomplete = function (query, cb) {
  */
 exports.regexForQuery = function (query) {
   var tokens = query.split(' ')
-    , str = '(^|\\s)[^a-z]*' + util.escapeRegExp(tokens[0])
+  var str = '(^|\\s)[^a-z]*' + util.escapeRegExp(tokens[0])
 
   for(var i = 1, len = tokens.length; i < len; i++) {
     str += '.*\\s[^a-z]*' + util.escapeRegExp(tokens[i])

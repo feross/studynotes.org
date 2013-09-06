@@ -19,6 +19,7 @@ exports.Note = require('./Note')
 exports.User = require('./User')
 
 exports.connect = function (cb) {
+  cb || (cb = function () {})
   cb = once(cb)
   mongoose.set('debug', !config.isProd)
 
