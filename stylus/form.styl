@@ -1,9 +1,11 @@
+CONTENT_WIDTH = 600px
+
 html.form
   .content
-    margin: 80px auto
+    margin: 80px auto 0 auto
     padding: 20px 90px
     position: relative
-    width: 600px
+    width: CONTENT_WIDTH
 
   img.corner
     border-radius: 6px
@@ -56,6 +58,17 @@ html.form
     color: GRAY
   :-ms-input-placeholder
     color: GRAY
+
+  footer
+    color: GRAY_DARK
+    font-size: 14px
+    margin: 20px auto
+    width: CONTENT_WIDTH
+    text-align: center
+
+    span:not(:last-child):after
+      content: '\b7'
+      padding: 0 5px
 
   // .btn
   //   {LINK}
