@@ -151,6 +151,7 @@ Site.prototype.start = function (done) {
       }
     ], function (err) {
       if (!err) debug('StudyNotes listening on ' + self.port)
+      util.triggerLiveReload()
       done(err)
     })
   }

@@ -144,7 +144,7 @@ exports.expressLogger = function (debug) {
  * Manually trigger LiveReload to refresh the browser (during development)
  */
 exports.triggerLiveReload = function () {
-  if (os.platform() === 'darwin' && !config.isProd) {
+  if (!config.isProd) {
     mkdirp.sync(config.tmp)
     touch.sync(path.join(config.tmp, 'restart.txt'))
   }
