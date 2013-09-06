@@ -46,7 +46,7 @@ exports.run = function (ServerConstructor) {
   // Create and start the server
   var server = new ServerConstructor(opts, function (err) {
     if (err) {
-      console.error('Error during startup of server ' + server.serverName + '. Exiting process.')
+      console.error('Error during ' + server.serverName + ' startup. Abort.')
       console.error(err.stack)
       process.exit(1)
     }
