@@ -9,7 +9,6 @@ var config = require('./config')
 var connectSlashes = require('connect-slashes')
 var debug = global.debug = require('debug')('studynotes')
 var express = require('express')
-var expressValidator = require('express-validator')
 var flash = require('connect-flash')
 var fs = require('fs')
 var http = require('http')
@@ -58,21 +57,21 @@ Site.prototype.start = function (done) {
     global.app = express()
     self.server = http.createServer(app)
 
-    // Readable logs that are hidden by default. Enable with DEBUG=*
-    app.use(util.expressLogger(debug))
-
     // Trust the X-Forwarded-* headers from nginx
     app.enable('trust proxy')
 
     // Disable express advertising header
     app.disable('x-powered-by')
 
-    // Gzip
-    app.use(express.compress())
-
     // Jade for templating
     app.set('views', path.join(__dirname, 'views'))
     app.set('view engine', 'jade')
+
+    // Readable logs that are hidden by default. Enable with DEBUG=*
+    app.use(util.expressLogger(debug))
+
+    // Gzip
+    app.use(express.compress())
 
     app.use(self.addHeaders)
 
@@ -84,6 +83,7 @@ Site.prototype.start = function (done) {
       app.locals.pretty = true
 
       // Serve static resources (nginx handles it in prod)
+      app.use(express.favicon(path.join(config.root, 'static/favicon.ico')))
       app.use(express.static(path.join(config.root, 'static')))
     }
     // TODO: use MaxCDN and remove this
@@ -100,9 +100,6 @@ Site.prototype.start = function (done) {
 
     app.locals.CSS_MD5 = process.env['CSS_MD5']
     app.locals.JS_MD5 = process.env['JS_MD5']
-
-    app.use(express.favicon(path.join(config.root, 'static/favicon.ico')))
-    app.use(expressValidator()) // validate user input
 
     app.use(express.cookieParser(secret.cookieSecret))
     app.use(express.bodyParser())
@@ -223,7 +220,7 @@ Site.prototype.passportStrategy = function (email, password, done) {
       } else if (user === null) {
         done(null, false, { message: 'Username not found' })
       } else {
-        user.verifyPassword(password, function (err, isMatch) {
+        user.comparePassword(password, function (err, isMatch) {
           if (err) {
             done(err)
           } else if (isMatch) {

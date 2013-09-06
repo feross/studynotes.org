@@ -1,3 +1,4 @@
+var _ = require('underscore')
 var async = require('async')
 var bcrpyt = require('bcrypt')
 var model = require('../model')
@@ -19,23 +20,6 @@ module.exports = function () {
   })
 
   app.post('/signup', function (req, res, next) {
-    req.sanitize('name').trim()
-    req.sanitize('email').trim()
-
-    req.assert('name', 'Please use your full name').notEmpty()
-    req.assert('email', 'Email address is not valid').isEmail()
-    req.assert('password', 'Password must be longer than 6 characters').len(4).notEmpty()
-
-    var errors = req.validationErrors()
-    if (errors) {
-      errors.forEach(function (error) {
-        req.flash('error', error.msg)
-        debug('Registration error: ' + error.msg)
-      })
-      res.redirect('/signup')
-      return
-    }
-
     var user = new model.User({
       name: req.body.name,
       email: req.body.email,
@@ -44,6 +28,11 @@ module.exports = function () {
     user.save(function (err) {
       if (err && err.code === 11000) {
         req.flash('error', 'A user is already using that email address')
+        res.redirect('/signup')
+      } else if (err && err.name === 'ValidationError') {
+        _(err.errors).map(function (error) {
+          req.flash('error', error.type)
+        })
         res.redirect('/signup')
       } else if (err) {
         next(err)
