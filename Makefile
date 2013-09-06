@@ -4,6 +4,7 @@ APP_DIR = /home/feross/www/studynotes.org
 .PHONY : default
 default:
 	ssh -L 27017:localhost:27017 -N feross@athena &
+	node ./node_modules/nagger/index.js
 	DEBUG=studynotes nodemon index.js
 
 # Upload secret.js to server
