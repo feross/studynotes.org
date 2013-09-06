@@ -1,7 +1,13 @@
 extends base
 
+block vars
+  - var layout = 'form'
+
 block body
-  .contentWrapper
-    .content.clearfix
-      block content
-        p This page has no content.
+  .content.clearfix
+    img.corner(src='/images/S.png')
+    block content
+      p This page has no content.
+
+  footer
+    block footer

@@ -4,12 +4,12 @@ block content
   h1 Log in to StudyNotes
   h2 Provide your email and password
 
-  ul.error-msgs
-    each msg in errors
-      li.error-msg= msg
+  if (locals.errors)
+    ul.errors
+      each msg in errors
+        li= msg
 
-  div.login
-    form(method='POST')
-      input(type='email', name='email', placeholder='Email')
-      input(type='password', name='password', placeholder='Password')
-      input(type='submit', value='Log In')
+  form(method='POST')
+    input(type='email', name='email', placeholder='email', autofocus)
+    input(type='password', name='password', placeholder='password')
+    button.btn.large(type='submit') Log In

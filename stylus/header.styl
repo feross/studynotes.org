@@ -1,11 +1,3 @@
-HEADER_HEIGHT = 50px
-
-HEADER_BORDER = 1px solid rgba(255, 255, 255, 0.6)
-SOLID_HEADER_BORDER = 1px solid LIGHTER_GRAY
-
-HEADER_BORDER_FOCUS = 3px solid #FFF
-SOLID_HEADER_BORDER_FOCUS = 3px solid #000
-
 .header
   background-color: transparent
   border-bottom: HEADER_BORDER
@@ -16,10 +8,10 @@ SOLID_HEADER_BORDER_FOCUS = 3px solid #000
   width: 100%
   z-index: 10
 
-  html:not(.solidHeader) &
+  body:not(.solidHeader) &
     background-color: rgba(0,0,0,0.1)
 
-  .solidHeader &
+  body.solidHeader &
     background-color: #FFF
     border-bottom: SOLID_HEADER_BORDER
 
@@ -39,7 +31,7 @@ SOLID_HEADER_BORDER_FOCUS = 3px solid #000
           border: HEADER_BORDER_FOCUS
           padding: 14px 16px 0 15px
 
-        .solidHeader &
+        body.solidHeader &
           {LINK}
             border-right: SOLID_HEADER_BORDER
           {HOVER}
@@ -59,7 +51,7 @@ SOLID_HEADER_BORDER_FOCUS = 3px solid #000
           height: HEADER_HEIGHT - 1
           padding: 14px 15px 0 16px
 
-        .solidHeader &
+        body.solidHeader &
           {LINK}
             border-left: SOLID_HEADER_BORDER
           {HOVER}
@@ -84,7 +76,7 @@ SOLID_HEADER_BORDER_FOCUS = 3px solid #000
         {HOVER}
           text-decoration: none
 
-        .solidHeader &
+        body.solidHeader &
           {LINK}
             color: #000
 
@@ -115,15 +107,15 @@ SOLID_HEADER_BORDER_FOCUS = 3px solid #000
     position: relative
     text-transform: none
 
-    .solidHeader &
+    body.solidHeader &
       color: #000
 
-    html:not(.solidHeader) &
+    body:not(.solidHeader) &
       background: linear-gradient(top, rgba(255,255,255,0.3), rgba(255,255,255,0.4))
       background-size: 100% 100%
       box-shadow: inset 0 1px 3px rgba(0,0,0,0.4)
 
-    .solidHeader &
+    body.solidHeader &
       &.searching, &:hover
         border: SOLID_HEADER_BORDER_FOCUS
 
@@ -137,7 +129,7 @@ SOLID_HEADER_BORDER_FOCUS = 3px solid #000
       padding-left: 44px
       width: 100%
 
-      .solidHeader &
+      body.solidHeader &
         color: #000
 
     i
@@ -160,7 +152,7 @@ SOLID_HEADER_BORDER_FOCUS = 3px solid #000
     :-ms-input-placeholder
       color: #FFF
 
-    .solidHeader &
+    body.solidHeader &
       ::-webkit-input-placeholder
         color: #000
       :-moz-placeholder
@@ -175,7 +167,7 @@ SOLID_HEADER_BORDER_FOCUS = 3px solid #000
 
   .autocomplete
     background: #FFF
-    border: 1px solid LIGHT_GRAY
+    border: 1px solid GRAY
     z-index: 50
 
     a.result
@@ -192,10 +184,10 @@ SOLID_HEADER_BORDER_FOCUS = 3px solid #000
         text-decoration: none
 
       &.selected
-        background-color: LIGHT_BLUE
+        background-color: BLUE_LIGHT
 
       .desc
-        color: LIGHT_GRAY
+        color: GRAY
         padding-left: 12px
 
       // &.course

@@ -26,15 +26,6 @@ module.exports = function () {
       }
     }
 
-    // Add view name as class on <body>
-    opts.cls += ' ' + view
-
-    // If we're rendering a view that is related to a course, then add a
-    // relevant class to <body>
-    if (opts.course) {
-      opts.cls += ' course-' + opts.course.slug
-    }
-
     // If we're rendering a view that is related to a course, let's set the
     // hero text
     if (opts.course) {
@@ -44,6 +35,20 @@ module.exports = function () {
         title: opts.course.name,
         url: opts.course.url
       }
+    }
+
+    // Add view name as class on <body>
+    opts.cls += ' ' + view
+
+    // If no hero is on the page, set a special class on <body>
+    if (!opts.hero) {
+      opts.cls += ' solidHeader'
+    }
+
+    // If we're rendering a view that is related to a course, then add a
+    // relevant class to <body>
+    if (opts.course) {
+      opts.cls += ' course-' + opts.course.slug
     }
 
     // Call the original express render function

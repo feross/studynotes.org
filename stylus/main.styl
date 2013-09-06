@@ -6,6 +6,19 @@ LOGO_WIDTH = 131px
 HERO_FONT = 'adelle', Georgia, serif
 BODY_FONT = 'proxima-nova', Helvetica, sans-serif
 
+HEADER_HEIGHT = 50px
+
+HEADER_BORDER = 1px solid rgba(255, 255, 255, 0.6)
+SOLID_HEADER_BORDER = 1px solid GRAY_LIGHT
+
+HEADER_BORDER_FOCUS = 3px solid #FFF
+SOLID_HEADER_BORDER_FOCUS = 3px solid #000
+
+HERO_EXTRA_HEIGHT_FOR_FADE = 100px
+HERO_HEIGHT = 260px + HEADER_HEIGHT
+HERO_HOME_HEIGHT = HERO_HEIGHT + 40px
+BROWSE_HEIGHT = HERO_HOME_HEIGHT - HEADER_HEIGHT
+
 SIDEBAR_WIDTH = 336px
 SIDEBAR_MARGIN_LEFT = 30px
 SIDEBAR_MARGIN_RIGHT = 40px
@@ -40,7 +53,7 @@ a
     text-decoration: none
 
   {HOVER}
-    color: DARK_BLUE
+    color: BLUE_DARK
     text-decoration: underline
 
 h1, h2, h3, h4, h5
@@ -68,7 +81,7 @@ ul.listing
   margin-bottom: 25px
   li
     background: #EEE
-    color: DARKER_GRAY
+    color: GRAY_DARKER
     ellipsis()
     padding: 10px 25px
   li:nth-child(even)
@@ -78,20 +91,11 @@ ul.listing
     font-weight: bold
 
 hr
-  background-color: LIGHTEST_GRAY
+  background-color: GRAY_LIGHTER
   border: 0
-  color: LIGHTEST_GRAY
+  color: GRAY_LIGHTER
   height: 1px
   margin: 30px 0
-
-@import 'header'
-@import 'browseMenu'
-@import 'hero'
-@import 'toolbar'
-@import 'buttons'
-@import 'sidebar'
-@import 'note'
-@import 'footer'
 
 //
 // CONTENT
@@ -104,16 +108,15 @@ hr
   position: relative
   width: 100%
 
-  .isHero &
+  body:not(.solidHeader) &
     margin-top: HERO_HEIGHT
-  .isHero body.home &
+  body:not(.solidHeader).home &
     margin-top: HERO_HOME_HEIGHT
-
 
 .content
   background: #FFF
   border: 1px solid rgba(0, 0, 0, .1)
-  border-radius: 6px
+  border-radius: 3px
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.35)
   margin-left: 10px
   margin-right: (SIDEBAR_WIDTH + SIDEBAR_MARGIN_LEFT + SIDEBAR_MARGIN_RIGHT)
@@ -132,7 +135,7 @@ hr
     float: right
 
   h1
-    border-bottom: 1px solid LIGHTEST_GRAY
+    border-bottom: 1px solid GRAY_LIGHTER
     margin: 10px 0 30px 0
     padding-bottom: 20px
 
@@ -145,3 +148,13 @@ hr
 
   ul:not(.listing)
     padding-left: 20px
+
+@import 'header'
+@import 'browseMenu'
+@import 'hero'
+@import 'toolbar'
+@import 'buttons'
+@import 'sidebar'
+@import 'note'
+@import 'footer'
+@import 'form'

@@ -4,9 +4,9 @@
   position: relative
   width: SIDEBAR_WIDTH + SIDEBAR_MARGIN_LEFT + SIDEBAR_MARGIN_RIGHT
 
-  .isHero &
+  body:not(.solidHeader) &
     margin-top: 120px
-  .isHero body.home &
+  body:not(.solidHeader).home &
     margin-top: HERO_HOME_HEIGHT
 
   & > div:not(.ad)
