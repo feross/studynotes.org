@@ -7,6 +7,10 @@ default:
 	node ./node_modules/nagger/index.js
 	DEBUG=studynotes nodemon index.js
 
+.PHONY : offline
+offline:
+	DEBUG=studynotes nodemon index.js --offline
+
 # Upload secret.js to server
 .PHONY : upload-secret
 upload-secret:

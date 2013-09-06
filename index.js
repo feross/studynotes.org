@@ -26,6 +26,7 @@ var util = require('./util')
 function Site (opts, cb) {
   var self = this
   /** @type {number} port */ opts.port || (opts.port = config.port)
+  /** @type {boolean} offline mode? */ opts.offline || (opts.offline = false)
 
   util.extend(self, opts)
   self.start(cb)
@@ -95,6 +96,7 @@ Site.prototype.start = function (done) {
     app.locals.config = config
     app.locals.moment = moment
     app.locals.util = util
+    app.locals.offline = self.offline
 
     app.locals.CSS_MD5 = process.env['CSS_MD5']
     app.locals.JS_MD5 = process.env['JS_MD5']
