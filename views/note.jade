@@ -10,9 +10,9 @@ append sidebar
 
   h3 Note Stats
   if (notetype.singularName)
-    p #{ util.addCommas(note.hits) } people have viewed this #{ notetype.singularName.toLowerCase() }.
+    p <strong>#{ util.addCommas(note.hits) } people</strong> have viewed this #{ notetype.singularName.toLowerCase() }.
   else
-    p #{ util.addCommas(note.hits) } people have viewed these #{ notetype.name.toLowerCase() }.
+    p <strong>#{ util.addCommas(note.hits) } people</strong> have viewed these #{ notetype.name.toLowerCase() }.
 
 
   include includes/relatedNotes
