@@ -4,6 +4,7 @@ build
 
 static/out
 secret.js
+tmp/
 
 # Numerous always-ignore extensions
 *.diff
