@@ -1,7 +1,9 @@
 footer.footer
   block footer
     .row
-      p!= randomquote
+      p.randomquote
+        q= randomquote.text
+        span.author!= randomquote.author.replace(' ', '&nbsp;')
 
     .row
       .col
