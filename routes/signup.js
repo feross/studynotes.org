@@ -1,19 +1,13 @@
 var _ = require('underscore')
 var async = require('async')
+var auth = require('../auth')
 var bcrpyt = require('bcrypt')
 var model = require('../model')
 
 module.exports = function () {
-  app.get('/signup', function (req, res) {
+  app.get('/signup', auth.returnTo, function (req, res) {
     if (req.user) {
-      var uri = url.parse(req.url)
-      var origin = uri.protocol + '//' + uri.host
-      if (req.cookies.next && origin === config.siteOrigin) {
-        // Only redirect to our own domain, so we're not an "open redirector"
-        res.redirect(req.cookies.next)
-      } else {
-        res.redirect('/')
-      }
+      res.redirect('/')
     } else {
       res.render('signup', { errors: req.flash('error') })
     }
@@ -39,8 +33,16 @@ module.exports = function () {
       } else {
         // Automatically login the user
         req.login(user, function (err) {
-          if (err) next(err)
-          else res.redirect('/signup') // for next redirect
+          if (err) {
+            next(err)
+          } else if (req.session && req.session.returnTo) {
+            console.log(req.session.returnTo)
+            var url = req.session.returnTo
+            delete req.session.returnTo
+            res.redirect(url)
+          } else {
+            res.redirect('/signup')
+          }
         })
       }
     })
