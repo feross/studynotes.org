@@ -50,3 +50,6 @@ header.header
             ul
               each notetype in course.notetypes
                 li: a(href='/#{course.slug}/#{notetype.slug}/')= notetype.name
+
+if (locals.hero)
+  .heroImage

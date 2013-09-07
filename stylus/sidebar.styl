@@ -1,13 +1,12 @@
 .sidebar
-  float: left
+  top: 0
+  right: 0
   padding: 5px SIDEBAR_MARGIN_RIGHT 0 SIDEBAR_MARGIN_LEFT
-  position: relative
+  position: absolute
   width: SIDEBAR_WIDTH + SIDEBAR_MARGIN_LEFT + SIDEBAR_MARGIN_RIGHT
 
   body:not(.solidHeader) &
-    margin-top: 120px
-  body:not(.solidHeader).home &
-    margin-top: HERO_HOME_HEIGHT
+    margin-top: -200px
 
   & > div:not(.ad)
     margin: 1.2em 0

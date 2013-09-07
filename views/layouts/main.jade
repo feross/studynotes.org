@@ -5,13 +5,10 @@ block vars
 
 block body
   include ../includes/header
-  include ../includes/hero
-
-  .contentWrapper
-    .content.clearfix
+  .wrap
+    include ../includes/hero
+    .content
       block content
-        p This page has no content.
-
-  include ../includes/sidebar
-
-  include ../includes/footer
+      //- .sidebar
+        block sidebar
+    include ../includes/footer

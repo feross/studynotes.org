@@ -14,15 +14,16 @@ SOLID_HEADER_BORDER = 1px solid GRAY_LIGHT
 HEADER_BORDER_FOCUS = 3px solid #FFF
 SOLID_HEADER_BORDER_FOCUS = 3px solid #000
 
-HERO_EXTRA_HEIGHT_FOR_FADE = 100px
-HERO_HEIGHT = 260px + HEADER_HEIGHT
-HERO_HOME_HEIGHT = HERO_HEIGHT + 40px
-BROWSE_HEIGHT = HERO_HOME_HEIGHT - HEADER_HEIGHT
+HERO_HEIGHT = 400px + HEADER_HEIGHT
+BROWSE_MENU_HEIGHT = 280px
 
 SIDEBAR_WIDTH = 336px
 SIDEBAR_MARGIN_LEFT = 30px
 SIDEBAR_MARGIN_RIGHT = 40px
-CONTENT_PADDING_TOP = 35px
+
+CONTENT_PADDING = 50px
+
+READABLE_WIDTH = 700px
 
 *
   box-sizing: border-box
@@ -37,7 +38,6 @@ body
   font-size: 16px
   margin: 0
   padding: 0
-  position: relative
   -webkit-font-smoothing: antialiased
 
 img, iframe
@@ -101,27 +101,21 @@ hr
 // CONTENT
 //
 
-.contentWrapper
-  float: left
-  margin-right: - (SIDEBAR_WIDTH + SIDEBAR_MARGIN_LEFT + SIDEBAR_MARGIN_RIGHT)
-  margin-top: HEADER_HEIGHT
+.wrap
+  margin: 0 auto
+  max-width: READABLE_WIDTH + SIDEBAR_WIDTH + SIDEBAR_MARGIN_LEFT + SIDEBAR_MARGIN_RIGHT
+  padding: HEADER_HEIGHT 15px 0 15px
   position: relative
   width: 100%
-
-  body:not(.solidHeader) &
-    margin-top: HERO_HEIGHT
-  body:not(.solidHeader).home &
-    margin-top: HERO_HOME_HEIGHT
 
 .content
   background: #FFF
   border: 1px solid rgba(0, 0, 0, .1)
-  border-radius: 3px
+  border-radius: 6px
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.35)
-  margin-left: 10px
-  margin-right: (SIDEBAR_WIDTH + SIDEBAR_MARGIN_LEFT + SIDEBAR_MARGIN_RIGHT)
-  padding: CONTENT_PADDING_TOP 50px 50px 50px
-  z-index: 10
+  // margin-right: (SIDEBAR_WIDTH + SIDEBAR_MARGIN_LEFT + SIDEBAR_MARGIN_RIGHT)
+  padding: CONTENT_PADDING
+  z-index: 20
 
   .like
     height: 26px
@@ -136,7 +130,7 @@ hr
 
   h1
     border-bottom: 1px solid GRAY_LIGHTER
-    margin: 10px 0 30px 0
+    margin: 0 0 30px 0
     padding-bottom: 20px
 
     body.note &, body.notetype &, body.course &, body.home &

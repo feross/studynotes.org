@@ -1,18 +1,7 @@
 if (locals.hero)
   .hero
-    .text
-      if (hero.url)
-        a(href='#{hero.url}')
-          if (locals.notetype || locals.note)
-            //- notetype and note pages already have a h1 in the content
-            h2.title!= hero.title
-            if (locals.hero.desc)
-              h3.desc!= hero.desc
-          else
-            h1.title!= hero.title
-            if (locals.hero.desc)
-              h2.desc!= hero.desc
-      else
+    if (hero.url)
+      a(href='#{hero.url}')
         if (locals.notetype || locals.note)
           //- notetype and note pages already have a h1 in the content
           h2.title!= hero.title
@@ -22,9 +11,19 @@ if (locals.hero)
           h1.title!= hero.title
           if (locals.hero.desc)
             h2.desc!= hero.desc
+    else
+      if (locals.notetype || locals.note)
+        //- notetype and note pages already have a h1 in the content
+        h2.title!= hero.title
+        if (locals.hero.desc)
+          h3.desc!= hero.desc
+      else
+        h1.title!= hero.title
+        if (locals.hero.desc)
+          h2.desc!= hero.desc
 
-    if (hero.tabs)
-      ul.tabs.clearfix
-        each tab in hero.tabs
-          li(class='#{locals.notetype && tab.slug == notetype.slug ? "on" : ""}')
-            a(href='#{tab.url}')= tab.name
+  if (hero.tabs && hero.tabs.length)
+    ul.tabs.clearfix
+      each tab in hero.tabs
+        li(class='#{locals.notetype && tab.slug == notetype.slug ? "on" : ""}')
+          a(href='#{tab.url}')= tab.name
