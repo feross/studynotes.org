@@ -24,6 +24,7 @@ Notetype.virtual('searchDesc').get(function () {
   var course = _.find(app.cache.courses, function (c) {
     return c._id == notetype.courseId.toString()
   })
+  if (!course) return ''
   return course.name + ' Notes'
 })
 
@@ -32,6 +33,7 @@ Notetype.virtual('url').get(function() {
   var course = _.find(app.cache.courses, function (c) {
     return c._id == notetype.courseId.toString()
   })
+  if (!course) return ''
   return '/' + course.slug + '/' + notetype.slug + '/'
 })
 

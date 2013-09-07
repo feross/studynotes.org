@@ -35,12 +35,18 @@ exports.ensureAuth = function (req, res, next) {
   }
 }
 
+/**
+ * Passport serialize user function.
+ */
 exports.serializeUser = function (user, done) {
   process.nextTick(function () {
     done(null, user.email)
   })
 }
 
+/**
+ * Passport deserialize user function.
+ */
 exports.deserializeUser = function (email, done) {
   model.User
     .findOne({ email: email })

@@ -38,6 +38,7 @@ Note.virtual('url').get(function () {
     return n.id == notetypeId
   })
 
+  if (!course || !notetype) return ''
   return '/' + course.slug + '/' + notetype.slug + '/' + note.slug + '/'
 })
 
@@ -52,6 +53,7 @@ Note.virtual('searchDesc').get(function () {
     return n.id == notetypeId
   })
 
+  if (!course || !notetype) return ''
   return course.name + ' ' + (notetype.singularName || notetype.name)
 })
 
