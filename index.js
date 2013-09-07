@@ -126,15 +126,6 @@ Site.prototype.start = function (done) {
       passwordField: 'password'
     }, self.passportStrategy))
 
-    app.auth = function (req, res, next) {
-      if (req.isAuthenticated()) {
-        next()
-      } else {
-        res.cookie('next', req.url)
-        res.redirect('/login')
-      }
-    }
-
     // errors are propogated using `req.flash`
     app.use(flash())
     app.use(self.addTemplateLocals)

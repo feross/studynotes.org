@@ -13,7 +13,7 @@ module.exports =  function () {
   })
 
   app.post('/login', passport.authenticate('local', {
-    failureRedirect: '/login',
+    failureRedirect: '/login/',
     successReturnToOrRedirect: '/',
     failureFlash: true
   }))
@@ -25,7 +25,7 @@ module.exports =  function () {
 
   // TODO
   app.get('/login/forgot', function (req, res) {
-    res.send('TODO -- this feature is not ready yet. Email feross@studynotes.org.')
+    res.send('TODO -- this feature is not ready yet. Email feross@studynotes.org if you forgot your password.')
   })
   // app.post('/login/forgot', function (req, res) {
   // })

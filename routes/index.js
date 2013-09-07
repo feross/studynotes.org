@@ -66,6 +66,10 @@ module.exports = function () {
   require('./photo-credits')()
   require('./open-source')()
 
+  // Accounts
+  require('./signup')()
+  require('./login')()
+
   // Search
   require('./search')()
   require('./autocomplete')()
@@ -74,8 +78,6 @@ module.exports = function () {
   require('./course')()
   require('./notetype')()
   require('./note')()
-  require('./signup')()
-  require('./login')()
   require('./user')()
 
   // Error pages
