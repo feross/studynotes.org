@@ -1,4 +1,6 @@
 var config = require('./config')
+var model = require('./model')
+var passportLocal = require('passport-local')
 var url = require('url')
 
 /**
@@ -32,3 +34,44 @@ exports.ensureAuth = function (req, res, next) {
     res.redirect('/signup/?returnTo=' + req.url)
   }
 }
+
+exports.serializeUser = function (user, done) {
+  process.nextTick(function () {
+    done(null, user.email)
+  })
+}
+
+exports.deserializeUser = function (email, done) {
+  model.User
+    .findOne({ email: email })
+    .exec(done)
+}
+
+/**
+ * Passport authentication strategy. Tests if the user's credentials are correct
+ * so they can log in.
+ */
+exports.passportStrategy = new passportLocal.Strategy({
+  usernameField: 'email',
+  passwordField: 'password'
+}, function (email, password, done) {
+  model.User
+    .findOne({ email: email })
+    .exec(function (err, user) {
+      if (err) {
+        done(err)
+      } else if (user === null) {
+        done(null, false, { message: 'Username not found' })
+      } else {
+        user.comparePassword(password, function (err, isMatch) {
+          if (err) {
+            done(err)
+          } else if (isMatch) {
+            done(null, user)
+          } else {
+            done(null, false, { message: 'Wrong password' })
+          }
+        })
+      }
+    })
+})

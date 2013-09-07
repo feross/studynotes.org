@@ -2,6 +2,7 @@ module.exports = Site
 
 var _ = require('underscore')
 var async = require('async')
+var auth = require('./auth')
 var bcrypt = require('bcrypt')
 var builder = require('./builder')
 var cluster = require('cluster')
@@ -17,7 +18,6 @@ var moment = require('moment')
 var mongoose = require('mongoose')
 var MongoStore = require('connect-mongo')(express)
 var passport = require('passport')
-var passportLocal = require('passport-local')
 var path = require('path')
 var secret = require('./secret')
 var util = require('./util')
@@ -117,17 +117,13 @@ Site.prototype.start = function (done) {
     // Passport
     app.use(passport.initialize())
     app.use(passport.session())
+    passport.serializeUser(auth.serializeUser)
+    passport.deserializeUser(auth.deserializeUser)
+    passport.use(auth.passportStrategy)
 
-    passport.serializeUser(self.serializeUser)
-    passport.deserializeUser(self.deserializeUser)
-
-    passport.use(new passportLocal.Strategy({
-      usernameField: 'email',
-      passwordField: 'password'
-    }, self.passportStrategy))
-
-    // errors are propogated using `req.flash`
+    // Errors are propogated using `req.flash`
     app.use(flash())
+
     app.use(self.addTemplateLocals)
 
     require('./routes')()
@@ -188,40 +184,6 @@ Site.prototype.addTemplateLocals = function (req, res, next) {
   res.locals.user = req.user
 
   next()
-}
-
-Site.prototype.serializeUser = function (user, done) {
-  process.nextTick(function () {
-    done(null, user.email)
-  })
-}
-
-Site.prototype.deserializeUser = function (email, done) {
-  model.User
-    .findOne({ email: email })
-    .exec(done)
-}
-
-Site.prototype.passportStrategy = function (email, password, done) {
-  model.User
-    .findOne({ email: email })
-    .exec(function (err, user) {
-      if (err) {
-        done(err)
-      } else if (user === null) {
-        done(null, false, { message: 'Username not found' })
-      } else {
-        user.comparePassword(password, function (err, isMatch) {
-          if (err) {
-            done(err)
-          } else if (isMatch) {
-            done(null, user)
-          } else {
-            done(null, false, { message: 'Wrong password' })
-          }
-        })
-      }
-    })
 }
 
 if (require.main === module) {
