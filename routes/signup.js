@@ -27,7 +27,7 @@ module.exports = function () {
         _(err.errors).map(function (error) {
           req.flash('error', error.type)
         })
-        res.redirect('/signup')
+        res.redirect('/signup/')
       } else if (err) {
         next(err)
       } else {
@@ -41,7 +41,7 @@ module.exports = function () {
             delete req.session.returnTo
             res.redirect(url)
           } else {
-            res.redirect('/signup')
+            res.redirect('/signup/')
           }
         })
       }
