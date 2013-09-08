@@ -17,7 +17,7 @@ module.exports = function () {
   })
 
   app.use(function (err, req, res, next) {
-    if (config.isProd) {
+    if (config.isProd || req.url === '/500/') {
       // Log the exception
       console.error(err)
 
