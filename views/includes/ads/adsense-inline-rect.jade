@@ -1,14 +1,29 @@
 //- div(class='#{!locals.inlineRight && _.random(1) ? 'pull-left' : 'pull-right'}')
 div.pull-right
+  style.
+    .in-content-ad {
+      width: 336px;
+      height: 280px;
+    }
+    @media(min-width: 500px) {
+      .in-content-ad {
+        width: 468px;
+        height: 60px;
+      }
+    }
+    @media(min-width: 800px) {
+      .in-content-ad {
+        width: 336px;
+        height: 280px;
+      }
+    }
+
   if config.isProd
-    script(type="text/javascript").
-      <!--
-      google_ad_client = "ca-pub-7826623632932605";
-      /* StudyNotes In-Content LRectangle */
-      google_ad_slot = "8440669102";
-      google_ad_width = 336;
-      google_ad_height = 280;
-      //-->
-    script(type="text/javascript", src="http://pagead2.googlesyndication.com/pagead/show_ads.js")
+    //- StudyNotes In-Content LRectangle (new)
+    ins(class='adsbygoogle in-content-ad', style='display:inline-block', data-ad-client='ca-pub-7826623632932605', data-ad-slot='1538751506')
+    script.
+      (adsbygoogle = window.adsbygoogle || []).push({})
+  else if locals.offline
+    img.in-content-ad(src='/images/placeholder-ad.png')
   else
-    img(src='http://lorempixel.com/336/280')
+    img.in-content-ad(src='http://lorempixel.com/336/280')

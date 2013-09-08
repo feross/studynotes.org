@@ -37,6 +37,7 @@ module.exports = function () {
         })
 
         res.render('note', {
+          ads: true,
           breadcrumbs: [ course, notetype ],
           course: course,
           note: note,

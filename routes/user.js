@@ -11,6 +11,7 @@ module.exports = function () {
         if (!theUser) return next()
 
         res.render('user', {
+          ads: true,
           theUser: theUser,
           title: theUser.name + '\'s Notes',
           url: theUser.url

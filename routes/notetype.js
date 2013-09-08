@@ -22,6 +22,7 @@ module.exports = function () {
         if (err) return next(err)
 
         res.render('notetype', {
+          ads: true,
           breadcrumbs: [ course ],
           course: course,
           notetype: notetype,

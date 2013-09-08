@@ -68,6 +68,9 @@ html(class='no-js #{layout}', lang='en')
     block scripts
       script(src='/out/js/main-#{locals.JS_MD5}.js')
 
+      if (locals.ads && config.isProd)
+        script(async, src='http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')
+
       //- Countdown script
       if (locals.course)
         | <script>var countdownDate = new Date('#{course.examDate}')</script>

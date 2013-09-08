@@ -1,6 +1,7 @@
 module.exports = function () {
   app.get('/', function (req, res) {
     res.render('home', {
+      ads: true,
       url: '/',
       hero: {
         title: 'Study Notes',

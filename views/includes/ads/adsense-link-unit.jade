@@ -9,5 +9,7 @@
       google_ad_height = 15;
       //-->
     script(type="text/javascript", src="http://pagead2.googlesyndication.com/pagead/show_ads.js")
+  else if locals.offline
+    img.link-unit(src='/images/placeholder-ad.png')
   else
-    img(src='http://lorempixel.com/468/15')
+    img.link-unit(src='http://lorempixel.com/468/15')
