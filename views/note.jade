@@ -1,22 +1,19 @@
-extends layouts/main
-
-append toolbar
-  if next
-    a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next →
-    .navigate-msg Use ← → keys to navigate
+extends layouts/main-sidebar
 
 append sidebar
   include includes/ads/adsense-rect
-
   h3 Note Stats
   if (notetype.singularName)
     p <strong>#{ util.addCommas(note.hits) } people</strong> have viewed this #{ notetype.singularName.toLowerCase() }.
   else
     p <strong>#{ util.addCommas(note.hits) } people</strong> have viewed these #{ notetype.name.toLowerCase() }.
-
-
   include includes/relatedNotes
   include includes/ads/adsense-rect
+
+append toolbar
+  if next
+    a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next →
+    .navigate-msg Use ← → keys to navigate
 
 block content
   include includes/breadcrumbs

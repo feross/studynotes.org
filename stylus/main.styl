@@ -18,13 +18,13 @@ BROWSE_MENU_HEIGHT = 280px
 
 SIDEBAR_WIDTH = 336px
 SIDEBAR_MARGIN_LEFT = 30px
-SIDEBAR_MARGIN_RIGHT = 40px
+SIDEBAR_MARGIN_RIGHT = 10px
 
 CONTENT_PADDING = 50px
 
-READABLE_WIDTH = 700px
+READABLE_WIDTH = 900px
 
-*
+*, *:before, *:after
   box-sizing: border-box
   line-height: 1.4em
 
@@ -102,19 +102,26 @@ hr
 
 .wrap
   margin: 0 auto
-  max-width: READABLE_WIDTH + SIDEBAR_WIDTH + SIDEBAR_MARGIN_LEFT + SIDEBAR_MARGIN_RIGHT
+  max-width: READABLE_WIDTH
   padding: HEADER_HEIGHT 15px 0 15px
   position: relative
   width: 100%
+
+  html.main-sidebar &
+    max-width: READABLE_WIDTH + SIDEBAR_WIDTH + SIDEBAR_MARGIN_LEFT
 
 .content
   background: #FFF
   border: 1px solid rgba(0, 0, 0, .1)
   border-radius: 6px
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.35)
-  // margin-right: (SIDEBAR_WIDTH + SIDEBAR_MARGIN_LEFT + SIDEBAR_MARGIN_RIGHT)
+  max-width: READABLE_WIDTH
   padding: CONTENT_PADDING
+  position: relative
   z-index: 20
+
+  html.main-sidebar &
+    margin-right: SIDEBAR_WIDTH + SIDEBAR_MARGIN_LEFT
 
   .like
     height: 26px

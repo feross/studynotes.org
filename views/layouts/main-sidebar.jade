@@ -1,7 +1,7 @@
 extends base
 
 block vars
-  - var layout = 'main'
+  - var layout = 'main main-sidebar'
 
 block body
   include ../includes/header
@@ -9,4 +9,6 @@ block body
     include ../includes/hero
     .content
       block content
+      .sidebar
+        block sidebar
     include ../includes/footer

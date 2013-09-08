@@ -1,8 +1,7 @@
-extends layouts/main
+extends layouts/main-sidebar
 
 append sidebar
   include includes/ads/adsense-rect
-
   h3 User Stats
   p <strong>#{ util.addCommas(theUser.hits) } people</strong> have viewed #{ theUser.name }'s profile.
 

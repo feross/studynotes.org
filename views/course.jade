@@ -1,10 +1,9 @@
-extends layouts/main
+extends layouts/main-sidebar
 
 append sidebar
   include includes/ads/adsense-rect
   include includes/countdown
   include includes/ads/adsense-rect
-
   h3 Page Stats
   p <strong>#{ util.addCommas(course.hits) } people</strong> have viewed this #{ course.name } page.
 
