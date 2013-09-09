@@ -9,6 +9,7 @@ default:
 
 .PHONY : offline
 offline:
+	mongod &
 	DEBUG=studynotes nodemon index.js --offline
 
 # Upload secret.js to server
