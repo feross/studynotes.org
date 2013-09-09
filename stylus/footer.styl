@@ -1,10 +1,16 @@
 .footer
-  font-size: 15px
-  margin: 50px 0
+  font-size: 0.9em
+
+  @media PHONE
+    margin: CONTENT_PADDING_PHONE + 10px
+  @media TABLET
+    margin: CONTENT_PADDING_TABLET
+  @media DESKTOP
+    margin: CONTENT_PADDING_DESKTOP
 
   .randomquote
     color: GRAY
-    font-size: 22px
+    font-size: 1.4em
 
     q
       font-style: italic
@@ -12,10 +18,12 @@
 
       &:before
         content: '\201C'
-        font-size: 30px
+        font-size: 1.8em
+        line-height: inherit
       &:after
         content: '\201D'
-        font-size: 30px
+        font-size: 1.8em
+        line-height: inherit
 
     .author:before
       content: '\2013' // en dash
@@ -23,10 +31,17 @@
 
   .col
     margin-bottom: 40px
+    min-width: 140px
     width: 20%
 
+    @media PHONE
+      width: 30%
+
     &.about-this-site
-      width: 40%
+      width: 35%
+
+      @media PHONE
+        width: 100%
 
   a
     {LINK}
@@ -36,8 +51,8 @@
       border-bottom: 1px solid BLUE
       color: BLUE
 
-  h4
-    font-size: 18px
+  h3
+    font-size: 1.125em
     font-weight: bold
     text-transform: uppercase
 

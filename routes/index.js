@@ -75,6 +75,7 @@ module.exports = function () {
   require('./autocomplete')()
 
   // Dynamic
+  require('./courses')()
   require('./course')()
   require('./notetype')()
   require('./note')()

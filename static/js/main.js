@@ -31,7 +31,7 @@ $.ajaxSetup({
  */
 function updateSearchWidth () {
   var headerLeftWidth = $headerLeft.width()
-    , headerRightWidth = $headerRight.width()
+  var headerRightWidth = $headerRight.width()
   $searchAndAutocomplete
   .css({
     'margin-left': headerLeftWidth,
@@ -108,13 +108,14 @@ function loadFacebookSDK () {
 }
 loadFacebookSDK()
 
+function isPhone () {
+  return $window.width() < 800
+}
 
 /**
  * Executed when `document` is ready.
  */
 $(function () {
-
-  updateSearchWidth()
 
   /**
    * Make external links open in new window
@@ -130,8 +131,10 @@ $(function () {
     // Only handle left-clicks
     if (e.which != 1) return
 
-    toggleBrowseMenu()
-    e.preventDefault()
+    if (!isPhone()) {
+      toggleBrowseMenu()
+      e.preventDefault()
+    }
   })
 
   /**
@@ -155,6 +158,8 @@ $(function () {
     , contentBottom
     , contentWidth
   $window.on('resize', _.throttle(function () {
+    updateSearchWidth()
+
     $contentToolbar.removeClass('sticky')
     contentToolbarTop = $contentToolbar.length
       ? $contentToolbar.offset().top
@@ -187,11 +192,11 @@ $(function () {
       if (contentToolbarTop < scrollTop && scrollTop < contentBottom) {
         $contentToolbar
           .addClass('sticky')
-          .css({width: contentWidth})
+          .css({ width: contentWidth })
       } else {
         $contentToolbar
           .removeClass('sticky')
-          .css({width: ''})
+          .css({ width: '' })
       }
     }
 

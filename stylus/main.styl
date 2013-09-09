@@ -1,5 +1,4 @@
 @import 'nib'
-@import 'util'
 @import 'colors'
 
 HERO_FONT = 'adelle', Helvetica, serif
@@ -17,9 +16,62 @@ SOLID_HEADER_BORDER_FOCUS = 3px solid #000
 SIDEBAR_WIDTH = 336px
 SIDEBAR_MARGIN_LEFT = 30px
 
-CONTENT_PADDING = 50px
+CONTENT_PADDING_PHONE = 20px
+CONTENT_PADDING_TABLET = 30px
+CONTENT_PADDING_DESKTOP = 50px
 
-READABLE_WIDTH = 900px
+MAX_WIDTH = 1300px
+
+PHONE = 'only screen and (max-width: 799px)'
+TABLET = 'only screen and (min-width: 800px) and (max-width: 1099px)'
+DESKTOP = 'only screen and (min-width: 1100px) and (max-width: 1499px)'
+// HUGE_DESKTOP = 'only screen and (min-width: 1500px)'
+
+// For convenience, when styling links
+
+LINK = '&:link, &:visited'
+HOVER = '&:hover, &:focus, &:active'
+
+.clearfix:before, .clearfix:after
+  content: ""
+  display: table
+
+.clearfix:after
+  clear: both
+
+.off
+  display: none
+
+.gray
+  color: GRAY
+
+.red
+  color: red
+
+.center
+  text-align: center
+
+.strong
+  font-weight: bold
+
+.col
+  display: inline-block
+  vertical-align: top
+
+.row
+  clear: both
+
+ellipsis()
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+
+.hide-phone
+  @media PHONE
+    display: none !important
+.hide-tablet
+  @media TABLET
+    display: none !important
 
 *, *:before, *:after
   box-sizing: border-box
@@ -31,10 +83,17 @@ html
 body
   background: #F4F4F4 url('/images/body.gif')
   font-family: BODY_FONT
-  font-size: 16px
+  font-size: 18px
   margin: 0
   padding: 0
   -webkit-font-smoothing: antialiased
+
+  @media PHONE
+    font-size: 14px
+  @media TABLET
+    font-size: 16px
+  @media DESKTOP
+    font-size: 18px
 
 img, iframe
   max-width: 100%
@@ -59,15 +118,15 @@ h1, h2, h3, h4, h5
   margin: 1em 0 .5em 0
   text-rendering: optimizelegibility
 h1
-  font-size: 36px
+  font-size: 2.25em
 h2
-  font-size: 24px
+  font-size: 1.5em
 h3
-  font-size: 20px
+  font-size: 1.25em
 h4
-  font-size: 18px
+  font-size: 1.125em
 h5
-  font-size: 16px
+  font-size: 1em
 
 p
   margin: 1em 0
@@ -99,26 +158,40 @@ hr
 
 .wrap
   margin: 0 auto
-  max-width: READABLE_WIDTH
-  padding: HEADER_HEIGHT 15px 0 15px
+  max-width: MAX_WIDTH
+  padding-top: HEADER_HEIGHT
   position: relative
   width: 100%
 
   html.main-sidebar &
-    max-width: READABLE_WIDTH + SIDEBAR_WIDTH + SIDEBAR_MARGIN_LEFT
+    max-width: MAX_WIDTH + SIDEBAR_WIDTH + SIDEBAR_MARGIN_LEFT
+
+  @media PHONE
+    padding-left: 0
+    padding-right: 0
+  @media TABLET
+    padding-left: 10px
+    padding-right: 10px
+  @media DESKTOP
+    padding-left: 20px
+    padding-right: 20px
 
 .content
   background: #FFF
   border: 1px solid rgba(0, 0, 0, .1)
   border-radius: 6px
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.35)
-  max-width: READABLE_WIDTH
-  padding: CONTENT_PADDING
-  position: relative
-  z-index: 20
 
   html.main-sidebar &
     margin-right: SIDEBAR_WIDTH + SIDEBAR_MARGIN_LEFT
+
+  @media PHONE
+    border-radius: 0
+    padding: CONTENT_PADDING_PHONE
+  @media TABLET
+    padding: CONTENT_PADDING_TABLET
+  @media DESKTOP
+    padding: CONTENT_PADDING_DESKTOP
 
   .like
     height: 26px
