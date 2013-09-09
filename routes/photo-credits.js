@@ -4,7 +4,8 @@ module.exports = function () {
       url: '/photo-credits',
       title: 'Photo Credits',
       hero: {
-        title: 'Photo Credits'
+        title: 'Photo Credits',
+        desc: 'Many thanks for the beautiful photos!'
       }
     })
   })
