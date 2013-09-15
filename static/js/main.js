@@ -155,8 +155,8 @@ $(function () {
    * Browser resize event
    */
   var contentToolbarTop
-    , contentBottom
-    , contentWidth
+  var contentBottom
+  var contentWidth
   $window.on('resize', _.throttle(function () {
     updateSearchWidth()
 
@@ -206,9 +206,9 @@ $(function () {
   /**
    * Autocomplete
    */
-  var lastAutocompleteTime = +(new Date)
-    , lastAutocompleteQuery
-    , autocompletePosition = 0 // 0 means nothing is selected, 1 is the first result
+  var lastAutocompleteTime = +(new Date())
+  var lastAutocompleteQuery
+  var autocompletePosition = 0 // 0 means nothing is selected, 1 is the first result
 
 
   /**
@@ -223,7 +223,7 @@ $(function () {
       : position
 
     var $results = $('.header .autocomplete .result')
-      , len = $results.length
+    var len = $results.length
 
     // Handle numbers that are negative or too big by wrapping around.
     if (autocompletePosition < 0) {
@@ -232,7 +232,7 @@ $(function () {
     autocompletePosition %= (len + 1)
 
     $results.removeClass('selected')
-    if (autocompletePosition != 0) {
+    if (autocompletePosition !== 0) {
       var result = $results[autocompletePosition - 1]
       $(result).addClass('selected')
     }
@@ -249,7 +249,7 @@ $(function () {
         !$headerAutocomplete.hasClass('off')) {
       return
 
-    } else if ($searchInput.val() == '') {
+    } else if ($searchInput.val() === '') {
       $search.removeClass('searching')
       $headerAutocomplete.addClass('off')
       setAutocompletePosition(0)
@@ -258,10 +258,10 @@ $(function () {
       $search.addClass('searching')
 
       var params = { q: $searchInput.val() }
-      var time = +(new Date)
+      var time = +(new Date())
       $.get('/autocomplete/', params, function (data) {
 
-        if ($searchInput.val() != '' && time >= lastAutocompleteTime) {
+        if ($searchInput.val() !== '' && time >= lastAutocompleteTime) {
 
           lastAutocompleteTime = time
           lastAutocompleteQuery = data.q
@@ -295,7 +295,7 @@ $(function () {
   }
 
   $searchInput.on('focus', function (e) {
-    if ($searchInput.val() != '') {
+    if ($searchInput.val() !== '') {
       $search.addClass('searching')
       $headerAutocomplete.removeClass('off')
     }
@@ -303,7 +303,7 @@ $(function () {
   $searchInput.on('keyup', doSearchAutocomplete)
 
   $('.header .autocomplete').on('mouseover', '.result', function (e) {
-    var position = parseInt($(this).attr('data-position'))
+    var position = parseInt($(this).attr('data-position'), 10)
     setAutocompletePosition(position)
   })
 
@@ -314,7 +314,7 @@ $(function () {
 
   $searchInput.on('keydown', function (e) {
     if (e.which == 38) { // UP
-      if ($searchInput.val() == '') {
+      if ($searchInput.val() === '') {
         $searchInput.trigger('blur') // User meant to scroll page down -- not type into search box
       } else {
         e.preventDefault()
@@ -322,7 +322,7 @@ $(function () {
       }
 
     } else if (e.which == 40) { // DOWN
-      if ($searchInput.val() == '') {
+      if ($searchInput.val() === '') {
         $searchInput.trigger('blur')
       } else {
         e.preventDefault()
@@ -330,14 +330,14 @@ $(function () {
       }
 
     } else if (e.which == 32) { // SPACE
-      if ($searchInput.val() == '') {
+      if ($searchInput.val() === '') {
         $searchInput.trigger('blur')
       }
     }
   })
 
   $('.header .search form').on('submit', function (e) { // ENTER
-    if (autocompletePosition == 0) {
+    if (autocompletePosition === 0) {
       if ($searchInput.val().length) {
         return // go to search page
       } else {
@@ -368,7 +368,7 @@ $(function () {
    * https://github.com/madrobby/keymaster
    */
   key.filter = function (event) {
-    return $searchInput.val() == ''
+    return $searchInput.val() === ''
   }
 
   key('left', function () {
@@ -387,15 +387,15 @@ $(function () {
   /**
    * Load polyfills for old browsers.
    */
-  Modernizr.load(
-    [ { test: Modernizr.placeholder
-      , nope: '/js/lib/polyfill/jquery.placeholder.min.js'
-      , callback: function (url, result, key) {
-          if (!result) $('input, textarea').placeholder()
-        }
+  Modernizr.load([
+    {
+      test: Modernizr.placeholder,
+      nope: '/js/lib/polyfill/jquery.placeholder.min.js',
+      callback: function (url, result, key) {
+        if (!result) $('input, textarea').placeholder()
       }
-    ]
-  )
+    }
+  ])
 
 })
 
