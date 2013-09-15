@@ -14,7 +14,8 @@ HEADER_BORDER_FOCUS = 3px solid #FFF
 SOLID_HEADER_BORDER_FOCUS = 3px solid #000
 
 SIDEBAR_WIDTH = 336px
-SIDEBAR_MARGIN_LEFT = 30px
+SIDEBAR_GUTTER_TABLET = 15px
+SIDEBAR_GUTTER_DESKTOP = 30px
 
 CONTENT_PADDING_PHONE = 20px
 CONTENT_PADDING_TABLET = 30px
@@ -163,9 +164,6 @@ hr
   position: relative
   width: 100%
 
-  html.main-sidebar &
-    max-width: MAX_WIDTH + SIDEBAR_WIDTH + SIDEBAR_MARGIN_LEFT
-
   @media PHONE
     padding-left: 0
     padding-right: 0
@@ -176,6 +174,25 @@ hr
     padding-left: 20px
     padding-right: 20px
 
+  html.main-sidebar &
+    @media PHONE
+      max-width: 100%
+    @media TABLET
+      max-width: MAX_WIDTH + SIDEBAR_WIDTH + SIDEBAR_GUTTER_TABLET
+    @media DESKTOP
+      max-width: MAX_WIDTH + SIDEBAR_WIDTH + SIDEBAR_GUTTER_DESKTOP
+
+.contentWrapper
+  float: left
+  width: 100%
+
+  @media PHONE
+    float: none
+  @media TABLET
+    margin-right: -(SIDEBAR_WIDTH + SIDEBAR_GUTTER_TABLET)
+  @media DESKTOP
+    margin-right: -(SIDEBAR_WIDTH + SIDEBAR_GUTTER_DESKTOP)
+
 .content
   background: #FFF
   border: 1px solid rgba(0, 0, 0, .1)
@@ -183,7 +200,12 @@ hr
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.35)
 
   html.main-sidebar &
-    margin-right: SIDEBAR_WIDTH + SIDEBAR_MARGIN_LEFT
+    @media PHONE
+      margin-right: 0
+    @media TABLET
+      margin-right: SIDEBAR_WIDTH + SIDEBAR_GUTTER_TABLET
+    @media DESKTOP
+      margin-right: SIDEBAR_WIDTH + SIDEBAR_GUTTER_DESKTOP
 
   @media PHONE
     border-radius: 0

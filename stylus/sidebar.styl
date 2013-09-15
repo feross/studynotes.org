@@ -1,9 +1,14 @@
 .sidebar
-  top: 0
-  position: absolute
-  right: - (SIDEBAR_WIDTH + SIDEBAR_MARGIN_LEFT)
+  float: right
   margin-top: -200px
+  position: relative
   width: SIDEBAR_WIDTH
+
+  @media PHONE
+    float: none
+    margin-top: 0
+    padding: 20px
+    width: 100%
 
   & > div:not(.ad)
     margin: 1.2em 0
@@ -15,6 +20,7 @@
     font-size: 19px
     font-weight: bold
     margin: 2em 0 1em 0
+
 
   //
   // COUNTDOWN

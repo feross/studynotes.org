@@ -5,10 +5,11 @@ block vars
 
 block body
   include ../includes/header
-  .wrap
+  .wrap.clearfix
     include ../includes/hero
-    .content
-      block content
-      .sidebar
-        block sidebar
+    .contentWrapper
+      .content
+        block content
+    .sidebar
+      block sidebar
     include ../includes/footer
