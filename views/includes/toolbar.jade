@@ -2,4 +2,5 @@
   .toolbar.clearfix
     block toolbar
       if (locals.url)
-        div(class='fb-like', data-href='#{locals.url}', data-send='false', data-width='400', data-show-faces='false')
+        a(href='https://twitter.com/share', class='twitter-share-button', data-url='#{ locals.url }', data-via='feross', data-hashtags='studynotes', data-size='large') Tweet
+        div(class='fb-like', data-href='#{ locals.url }', data-send='false', data-width='400', data-show-faces='false')
