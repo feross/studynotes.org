@@ -86,8 +86,6 @@ Site.prototype.start = function (done) {
       app.use(express.favicon(path.join(config.root, 'static/favicon.ico')))
       app.use(express.static(path.join(config.root, 'static')))
     }
-    // TODO: use MaxCDN and remove this
-    app.use('/bower_components', express.static(path.join(config.root, 'bower_components')))
 
     app.use(connectSlashes())
 

@@ -94,6 +94,10 @@ function buildSite (done) {
       ], mkdirp, cb)
     },
 
+    copyBowerDeps: function (cb) {
+      cp.exec('cp -r ' + path.join(config.root, 'bower_components') + ' ' + config.out, {}, cb)
+    },
+
     // Build CSS
     css: ['mkdir', function (cb) {
       buildStylus(SITE_STYLUS_FILENAME, path.dirname(SITE_CSS_OUT), cb)
