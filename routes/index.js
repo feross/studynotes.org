@@ -65,6 +65,7 @@ module.exports = function () {
   require('./privacy')()
   require('./photo-credits')()
   require('./open-source')()
+  require('./courses')()
 
   // Accounts
   require('./signup')()
@@ -78,7 +79,6 @@ module.exports = function () {
   require('./autocomplete')()
 
   // Dynamic
-  require('./courses')()
   require('./course')()
   require('./notetype')()
   require('./note')()
