@@ -1,0 +1,85 @@
+extends layouts/main-sidebar
+
+append sidebar
+  include includes/ads/adsense-rect
+
+block content
+  div#wysihtml5-toolbar(style='display: none;')
+    a(data-wysihtml5-command='bold') bold
+    | |
+    a(data-wysihtml5-command='italic') italic
+    | |
+    a(data-wysihtml5-command='underline') underline
+    | |
+    a(data-wysihtml5-command='formatBlock', data-wysihtml5-command-value='h1') h1
+    | |
+    a(data-wysihtml5-command='formatBlock', data-wysihtml5-command-value='h2') h2
+    | |
+    a(data-wysihtml5-command='formatBlock', data-wysihtml5-command-value='p') p
+
+  form
+    textarea#editor(placeholder='Enter your text ...')
+
+  //- h2 Events:
+  //- #log
+
+append scripts
+  script(src='/out/bower_components/wysihtml5/parser_rules/advanced.js')
+  script(src='/out/bower_components/wysihtml5/dist/wysihtml5-0.4.0pre.min.js')
+  script(src='/out/bower_components/wysihtml5_size_matters/jquery.wysihtml5_size_matters.js')
+
+  script.
+    var editor = new wysihtml5.Editor('editor', {
+      // Id of the toolbar element or DOM node, pass false value if you don't want any toolbar logic
+      toolbar:              'wysihtml5-toolbar',
+
+      // Whether urls, entered by the user should automatically become clickable-links
+      autoLink:             false,
+
+      // Array (or single string) of stylesheet urls to be loaded in the editor's iframe
+      stylesheets:          ['/css/editor.css'],
+
+      // Object which includes parser rules to apply when html gets inserted via copy & paste
+      parserRules: wysihtml5ParserRules,
+
+      // Parser method to use when the user inserts content via copy & paste
+      //- parser:               wysihtml5.dom.parse,
+
+      // By default wysihtml5 will insert a <br> for line breaks, set this to false to use <p>
+      useLineBreaks:  false,
+
+      // Whether senseless <span> elements (empty or without attributes) should be removed/replaced with their content
+      cleanUp:              true
+
+    })
+
+    //- var log = document.getElementById("log");
+    //- editor
+    //-   .on("load", function() {
+    //-     log.innerHTML += "<div>load</div>";
+    //-   })
+    //-   .on("focus", function() {
+    //-     log.innerHTML += "<div>focus</div>";
+    //-   })
+    //-   .on("blur", function() {
+    //-     log.innerHTML += "<div>blur</div>";
+    //-   })
+    //-   .on("change", function() {
+    //-     log.innerHTML += "<div>change</div>";
+    //-   })
+    //-   .on("paste", function() {
+    //-     log.innerHTML += "<div>paste</div>";
+    //-   })
+    //-   .on("newword:composer", function() {
+    //-     log.innerHTML += "<div>newword:composer</div>";
+    //-   })
+    //-   .on("undo:composer", function() {
+    //-     log.innerHTML += "<div>undo:composer</div>";
+    //-   })
+    //-   .on("redo:composer", function() {
+    //-     log.innerHTML += "<div>redo:composer</div>";
+    //-   });
+
+    editor.on('load', function() {
+      $(editor.composer.iframe).wysihtml5_size_matters()
+    });

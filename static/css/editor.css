@@ -1,0 +1,12 @@
+body {
+  /*
+   * Hack to make useLineBreaks work with the size_matters resize plugin
+   * https://github.com/smidwap/wysihtml5_size_matters/issues/5
+   */
+  height: auto !important;
+  padding: 10px;
+}
+
+p {
+  margin: 10px 0;
+}

@@ -70,6 +70,9 @@ module.exports = function () {
   require('./signup')()
   require('./login')()
 
+  // Submit
+  require('./submit')()
+
   // Search
   require('./search')()
   require('./autocomplete')()
