@@ -25,21 +25,21 @@ header.header
         a(href='/study-guides/', class='study-guides', title='Buy Amazon.com AP Study Guides')
           i.icon-book.hide-tablet
           span Book Store
-      if (locals.user)
-        li: a(href='#{user.url}', title='Manage your account')
-          img(src='#{ user.gravatarUrl }')
-          i.icon-user.hide-phone.hide-tablet
-          span= user.firstName
-        li: a(href='#logout', class='logout', title='Logout of StudyNotes')
-          i.icon-signout.hide-phone.hide-tablet
-          span Logout
-      else
-        li: a(href='/signup', title='Create a StudyNotes Account')
-          i.icon-check.hide-phone.hide-tablet
-          span Sign Up
-        li: a(href='/login', title='Login to StudyNotes')
-          i.icon-signin.hide-phone.hide-tablet
-          span Log In
+      //- if (locals.user)
+      //-   li: a(href='#{user.url}', title='Manage your account')
+      //-     img(src='#{ user.gravatarUrl }')
+      //-     i.icon-user.hide-phone.hide-tablet
+      //-     span= user.firstName
+      //-   li: a(href='#logout', class='logout', title='Logout of StudyNotes')
+      //-     i.icon-signout.hide-phone.hide-tablet
+      //-     span Logout
+      //- else
+      //-   li: a(href='/signup', title='Create a StudyNotes Account')
+      //-     i.icon-check.hide-phone.hide-tablet
+      //-     span Sign Up
+      //-   li: a(href='/login', title='Login to StudyNotes')
+      //-     i.icon-signin.hide-phone.hide-tablet
+      //-     span Log In
 
 .browseWrapper
   ul.browse
