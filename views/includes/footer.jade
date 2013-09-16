@@ -12,13 +12,13 @@ footer.footer
         ul
           each course in locals.courses
             li: a(href='#{course.url}')= course.name
-          li: a(href='/submit/note/'): strong Upload Notes
+          //- li: a(href='/submit/note/'): strong Upload Notes
 
       .col
         h3 College Prep
         ul
           li: a(href='/essays/') Read College Essays
-          li: a(href='/submit/essay/'): strong Upload an Essay
+          //- li: a(href='/submit/essay/'): strong Upload an Essay
 
       .col
         h3 Site Links
