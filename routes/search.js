@@ -5,7 +5,10 @@ module.exports = function () {
     res.render('search', {
       url: '/search',
       title: 'Search Results for ' + q,
-      searchTerm: q
+      searchTerm: q,
+      hero: {
+        title: 'Search Results for "' + q + '"'
+      }
     })
   })
 }
