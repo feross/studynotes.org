@@ -17,6 +17,3 @@ block content
     each notetype in course.notetypes
       h2: a(href='#{notetype.url}')= notetype.name
       p.desc!= notetype.shortDesc
-
-  hr
-  include includes/ads/adsense-link-unit
