@@ -39,18 +39,21 @@ function updateSearchWidth () {
   })
 
   $search.removeClass('off')
-
-  /**
-   * Continue to set the width every 100ms until fonts are done loading.
-   *
-   * (If fonts don't load, then wf-loading gets removed automatically
-   * after 1000ms, so this won't run forever.)
-   */
-  if ($html.hasClass('wf-loading')) {
-    setTimeout(updateSearchWidth, 100)
-  }
 }
 
+/**
+ * Continue to set the width every 100ms until fonts are done loading.
+ *
+ * (If fonts don't load, then wf-loading gets removed automatically
+ * after 1000ms, so this won't run forever.)
+ */
+function updateSearchWidthWhileLoading () {
+  updateSearchWidth()
+  if ($html.hasClass('wf-loading')) {
+    setTimeout(updateSearchWidthWhileLoading, 100)
+  }
+}
+updateSearchWidthWhileLoading()
 
 /**
  * Show or hide the browse menu.
