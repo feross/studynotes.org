@@ -1,5 +1,7 @@
+var auth = require('../auth')
+
 module.exports = function () {
-  app.get('/submit/essay', function (req, res, next) {
+  app.get('/submit/essay', auth.ensureAuth, function (req, res, next) {
     res.render('submit', {
       hero: {
         title: 'Upload an essay',
