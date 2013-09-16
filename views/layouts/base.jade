@@ -82,6 +82,26 @@ html(class='no-js #{layout}', lang='en')
       script.
         !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 
+      //- Facebook SDK (async)
+      //- Calls `window.fbAsyncInit` when ready.
+      script.
+        window.fbAsyncInit = function () {
+          FB.init({ // init the SDK
+            appId      : '466476846723021', // App ID
+            channelUrl : '//www.apstudynotes.org/channel.html', // Channel File for x-domain communication
+            status     : true, // check the login status upon init?
+            cookie     : true, // set sessions cookies to allow your server to access the session?
+            xfbml      : true  // parse XFBML tags on this page?
+          })
+        }
+        ;(function(d, s, id){
+           var js, fjs = d.getElementsByTagName(s)[0];
+           if (d.getElementById(id)) {return;}
+           js = d.createElement(s); js.id = id;
+           js.src = "//connect.facebook.net/en_US/all.js";
+           fjs.parentNode.insertBefore(js, fjs);
+         }(document, 'script', 'facebook-jssdk'));
+
       //- User Voice Feedback (async)
       script.
         (function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/oZKwjGI98y7HmJ5jbPuO7w.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})()
