@@ -19,7 +19,11 @@ module.exports = function () {
   app.use(function (err, req, res, next) {
     if (config.isProd || req.url === '/500/') {
       // Log the exception
-      console.error(err)
+      console.error('EXCEPTION ON ' + req.url)
+      console.error('Headers:')
+      console.dir(req.headers)
+      console.error(err.stack)
+      console.error(err.message || err.toString())
 
       res.render('error', {
         title: 'Internal Server Error',
