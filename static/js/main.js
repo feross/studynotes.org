@@ -75,6 +75,31 @@ function toggleBrowseMenu (_switch) {
   }
 }
 
+/**
+ * Init the FB SDK
+ */
+window.fbAsyncInit = function () {
+  FB.init({
+    appId      : '466476846723021', // App ID
+    channelUrl : '//www.apstudynotes.org/channel.html', // Channel File for x-domain communication
+    status     : true, // check the login status upon init?
+    cookie     : true, // set sessions cookies to allow your server to access the session?
+    xfbml      : true  // parse XFBML tags on this page?
+  })
+}
+
+/**
+ * Facebook SDK (async)
+ * Calls `window.fbAsyncInit` when ready.
+ */
+(function(d, s, id){
+   var js, fjs = d.getElementsByTagName(s)[0];
+   if (d.getElementById(id)) {return;}
+   js = d.createElement(s); js.id = id;
+   js.src = "//connect.facebook.net/en_US/all.js";
+   fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
 
 function isPhone () {
   return $window.width() < 800
