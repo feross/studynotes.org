@@ -19,29 +19,15 @@ append scripts
 
   script.
     var editor = new wysihtml5.Editor('editor', {
-      // Id of the toolbar element or DOM node, pass false value if you don't want any toolbar logic
-      toolbar:              'editor-toolbar',
-
-      // Whether urls, entered by the user should automatically become clickable-links
-      autoLink:             false,
-
-      // Array (or single string) of stylesheet urls to be loaded in the editor's iframe
-      stylesheets:          ['/css/editor.css'],
-
-      // Object which includes parser rules to apply when html gets inserted via copy & paste
-      parserRules: wysihtml5ParserRules,
-
-      // Parser method to use when the user inserts content via copy & paste
-      //- parser:               wysihtml5.dom.parse,
-
-      // By default wysihtml5 will insert a <br> for line breaks, set this to false to use <p>
-      useLineBreaks:  false,
-
-      // Whether senseless <span> elements (empty or without attributes) should be removed/replaced with their content
-      cleanUp:              true
-
+      toolbar: 'editor-toolbar',
+      autoLink: false, // Don't auto-link URLs
+      stylesheets: ['/css/editor.css'], // Iframe editor stylesheets
+      parserRules: wysihtml5ParserRules, // Rules to parse copy & pasted html
+      useLineBreaks: false, // Use <p> instead of <br> for line breaks
+      cleanUp: true // remove senseless <span> elements (empty or w/o attrs)
     })
 
+    // Auto-resize editor
     editor.on('load', function() {
       $(editor.composer.iframe).wysihtml5_size_matters()
     });
