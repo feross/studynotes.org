@@ -10,7 +10,7 @@ header.header
     .search.off
       i.icon-search
       form(action='/search/', method='GET')
-        input(autocorrect='off', autocomplete='off', autofocus, spellcheck='false', name='q', placeholder='Search for AP Courses and Topics...', type='text', value='#{locals.searchTerm}')
+        input(autocorrect='off', autocomplete='off', spellcheck='false', name='q', placeholder='Search for AP Courses and Topics...', type='text', value='#{locals.searchTerm}', autofocus=(searchFocus === false ? undefined : 'autofocus'))
 
     .autocomplete.off
       a.result(href='#')

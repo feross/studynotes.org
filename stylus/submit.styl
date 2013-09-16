@@ -1,6 +1,24 @@
-textarea
-  width: 100%
+#editor-toolbar
+  padding: 15px 0 0 12.5px
+  margin-bottom: 15px
 
-.wysihtml5-command-active {
-  font-weight: bold;
-}
+  a
+    {LINK}
+      border: 2px solid GRAY
+      border-radius: 3px
+      color: GRAY_DARK
+      padding: 0.15em 0.3em 0.05em 0.3em
+      margin: 0 6px
+      text-align: center
+
+    {HOVER}
+      border: 2px solid GRAY_DARKER
+      text-decoration: none
+
+    &.wysihtml5-command-active
+      {LINK}
+        border-color: BLUE
+
+    i
+      display: inline-block
+      width: 18px

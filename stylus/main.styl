@@ -246,6 +246,53 @@ hr
   ul:not(.listing)
     padding-left: 20px
 
+  //
+  // FORM
+  //
+
+  [type='submit']
+    display: block
+    margin: 40px auto 0 auto
+
+  input, textarea
+    color: #000
+    border: 3px solid GRAY_LIGHT
+    border-radius: 25px
+    display: block
+    font-size: 1em
+    margin-bottom: 15px
+    width: 100%
+
+    &:last-child
+      margin-bottom: 0
+
+    &:focus, &:active
+      outline: 0
+      border-color: BLUE
+
+  input
+    height: 50px
+    padding: 10px 15px
+
+  ::-webkit-input-placeholder
+    color: GRAY
+  ::-moz-placeholder
+    color: GRAY
+  :-ms-input-placeholder
+    color: GRAY
+
+  .errors
+    font-weight: bold
+    margin: 40px 0
+    padding: 0
+
+    li
+      background-color: HAPPY_RED
+      border-radius: 3px
+      list-style: none
+      margin: 5px 0
+      padding: 10px
+
 @import 'header'
 @import 'browseMenu'
 @import 'hero'

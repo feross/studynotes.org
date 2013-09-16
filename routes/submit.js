@@ -9,6 +9,7 @@ module.exports = function () {
       },
       title: 'Upload a college essay',
       url: '/submit/essay',
+      searchFocus: false
     })
   })
 }
