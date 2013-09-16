@@ -1,32 +1,25 @@
 .ad
   style.
-    .sidebar-ad {
+    .studynotes-sidebar {
       width: 336px;
       height: 280px;
     }
-    @media(min-width: 500px) {
-      .sidebar-ad {
-        width: 468px;
-        height: 60px;
+    @media(min-width: 800px) {
+      .studynotes-sidebar {
+        width: 160px;
+        height: 600px;
       }
     }
-    @media(min-width: 800px) {
-      .sidebar-ad {
+    @media(min-width: 1100px) {
+      .studynotes-sidebar {
         width: 336px;
         height: 280px;
       }
     }
+
   if config.isProd
-    script(type="text/javascript").
-      <!--
-      google_ad_client = "ca-pub-7826623632932605";
-      /* StudyNotes Large Rectangle */
-      google_ad_slot = "6615549264";
-      google_ad_width = 336;
-      google_ad_height = 280;
-      //-->
-    script(type="text/javascript", src="http://pagead2.googlesyndication.com/pagead/show_ads.js")
-  else if locals.offline
-    img.sidebar-ad(src='/images/placeholder-ad.png')
+    ins(class="adsbygoogle studynotes-sidebar", style="display:inline-block", data-ad-client="ca-pub-7826623632932605", data-ad-slot="2128690705")
+    script.
+      (adsbygoogle = window.adsbygoogle || []).push({})
   else
-    img.sidebar-ad(src='http://lorempixel.com/336/280')
+    img.studynotes-sidebar(src='/images/placeholder-ad.png')

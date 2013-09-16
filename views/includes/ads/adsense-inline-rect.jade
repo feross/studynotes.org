@@ -1,29 +1,25 @@
-//- div(class='#{!locals.inlineRight && _.random(1) ? 'pull-left' : 'pull-right'}')
-div.pull-right
+.ad.pull-right
   style.
-    .in-content-ad {
+    .studynotes-in-content {
       width: 336px;
       height: 280px;
     }
-    @media(min-width: 500px) {
-      .in-content-ad {
-        width: 468px;
-        height: 60px;
+    @media(min-width: 800px) {
+      .studynotes-in-content {
+        width: 160px;
+        height: 600px;
       }
     }
-    @media(min-width: 800px) {
-      .in-content-ad {
+    @media(min-width: 1100px) {
+      .studynotes-in-content {
         width: 336px;
         height: 280px;
       }
     }
 
   if config.isProd
-    //- StudyNotes In-Content LRectangle (new)
-    ins(class='adsbygoogle in-content-ad', style='display:inline-block', data-ad-client='ca-pub-7826623632932605', data-ad-slot='1538751506')
+    ins(class="adsbygoogle studynotes-in-content", style="display:inline-block", data-ad-client="ca-pub-7826623632932605", data-ad-slot="1538751506")
     script.
       (adsbygoogle = window.adsbygoogle || []).push({})
-  else if locals.offline
-    img.in-content-ad(src='/images/placeholder-ad.png')
   else
-    img.in-content-ad(src='http://lorempixel.com/336/280')
+    img.studynotes-in-content(src='/images/placeholder-ad.png')
