@@ -5,6 +5,8 @@ append sidebar
   include includes/ads/adsense-rect
 
 block content
-  each college in colleges
-    h2: a(href='#{college.url}')= college.name
-    //- p.desc!= college.desc
+
+  if (locals.colleges)
+    ul.listing
+      each college in colleges
+        li: a(href='#{college.url}')= college.name

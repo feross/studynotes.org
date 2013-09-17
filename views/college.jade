@@ -3,14 +3,11 @@ extends layouts/main-sidebar
 append sidebar
   include includes/ads/adsense-rect
   h3 Page Stats
-  p <strong>#{ util.addCommas(college.hits) } people</strong> have viewed #{ college.name }'s page.
+  p <strong>#{ util.addCommas(college.hits) } people</strong> have viewed #{ college.shortName }'s page.
   include includes/ads/adsense-rect
 
 block content
-  h1 Top #{college.name} Essays
   include includes/toolbar
-
-  include includes/ads/adsense-inline-rect
 
   if (college.notetypes)
     each notetype in college.notetypes

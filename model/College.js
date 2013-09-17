@@ -4,6 +4,7 @@ var plugin = require('./plugin')
 
 var College = mongoose.Schema({
   name: { type: String, required: true, unique: true },
+  shortName: { type: String, required: true, unique: true },
   tuition: { type: Number, required: true },
   inStateTuition: { type: Number },
   enrollment: { type: Number, required: true },

@@ -7,11 +7,11 @@ module.exports = function () {
     res.render('colleges', {
       ads: true,
       colleges: colleges,
-      title: 'Elite College Essays',
+      title: 'Elite College Admissions Essays',
       url: '/colleges',
       hero: {
-        title: 'Elite College Essays',
-        desc: 'Get into a top college! Learn from these essays.'
+        title: 'Elite College Admissions Essays',
+        desc: 'Learn from these essays that worked.'
       }
     })
   })
@@ -25,7 +25,7 @@ module.exports = function () {
     res.render('college', {
       ads: true,
       college: college,
-      title: college.name,
+      title: college.shortName + ' Admissions Essays',
       url: college.url
     })
 
