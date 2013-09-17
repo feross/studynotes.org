@@ -47,6 +47,18 @@ exports.autocomplete = function (query, cb) {
         .limit(MAX_RESULTS)
         .select('name slug hits')
         .exec(cb)
+    },
+
+    colleges: function (cb) {
+      model.College
+        .find({ $or: [
+          { name: exports.regexForQuery(query) },
+          { shortName: exports.regexForQuery(query) }
+        ]})
+        .sort('-hits')
+        .limit(MAX_RESULTS)
+        .select('name slug hits')
+        .exec(cb)
     }
 
   }, function (err, fetched) {
@@ -163,7 +175,7 @@ exports.highlight = function (str, query) {
   var reStr = ''
 
   tokens.forEach(function (token, i){
-    if (i != 0) {
+    if (i !== 0) {
       reStr += '|'
     }
     reStr += '((^|\\s)[^a-z]*' + util.escapeRegExp(tokens[i]) + ')'
