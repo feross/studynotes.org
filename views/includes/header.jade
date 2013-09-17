@@ -21,24 +21,24 @@ header.header
       li: a(href='/courses/', class='courses', title='Browse all AP study notes')
         i.icon-chevron-down.hide-phone
         span AP Courses
-      //- if (locals.user)
-      //-   li: a(href='#{user.url}', title='Manage your account')
-      //-     img(src='#{ user.gravatarUrl }')
-      //-     i.icon-user.hide-phone.hide-tablet
-      //-     span= user.firstName
-      //-   li: a(href='#logout', class='logout', title='Logout of StudyNotes')
-      //-     i.icon-signout.hide-phone.hide-tablet
-      //-     span Logout
-      //- else
-      //-   li: a(href='/signup', title='Create a StudyNotes Account')
-      //-     i.icon-check.hide-phone.hide-tablet
-      //-     span Sign Up
-      //-   li: a(href='/login', title='Login to StudyNotes')
-      //-     i.icon-signin.hide-phone.hide-tablet
-      //-     span Log In
       li: a(href='/colleges/', class='colleges', title='Browse all college essays')
         i.icon-chevron-down.hide-phone
         span College Essays
+      if (locals.user)
+        li: a(href='#{user.url}', title='Manage your account')
+          img(src='#{ user.gravatarUrl }').hide-phone.hide-tablet
+          i.icon-user.hide-phone.hide-tablet
+          span= user.firstName
+        li: a(href='#logout', class='logout', title='Logout of StudyNotes')
+          i.icon-signout.hide-phone.hide-tablet
+          span Logout
+      else
+        li: a(href='/signup', title='Create a StudyNotes Account')
+          i.icon-check.hide-phone.hide-tablet
+          span Sign Up
+        li: a(href='/login', title='Login to StudyNotes')
+          i.icon-signin.hide-phone.hide-tablet
+          span Log In
 
 .browseWrapper
   ul.browse

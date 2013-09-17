@@ -12,23 +12,22 @@ footer.footer
         ul
           each course in locals.courses
             li: a(href='#{course.url}')= course.name
-          //- li: a(href='/submit/note/'): strong Upload Notes
           li: a(href='/study-guides/') Amazon.com Book Store
+          //- li: a(href='/submit/note/'): strong Submit Notes
 
       .col
         h3 College Prep
         ul
-          li Coming soon!
-          //- li: a(href='/essays/') Read College Essays
-          //- li: a(href='/submit/essay/'): strong Upload an Essay
+          li: a(href='/essays/') Read College Essays
+          li: a(href='/submit/essay/'): strong Submit an Essay
 
       .col
         h3 Site Links
         ul
           li: a(href='/about/') About This Site
           li: a(href='/contact/') Contact Us
-          li: a(href='/plagiarism/') Plagiarism Policy
           li: a(href='/open-source/') Open Source
+          li: a(href='/plagiarism/') Plagiarism Policy
 
       .col.about-this-site
         h3 What is StudyNotes.org?
