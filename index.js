@@ -128,7 +128,7 @@ Site.prototype.start = function (done) {
 
     async.series([
       model.connect,
-      model.cacheCourses,
+      model.loadCache,
       function (cb) {
         // Start HTTP server -- workers will share TCP connection
         self.server.listen(self.port, cb)

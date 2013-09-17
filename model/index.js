@@ -33,16 +33,35 @@ exports.connect = function (cb) {
   mongoose.connection.on('open', cb)
 }
 
-exports.cacheCourses = function (done) {
+exports.loadCache = function (done) {
   app.cache = {}
-  exports.Course.find(function (err, courses) {
-    if (err) return done(err)
 
-    app.cache.courses = {}
-    async.forEach(courses, function (course, cb) {
-      app.cache.courses[course.slug] = course
-
-      course.populateNotetypes(cb)
-    }, done)
-  })
+  async.parallel([
+    function (cb) {
+      exports.Course
+        .find()
+        .sort('-hits')
+        .exec(function (err, courses) {
+          if (err) return cb(err)
+          app.cache.courses = {}
+          async.forEach(courses, function (course, cb2) {
+            app.cache.courses[course.slug] = course
+            course.populateNotetypes(cb2)
+          }, cb)
+        })
+    },
+    function (cb) {
+      exports.College
+        .find()
+        .sort('-hits')
+        .exec(function (err, colleges) {
+          if (err) return cb(err)
+          app.cache.colleges = {}
+          colleges.forEach(function (college) {
+            app.cache.colleges[college.slug] = college
+          })
+          cb(null)
+        })
+    }
+  ], done)
 }
