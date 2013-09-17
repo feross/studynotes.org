@@ -15,7 +15,7 @@ var College = mongoose.Schema({
 })
 
 College.virtual('url').get(function () {
-  return '/college/' + this.slug + '/'
+  return '/' + this.slug + '/'
 })
 
 College.virtual('searchDesc').get(function () {

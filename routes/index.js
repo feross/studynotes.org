@@ -26,8 +26,7 @@ module.exports = function () {
       }
     }
 
-    // If we're rendering a view that is related to a course, let's set the
-    // hero text
+    // If rendering a course-related view
     if (opts.course) {
       opts.hero = {
         desc: 'Class Notes, Test Prep, Review Materials, and More',
@@ -35,6 +34,20 @@ module.exports = function () {
         title: opts.course.name,
         url: opts.course.url
       }
+      opts.heroImage = opts.course.heroImage
+    }
+    // If rendering a college-related view
+    else if (opts.college) {
+      opts.hero = {
+        title: opts.college.shortName + ' Admissions Essays',
+        desc: 'Top essays from students who got accepted at ' + opts.college.name,
+        url: opts.college.url
+      }
+      opts.heroImage = opts.college.heroImage
+    }
+    // If rendering any other type of view and heroImage is missing
+    else if (!opts.heroImage) {
+      opts.heroImage = view + '.jpg'
     }
 
     // Add view name as class on <body>
@@ -45,14 +58,8 @@ module.exports = function () {
       opts.cls += ' solidHeader'
     }
 
-    // If we're rendering a view that is related to a course, then add a
-    // relevant class to <body>
-    if (opts.course) {
-      opts.cls += ' course-' + opts.course.slug
-    }
-
     // Call the original express render function
-    render.call(app, view, opts, fn)
+    return render.call(this, view, opts, fn)
   }
 
   require('./home')()
@@ -65,7 +72,6 @@ module.exports = function () {
   require('./privacy')()
   require('./photo-credits')()
   require('./open-source')()
-  require('./courses')()
 
   // Accounts
   require('./signup')()
@@ -82,6 +88,7 @@ module.exports = function () {
   require('./course')()
   require('./notetype')()
   require('./note')()
+  require('./college')()
   require('./user')()
 
   // Error pages
