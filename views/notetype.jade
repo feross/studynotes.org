@@ -19,4 +19,4 @@ block content
   if (locals.notes)
     ul.listing
       each note in notes
-        li: a(href='#{note.slug}/')= note.name
+        li: a(href='#{note.url}')= note.name
