@@ -36,6 +36,9 @@ html(class='no-js #{layout}', lang='en')
       meta(property='og:url', content='#{locals.url}')
       link(rel='canonical', href='#{locals.url}')
 
+    if (locals.heroImage)
+      meta(property='og:image', content='#{ config.siteOrigin }/images/hero/#{ heroImage }')
+
     //- TODO: responsive layout
     //- meta(name='viewport', content='width=device-width, initial-scale=1.0')
 
