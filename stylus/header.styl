@@ -69,10 +69,10 @@
       a
         {LINK}
           color: #FFF
-          text-shadow: 0 1px rgba(0,0,0,0.7)
           display: block
           height: HEADER_HEIGHT - 1
           padding: 17px 18px 0 18px
+          text-shadow: 0 1px rgba(0,0,0,0.7)
 
         {HOVER}
           text-decoration: none
@@ -80,6 +80,7 @@
         body.solidHeader &
           {LINK}
             color: #000
+            text-shadow: none
 
   i
     display: inline-block
@@ -107,7 +108,6 @@
     padding: 3px 18px 3px 3px
     position: relative
     text-transform: none
-    text-shadow: 0 1px rgba(0,0,0,0.7)
 
     body.solidHeader &
       color: #000
@@ -116,6 +116,7 @@
       background: linear-gradient(top, rgba(255,255,255,0.3), rgba(255,255,255,0.4))
       background-size: 100% 100%
       box-shadow: inset 0 1px 3px rgba(0,0,0,0.4)
+      text-shadow: 0 1px rgba(0,0,0,0.7)
 
     body.solidHeader &
       &.searching, &:hover
@@ -134,6 +135,7 @@
 
       body.solidHeader &
         color: #000
+        text-shadow: none
 
     i
       left: 16px
@@ -161,10 +163,13 @@
     body.solidHeader &
       ::-webkit-input-placeholder
         color: #000
+        text-shadow: none
       :-moz-placeholder
         color: #000
+        text-shadow: none
       :-ms-input-placeholder
         color: #000
+        text-shadow: none
 
 
   /**
