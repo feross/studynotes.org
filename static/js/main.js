@@ -80,7 +80,7 @@ function toggleBrowseMenu (_switch) {
 
 
 function isPhone () {
-  return $window.width() < 800
+  return $window.width() < 800 - 25 // account for scrollbar
 }
 
 /**
