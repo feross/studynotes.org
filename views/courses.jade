@@ -1,4 +1,8 @@
-extends layouts/main
+extends layouts/main-sidebar
+
+append sidebar
+  include includes/ads/adsense-rect
+  include includes/ads/adsense-rect
 
 block content
   each course in courses
