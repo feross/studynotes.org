@@ -14,12 +14,15 @@ var College = mongoose.Schema({
 })
 
 College.virtual('url').get(function () {
-  var college = this
-  return '/college/' + college.slug + '/'
+  return '/college/' + this.slug + '/'
 })
 
 College.virtual('searchDesc').get(function () {
   return 'University'
+})
+
+College.virtual('heroImage').get(function () {
+  return this.slug + '.jpg'
 })
 
 College.plugin(plugin.modifyDate)

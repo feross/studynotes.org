@@ -17,6 +17,10 @@ Course.virtual('searchDesc').get(function () {
   return 'Course'
 })
 
+Course.virtual('heroImage').get(function () {
+  return this.slug + '.jpg'
+})
+
 Course.methods.populateNotetypes = function (cb) {
   var course = this
 

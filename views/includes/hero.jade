@@ -1,4 +1,14 @@
 if (locals.hero)
+  style.
+    .heroImage {
+    background: url("/images/hero/#{ heroImage }");
+    background: bottom left url("/images/hero-body-mask.png") repeat-x, center center -webkit-linear-gradient(left, rgba(0,0,0,0.2), rgba(0,0,0,0.05)) repeat, center center url("/images/hero/#{ heroImage }") no-repeat;
+    background: bottom left url("/images/hero-body-mask.png") repeat-x, center center -moz-linear-gradient(left, rgba(0,0,0,0.2), rgba(0,0,0,0.05)) repeat, center center url("/images/hero/#{ heroImage }") no-repeat;
+    background: bottom left url("/images/hero-body-mask.png") repeat-x, center center -o-linear-gradient(left, rgba(0,0,0,0.2), rgba(0,0,0,0.05)) repeat, center center url("/images/hero/#{ heroImage }") no-repeat;
+    background: bottom left url("/images/hero-body-mask.png") repeat-x, center center -ms-linear-gradient(left, rgba(0,0,0,0.2), rgba(0,0,0,0.05)) repeat, center center url("/images/hero/#{ heroImage }") no-repeat;
+    background: bottom left url("/images/hero-body-mask.png") repeat-x, center center linear-gradient(to right, rgba(0,0,0,0.2), rgba(0,0,0,0.05)) repeat, center center url("/images/hero/#{ heroImage }") no-repeat;
+    background-size: auto auto, 100% 100%, cover;
+    }
   .hero
     a(href='#{hero.url || "."}')
       if (locals.notetype || locals.note)
