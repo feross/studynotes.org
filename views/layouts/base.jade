@@ -4,6 +4,7 @@ html(class='no-js #{layout}', lang='en')
   block head
     link(rel='stylesheet', href='/out/bower_components/font-awesome/css/font-awesome.min.css')
     link(rel='stylesheet', href='/out/css/main-#{ locals.CSS_MD5 }.css')
+    block stylesheets
 
     - if (locals.forceTitle)
       - pageTitle = locals.forceTitle

@@ -2,6 +2,9 @@ extends layouts/main
 
 block content
   form(method='POST')
+    select.select2(name='college', data-placeholder='Select a University')
+      each college in colleges
+        option(value='#{ college.slug }')= college.name
     input(type='text', name='name', placeholder='Essay Title', autofocus)
 
     #editor-toolbar(style='display: none;')
@@ -12,11 +15,14 @@ block content
     textarea#editor(placeholder='Paste your essay here...')
     button.btn.large(type='submit') Submit Essay
 
+append stylesheets
+  link(rel='stylesheet', href='/out/bower_components/select2/select2.css')
+
 append scripts
   script(src='/out/bower_components/wysihtml5/parser_rules/advanced.js')
   script(src='/out/bower_components/wysihtml5/dist/wysihtml5-0.4.0pre.min.js')
   script(src='/out/bower_components/wysihtml5_size_matters/jquery.wysihtml5_size_matters.js')
-
+  script(src='/out/bower_components/select2/select2.min.js')
   script.
     var editor = new wysihtml5.Editor('editor', {
       toolbar: 'editor-toolbar',
@@ -30,4 +36,6 @@ append scripts
     // Auto-resize editor
     editor.on('load', function() {
       $(editor.composer.iframe).wysihtml5_size_matters()
-    });
+    })
+
+    $('.select2').select2()

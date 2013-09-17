@@ -253,14 +253,16 @@ hr
     display: block
     margin: 40px auto 0 auto
 
-  input, textarea
+  input, textarea, select
     color: #000
-    border: 3px solid GRAY_LIGHT
-    border-radius: 25px
     display: block
     font-size: 1em
     margin-bottom: 15px
     width: 100%
+
+  input, textarea
+    border: 3px solid GRAY_LIGHT
+    border-radius: 25px
 
     &:last-child
       margin-bottom: 0
@@ -268,6 +270,20 @@ hr
     &:focus, &:active
       outline: 0
       border-color: BLUE
+
+  .select2
+    margin-bottom: 25px
+    width: 100%
+
+  .select2-container .select2-choice
+    border: 3px solid GRAY_LIGHT
+    border-radius: 25px
+    font-size: 1.25em
+    padding: 5px
+    height: 45px
+
+  .select2-container.select2-dropdown-open .select2-choice
+    border-radius 25px 25px 0 0
 
   input
     height: 50px
@@ -291,6 +307,10 @@ hr
       list-style: none
       margin: 5px 0
       padding: 10px
+
+.select2-drop-active
+  border: 3px solid GRAY_LIGHT !important
+  border-top: none !important
 
 @import 'header'
 @import 'browseMenu'
