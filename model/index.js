@@ -17,6 +17,7 @@ exports.Course = require('./Course')
 exports.Notetype = require('./Notetype')
 exports.Note = require('./Note')
 exports.User = require('./User')
+exports.College = require('./College')
 
 exports.connect = function (cb) {
   cb || (cb = function () {})
