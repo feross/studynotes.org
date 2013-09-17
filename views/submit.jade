@@ -2,18 +2,22 @@ extends layouts/main
 
 block content
   form(method='POST')
-    select.select2(name='college', data-placeholder='Select a University')
-      each college in colleges
-        option(value='#{ college.slug }')= college.name
-    input(type='text', name='name', placeholder='Essay Title', autofocus)
-
-    #editor-toolbar(style='display: none;')
-      a(data-wysihtml5-command='bold'): i.icon-bold
-      a(data-wysihtml5-command='italic'): i.icon-italic
-      a(data-wysihtml5-command='underline'): i.icon-underline
-      a(data-wysihtml5-command='formatBlock', data-wysihtml5-command-value='h2') Heading
-    textarea#editor(placeholder='Paste your essay here...')
-    button.btn.large(type='submit') Submit Essay
+    .row
+      input.col(type='text', name='name', placeholder='Essay Title', autofocus, style='width: 60%')
+      select.select2.col(name='college', data-placeholder='Which university is this essay for?', style='width: 39%')
+        option
+        each college in colleges
+          option(value='#{ college.slug }')= college.name
+    .row
+      #editor-toolbar.col(style='display: none;')
+        a(data-wysihtml5-command='bold'): i.icon-bold
+        a(data-wysihtml5-command='italic'): i.icon-italic
+        a(data-wysihtml5-command='underline'): i.icon-underline
+        a(data-wysihtml5-command='formatBlock', data-wysihtml5-command-value='h2') Heading
+    .row
+      textarea#editor.col(placeholder='Paste your essay here...')
+    .row
+      button.btn.large(type='submit') Submit Essay
 
 append stylesheets
   link(rel='stylesheet', href='/out/bower_components/select2/select2.css')

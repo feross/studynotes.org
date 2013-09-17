@@ -3,6 +3,7 @@
 
 HERO_FONT = 'adelle', Helvetica, serif
 BODY_FONT = 'proxima-nova', Helvetica, sans-serif
+FORM_FONT = 'Lucida Grande', sans-serif
 
 HEADER_HEIGHT = 50px
 HERO_HEIGHT = 400px + HEADER_HEIGHT
@@ -54,12 +55,22 @@ HOVER = '&:hover, &:focus, &:active'
 .strong
   font-weight: bold
 
+.row
+  clear: both
+  width: 100%
+
 .col
   display: inline-block
   vertical-align: top
+  width: 100%
 
-.row
-  clear: both
+.col2
+  @extend .col
+  width: 49%
+
+.col3
+  @extend .col3
+  width: 33%
 
 ellipsis()
   overflow: hidden
@@ -82,8 +93,6 @@ html
 
 body
   background: #F4F4F4 url('/images/body.gif')
-
-body, textarea
   font-family: BODY_FONT
   font-size: 18px
   margin: 0
@@ -253,15 +262,15 @@ hr
     display: block
     margin: 40px auto 0 auto
 
-  input, textarea, select
+  input, textarea
     color: #000
-    display: block
+    // display: block
+    font-family: FORM_FONT
     font-size: 1em
     margin-bottom: 15px
-    width: 100%
 
   input, textarea
-    border: 3px solid GRAY_LIGHT
+    border: 3px solid GRAY
     border-radius: 25px
 
     &:last-child
@@ -271,30 +280,33 @@ hr
       outline: 0
       border-color: BLUE
 
-  .select2
-    margin-bottom: 25px
-    width: 100%
-
-  .select2-container .select2-choice
-    border: 3px solid GRAY_LIGHT
-    border-radius: 25px
-    font-size: 1.25em
-    padding: 5px
-    height: 45px
-
-  .select2-container.select2-dropdown-open .select2-choice
-    border-radius 25px 25px 0 0
-
-  input
+  input, .select2-container .select2-choice
     height: 50px
     padding: 10px 15px
 
+  .select2
+    margin-bottom: 25px
+
+  .select2-container .select2-choice
+    background: linear-gradient(top, #FFF, #EEE)
+    border: 3px solid GRAY
+    border-radius: 10px
+    color: #000
+    font-family: FORM_FONT
+    font-size: 1em
+
+  .select2-container.select2-dropdown-open .select2-choice
+    border-radius 10px 10px 0 0
+
   ::-webkit-input-placeholder
     color: GRAY
+    font-family: FORM_FONT
   ::-moz-placeholder
     color: GRAY
+    font-family: FORM_FONT
   :-ms-input-placeholder
     color: GRAY
+    font-family: FORM_FONT
 
   .errors
     font-weight: bold
@@ -302,14 +314,14 @@ hr
     padding: 0
 
     li
-      background-color: HAPPY_RED
+      background-color: RED
       border-radius: 3px
       list-style: none
       margin: 5px 0
       padding: 10px
 
 .select2-drop-active
-  border: 3px solid GRAY_LIGHT !important
+  border: 3px solid GRAY !important
   border-top: none !important
 
 @import 'header'
