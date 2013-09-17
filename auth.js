@@ -50,6 +50,7 @@ exports.serializeUser = function (user, done) {
 exports.deserializeUser = function (email, done) {
   model.User
     .findOne({ email: email })
+    .select('-password')
     .exec(done)
 }
 
