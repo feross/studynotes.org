@@ -318,7 +318,7 @@ hr
         width: 50px
 
         b
-          background: none !important
+          background: none !important // to override their !important
 
           &:before
             color: GRAY_DARK
@@ -344,14 +344,17 @@ hr
     .select2-chosen
       line-height: inherit
 
+    .select2-default
+      color: GRAY_DARK !important // to override their !important
+
   ::-webkit-input-placeholder
-    color: GRAY
+    color: GRAY_DARK
     font-family: FORM_FONT
   ::-moz-placeholder
-    color: GRAY
+    color: GRAY_DARK
     font-family: FORM_FONT
   :-ms-input-placeholder
-    color: GRAY
+    color: GRAY_DARK
     font-family: FORM_FONT
 
   .errors
@@ -368,7 +371,7 @@ hr
 
 .select2-drop.select2-drop-active
   &:not(.select2-drop-above)
-    border: 2px solid BLUE !important
+    border: 2px solid BLUE !important // need more specificity
     border-top: none !important
 
   &.select2-drop-above

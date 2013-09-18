@@ -14,3 +14,7 @@ body {
 body > p {
   margin: 1em 0;
 }
+
+body.placeholder {
+  color: #888 !important;
+}
