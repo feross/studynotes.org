@@ -126,7 +126,6 @@ $(function () {
    * Browser resize event
    */
   var contentToolbarTop
-  var contentBottom
   var contentWidth
   $window.on('resize', _.throttle(function () {
     updateSearchWidth()
@@ -134,9 +133,6 @@ $(function () {
     $contentToolbar.removeClass('sticky')
     contentToolbarTop = $contentToolbar.length
       ? $contentToolbar.offset().top
-      : null
-    contentBottom = $content.length
-      ? $content.offset().top + $content.height()
       : null
 
     contentWidth = $content.width()
@@ -159,6 +155,10 @@ $(function () {
 
     if (contentToolbarTop) {
       var scrollTop = $window.scrollTop() // current vertical position from the top
+
+      var contentBottom = $content.length
+        ? $content.offset().top + $content.height()
+        : null
 
       if (contentToolbarTop < scrollTop && scrollTop < contentBottom) {
         $contentToolbar
