@@ -24,10 +24,10 @@ module.exports = function () {
 
     model.Essay
       .find({ collegeId: college._id })
+      .select('-body')
       .sort('-hits')
       .exec(function (err, essays) {
         if (err) return next(err)
-        console.log(essays)
         res.render('college', {
           ads: true,
           college: college,
