@@ -8,6 +8,7 @@ var validate = require('mongoose-validator').validate
 var User = new mongoose.Schema({
   name: {
     type: String,
+    index: true,
     validate: [
       validate({ message: 'Please use your full name (first and last).' }, 'contains', ' '),
       validate({ message: 'Please share your name, don\'t be shy!' }, 'notEmpty')
