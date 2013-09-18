@@ -1,24 +1,28 @@
 extends layouts/main
 
 block content
+  if (locals.errors.length)
+    .errors
+      each msg in errors
+        div= msg
   form(method='POST')
     .row
       .col2
-        input(type='text', name='name', placeholder='Essay Title', autofocus)
+        input(name='name', type='text', placeholder='Essay Title', value=(essay && essay.name), autofocus, required)
       .col2
         select.select2(name='college', data-placeholder='Which university is this essay for?')
           option
           each college in colleges
-            option(value='#{ college.slug }')= college.name
-
+            option(value='#{ college.slug }' selected=(essay && (essay.college === college.slug)))= college.name
     .row
-      #editor-toolbar(style='display: none;')
-        a(data-wysihtml5-command='bold'): i.icon-bold
-        a(data-wysihtml5-command='italic'): i.icon-italic
-        a(data-wysihtml5-command='underline'): i.icon-underline
-        a(data-wysihtml5-command='formatBlock', data-wysihtml5-command-value='h2') Heading
+      .ghost
+          #editor-toolbar.toolbar.clearfix(style='display: none;')
+            a(data-wysihtml5-command='bold'): i.icon-bold
+            a(data-wysihtml5-command='italic'): i.icon-italic
+            a(data-wysihtml5-command='underline'): i.icon-underline
+            a(data-wysihtml5-command='formatBlock', data-wysihtml5-command-value='h2') Heading
     .row
-      textarea#editor(placeholder='Paste your essay here...')
+      textarea#editor(name='body', placeholder='Paste your essay here...')
     .row
       button.btn.large(type='submit') Submit Essay
 

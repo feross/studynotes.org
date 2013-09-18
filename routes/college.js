@@ -22,13 +22,21 @@ module.exports = function () {
     var college = app.cache.colleges[collegeSlug]
     if (!college) return next()
 
-    res.render('college', {
-      ads: true,
-      college: college,
-      title: college.shortName + ' Admissions Essays',
-      url: college.url
-    })
+    model.Essay
+      .find({ collegeId: college._id })
+      .sort('-hits')
+      .exec(function (err, essays) {
+        if (err) return next(err)
+        console.log(essays)
+        res.render('college', {
+          ads: true,
+          college: college,
+          essays: essays,
+          title: college.shortName + ' Admissions Essays',
+          url: college.url
+        })
 
-    college.hit()
+        college.hit()
+      })
   })
 }

@@ -24,6 +24,7 @@ exports.Notetype = require('./Notetype')
 exports.Note = require('./Note')
 exports.User = require('./User')
 exports.College = require('./College')
+exports.Essay = require('./Essay')
 
 exports.connect = function (cb) {
   cb || (cb = function () {})

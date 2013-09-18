@@ -89,6 +89,7 @@ module.exports = function () {
   require('./notetype')()
   require('./note')()
   require('./college')()
+  require('./essay')()
   require('./user')()
 
   // Error pages
