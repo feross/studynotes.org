@@ -9,7 +9,10 @@ module.exports = function () {
     if (req.user) {
       res.redirect('/')
     } else {
-      res.render('signup', { errors: req.flash('error') })
+      res.render('signup', {
+        errors: req.flash('error'),
+        user: req.flash('user')[0]
+      })
     }
   })
 
@@ -21,12 +24,14 @@ module.exports = function () {
     })
     user.save(function (err) {
       if (err && err.code === 11000) {
-        req.flash('error', 'A user is already using that email address')
-        res.redirect('/signup')
+        req.flash('error', 'A user is already using that email address.')
+        req.flash('user', req.body)
+        res.redirect('/signup/')
       } else if (err && err.name === 'ValidationError') {
         _(err.errors).map(function (error) {
           req.flash('error', error.type)
         })
+        req.flash('user', req.body)
         res.redirect('/signup/')
       } else if (err) {
         next(err)
@@ -36,7 +41,6 @@ module.exports = function () {
           if (err) {
             next(err)
           } else if (req.session && req.session.returnTo) {
-            console.log(req.session.returnTo)
             var url = req.session.returnTo
             delete req.session.returnTo
             res.redirect(url)
