@@ -9,9 +9,15 @@ var Schema = mongoose.Schema
 exports.SLUG = {
   type: String,
   match: /[-a-z0-9]+/i,
-  lowercase: true
+  lowercase: true,
+  index: true
 }
-exports.SLUG_UNIQUE = _.extend({}, exports.SLUG, { unique: true })
+exports.SLUG_UNIQUE = {
+  type: String,
+  match: /[-a-z0-9]+/i,
+  lowercase: true,
+  unique: true
+}
 
 exports.Course = require('./Course')
 exports.Notetype = require('./Notetype')
