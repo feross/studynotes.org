@@ -2,8 +2,13 @@ extends layouts/main-sidebar
 
 append sidebar
   include includes/ads/adsense-rect
-  h3 Page Stats
-  p <strong>#{ util.addCommas(college.hits) } people</strong> have viewed #{ college.shortName }'s page.
+  h3 #{ college.shortName } Stats
+  p #{ college.acceptRate }% acceptance rate
+  p #{ util.addCommas(college.enrollment) } enrolled students
+  p #{ college.location }
+  p $#{ util.addCommas(college.tuition) } tuition &amp; fees
+  p ##{ college.rank } rank in US News &amp; World Report
+  p <strong>#{ util.addCommas(college.hits) } people</strong> have viewed this page.
   include includes/ads/adsense-rect
 
 block content
