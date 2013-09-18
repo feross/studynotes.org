@@ -4,10 +4,10 @@ block content
   h1 Log in to StudyNotes
   h2 Provide your email and password
 
-  if (locals.errors)
-    ul.errors
+  if (locals.errors.length)
+    .errors
       each msg in errors
-        li= msg
+        div= msg
 
   form(method='POST')
     input(type='email', name='email', placeholder='email', autofocus)

@@ -9,10 +9,10 @@ block content
   h1 Want to get into a top college?
   h2 Sign up now to start reading top essays!
 
-  if (locals.errors)
-    ul.errors
+  if (locals.errors.length)
+    .errors
       each msg in errors
-        li= msg
+        div= msg
 
   form(method='POST')
     input(name='name', type='text', placeholder='full name', value=(user && user.name), autofocus, required)
