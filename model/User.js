@@ -10,7 +10,7 @@ var User = new mongoose.Schema({
     type: String,
     index: true,
     validate: [
-      validate({ message: 'Please use your full name (first and last).' }, 'contains', ' '),
+      validate({ message: 'Please share your full name (first and last), don\'t be shy!' }, 'contains', ' '),
       validate({ message: 'Please share your name, don\'t be shy!' }, 'notEmpty')
     ]
   },
@@ -18,7 +18,7 @@ var User = new mongoose.Schema({
     type: String,
     unique: true,
     validate: [
-      validate({ message: 'Your email address is incorrect!' }, 'isEmail'),
+      validate({ message: 'Your email address is invalid!' }, 'isEmail'),
       validate({ message: 'An email address is required.' }, 'notEmpty')
     ]
   },

@@ -15,7 +15,7 @@ module.exports =  function () {
   app.post('/login', passport.authenticate('local', {
     failureRedirect: '/login/',
     successReturnToOrRedirect: '/',
-    failureFlash: true
+    failureFlash: 'Wrong email or password.'
   }))
 
   app.post('/logout', function (req, res) {
