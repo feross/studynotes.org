@@ -59,18 +59,35 @@ HOVER = '&:hover, &:focus, &:active'
   clear: both
   width: 100%
 
+.row:before, .row:after // clearfix
+  content: ""
+  display: table
+
 .col
-  display: inline-block
+  float: left
   vertical-align: top
-  width: 100%
 
 .col2
   @extend .col
-  width: 49%
+  width: 50%
+
+  &:first-child
+    padding-right: 7.5px
+  &:last-child
+    padding-left: 7.5px
 
 .col3
   @extend .col3
-  width: 33%
+  width: 33.3%
+
+  &:first-child
+    padding-right: 10px
+  &:nth-child(2)
+    padding-left: 5px
+    padding-right: 5px
+  &:last-child
+    padding-left: 10px
+
 
 ellipsis()
   overflow: hidden
@@ -261,41 +278,71 @@ hr
     display: block
     margin: 40px auto 0 auto
 
-  input, textarea
+  input, textarea, .select2
     color: #000
-    // display: block
+    display: block
     font-family: FORM_FONT
     font-size: 1em
     margin-bottom: 15px
+    width: 100%
 
   input, textarea
-    border: 3px solid GRAY
+    border: 2px solid GRAY_DARK
     border-radius: 25px
 
     &:last-child
       margin-bottom: 0
 
     &:focus, &:active
-      outline: 0
       border-color: BLUE
+      outline: 0
+      box-shadow: 0 0 5px rgba(BLUE, 0.4)
 
   input, .select2-container .select2-choice
     height: 50px
     padding: 10px 15px
 
-  .select2
-    margin-bottom: 25px
+  .select2-container
+    .select2-choice
+      background: linear-gradient(top, 50% #FFF, #DDD)
+      border: 2px solid GRAY_DARK
+      border-radius: 10px
+      color: #000
+      font-family: FORM_FONT
+      font-size: 1em
 
-  .select2-container .select2-choice
-    background: linear-gradient(top, #FFF, #EEE)
-    border: 3px solid GRAY
-    border-radius: 10px
-    color: #000
-    font-family: FORM_FONT
-    font-size: 1em
+      .select2-arrow
+        background: linear-gradient(top, 30% #FFF, #BBB)
+        border-left: 2px solid GRAY_DARK
+        border-radius: 0
+        width: 50px
 
-  .select2-container.select2-dropdown-open .select2-choice
-    border-radius 10px 10px 0 0
+        b
+          background: none !important
+
+          &:before
+            color: GRAY_DARK
+            content: '\25BC' // '\25B2'
+            display: block
+            font-size: 18px
+            padding: 10px 15px
+
+    &.select2-container-active .select2-choice
+      border: 2px solid BLUE
+      box-shadow: 0 0 5px rgba(BLUE, 0.4)
+      outline: 0
+
+    &.select2-dropdown-open
+      &:not(.select2-drop-above) .select2-choice
+        border-radius 10px 10px 0 0
+        border-bottom: none
+
+      &.select2-drop-above .select2-choice
+        border-radius 0 0 10px 10px
+        border-top: none
+
+    .select2-chosen
+      line-height: inherit
 
   ::-webkit-input-placeholder
     color: GRAY
@@ -319,9 +366,14 @@ hr
       margin: 5px 0
       padding: 10px
 
-.select2-drop-active
-  border: 3px solid GRAY !important
-  border-top: none !important
+.select2-drop.select2-drop-active
+  &:not(.select2-drop-above)
+    border: 2px solid BLUE !important
+    border-top: none !important
+
+  &.select2-drop-above
+    border: 2px solid BLUE !important
+    border-bottom: none !important
 
 @import 'header'
 @import 'browseMenu'
