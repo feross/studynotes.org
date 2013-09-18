@@ -14,7 +14,7 @@ append sidebar
 block content
   include includes/toolbar
 
-  if (college.notetypes)
-    each notetype in college.notetypes
-      h2: a(href='#{notetype.url}')= notetype.name
-      p.desc!= notetype.shortDesc
+  if (locals.essays && locals.essays.length)
+    ul.listing
+      each essay in essays
+        li: a(href='#{essay.url}')= essay.name
