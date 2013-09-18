@@ -322,15 +322,19 @@ hr
 
           &:before
             color: GRAY_DARK
-            content: '\25BC' // '\25B2'
+            content: '\25BC'
             display: block
-            font-size: 18px
-            padding: 10px 15px
+            font-size: 16px
+            padding: 13px 16px
 
-    &.select2-container-active .select2-choice
-      border: 2px solid BLUE
-      box-shadow: 0 0 5px rgba(BLUE, 0.4)
-      outline: 0
+    &.select2-container-active
+      .select2-choice
+        border: 2px solid BLUE
+        box-shadow: 0 0 5px rgba(BLUE, 0.4)
+        outline: 0
+
+        .select2-arrow b:before
+          content: '\25B2'
 
     &.select2-dropdown-open
       &:not(.select2-drop-above) .select2-choice
