@@ -1,18 +1,22 @@
 #editor-toolbar
-  padding: 10px 0 0 5px
-  margin-bottom: 15px
+  padding: 6px
+
+  &:not(.sticky)
+    border: 0
 
   a
     border-radius: 3px
-    margin: 0 5px
-    text-align: center
     box-shadow: 0 1px 1px rgba(0,0,0,0.2)
+    display: block
+    float: left
+    margin: 5px
+    min-width: 35px
 
     {LINK}
       border: 1px solid GRAY_DARK
       background-color: GRAY_LIGHTER
       color: GRAY_DARK
-      padding: 3px 6px 1px 6px
+      padding: 3px 8px 1px 8px
 
     {HOVER}
       border: 1px solid #000
@@ -24,8 +28,8 @@
         border: 2px solid RED
         background-color: RED_LIGHT
         color: RED
-        padding: 2px 5px 0px 5px
+        padding: 2px 7px 0px 7px
 
     i
-      display: inline-block
-      width: 18px
+      display: block
+      text-align: center
