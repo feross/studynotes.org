@@ -1,0 +1,42 @@
+extends layouts/main-sidebar
+
+append sidebar
+  include includes/ads/adsense-rect
+  h3 About this Essay
+  p <strong>#{ util.addCommas(essay.hits) } people</strong> have viewed this #{ essay.shortName } admissions essay.
+  //- include includes/relatedessays
+  include includes/ads/adsense-rect
+
+//- append toolbar
+//-   if next
+//-     a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next →
+//-     .navigate-msg Use ← → keys to navigate
+
+block content
+  include includes/breadcrumbs
+  h1= essay.name
+
+  include includes/toolbar
+
+  include includes/ads/adsense-inline-rect
+
+  | !{essay.body}
+
+  //- p.keepStudying You just finished <strong>"#{essay.name}"</strong>. Keep&nbsp;studying!
+
+  //- .essayNav.clearfix
+  //-   if prev
+  //-     a.btn.prev(href='#{prev.url}', title='Previous: #{prev.name}') ← Prev
+
+  //-   if next
+  //-     a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next →
+
+  hr
+  h2 On copying
+  p It's a bad idea.
+  hr
+  h2 How to cite this essay (with MLA)
+  .cite Aboukhadijeh, Feross. "#{essay.name}" StudyNotes.org. StudyNotes, Inc., #{moment(essay.createDate).format('DD MMM. YYYY.')} Web. #{moment().format('DD MMM. YYYY.')} &lt;#{essay.absoluteUrl}&gt;.
+
+
+
