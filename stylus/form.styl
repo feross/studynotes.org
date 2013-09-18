@@ -2,7 +2,7 @@ CONTENT_WIDTH = 580px
 
 html.form
   .content
-    margin: 80px auto 0 auto
+    margin: 80px auto
     padding: 20px 80px
     position: relative
     width: CONTENT_WIDTH
@@ -31,17 +31,22 @@ html.form
   h2
     color: GRAY
     font-size: 1.1em
-    margin: 10px 0
+    margin: 10px 0 30px 0
+
+  form
+    margin: 30px 0
 
   footer
     color: GRAY_DARK
     font-size: 0.8em
-    margin: 30px auto 0 auto
+    margin: 20px auto 0 auto
     text-align: center
 
     span:not(:last-child):after
       content: '\b7'
-      padding: 0 5px.errors
+      padding: 0 5px
+
+.errors
   font-weight: bold
   margin-bottom: 15px
 

@@ -10,8 +10,8 @@ block content
         div= msg
 
   form(method='POST')
-    input(type='email', name='email', placeholder='email', autofocus)
-    input(type='password', name='password', placeholder='password')
+    input(name='email', type='email', placeholder='email', autofocus, required)
+    input(name='password', type='password', placeholder='password', required)
     button.btn.large(type='submit') Log In
 
 block footer
