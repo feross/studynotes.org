@@ -91,10 +91,11 @@ Site.prototype.start = function (done) {
 
     // Make variables and functions available to Jade templates
     app.locals._ = _
+    app.locals.app = app
     app.locals.config = config
     app.locals.moment = moment
-    app.locals.util = util
     app.locals.offline = self.offline
+    app.locals.util = util
 
     app.locals.CSS_MD5 = process.env['CSS_MD5']
     app.locals.JS_MD5 = process.env['JS_MD5']

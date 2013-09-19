@@ -12,7 +12,6 @@ module.exports = function () {
   app.render = function (view, opts, fn) {
     // Set default template local variables
     opts.cls || (opts.cls = '')
-    opts.courses || (opts.courses = app.cache.courses)
     opts.randomquote || (opts.randomquote = randomquote())
     opts.searchTerm || (opts.searchTerm = '')
 
