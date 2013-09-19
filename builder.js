@@ -124,8 +124,20 @@ function buildSite (done) {
       })
     }],
 
+    removeOldFiles: ['cssMd5', 'jsMd5', function (cb) {
+      var command1 = 'rm ' + path.join(config.out, 'js') + '/main-*.js'
+      var command2 = 'rm ' + path.join(config.out, 'css') + '/main-*.css'
+      // console.log(command1)
+      cp.exec(command1, {}, function (err) {
+        cp.exec(command2, {}, function (err) {
+          // ignore errors - doesn't matter if no file is found
+          cb(null)
+        })
+      })
+    }],
+
     // Copy the CSS file to a file with a unique name, based on the MD5
-    cssRename: ['cssMd5', function (cb) {
+    cssRename: ['removeOldFiles', function (cb) {
       var base = path.basename(SITE_CSS_OUT, '.css') + '-' + md5s.css + '.css'
       var filename = path.join(path.dirname(SITE_CSS_OUT), base)
       fs.createReadStream(SITE_CSS_OUT)
@@ -135,7 +147,7 @@ function buildSite (done) {
     }],
 
     // Copy the JS file to a file with a unique name, based on the MD5
-    jsRename: ['jsMd5', function (cb) {
+    jsRename: ['removeOldFiles', function (cb) {
       var base = path.basename(SITE_JS_OUT, '.js') + '-' + md5s.js + '.js'
       var filename = path.join(path.dirname(SITE_JS_OUT), base)
       fs.createReadStream(SITE_JS_OUT)
