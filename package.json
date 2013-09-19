@@ -25,6 +25,7 @@
     "mongoose": "*",
     "mongoose-validator": "*",
     "nagger": "*",
+    "netdna": "*",
     "nib": "*",
     "node-uuid": "*",
     "once": "*",

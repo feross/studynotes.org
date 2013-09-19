@@ -1,1 +1,8 @@
-exports.cookieSecret = 'SECRET_GOES_HERE'
+exports.cookieSecret = ''
+
+exports.netdna = {
+  companyAlias: '',
+  consumerKey: '',
+  consumerSecret: '',
+  zoneId: ''
+}

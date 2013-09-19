@@ -30,6 +30,7 @@ trigger:
 # Update code and restart server (from app server)
 .PHONY : deploy
 deploy:
-	cd $(APP_DIR); git pull
-	cd $(APP_DIR); npm rebuild
+	cd $(APP_DIR) && git pull
+	cd $(APP_DIR) && npm rebuild
 	sudo supervisorctl reload && sleep 3 && sudo supervisorctl restart studynotes:
+	cd $(APP_DIR) && node purge-netdna.js
