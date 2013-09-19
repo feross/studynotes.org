@@ -355,18 +355,10 @@ $(function () {
     }
   })
 
-  /**
-   * Load polyfills for old browsers.
-   */
-  Modernizr.load([
-    {
-      test: Modernizr.placeholder,
-      nope: '/js/lib/polyfill/jquery.placeholder.min.js',
-      callback: function (url, result, key) {
-        if (!result) $('input, textarea').placeholder()
-      }
-    }
-  ])
+  // Polyfills for old browsers
+  if (!hasPlaceholderSupport()) {
+    $('input, textarea').placeholder()
+  }
 
 })
 

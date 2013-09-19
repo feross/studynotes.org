@@ -56,8 +56,6 @@ html(class='no-js #{layout}', lang='en')
     //- TODO: add print stylesheet. should this be a media query in main file?
     //- link(rel='stylesheet', href='/stylesheets/print.css', media='print')
 
-    script(src='#{ config.cdnOrigin }/js/lib/modernizr.custom.js')
-
     if (!locals.offline)
       | <script type="text/javascript" src="//use.typekit.net/djj4afz.js"></script>
       | <script type="text/javascript">try{Typekit.load();}catch(e){}</script>

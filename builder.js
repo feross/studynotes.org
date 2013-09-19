@@ -37,6 +37,10 @@ var SITE_JS_FILENAMES = [
     'bower_components/keymaster/keymaster.js',
     'bower_components/keymaster/keymaster.min.js'
   ],
+  [
+    'bower_components/jquery-placeholder/jquery.placeholder.js',
+    'bower_components/jquery-placeholder/jquery.placeholder.min.js'
+  ],
   'bower_components/moment/moment.js',
   'static/js/util.js',
   'static/js/countdown.js',
