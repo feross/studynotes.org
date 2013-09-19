@@ -7,15 +7,14 @@ var debug = require('debug')('builder')
 var fs = require('fs')
 var md5 = require('MD5')
 var mkdirp = require('mkdirp')
+var nib = require('nib')
 var optimist = require('optimist')
 var path = require('path')
+var stylus = require('stylus')
 var util = require('./util')
 
 var NIB_LIB = path.join(config.root, 'node_modules/nib/lib/nib')
-var STYLUS = path.join(config.root, 'node_modules/.bin/stylus')
 var UGLIFY = path.join(config.root, 'node_modules/.bin/uglifyjs')
-
-var SITE_STATIC_PATH = path.join(config.root, 'static')
 
 /**
  * JS for the site.
@@ -94,13 +93,14 @@ function buildSite (done) {
       ], mkdirp, cb)
     },
 
+    // Copy bower_components/ into out/ folder
     copyBowerDeps: function (cb) {
       cp.exec('cp -r ' + path.join(config.root, 'bower_components') + ' ' + config.out, {}, cb)
     },
 
     // Build CSS
     css: ['mkdir', function (cb) {
-      buildStylus(SITE_STYLUS_FILENAME, path.dirname(SITE_CSS_OUT), cb)
+      buildStylus(SITE_STYLUS_FILENAME, SITE_CSS_OUT, cb)
     }],
 
     // Build JS
@@ -163,12 +163,18 @@ function buildJSUglify (inFilenames, outFilename, cb) {
  * Compile stylus files to CSS
  * @param  {function} cb
  */
-function buildStylus (inFilename, outFolder, cb) {
-  var command = STYLUS + ' ' + inFilename +
-    ' --use ' + NIB_LIB +
-    (config.isProd ? ' --compress' : '') + ' --out ' + outFolder
-
-  cp.exec(command, {}, cb)
+function buildStylus (inFilename, outFilename, cb) {
+  fs.readFile(inFilename, { encoding: 'utf8' }, function (err, source) {
+    if (err) return cb(err)
+    stylus(source, { filename: inFilename })
+      .include(nib.path)
+      .define('cdnOrigin', config.cdnOrigin)
+      .set('compress', config.isProd)
+      .render(function (err, css) {
+        if (err) return cb(err)
+        fs.writeFile(outFilename, css, cb)
+      })
+  })
 }
 
 /**

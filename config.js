@@ -3,7 +3,17 @@ var path = require('path')
 
 exports.isProd = (process.env.NODE_ENV === 'production')
 
-exports.port = 4000
+exports.root = __dirname
+exports.tmp = path.join(exports.root, 'tmp')
+exports.out = path.join(exports.root, 'static', 'out')
+
+exports.numCpus = exports.isProd
+  ? os.cpus().length
+  : 1
+
+exports.port = exports.isProd
+  ? 7300
+  : 4000
 
 exports.mongo = {
   host: exports.isProd
@@ -17,10 +27,17 @@ exports.siteOrigin = exports.isProd
   ? 'http://www.apstudynotes.org'
   : 'http://localhost:' + exports.port
 
-exports.root = __dirname
-exports.out = path.join(__dirname, 'static', 'out')
-exports.tmp = path.join(__dirname, 'tmp')
+exports.cdnOrigin = exports.isProd
+  ? 'http://cdn.apstudynotes.org'
+  : '/static'
 
-exports.numCluster = exports.isProd
-  ? os.cpus().length
-  : 1
+/**
+ * Maximum time to cache static resources (in milliseconds). This value is
+ * sent in the HTTP cache-control header. MaxCDN will obey it, caching
+ * the file for this length of time as well as passing it along to clients.
+ *
+ * @type {number}
+ */
+exports.maxAge = exports.isProd
+  ? 7 * 24 * 3600000 // 7 days
+  : 0

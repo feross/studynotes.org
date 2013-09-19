@@ -38,8 +38,8 @@ Site.prototype.start = function (done) {
   if (cluster.isMaster) {
     builder.build(function (err, output) {
       if (!err) {
-        debug('Spawning ' + config.numCluster + ' worker processes')
-        _.times(config.numCluster, function () {
+        debug('Spawning ' + config.numCpus + ' worker processes')
+        _.times(config.numCpus, function () {
           cluster.fork({
             'CSS_MD5': output.cssMd5,
             'JS_MD5': output.jsMd5
@@ -53,7 +53,6 @@ Site.prototype.start = function (done) {
     })
 
   } else {
-
     global.app = express()
     self.server = http.createServer(app)
 
@@ -84,8 +83,12 @@ Site.prototype.start = function (done) {
 
       // Serve static resources (nginx handles it in prod)
       app.use(express.favicon(path.join(config.root, 'static/favicon.ico')))
-      app.use(express.static(path.join(config.root, 'static')))
     }
+
+    // Serve static files to be mirrored by the CDN.
+    app.use('/static', express.static(path.join(config.root, 'static'), {
+      maxAge: config.maxAge
+    }))
 
     app.use(connectSlashes())
 
@@ -97,8 +100,8 @@ Site.prototype.start = function (done) {
     app.locals.offline = self.offline
     app.locals.util = util
 
-    app.locals.CSS_MD5 = process.env['CSS_MD5']
-    app.locals.JS_MD5 = process.env['JS_MD5']
+    app.locals.CSS_MD5 = process.env.CSS_MD5
+    app.locals.JS_MD5 = process.env.JS_MD5
 
     app.use(express.cookieParser(secret.cookieSecret))
     app.use(express.bodyParser())

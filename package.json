@@ -32,6 +32,7 @@
     "optimist": "*",
     "passport": "*",
     "passport-local": "*",
+    "posix": "*",
     "stylus": "*",
     "touch": "*",
     "uglify-js": "*",
