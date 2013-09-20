@@ -18,3 +18,5 @@ block content
     ul.listing
       each essay in essays
         li: a(href='#{essay.url}')= essay.name
+  else
+    h2 No #{ college.shortName } essays have been posted yet! Represent your college, <a href="/submit/essay/">share your essay</a>!
