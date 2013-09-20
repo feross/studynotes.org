@@ -4,6 +4,7 @@
 
 var config = require('../config')
 var express = require('express')
+var httpStatus = require('http-status-codes')
 
 module.exports = function () {
   app.use(function(req, res) {
@@ -28,10 +29,15 @@ module.exports = function () {
     console.error('HEADERS:')
     console.dir(req.headers)
 
-    res.status(500).render('error', {
-      title: '500 Internal Server Error',
+    var code = 500
+    if (typeof err.status === 'number') {
+      code = err.status
+    }
+
+    res.status(code).render('error', {
+      title: code + ' ' + httpStatus.getStatusText(code),
       hero: {
-        title: '500 Internal Server Error',
+        title: code + ' ' + httpStatus.getStatusText(code),
         desc: 'Sorry about that. Here is a cat for you instead.'
       }
     })
