@@ -115,16 +115,14 @@ html(class='no-js #{layout}', lang='en')
 
     block body
 
-    //- Compiled StudyNotes JS
-    script(src='#{ config.cdnOrigin }/out/js/main-#{locals.JS_MD5}.js')
-
-    block scripts
-
     //- Countdown script
     if (locals.course)
-      | <script>var countdownDate = new Date('#{course.examDate}')</script>
-      script.
-        var countdown = new Countdown('.countdown', countdownDate)
+      | <script>window.countdownDate = new Date('#{course.examDate}')</script>
+
+    //- Compiled StudyNotes JS
+    script(async, src='#{ config.cdnOrigin }/out/js/main-#{locals.JS_MD5}.js')
+
+    block scripts
 
     //- Adsense (responsive ads) (async)
     if (locals.ads && config.isProd)

@@ -15,6 +15,10 @@ var $headerAutocomplete = $('.header .autocomplete')
 var $content = $('.content')
 var $contentToolbar = $('.content .toolbar')
 
+// Setup countdown timer, if applicable
+if (window.countdownDate) {
+  new Countdown('.countdown', countdownDate)
+}
 
 /**
  * Disable caching of jQuery AJAX responses
