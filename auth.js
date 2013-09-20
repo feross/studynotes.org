@@ -1,4 +1,5 @@
 var config = require('./config')
+var debug = require('debug')('studynotes:auth')
 var model = require('./model')
 var passportLocal = require('passport-local')
 var url = require('url')
