@@ -1,0 +1,16 @@
+/* IE 9 and below */
+
+/* IE9 can't handle multiple backgrounds and linear gradients at the same time,
+   so we just use a single background image. The problem is that IE *can*
+   handle background-size with multiple values, so it gets very confused when
+   it combines the two. Fixed by overriding with a single background-size
+   value */
+.heroImage {
+  background-size: cover !important;
+}
+
+/* Hero image doesn't fade away at the bottom, so moving the sidebar a bit lower
+   than in other browsers makes the sidebar more readable. */
+body.course .sidebar, body.notetype .sidebar, body.note .sidebar {
+  margin-top: -100px !important;
+}
