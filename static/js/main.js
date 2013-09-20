@@ -22,7 +22,7 @@ $.ajaxSetup({
   function onResize () {
     updateSearchWidth()
     toolbarOnResize()
-    onScroll()
+    toolbarOnScroll()
   }
   $window.on('resize', _.throttle(onResize, 100))
   onResize()
