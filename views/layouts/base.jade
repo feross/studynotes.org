@@ -2,10 +2,6 @@
 block vars
 html(class='no-js #{layout}', lang='en')
   block head
-    link(rel='stylesheet', href='#{ config.cdnOrigin }/out/bower_components/font-awesome/css/font-awesome.min.css')
-    link(rel='stylesheet', href='#{ config.cdnOrigin }/out/css/main-#{ locals.CSS_MD5 }.css')
-    block stylesheets
-
     - if (locals.forceTitle)
       - pageTitle = locals.forceTitle
     - else if (locals.title)
@@ -55,6 +51,59 @@ html(class='no-js #{layout}', lang='en')
 
     //- TODO: add print stylesheet. should this be a media query in main file?
     //- link(rel='stylesheet', href='/stylesheets/print.css', media='print')
+
+    link(rel='stylesheet', href='#{ config.cdnOrigin }/out/bower_components/font-awesome/css/font-awesome.min.css')
+    link(rel='stylesheet', href='#{ config.cdnOrigin }/out/css/main-#{ locals.CSS_MD5 }.css')
+    if ads
+      //- Adsense styles must be inline
+      style.
+        .studynotes-in-content {
+          width: 336px;
+          height: 280px;
+        }
+        @media (max-width: 799px) {
+          .studynotes-in-content {
+            width: 336px;
+            height: 280px;
+          }
+        }
+        @media (min-width: 800px) and (max-width: 1099px) {
+          .studynotes-in-content {
+            width: 336px;
+            height: 280px;
+          }
+        }
+        @media (min-width: 1100px) {
+          .studynotes-in-content {
+            width: 336px;
+            height: 280px;
+          }
+        }
+      style.
+        .studynotes-sidebar {
+          width: 336px;
+          height: 280px;
+        }
+        @media (max-width: 799px) {
+          .studynotes-sidebar {
+            width: 336px;
+            height: 280px;
+          }
+        }
+        @media (min-width: 800px) and (max-width: 1099px) {
+          .studynotes-sidebar {
+            width: 160px;
+            height: 600px;
+          }
+        }
+        @media (min-width: 1100px) {
+          .studynotes-sidebar {
+            width: 336px;
+            height: 280px;
+          }
+        }
+
+    block stylesheets
 
     if (!locals.offline)
       | <script type="text/javascript" src="//use.typekit.net/djj4afz.js"></script>
