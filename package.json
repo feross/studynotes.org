@@ -19,6 +19,7 @@
     "connect-slashes": "*",
     "debug": "*",
     "express": "*",
+    "html-parser": "*",
     "http-status-codes": "*",
     "jade": "*",
     "MD5": "*",

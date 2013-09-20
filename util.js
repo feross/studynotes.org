@@ -8,6 +8,7 @@ var cp = require('child_process')
 var debug = require('debug')('util')
 var express = require('express')
 var fs = require('fs')
+var htmlParser = require('html-parser')
 var mkdirp = require('mkdirp')
 var nodeUtil = require('util')
 var once = require('once')
@@ -166,6 +167,38 @@ exports.triggerLiveReload = function () {
 
 exports.escapeRegExp = function(str) {
   return str.replace(/([.*+?^=!:${}()|[\]\/\\])/g, "\\$1")
+}
+
+var elementsWhitelist = [
+  'p',
+  'strong', 'b', 'em', 'i', 'u',
+  'ol', 'ul', 'li',
+  'h2', 'h3', 'h4', 'h5', 'h6',
+  'div', 'span'
+]
+
+var attributesWhitelist = [
+
+]
+
+/**
+ * Sanitize dirty (user-provided) HTML to remove bad html tags. Uses a
+ * whitelist approach, where only the tags we explicitly allow are kept.
+ * @param  {String} html dirty HTML
+ * @return {String}      sanitized HTML
+ */
+exports.sanitizeHTML = function (html) {
+  var sanitized = htmlParser.sanitize(html, {
+      elements: function (name) {
+        return elementsWhitelist.indexOf(name) === -1
+      },
+      attributes: function (name) {
+        return attributesWhitelist.indexOf(name) === -1
+      },
+      comments: true,
+      doctype: true
+  })
+  return sanitized
 }
 
 // Make `inherits` from node's "util" module available

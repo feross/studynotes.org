@@ -7,6 +7,7 @@ var model = require('./')
 var mongoose = require('mongoose')
 var plugin = require('./plugin')
 var validate = require('mongoose-validator').validate
+var util = require('../util')
 
 var Essay = mongoose.Schema({
   name: {
@@ -63,6 +64,15 @@ Essay.virtual('searchDesc').get(function () {
   })
 
   return college.shortName + ' Admissions Essay'
+})
+
+// Sanitize essay to strip bad html before saving
+Essay.pre('save', function (next) {
+  var essay = this
+  if (!essay.isModified('body')) return next()
+
+  essay.body = util.sanitizeHTML(essay.body)
+  next()
 })
 
 Essay.plugin(plugin.modifyDate)

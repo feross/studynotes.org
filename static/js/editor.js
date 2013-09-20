@@ -199,9 +199,7 @@ if ($('#editor').length) {
           "rename_tag": "div"
       },
       "h1": {
-          "add_class": {
-              "align": "align_text"
-          }
+          "rename_tag": "h2"
       },
       "head": {
           "remove": 1
