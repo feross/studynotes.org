@@ -8,7 +8,7 @@ var mongoose = require('mongoose')
 var plugin = require('./plugin')
 
 var Notetype = mongoose.Schema({
-  name: { type: String, required: true },
+  name: { type: String, required: true, index: true },
   singularName: String,
   shortDesc: String,
   desc: String,

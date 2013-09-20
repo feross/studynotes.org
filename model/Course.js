@@ -7,7 +7,7 @@ var mongoose = require('mongoose')
 var plugin = require('./plugin')
 
 var Course = mongoose.Schema({
-  name: { type: String, required: true },
+  name: { type: String, required: true, index: true },
   desc: String,
   slug: model.SLUG_UNIQUE,
   examDate: Date

@@ -37,6 +37,8 @@ var Essay = mongoose.Schema({
   slug: model.SLUG_UNIQUE
 })
 
+Essay.index({ collegeId: 1, slug: 1 })
+
 // Trim whitespace
 Essay.pre('save', function (next) {
   var essay = this

@@ -24,9 +24,8 @@ var Note = mongoose.Schema({
   slug: model.SLUG
 })
 
-// No duplicate names or slugs for a course+notetype
+// No duplicate slugs for a course+notetype
 Note.index({ courseId: 1, notetypeId: 1, slug: 1 }, { unique: true })
-Note.index({ courseId: 1, notetypeId: 1, name: 1 }, { unique: true })
 
 Note.index({ courseId: 1, notetypeId: 1})
 
