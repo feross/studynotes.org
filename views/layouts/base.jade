@@ -23,8 +23,8 @@ html(class='no-js #{layout}', lang='en')
     meta(name='keywords', content='#{keywords}')
 
     meta(property='og:type', content='website')
-    if (locals.heroImage)
-      meta(property='og:image', content='#{ config.cdnOrigin }/images/hero/#{ heroImage }')
+    if (locals.hero && hero.image)
+      meta(property='og:image', content='#{ config.cdnOrigin }/images/hero/#{ hero.image }')
     else
       meta(property='og:image', content='#{ config.cdnOrigin }/images/S.png')
 
@@ -79,7 +79,6 @@ html(class='no-js #{layout}', lang='en')
             height: 280px;
           }
         }
-      style.
         .studynotes-sidebar {
           width: 336px;
           height: 280px;
@@ -101,6 +100,18 @@ html(class='no-js #{layout}', lang='en')
             width: 336px;
             height: 280px;
           }
+        }
+
+    if (locals.hero && hero.image)
+      style.
+        .heroImage {
+          background: url("#{ config.cdnOrigin }/images/hero/#{ hero.image }");
+          background: bottom left url("#{ config.cdnOrigin }/images/hero-body-mask.png") repeat-x, center center -webkit-linear-gradient(left, rgba(0,0,0,0.2), rgba(0,0,0,0.05)) repeat, center center url("#{ config.cdnOrigin }/images/hero/#{ hero.image }") no-repeat;
+          background: bottom left url("#{ config.cdnOrigin }/images/hero-body-mask.png") repeat-x, center center -moz-linear-gradient(left, rgba(0,0,0,0.2), rgba(0,0,0,0.05)) repeat, center center url("#{ config.cdnOrigin }/images/hero/#{ hero.image }") no-repeat;
+          background: bottom left url("#{ config.cdnOrigin }/images/hero-body-mask.png") repeat-x, center center -o-linear-gradient(left, rgba(0,0,0,0.2), rgba(0,0,0,0.05)) repeat, center center url("#{ config.cdnOrigin }/images/hero/#{ hero.image }") no-repeat;
+          background: bottom left url("#{ config.cdnOrigin }/images/hero-body-mask.png") repeat-x, center center -ms-linear-gradient(left, rgba(0,0,0,0.2), rgba(0,0,0,0.05)) repeat, center center url("#{ config.cdnOrigin }/images/hero/#{ hero.image }") no-repeat;
+          background: bottom left url("#{ config.cdnOrigin }/images/hero-body-mask.png") repeat-x, center center linear-gradient(to right, rgba(0,0,0,0.2), rgba(0,0,0,0.05)) repeat, center center url("#{ config.cdnOrigin }/images/hero/#{ hero.image }") no-repeat;
+          background-size: auto auto, 100% 100%, cover;
         }
 
     block stylesheets

@@ -31,22 +31,22 @@ module.exports = function () {
         desc: 'Class Notes, Test Prep, Review Materials, and More',
         tabs: opts.course.notetypes,
         title: opts.course.name,
-        url: opts.course.url
+        url: opts.course.url,
+        image: opts.course.heroImage
       }
-      opts.heroImage = opts.course.heroImage
     }
     // If rendering a college-related view
     else if (opts.college) {
       opts.hero = {
         title: opts.college.shortName + ' Admissions Essays',
         desc: 'Top essays from students who got accepted at ' + opts.college.name,
-        url: opts.college.url
+        url: opts.college.url,
+        image: opts.college.heroImage
       }
-      opts.heroImage = opts.college.heroImage
     }
     // If rendering any other type of view and heroImage is missing
-    else if (!opts.heroImage) {
-      opts.heroImage = view + '.jpg'
+    else if (opts.hero && !opts.hero.image) {
+      opts.hero.image = view + '.jpg'
     }
 
     // Add view name as class on <body>
