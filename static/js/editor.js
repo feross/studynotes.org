@@ -527,7 +527,7 @@ if ($('#editor').length) {
   var editor = new wysihtml5.Editor('editor', {
     toolbar: 'editor-toolbar',
     autoLink: false, // Don't auto-link URLs
-    stylesheets: ['/css/editor.css'], // Iframe editor stylesheets
+    stylesheets: [config.cdnOrigin + '/css/editor.css'], // Iframe editor stylesheets
     parserRules: parserRules, // Rules to parse copy & pasted html
     useLineBreaks: false, // Use <p> instead of <br> for line breaks
     cleanUp: true // remove senseless <span> elements (empty or w/o attrs)
