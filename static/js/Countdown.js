@@ -1,8 +1,3 @@
-// Setup countdown timer, if applicable
-if (window.countdownDate) {
-  new Countdown('.countdown', countdownDate)
-}
-
 /**
  * Countdown to a specific date
  * @param {String} selector jQuery selector to bind the countdown timer to
@@ -11,7 +6,7 @@ if (window.countdownDate) {
 function Countdown(selector, date) {
   this.$elem = $(selector)
 
-  if (this.$elem.length == 0)
+  if (this.$elem.length === 0)
     return
 
   this.date = moment(date)
@@ -22,8 +17,8 @@ function Countdown(selector, date) {
 
 Countdown.prototype.update = function () {
   var now = moment()
-    , diff = moment.duration(this.date.diff(now))
-    , obj = {
+  var diff = moment.duration(this.date.diff(now))
+  var obj = {
       days: Math.floor(diff.asDays()),
       hours: diff.hours(),
       minutes: diff.minutes(),
@@ -36,4 +31,9 @@ Countdown.prototype.update = function () {
 
 Countdown.prototype.stop = function () {
   window.clearInterval(this.interval)
+}
+
+// Setup countdown timer, if applicable
+if (window.countdownDate) {
+  new Countdown('.countdown', countdownDate)
 }
