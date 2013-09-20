@@ -1,6 +1,8 @@
 /*jslint node: true */
 /*global app */
 "use strict";
+
+var bytes = require('bytes')
 var config = require('./config')
 var cp = require('child_process')
 var debug = require('debug')('util')

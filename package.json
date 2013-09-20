@@ -13,6 +13,7 @@
     "async": "*",
     "bcrypt": "*",
     "beepbeep": "*",
+    "bytes": "*",
     "connect-flash": "*",
     "connect-mongo": "*",
     "connect-slashes": "*",
