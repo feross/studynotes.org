@@ -53,10 +53,10 @@ header.header
 .browseWrapper
   ul.browse.browse-colleges
     li
-      h2: a(href='/colleges') Elite College Admissions Essays
+      h2: a(href='/colleges') College Admissions Essays
       ul
         each college in _.flatten(app.cache.colleges).slice(0, 7)
-          li: a(href='/#{ college.slug }/', title='#{ college.name } Admissions Essays')= college.name
+          li: a(href='/#{ college.slug }/', title='#{ college.name } Admissions Essays') #{ college.shortName } Essays
 
 if (locals.hero)
   .heroImage
