@@ -26,6 +26,10 @@ var SITE_JS_FILENAMES = [
     'bower_components/jquery/jquery.min.js'
   ],
   [
+    'bower_components/jquery-placeholder/jquery.placeholder.js',
+    'bower_components/jquery-placeholder/jquery.placeholder.min.js'
+  ],
+  [
     'bower_components/underscore/underscore.js',
     'bower_components/underscore/underscore-min.js'
   ],
@@ -38,15 +42,24 @@ var SITE_JS_FILENAMES = [
     'bower_components/keymaster/keymaster.min.js'
   ],
   [
-    'bower_components/jquery-placeholder/jquery.placeholder.js',
-    'bower_components/jquery-placeholder/jquery.placeholder.min.js'
+    'bower_components/moment/moment.js',
+    'bower_components/moment/moment.min.js'
   ],
-  'bower_components/moment/moment.js',
+  [
+    'bower_components/wysihtml5/dist/wysihtml5-0.4.0pre.js',
+    'bower_components/wysihtml5/dist/wysihtml5-0.4.0pre.min.js'
+  ],
+  [
+    'bower_components/select2/select2.js',
+    'bower_components/select2/select2.min.js',
+  ],
+  'bower_components/wysihtml5_size_matters/jquery.wysihtml5_size_matters.js',
   'static/js/util.js',
+  'static/js/Countdown.js',
   'static/js/browse.js',
   'static/js/search.js',
   'static/js/toolbar.js',
-  'static/js/Countdown.js',
+  'static/js/editor.js',
   'static/js/main.js'
 ]
 
