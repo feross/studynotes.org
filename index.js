@@ -119,6 +119,7 @@ Site.prototype.start = function (done) {
         auto_reconnect: true
       })
     }))
+    app.use(express.csrf())
 
     // Passport
     app.use(passport.initialize())
@@ -185,10 +186,10 @@ Site.prototype.addHeaders = function (req, res, next) {
   next()
 }
 
+// Make certain variables available to templates on this request
 Site.prototype.addTemplateLocals = function (req, res, next) {
-  // Make user object available to all templates
   res.locals.user = req.user
-
+  res.locals.csrf = req.csrfToken()
   next()
 }
 

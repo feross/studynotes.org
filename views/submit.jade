@@ -9,6 +9,7 @@ block content
       each msg in errors
         div= msg
   form(method='POST')
+    input(type='hidden', name='_csrf', value=csrf)
     .row
       .col2
         input(name='name', type='text', placeholder='Essay Title', value=(essay && essay.name), autofocus, required)

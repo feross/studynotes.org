@@ -132,6 +132,8 @@ html(class='no-js #{layout}', lang='en')
 
     block body
 
+    input(type='hidden', name='_csrf', value=csrf)
+
     //- Countdown script
     if (locals.course)
       | <script>window.countdownDate = new Date('#{course.examDate}')</script>
