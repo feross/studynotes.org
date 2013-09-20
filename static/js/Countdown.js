@@ -1,3 +1,8 @@
+// Setup countdown timer, if applicable
+if (window.countdownDate) {
+  new Countdown('.countdown', countdownDate)
+}
+
 /**
  * Countdown to a specific date
  * @param {String} selector jQuery selector to bind the countdown timer to

@@ -43,7 +43,10 @@ var SITE_JS_FILENAMES = [
   ],
   'bower_components/moment/moment.js',
   'static/js/util.js',
-  'static/js/countdown.js',
+  'static/js/browse.js',
+  'static/js/search.js',
+  'static/js/toolbar.js',
+  'static/js/Countdown.js',
   'static/js/main.js'
 ]
 
