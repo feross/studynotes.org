@@ -18,7 +18,7 @@ block content
           option
           each college in colleges
             option(value='#{ college.slug }' selected=(essay && (essay.college === college.slug)))= college.name
-    .row
+    .row(style='margin-bottom: 0')
       .ghost
           #editor-toolbar.toolbar.clearfix(style='display: none;')
             a(data-wysihtml5-command='bold'): i.icon-bold

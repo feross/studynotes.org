@@ -59,6 +59,16 @@ HOVER = '&:hover, &:focus, &:active'
   clear: both
   width: 100%
 
+  @media PHONE
+    margin-bottom: (CONTENT_PADDING_PHONE / 2)
+  @media TABLET
+    margin-bottom: (CONTENT_PADDING_TABLET / 2)
+  @media DESKTOP
+    margin-bottom: (CONTENT_PADDING_DESKTOP / 2)
+
+  &:last-child
+    margin-bottom: 0
+
 .row:before, .row:after // clearfix
   content: ""
   display: table
@@ -273,22 +283,24 @@ hr
 
   [type='submit']
     display: block
-    margin: 30px auto
+
+    @media PHONE
+      margin: 5px auto 0 auto
+    @media TABLET
+      margin: 10px auto 0 auto
+    @media DESKTOP
+      margin: 15px auto 0 auto
 
   input, textarea, .select2
     color: #000
     display: block
     font-family: FORM_FONT
     font-size: 1em
-    margin-bottom: 15px
     width: 100%
 
   input, textarea
     border: 2px solid GRAY_DARK
     border-radius: 25px
-
-    &:last-child
-      margin-bottom: 0
 
     &:focus, &:active
       border-color: BLUE

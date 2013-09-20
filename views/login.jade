@@ -10,9 +10,13 @@ block content
         div= msg
 
   form(method='POST')
-    input(name='email', type='email', placeholder='email', autofocus, required)
-    input(name='password', type='password', placeholder='password', required)
-    button.btn.large(type='submit') Log In
+    input(type='hidden', name='_csrf', value=csrf)
+    .row
+      input(name='email', type='email', placeholder='email', autofocus, required)
+    .row
+      input(name='password', type='password', placeholder='password', required)
+    .row
+      button.btn.large(type='submit') Log In
 
 block footer
   span Looking to <a href="/signup/">sign up</a> instead?
