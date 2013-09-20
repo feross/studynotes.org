@@ -1,3 +1,7 @@
+/*jslint node: true */
+/*global app */
+"use strict";
+
 var async = require('async')
 var beep = require('beepbeep')
 var builder = require('./')
@@ -55,6 +59,8 @@ var SITE_JS_FILENAMES = [
   ],
   'bower_components/wysihtml5_size_matters/jquery.wysihtml5_size_matters.js',
   'static/js/util.js',
+  'config.js',
+  'config-browser.js',
   'static/js/Countdown.js',
   'static/js/browse.js',
   'static/js/search.js',

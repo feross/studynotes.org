@@ -1,3 +1,7 @@
+/*jslint node: true */
+/*global app */
+"use strict";
+
 var _ = require('underscore')
 var async = require('async')
 var auth = require('../auth')

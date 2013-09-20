@@ -1,3 +1,7 @@
+/*jslint node: true */
+/*global app */
+"use strict";
+
 var model = require('./')
 var mongoose = require('mongoose')
 var plugin = require('./plugin')

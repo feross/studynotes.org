@@ -1,3 +1,7 @@
+/*jslint node: true */
+/*global app */
+"use strict";
+
 var config = require('../config')
 var express = require('express')
 var path = require('path')

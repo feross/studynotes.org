@@ -1,3 +1,7 @@
+/*jslint node: true */
+/*global app */
+"use strict";
+
 var auth = require('../auth')
 var config = require('../config')
 var passport = require('passport')

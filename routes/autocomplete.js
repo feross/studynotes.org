@@ -1,3 +1,7 @@
+/*jslint node: true */
+/*global app */
+"use strict";
+
 var search = require('../search')
 
 module.exports = function () {

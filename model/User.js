@@ -1,3 +1,7 @@
+/*jslint node: true */
+/*global app */
+"use strict";
+
 var bcrypt = require('bcrypt')
 var model = require('./')
 var md5 = require('MD5')

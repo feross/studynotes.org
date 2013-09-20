@@ -1,3 +1,7 @@
+/*jslint node: true */
+/*global app */
+"use strict";
+
 var _s = require('underscore.string')
 var async = require('async')
 var config = require('../config')
@@ -11,7 +15,7 @@ exports.modifyDate = function (schema, opts) {
   schema.add({ modifyDate: Date })
 
   schema.pre('save', function (next) {
-    this.modifyDate = new Date
+    this.modifyDate = new Date()
     next()
   })
 
@@ -24,7 +28,7 @@ exports.createDate = function (schema, opts) {
   schema.add({ createDate: Date })
 
   schema.pre('save', function (next) {
-    if (!this.createDate) this.createDate = new Date
+    if (!this.createDate) this.createDate = new Date()
     next()
   })
 

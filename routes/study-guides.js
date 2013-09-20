@@ -1,3 +1,7 @@
+/*jslint node: true */
+/*global app */
+"use strict";
+
 module.exports = function () {
   app.get('/study-guides', function (req, res) {
     res.render('study-guides', {

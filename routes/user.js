@@ -1,3 +1,7 @@
+/*jslint node: true */
+/*global app */
+"use strict";
+
 var model = require('../model')
 
 module.exports = function () {

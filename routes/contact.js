@@ -1,3 +1,7 @@
+/*jslint node: true */
+/*global app */
+"use strict";
+
 module.exports = function () {
   app.get('/contact', function (req, res) {
     res.render('contact', {

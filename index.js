@@ -1,3 +1,7 @@
+/*jslint node: true */
+/*global app */
+"use strict";
+
 module.exports = Site
 
 var _ = require('underscore')

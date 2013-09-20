@@ -1,6 +1,8 @@
-/**
- * Script to purge the NetDNA CDN cache.
- */
+/*jslint node: true */
+/*global app */
+"use strict";
+
+// Script to purge the NetDNA CDN cache
 
 var netdna = require('netdna')
 var secret = require('./secret.js')

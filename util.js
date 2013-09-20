@@ -1,3 +1,6 @@
+/*jslint node: true */
+/*global app */
+"use strict";
 var config = require('./config')
 var cp = require('child_process')
 var debug = require('debug')('util')
@@ -40,7 +43,7 @@ exports.run = function (ServerConstructor) {
 
   // Delete all options that are not explicitly passed in like this:
   //   node tracker --port 4000 --dbPort 4001
-  delete opts['$0']
+  delete opts.$0
   delete opts._
 
   // Create and start the server
@@ -128,12 +131,12 @@ exports.expressLogger = function (debug) {
       ? ''
       : len = ' - ' + bytes(len)
 
-    var str = '\033[90m' + req.method
+    var str = '\x1B[90m' + req.method
       + ' ' + req.originalUrl + ' '
-      + '\033[' + color + 'm' + res.statusCode
-      + ' \033[90m'
+      + '\x1B[' + color + 'm' + res.statusCode
+      + ' \x1B[90m'
       + len
-      + '\033[0m'
+      + '\x1B[0m'
 
     debug(str)
     next()

@@ -1,3 +1,7 @@
+/*jslint node: true */
+/*global app */
+"use strict";
+
 var config = require('./config')
 var debug = require('debug')('studynotes:auth')
 var model = require('./model')
