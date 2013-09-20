@@ -241,7 +241,9 @@ if ($('#editor').length) {
       "select": {
           "rename_tag": "span"
       },
-      "i": {},
+      "i": {
+          "rename_tag": "em"
+      },
       "track": {
           "remove": 1
       },
@@ -314,7 +316,9 @@ if ($('#editor').length) {
       "marquee": {
           "rename_tag": "span"
       },
-      "b": {},
+      "b": {
+          "rename_tag": "strong"
+      },
       "q": {
           "check_attributes": {
               "cite": "url"

@@ -21,8 +21,8 @@ block content
     .row(style='margin-bottom: 0')
       .ghost
           #editor-toolbar.toolbar.clearfix(style='display: none;')
-            a(data-wysihtml5-command='bold'): i.icon-bold
-            a(data-wysihtml5-command='italic'): i.icon-italic
+            a(data-wysihtml5-command='formatInline', data-wysihtml5-command-value='strong'): i.icon-bold
+            a(data-wysihtml5-command='formatInline', data-wysihtml5-command-value='em'): i.icon-italic
             a(data-wysihtml5-command='underline'): i.icon-underline
             .space
             a(data-wysihtml5-command='insertOrderedList'): i.icon-list-ol
