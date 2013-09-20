@@ -23,7 +23,7 @@ College.virtual('url').get(function () {
 })
 
 College.virtual('searchDesc').get(function () {
-  return 'University'
+  return 'Admissions Essays'
 })
 
 College.virtual('heroImage').get(function () {

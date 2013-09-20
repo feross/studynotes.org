@@ -63,6 +63,15 @@ exports.autocomplete = function (query, cb) {
         .limit(MAX_RESULTS)
         .select('name slug hits')
         .exec(cb)
+    },
+
+    essays: function (cb) {
+      model.Essay
+        .find({ name: exports.regexForQuery(query) })
+        .sort('-hits')
+        .limit(MAX_RESULTS)
+        .select('name slug hits collegeId')
+        .exec(cb)
     }
 
   }, function (err, fetched) {
@@ -138,10 +147,16 @@ exports.weight = function (result, query){
     case 'Course':
       weight += 10
       break
+    case 'College':
+      weight += 10
+      break
     case 'NoteType':
       weight += 2
       break
     case 'Note':
+      weight += 1
+      break
+    case 'Essay':
       weight += 1
       break
     case 'User':
