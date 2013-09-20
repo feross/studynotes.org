@@ -1,7 +1,7 @@
 !!! 5
 block vars
 html(class='no-js #{layout}', lang='en')
-  block head
+  head
     - if (locals.forceTitle)
       - pageTitle = locals.forceTitle
     - else if (locals.title)
@@ -108,6 +108,8 @@ html(class='no-js #{layout}', lang='en')
     if (!locals.offline)
       | <script type="text/javascript" src="//use.typekit.net/djj4afz.js"></script>
       | <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+    block head
 
   body(class='#{ locals.cls }')
     //- For Facebook SDK
