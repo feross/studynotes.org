@@ -13,7 +13,7 @@ module.exports = function () {
       colleges: colleges,
       hero: {
         title: 'Submit an essay',
-        desc: 'Only college admissions essays (for now)'
+        desc: 'Help the next generation of students!'
       },
       title: 'Submit a college essay',
       url: '/submit/essay',

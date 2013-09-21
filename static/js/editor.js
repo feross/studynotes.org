@@ -539,4 +539,34 @@ if ($('#editor').length) {
   editor.on('load', function() {
     $(editor.composer.iframe).wysihtml5_size_matters()
   })
+
+  // Debug the editor!
+  if (window.location.search.indexOf('debug=1') >= 0) {
+    $('<h2>Events</h2><div id="log"></div>').insertAfter($('#editor').parent())
+    editor
+      .on('load', function() {
+        $('#log')[0].innerHTML += '<div>load</div>'
+      })
+      .on('focus', function() {
+        $('#log')[0].innerHTML += '<div>focus</div>'
+      })
+      .on('blur', function() {
+        $('#log')[0].innerHTML += '<div>blur</div>'
+      })
+      .on('change', function() {
+        $('#log')[0].innerHTML += '<div>change</div>'
+      })
+      .on('paste', function() {
+        $('#log')[0].innerHTML += '<div>paste</div>'
+      })
+      .on('newword:composer', function() {
+        $('#log')[0].innerHTML += '<div>newword:composer</div>'
+      })
+      .on('undo:composer', function() {
+        $('#log')[0].innerHTML += '<div>undo:composer</div>'
+      })
+      .on('redo:composer', function() {
+        $('#log')[0].innerHTML += '<div>redo:composer</div>'
+      })
+  }
 }
