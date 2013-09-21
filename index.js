@@ -4,6 +4,16 @@
 
 module.exports = Site
 
+var secret = require('./secret')
+
+// NodeTime
+if (process.env.NODE_ENV === 'production') {
+  require('nodetime').profile({
+    accountKey: secret.nodetime.accountKey,
+    appName: secret.nodetime.appName
+  })
+}
+
 var _ = require('underscore')
 var async = require('async')
 var auth = require('./auth')
@@ -23,7 +33,6 @@ var mongoose = require('mongoose')
 var MongoStore = require('connect-mongo')(express)
 var passport = require('passport')
 var path = require('path')
-var secret = require('./secret')
 var util = require('./util')
 
 function Site (opts, cb) {

@@ -10,3 +10,8 @@ exports.netdna = {
   consumerSecret: '',
   zoneId: ''
 }
+
+exports.nodetime = {
+  accountKey: '',
+  appName: ''
+}
