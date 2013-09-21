@@ -8,7 +8,11 @@ var model = require('../model')
 
 module.exports = function () {
   app.get('/submit/essay', auth.ensureAuth, function (req, res, next) {
-    var colleges = _(app.cache.colleges).flatten()
+    var colleges = _(app.cache.colleges).flatten().sort(function (a, b) {
+      if(a.name < b.name) return -1
+      if(a.name > b.name) return 1
+      return 0
+    })
     res.render('submit', {
       colleges: colleges,
       hero: {

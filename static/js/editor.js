@@ -5,9 +5,9 @@ function formatSelect2 (college) {
 
 // Initialize select2 on <select> elements
 $('.select2').select2({
+  escapeMarkup: function(m) { return m },
   formatResult: formatSelect2,
-  formatSelection: formatSelect2,
-  escapeMarkup: function(m) { return m; }
+  formatSelection: formatSelect2
 })
 
 // If there is a wysiwyg editor on this page, initialize it.
