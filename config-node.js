@@ -32,7 +32,7 @@ exports.siteOrigin = exports.isProd
   : 'http://localhost:' + exports.port
 
 exports.cdnOrigin = exports.isProd
-  ? 'http://cdn.apstudynotes.org'
+  ? 'http://www.apstudynotes.org'
   : '/static'
 
 /**
