@@ -15,6 +15,7 @@ module.exports = function () {
 
     model.Essay
       .findOne({ collegeId: college._id, slug: essaySlug })
+      .populate('userId')
       .exec(function (err, essay) {
         if (err) return next(err)
         if (!essay) return next()

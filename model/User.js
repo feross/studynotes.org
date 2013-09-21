@@ -52,6 +52,15 @@ User.virtual('firstName').get(function () {
   return this.name.split(' ')[0]
 })
 
+User.virtual('mlaName').get(function () {
+  var split = this.name.split(' ')
+  if (split.length >= 2) {
+    return split[1] + ', ' + split[0]
+  } else {
+    return split[0]
+  }
+})
+
 User.virtual('searchDesc').get(function () {
   return 'User'
 })
