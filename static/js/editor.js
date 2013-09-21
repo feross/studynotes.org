@@ -1,5 +1,14 @@
+function formatSelect2 (college) {
+  var $elem = $(college.element)
+  return '<img class="select2-icon" src="' + config.cdnOrigin + '/images/icon/' + $elem.val() + '.png"/>' + college.text
+}
+
 // Initialize select2 on <select> elements
-$('.select2').select2()
+$('.select2').select2({
+  formatResult: formatSelect2,
+  formatSelection: formatSelect2,
+  escapeMarkup: function(m) { return m; }
+})
 
 // If there is a wysiwyg editor on this page, initialize it.
 if ($('#editor').length) {
