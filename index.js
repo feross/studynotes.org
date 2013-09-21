@@ -89,10 +89,10 @@ Site.prototype.start = function (done) {
       app.use(express.favicon(path.join(config.root, 'static/favicon.ico')))
     }
 
-    // Serve static files to be mirrored by the CDN.
-    app.use('/cdn', express.static(path.join(config.root, 'static'), {
-      maxAge: config.maxAge
-    }))
+    // Serve static files
+    var staticMiddleware = express.static(path.join(config.root, 'static'))
+    app.use('/static', staticMiddleware, { maxAge: config.maxAge })
+    app.use(staticMiddleware, { maxAge: config.maxAge })
 
     app.use(connectSlashes())
 
