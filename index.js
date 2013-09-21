@@ -63,9 +63,6 @@ Site.prototype.start = function (done) {
     // Trust the X-Forwarded-* headers from nginx
     app.enable('trust proxy')
 
-    // Disable express advertising header
-    app.disable('x-powered-by')
-
     // Jade for templating
     app.set('views', path.join(__dirname, 'views'))
     app.set('view engine', 'jade')
