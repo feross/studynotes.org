@@ -30,6 +30,6 @@ block content
             .space
             a(data-wysihtml5-command='formatBlock', data-wysihtml5-command-value='h2') Heading
     .row
-      textarea#editor(name='body', placeholder='Paste your essay here...')
+      textarea#editor(name='body', placeholder='Paste your essay here...')= (essay && essay.body)
     .row
       button.btn.large(type='submit') Submit Essay
