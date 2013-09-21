@@ -2,6 +2,7 @@
 block vars
 html(class='no-js #{layout}', lang='en')
   head
+    meta(charset='utf-8')
     - if (locals.forceTitle)
       - pageTitle = locals.forceTitle
     - else if (locals.title)
