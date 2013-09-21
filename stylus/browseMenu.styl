@@ -6,15 +6,18 @@
   z-index: 50
 
   @media PHONE
-    padding: 0 5px
+    padding: 0 9px
   @media TABLET
-    padding: 0 10px
+    padding: 0 18px
   @media DESKTOP
-    padding: 0 30px
+    padding: 0 27px
+
+.browse, .browse ul
+  margin: 0
+  padding: 0
 
 .browse
   height: 0
-  padding: 0
   overflow: hidden
 
   transform: translateZ(0)
@@ -23,7 +26,7 @@
 
   &.on
     height: BROWSE_MENU_HEIGHT
-    padding: 30px 0
+    padding: 27px 0
 
     transition-property: padding, height
     transition-duration: .5s
@@ -39,15 +42,15 @@
       border-right: 0
 
     h2
-      font-size: 20px
+      font-size: 1.125em
       font-weight: bold
-      margin-top: 0
+      line-height: (1.5 / 1.125)em
+      margin-bottom: (0.5 / 1.125)em // intentionally breaking the rhythm
       text-transform: uppercase
 
     li
-      font-size: 16px
+      font-size: 0.88em
       list-style: none
-      margin: 5px 0
 
   a
     {LINK}

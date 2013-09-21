@@ -15,12 +15,12 @@ HEADER_BORDER_FOCUS = 3px solid #FFF
 SOLID_HEADER_BORDER_FOCUS = 3px solid #000
 
 SIDEBAR_WIDTH = 336px
-SIDEBAR_GUTTER_TABLET = 20px
-SIDEBAR_GUTTER_DESKTOP = 30px
+SIDEBAR_GUTTER_TABLET = 18px
+SIDEBAR_GUTTER_DESKTOP = 36px
 
-CONTENT_PADDING_PHONE = 20px
-CONTENT_PADDING_TABLET = 30px
-CONTENT_PADDING_DESKTOP = 50px
+CONTENT_PADDING_PHONE = 18px
+CONTENT_PADDING_TABLET = 36px
+CONTENT_PADDING_DESKTOP = 54px
 
 MAX_WIDTH = 1050px
 
@@ -115,7 +115,6 @@ ellipsis()
 
 *, *:before, *:after
   box-sizing: border-box
-  line-height: 1.4em
 
 html
   overflow-y: scroll
@@ -124,22 +123,33 @@ body
   background: #F4F4F4 url(cdnOrigin + '/images/body.gif')
   font-family: BODY_FONT
   font-size: 18px
+  line-height: 1.5em
   margin: 0
   padding: 0
   -webkit-font-smoothing: antialiased
 
   @media PHONE
     font-size: 14px
+    line-height: 1.5em
   @media TABLET
     font-size: 16px
+    line-height: 1.5em
   @media DESKTOP
     font-size: 18px
+    line-height: 1.5em
 
-img, iframe
+img, iframe, video
   max-width: 100%
 
+  @media PHONE
+    margin-bottom: (14 * 1.5)px
+  @media TABLET
+    margin-bottom: (16 * 1.5)px
+  @media DESKTOP
+    margin-bottom: (18 * 1.5)px
+
 ul, ol
-  margin: 0
+  margin: 0 0 1.5em 0
   padding: 0
 
 a
@@ -157,22 +167,31 @@ a[href^="mailto"]
 h1, h2, h3, h4, h5
   font-family: HERO_FONT
   font-weight: 500
-  line-height: 1.2em
-  margin: 1em 0 .5em 0
+  margin: 0
   text-rendering: optimizelegibility
-h1
-  font-size: 2.25em
-h2
-  font-size: 1.6em
+h1, .hero .title
+  font-size: 2.3em
+  line-height: (3 / 2.3)em
+  margin-bottom: (1.5 / 2.3)em
+h2, .hero .desc
+  font-size: 1.5em
+  line-height: (1.5 / 1.5)em
+  margin-bottom: (1.5 / 1.5)em
 h3
   font-size: 1.25em
+  line-height: (1.5 / 1.25)em
+  margin-bottom: (1.5 / 1.25)em
 h4
   font-size: 1.125em
+  line-height: (1.5 / 1.125)em
+  margin-bottom: (1.5 / 1.125)em
 h5
   font-size: 1em
+  line-height: (1.5 / 1)em
+  margin-bottom: 1.5em
 
 p
-  margin: 1em 0
+  margin: 0 0 1.5em 0
 
 ul.listing
   list-style: none
@@ -269,12 +288,6 @@ hr
   .pull-right
     margin: 0 0 10px 20px
     float: right
-
-  h1
-    margin: 10px 0 20px 0
-
-  h2:first-child
-    margin-top: 10px
 
   ul:not(.listing)
     padding-left: 20px
