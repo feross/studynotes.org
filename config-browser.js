@@ -1,3 +1,3 @@
 config.cdnOrigin = /^local/.test(window.location.hostname)
   ? '/static'
-  : 'http://www.apstudynotes.org'
+  : 'http://cdn.apstudynotes.org'
