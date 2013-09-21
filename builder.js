@@ -47,7 +47,7 @@ var SITE_JS_FILENAMES = [
   ],
   [
     'bower_components/moment/moment.js',
-    'bower_components/moment/moment.min.js'
+    'bower_components/moment/min/moment.min.js'
   ],
   [
     'bower_components/wysihtml5/dist/wysihtml5-0.4.0pre.js',
