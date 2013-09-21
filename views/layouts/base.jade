@@ -3,6 +3,20 @@ block vars
 html(class='no-js #{layout}', lang='en')
   head
     meta(charset='utf-8')
+
+    link(rel='dns-prefetch', href='//use.typekit.net')
+    link(rel='dns-prefetch', href='//pagead2.googlesyndication.com')
+    link(rel='dns-prefetch', href='//platform.twitter.com')
+    link(rel='dns-prefetch', href='//cdn.api.twitter.com')
+    link(rel='dns-prefetch', href='//p.twitter.com')
+    link(rel='dns-prefetch', href='//connect.facebook.net')
+    link(rel='dns-prefetch', href='//widget.uservoice.com')
+    link(rel='dns-prefetch', href='http://edge.quantserve.com')
+    link(rel='dns-prefetch', href='http://pixel.quantserve.com')
+    link(rel='dns-prefetch', href='http://www.google-analytics.com')
+    link(rel='dns-prefetch', href='http://www.statcounter.com')
+    link(rel='dns-prefetch', href='http://c.statcounter.com')
+
     - if (locals.forceTitle)
       - pageTitle = locals.forceTitle
     - else if (locals.title)
@@ -33,6 +47,10 @@ html(class='no-js #{layout}', lang='en')
     //- meta(property='article:author', content='')
 
     //- TODO: add google plus author information
+
+    //- TODO: Nicer, hi-res favicon
+    //- <link rel="shortcut icon" href="/icon.png">
+    //- <link rel="apple-touch-icon-precomposed" href="/icon.png">
 
     meta(property='fb:admins', content='1347524341')
     meta(property='fb:app_id', content='466476846723021')
