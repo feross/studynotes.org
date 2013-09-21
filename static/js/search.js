@@ -34,7 +34,7 @@ function updateSearchWidth () {
 function updateSearchWidthWhileLoading () {
   updateSearchWidth()
   if ($html.hasClass('wf-loading')) {
-    setTimeout(updateSearchWidthWhileLoading, 100)
+    setTimeout(updateSearchWidthWhileLoading, 50)
   }
 }
 updateSearchWidthWhileLoading()

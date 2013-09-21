@@ -2,34 +2,28 @@
 
 var $window = $(window)
 var $content = $('.content')
-var $contentToolbar = $('.content .toolbar')
-
-var contentToolbarTop
-var contentWidth
-
-function toolbarOnResize () {
-  $contentToolbar.removeClass('sticky') // TODO: can this be removed?
-
-  contentToolbarTop = $contentToolbar.length
-    ? $contentToolbar.offset().top
-    : null
-  contentWidth = $content.width()
-}
+var $toolbar = $('.content .toolbar')
+var $toolbarGhost = $('.content .ghost')
 
 function toolbarOnScroll () {
-  if (contentToolbarTop) {
+  var toolbarTop = $toolbarGhost.length
+    ? $toolbarGhost.offset().top
+    : null
+  var contentWidth = $content.width()
+
+  if (toolbarTop) {
     var scrollTop = $window.scrollTop() // current vertical position from the top
 
     var contentBottom = $content.length
       ? $content.offset().top + $content.height()
       : null
 
-    if (contentToolbarTop < scrollTop && scrollTop < contentBottom) {
-      $contentToolbar
+    if (toolbarTop < scrollTop && scrollTop < contentBottom) {
+      $toolbar
         .addClass('sticky')
         .css({ width: contentWidth })
     } else {
-      $contentToolbar
+      $toolbar
         .removeClass('sticky')
         .css({ width: '' })
     }
