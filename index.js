@@ -87,9 +87,17 @@ Site.prototype.start = function (done) {
     }
 
     // Serve static files
-    var staticMiddleware = express.static(path.join(config.root, 'static'))
-    app.use('/static', staticMiddleware, { maxAge: config.maxAge })
-    app.use(staticMiddleware, { maxAge: config.maxAge })
+    var staticMiddleware = express.static(path.join(config.root, 'static'), {
+      maxAge: config.maxAge
+    })
+    app.use(staticMiddleware)
+    app.use('/static', function (req, res, next) {
+      staticMiddleware(req, res, function (err) {
+        if (err) return next(err)
+        res.send(404)
+      })
+    })
+
 
     app.use(connectSlashes())
 
