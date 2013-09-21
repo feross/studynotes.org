@@ -526,16 +526,38 @@ if ($('#editor').length) {
     }
   }
 
+  // Monkey patch the default parse function (wysihtml5.dom.parse) to do our
+  // own cleanup
+  var parser = function (elementOrHtml, rules, context, cleanUp) {
+    elementOrHtml = wysihtml5.dom.parse(elementOrHtml, rules, context, cleanUp)
+    var isString = (typeof elementOrHtml === 'string')
+    var element = (isString)
+      ? wysihtml5.dom.getAsDom(elementOrHtml, context)
+      : element = elementOrHtml
+
+    // Remove empty paragraph elements (for Word)
+    $(element).find('p').each(function (i, elem) {
+      var $elem = $(elem)
+      var html = $elem.html()
+      if (html === '&nbsp;' || /^(\s|\n)*$/.test(html)) {
+        $elem.remove()
+      }
+    })
+
+    return isString ? wysihtml5.quirks.getCorrectInnerHTML(element) : element
+  }
+
   var editor = new wysihtml5.Editor('editor', {
     toolbar: 'editor-toolbar',
     autoLink: false, // Don't auto-link URLs
-    stylesheets: [config.cdnOrigin + '/css/editor.css'], // Iframe editor stylesheets
+    stylesheets: [config.cdnOrigin + '/css/editor.css'], // Iframe editor css
     parserRules: parserRules, // Rules to parse copy & pasted html
+    parser: parser,
     useLineBreaks: false, // Use <p> instead of <br> for line breaks
     cleanUp: true // remove senseless <span> elements (empty or w/o attrs)
   })
 
-  // Auto-resize editor
+  // Auto-resize the editor
   editor.on('load', function() {
     $(editor.composer.iframe).wysihtml5_size_matters()
   })
