@@ -8,42 +8,7 @@ if ($('#editor').length) {
      * CSS Class white-list
      * Following CSS classes won't be removed when parsed by the wysihtml5 HTML parser
      */
-    "classes": {
-      "wysiwyg-clear-both": 1,
-      "wysiwyg-clear-left": 1,
-      "wysiwyg-clear-right": 1,
-      "wysiwyg-color-aqua": 1,
-      "wysiwyg-color-black": 1,
-      "wysiwyg-color-blue": 1,
-      "wysiwyg-color-fuchsia": 1,
-      "wysiwyg-color-gray": 1,
-      "wysiwyg-color-green": 1,
-      "wysiwyg-color-lime": 1,
-      "wysiwyg-color-maroon": 1,
-      "wysiwyg-color-navy": 1,
-      "wysiwyg-color-olive": 1,
-      "wysiwyg-color-purple": 1,
-      "wysiwyg-color-red": 1,
-      "wysiwyg-color-silver": 1,
-      "wysiwyg-color-teal": 1,
-      "wysiwyg-color-white": 1,
-      "wysiwyg-color-yellow": 1,
-      "wysiwyg-float-left": 1,
-      "wysiwyg-float-right": 1,
-      "wysiwyg-font-size-large": 1,
-      "wysiwyg-font-size-larger": 1,
-      "wysiwyg-font-size-medium": 1,
-      "wysiwyg-font-size-small": 1,
-      "wysiwyg-font-size-smaller": 1,
-      "wysiwyg-font-size-x-large": 1,
-      "wysiwyg-font-size-x-small": 1,
-      "wysiwyg-font-size-xx-large": 1,
-      "wysiwyg-font-size-xx-small": 1,
-      "wysiwyg-text-align-center": 1,
-      "wysiwyg-text-align-justify": 1,
-      "wysiwyg-text-align-left": 1,
-      "wysiwyg-text-align-right": 1
-    },
+    "classes": { },
 
     /**
      * Tag list
@@ -92,19 +57,11 @@ if ($('#editor').length) {
       "acronym": {
         "rename_tag": "span"
       },
-      "br": {
-        "add_class": {
-          "clear": "clear_br"
-        }
-      },
+      "br": {},
       "details": {
         "rename_tag": "div"
       },
-      "h4": {
-        "add_class": {
-          "align": "align_text"
-        }
-      },
+      "h4": {},
       "em": {},
       "title": {
         "remove": 1
@@ -120,7 +77,6 @@ if ($('#editor').length) {
       },
       "small": {
           "rename_tag": "span",
-          "set_class": "wysiwyg-font-size-smaller"
       },
       "area": {
           "remove": 1
@@ -150,25 +106,9 @@ if ($('#editor').length) {
       "figcaption": {
           "rename_tag": "div"
       },
-      "a": {
-          "check_attributes": {
-              "href": "url" // if you compiled master manually then change this from 'url' to 'href'
-          },
-          "set_attributes": {
-              "rel": "nofollow",
-              "target": "_blank"
-          }
-      },
+      "a": {}, // manually removed in our own parse function
       "img": {
-          "check_attributes": {
-              "width": "numbers",
-              "alt": "alt",
-              "src": "url", // if you compiled master manually then change this from 'url' to 'src'
-              "height": "numbers"
-          },
-          "add_class": {
-              "align": "align_img"
-          }
+        "remove": 1
       },
       "rb": {
           "rename_tag": "span"
@@ -205,9 +145,7 @@ if ($('#editor').length) {
           "remove": 1
       },
       "tbody": {
-          "add_class": {
-              "align": "align_text"
-          }
+          "remove": 1
       },
       "dd": {
           "rename_tag": "div"
@@ -217,22 +155,12 @@ if ($('#editor').length) {
       },
       "li": {},
       "td": {
-          "check_attributes": {
-              "rowspan": "numbers",
-              "colspan": "numbers"
-          },
-          "add_class": {
-              "align": "align_text"
-          }
+        "remove": 1
       },
       "object": {
           "remove": 1
       },
-      "div": {
-          "add_class": {
-              "align": "align_text"
-          }
-      },
+      "div": {},
       "option": {
           "rename_tag": "span"
       },
@@ -252,8 +180,7 @@ if ($('#editor').length) {
           "rename_tag": "div"
       },
       "big": {
-          "rename_tag": "span",
-          "set_class": "wysiwyg-font-size-larger"
+          "rename_tag": "h2",
       },
       "button": {
           "rename_tag": "span"
@@ -271,11 +198,7 @@ if ($('#editor').length) {
       "keygen": {
           "remove": 1
       },
-      "h5": {
-          "add_class": {
-              "align": "align_text"
-          }
-      },
+      "h5": {},
       "meta": {
           "remove": 1
       },
@@ -289,14 +212,10 @@ if ($('#editor').length) {
           "rename_tag": "span"
       },
       "caption": {
-          "add_class": {
-              "align": "align_text"
-          }
+          "rename_tag": "p"
       },
       "tfoot": {
-          "add_class": {
-              "align": "align_text"
-          }
+          "remove": 1
       },
       "base": {
           "remove": 1
@@ -317,11 +236,7 @@ if ($('#editor').length) {
       "b": {
           "rename_tag": "strong"
       },
-      "q": {
-          "check_attributes": {
-              "cite": "url"
-          }
-      },
+      "q": {},
       "applet": {
           "remove": 1
       },
@@ -363,11 +278,7 @@ if ($('#editor').length) {
       "del": {
           "remove": 1
       },
-      "blockquote": {
-          "check_attributes": {
-              "cite": "url"
-          }
-      },
+      "blockquote": {},
       "style": {
           "remove": 1
       },
@@ -377,11 +288,7 @@ if ($('#editor').length) {
       "meter": {
           "rename_tag": "span"
       },
-      "h3": {
-          "add_class": {
-              "align": "align_text"
-          }
-      },
+      "h3": {},
       "textarea": {
           "rename_tag": "span"
       },
@@ -393,9 +300,6 @@ if ($('#editor').length) {
       },
       "font": {
           "rename_tag": "span",
-          "add_class": {
-              "size": "size_font"
-          }
       },
       "tt": {
           "rename_tag": "span"
@@ -404,9 +308,7 @@ if ($('#editor').length) {
           "remove": 1
       },
       "thead": {
-          "add_class": {
-              "align": "align_text"
-          }
+          "remove": 1
       },
       "blink": {
           "rename_tag": "span"
@@ -417,22 +319,12 @@ if ($('#editor').length) {
       "xml": {
           "remove": 1
       },
-      "h6": {
-          "add_class": {
-              "align": "align_text"
-          }
-      },
+      "h6": {},
       "param": {
           "remove": 1
       },
       "th": {
-          "check_attributes": {
-              "rowspan": "numbers",
-              "colspan": "numbers"
-          },
-          "add_class": {
-              "align": "align_text"
-          }
+          "remove": 1
       },
       "legend": {
           "rename_tag": "span"
@@ -459,7 +351,6 @@ if ($('#editor').length) {
       "pre": {},
       "center": {
           "rename_tag": "div",
-          "set_class": "wysiwyg-text-align-center"
       },
       "audio": {
           "remove": 1
@@ -495,19 +386,11 @@ if ($('#editor').length) {
       "ruby": {
           "rename_tag": "span"
       },
-      "h2": {
-          "add_class": {
-              "align": "align_text"
-          }
-      },
+      "h2": {},
       "ins": {
           "rename_tag": "span"
       },
-      "p": {
-          "add_class": {
-              "align": "align_text"
-          }
-      },
+      "p": {},
       "sub": {
           "rename_tag": "span"
       },
@@ -535,14 +418,35 @@ if ($('#editor').length) {
       ? wysihtml5.dom.getAsDom(elementOrHtml, context)
       : element = elementOrHtml
 
-    // Remove empty paragraph elements (for Word)
-    $(element).find('p').each(function (i, elem) {
-      var $elem = $(elem)
-      var html = $elem.html()
-      if (html === '&nbsp;' || /^(\s|\n)*$/.test(html)) {
-        $elem.remove()
-      }
-    })
+    function cleanUp () {
+      var didModify = false
+
+      // Remove empty elements
+      $(element).find('*').each(function (i, elem) {
+        var $elem = $(elem)
+        var html = $elem.html()
+        if (html === '&nbsp;' || /^(\s|\n)*$/.test(html)) {
+          console.log('removing ' + elem)
+          $elem.remove()
+          didModify = true
+        }
+      })
+
+      // Replace links, <div>s, and <span>s with their contents, since these
+      // tags don't affect presentation at all.
+      $(element).find('a, div, span').replaceWith(function () {
+        didModify = true
+        return $(this).contents()
+      })
+
+      // If we removed an empty element, then run this function again because
+      // there might be more elements that have now become removable. For
+      // example, take <p><span></span></p>. Say that <p> is visited first. It
+      // cannot be removed the first time around. But after <span> is removed,
+      // <p> is now removable.
+      if (didModify) cleanUp()
+    }
+    cleanUp()
 
     return isString ? wysihtml5.quirks.getCorrectInnerHTML(element) : element
   }
