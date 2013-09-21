@@ -1,42 +1,49 @@
-#editor-toolbar
-  padding: 6px
+body.submit
+  textarea[name='prompt']
+    height: 100px
 
-  &:not(.sticky)
-    border: 0
+  textarea[name='body']
+    height: 200px
 
-  .space
-    float: left
-    display: block
-    height: 30px
-    width: 15px
+  #editor-toolbar
+    padding: 6px 0
 
-  a
-    border-radius: 3px
-    box-shadow: 0 1px 1px rgba(0,0,0,0.2)
-    display: block
-    float: left
-    margin: 5px
-    min-width: 35px
+    &:not(.sticky)
+      border: 0
 
-    {LINK}
-      border: 1px solid GRAY_DARK
-      background-color: GRAY_LIGHTER
-      color: GRAY_DARK
-      padding: 3px 8px 1px 8px
-
-    {HOVER}
-      border: 1px solid #000
-      color: #000
-      text-decoration: none
-
-    &.wysihtml5-command-active
-      {LINK}
-        border: 2px solid RED
-        background-color: RED_LIGHT
-        color: RED
-        padding: 2px 7px 0px 7px
-
-    i
+    .space
+      float: left
       display: block
-      line-height: 1.5em
-      text-align: center
+      height: 30px
+      width: 15px
+
+    a
+      border-radius: 3px
+      box-shadow: 0 1px 1px rgba(0,0,0,0.2)
+      display: block
+      float: left
+      margin: 5px
+      min-width: 35px
+
+      {LINK}
+        border: 1px solid GRAY_DARK
+        background-color: GRAY_LIGHTER
+        color: GRAY_DARK
+        padding: 3px 8px 1px 8px
+
+      {HOVER}
+        border: 1px solid #000
+        color: #000
+        text-decoration: none
+
+      &.wysihtml5-command-active
+        {LINK}
+          border: 2px solid RED
+          background-color: RED_LIGHT
+          color: RED
+          padding: 2px 7px 0px 7px
+
+      i
+        display: block
+        line-height: 1.5em
+        text-align: center

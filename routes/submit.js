@@ -37,6 +37,7 @@ module.exports = function () {
     }
     var essay = new model.Essay({
       name: req.body.name,
+      prompt: req.body.prompt,
       body: req.body.body,
       collegeId: college._id,
       userId: req.user._id

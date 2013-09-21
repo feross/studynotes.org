@@ -17,6 +17,7 @@ var Essay = mongoose.Schema({
       validate({ message: 'Please give your essay a title.' }, 'notEmpty')
     ]
   },
+  prompt: String,
   body: {
     type: String,
     validate: [
@@ -69,9 +70,12 @@ Essay.virtual('searchDesc').get(function () {
 // Sanitize essay to strip bad html before saving
 Essay.pre('save', function (next) {
   var essay = this
-  if (!essay.isModified('body')) return next()
-
-  essay.body = util.sanitizeHTML(essay.body)
+  if (essay.isModified('body')) {
+    essay.body = util.sanitizeHTML(essay.body)
+  }
+  if (essay.isModified('prompt')) {
+    essay.prompt = util.sanitizeHTML(essay.prompt)
+  }
   next()
 })
 

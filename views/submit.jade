@@ -18,7 +18,9 @@ block content
           option
           each college in colleges
             option(value='#{ college.slug }' selected=(essay && (essay.college === college.slug)))= college.name
-    .row(style='margin-bottom: 0')
+    .row
+      textarea.editor(name='prompt', placeholder='Paste the essay prompt here... (optional)')= (essay && essay.prompt)
+    .row(style='margin: -10px 0 5px 0')
       .ghost
           #editor-toolbar.toolbar.clearfix(style='display: none;')
             a(data-wysihtml5-command='formatInline', data-wysihtml5-command-value='strong'): i.icon-bold
@@ -30,6 +32,9 @@ block content
             .space
             a(data-wysihtml5-command='formatBlock', data-wysihtml5-command-value='h2') Heading
     .row
-      textarea#editor(name='body', placeholder='Paste your essay here...')= (essay && essay.body)
+      textarea.editor(name='body', placeholder='Paste your essay here...', data-toolbar='editor-toolbar')= (essay && essay.body)
+    //- if (user.admin)
+    //-   .row
+    //-     input(name='')
     .row
       button.btn.large(type='submit') Submit Essay
