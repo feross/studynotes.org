@@ -90,7 +90,7 @@ Site.prototype.start = function (done) {
     }
 
     // Serve static files to be mirrored by the CDN.
-    app.use('/static', express.static(path.join(config.root, 'static'), {
+    app.use('/cdn', express.static(path.join(config.root, 'static'), {
       maxAge: config.maxAge
     }))
 
