@@ -14,6 +14,14 @@ SOLID_HEADER_BORDER = 1px solid GRAY_LIGHT
 HEADER_BORDER_FOCUS = 3px solid #FFF
 SOLID_HEADER_BORDER_FOCUS = 3px solid #000
 
+PHONE = 'only screen and (max-width: 799px)'
+TABLET = 'only screen and (min-width: 800px) and (max-width: 1099px)'
+DESKTOP = 'only screen and (min-width: 1100px)'
+
+PHONE_FONT_SIZE = 15px
+TABLET_FONT_SIZE = 16px
+DESKTOP_FONT_SIZE = 18px
+
 SIDEBAR_WIDTH = 336px
 SIDEBAR_GUTTER_TABLET = 18px
 SIDEBAR_GUTTER_DESKTOP = 36px
@@ -24,9 +32,6 @@ CONTENT_PADDING_DESKTOP = 54px
 
 MAX_WIDTH = 1050px
 
-PHONE = 'only screen and (max-width: 799px)'
-TABLET = 'only screen and (min-width: 800px) and (max-width: 1099px)'
-DESKTOP = 'only screen and (min-width: 1100px)'
 
 // For convenience, when styling links
 
@@ -129,24 +134,24 @@ body
   -webkit-font-smoothing: antialiased
 
   @media PHONE
-    font-size: 14px
+    font-size: PHONE_FONT_SIZE
     line-height: 1.5em
   @media TABLET
-    font-size: 16px
+    font-size: TABLET_FONT_SIZE
     line-height: 1.5em
   @media DESKTOP
-    font-size: 18px
+    font-size: DESKTOP_FONT_SIZE
     line-height: 1.5em
 
 img, iframe, video
   max-width: 100%
 
   @media PHONE
-    margin-bottom: (14 * 1.5)px
+    margin-bottom: (PHONE_FONT_SIZE * 1.5)px
   @media TABLET
-    margin-bottom: (16 * 1.5)px
+    margin-bottom: (TABLET_FONT_SIZE * 1.5)px
   @media DESKTOP
-    margin-bottom: (18 * 1.5)px
+    margin-bottom: (DESKTOP_FONT_SIZE * 1.5)px
 
 ul, ol
   margin: 0 0 1.5em 0
