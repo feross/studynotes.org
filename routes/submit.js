@@ -8,13 +8,7 @@ var model = require('../model')
 
 module.exports = function () {
   app.get('/submit/essay', auth.ensureAuth, function (req, res, next) {
-    var colleges = _(app.cache.colleges).flatten().sort(function (a, b) {
-      if(a.name < b.name) return -1
-      if(a.name > b.name) return 1
-      return 0
-    })
     res.render('submit', {
-      colleges: colleges,
       hero: {
         title: 'Submit an essay',
         desc: 'Help the next generation of students!'
@@ -32,7 +26,7 @@ module.exports = function () {
     var college = app.cache.colleges[req.body.college]
     if (!college) {
       req.flash('error', 'Please select a university from the list.')
-      req.flash('essay', req.body) // TODO
+      req.flash('essay', req.body)
       return res.redirect('/submit/essay/')
     }
     var essay = new model.Essay({

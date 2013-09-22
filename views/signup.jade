@@ -1,13 +1,19 @@
 extends layouts/form
 
+append stylesheets
+  link(rel='stylesheet', href='#{ config.cdnOrigin }/out/bower_components/select2/select2.css')
+
 block content
   //- h1 Hey there! Let's get started.
   //- h2 What would you like to do?
   //- p Submit an Essay - get paid.
   //- p Buy an Essay - get into college.
 
-  h1 Get accepted at a top university
-  h2 Sign up now to read the best essays!
+  h1 Help students get into college
+  h2 Share your admissions essays!
+
+  //- h1 Get accepted at a top university
+  //- h2 Sign up now to read the best essays!
 
   if (locals.errors.length)
     .errors
@@ -22,6 +28,15 @@ block content
       input(name='email', type='email', placeholder='email', value=(user && user.email), required)
     .row
       input(name='password', type='password', placeholder='password', value=(user && user.password), required)
+    .row
+      select.select2(name='college', data-placeholder='What university do/did you attend?')
+        option
+        each college in app.cache.collegesArray
+          option(value='#{ college.slug }' selected=(essay && (essay.college === college.slug)))= college.name
+    .row
+      input(name='collegeMajor', type='text', placeholder='college major', value=(user && user.collegeMajor))
+    .row
+      input(name='collegeYear', type='number', placeholder='graduation year', value=(user && user.collegeYear))
     .row
       button.btn.large(type='submit') Sign Up
 

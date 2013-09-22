@@ -74,5 +74,20 @@ exports.loadCache = function (done) {
           cb(null)
         })
     }
-  ], done)
+  ], function (err) {
+
+    function sortByName (a, b) {
+      if(a.name < b.name) return -1
+      if(a.name > b.name) return 1
+      return 0
+    }
+    app.cache.coursesArray = _(app.cache.courses)
+      .flatten()
+      .sort(sortByName)
+    app.cache.collegesArray = _(app.cache.colleges)
+      .flatten()
+      .sort(sortByName)
+
+    done(err)
+  })
 }

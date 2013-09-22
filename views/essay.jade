@@ -5,7 +5,11 @@ append sidebar
     a(href=user.url, title=user.name)
       img(src=user.gravatar)
       h2.name= user.name
-    h3.accepted Accepted at <a href='#{ essay.collegeId.url }'>#{ essay.collegeId.name }</a>
+    h3.accepted Accepted at <a href='#{ college.url }'>#{ college.shortName }</a>
+    if (user.collegeYear)
+      - var year = user.collegeYear
+      h3.accepted #{ user.hasGraduated ? 'Attended' : 'Attending' } <a href='#{ user.collegeId.url }'>#{ college.shortName }</a>
+
 
   include includes/ads/adsense-rect
 
@@ -47,4 +51,4 @@ block content
 
   hr
   h2 How to cite this essay (with MLA)
-  .cite #{ essay.userId.mlaName }. "#{essay.name}" StudyNotes.org. StudyNotes, Inc., #{moment(essay.createDate).format('DD MMM. YYYY.')} Web. #{moment().format('DD MMM. YYYY.')} &lt;#{essay.absoluteUrl}&gt;.
+  .cite #{ user.mlaName }. "#{essay.name}" StudyNotes.org. StudyNotes, Inc., #{moment(essay.createDate).format('DD MMM. YYYY.')} Web. #{moment().format('DD MMM. YYYY.')} &lt;#{essay.absoluteUrl}&gt;.

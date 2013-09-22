@@ -33,6 +33,12 @@ var User = new mongoose.Schema({
       validate({ message: 'You need a password, silly!' }, 'notEmpty')
     ]
   },
+  collegeId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'College'
+  },
+  collegeMajor: String,
+  collegeYear: Number,
   slug: model.SLUG_UNIQUE,
   admin: Boolean
 })
@@ -64,6 +70,11 @@ User.virtual('mlaName').get(function () {
 
 User.virtual('searchDesc').get(function () {
   return 'User'
+})
+
+User.virtual('hasGraduated').get(function () {
+  if (this.collegeYear === undefined) return true
+  return this.collegeYear <= (new Date()).getFullYear()
 })
 
 /**

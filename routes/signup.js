@@ -21,10 +21,14 @@ module.exports = function () {
   })
 
   app.post('/signup', function (req, res, next) {
+    var college = app.cache.colleges[req.body.college]
     var user = new model.User({
       name: req.body.name,
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
+      collegeId: college._id,
+      collegeMajor: req.body.collegeMajor,
+      collegeYear: req.body.collegeYear
     })
     user.save(function (err) {
       if (err && err.code === 11000) {

@@ -24,11 +24,11 @@ header.header
       li: a.colleges(href='/colleges/', title='Browse all college admissions essays')
         i.icon-chevron-down.hide-phone
         span College Essays
-      if (locals.user)
-        li: a(href='#{user.url}', title='Manage your account')
-          img(src='#{ user.gravatarBlank }', width=21, height=21).hide-phone.hide-tablet
-          i.icon-user.hide-phone.hide-tablet
-          span= user.firstName
+      if (locals.currentUser)
+        li: a(href='#{currentUser.url}', title='Manage your account')
+          img(src='#{ currentUser.gravatarBlank }', width=21, height=21).hide-phone.hide-tablet
+          i.icon-currentUser.hide-phone.hide-tablet
+          span= currentUser.firstName
         li: a.logout(href='#logout', title='Logout of StudyNotes')
           i.icon-signout.hide-phone.hide-tablet
           span Logout

@@ -15,7 +15,7 @@ module.exports = function () {
 
     model.Essay
       .findOne({ collegeId: college._id, slug: essaySlug })
-      .populate('userId collegeId')
+      .populate('userId')
       .exec(function (err, essay) {
         if (err) return next(err)
         if (!essay) return next()
@@ -26,7 +26,8 @@ module.exports = function () {
           college: college,
           essay: essay,
           title: essay.name + ' - ' + college.name,
-          url: essay.url
+          url: essay.url,
+          user: essay.userId
         })
 
         essay.hit()
