@@ -424,8 +424,10 @@ var parser = function (elementOrHtml, rules, context, cleanUp) {
     ? wysihtml5.dom.getAsDom(elementOrHtml, context)
     : element = elementOrHtml
 
+  var count = 0 // to prevent infinite loops
   function extraCleanup () {
     var didModify = false
+    count += 1
 
     // Remove empty elements
     $(element).find('*').each(function (i, elem) {
@@ -454,7 +456,7 @@ var parser = function (elementOrHtml, rules, context, cleanUp) {
     // example, take <p><span></span></p>. Say that <p> is visited first. It
     // cannot be removed the first time around. But after <span> is removed,
     // <p> is now removable.
-    if (didModify) extraCleanup()
+    if (didModify && count < 1000) extraCleanup()
   }
   extraCleanup()
 
