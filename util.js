@@ -180,7 +180,8 @@ var elementsWhitelist = [
   'strong', 'b', 'em', 'i', 'u',
   'ol', 'ul', 'li',
   'h2', 'h3', 'h4', 'h5', 'h6',
-  'div', 'span'
+  'div', 'span',
+  'sub', 'sup'
 ]
 
 var attributesWhitelist = [

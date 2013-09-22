@@ -133,9 +133,7 @@ var parserRules = {
     "bgsound": {
         "remove": 1
     },
-    "sup": {
-        "rename_tag": "span"
-    },
+    "sup": {},
     "address": {
         "rename_tag": "div"
     },
@@ -398,9 +396,7 @@ var parserRules = {
         "rename_tag": "span"
     },
     "p": {},
-    "sub": {
-        "rename_tag": "span"
-    },
+    "sub": {},
     "comment": {
         "remove": 1
     },
