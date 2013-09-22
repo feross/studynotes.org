@@ -24,7 +24,6 @@ module.exports = function () {
   app.use(function (err, req, res, next) {
     // Log the exception
     console.error('EXCEPTION: ' + req.url)
-    console.dir(err)
     console.error(err.stack)
     console.error('HEADERS:')
     console.dir(req.headers)

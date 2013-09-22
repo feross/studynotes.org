@@ -50,7 +50,7 @@ Essay.pre('save', function (next) {
 
 Essay.virtual('url').get(function () {
   var essay = this
-  var collegeId = this.collegeId.toString()
+  var collegeId = essay.populated('collegeId') || essay.collegeId.toString()
   var college = _.find(app.cache.colleges, function (c) {
     return c.id == collegeId
   })

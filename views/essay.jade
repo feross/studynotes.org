@@ -1,9 +1,19 @@
 extends layouts/main-sidebar
 
 append sidebar
+  .author
+    a(href=user.url, title=user.name)
+      img(src=user.gravatar)
+      h2.name= user.name
+    h3.accepted Accepted at #{ essay.collegeId.name }
+
   include includes/ads/adsense-rect
-  h3 About this Essay
-  p <strong>#{ util.addCommas(essay.hits) } people</strong> have viewed this #{ essay.shortName } admissions essay.
+
+  h3 Essay Stats
+  ul
+    li #{ util.addCommas(essay.hits) } views
+    li Posted <span title='#{ moment(essay.createDate).format("MMMM Do, YYYY, h:mm:ss a") }'>#{ moment(essay.createDate).fromNow() }</span>
+    li Averaging #{ util.addCommas(util.hitsPerDay(essay.hits, essay.createDate)) } views per day
   //- include includes/relatedessays
 
 //- append toolbar

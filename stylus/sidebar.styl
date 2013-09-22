@@ -1,6 +1,6 @@
 .sidebar
   float: right
-  margin-top: 50px
+  margin-top: 0px
   position: relative
   width: SIDEBAR_WIDTH
 
@@ -14,43 +14,43 @@
     text-align: center
     width: 100%
 
-  & > div:not(.ad)
-    margin: 1.2em 0
+  & > div
+    margin: 0 0 2em 0
+  img
+    margin-bottom: 0
 
-  h1, h2, h3, h4
+  h1, h2, h3, h4, h5
     font-family: BODY_FONT
+    margin-bottom: 0.7em
+
+    &:last-child
+      margin-bottom: 0
+
+  ul
+    color: GRAY_DARK
+    margin-left: 25px
+
+.countdown
+  .time
+    margin-bottom: 1.5em
+    float: left
+    width: 25%
+
+    div
+      font-size: 35px
+      line-height: 1.1em
+      margin: 0
+      text-align: center
+    span
+      display: block
+      font-size: 15px
+      margin: 0
+      text-align: center
 
   h3
-    font-size: 19px
-    font-weight: bold
-    margin: 1em 0 1em 0
+    margin-bottom: 1.2em
+    text-align: center
+    text-transform: uppercase
 
-
-  //
-  // COUNTDOWN
-  //
-
-  .countdown
-
-    .time
-      float: left
-      width: 25%
-
-      div
-        font-size: 35px
-        line-height: 1.1em
-        margin: 0
-        text-align: center
-      span
-        display: block
-        font-size: 15px
-        margin: 0
-        text-align: center
-
-    h3
-      margin-top: 1em
-      text-align: center
-      text-transform: uppercase
-
-      &.left-to-study
-        font-weight: normal
+    &.left-to-study
+      font-weight: normal

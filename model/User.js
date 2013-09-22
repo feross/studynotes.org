@@ -33,7 +33,8 @@ var User = new mongoose.Schema({
       validate({ message: 'You need a password, silly!' }, 'notEmpty')
     ]
   },
-  slug: model.SLUG_UNIQUE
+  slug: model.SLUG_UNIQUE,
+  admin: Boolean
 })
 
 // Trim whitespace
@@ -65,11 +66,18 @@ User.virtual('searchDesc').get(function () {
   return 'User'
 })
 
-// Returns the URL to the user's Gravatar image, based on their email address.
-// If the user has nothing set, this returns a transparent PNG.
-User.virtual('gravatarUrl').get(function() {
+/**
+ * Returns the URL to the user's Gravatar image, based on their email address.
+ * If the user has nothing set, this returns a transparent PNG.
+ */
+User.virtual('gravatarBlank').get(function() {
   var hash = md5(this.email.trim().toLowerCase())
-  return '//www.gravatar.com/avatar/' + hash + '?size=100&default=blank'
+  return '//www.gravatar.com/avatar/' + hash + '?size=200&default=blank'
+})
+
+User.virtual('gravatar').get(function () {
+  var hash = md5(this.email.trim().toLowerCase())
+  return '//www.gravatar.com/avatar/' + hash + '?size=200&default=mm'
 })
 
 // Store hashed version of user's password
