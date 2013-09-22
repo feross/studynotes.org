@@ -41,9 +41,9 @@ header.header
           span Log In
 
 .browseWrapper
-  ul.browse.browse-courses
-    each course in _.flatten(app.cache.courses)
-      li
+  .browse.browse-courses
+    each course in app.cache.coursesArray.slice(0, 3)
+      div
         h2: a(href='#{ course.url }')= course.name
         if (course.notetypes)
           ul
@@ -51,12 +51,25 @@ header.header
               li: a(href='/#{ course.slug }/#{ notetype.slug }/')= notetype.name
 
 .browseWrapper
-  ul.browse.browse-colleges
-    li
+  .browse.browse-colleges
+    div
       h2: a(href='/colleges') College Admissions Essays
       ul
-        each college in _.flatten(app.cache.colleges).slice(0, 7)
-          li: a(href='/#{ college.slug }/', title='#{ college.name } Admissions Essays') #{ college.shortName } Essays
+        each college in app.cache.collegesArray.slice(0, 7)
+          li: a(href='/#{ college.slug }/', title='#{ college.name } Sample Essays') #{ college.shortName } Essays
+    div
+      ul
+        each college in app.cache.collegesArray.slice(7, 15)
+          li: a(href='/#{ college.slug }/', title='#{ college.name } Sample Essays') #{ college.shortName } Essays
+    div
+      ul
+        each college in app.cache.collegesArray.slice(15, 23)
+          li: a(href='/#{ college.slug }/', title='#{ college.name } Sample Essays') #{ college.shortName } Essays
+    div
+      ul
+        each college in app.cache.collegesArray.slice(23)
+          li: a(href='/#{ college.slug }/', title='#{ college.name } Sample Essays') #{ college.shortName } Essays
+      a.btn(href='/submit/essay/') Add your essay
 
 if (locals.hero)
   .heroImage

@@ -6,13 +6,13 @@
   z-index: 50
 
   @media PHONE
-    padding: 0 9px
+    padding: 0 5px
   @media TABLET
-    padding: 0 18px
+    padding: 0 10px
   @media DESKTOP
-    padding: 0 27px
+    padding: 0 15px
 
-.browse, .browse ul
+.browse
   margin: 0
   padding: 0
 
@@ -31,12 +31,12 @@
     transition-property: padding, height
     transition-duration: .5s
 
-  & > li
+  & > div
     border-right: 1px solid GRAY_DARKEST
-    display: inline-block
-    padding: 0 15px
+    display: block
+    float: left
+    padding: 0 20px
     vertical-align: top
-    width: 32%
 
     &:last-child
       border-right: 0
@@ -45,12 +45,18 @@
       font-size: 1.125em
       font-weight: bold
       line-height: (1.5 / 1.125)em
-      margin-bottom: (0.5 / 1.125)em // intentionally breaking the rhythm
+      margin-bottom: 0.2em
       text-transform: uppercase
 
     li
       font-size: 0.88em
       list-style: none
+
+  &.browse-courses > div
+    width: 33.3%
+
+  &.browse-colleges > div
+    width: 25%
 
   a
     {LINK}
@@ -60,3 +66,6 @@
       width: 100%
     {HOVER}
       color: BLUE_LIGHT
+
+  .btn
+    text-align: center

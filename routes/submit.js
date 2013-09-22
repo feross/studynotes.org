@@ -10,10 +10,10 @@ module.exports = function () {
   app.get('/submit/essay', auth.ensureAuth, function (req, res, next) {
     res.render('submit', {
       hero: {
-        title: 'Submit an essay',
-        desc: 'Help the next generation of students!'
+        title: 'Add an essay to StudyNotes',
+        desc: 'Help everyone write a powerful essay, regardless of their background.'
       },
-      title: 'Submit a college essay',
+      title: 'Submit an essay',
       url: '/submit/essay',
       searchFocus: false,
 
