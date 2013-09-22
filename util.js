@@ -176,7 +176,7 @@ exports.hitsPerDay = function (hits, date) {
 }
 
 var elementsWhitelist = [
-  'p',
+  'p', 'br',
   'strong', 'b', 'em', 'i', 'u',
   'ol', 'ul', 'li',
   'h2', 'h3', 'h4', 'h5', 'h6',
