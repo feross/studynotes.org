@@ -9,10 +9,11 @@ body {
    */
   height: auto !important;
   padding: 15px;
+  line-height: 1.5em !important;
 }
 
 body > p {
-  margin: 0 0 1.5em 0;
+  margin: 0.75em 0 0.75em 0;
 }
 
 body > h2 {
