@@ -202,7 +202,7 @@ Site.prototype.addHeaders = function (req, res, next) {
 
 // Make certain variables available to templates on this request
 Site.prototype.addTemplateLocals = function (req, res, next) {
-  res.locals.currentUser = req.currentUser
+  res.locals.currentUser = req.user
   res.locals.csrf = req.csrfToken()
   next()
 }
