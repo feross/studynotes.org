@@ -419,6 +419,7 @@ var parserRules = {
 // Monkey patch the default parse function (wysihtml5.dom.parse) to do our
 // own cleanup
 var parser = function (elementOrHtml, rules, context, cleanUp) {
+  elementOrHtml = wysihtml5.dom.parse(elementOrHtml, rules, context, cleanUp)
   var isString = (typeof elementOrHtml === 'string')
   var element = (isString)
     ? wysihtml5.dom.getAsDom(elementOrHtml, context)
@@ -432,6 +433,7 @@ var parser = function (elementOrHtml, rules, context, cleanUp) {
     // Remove empty elements
     $(element).find('*').each(function (i, elem) {
       var $elem = $(elem)
+      if ($elem.is('br')) return // don't remove <br>s
       var html = $elem.html()
       if (html === '&nbsp;' || /^(\s|\n)*$/.test(html)) {
         console.log('removing ' + $elem[0].outerHTML)
@@ -460,8 +462,7 @@ var parser = function (elementOrHtml, rules, context, cleanUp) {
   }
   extraCleanup()
 
-  elementOrHtml = isString ? wysihtml5.quirks.getCorrectInnerHTML(element) : element
-  return wysihtml5.dom.parse(elementOrHtml, rules, context, cleanUp)
+  return isString ? wysihtml5.quirks.getCorrectInnerHTML(element) : element
 }
 
 // Initialize all the wysiwyg editors on the page
