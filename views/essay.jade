@@ -5,7 +5,7 @@ append sidebar
     a(href=user.url, title=user.name)
       img(src=user.gravatar)
       h2.name= user.name
-    h3.accepted Accepted at #{ essay.collegeId.name }
+    h3.accepted Accepted at <a href='#{ essay.collegeId.url }'>#{ essay.collegeId.name }</a>
 
   include includes/ads/adsense-rect
 
