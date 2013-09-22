@@ -1,15 +1,21 @@
 extends layouts/main-sidebar
 
 append sidebar
-  include includes/ads/adsense-rect
   h3 User Stats
-  p <strong>#{ util.addCommas(theUser.hits) } people</strong> have viewed #{ theUser.name }'s profile.
+  ul
+    li #{ util.addCommas(user.hits) } profile views
+    li #{ util.addCommas(totalHits) } total views across StudyNotes
+
+  include includes/ads/adsense-rect
 
 block content
-  include includes/breadcrumbs
-  h1 Notes by #{ theUser.name }
-
   include includes/toolbar
 
-  p Nothing to see here yet
-
+  if (essays.length)
+    ul.listing
+      each essay in essays
+        li: a(href='#{ essay.url }')= essay.name + ' - ' + essay.collegeId.shortName
+  else if (user._id === currentUser._id)
+    h2 You haven't posted anything yet! <a href="/submit/essay/">Share your college admissions essay</a>!
+  else
+    p Nothing to see here yet!
