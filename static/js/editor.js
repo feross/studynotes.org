@@ -441,10 +441,20 @@ var parser = function (elementOrHtml, rules, context, cleanUp) {
     // Replace links, <div>s, and <span>s with their contents, since these
     // tags don't affect presentation at all.
     $(element).find('a, div, span').each(function (i, elem) {
-      $(elem).replaceWith(function () {
-        console.log('replacing ' + $(this)[0].outerHTML + ' with its contents')
+      var $elem = $(elem)
+      $elem.replaceWith(function () {
+        console.log('replacing ' + $elem[0].outerHTML + ' with its contents')
+        var contents = $elem.contents()
+
+        // If removing this element would put its contents directly in the
+        // <body>, then append a space so that it doesn't bump against the
+        // next element.
+        if ($elem.parent().is('body') && contents.length) {
+          contents[0].textContent += ' '
+        }
+
         didModify = true
-        return $(this).contents()
+        return contents
       })
       return false
     })
