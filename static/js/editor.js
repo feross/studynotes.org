@@ -438,8 +438,8 @@ var parser = function (elementOrHtml, rules, context, cleanUp) {
       }
     })
 
-    // Replace links, <div>s, and <span>s with their contents, since these
-    // tags don't affect presentation at all.
+    // Replace <div>s and <span>s with their contents, since it doesn't affect
+    // presentation. De-linkify links, too.
     $(element).find('a, div, span').each(function (i, elem) {
       var $elem = $(elem)
       $elem.replaceWith(function () {
