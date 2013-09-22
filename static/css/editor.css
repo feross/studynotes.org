@@ -12,7 +12,15 @@ body {
 }
 
 body > p {
-  margin: 1em 0;
+  margin: 0 0 1.5em 0;
+}
+
+body > h2 {
+  font-size: 1.3em;
+}
+
+body > ul {
+  margin: 0 0 1.5em 0;
 }
 
 body.placeholder {
