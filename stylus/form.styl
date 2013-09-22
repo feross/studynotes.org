@@ -20,12 +20,16 @@ CONTENT_WIDTH = 580px
 
   input, textarea
     border: 2px solid GRAY_DARK
-    border-radius: 25px
 
     &:focus, &:active
       border-color: BLUE
       outline: 0
       box-shadow: 0 0 5px rgba(BLUE, 0.4)
+
+  input
+    border-radius: 25px
+  textarea
+    border-radius: 10px
 
   input, .select2-container .select2-choice
     height: 50px
