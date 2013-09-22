@@ -27,7 +27,7 @@ header.header
       if (locals.currentUser)
         li: a(href='#{currentUser.url}', title='Manage your account')
           img(src='#{ currentUser.gravatarBlank }', width=21, height=21).hide-phone.hide-tablet
-          i.icon-currentUser.hide-phone.hide-tablet
+          i.icon-user.hide-phone.hide-tablet
           span= currentUser.firstName
         li: a.logout(href='#logout', title='Logout of StudyNotes')
           i.icon-signout.hide-phone.hide-tablet
