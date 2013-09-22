@@ -83,12 +83,12 @@ User.virtual('hasGraduated').get(function () {
  */
 User.virtual('gravatarBlank').get(function() {
   var hash = md5(this.email.trim().toLowerCase())
-  return '//www.gravatar.com/avatar/' + hash + '?size=200&default=blank'
+  return '//www.gravatar.com/avatar/' + hash + '?size=50&default=blank'
 })
 
 User.virtual('gravatar').get(function () {
   var hash = md5(this.email.trim().toLowerCase())
-  return '//www.gravatar.com/avatar/' + hash + '?size=200&default=mm'
+  return '//www.gravatar.com/avatar/' + hash + '?size=400&default=mm'
 })
 
 // Store hashed version of user's password
