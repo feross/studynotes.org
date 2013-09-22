@@ -30,6 +30,7 @@ module.exports = function () {
       .find({ collegeId: college._id })
       .select('-body')
       .sort('-hits')
+      .populate('userId')
       .exec(function (err, essays) {
         if (err) return next(err)
         res.render('college', {
