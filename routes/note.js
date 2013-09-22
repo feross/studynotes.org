@@ -44,14 +44,11 @@ module.exports = function () {
 
       if (!note) return next()
 
-      var noteOrdering = note.ordering
-
-      var nextNote = _.find(notes, function (note) {
-        return note.ordering === noteOrdering + 1
+      var nextNote = _.find(notes, function (n) {
+        return n.ordering === note.ordering + 1
       })
-
-      var prevNote = _.find(notes, function (note) {
-        return note.ordering === noteOrdering - 1
+      var prevNote = _.find(notes, function (n) {
+        return n.ordering === note.ordering - 1
       })
 
       res.render('note', {

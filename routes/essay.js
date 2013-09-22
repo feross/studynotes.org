@@ -21,6 +21,13 @@ module.exports = function () {
           .populate('userId')
           .exec(cb)
       },
+      essays: function (cb) {
+        model.Essay
+          .find({ collegeId: college._id })
+          .sort('-hits')
+          .select('-body -prompt')
+          .exec(cb)
+      },
       populateUserCollege: ['essay', function (cb, results) {
         var essay = results.essay
         if (!essay) return next()
@@ -29,13 +36,28 @@ module.exports = function () {
       }]
     }, function (err, results) {
       var essay = results.essay
+      var essays = results.essays
       if (err) return next(err)
+
+      var index
+      essays.forEach(function (e, i) {
+        if (e.id === essay.id) index = i
+      })
+
+      if (index > 0) {
+        var prevEssay = essays[index - 1]
+      }
+      if (index < essays.length - 1) {
+        var nextEssay = essays[index + 1]
+      }
 
       res.render('essay', {
         ads: true,
         breadcrumbs: [ college ],
         college: college,
         essay: essay,
+        next: nextEssay,
+        prev: prevEssay,
         title: essay.name + ' - ' + college.name,
         url: essay.url,
         user: essay.userId

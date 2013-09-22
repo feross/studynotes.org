@@ -23,10 +23,10 @@ append sidebar
     li Averaging #{ util.addCommas(util.hitsPerDay(essay.hits, essay.createDate)) } views per day
   //- include includes/relatedessays
 
-//- append toolbar
-//-   if next
-//-     a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next →
-//-     .navigate-msg Use ← → keys to navigate
+append toolbar
+  if next
+    a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next →
+    .navigate-msg Use ← → keys to navigate
 
 block content
   include includes/breadcrumbs
@@ -39,14 +39,14 @@ block content
 
   .body !{essay.body}
 
-  //- p.keepStudying You just finished <strong>"#{essay.name}"</strong>. Keep&nbsp;studying!
+  p.keepStudying Keep&nbsp;reading more #{ college.shortName } admissions essays — can't be too prepared!
 
-  //- .essayNav.clearfix
-  //-   if prev
-  //-     a.btn.prev(href='#{prev.url}', title='Previous: #{prev.name}') ← Prev
+  .noteNav.clearfix
+    if prev
+      a.btn.prev(href='#{prev.url}', title='Previous: #{prev.name}') ← Prev
 
-  //-   if next
-  //-     a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next →
+    if next
+      a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next →
 
   //- hr
   //- h2 On copying
