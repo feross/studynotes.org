@@ -11,7 +11,7 @@ var model = require('../model')
 module.exports = function () {
   app.get('/signup', auth.returnTo, function (req, res) {
     if (req.user) {
-      res.redirect('/')
+      res.redirect('/submit/essay/')
     } else {
       res.render('signup', {
         errors: req.flash('error'),
