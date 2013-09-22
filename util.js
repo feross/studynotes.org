@@ -170,8 +170,8 @@ exports.escapeRegExp = function(str) {
 }
 
 exports.hitsPerDay = function (hits, date) {
-  var days = Math.floor((Date.now() - new Date(date)) / 86400000)
-  days = Math.max(days, 1) // Always at least 1 day
+  var days = (Date.now() - new Date(date)) / 86400000
+  days = Math.max(days, 0.00001) // To prevent divide by zero
   return Math.round(hits / days)
 }
 
