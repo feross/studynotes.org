@@ -3,6 +3,7 @@
 "use strict";
 
 var _ = require('underscore')
+var async = require('async')
 var model = require('../model')
 
 module.exports = function () {
@@ -13,24 +14,34 @@ module.exports = function () {
     var college = app.cache.colleges[collegeSlug]
     if (!college) return next()
 
-    model.Essay
-      .findOne({ collegeId: college._id, slug: essaySlug })
-      .populate('userId')
-      .exec(function (err, essay) {
-        if (err) return next(err)
+    async.auto({
+      essay: function (cb) {
+        model.Essay
+          .findOne({ collegeId: college._id, slug: essaySlug })
+          .populate('userId')
+          .exec(cb)
+      },
+      populateUserCollege: ['essay', function (cb, results) {
+        var essay = results.essay
         if (!essay) return next()
 
-        res.render('essay', {
-          ads: true,
-          breadcrumbs: [ college ],
-          college: college,
-          essay: essay,
-          title: essay.name + ' - ' + college.name,
-          url: essay.url,
-          user: essay.userId
-        })
+        essay.userId.populate('collegeId', cb)
+      }]
+    }, function (err, results) {
+      var essay = results.essay
+      if (err) return next(err)
 
-        essay.hit()
+      res.render('essay', {
+        ads: true,
+        breadcrumbs: [ college ],
+        college: college,
+        essay: essay,
+        title: essay.name + ' - ' + college.name,
+        url: essay.url,
+        user: essay.userId
       })
+
+      essay.hit()
+    })
   })
 }
