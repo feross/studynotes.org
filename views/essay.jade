@@ -13,6 +13,8 @@ append sidebar
         | #{ ' \'' + user.collegeYear.toString().substring(2) }
     if (user.collegeId.id !== college.id)
       h3.accepted Accepted at <a href='#{ college.url }'>#{ college.shortName }</a>
+    if (user.collegeMajor)
+      h3.accepted= user.collegeMajor
 
   include includes/ads/adsense-rect
 
