@@ -11,7 +11,7 @@ append sidebar
         | #{ user.hasGraduated ? 'Attended ' : 'Attending ' }
         a(href=user.collegeId.url)= user.collegeId.shortName
         | #{ ' \'' + user.collegeYear.toString().substring(2) }
-    if (user.collegeId.id !== college.id)
+    if (user.collegeId && user.collegeId.id !== college.id)
       h3.accepted Accepted at <a href='#{ college.url }'>#{ college.shortName }</a>
     if (user.collegeMajor)
       h3.accepted= user.collegeMajor
