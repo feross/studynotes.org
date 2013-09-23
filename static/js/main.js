@@ -67,5 +67,18 @@ if (!util.hasPlaceholderSupport()) {
   $('input, textarea').placeholder()
 }
 
-$(updateSearchWidth)
-$(window).load(updateSearchWidth)
+/**
+ * Continue to update the search width every 50ms until page is done loading.
+ */
+var loaded = false
+function updateSearchWidthWhileLoading () {
+  updateSearchWidth()
+  if (!loaded) {
+    setTimeout(updateSearchWidthWhileLoading, 50)
+  }
+}
+updateSearchWidthWhileLoading()
+
+$(window).load(function () {
+  loaded = true
+})

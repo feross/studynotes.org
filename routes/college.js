@@ -37,7 +37,7 @@ module.exports = function () {
           ads: true,
           college: college,
           essays: essays,
-          title: college.shortName + ' Admissions Essays',
+          title: 'Sample ' + college.shortName + ' Admissions Essays',
           url: college.url
         })
 

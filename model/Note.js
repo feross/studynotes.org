@@ -9,7 +9,7 @@ var plugin = require('./plugin')
 
 var Note = mongoose.Schema({
   name: { type: String, required: true, index: true },
-  body: { type: String, required: true },
+  body: { type: String, required: true },
   courseId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Course',
