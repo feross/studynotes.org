@@ -10,7 +10,7 @@ module.exports = function () {
     var courseSlug = req.params.courseSlug
     var notetypeSlug = req.params.notetypeSlug
 
-    var course = app.cache.courses[courseSlug]
+    var course = model.cache.courses[courseSlug]
     if (!course) return next()
 
     var notetype = _.find(course.notetypes, function (n) {

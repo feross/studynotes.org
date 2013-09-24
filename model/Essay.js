@@ -51,7 +51,7 @@ Essay.pre('save', function (next) {
 Essay.virtual('url').get(function () {
   var essay = this
   var collegeId = essay.populated('collegeId') || essay.collegeId.toString()
-  var college = _.find(app.cache.colleges, function (c) {
+  var college = _.find(model.cache.colleges, function (c) {
     return c.id == collegeId
   })
   return '/' + college.slug + '/' + essay.slug + '/'
@@ -60,7 +60,7 @@ Essay.virtual('url').get(function () {
 Essay.virtual('searchDesc').get(function () {
   var essay = this
   var collegeId = this.collegeId.toString()
-  var college = _.find(app.cache.colleges, function (c) {
+  var college = _.find(model.cache.colleges, function (c) {
     return c.id == collegeId
   })
 

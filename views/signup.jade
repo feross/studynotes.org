@@ -31,7 +31,7 @@ block content
     .row
       select.select2(name='college', data-placeholder='What university do/did you attend?')
         option
-        each college in app.cache.collegesArray
+        each college in modelCache.collegesArray
           option(value='#{ college.slug }' selected=(essay && (essay.college === college.slug)))= college.name
     .row
       input(name='collegeMajor', type='text', placeholder='college major', value=(user && user.collegeMajor))

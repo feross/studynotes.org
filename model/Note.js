@@ -34,7 +34,7 @@ Note.virtual('url').get(function () {
   var courseId = this.courseId.toString()
   var notetypeId = this.notetypeId.toString()
 
-  var course = _.find(app.cache.courses, function (c) {
+  var course = _.find(model.cache.courses, function (c) {
     return c.id == courseId
   })
   var notetype = _.find(course.notetypes, function (n) {
@@ -48,7 +48,7 @@ Note.virtual('searchDesc').get(function () {
   var courseId = this.courseId.toString()
   var notetypeId = this.notetypeId.toString()
 
-  var course = _.find(app.cache.courses, function (c){
+  var course = _.find(model.cache.courses, function (c){
     return c.id == courseId
   })
   var notetype = _.find(course.notetypes, function (n){

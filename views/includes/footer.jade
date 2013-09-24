@@ -10,7 +10,7 @@ footer.footer
       .col
         h3 AP Courses
         ul
-          each course in app.cache.courses
+          each course in modelCache.courses
             li: a(href='#{course.url}')= course.name
           li: a(href='/study-guides/') Amazon.com Book Store
           //- li: a(href='/submit/note/'): strong Submit Notes

@@ -7,9 +7,8 @@ var model = require('../model')
 
 module.exports = function () {
   app.get('/colleges', function (req, res, next) {
-    var colleges = _.flatten(app.cache.colleges)
+    var colleges = _.flatten(model.cache.colleges)
     res.render('colleges', {
-      ads: true,
       colleges: colleges,
       title: 'Elite College Admissions Essays',
       url: '/colleges',
@@ -23,7 +22,7 @@ module.exports = function () {
   app.get('/:collegeSlug', function (req, res, next) {
     var collegeSlug = req.params.collegeSlug
 
-    var college = app.cache.colleges[collegeSlug]
+    var college = model.cache.colleges[collegeSlug]
     if (!college) return next()
 
     model.Essay

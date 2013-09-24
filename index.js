@@ -112,8 +112,8 @@ Site.prototype.start = function (done) {
 
     // Make variables and functions available to Jade templates
     app.locals._ = _
-    app.locals.app = app
     app.locals.config = config
+    app.locals.modelCache = model.cache
     app.locals.moment = moment
     app.locals.offline = self.offline
     app.locals.util = util

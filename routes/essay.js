@@ -11,7 +11,7 @@ module.exports = function () {
     var collegeSlug = req.params.collegeSlug
     var essaySlug = req.params.essaySlug
 
-    var college = app.cache.colleges[collegeSlug]
+    var college = model.cache.colleges[collegeSlug]
     if (!college) return next()
 
     async.auto({

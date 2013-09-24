@@ -44,9 +44,9 @@ exports.connect = function (cb) {
   mongoose.connection.on('open', cb)
 }
 
-exports.loadCache = function (done) {
-  app.cache = {}
+exports.cache = {}
 
+exports.loadCache = function (done) {
   async.parallel([
     function (cb) {
       exports.Course
@@ -54,9 +54,9 @@ exports.loadCache = function (done) {
         .sort('-hits')
         .exec(function (err, courses) {
           if (err) return cb(err)
-          app.cache.courses = {}
+          exports.cache.courses = {}
           async.forEach(courses, function (course, cb2) {
-            app.cache.courses[course.slug] = course
+            exports.cache.courses[course.slug] = course
             course.populateNotetypes(cb2)
           }, cb)
         })
@@ -67,9 +67,9 @@ exports.loadCache = function (done) {
         .sort('-hits')
         .exec(function (err, colleges) {
           if (err) return cb(err)
-          app.cache.colleges = {}
+          exports.cache.colleges = {}
           colleges.forEach(function (college) {
-            app.cache.colleges[college.slug] = college
+            exports.cache.colleges[college.slug] = college
           })
           cb(null)
         })
@@ -81,10 +81,10 @@ exports.loadCache = function (done) {
       if(a.name > b.name) return 1
       return 0
     }
-    app.cache.coursesArray = _(app.cache.courses)
+    exports.cache.coursesArray = _(exports.cache.courses)
       .flatten()
       .sort(sortByName)
-    app.cache.collegesArray = _(app.cache.colleges)
+    exports.cache.collegesArray = _(exports.cache.colleges)
       .flatten()
       .sort(sortByName)
 

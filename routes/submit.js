@@ -23,7 +23,7 @@ module.exports = function () {
   })
 
   app.post('/submit/essay', auth.ensureAuth, function (req, res, next) {
-    var college = app.cache.colleges[req.body.college]
+    var college = model.cache.colleges[req.body.college]
     if (!college) {
       req.flash('error', 'Please select a university from the list.')
       req.flash('essay', req.body)

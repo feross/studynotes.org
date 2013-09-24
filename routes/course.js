@@ -7,9 +7,8 @@ var model = require('../model')
 
 module.exports = function () {
   app.get('/courses', function (req, res, next) {
-    var courses = _.flatten(app.cache.courses)
+    var courses = _.flatten(model.cache.courses)
     res.render('courses', {
-      ads: true,
       courses: courses,
       title: 'AP Courses',
       url: '/courses',
@@ -23,7 +22,7 @@ module.exports = function () {
   app.get('/:courseSlug', function (req, res, next) {
     var courseSlug = req.params.courseSlug
 
-    var course = app.cache.courses[courseSlug]
+    var course = model.cache.courses[courseSlug]
     if (!course) return next()
 
     res.render('course', {

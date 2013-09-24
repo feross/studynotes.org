@@ -25,7 +25,7 @@ Notetype.index({ courseId: 1 })
 
 Notetype.virtual('searchDesc').get(function () {
   var notetype = this
-  var course = _.find(app.cache.courses, function (c) {
+  var course = _.find(model.cache.courses, function (c) {
     return c._id == notetype.courseId.toString()
   })
   if (!course) return ''
@@ -34,7 +34,7 @@ Notetype.virtual('searchDesc').get(function () {
 
 Notetype.virtual('url').get(function() {
   var notetype = this
-  var course = _.find(app.cache.courses, function (c) {
+  var course = _.find(model.cache.courses, function (c) {
     return c._id == notetype.courseId.toString()
   })
   return '/' + course.slug + '/' + notetype.slug + '/'

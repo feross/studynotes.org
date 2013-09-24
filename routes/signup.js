@@ -21,7 +21,7 @@ module.exports = function () {
   })
 
   app.post('/signup', function (req, res, next) {
-    var college = app.cache.colleges[req.body.college]
+    var college = model.cache.colleges[req.body.college]
     var user = new model.User({
       name: req.body.name,
       email: req.body.email,
