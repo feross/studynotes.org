@@ -1,11 +1,10 @@
 /*jslint node: true */
-/*global app */
 "use strict";
 
 var _ = require('underscore')
 var model = require('../model')
 
-module.exports = function () {
+module.exports = function (app) {
   app.get('/colleges', function (req, res, next) {
     var colleges = _.flatten(model.cache.colleges)
     res.render('colleges', {

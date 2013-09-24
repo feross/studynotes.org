@@ -1,5 +1,4 @@
 /*jslint node: true */
-/*global app */
 "use strict";
 
 var config = require('../config')
@@ -8,7 +7,7 @@ var path = require('path')
 var randomquote = require('../randomquote')
 var util = require('../util')
 
-module.exports = function () {
+module.exports = function (app) {
   /*
    * Adds variables that all templates will expect.
    */
@@ -65,36 +64,36 @@ module.exports = function () {
     return render.call(this, view, opts, fn)
   }
 
-  require('./home')()
-  require('./study-guides')()
+  require('./home')(app)
+  require('./study-guides')(app)
 
   // Static
-  require('./about')()
-  require('./contact')()
-  require('./plagiarism')()
-  require('./privacy')()
-  require('./photo-credits')()
-  require('./open-source')()
+  require('./about')(app)
+  require('./contact')(app)
+  require('./plagiarism')(app)
+  require('./privacy')(app)
+  require('./photo-credits')(app)
+  require('./open-source')(app)
 
   // Accounts
-  require('./signup')()
-  require('./login')()
+  require('./signup')(app)
+  require('./login')(app)
 
   // Submit
-  require('./submit')()
+  require('./submit')(app)
 
   // Search
-  require('./search')()
-  require('./autocomplete')()
+  require('./search')(app)
+  require('./autocomplete')(app)
 
   // Dynamic
-  require('./course')()
-  require('./notetype')()
-  require('./note')()
-  require('./college')()
-  require('./essay')()
-  require('./user')()
+  require('./course')(app)
+  require('./notetype')(app)
+  require('./note')(app)
+  require('./college')(app)
+  require('./essay')(app)
+  require('./user')(app)
 
   // Error pages
-  require('./error')()
+  require('./error')(app)
 }

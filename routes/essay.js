@@ -1,12 +1,11 @@
 /*jslint node: true */
-/*global app */
 "use strict";
 
 var _ = require('underscore')
 var async = require('async')
 var model = require('../model')
 
-module.exports = function () {
+module.exports = function (app) {
   app.get('/:collegeSlug/:essaySlug', function (req, res, next) {
     var collegeSlug = req.params.collegeSlug
     var essaySlug = req.params.essaySlug

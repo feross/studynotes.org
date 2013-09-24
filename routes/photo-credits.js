@@ -1,8 +1,7 @@
 /*jslint node: true */
-/*global app */
 "use strict";
 
-module.exports = function () {
+module.exports = function (app) {
   app.get('/photo-credits', function (req, res) {
     res.render('photo-credits', {
       url: '/photo-credits',

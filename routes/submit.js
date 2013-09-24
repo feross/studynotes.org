@@ -1,12 +1,11 @@
 /*jslint node: true */
-/*global app */
 "use strict";
 
 var _ = require('underscore')
 var auth = require('../auth')
 var model = require('../model')
 
-module.exports = function () {
+module.exports = function (app) {
   app.get('/submit/essay', auth.ensureAuth, function (req, res, next) {
     res.render('submit', {
       hero: {

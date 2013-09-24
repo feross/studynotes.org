@@ -1,8 +1,7 @@
 /*jslint node: true */
-/*global app */
 "use strict";
 
-module.exports = function () {
+module.exports = function (app) {
   app.get('/plagiarism', function (req, res) {
     res.render('plagiarism', {
       url: '/plagiarism',

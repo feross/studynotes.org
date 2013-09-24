@@ -1,8 +1,7 @@
 /*jslint node: true */
-/*global app */
 "use strict";
 
-module.exports = function () {
+module.exports = function (app) {
   app.get('/search', function (req, res) {
     var q = req.query.q
 

@@ -1,5 +1,4 @@
 /*jslint node: true */
-/*global app */
 "use strict";
 
 module.exports = Site
@@ -22,7 +21,7 @@ var builder = require('./builder')
 var cluster = require('cluster')
 var config = require('./config')
 var connectSlashes = require('connect-slashes')
-var debug = global.debug = require('debug')('studynotes:index')
+var debug = require('debug')('studynotes:index')
 var express = require('express')
 var flash = require('connect-flash')
 var fs = require('fs')
@@ -66,7 +65,7 @@ Site.prototype.start = function (done) {
     })
 
   } else {
-    global.app = express()
+    var app = express()
     self.server = http.createServer(app)
 
     // Trust the X-Forwarded-* headers from nginx
@@ -147,7 +146,7 @@ Site.prototype.start = function (done) {
 
     app.use(self.addTemplateLocals)
 
-    require('./routes')()
+    require('./routes')(app)
 
     async.series([
       model.connect,

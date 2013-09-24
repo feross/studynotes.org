@@ -1,12 +1,11 @@
 /*jslint node: true */
-/*global app */
 "use strict";
 
 var config = require('../config')
 var express = require('express')
 var httpStatus = require('http-status-codes')
 
-module.exports = function () {
+module.exports = function (app) {
   app.use(function(req, res) {
     res.status(404).render('error', {
       title: '404 Page Not Found',

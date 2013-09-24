@@ -1,5 +1,4 @@
 /*jslint node: true */
-/*global app */
 "use strict";
 
 var _ = require('underscore')
@@ -8,7 +7,7 @@ var auth = require('../auth')
 var bcrpyt = require('bcrypt')
 var model = require('../model')
 
-module.exports = function () {
+module.exports = function (app) {
   app.get('/signup', auth.returnTo, function (req, res) {
     if (req.user) {
       res.redirect('/submit/essay/')

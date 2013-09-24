@@ -1,5 +1,4 @@
 /*jslint node: true */
-/*global app */
 "use strict";
 
 var auth = require('../auth')
@@ -7,7 +6,7 @@ var config = require('../config')
 var passport = require('passport')
 var url = require('url')
 
-module.exports =  function () {
+module.exports = function (app) {
   app.get('/login', auth.returnTo, function (req, res) {
     if (req.user) {
       res.redirect('/')

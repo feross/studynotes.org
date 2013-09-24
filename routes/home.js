@@ -1,8 +1,7 @@
 /*jslint node: true */
-/*global app */
 "use strict";
 
-module.exports = function () {
+module.exports = function (app) {
   app.get('/', function (req, res) {
     res.render('home', {
       ads: true,
