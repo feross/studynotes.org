@@ -41,6 +41,7 @@
     "touch": "*",
     "uglify-js": "*",
     "underscore": "*",
-    "underscore.string": "*"
+    "underscore.string": "*",
+    "purge-netdna": "~1.0.1"
   }
 }
