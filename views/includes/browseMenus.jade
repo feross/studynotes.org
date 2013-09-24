@@ -1,0 +1,30 @@
+.browseWrapper
+  .browse.browse-courses
+    each course in app.cache.coursesArray.slice(0, 3)
+      div
+        h2: a(href=course.url)= course.name
+        if (course.notetypes)
+          ul
+            each notetype in course.notetypes
+              li: a(href=notetype.url)= notetype.name
+
+.browseWrapper
+  .browse.browse-colleges
+    div
+      h2: a(href='/colleges/') College Admissions Essays
+      ul
+        each college in app.cache.collegesArray.slice(0, 7)
+          li: a(href=college.url, title='#{ college.name } Sample Essays') #{ college.shortName } Essays
+    div
+      ul
+        each college in app.cache.collegesArray.slice(7, 15)
+          li: a(href=college.url, title='#{ college.name } Sample Essays') #{ college.shortName } Essays
+    div
+      ul
+        each college in app.cache.collegesArray.slice(15, 23)
+          li: a(href=college.url, title='#{ college.name } Sample Essays') #{ college.shortName } Essays
+    div
+      ul
+        each college in app.cache.collegesArray.slice(23)
+          li: a(href=college.url, title='#{ college.name } Sample Essays') #{ college.shortName } Essays
+      a.btn(href='/submit/essay/') Add your essay

@@ -5,6 +5,9 @@ block vars
 
 block body
   include ../includes/header
+  include ../includes/browseMenus
+  if (locals.hero)
+    .heroImage
   .wrap
     include ../includes/hero
     .contentWrapper
