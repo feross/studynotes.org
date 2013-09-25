@@ -103,6 +103,20 @@ CONTENT_WIDTH = 580px
     border: 2px solid BLUE !important
     border-bottom: none !important
 
+.select2-results .select2-highlighted
+  background: BLUE !important // need more specificity
+
+.select2-drop
+  .select2-search input
+    background-position: 100% -24px !important
+    background-size: 69px 46px !important
+    border-radius: 20px
+    font-size: 18px !important
+    padding: 4px 28px 4px 8px
+
+  &:not(.select2-drop-above) .select2-search input
+    margin-top: 4px
+
 .select2-icon
   float: left
   height: 26px
