@@ -37,16 +37,12 @@ exports.createDate = function (schema, opts) {
 }
 
 exports.hits = function (schema, opts) {
-  schema.add({ hits: { type: Number, default: 0 } })
+  schema.add({ hits: { type: Number, default: 0, index: true } })
 
   schema.pre('save', function (next) {
     if (!this.hits) this.hits = 0
     next()
   })
-
-  if (opts && opts.index) {
-    schema.path('hits').index(opts.index)
-  }
 
   // Update hit count, asyncronously
   schema.methods.hit = function (cb) {

@@ -40,6 +40,6 @@ Course.plugin(plugin.modifyDate)
 Course.plugin(plugin.createDate)
 Course.plugin(plugin.absoluteUrl)
 Course.plugin(plugin.slug, { model: 'Course' })
-Course.plugin(plugin.hits, { index: true })
+Course.plugin(plugin.hits)
 
 module.exports = mongoose.model('Course', Course)
