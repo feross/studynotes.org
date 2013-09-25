@@ -132,7 +132,7 @@ html(class='no-js #{layout}', lang='en')
         }
 
     if (locals.hero && hero.image)
-      style.
+      style(id='heroStyle').
         .heroImage {
           background: url("#{ config.cdnOrigin }/images/hero/#{ hero.image }");
           background-size: cover;

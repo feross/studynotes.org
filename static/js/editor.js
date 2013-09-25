@@ -10,6 +10,22 @@ $('.select2').select2({
   formatSelection: formatSelect2
 })
 
+var $selectCollege = $('select[name="college"]')
+var $style = $('#heroStyle')
+var currentHero = $selectCollege.val() || $('body').attr('class').trim()
+
+if ($style.length) {
+  $selectCollege.on('change', function () {
+    var newHero = $(this).val()
+
+    var html = $style.html()
+      .replace(new RegExp(currentHero + '\\.jpg', 'g'), newHero + '.jpg')
+    $style.html(html)
+
+    currentHero = newHero
+  })
+}
+
 var parserRules = {
   /**
    * CSS Class white-list
