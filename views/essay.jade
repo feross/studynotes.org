@@ -50,10 +50,23 @@ block content
     if next
       a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next →
 
+  hr
+
+  #disqus_thread
+  script.
+    var disqus_shortname = 'studynotesapp';
+    var disqus_identifier = '#{ essay.slug }';
+    var disqus_title = '#{ title }';
+    var disqus_url = '#{ url }';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
   //- hr
   //- h2 On copying
   //- p It's a bad idea.
 
-  hr
   h2 How to cite this essay (with MLA)
   .cite #{ user.mlaName }. "#{essay.name}" StudyNotes.org. StudyNotes, Inc., #{moment(essay.createDate).format('DD MMM. YYYY.')} Web. #{moment().format('DD MMM. YYYY.')} &lt;#{essay.absoluteUrl}&gt;.

@@ -35,8 +35,19 @@ block content
       a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next →
 
   hr
+
+  #disqus_thread
+  script.
+    var disqus_shortname = 'studynotesapp';
+    var disqus_identifier = '#{ note.slug }';
+    var disqus_title = '#{ title }';
+    var disqus_url = '#{ url }';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
   h2 How to cite this note (with MLA)
   .cite Aboukhadijeh, Feross. "#{note.name}" StudyNotes.org. StudyNotes, Inc., #{moment(note.createDate).format('DD MMM. YYYY.')} Web. #{moment().format('DD MMM. YYYY.')} &lt;#{note.absoluteUrl}&gt;.
-
-
 
