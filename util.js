@@ -14,6 +14,7 @@ var once = require('once')
 var optimist = require('optimist')
 var os = require('os')
 var path = require('path')
+var posix = require('posix')
 var touch = require('touch')
 var uuid = require('node-uuid')
 
@@ -47,6 +48,24 @@ exports.run = function (ServerConstructor) {
   //   node tracker --port 4000 --dbPort 4001
   delete opts.$0
   delete opts._
+
+  // When server is started as "root" we can upgrade resource limits
+  if (config.isProd && process.getuid() === 0) {
+
+    // Upgrade resource limits
+    posix.setrlimit('nofile', { soft: 10000, hard: 10000 })
+    var limits = posix.getrlimit('nofile')
+    console.log('Upgraded resource limit to ' + limits.soft)
+
+    // Downgrade server from "root" user for security
+    var oldUid = process.getuid()
+    try {
+      process.setuid('feross')
+      console.log('Set uid to ' + process.getuid() + ' (previously ' + oldUid + ')')
+    } catch (e) {
+      throw new Error('Failed to downgrade uid ' + e)
+    }
+  }
 
   // Create and start the server
   var server = new ServerConstructor(opts, function (err) {

@@ -47,6 +47,8 @@ Site.prototype.start = function (done) {
   var self = this
   done || (done = function () {})
 
+  console.log(require('posix').getrlimit('nofile'))
+
   if (cluster.isMaster) {
     builder.build(function (err, output) {
       if (!err) {
@@ -206,6 +208,4 @@ Site.prototype.addTemplateLocals = function (req, res, next) {
   next()
 }
 
-if (require.main === module) {
-  util.run(Site)
-}
+if (!module.parent) util.run(Site)
