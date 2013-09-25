@@ -3,8 +3,8 @@
 /**
  * Show or hide the browse menus. If no `menu` parameter is provided, then
  * this shows
- * @param {boolean=} toggle  force the menu open?
  * @param {jQuery=} menu to show/hide
+ * @param {boolean=} toggle  force the menu open?
  */
 function toggleBrowseMenu (menu, toggle) {
   /*jshint eqnull:true */
@@ -55,15 +55,33 @@ $('.browse').each(function (i, elem) {
     var menu = {
       name: name,
       $btn: $('.header .' + name),
-      $browse: $elem
+      $browse: $elem,
+      btnHover: false,
+      browseHover: false
     }
 
-    // Handle clicks on header buttons
-    menu.$btn.on('click', function (e) {
-      if (e.which != 1) return // Only handle left-clicks
-      if (util.isPhone()) return // Only show browse menu on larger screens
-      e.preventDefault()
-      toggleBrowseMenu(menu)
+    var maybeOpenClose = function () {
+      if (menu.btnHover || menu.browseHover) {
+        if (util.isPhone()) return // Only show on larger screens
+        toggleBrowseMenu(menu, true)
+      } else if (!menu.btnHover || !menu.browseHover) {
+        toggleBrowseMenu(menu, false)
+      }
+    }
+
+    menu.$btn.hover(function (e) {
+      menu.btnHover = true
+      maybeOpenClose()
+    }, function (e) {
+      menu.btnHover = false
+      maybeOpenClose()
+    })
+    menu.$browse.hover(function (e) {
+      menu.browseHover = true
+      maybeOpenClose()
+    }, function (e) {
+      menu.browseHover = false
+      maybeOpenClose()
     })
 
     browseMenus.push(menu)
