@@ -1,13 +1,15 @@
 extends layouts/main-sidebar
 
 append sidebar
+  a(class='twitter-timeline', href='https://twitter.com/StudyNotesApp', data-widget-id='382664807926624257') Tweets by @StudyNotesApp
+
   h3 StudyNote Stats
   ul
     li #{ util.addCommas(noteCount) } <a href='/courses/'>AP notes</a>
     li #{ util.addCommas(essayCount) } <a href='/colleges/'>college admissions essays
 
 block content
-  h1 Welcome to the new AP* Study Notes!
+
   include includes/toolbar
 
   p We have the best Advanced Placement* study guides, practice tests, and notes on the web, contributed and curated by students and teachers like yourself. <strong>The site is used by millions of students in all 50 U.S. states to prepare for AP* courses and exams.</strong>
