@@ -1,4 +1,10 @@
-extends layouts/main
+extends layouts/main-sidebar
+
+append sidebar
+  h3 StudyNote Stats
+  ul
+    li #{ util.addCommas(noteCount) } <a href='/courses/'>AP notes</a>
+    li #{ util.addCommas(essayCount) } <a href='/colleges/'>college admissions essays
 
 block content
   h1 Welcome to the new AP* Study Notes!

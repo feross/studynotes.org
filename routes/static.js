@@ -24,19 +24,6 @@ module.exports = function (app) {
     })
   })
 
-  app.get('/', function (req, res) {
-    res.render('home', {
-      url: '/',
-      hero: {
-        title: 'Study Notes',
-        desc: 'Fast, free study tools for AP* students'
-        // desc: 'The best AP* study guides'
-        // desc: 'Study tools for smart students'
-        // desc: 'The secret to getting a 5 on the AP* exam'
-      }
-    })
-  })
-
   app.get('/open-source', function (req, res) {
     res.render('open-source', {
       url: '/open-source',

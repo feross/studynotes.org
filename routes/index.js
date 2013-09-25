@@ -64,7 +64,7 @@ module.exports = function (app) {
     return render.call(this, view, opts, fn)
   }
 
-  // Static
+  require('./home')(app)
   require('./static')(app)
 
   // Accounts
