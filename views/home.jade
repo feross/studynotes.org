@@ -3,10 +3,11 @@ extends layouts/main-sidebar
 append sidebar
   a(class='twitter-timeline', href='https://twitter.com/StudyNotesApp', data-widget-id='382664807926624257') Tweets by @StudyNotesApp
 
-  h3 StudyNote Stats
+  h3 StudyNotes In Numbers
   ul
-    li #{ util.addCommas(noteCount) } <a href='/courses/'>AP notes</a>
-    li #{ util.addCommas(essayCount) } <a href='/colleges/'>college admissions essays
+    li #{ util.addCommas(noteCount) } notes for #{ courseCount } <a href='/courses/'>AP courses</a>
+    li #{ util.addCommas(essayCount) } essays for #{ collegeCount } <a href='/colleges/'>elite universities</a>
+    li #{ util.addCommas(userCount) } registered users
 
 block content
 

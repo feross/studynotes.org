@@ -3,6 +3,7 @@
 
 var async = require('async')
 var model = require('../model')
+var util = require('../util')
 
 module.exports = function (app) {
   app.get('/', function (req, res, next) {
@@ -10,14 +11,22 @@ module.exports = function (app) {
       noteCount: function (cb) {
         model.Note.count().exec(cb)
       },
+      courseCount: function (cb) {
+        model.Course.count().exec(cb)
+      },
       essayCount: function (cb) {
         model.Essay.count().exec(cb)
+      },
+      collegeCount: function (cb) {
+        model.College.count().exec(cb)
+      },
+      userCount: function (cb) {
+        model.User.count().exec(cb)
       }
-    }, function (err, r) {
+    }, function (err, results) {
       if (err) return next(err)
 
-      res.render('home', {
-        essayCount: r.essayCount,
+      var locals = {
         hero: {
           title: 'Study Notes',
           desc: 'Fast, free study tools for AP* students'
@@ -25,9 +34,11 @@ module.exports = function (app) {
           // desc: 'Study tools for smart students'
           // desc: 'The secret to getting a 5 on the AP* exam'
         },
-        noteCount: r.noteCount,
         url: '/',
-      })
+      }
+      util.extend(locals, results)
+
+      res.render('home', locals)
     })
   })
 }
