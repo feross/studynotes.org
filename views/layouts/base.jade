@@ -213,6 +213,14 @@ html(class='no-js #{layout}', lang='en')
         tab_inverted: false
       }]);
 
+    //- Google +1
+    script.
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+
     //- Quantcast (async)
     script.
       var _qevents = _qevents || [];
