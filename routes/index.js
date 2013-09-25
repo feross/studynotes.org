@@ -64,16 +64,8 @@ module.exports = function (app) {
     return render.call(this, view, opts, fn)
   }
 
-  require('./home')(app)
-  require('./study-guides')(app)
-
   // Static
-  require('./about')(app)
-  require('./contact')(app)
-  require('./plagiarism')(app)
-  require('./privacy')(app)
-  require('./photo-credits')(app)
-  require('./open-source')(app)
+  require('./static')(app)
 
   // Accounts
   require('./signup')(app)
