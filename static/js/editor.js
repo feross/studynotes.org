@@ -7,7 +7,11 @@ function formatSelect2 (college) {
 $('.select2').select2({
   escapeMarkup: function(m) { return m },
   formatResult: formatSelect2,
-  formatSelection: formatSelect2
+  formatSelection: formatSelect2,
+  matcher: function(term, text, opt) {
+    return text.toLowerCase().indexOf(term.toLowerCase()) >= 0 ||
+      opt.attr('data-alt').toLowerCase().indexOf(term.toLowerCase()) >= 0
+  }
 })
 
 var $selectCollege = $('select[name="college"]')
