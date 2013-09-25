@@ -18,6 +18,8 @@
     "connect-mongo": "*",
     "connect-slashes": "*",
     "debug": "*",
+    "engine.io": "*",
+    "engine.io-client": "*",
     "express": "*",
     "html-parser": "*",
     "http-status-codes": "*",
@@ -37,11 +39,11 @@
     "passport": "*",
     "passport-local": "*",
     "posix": "*",
+    "purge-netdna": "*",
     "stylus": "*",
     "touch": "*",
     "uglify-js": "*",
     "underscore": "*",
-    "underscore.string": "*",
-    "purge-netdna": "~1.0.1"
+    "underscore.string": "*"
   }
 }
