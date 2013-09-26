@@ -37,7 +37,6 @@
     "netdna": "0.0.5",
     "nib": "~1.0.1",
     "node-uuid": "~1.4.1",
-    "nodetime": "~0.8.13",
     "once": "~1.2.0",
     "optimist": "~0.6.0",
     "passport": "~0.1.17",

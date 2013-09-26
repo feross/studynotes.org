@@ -5,14 +5,6 @@ module.exports = Site
 
 var secret = require('./secret')
 
-// NodeTime
-if (process.env.NODE_ENV === 'production') {
-  require('nodetime').profile({
-    accountKey: secret.nodetime.accountKey,
-    appName: secret.nodetime.appName
-  })
-}
-
 var _ = require('underscore')
 var async = require('async')
 var auth = require('./auth')
@@ -21,7 +13,9 @@ var builder = require('./builder')
 var cluster = require('cluster')
 var config = require('./config')
 var connectSlashes = require('connect-slashes')
+var DB = require('./db')
 var debug = require('debug')('studynotes:index')
+var engine = require('engine.io')
 var express = require('express')
 var flash = require('connect-flash')
 var fs = require('fs')
@@ -36,7 +30,8 @@ var util = require('./util')
 
 function Site (opts, cb) {
   var self = this
-  /** @type {number} port */ opts.port || (opts.port = config.port)
+  opts || (opts = {})
+  /** @type {number} port */ opts.port || (opts.port = config.ports.site)
   /** @type {boolean} offline mode? */ opts.offline || (opts.offline = false)
 
   util.extend(self, opts)
@@ -48,81 +43,79 @@ Site.prototype.start = function (done) {
   done || (done = function () {})
 
   if (cluster.isMaster) {
-    builder.build(function (err, output) {
-      if (!err) {
-        debug('Spawning ' + config.numCpus + ' worker processes')
-        _.times(config.numCpus, function () {
-          cluster.fork({
-            'CSS_MD5': output.cssMd5,
-            'JS_MD5': output.jsMd5
-          })
-        })
-        cluster.on('exit', function (worker, code, signal) {
-          console.error('Worker ' + worker.process.pid + ' died')
+    async.auto({
+      build: builder.build,
+      db: function (cb) {
+        self.db = new DB({}, cb)
+      }
+    }, function (err, results) {
+      if (err) return done(err)
+
+      debug('Spawning ' + config.numCpus + ' workers.')
+      for (var i = 0; i < config.numCpus; i++) {
+        cluster.fork({
+          'CSS_MD5': results.build.cssMd5,
+          'JS_MD5': results.build.jsMd5
         })
       }
-      done(err)
+      cluster.on('exit', function (worker, code, signal) {
+        console.error('Worker %s died (%s)', worker.process.pid, code)
+      })
+      done(null)
     })
-
   } else {
-    var app = express()
-    self.server = http.createServer(app)
+    console.log('Worker %s started', cluster.worker.id)
+    self.app = express()
+    self.server = http.createServer(self.app)
 
     // Trust the X-Forwarded-* headers from nginx
-    app.enable('trust proxy')
+    self.app.enable('trust proxy')
 
     // Jade for templating
-    app.set('views', path.join(__dirname, 'views'))
-    app.set('view engine', 'jade')
+    self.app.set('views', path.join(__dirname, 'views'))
+    self.app.set('view engine', 'jade')
 
     // Readable logs that are hidden by default. Enable with DEBUG=*
-    app.use(util.expressLogger(debug))
-
-    // Gzip
-    app.use(express.compress())
-
-    app.use(self.addHeaders)
+    self.app.use(util.expressLogger(debug))
+    self.app.use(express.compress())
+    self.app.use(self.addHeaders)
 
     if (config.isProd) {
-      app.use(self.canonicalize)
-
-    } else {
-      // Pretty HTML
-      app.locals.pretty = true
-
-      // Serve static resources (nginx handles it in prod)
-      app.use(express.favicon(path.join(config.root, 'static/favicon.ico')))
+      self.app.use(self.canonicalize)
     }
 
-    // Serve static files
-    var staticMiddleware = express.static(path.join(config.root, 'static'), {
-      maxAge: config.maxAge
+    self.engine = engine.attach(self.server)
+    self.engine.on('connection', function (socket) {
+      debug('New engine connection')
+      debug(socket)
+
+      // self.db.put('')
+
+      // self.db.liveStream({
+      //   min: 'www.apstudynotes.org!client-',
+      //   max: 'www.apstudynotes.org!client-\xff'
+      // }).on('data', function (record) {
+      //   if (record.type === 'put') {
+      //     socket.send(JSON.stringify({
+      //       type: 'addClient',
+      //       client: clientFromRecord(record)
+      //     }))
+      //   } else if (record.type === 'del') {
+      //     socket.send(JSON.stringify({
+      //       type: 'removeClient',
+      //       ip: /!client-(.*)$/.exec(record.key)[1]
+      //     }))
+      //   }
+      // })
     })
-    app.use(staticMiddleware)
-    app.use('/static', function (req, res, next) {
-      staticMiddleware(req, res, function (err) {
-        if (err) return next(err)
-        res.send(404)
-      })
-    })
 
+    self.serveStatic()
 
-    app.use(connectSlashes())
+    self.app.use(connectSlashes())
 
-    // Make variables and functions available to Jade templates
-    app.locals._ = _
-    app.locals.config = config
-    app.locals.modelCache = model.cache
-    app.locals.moment = moment
-    app.locals.offline = self.offline
-    app.locals.util = util
-
-    app.locals.CSS_MD5 = process.env.CSS_MD5
-    app.locals.JS_MD5 = process.env.JS_MD5
-
-    app.use(express.cookieParser(secret.cookieSecret))
-    app.use(express.bodyParser())
-    app.use(express.session({
+    self.app.use(express.cookieParser(secret.cookieSecret))
+    self.app.use(express.bodyParser())
+    self.app.use(express.session({
       proxy: true, // trust the reverse proxy
       secret: secret.cookieSecret, // prevent cookie tampering
       store: new MongoStore({
@@ -132,23 +125,27 @@ Site.prototype.start = function (done) {
         auto_reconnect: true
       })
     }))
-    app.use(express.csrf())
+    self.app.use(express.csrf())
 
     // Passport
-    app.use(passport.initialize())
-    app.use(passport.session())
+    self.app.use(passport.initialize())
+    self.app.use(passport.session())
     passport.serializeUser(auth.serializeUser)
     passport.deserializeUser(auth.deserializeUser)
     passport.use(auth.passportStrategy)
 
     // Errors are propogated using `req.flash`
-    app.use(flash())
+    self.app.use(flash())
 
-    app.use(self.addTemplateLocals)
+    self.addTemplateGlobals()
+    self.app.use(self.addTemplateLocals)
 
-    require('./routes')(app)
+    require('./routes')(self.app)
 
     async.series([
+      // function (cb) {
+      //   self.db = db.connect(cb)
+      // },
       model.connect,
       model.loadCache,
       function (cb) {
@@ -199,7 +196,43 @@ Site.prototype.addHeaders = function (req, res, next) {
   next()
 }
 
-// Make certain variables available to templates on this request
+Site.prototype.serveStatic = function () {
+  var self = this
+
+  self.app.use(express.favicon(path.join(config.root, 'static/favicon.ico')))
+  var staticMiddleware = express.static(path.join(config.root, 'static'), {
+    maxAge: config.maxAge
+  })
+  self.app.use(staticMiddleware)
+  self.app.use('/static', function (req, res, next) {
+    staticMiddleware(req, res, function (err) {
+      if (err) return next(err)
+      res.send(404)
+    })
+  })
+}
+
+/**
+ * Make variables and functions available to Jade templates.
+ */
+Site.prototype.addTemplateGlobals = function () {
+  var self = this
+
+  self.app.locals._ = _
+  self.app.locals.config = config
+  self.app.locals.modelCache = model.cache
+  self.app.locals.moment = moment
+  self.app.locals.pretty = true
+  self.app.locals.offline = self.offline
+  self.app.locals.util = util
+
+  self.app.locals.CSS_MD5 = process.env.CSS_MD5
+  self.app.locals.JS_MD5 = process.env.JS_MD5
+}
+
+/**
+ * Make certain variables available to templates on this request.
+ */
 Site.prototype.addTemplateLocals = function (req, res, next) {
   res.locals.currentUser = req.user
   res.locals.csrf = req.csrfToken()
