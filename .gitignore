@@ -1,7 +1,5 @@
-# Ignore binary files in native npm modules
-out/
-build/
-compiled/
+# Ignore node_modules
+node_modules/
 
 static/out
 secret.js

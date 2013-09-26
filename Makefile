@@ -31,6 +31,6 @@ trigger:
 .PHONY : deploy
 deploy:
 	cd $(APP_DIR) && git pull
-	cd $(APP_DIR) && npm rebuild
+	cd $(APP_DIR) && npm install
 	sudo supervisorctl reload && sleep 3 && sudo supervisorctl restart studynotes:
 	cd $(APP_DIR) && sleep 20 && node purge-netdna.js
