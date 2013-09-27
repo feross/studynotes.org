@@ -1,9 +1,13 @@
 .lev_history
 db/store/
-node_modules/
 secret.js
 static/out/
 tmp/
+
+# Ignore binary files in native npm modules
+out/
+build/
+compiled/
 
 # Numerous always-ignore extensions
 *.diff
