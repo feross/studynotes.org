@@ -1,5 +1,4 @@
 /*jslint node: true */
-"use strict";
 
 // Configuration settings. For node and the browser.
 
