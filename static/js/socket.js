@@ -14,7 +14,8 @@ function openSocket () {
     }))
   }
 }
-openSocket()
+// openSocket()
+$('.online').hide()
 
 function onMessage (str) {
   var message
