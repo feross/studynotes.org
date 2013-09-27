@@ -1,5 +1,4 @@
-var config = {}
+// Browser-specific configuration
 
-config.cdnOrigin = /^local/.test(window.location.hostname)
-  ? '/static'
-  : 'http://cdn.apstudynotes.org'
+/** @type {number} ms */
+config.socketReconnectTimeout = 10000

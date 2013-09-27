@@ -1,9 +1,10 @@
 extends layouts/main-sidebar
 
 append sidebar
-  h3 User Stats
+  h2 User Stats
   ul
     li #{ util.addCommas(user.hits + totalHits) } total views for #{ user.firstName }'s submissions to StudyNotes.
+    li.online
 
   include includes/ads/adsense-rect
 

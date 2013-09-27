@@ -18,11 +18,13 @@ append sidebar
 
   include includes/ads/adsense-rect
 
-  h3 Essay Stats
+  h2 Essay Stats
   ul
     li #{ util.addCommas(essay.hits) } views
     li Posted <span title='#{ moment(essay.createDate).format("MMMM Do, YYYY, h:mm:ss a") }'>#{ moment(essay.createDate).fromNow() }</span>
     li Averaging #{ util.addCommas(util.hitsPerDay(essay.hits, essay.createDate)) } views per day
+    li.online
+
   //- include includes/relatedessays
 
 append toolbar

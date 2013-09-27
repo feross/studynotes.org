@@ -1,8 +1,8 @@
-# Ignore node_modules
+.lev_history
+db/store/
 node_modules/
-
-static/out
 secret.js
+static/out/
 tmp/
 
 # Numerous always-ignore extensions

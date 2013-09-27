@@ -57,13 +57,16 @@ var SITE_JS_FILENAMES = [
     'bower_components/select2/select2.min.js',
   ],
   'bower_components/wysihtml5_size_matters/jquery.wysihtml5_size_matters.js',
+  'node_modules/engine.io-client/engine.io.js',
   'static/js/util.js',
+  'config.js',
   'config-browser.js',
   'static/js/Countdown.js',
   'static/js/browse.js',
   'static/js/search.js',
   'static/js/toolbar.js',
   'static/js/editor.js',
+  'static/js/socket.js',
   'static/js/main.js'
 ]
 

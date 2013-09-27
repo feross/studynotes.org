@@ -2,23 +2,23 @@ extends layouts/main-sidebar
 
 append sidebar
   include includes/ads/adsense-rect
-  h3 #{ college.shortName } Stats
+  h2 #{ college.shortName } Stats
   ul
     li #{ college.acceptRate }% acceptance rate
     li #{ util.addCommas(college.enrollment) } enrolled students
     li $#{ util.addCommas(college.tuition) } tuition &amp; fees
     li ##{ college.rank } in US News &amp; World Report
 
-  h3 Located in #{ college.location }
+  h2 Located in #{ college.location }
   .map
     img(src='http://maps.googleapis.com/maps/api/staticmap?center=#{ encodeURIComponent(college.location) }&zoom=8&size=336x200&maptype=roadmap&sensor=false')
 
-  include includes/ads/adsense-rect
-
-  h3 Page Stats
+  h2 Page Stats
   ul
     li #{ util.addCommas(college.hits) } views
+    li.online
 
+  include includes/ads/adsense-rect
 
 block content
   include includes/toolbar

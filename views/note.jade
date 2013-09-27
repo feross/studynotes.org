@@ -2,11 +2,11 @@ extends layouts/main-sidebar
 
 append sidebar
   include includes/ads/adsense-rect
-  h3 Note Stats
-  if (notetype.singularName)
-    p <strong>#{ util.addCommas(note.hits) } people</strong> have viewed this #{ notetype.singularName.toLowerCase() }.
-  else
-    p <strong>#{ util.addCommas(note.hits) } people</strong> have viewed these #{ notetype.name.toLowerCase() }.
+  h2 Note Stats
+  ul
+    li #{ util.addCommas(note.hits) } views
+    li.online
+
   include includes/relatedNotes
   include includes/ads/adsense-rect
 
