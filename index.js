@@ -277,7 +277,9 @@ Site.prototype.updateOnlineCount = function (pathname) {
 Site.prototype.setupEngine = function () {
   var self = this
 
-  self.engine = engine.attach(self.server)
+  self.engine = engine.attach(self.server, {
+    transports: ['polling']
+  })
   self.engine.on('connection', function (socket) {
     socket.on('message', self.onSocketMessage.bind(self, socket))
     socket.on('close', self.onSocketClose.bind(self, socket))

@@ -1,7 +1,9 @@
 var socket
 
 function openSocket () {
-  socket = eio('ws://' + window.location.host)
+  socket = eio('ws://' + window.location.host, {
+    transports: ['polling']
+  })
   socket.onopen = function () {
     socket.onmessage = onMessage
     socket.onclose = onClose
