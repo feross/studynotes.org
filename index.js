@@ -14,9 +14,7 @@ var cluster = require('cluster')
 var cp = require('child_process')
 var config = require('./config')
 var connectSlashes = require('connect-slashes')
-var DB = require('./db')
 var debug = require('debug')('studynotes:index')
-var engine = require('engine.io')
 var express = require('express')
 var flash = require('connect-flash')
 var fs = require('fs')
@@ -39,8 +37,6 @@ function Site (opts, cb) {
   /** @type {boolean} offline mode? */
   self.offline || (self.offline = false)
 
-  self.online = {}
-
   self.start(cb)
 }
 
@@ -49,23 +45,14 @@ Site.prototype.start = function (done) {
   done || (done = function () {})
 
   if (cluster.isMaster) {
-    async.auto({
-      build: builder.build,
-      deleteDb: function (cb) {
-        var dbPath = path.join(config.root, 'db/store')
-        cp.exec('rm -rf ' + dbPath, cb)
-      },
-      startDb: function (cb) {
-        self.db = new DB({}, cb)
-      }
-    }, function (err, results) {
+    builder.build(function (err, output) {
       if (err) return done(err)
 
       debug('Spawning ' + config.numCpus + ' workers.')
       for (var i = 0; i < config.numCpus; i++) {
         cluster.fork({
-          'CSS_MD5': results.build.cssMd5,
-          'JS_MD5': results.build.jsMd5
+          'CSS_MD5': output.cssMd5,
+          'JS_MD5': output.jsMd5
         })
       }
       cluster.on('exit', function (worker, code, signal) {
@@ -77,7 +64,6 @@ Site.prototype.start = function (done) {
     console.log('Worker %s started', cluster.worker.id)
     self.app = express()
     self.server = http.createServer(self.app)
-    self.setupEngine()
 
     // Trust the X-Forwarded-* headers from nginx
     self.app.enable('trust proxy')
@@ -128,10 +114,6 @@ Site.prototype.start = function (done) {
     require('./routes')(self.app)
 
     async.series([
-      function (cb) {
-        self.db = DB.connect(cb)
-      },
-      self.setupLiveStream.bind(self),
       model.connect,
       model.loadCache,
       function (cb) {
@@ -223,107 +205,6 @@ Site.prototype.addTemplateLocals = function (req, res, next) {
   res.locals.currentUser = req.user
   res.locals.csrf = req.csrfToken()
   next()
-}
-
-Site.prototype.setupLiveStream = function (cb) {
-  var self = this
-
-  self.db.liveStream({
-    min: 'online!',
-    max: 'online!\xFF'
-  }).on('data', function (record) {
-    debug('Received liveStream update: ' + record.key)
-    var exec = /^online!(.*)!/.exec(record.key)
-    if (exec) {
-      var pathname = exec[1]
-      self.updateOnlineCount(pathname)
-      self.updateOnlineCount('/')
-    }
-  })
-  cb(null)
-}
-
-Site.prototype.getOnlineCount = function (pathname, cb) {
-  var self = this
-
-  if (pathname === '/') {
-    // Show total users across site on homepage
-    self.db.count({
-      prefix: 'online!'
-    }, cb)
-  } else {
-    self.db.count({
-      prefix: 'online!' + pathname
-    }, cb)
-  }
-}
-
-Site.prototype.updateOnlineCount = function (pathname) {
-  var self = this
-  var sockets = self.online[pathname]
-
-  // Early return if there are no updates to send
-  if (!sockets || sockets.length === 0) return
-
-  self.getOnlineCount(pathname, function (err, count) {
-    if (err) return console.error(err.message)
-
-    sockets.forEach(function (socket) {
-      socket.send(JSON.stringify({ type: 'update', count: count }))
-    })
-  })
-}
-
-Site.prototype.setupEngine = function () {
-  var self = this
-
-  self.engine = engine.attach(self.server, {
-    transports: ['polling']
-  })
-  self.engine.on('connection', function (socket) {
-    socket.on('message', self.onSocketMessage.bind(self, socket))
-    socket.on('close', self.onSocketClose.bind(self, socket))
-  })
-}
-
-Site.prototype.onSocketMessage = function (socket, str) {
-  var self = this
-  var message
-  try {
-    debug('Received message: ' + str)
-    message = JSON.parse(str)
-  } catch (e) {
-    debug('Discarding non-JSON message: ' + message)
-    return
-  }
-  if (message.type === 'online') {
-    // Only accept the first 'online' message
-    if (socket.pathname) return
-
-    var pathname = message.pathname.replace('!', '')
-    socket.pathname = pathname
-
-    if (!self.online[pathname]) self.online[pathname] = []
-    self.online[pathname].push(socket)
-
-    var key = 'online!' + pathname + '!' + socket.id
-    self.db.put(key, true, function (err) {
-      if (err) console.error(err)
-    })
-  }
-}
-
-Site.prototype.onSocketClose = function (socket) {
-  var self = this
-  var sockets = self.online[socket.pathname]
-
-  var index = sockets.indexOf(socket)
-  sockets.splice(index, 1)
-
-  var key = 'online!' + socket.pathname + '!' + socket.id
-  self.db.del(key, function (err) {
-    if (err) console.error(err)
-  })
 }
 
 if (!module.parent) util.run(Site)

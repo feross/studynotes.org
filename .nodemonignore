@@ -1,6 +1,4 @@
 .git/
-db/manifest.json
-db/store/
 static/out/
 static/images/
 tmp/restart.txt
