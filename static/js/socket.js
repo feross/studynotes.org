@@ -1,9 +1,7 @@
 var socket
 
 function openSocket () {
-  socket = eio('ws://' + window.location.host, {
-    transports: ['polling']
-  })
+  socket = eio('ws://' + window.location.hostname + ':' + config.ports.liveupdater)
   socket.onopen = function () {
     socket.onmessage = onMessage
     socket.onclose = onClose
@@ -14,8 +12,7 @@ function openSocket () {
     }))
   }
 }
-// openSocket()
-$('.online').hide()
+openSocket()
 
 function onMessage (str) {
   var message

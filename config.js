@@ -10,6 +10,11 @@ config.isProd = config.isNode
   ? (process.env.NODE_ENV === 'production')
   : !/^local/.test(window.location.hostname)
 
+config.ports = {
+  site: config.isProd ? 7300 : 4000,
+  liveupdater: config.isProd ? 7301 : 4001
+}
+
 config.siteOrigin = config.isProd
   ? 'http://www.apstudynotes.org'
   : config.isNode

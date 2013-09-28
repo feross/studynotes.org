@@ -45,6 +45,10 @@ Site.prototype.start = function (done) {
   done || (done = function () {})
 
   if (cluster.isMaster) {
+    cluster.setupMaster({
+      exec: __filename
+    })
+
     builder.build(function (err, output) {
       if (err) return done(err)
 

@@ -5,12 +5,11 @@ APP_DIR = /home/feross/www/studynotes.org
 default:
 	ssh -L 27017:localhost:27017 -N feross@athena &
 	node ./node_modules/nagger/index.js
-	DEBUG="studynotes:*" nodemon index.js
+	DEBUG="studynotes:*" nodemon run.js
 
 .PHONY : offline
 offline:
-	mongod &
-	DEBUG="studynotes:*" nodemon index.js --offline
+	DEBUG="studynotes:*" nodemon run.js --offline
 
 # Upload secret.js to server
 .PHONY : upload-secret

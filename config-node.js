@@ -14,11 +14,6 @@ exports.numCpus = exports.isProd
   ? os.cpus().length
   : 1
 
-exports.ports = {
-  site: exports.isProd ? 7300 : 4000,
-  db: exports.isProd ? 7301 : 4001
-}
-
 /**
  * Maximum time to cache static resources (in milliseconds). This value is
  * sent in the HTTP cache-control header. MaxCDN will obey it, caching
