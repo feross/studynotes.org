@@ -54,6 +54,8 @@ LiveUpdater.prototype.sendUpdates = function (pathname) {
   sockets.forEach(function (socket) {
     socket.send(JSON.stringify({ type: 'update', count: count }))
   })
+
+  if (pathname !== '/') self.sendUpdates('/')
 }
 
 
@@ -78,7 +80,6 @@ LiveUpdater.prototype.onSocketMessage = function (socket, str) {
     self.online[pathname].push(socket)
 
     self.sendUpdates(pathname)
-    self.sendUpdates('/')
   }
 }
 
@@ -90,7 +91,6 @@ LiveUpdater.prototype.onSocketClose = function (socket) {
   sockets.splice(index, 1)
 
   self.sendUpdates(socket.pathname)
-  self.sendUpdates('/')
 }
 
 if (!module.parent) util.run(LiveUpdater)
