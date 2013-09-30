@@ -5,7 +5,7 @@ $expandifys.each(function (i, elem) {
 
   $expandify
     .append($('<div class="expandify-ghost">'))
-    .append($('<div class="expandify-btn"><button class="btn">Read more</button></div>'))
+    .append($('<div class="expandify-btn"><button class="btn small">Show more</button></div>'))
 
   var $ghost = $expandify.find('.expandify-ghost')
   var $btn = $expandify.find('.expandify-btn')
