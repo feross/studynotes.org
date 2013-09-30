@@ -21,7 +21,7 @@ block content
     .row
       textarea.editor(name='prompt', placeholder='Paste the essay prompt here... (optional)')= (essay && essay.prompt)
     .row(style='margin: 0')
-      .ghost
+      .toolbar-ghost
           #editor-toolbar.toolbar.clearfix(style='display: none;')
             a(data-wysihtml5-command='formatInline', data-wysihtml5-command-value='strong'): i.icon-bold
             a(data-wysihtml5-command='formatInline', data-wysihtml5-command-value='em'): i.icon-italic

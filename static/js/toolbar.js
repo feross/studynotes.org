@@ -3,7 +3,7 @@
 var $window = $(window)
 var $content = $('.content')
 var $toolbar = $('.content .toolbar')
-var $toolbarGhost = $('.content .ghost')
+var $toolbarGhost = $('.content .toolbar-ghost')
 
 function toolbarOnScroll () {
   var toolbarTop = $toolbarGhost.length
