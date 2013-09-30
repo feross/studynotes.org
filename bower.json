@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "dependencies": {
     "font-awesome": "*",
-    "humane-js": "*",
     "jquery": "*",
     "jquery-placeholder": "*",
     "keymaster": "*",
