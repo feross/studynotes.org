@@ -1,84 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="refresh" content="90">
-        <title>Site is under maintenance!</title>
-        <style>
-            ::-moz-selection {
-                background: #b3d4fc;
-                text-shadow: none;
-            }
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="30">
+    <title>Site is under maintenance!</title>
+    <style>
+      ::-moz-selection {
+        background: #b3d4fc;
+        text-shadow: none;
+      }
 
-            ::selection {
-                background: #b3d4fc;
-                text-shadow: none;
-            }
+      ::selection {
+        background: #b3d4fc;
+        text-shadow: none;
+      }
 
-            html {
-                padding: 30px 10px;
-                font-size: 20px;
-                line-height: 1.4;
-                color: #737373;
-                background: #f0f0f0;
-                -webkit-text-size-adjust: 100%;
-                -ms-text-size-adjust: 100%;
-            }
+      html {
+        padding: 30px 10px;
+        font-size: 20px;
+        line-height: 1.4;
+        color: #737373;
+        background: #f0f0f0;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+      }
 
-            html,
-            input {
-                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            }
+      html,
+      input {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
 
-            body {
-                width: 600px;
-                padding: 30px 20px 50px;
-                border: 1px solid #b3b3b3;
-                border-radius: 4px;
-                margin: 0 auto;
-                box-shadow: 0 1px 10px #a7a7a7, inset 0 1px 0 #fff;
-                background: #fcfcfc;
-            }
+      body {
+        width: 600px;
+        padding: 30px 20px 50px;
+        border: 1px solid #b3b3b3;
+        border-radius: 4px;
+        margin: 0 auto;
+        box-shadow: 0 1px 10px #a7a7a7, inset 0 1px 0 #fff;
+        background: #fcfcfc;
+      }
 
-            h1 {
-                margin: 0 10px;
-                font-size: 50px;
-                text-align: center;
-            }
+      h1 {
+        margin: 0 10px;
+        font-size: 50px;
+        text-align: center;
+      }
 
-            h3 {
-                margin: 1.5em 0 0.5em;
-            }
+      h3 {
+        margin: 1.5em 0 0.5em;
+      }
 
-            p {
-                margin: 1em 0;
-            }
+      p {
+        margin: 1em 0;
+      }
 
-            ul {
-                padding: 0 0 0 40px;
-                margin: 1em 0;
-            }
+      ul {
+        padding: 0 0 0 40px;
+        margin: 1em 0;
+      }
 
-            .container {
-                max-width: 550px;
-                width: 550px;
-                margin: 0 auto;
-            }
+      .container {
+        max-width: 550px;
+        width: 550px;
+        margin: 0 auto;
+      }
 
-            input::-moz-focus-inner {
-                padding: 0;
-                border: 0;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <h1>We'll be back shortly!</h1>
-            <p><strong>StudyNotes is being updated</strong> right now, but we'll be back in <strong>90 seconds</strong> with some sweet new features.</p>
-            <p>In the meantime, here's a dubstep kitten for you:</p>
-            <p style="text-align: center"><iframe width="480" height="360" src="//www.youtube.com/embed/aQeIDhz-_eg?rel=0&amp;autoplay=1" frameborder="0" allowfullscreen></iframe></p>
-            <p>We'll automatically refresh this page for you. Or <a href="javascript:location.reload()">click here</a> to refresh now.</p>
-            (If you see this page for more than a few minutes, then something is wrong. <a href="mailto:feross@studynotes.org?subject=StudyNotes%20Is%20Down!!">Click here</a> to send us an email and we'll fix things right away!)
-        </div>
-    </body>
+      input::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>We'll be back shortly!</h1>
+      <p><strong>StudyNotes is being updated</strong> right now, but we'll be back in <strong>90 seconds</strong> with some sweet new features.</p>
+
+      <p>In the meantime, here's a dubstep kitten for you:</p>
+      <p style="text-align: center"><iframe width="480" height="360" src="//www.youtube.com/embed/aQeIDhz-_eg?rel=0&amp;autoplay=1" frameborder="0" allowfullscreen></iframe></p>
+
+      <p>We'll automatically refresh this page for you. Or <a href="javascript:location.reload()">click here</a> to refresh now.</p>
+
+      (If you see this page for more than a few minutes, then something is wrong. <a href="mailto:feross@studynotes.org?subject=StudyNotes%20Is%20Down!!">Click here</a> to send us an email and we'll fix things right away!)
+    </div>
+
+    <script>
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-3898076-4']);
+      _gaq.push(['_setDomainName', 'apstudynotes.org']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
 </html>
