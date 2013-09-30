@@ -19,10 +19,10 @@ openSocket()
 function onMessage (str) {
   var message
   try {
-    console.log('Received message: ' + str)
+    // console.log('Received message: ' + str)
     message = JSON.parse(str)
   } catch (e) {
-    console.log('Discarding non-JSON message: ' + message)
+    // console.log('Discarding non-JSON message: ' + message)
     return
   }
   if (message.type === 'update') {
@@ -38,6 +38,6 @@ function onMessage (str) {
 }
 
 function onClose () {
-  console.log('Lost socket to server, reconnecting in ' + config.socketReconnectTimeout)
+  // console.log('Lost socket to server, reconnecting in ' + config.socketReconnectTimeout)
   setTimeout(openSocket, config.socketReconnectTimeout)
 }
