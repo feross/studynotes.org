@@ -1,5 +1,23 @@
 extends layouts/main-sidebar
 
+
+block content
+  h2= college.name
+  include includes/toolbar
+
+  .expandify
+    if (college.desc)
+      | !{ college.desc }
+
+  if (locals.essays && locals.essays.length)
+    h2 #{ college.name } Essays (most popular first)
+    ul.listing
+      each essay in essays
+        li: a(href='#{essay.url}')= essay.name + ' - ' + essay.userId.name
+  else
+    h3 No #{ college.shortName } essays have been posted yet! Represent your college, <a href="/submit/essay/">share your essay</a>!
+
+
 append sidebar
   include includes/ads/adsense-rect
   h2 #{ college.shortName } Stats
@@ -19,13 +37,3 @@ append sidebar
     li.online
 
   include includes/ads/adsense-rect
-
-block content
-  include includes/toolbar
-
-  if (locals.essays && locals.essays.length)
-    ul.listing
-      each essay in essays
-        li: a(href='#{essay.url}')= essay.name + ' - ' + essay.userId.name
-  else
-    h2 No #{ college.shortName } essays have been posted yet! Represent your college, <a href="/submit/essay/">share your essay</a>!

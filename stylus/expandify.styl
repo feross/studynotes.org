@@ -1,0 +1,24 @@
+.expandify
+  height: 200px
+  position: relative
+  margin-bottom: 1.5em
+  overflow: hidden
+
+  &.expanded
+    height: auto
+    overflow: visible
+
+.expandify-ghost
+  background: bottom left url(cdnOrigin + "/images/expandify-mask.png") repeat-x
+  height: 200px
+  left: 0
+  position: absolute
+  top: 0
+  width: 100%
+
+.expandify-btn
+  bottom: 10px
+  left: 0
+  position: absolute
+  text-align: center
+  width: 100%
