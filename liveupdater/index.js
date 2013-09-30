@@ -73,8 +73,7 @@ LiveUpdater.prototype.onSocketMessage = function (socket, str) {
     // Only accept the first 'online' message
     if (socket.pathname) return
 
-    var pathname = message.pathname
-    socket.pathname = pathname
+    var pathname = socket.pathname = message.pathname
 
     if (!self.online[pathname]) self.online[pathname] = []
     self.online[pathname].push(socket)
@@ -87,10 +86,11 @@ LiveUpdater.prototype.onSocketClose = function (socket) {
   var self = this
   var sockets = self.online[socket.pathname]
 
-  var index = sockets.indexOf(socket)
-  sockets.splice(index, 1)
-
-  self.sendUpdates(socket.pathname)
+  if (sockets) {
+    var index = sockets.indexOf(socket)
+    sockets.splice(index, 1)
+    self.sendUpdates(socket.pathname)
+  }
 }
 
 if (!module.parent) util.run(LiveUpdater)

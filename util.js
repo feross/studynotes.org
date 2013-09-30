@@ -77,7 +77,7 @@ exports.run = function (ServerConstructor) {
   })
 
   process.on('uncaughtException', function (err) {
-    console.error('UNCAUGHT EXCEPTION')
+    console.error('\nUNCAUGHT EXCEPTION')
     console.error(err.stack)
   })
 }
