@@ -1,7 +1,9 @@
 var socket
 
 function openSocket () {
-  socket = eio('ws://' + window.location.hostname + ':' + config.ports.liveupdater)
+  socket = eio(config.engineEndpoint, {
+    transports: ['polling', 'websocket']
+  })
   socket.onopen = function () {
     socket.onmessage = onMessage
     socket.onclose = onClose

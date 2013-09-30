@@ -3,6 +3,7 @@ module.exports = LiveUpdater
 var config = require('../config')
 var debug = require('debug')('studynotes:liveupdater')
 var engine = require('engine.io')
+var http = require('http')
 var util = require('../util')
 
 function LiveUpdater (opts, cb) {
@@ -20,11 +21,16 @@ LiveUpdater.prototype.start = function (cb) {
   var self = this
   cb || (cb = function () {})
 
-  self.engine = engine.listen(self.port)
+  var server = http.createServer()
+  self.engine = engine.attach(server, {
+    transports: ['polling', 'websocket']
+  })
   self.engine.on('connection', function (socket) {
     socket.on('message', self.onSocketMessage.bind(self, socket))
     socket.on('close', self.onSocketClose.bind(self, socket))
   })
+
+  server.listen(self.port)
 }
 
 LiveUpdater.prototype.getOnlineCount = function (pathname) {
