@@ -75,7 +75,7 @@ LiveUpdater.prototype.onSocketMessage = function (socket, str) {
 
     var pathname = socket.pathname = message.pathname
 
-    if (!self.online[pathname]) self.online[pathname] = []
+    if (self.online[pathname] === undefined) self.online[pathname] = []
     self.online[pathname].push(socket)
 
     self.sendUpdates(pathname)
