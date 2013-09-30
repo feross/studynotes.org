@@ -8,10 +8,25 @@ block content
       | !{ college.desc }
 
   if (locals.essays && locals.essays.length)
-    h2 #{ college.shortName } Essays (most popular first)
-    ul.listing
-      each essay in essays
-        li: a(href='#{essay.url}')= essay.name + ' - ' + essay.userId.name
+    h2 Top #{ essays.length } #{ college.shortName } Essays
+    - var num = 1
+    each essay in essays
+      .entry
+        .heading.clearfix
+          h3
+            | !{ num + '. ' }
+            a(href=essay.url)= essay.name
+          .author
+            a(href=essay.userId.url)
+              span by #{ essay.userId.name }
+              img(src=essay.userId.gravatar)
+        .expandify.no-btn
+          //- TODO: shorten, while preserving HTML
+          .body
+            | !{ essay.body }
+
+      - num += 1
+
   else
     h3 No #{ college.shortName } essays have been posted yet! Represent your college, <a href="/submit/essay/">share your essay</a>!
 

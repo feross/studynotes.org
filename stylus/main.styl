@@ -184,9 +184,9 @@ h2, .hero .desc
   line-height: (1.5 / 1.5)em
   margin-bottom: (1.5 / 1.5)em
 h3
-  font-size: 1.25em
-  line-height: (1.5 / 1.25)em
-  margin-bottom: (1.5 / 1.25)em
+  font-size: 1.2em
+  line-height: (1.5 / 1.2)em
+  margin-bottom: (1.5 / 1.2)em
 h4
   font-size: 1.125em
   line-height: (1.5 / 1.125)em
@@ -198,20 +198,6 @@ h5
 
 p
   margin: 0 0 1.5em 0
-
-ul.listing
-  list-style: none
-  margin-bottom: 25px
-  li
-    background: #EEE
-    color: GRAY_DARKEST
-    ellipsis()
-    padding: 10px 25px
-  li:nth-child(even)
-    background: #FFF
-
-  .content &
-    font-weight: bold
 
 hr
   background-color: GRAY_LIGHTER
@@ -297,12 +283,10 @@ hr
     margin: 0 0 10px 20px
     float: right
 
-  ul:not(.listing)
-    padding-left: 20px
-
 @import 'header'
 @import 'browseMenu'
 @import 'hero'
+@import 'list'
 @import 'toolbar'
 @import 'buttons'
 @import 'sidebar'

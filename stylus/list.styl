@@ -1,0 +1,56 @@
+ul.listing
+  list-style: none
+  margin-bottom: 25px
+  li
+    background: #EEE
+    color: GRAY_DARKEST
+    ellipsis()
+    padding: 10px 25px
+  li:nth-child(even)
+    background: #FFF
+
+  .content &
+    font-weight: bold
+
+.content
+  ul:not(.listing)
+    padding-left: 20px
+
+.entry
+  .heading
+    h3
+      float: left
+
+    .author
+      float: right
+      position: relative
+      top: -6px
+
+      a
+        {LINK}
+          color: GRAY_DARKEST
+
+      a:hover img, a:active img
+        -webkit-filter: brightness(0.8)
+        filter: brightness(0.8)
+
+      span
+        float: left
+        margin-top: 8px
+
+      img
+        border-radius: 20px
+        box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.35)
+        float: right
+        height: 40px
+        margin: 0 0 0 10px
+        width: 40px
+
+  .body
+    // Make inline headings look less dramatic
+    h2
+      font-family: BODY_FONT
+      font-size: 1em
+      font-style: italic
+      line-height: 1.5em
+      margin-bottom: 1.5em

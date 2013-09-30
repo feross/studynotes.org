@@ -1,19 +1,22 @@
 var $expandifys = $('.expandify')
 
 $expandifys.each(function (i, elem) {
-  $expandify = $(elem)
+  var $expandify = $(elem)
 
-  $expandify
-    .append($('<div class="expandify-ghost">'))
-    .append($('<div class="expandify-btn"><button class="btn small">Show more</button></div>'))
+  $expandify.append($('<div class="expandify-ghost">'))
 
-  var $ghost = $expandify.find('.expandify-ghost')
-  var $btn = $expandify.find('.expandify-btn')
+  if ($expandify.find('.expandify-btn').length === 0
+      && !$expandify.hasClass('no-btn')) {
+    $expandify.append($('<div class="expandify-btn"><button class="btn small">Read more <i class="icon-chevron-down"></i></button></div>'))
 
-  $btn.find('button').on('click', function () {
-    $ghost.remove()
-    $btn.remove()
+    var $btn = $expandify.find('.expandify-btn')
+    var $ghost = $expandify.find('.expandify-ghost')
 
-    $expandify.addClass('expanded')
-  })
+    $btn.find('button').on('click', function () {
+      $ghost.remove()
+      $btn.remove()
+
+      $expandify.addClass('expanded')
+    })
+  }
 })

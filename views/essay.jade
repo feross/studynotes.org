@@ -2,7 +2,7 @@ extends layouts/main-sidebar
 
 append sidebar
   .author
-    a(href=user.url, title=user.name)
+    a(href=user.url)
       img(src=user.gravatar)
       h2.name= user.name
     if (user.collegeMajor)
