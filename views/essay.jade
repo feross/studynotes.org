@@ -5,23 +5,27 @@ append sidebar
     a(href=user.url, title=user.name)
       img(src=user.gravatar)
       h2.name= user.name
+    if (user.collegeMajor)
+      h3.accepted= user.collegeMajor
     if (user.collegeYear && user.collegeId)
       - var year = user.collegeYear
       h3.accepted
         | #{ user.hasGraduated ? 'Attended ' : 'Attending ' }
         a(href=user.collegeId.url)= user.collegeId.shortName
         | #{ ' \'' + user.collegeYear.toString().substring(2) }
-    if (user.collegeMajor)
-      h3.accepted= user.collegeMajor
     if (!user.collegeId || user.collegeId.id !== college.id)
       h3.accepted Accepted at <a href='#{ college.url }'>#{ college.shortName }</a>
+
+  if (essay.admitsphere)
+    h3 Visit AdmitSphere
+    p This essay comes from <a href="http://www.admitsphere.tk/">AdmitSphere</a> who kindly agreed to republish it here.
 
   include includes/ads/adsense-rect
 
   h2 Essay Stats
   ul
-    li #{ util.addCommas(essay.hits) } views
     li Posted <span title='#{ moment(essay.createDate).format("MMMM Do, YYYY, h:mm:ss a") }'>#{ moment(essay.createDate).fromNow() }</span>
+    li #{ util.addCommas(essay.hits) } views
     li Averaging #{ util.addCommas(util.hitsPerDay(essay.hits, essay.createDate)) } views per day
     li.online
 

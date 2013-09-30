@@ -35,7 +35,8 @@ var Essay = mongoose.Schema({
     index: true,
     required: true
   },
-  slug: model.SLUG_UNIQUE
+  slug: model.SLUG_UNIQUE,
+  admitsphere: Boolean
 })
 
 Essay.index({ collegeId: 1, slug: 1 })
