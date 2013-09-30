@@ -31,12 +31,16 @@ LiveUpdater.prototype.getOnlineCount = function (pathname) {
   var self = this
 
   if (pathname === '/') {
+    console.log('')
     // Show total users across site on homepage
     var count = 0
     for (var p in self.online) {
       var sockets = self.online[p]
       count += sockets.length
+      console.log(sockets.length + ' = ' + p)
     }
+    console.log('TOTAL = ' + count)
+    console.log('')
     return count
   } else {
     return self.online[pathname].length
