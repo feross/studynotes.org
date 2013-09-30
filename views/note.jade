@@ -7,7 +7,12 @@ append sidebar
     li #{ util.addCommas(note.hits) } views
     li.online
 
-  include includes/relatedNotes
+  if locals.relatedNotes
+    h2 More #{course.name} #{notetype.name}
+    ul.relatedNotes
+      each note in locals.relatedNotes
+        li: a(href='#{note.url}')= note.name
+
   include includes/ads/adsense-rect
 
 append toolbar
