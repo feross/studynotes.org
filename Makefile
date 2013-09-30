@@ -11,12 +11,15 @@ default:
 offline:
 	DEBUG="studynotes:*" nodemon run.js --offline
 
-# Upload secret.js to server
+.PHONY : init
+init:
+	npm install --quiet
+	bower install --quiet
+
 .PHONY : upload-secret
 upload-secret:
 	rsync -a -O -v -e "ssh -p 44444" secret.js feross@$(APP_SERVER):/home/feross/www/studynotes.org/
 
-# Upload secret.js to server
 .PHONY : download-secret
 download-secret:
 	rsync -a -O -v -e "ssh -p 44444" feross@$(APP_SERVER):"$(APP_DIR)/secret.js" .
@@ -30,7 +33,6 @@ trigger:
 .PHONY : deploy
 deploy:
 	cd $(APP_DIR) && git pull
-	cd $(APP_DIR) && npm install --quiet
-	cd $(APP_DIR) && bower install --quiet
+	cd $(APP_DIR) && make init
 	sudo supervisorctl reload && sleep 3 && sudo supervisorctl restart studynotes-site && sudo supervisorctl restart studynotes-liveupdater
 	cd $(APP_DIR) && sleep 20 && node purge-netdna.js
