@@ -10,32 +10,19 @@ function toggleBrowseMenu (menu, toggle) {
   /*jshint eqnull:true */
   if (toggle == null) toggle = !menu.$browse.hasClass('on')
 
-  function showHide () {
-    menu.$btn.toggleClass('on', toggle)
-    menu.$browse.toggleClass('on', toggle)
+  menu.$btn.toggleClass('on', toggle)
+  menu.$browse.toggleClass('on', toggle)
 
-    // Update chevron icon
-    var icon = menu.$btn.find('i')
-    if (toggle) {
-      icon
-        .removeClass('icon-chevron-down')
-        .addClass('icon-chevron-up')
-    } else {
-      icon
-        .addClass('icon-chevron-down')
-        .removeClass('icon-chevron-up')
-    }
-  }
-
-  // If we are opening a menu and there are already others open, then
-  // close them first.
-  if (toggle && $('.browse').hasClass('on')) {
-    closeBrowseMenus()
-    setTimeout(function () {
-      showHide()
-    }, 200)
+  // Update chevron icon
+  var icon = menu.$btn.find('i')
+  if (toggle) {
+    icon
+      .removeClass('icon-chevron-down')
+      .addClass('icon-chevron-up')
   } else {
-    showHide()
+    icon
+      .addClass('icon-chevron-down')
+      .removeClass('icon-chevron-up')
   }
 }
 
