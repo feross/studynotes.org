@@ -23,8 +23,10 @@ TABLET_FONT_SIZE = 16px
 DESKTOP_FONT_SIZE = 18px
 
 SIDEBAR_WIDTH = 336px
-SIDEBAR_GUTTER_TABLET = 18px
-SIDEBAR_GUTTER_DESKTOP = 36px
+
+GUTTER_PHONE = 0px
+GUTTER_TABLET = 18px
+GUTTER_DESKTOP = 36px
 
 CONTENT_PADDING_PHONE = 18px
 CONTENT_PADDING_TABLET = 36px
@@ -233,22 +235,22 @@ hr
     max-width: 900px
 
   @media PHONE
-    padding-left: 0
-    padding-right: 0
+    padding-left: GUTTER_PHONE
+    padding-right: GUTTER_PHONE
   @media TABLET
-    padding-left: 10px
-    padding-right: 10px
+    padding-left: GUTTER_TABLET
+    padding-right: GUTTER_TABLET
   @media DESKTOP
-    padding-left: 20px
-    padding-right: 20px
+    padding-left: GUTTER_DESKTOP
+    padding-right: GUTTER_DESKTOP
 
   html.main-sidebar &
     @media PHONE
       max-width: 100%
     @media TABLET
-      max-width: MAX_WIDTH + SIDEBAR_WIDTH + SIDEBAR_GUTTER_TABLET
+      max-width: MAX_WIDTH + SIDEBAR_WIDTH + GUTTER_TABLET
     @media DESKTOP
-      max-width: MAX_WIDTH + SIDEBAR_WIDTH + SIDEBAR_GUTTER_DESKTOP
+      max-width: MAX_WIDTH + SIDEBAR_WIDTH + GUTTER_DESKTOP
 
 .contentWrapper
   float: left
@@ -257,9 +259,9 @@ hr
   @media PHONE
     float: none
   @media TABLET
-    margin-right: -(SIDEBAR_WIDTH + SIDEBAR_GUTTER_TABLET)
+    margin-right: -(SIDEBAR_WIDTH + GUTTER_TABLET)
   @media DESKTOP
-    margin-right: -(SIDEBAR_WIDTH + SIDEBAR_GUTTER_DESKTOP)
+    margin-right: -(SIDEBAR_WIDTH + GUTTER_DESKTOP)
 
 .content, .twitter-timeline
   border-radius: 3px
@@ -272,9 +274,9 @@ hr
     @media PHONE
       margin-right: 0
     @media TABLET
-      margin-right: SIDEBAR_WIDTH + SIDEBAR_GUTTER_TABLET
+      margin-right: SIDEBAR_WIDTH + GUTTER_TABLET
     @media DESKTOP
-      margin-right: SIDEBAR_WIDTH + SIDEBAR_GUTTER_DESKTOP
+      margin-right: SIDEBAR_WIDTH + GUTTER_DESKTOP
 
   @media PHONE
     border-radius: 0
