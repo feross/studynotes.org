@@ -66,6 +66,7 @@ var SITE_JS_FILENAMES = [
   'static/js/search.js',
   'static/js/toolbar.js',
   'static/js/editor.js',
+  'static/js/submit-note.js',
   'static/js/socket.js',
   'static/js/expandify.js',
   'static/js/main.js'

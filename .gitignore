@@ -1,10 +1,18 @@
+# Dependencies
 bower_components/
 node_modules/
+
+# Password file
 secret.js
+
+# Built files
 static/out/
 tmp/
 
-# Ignore binary files in native npm modules
+# Override bad GitHub for Mac default
+!Icon
+
+# Built files in native npm modules
 out/
 build/
 compiled/
