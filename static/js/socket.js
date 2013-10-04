@@ -33,7 +33,9 @@ function onMessage (str) {
     var pageStr = (window.location.pathname === '/')
       ? '(whole site)'
       : '(on this page)'
-    $('.online').text(message.count + ' ' + studentsStr + ' online ' + pageStr)
+    $('.online')
+      .text(message.count + ' ' + studentsStr + ' online ' + pageStr)
+      .show()
   }
 }
 
