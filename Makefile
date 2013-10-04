@@ -14,7 +14,7 @@ offline:
 .PHONY : init
 init:
 	npm install --quiet
-	bower install --quiet
+	./node_modules/.bin/bower install --quiet
 
 .PHONY : upload-secret
 upload-secret:
