@@ -7,54 +7,46 @@ var mongoose = require('mongoose')
 var plugin = require('./plugin')
 
 var Note = mongoose.Schema({
+  _id: {
+    type: String,
+    unique: true
+  },
   name: { type: String, required: true, index: true },
   body: { type: String, required: true },
-  courseId: {
-    type: mongoose.Schema.Types.ObjectId,
+  course: {
+    type: String,
     ref: 'Course',
     required: true
   },
-  notetypeId: {
-    type: mongoose.Schema.Types.ObjectId,
+  notetype: {
+    type: String,
     ref: 'Notetype',
     required: true
   },
-  ordering: Number,
-  slug: model.SLUG
+  ordering: Number
 })
 
-// No duplicate slugs for a course+notetype
-Note.index({ courseId: 1, notetypeId: 1, slug: 1 }, { unique: true })
+Note.index({ course: 1, notetype: 1})
 
 Note.index({ courseId: 1, notetypeId: 1})
 
 Note.virtual('url').get(function () {
   var note = this
-  var courseId = this.courseId.toString()
-  var notetypeId = this.notetypeId.toString()
 
-  var course = _.find(model.cache.courses, function (c) {
-    return c.id == courseId
-  })
-  var notetype = _.find(course.notetypes, function (n) {
-    return n.id == notetypeId
-  })
+  var courseSlug = note.populated('course') || note.course
+  var notetypeSlug = note.populated('notetype') || note.notetype
 
-  return '/' + course.slug + '/' + notetype.slug + '/' + note.slug + '/'
+  return '/' + courseSlug + '/' + notetypeSlug + '/' + note.id + '/'
 })
 
 Note.virtual('searchDesc').get(function () {
-  var courseId = this.courseId.toString()
-  var notetypeId = this.notetypeId.toString()
+  var note = this
 
-  var course = _.find(model.cache.courses, function (c){
-    return c.id == courseId
-  })
-  var notetype = _.find(course.notetypes, function (n){
-    return n.id == notetypeId
+  var course = model.cache.courses[note.course]
+  var notetype = _.find(course.notetypes, function (n) {
+    return n.id == note.notetype
   })
 
-  if (!course || !notetype) return ''
   return course.name + ' ' + (notetype.singularName || notetype.name)
 })
 
