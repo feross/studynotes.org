@@ -40,12 +40,14 @@ exports.connect = function (cb) {
       server: { poolSize: 20 }
   })
   mongoose.connection.on('error', cb)
-  mongoose.connection.on('open', cb)
+  mongoose.connection.on('open', function () {
+    loadCache(cb)
+  })
 }
 
 exports.cache = {}
 
-exports.loadCache = function (done) {
+function loadCache (done) {
   async.parallel([
     function (cb) {
       exports.Course
