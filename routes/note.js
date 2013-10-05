@@ -19,7 +19,7 @@ module.exports = function (app) {
     async.parallel({
       notes: function (cb) {
         model.Note
-          .find({ courseId: course.id, notetypeId: notetype.id })
+          .find({ course: course.id, notetype: notetype.id })
           .sort('ordering')
           .select('-body')
           .exec(cb)
@@ -27,8 +27,8 @@ module.exports = function (app) {
       note: function (cb) {
         model.Note
           .findOne({
-            courseId: course.id,
-            notetypeId: notetype.id,
+            course: course.id,
+            notetype: notetype.id,
             _id: req.params.noteId
           })
           .exec(cb)
