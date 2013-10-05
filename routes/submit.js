@@ -32,8 +32,8 @@ module.exports = function (app) {
       name: req.body.name,
       prompt: req.body.prompt,
       body: req.body.body,
-      collegeId: college._id,
-      userId: req.user._id
+      college: college._id,
+      user: req.user._id
     })
     essay.save(function (err) {
       if (err && err.name === 'ValidationError') {
