@@ -28,7 +28,7 @@ module.exports = function (app) {
       .find({ college: college._id })
       .sort('-hits')
       .limit(10)
-      .populate('userId')
+      .populate('user')
       .exec(function (err, essays) {
         if (err) return next(err)
         res.render('college', {

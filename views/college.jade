@@ -17,9 +17,9 @@ block content
             | !{ num + '. ' }
             a(href=essay.url)= essay.name
           .author
-            a(href=essay.userId.url)
-              span by #{ essay.userId.name }
-              img(src=essay.userId.gravatar)
+            a(href=essay.user.url)
+              span by #{ essay.user.name }
+              img(src=essay.user.gravatar)
         .expandify.no-btn
           //- TODO: shorten, while preserving HTML
           .body
