@@ -12,7 +12,7 @@ module.exports = function (app) {
     if (!course) return next()
 
     var notetype = _.find(course.notetypes, function (n) {
-      return n.slug === req.params.notetypeId
+      return n.id === req.params.notetypeId
     })
     if (!notetype) return next()
 
