@@ -39,7 +39,7 @@ Note.virtual('searchDesc').get(function () {
   var note = this
 
   var courseId = note.populated('course') || note.course
-  var course = model.cache.courses[note.courseId]
+  var course = model.cache.courses[courseId]
   var notetype = _.find(course.notetypes, function (n) {
     return n.id == note.notetype
   })
