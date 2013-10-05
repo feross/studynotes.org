@@ -12,7 +12,8 @@ config.isProd = config.isNode
 
 config.ports = {
   site: config.isProd ? 7300 : 4000,
-  liveupdater: config.isProd ? 7301 : 4001
+  liveupdater: config.isProd ? 7301 : 4001,
+  admin: 4002
 }
 
 config.siteOrigin = config.isProd

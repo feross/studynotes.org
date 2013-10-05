@@ -44,6 +44,7 @@
     "uglify-js": "~2.4.0",
     "underscore": "~1.5.2",
     "underscore.string": "~2.3.3",
-    "bower": "~1.2.7"
+    "bower": "~1.2.7",
+    "formage": "~1.6.18"
   }
 }
