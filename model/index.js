@@ -4,11 +4,14 @@
 var _ = require('underscore')
 var async = require('async')
 var config = require('../config')
+var fs = require('fs')
 var mongoose = require('mongoose')
 var once = require('once')
+var path = require('path')
 var Schema = mongoose.Schema
 
 // Fields that are re-used many times
+// TODO: REMOVE
 exports.SLUG = {
   type: String,
   match: /[-a-z0-9]+/i,
@@ -22,12 +25,17 @@ exports.SLUG_UNIQUE = {
   unique: true
 }
 
-exports.Course = require('./Course')
-exports.Notetype = require('./Notetype')
-exports.Note = require('./Note')
-exports.User = require('./User')
-exports.College = require('./College')
-exports.Essay = require('./Essay')
+// Object that contains the exported models, useful for iterating
+// over *only* the models, skipping methods like `connect`.
+exports.models = {}
+
+// Export all models in /model folder
+var files = fs.readdirSync(__dirname)
+files.forEach(function (file) {
+  var name = path.basename(file, '.js')
+  if (name === 'index' || name === 'plugin') return
+  exports[name] = exports.models[name] = require('./' + name)
+})
 
 exports.connect = function (cb) {
   cb || (cb = function () {})
