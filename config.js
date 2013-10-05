@@ -19,7 +19,7 @@ config.ports = {
 config.siteOrigin = config.isProd
   ? 'http://www.apstudynotes.org'
   : config.isNode
-    ? 'http://localhost:' + config.port
+    ? 'http://localhost:' + config.ports.site
     : window.location.origin
 
 config.cdnOrigin = config.isProd
