@@ -35,13 +35,14 @@ module.exports = function (app) {
       //   essay.userId.populate('college', cb)
       // }]
     }, function (err, results) {
-      var essay = results.essay
-      var essays = results.essays
       if (err) return next(err)
+      var essays = results.essays
+      var essay = results.essay
+      if (!essay) return next()
 
       var index
       essays.forEach(function (e, i) {
-        if (e.id === essay.id) index = i
+        if (e._id === essay._id) index = i
       })
 
       var prevEssay
