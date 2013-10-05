@@ -26,22 +26,26 @@ module.exports = function (app) {
       courseNotetype: function (cb) {
         model.CourseNotetype
           .findOne({ course: course.id, notetype: notetype.id })
-          .exec(cb)
+          .exec(function (err, courseNotetype) {
+            if (err) return cb(err)
+
+            if (courseNotetype) {
+              cb(null, courseNotetype)
+            } else {
+              courseNotetype = new model.CourseNotetype({
+                course: course.id,
+                notetype: notetype.id
+              })
+              courseNotetype.save(function (err) {
+                cb(err, courseNotetype)
+              })
+            }
+          })
       }
     }, function (err, results) {
       if (err) return next(err)
       var notes = results.notes
       var courseNotetype = results.courseNotetype
-
-      if (!courseNotetype) {
-        courseNotetype = new model.CourseNotetype({
-          course: course.id,
-          notetype: notetype.id
-        })
-        courseNotetype.save(function (err) {
-          if (err) next(err)
-        })
-      }
 
       res.render('notetype', {
         ads: true,
