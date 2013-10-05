@@ -38,14 +38,6 @@ Course.methods.notetypeUrl = function (notetypeId) {
   return '/' + this._id + '/' + notetypeId + '/'
 }
 
-Course.methods.augmentNotetypes = function () {
-  var course = this
-  course.notetypes.forEach(function (notetype) {
-    notetype.course = course
-    notetype.url = course.notetypeUrl(notetype)
-  })
-}
-
 Course.plugin(plugin.modifyDate)
 Course.plugin(plugin.createDate)
 Course.plugin(plugin.absoluteUrl)

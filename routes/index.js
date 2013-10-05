@@ -30,9 +30,17 @@ module.exports = function (app) {
 
     // If rendering a course-related view
     if (opts.course) {
+      var tabs = opts.course.notetypes.map(function (notetype) {
+        return {
+          _id: notetype._id,
+          name: notetype.name,
+          url: opts.course.notetypeUrl(notetype)
+        }
+      })
+
       opts.hero = {
         desc: 'Class Notes, Test Prep, Review Materials, and More',
-        tabs: opts.course.notetypes,
+        tabs: tabs,
         title: opts.course.name,
         url: opts.course.url,
         image: opts.course.heroImage

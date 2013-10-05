@@ -6,7 +6,7 @@
         if (course.notetypes)
           ul
             each notetype in course.notetypes
-              li: a(href=notetype.url)= notetype.name
+              li: a(href=course.notetypeUrl(notetype))= notetype.name
 
 .browseWrapper
   .browse.browse-colleges

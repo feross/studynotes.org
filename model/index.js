@@ -51,7 +51,6 @@ function loadCache (done) {
           if (err) return cb(err)
           exports.cache.courses = {}
           courses.forEach(function (course) {
-            course.augmentNotetypes()
             exports.cache.courses[course._id] = course
           })
           cb(null)
