@@ -6,23 +6,20 @@ var async = require('async')
 var model = require('../model')
 
 module.exports = function (app) {
-  app.get('/:courseSlug/:notetypeSlug/:noteSlug', function (req, res, next) {
-    var courseSlug = req.params.courseSlug
-    var notetypeSlug = req.params.notetypeSlug
-    var noteSlug = req.params.noteSlug
+  app.get('/:courseId/:notetypeId/:noteId', function (req, res, next) {
 
-    var course = model.cache.courses[courseSlug]
+    var course = model.cache.courses[req.params.courseId]
     if (!course) return next()
 
     var notetype = _.find(course.notetypes, function (n) {
-      return n.slug === notetypeSlug
+      return n.slug === req.params.notetypeId
     })
     if (!notetype) return next()
 
     async.parallel({
       notes: function (cb) {
         model.Note
-          .find({ courseId: course._id, notetypeId: notetype._id })
+          .find({ courseId: course.id, notetypeId: notetype.id })
           .sort('ordering')
           .select('-body')
           .exec(cb)
@@ -30,9 +27,9 @@ module.exports = function (app) {
       note: function (cb) {
         model.Note
           .findOne({
-            courseId: course._id,
-            notetypeId: notetype._id,
-            slug: noteSlug
+            courseId: course.id,
+            notetypeId: notetype.id,
+            _id: req.params.noteId
           })
           .exec(cb)
       }
@@ -40,7 +37,6 @@ module.exports = function (app) {
       if (err) return next(err)
       var notes = results.notes
       var note = results.note
-
       if (!note) return next()
 
       var nextNote = _.find(notes, function (n) {

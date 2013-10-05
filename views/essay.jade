@@ -7,13 +7,12 @@ append sidebar
       h2.name= user.name
     if (user.collegeMajor)
       h3.accepted= user.collegeMajor
-    if (user.collegeYear && user.collegeId)
-      - var year = user.collegeYear
+    if (user.college && user.collegeYear)
       h3.accepted
         | #{ user.hasGraduated ? 'Attended ' : 'Attending ' }
-        a(href=user.collegeId.url)= user.collegeId.shortName
+        a(href=user.college.url)= user.college.shortName
         | #{ ' \'' + user.collegeYear.toString().substring(2) }
-    if (!user.collegeId || user.collegeId.id !== college.id)
+    if (!user.college || user.college.id !== college.id)
       h3.accepted Accepted at <a href='#{ college.url }'>#{ college.shortName }</a>
 
   if (essay.admitsphere)
@@ -63,7 +62,7 @@ block content
   #disqus_thread
   script.
     var disqus_shortname = 'studynotesapp';
-    var disqus_identifier = '#{ essay.slug }';
+    var disqus_identifier = '#{ essay.id }';
     var disqus_title = '#{ title }';
     var disqus_url = '#{ url }';
     (function() {

@@ -18,5 +18,5 @@ block content
 
   if (course.notetypes)
     each notetype in course.notetypes
-      h2: a(href='#{notetype.url}')= notetype.name
+      h2: a(href=course.notetypeUrl(notetype))= notetype.name
       p.desc!= notetype.shortDesc

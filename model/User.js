@@ -9,6 +9,10 @@ var plugin = require('./plugin')
 var validate = require('mongoose-validator').validate
 
 var User = new mongoose.Schema({
+  _id: {
+    type: String,
+    unique: true
+  },
   name: {
     type: String,
     index: true,
@@ -32,13 +36,16 @@ var User = new mongoose.Schema({
       validate({ message: 'You need a password, silly!' }, 'notEmpty')
     ]
   },
+  college: {
+    type: String,
+    ref: 'College'
+  },
   collegeId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'College'
   },
   collegeMajor: String,
   collegeYear: Number,
-  slug: model.SLUG_UNIQUE,
   admin: Boolean
 })
 
@@ -51,7 +58,7 @@ User.pre('save', function (next) {
 })
 
 User.virtual('url').get(function() {
-  return '/user/' + this.slug + '/'
+  return '/user/' + this._id + '/'
 })
 
 User.virtual('firstName').get(function () {

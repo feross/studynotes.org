@@ -9,6 +9,10 @@ var validate = require('mongoose-validator').validate
 var util = require('../util')
 
 var Essay = mongoose.Schema({
+  _id: {
+    type: String,
+    unique: true
+  },
   name: {
     type: String,
     index: true,
@@ -23,23 +27,20 @@ var Essay = mongoose.Schema({
       validate({ message: 'It looks like you forgot to include the actual essay.' }, 'notEmpty')
     ]
   },
-  collegeId: {
-    type: mongoose.Schema.Types.ObjectId,
+  college: {
+    type: 'String',
     ref: 'College',
     index: true,
     required: true
   },
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
+  user: {
+    type: String,
     ref: 'User',
     index: true,
     required: true
   },
-  slug: model.SLUG_UNIQUE,
   admitsphere: Boolean
 })
-
-Essay.index({ collegeId: 1, slug: 1 })
 
 // Trim whitespace
 Essay.pre('save', function (next) {
@@ -50,19 +51,14 @@ Essay.pre('save', function (next) {
 
 Essay.virtual('url').get(function () {
   var essay = this
-  var collegeId = essay.populated('collegeId') || essay.collegeId.toString()
-  var college = _.find(model.cache.colleges, function (c) {
-    return c.id == collegeId
-  })
-  return '/' + college.slug + '/' + essay.slug + '/'
+  var collegeSlug = essay.populated('college') || essay.college
+  return '/' + collegeSlug + '/' + essay._id + '/'
 })
 
 Essay.virtual('searchDesc').get(function () {
   var essay = this
-  var collegeId = this.collegeId.toString()
-  var college = _.find(model.cache.colleges, function (c) {
-    return c.id == collegeId
-  })
+  var collegeSlug = essay.populated('college') || essay.college
+  var college = model.cache.colleges[collegeSlug]
 
   return college.shortName + ' Admissions Essay'
 })

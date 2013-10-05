@@ -25,7 +25,7 @@ module.exports = function (app) {
     if (!college) return next()
 
     model.Essay
-      .find({ collegeId: college._id })
+      .find({ college: college._id })
       .sort('-hits')
       .limit(10)
       .populate('userId')

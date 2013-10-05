@@ -21,25 +21,25 @@ exports.autocomplete = function (query, cb) {
         .find({ name: exports.regexForQuery(query) })
         .sort('-hits')
         .limit(MAX_RESULTS)
-        .select('name slug hits')
+        .select('name hits')
         .exec(cb)
     },
 
-    notetypes: function (cb) {
-      model.Notetype
-        .find({ name: exports.regexForQuery(query) })
-        .sort('-hits')
-        .limit(MAX_RESULTS)
-        .select('name slug hits courseId')
-        .exec(cb)
-    },
+    // notetypes: function (cb) {
+    //   model.Notetype
+    //     .find({ name: exports.regexForQuery(query) })
+    //     .sort('-hits')
+    //     .limit(MAX_RESULTS)
+    //     .select('name hits courseId')
+    //     .exec(cb)
+    // },
 
     notes: function (cb) {
       model.Note
         .find({ name: exports.regexForQuery(query) })
         .sort('-hits')
         .limit(MAX_RESULTS)
-        .select('name slug hits courseId notetypeId')
+        .select('name hits course notetype')
         .exec(cb)
     },
 
@@ -48,7 +48,7 @@ exports.autocomplete = function (query, cb) {
         .find({ name: exports.regexForQuery(query) })
         .sort('-hits')
         .limit(MAX_RESULTS)
-        .select('name slug hits')
+        .select('name hits')
         .exec(cb)
     },
 
@@ -60,7 +60,7 @@ exports.autocomplete = function (query, cb) {
         ]})
         .sort('-hits')
         .limit(MAX_RESULTS)
-        .select('name slug hits')
+        .select('name hits')
         .exec(cb)
     },
 
@@ -69,7 +69,7 @@ exports.autocomplete = function (query, cb) {
         .find({ name: exports.regexForQuery(query) })
         .sort('-hits')
         .limit(MAX_RESULTS)
-        .select('name slug hits collegeId')
+        .select('name hits college')
         .exec(cb)
     }
 

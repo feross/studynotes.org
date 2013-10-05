@@ -28,21 +28,18 @@ var Note = mongoose.Schema({
 
 Note.index({ course: 1, notetype: 1})
 
-Note.index({ courseId: 1, notetypeId: 1})
-
 Note.virtual('url').get(function () {
-  var note = this
+  var courseId = this.populated('course') || this.course
+  var notetypeId = this.populated('notetype') || this.notetype
 
-  var courseSlug = note.populated('course') || note.course
-  var notetypeSlug = note.populated('notetype') || note.notetype
-
-  return '/' + courseSlug + '/' + notetypeSlug + '/' + note.id + '/'
+  return '/' + courseId + '/' + notetypeId + '/' + this._id + '/'
 })
 
 Note.virtual('searchDesc').get(function () {
   var note = this
 
-  var course = model.cache.courses[note.course]
+  var courseId = note.populated('course') || note.course
+  var course = model.cache.courses[note.courseId]
   var notetype = _.find(course.notetypes, function (n) {
     return n.id == note.notetype
   })

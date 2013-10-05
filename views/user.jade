@@ -14,7 +14,7 @@ block content
   if (essays.length)
     ul.listing
       each essay in essays
-        li: a(href='#{ essay.url }')= essay.name + ' - ' + essay.collegeId.shortName
+        li: a(href='#{ essay.url }')= essay.name + ' - ' + essay.college.shortName
   else if (user._id === currentUser._id)
     h2 You haven't posted anything yet! <a href="/submit/essay/">Share your college admissions essay</a>!
   else

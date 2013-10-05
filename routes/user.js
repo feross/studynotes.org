@@ -6,13 +6,11 @@ var async = require('async')
 var model = require('../model')
 
 module.exports = function (app) {
-  app.get('/user/:userSlug', function (req, res, next) {
-    var userSlug = req.params.userSlug
-
+  app.get('/user/:userId', function (req, res, next) {
     async.auto({
       user: function (cb) {
         model.User
-          .findOne({ slug: userSlug })
+          .findOne({ _id: req.params.userId })
           .exec(cb)
       },
       essays: ['user', function (cb, results) {
@@ -20,8 +18,8 @@ module.exports = function (app) {
         if (!user) return next()
 
         model.Essay
-          .find({ userId: user._id })
-          .populate('collegeId')
+          .find({ user: user._id })
+          .populate('college')
           .select('-body -prompt')
           .exec(cb)
       }]

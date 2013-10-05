@@ -6,14 +6,21 @@ var mongoose = require('mongoose')
 var plugin = require('./plugin')
 
 var Course = mongoose.Schema({
+  _id: {
+    type: String,
+    unique: true
+  },
   name: { type: String, required: true, index: true },
   desc: String,
-  slug: model.SLUG_UNIQUE,
-  examDate: Date
+  examDate: Date,
+  notetypes: [{
+    type: String,
+    ref: 'Notetype'
+  }]
 })
 
 Course.virtual('url').get(function() {
-  return '/' + this.slug + '/'
+  return '/' + this._id + '/'
 })
 
 Course.virtual('searchDesc').get(function () {
@@ -21,19 +28,22 @@ Course.virtual('searchDesc').get(function () {
 })
 
 Course.virtual('heroImage').get(function () {
-  return this.slug + '.jpg'
+  return this._id + '.jpg'
 })
 
-Course.methods.populateNotetypes = function (cb) {
-  var course = this
+Course.methods.notetypeUrl = function (notetypeId) {
+  // Support passing in the whole notetype object
+  if (notetypeId.id) notetypeId = notetypeId.id
 
-  model.Notetype
-    .find({ courseId: this._id })
-    .sort('-hits')
-    .exec(function (err, notetypes) {
-      if (!err) course.notetypes = notetypes
-      cb(err)
-    })
+  return '/' + this._id + '/' + notetypeId + '/'
+}
+
+Course.methods.augmentNotetypes = function () {
+  var course = this
+  course.notetypes.forEach(function (notetype) {
+    notetype.course = course
+    notetype.url = course.notetypeUrl(notetype)
+  })
 }
 
 Course.plugin(plugin.modifyDate)

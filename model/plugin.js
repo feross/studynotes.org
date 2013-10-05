@@ -64,15 +64,18 @@ exports.absoluteUrl = function (schema, opts) {
 /**
  * Automatic slug generation.
  *
- * If schema has a "slug" field, set up a pre-save hook to check for
- * existence of slug. When no slug is set at save time, we automatically
- * generate one.
+ * Pre-save hook to check for existence of an _id. When no _id is set at save
+ * time, we automatically generate one which acts as the slug.
  */
 exports.slug = function (schema, opts) {
+  // schema.virtual('slug').get(function () {
+  //   return this._id
+  // })
+
   schema.pre('save', function (next) {
     var doc = this
 
-    if (doc.slug) return next()
+    if (doc._id) return next()
 
     var num = 0 // number to append to slug to try to make it unique
     var done = false
@@ -92,11 +95,11 @@ exports.slug = function (schema, opts) {
       num += 1
 
       mongoose.model(opts.model)
-        .count({ slug: potentialSlug }, function (err, count) {
+        .count({ _id: potentialSlug }, function (err, count) {
           if (err) return cb(err)
 
           if (count === 0) {
-            doc.slug = potentialSlug
+            doc._id = potentialSlug
             done = true
           }
 

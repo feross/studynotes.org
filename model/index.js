@@ -10,21 +10,6 @@ var once = require('once')
 var path = require('path')
 var Schema = mongoose.Schema
 
-// Fields that are re-used many times
-// TODO: REMOVE
-exports.SLUG = {
-  type: String,
-  match: /[-a-z0-9]+/i,
-  lowercase: true,
-  index: true
-}
-exports.SLUG_UNIQUE = {
-  type: String,
-  match: /[-a-z0-9]+/i,
-  lowercase: true,
-  unique: true
-}
-
 // Object that contains the exported models, useful for iterating
 // over *only* the models, skipping methods like `connect`.
 exports.models = {}
@@ -61,13 +46,15 @@ function loadCache (done) {
       exports.Course
         .find()
         .sort('-hits')
+        .populate('notetypes')
         .exec(function (err, courses) {
           if (err) return cb(err)
           exports.cache.courses = {}
-          async.forEach(courses, function (course, cb2) {
-            exports.cache.courses[course.slug] = course
-            course.populateNotetypes(cb2)
-          }, cb)
+          courses.forEach(function (course) {
+            course.augmentNotetypes()
+            exports.cache.courses[course._id] = course
+          })
+          cb(null)
         })
     },
     function (cb) {
@@ -78,13 +65,12 @@ function loadCache (done) {
           if (err) return cb(err)
           exports.cache.colleges = {}
           colleges.forEach(function (college) {
-            exports.cache.colleges[college.slug] = college
+            exports.cache.colleges[college._id] = college
           })
           cb(null)
         })
     }
   ], function (err) {
-
     function sortByName (a, b) {
       if(a.name < b.name) return -1
       if(a.name > b.name) return 1

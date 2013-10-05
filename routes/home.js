@@ -22,6 +22,15 @@ module.exports = function (app) {
       },
       userCount: function (cb) {
         model.User.count().exec(cb)
+      },
+      newNotes: function (cb) {
+        model.Note
+          .find()
+          .sort('created')
+          .limit(10)
+          .select('-body')
+          .populate('course notetype')
+          .exec(cb)
       }
     }, function (err, results) {
       if (err) return next(err)

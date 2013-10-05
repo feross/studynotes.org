@@ -26,7 +26,7 @@ if (locals.hero)
   if (hero.tabs && hero.tabs.length)
     ul.tabs.clearfix
       each tab in hero.tabs
-        li(class='#{locals.notetype && tab.slug == notetype.slug ? "on" : ""}')
+        li(class='#{locals.notetype && tab._id == notetype._id ? "on" : ""}')
           a(href='#{tab.url}')= tab.name
         //- Force a space between tabs for inline-block spacing
         | #{ ' ' }

@@ -6,33 +6,34 @@ var async = require('async')
 var model = require('../model')
 
 module.exports = function (app) {
-  app.get('/:collegeSlug/:essaySlug', function (req, res, next) {
-    var collegeSlug = req.params.collegeSlug
-    var essaySlug = req.params.essaySlug
-
-    var college = model.cache.colleges[collegeSlug]
+  app.get('/:collegeId/:essayId', function (req, res, next) {
+    var college = model.cache.colleges[req.params.collegeId]
     if (!college) return next()
 
     async.auto({
       essay: function (cb) {
         model.Essay
-          .findOne({ collegeId: college._id, slug: essaySlug })
-          .populate('userId')
+          .findOne({
+            college: college.id,
+            _id: req.params.essayId
+          })
+          .populate('user user.college')
           .exec(cb)
       },
       essays: function (cb) {
         model.Essay
-          .find({ collegeId: college._id })
+          .find({ college: college.id })
           .sort('-hits')
           .select('-body -prompt')
           .exec(cb)
-      },
-      populateUserCollege: ['essay', function (cb, results) {
-        var essay = results.essay
-        if (!essay) return next()
+      }
+      // TODO: remove
+      // populateUserCollege: ['essay', function (cb, results) {
+      //   var essay = results.essay
+      //   if (!essay) return next()
 
-        essay.userId.populate('collegeId', cb)
-      }]
+      //   essay.userId.populate('college', cb)
+      // }]
     }, function (err, results) {
       var essay = results.essay
       var essays = results.essays
@@ -43,11 +44,13 @@ module.exports = function (app) {
         if (e.id === essay.id) index = i
       })
 
+      var prevEssay
+      var nextEssay
       if (index > 0) {
-        var prevEssay = essays[index - 1]
+        prevEssay = essays[index - 1]
       }
       if (index < essays.length - 1) {
-        var nextEssay = essays[index + 1]
+        nextEssay = essays[index + 1]
       }
 
       res.render('essay', {
@@ -59,7 +62,7 @@ module.exports = function (app) {
         prev: prevEssay,
         title: essay.name + ' - ' + college.name,
         url: essay.url,
-        user: essay.userId
+        user: essay.user
       })
 
       essay.hit()

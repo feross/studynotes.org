@@ -18,10 +18,8 @@ module.exports = function (app) {
     })
   })
 
-  app.get('/:courseSlug', function (req, res, next) {
-    var courseSlug = req.params.courseSlug
-
-    var course = model.cache.courses[courseSlug]
+  app.get('/:courseId', function (req, res, next) {
+    var course = model.cache.courses[req.params.courseId]
     if (!course) return next()
 
     res.render('course', {

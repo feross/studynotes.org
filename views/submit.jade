@@ -17,7 +17,7 @@ block content
         select.select2(name='college', data-placeholder='Which university is this essay for?')
           option
           each college in modelCache.collegesArray
-            option(value=college.slug, data-alt=college.shortName, selected=(essay && (essay.college === college.slug)))= college.name
+            option(value=college._id, data-alt=college.shortName, selected=(essay && (essay.college === college._id)))= college.name
     .row
       textarea.editor(name='prompt', placeholder='Paste the essay prompt here... (optional)')= (essay && essay.prompt)
     .row(style='margin: 0')
