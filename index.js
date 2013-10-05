@@ -52,7 +52,7 @@ Site.prototype.start = function (done) {
     builder.build(function (err, output) {
       if (err) return done(err)
 
-      debug('Spawning ' + config.numCpus + ' workers.')
+      debug('Spawning ' + config.numCpus + ' workers')
       for (var i = 0; i < config.numCpus; i++) {
         cluster.fork({
           'CSS_MD5': output.cssMd5,
@@ -72,47 +72,25 @@ Site.prototype.start = function (done) {
     // Trust the X-Forwarded-* headers from nginx
     self.app.enable('trust proxy')
 
-    // Jade for templating
+    // Templating
     self.app.set('views', path.join(__dirname, 'views'))
     self.app.set('view engine', 'jade')
+    self.addTemplateGlobals()
 
     // Readable logs that are hidden by default. Enable with DEBUG=*
     self.app.use(util.expressLogger(debug))
     self.app.use(express.compress())
     self.app.use(self.addHeaders)
-
-    if (config.isProd) {
-      self.app.use(self.canonicalize)
-    }
+    if (config.isProd) self.app.use(self.canonicalize)
 
     self.serveStatic()
     self.app.use(connectSlashes())
 
-    self.app.use(express.cookieParser(secret.cookieSecret))
-    self.app.use(express.bodyParser())
-    self.app.use(express.session({
-      proxy: true, // trust the reverse proxy
-      secret: secret.cookieSecret, // prevent cookie tampering
-      store: new MongoStore({
-        db: config.mongo.database,
-        host: config.mongo.host,
-        port: config.mongo.port,
-        auto_reconnect: true
-      })
-    }))
-    self.app.use(express.csrf())
-
-    // Passport
-    self.app.use(passport.initialize())
-    self.app.use(passport.session())
-    passport.serializeUser(auth.serializeUser)
-    passport.deserializeUser(auth.deserializeUser)
-    passport.use(auth.passportStrategy)
+    self.setupSessions()
 
     // Errors are propogated using `req.flash`
     self.app.use(flash())
 
-    self.addTemplateGlobals()
     self.app.use(self.addTemplateLocals)
 
     require('./routes')(self.app)
@@ -131,16 +109,22 @@ Site.prototype.start = function (done) {
   }
 }
 
-Site.prototype.canonicalize = function (req, res, next) {
-  if (req.host !== 'www.apstudynotes.org') {
-    // redirect alternate domains to homepage
-    res.redirect(301, config.siteOrigin)
-  } else if (req.protocol !== 'http') {
-    // redirect HTTP to HTTPS
-    res.redirect(301, config.siteOrigin + req.url)
-  } else {
-    next()
-  }
+/**
+ * Make variables and functions available to Jade templates.
+ */
+Site.prototype.addTemplateGlobals = function () {
+  var self = this
+
+  self.app.locals._ = _
+  self.app.locals.config = config
+  self.app.locals.modelCache = model.cache
+  self.app.locals.moment = moment
+  self.app.locals.pretty = true
+  self.app.locals.offline = self.offline
+  self.app.locals.util = util
+
+  self.app.locals.CSS_MD5 = process.env.CSS_MD5
+  self.app.locals.JS_MD5 = process.env.JS_MD5
 }
 
 Site.prototype.addHeaders = function (req, res, next) {
@@ -167,6 +151,18 @@ Site.prototype.addHeaders = function (req, res, next) {
   next()
 }
 
+Site.prototype.canonicalize = function (req, res, next) {
+  if (req.host !== 'www.apstudynotes.org') {
+    // redirect alternate domains to homepage
+    res.redirect(301, config.siteOrigin)
+  } else if (req.protocol !== 'http') {
+    // redirect HTTP to HTTPS
+    res.redirect(301, config.siteOrigin + req.url)
+  } else {
+    next()
+  }
+}
+
 Site.prototype.serveStatic = function () {
   var self = this
 
@@ -183,22 +179,29 @@ Site.prototype.serveStatic = function () {
   })
 }
 
-/**
- * Make variables and functions available to Jade templates.
- */
-Site.prototype.addTemplateGlobals = function () {
+Site.prototype.setupSessions = function () {
   var self = this
 
-  self.app.locals._ = _
-  self.app.locals.config = config
-  self.app.locals.modelCache = model.cache
-  self.app.locals.moment = moment
-  self.app.locals.pretty = true
-  self.app.locals.offline = self.offline
-  self.app.locals.util = util
+  self.app.use(express.cookieParser(secret.cookieSecret))
+  self.app.use(express.bodyParser())
+  self.app.use(express.session({
+    proxy: true, // trust the reverse proxy
+    secret: secret.cookieSecret, // prevent cookie tampering
+    store: new MongoStore({
+      db: config.mongo.database,
+      host: config.mongo.host,
+      port: config.mongo.port,
+      auto_reconnect: true
+    })
+  }))
+  self.app.use(express.csrf())
 
-  self.app.locals.CSS_MD5 = process.env.CSS_MD5
-  self.app.locals.JS_MD5 = process.env.JS_MD5
+  // Passport
+  self.app.use(passport.initialize())
+  self.app.use(passport.session())
+  passport.serializeUser(auth.serializeUser)
+  passport.deserializeUser(auth.deserializeUser)
+  passport.use(auth.passportStrategy)
 }
 
 /**
