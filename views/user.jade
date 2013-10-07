@@ -1,13 +1,5 @@
 extends layouts/main-sidebar
 
-append sidebar
-  h2 User Stats
-  ul
-    li #{ util.addCommas(user.hits + totalHits) } total views for #{ user.firstName }'s submissions to StudyNotes.
-    li.online
-
-  include includes/ads/adsense-rect
-
 block content
   include includes/toolbar
 
@@ -19,3 +11,25 @@ block content
     h2 You haven't posted anything yet! <a href="/submit/essay/">Share your college admissions essay</a>!
   else
     p Nothing to see here yet!
+
+append sidebar
+  .author
+    a(href=user.url)
+      img(src=user.gravatar)
+      h2.name= user.name
+    if (user.collegeMajor)
+      h3.accepted= user.collegeMajor
+    if (user.college)
+      h3.accepted
+        | #{ user.hasGraduated ? 'Graduated ' : 'Attending ' }
+        a(href=user.college.url)= user.college.shortName
+        if (user.collegeYear)
+          | #{ ' \'' + user.collegeYear.toString().substring(2) }
+
+  h2 User Stats
+  ul
+    li #{ util.addCommas(totalHits) } views (all submissions)
+    li #{ util.addCommas(user.hits) } profile views
+    li.online
+
+  include includes/ads/adsense-rect

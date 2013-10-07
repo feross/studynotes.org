@@ -1,40 +1,5 @@
 extends layouts/main-sidebar
 
-append sidebar
-  .author
-    a(href=user.getUrl(essay.anon))
-      img(src=user.getGravatar(essay.anon))
-      h2.name= user.getName(essay.anon)
-    if (user.collegeMajor)
-      h3.accepted= user.collegeMajor
-    if (user.college && user.collegeYear)
-      h3.accepted
-        | #{ user.hasGraduated ? 'Graduated ' : 'Attending ' }
-        a(href=user.college.url)= user.college.shortName
-        | #{ ' \'' + user.collegeYear.toString().substring(2) }
-    if (!user.college || user.college.id !== college.id)
-      h3.accepted Accepted at <a href='#{ college.url }'>#{ college.shortName }</a>
-
-  if (essay.admitsphere)
-    h3 Visit AdmitSphere
-    p This essay comes from <a href="http://www.admitsphere.tk/">AdmitSphere</a> who kindly agreed to republish it here.
-
-  include includes/ads/adsense-rect
-
-  h2 Essay Stats
-  ul
-    li Posted <span title='#{ moment(essay.createDate).format("MMMM Do, YYYY, h:mm:ss a") }'>#{ moment(essay.createDate).fromNow() }</span>
-    li #{ util.addCommas(essay.hits) } views
-    li Averaging #{ util.addCommas(util.hitsPerDay(essay.hits, essay.createDate)) } views per day
-    li.online
-
-  //- include includes/relatedessays
-
-append toolbar
-  if next
-    a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next →
-    .navigate-msg Use ← → keys to navigate
-
 block content
   include includes/breadcrumbs
   h1= essay.name
@@ -77,3 +42,38 @@ block content
 
   h2 How to cite this essay (with MLA)
   .cite #{ user.getMlaName(essay.anon) }. "#{essay.name}" StudyNotes.org. StudyNotes, Inc., #{moment(essay.createDate).format('DD MMM. YYYY.')} Web. #{moment().format('DD MMM. YYYY.')} &lt;#{essay.absoluteUrl}&gt;.
+
+append sidebar
+  .author
+    a(href=user.getUrl(essay.anon))
+      img(src=user.getGravatar(essay.anon))
+      h2.name= user.getName(essay.anon)
+    if (user.collegeMajor)
+      h3.accepted= user.collegeMajor
+    if (user.college && user.collegeYear)
+      h3.accepted
+        | #{ user.hasGraduated ? 'Graduated ' : 'Attending ' }
+        a(href=user.college.url)= user.college.shortName
+        | #{ ' \'' + user.collegeYear.toString().substring(2) }
+    if (!user.college || user.college.id !== college.id)
+      h3.accepted Accepted at <a href='#{ college.url }'>#{ college.shortName }</a>
+
+  if (essay.admitsphere)
+    h3 Visit AdmitSphere
+    p This essay comes from <a href="http://www.admitsphere.tk/">AdmitSphere</a> who kindly agreed to republish it here.
+
+  include includes/ads/adsense-rect
+
+  h2 Essay Stats
+  ul
+    li Posted <span title='#{ moment(essay.createDate).format("MMMM Do, YYYY, h:mm:ss a") }'>#{ moment(essay.createDate).fromNow() }</span>
+    li #{ util.addCommas(essay.hits) } views
+    li Averaging #{ util.addCommas(util.hitsPerDay(essay.hits, essay.createDate)) } views per day
+    li.online
+
+  //- include includes/relatedessays
+
+append toolbar
+  if next
+    a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next →
+    .navigate-msg Use ← → keys to navigate
