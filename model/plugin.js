@@ -70,15 +70,18 @@ exports.absoluteUrl = function (schema, opts) {
 exports.slug = function (schema, opts) {
   schema.pre('save', function (next) {
     var doc = this
-
     if (doc._id) return next()
+
+    var initialSlug = _s.slugify(doc.name)
+    if (initialSlug.length > config.maxSlugLength) {
+      initialSlug = initialSlug
+        .substring(0, config.maxSlugLength)
+        .replace(/-$/, '') // no trailing dashes in slug
+    }
 
     var num = 0 // number to append to slug to try to make it unique
     var done = false
-    var potentialSlug
-    var initialSlug
-
-    potentialSlug = initialSlug = _s.slugify(doc.name)
+    var potentialSlug = initialSlug
 
     async.whilst(function () {
       return !done
