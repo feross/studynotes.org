@@ -71,11 +71,15 @@ User.methods.getUrl = function (anon) {
 }
 
 User.methods.getName = function (anon) {
-  if (!this.populated('college')) throw new Error('must populate college')
-  if (anon)
-    return this.college.shortName + ' Student'
-  else
+  if (anon) {
+    if (this.college && this.populated('college')) {
+      return this.college.shortName + ' Student'
+    } else {
+      return 'Student'
+    }
+  } else {
     return this.name
+  }
 }
 
 User.virtual('firstName').get(function () {
@@ -92,11 +96,15 @@ User.virtual('mlaName').get(function () {
 })
 
 User.methods.getMlaName = function (anon) {
-  if (!this.populated('college')) throw new Error('must populate college')
-  if (anon)
-    return 'Anonymous ' + this.college.shortName + ' Student'
-  else
+  if (anon) {
+    if (this.college && this.populated('college')) {
+      return 'Anonymous ' + this.college.shortName + ' Student'
+    } else {
+      return 'Anonymous Student'
+    }
+  } else {
     return this.mlaName
+  }
 }
 
 User.virtual('searchDesc').get(function () {
