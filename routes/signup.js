@@ -5,6 +5,7 @@ var _ = require('underscore')
 var async = require('async')
 var auth = require('../auth')
 var bcrpyt = require('bcrypt')
+var email = require('../lib/email')
 var model = require('../model')
 
 module.exports = function (app) {
@@ -45,15 +46,16 @@ module.exports = function (app) {
       } else {
         // Automatically login the user
         req.login(user, function (err) {
-          if (err) {
-            next(err)
-          } else if (req.session && req.session.returnTo) {
+          if (err) return next(err)
+
+          if (req.session && req.session.returnTo) {
             var url = req.session.returnTo
             delete req.session.returnTo
             res.redirect(url)
           } else {
             res.redirect('/signup/')
           }
+          email.notifyAdmin('New user', user)
         })
       }
     })

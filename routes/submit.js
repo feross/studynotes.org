@@ -3,6 +3,7 @@
 
 var _ = require('underscore')
 var auth = require('../auth')
+var email = require('../lib/email')
 var model = require('../model')
 
 module.exports = function (app) {
@@ -48,6 +49,7 @@ module.exports = function (app) {
         next(err)
       } else {
         res.redirect(essay.url)
+        email.notifyAdmin('New essay', essay)
       }
     })
   })
@@ -101,6 +103,7 @@ module.exports = function (app) {
         next(err)
       } else {
         res.redirect(note.url)
+        email.notifyAdmin('New note', note)
       }
     })
   })
