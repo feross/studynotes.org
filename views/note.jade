@@ -9,7 +9,7 @@ append sidebar
 
   if locals.relatedNotes
     h2 More #{course.name} #{notetype.name}
-    ul.relatedNotes
+    ul
       each note in locals.relatedNotes
         li: a(href='#{note.url}')= note.name
 

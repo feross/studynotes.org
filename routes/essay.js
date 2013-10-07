@@ -55,7 +55,6 @@ module.exports = function (app) {
       }
 
       res.render('essay', {
-        ads: true,
         breadcrumbs: [ college ],
         college: college,
         essay: essay,

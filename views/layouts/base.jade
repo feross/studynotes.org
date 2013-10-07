@@ -83,53 +83,53 @@ html(class='no-js #{layout}', lang='en')
 
     link(rel='stylesheet', href='#{ config.cdnOrigin }/out/bower_components/font-awesome/css/font-awesome.min.css')
     link(rel='stylesheet', href='#{ config.cdnOrigin }/out/css/main-#{ locals.CSS_MD5 }.css')
-    if ads
-      //- Adsense styles must be inline
-      style.
+
+    //- Adsense styles must be inline
+    style.
+      .studynotes-in-content {
+        width: 336px;
+        height: 280px;
+      }
+      @media (max-width: 799px) {
         .studynotes-in-content {
           width: 336px;
           height: 280px;
         }
-        @media (max-width: 799px) {
-          .studynotes-in-content {
-            width: 336px;
-            height: 280px;
-          }
+      }
+      @media (min-width: 800px) and (max-width: 1099px) {
+        .studynotes-in-content {
+          width: 336px;
+          height: 280px;
         }
-        @media (min-width: 800px) and (max-width: 1099px) {
-          .studynotes-in-content {
-            width: 336px;
-            height: 280px;
-          }
+      }
+      @media (min-width: 1100px) {
+        .studynotes-in-content {
+          width: 336px;
+          height: 280px;
         }
-        @media (min-width: 1100px) {
-          .studynotes-in-content {
-            width: 336px;
-            height: 280px;
-          }
-        }
+      }
+      .studynotes-sidebar {
+        width: 336px;
+        height: 280px;
+      }
+      @media (max-width: 799px) {
         .studynotes-sidebar {
           width: 336px;
           height: 280px;
         }
-        @media (max-width: 799px) {
-          .studynotes-sidebar {
-            width: 336px;
-            height: 280px;
-          }
+      }
+      @media (min-width: 800px) and (max-width: 1099px) {
+        .studynotes-sidebar {
+          width: 160px;
+          height: 600px;
         }
-        @media (min-width: 800px) and (max-width: 1099px) {
-          .studynotes-sidebar {
-            width: 160px;
-            height: 600px;
-          }
+      }
+      @media (min-width: 1100px) {
+        .studynotes-sidebar {
+          width: 336px;
+          height: 280px;
         }
-        @media (min-width: 1100px) {
-          .studynotes-sidebar {
-            width: 336px;
-            height: 280px;
-          }
-        }
+      }
 
     if (locals.hero && hero.image)
       style(id='heroStyle').
@@ -170,7 +170,7 @@ html(class='no-js #{layout}', lang='en')
 
     if (!locals.offline)
       //- Adsense (responsive ads) (async)
-      if (locals.ads && config.isProd)
+      if (config.isProd)
         script(async, src='http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')
 
       //- Twitter SDK (async)

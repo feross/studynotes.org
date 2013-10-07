@@ -23,7 +23,6 @@ module.exports = function (app) {
     if (!course) return next()
 
     res.render('course', {
-      ads: true,
       course: course,
       title: course.name,
       url: course.url

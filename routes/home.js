@@ -36,7 +36,6 @@ module.exports = function (app) {
       if (err) return next(err)
 
       var locals = {
-        ads: true,
         hero: {
           title: 'Study Notes',
           desc: 'Fast, free study tools for AP* students'

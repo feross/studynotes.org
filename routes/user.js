@@ -35,7 +35,6 @@ module.exports = function (app) {
       }, 0)
 
       res.render('user', {
-        ads: true,
         essays: essays,
         hero: {
           title: user.name,
