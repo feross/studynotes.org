@@ -1,6 +1,5 @@
 extends layouts/main-sidebar
 
-
 block content
   if (college.desc)
     h2 About #{ college.name }
@@ -17,9 +16,9 @@ block content
             | !{ num + '. ' }
             a(href=essay.url)= essay.name
           .author
-            a(href=essay.user.url)
-              span by #{ essay.user.name }
-              img(src=essay.user.gravatar)
+            a(href=essay.user.getUrl(essay.anon))
+              span by #{ essay.user.getName(essay.anon) }
+              img(src=essay.user.getGravatar(essay.anon))
         .expandify.no-btn
           //- TODO: shorten, while preserving HTML
           .body

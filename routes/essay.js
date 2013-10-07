@@ -17,9 +17,15 @@ module.exports = function (app) {
             college: college.id,
             _id: req.params.essayId
           })
-          .populate('user user.college')
+          .populate('user')
           .exec(cb)
       },
+      populateCollege: ['essay', function (cb, results) {
+        var user = results.essay && results.essay.user
+        if (user) {
+          user.populate('college', cb)
+        }
+      }],
       essays: function (cb) {
         model.Essay
           .find({ college: college.id })
@@ -28,9 +34,10 @@ module.exports = function (app) {
           .exec(cb)
       }
     }, function (err, results) {
-      if (err) return next(err)
       var essays = results.essays
       var essay = results.essay
+
+      if (err) return next(err)
       if (!essay) return next()
 
       var index

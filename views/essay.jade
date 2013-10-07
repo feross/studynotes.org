@@ -2,9 +2,9 @@ extends layouts/main-sidebar
 
 append sidebar
   .author
-    a(href=user.url)
-      img(src=user.gravatar)
-      h2.name= user.name
+    a(href=user.getUrl(essay.anon))
+      img(src=user.getGravatar(essay.anon))
+      h2.name= user.getName(essay.anon)
     if (user.collegeMajor)
       h3.accepted= user.collegeMajor
     if (user.college && user.collegeYear)

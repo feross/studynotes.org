@@ -39,7 +39,8 @@ var Essay = mongoose.Schema({
     index: true,
     required: true
   },
-  admitsphere: Boolean
+  admitsphere: Boolean,
+  anon: Boolean
 })
 
 // Trim whitespace

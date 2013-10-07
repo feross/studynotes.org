@@ -13,6 +13,17 @@ module.exports = function (app) {
     })
   })
 
+  app.get('/anon', function (req, res) {
+    res.render('anon', {
+      url: '/anon',
+      title: 'Anonymity',
+      hero: {
+        title: 'Anonymity',
+        desc: 'Some content on StudyNotes is anonymous'
+      }
+    })
+  })
+
   app.get('/contact', function (req, res) {
     res.render('contact', {
       url: '/contact',

@@ -33,5 +33,9 @@ block content
           a(data-wysihtml5-command='formatBlock', data-wysihtml5-command-value='h2') Heading
     .row
       textarea.editor(name='body', placeholder='Paste the essay here...', data-toolbar='editor-toolbar')= (essay && essay.body)
-    .row
+    .row.submit
       button.btn.large(type='submit') Submit Essay
+      div(style='display: inline-block')
+        input(name='anon', id='anon', type='checkbox', value='true')
+        .checkbox
+        label(for='anon') Anonymous

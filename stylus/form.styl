@@ -1,17 +1,17 @@
 CONTENT_WIDTH = 580px
 
 .content
-  [type='submit']
-    display: block
-
+  .submit
+    margin: 0 auto
+    text-align: center
     @media PHONE
-      margin: 5px auto 0 auto
+      padding-top: 5px
     @media TABLET
-      margin: 10px auto 0 auto
+      padding-top: 10px
     @media DESKTOP
-      margin: 15px auto 0 auto
+      padding-top: 15px
 
-  input, textarea, .select2
+  input, textarea, .select2, label
     color: #000
     display: block
     font-family: FORM_FONT
@@ -26,14 +26,14 @@ CONTENT_WIDTH = 580px
       outline: 0
       box-shadow: 0 0 5px rgba(BLUE, 0.4)
 
+  input, .select2-container .select2-choice
+    height: 50px
+    padding: 10px 15px
+
   input
     border-radius: 25px
   textarea
     border-radius: 10px
-
-  input, .select2-container .select2-choice
-    height: 50px
-    padding: 10px 15px
 
   .select2-container
     .select2-choice
@@ -101,6 +101,51 @@ CONTENT_WIDTH = 580px
   :-ms-input-placeholder
     color: GRAY_DARK
     font-family: FORM_FONT
+
+  input[type='radio'],
+  input[type='checkbox'],
+  input[type='radio'] + .checkbox,
+  input[type='checkbox'] + .checkbox
+    cursor: pointer
+    height: 32px
+    margin: 4px 0 0 25px
+    width: 32px
+
+  input[type='radio'],
+  input[type='checkbox']
+    /* Hide the input, but have it still be clickable */
+    opacity: 0
+    position: absolute
+
+    &:focus, &:active
+      & + .checkbox
+        border-color: BLUE
+        box-shadow: 0 0 5px rgba(BLUE, 0.4)
+
+  input[type='radio'] + .checkbox,
+  input[type='checkbox'] + .checkbox
+    border: 2px solid GRAY_DARK
+    border-radius: 7px
+    box-shadow: 0 1px 1px rgba(0,0,0,0.2)
+    float: left
+
+  input[type='radio']:checked + .checkbox:before
+  input[type='checkbox']:checked + .checkbox:before
+    color: BLUE
+    content: '\2713'
+    font-size: 2.9em
+
+  input[type='radio'] + .checkbox + label,
+  input[type='checkbox'] + .checkbox + label
+    color: GRAY_DARKER
+    cursor: pointer
+    display: block
+    float: left
+    margin: 0
+    padding: 6px 0 0 10px
+    width: auto
+    vertical-align: top
+
 
 .select2-drop.select2-drop-active
   &:not(.select2-drop-above)

@@ -2,6 +2,7 @@
 "use strict";
 
 var bcrypt = require('bcrypt')
+var config = require('../config')
 var model = require('./')
 var md5 = require('MD5')
 var mongoose = require('mongoose')
@@ -66,6 +67,21 @@ User.virtual('url').get(function() {
   return '/user/' + this._id + '/'
 })
 
+User.methods.getUrl = function (anon) {
+  if (anon)
+    return '/anon/'
+  else
+    return this.url
+}
+
+User.methods.getName = function (anon) {
+  if (!this.populated('college')) throw new Error('must populate college')
+  if (anon)
+    return this.college.shortName + ' Student'
+  else
+    return this.name
+}
+
 User.virtual('firstName').get(function () {
   return this.name.split(' ')[0]
 })
@@ -101,6 +117,13 @@ User.virtual('gravatar').get(function () {
   var hash = md5(this.email.trim().toLowerCase())
   return '//www.gravatar.com/avatar/' + hash + '?size=400&default=mm'
 })
+
+User.methods.getGravatar = function (anon) {
+  if (anon)
+    return config.cdnOrigin + '/images/anon.jpg'
+  else
+    return this.gravatar
+}
 
 // Store hashed version of user's password
 User.pre('save', function (next) {

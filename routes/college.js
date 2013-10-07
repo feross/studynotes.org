@@ -2,6 +2,7 @@
 "use strict";
 
 var _ = require('underscore')
+var async = require('async')
 var model = require('../model')
 
 module.exports = function (app) {
@@ -18,19 +19,30 @@ module.exports = function (app) {
     })
   })
 
-  app.get('/:collegeSlug', function (req, res, next) {
-    var collegeSlug = req.params.collegeSlug
+  app.get('/:collegeId', function (req, res, next) {
+    var collegeId = req.params.collegeId
 
-    var college = model.cache.colleges[collegeSlug]
+    var college = model.cache.colleges[collegeId]
     if (!college) return next()
 
-    model.Essay
-      .find({ college: college._id })
-      .sort('-hits')
-      .limit(10)
-      .populate('user')
-      .exec(function (err, essays) {
+    async.auto({
+      essays: function (cb) {
+        model.Essay
+          .find({ college: college.id })
+          .populate('user')
+          .sort('-hits')
+          .limit(20)
+          .exec(cb)
+      },
+      populateColleges: ['essays', function (cb, results) {
+        async.each(results.essays, function (essay, cb2) {
+          essay.user.populate('college', cb2)
+        }, cb)
+      }]
+    }, function (err, results) {
+        var essays = results.essays
         if (err) return next(err)
+
         res.render('college', {
           ads: true,
           college: college,
