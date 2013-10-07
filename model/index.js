@@ -75,12 +75,15 @@ function loadCache (done) {
       if(a.name > b.name) return 1
       return 0
     }
-    exports.cache.coursesArray = _(exports.cache.courses)
+    exports.cache.coursesByName = _(exports.cache.courses)
       .flatten()
       .sort(sortByName)
-    exports.cache.collegesArray = _(exports.cache.colleges)
+    exports.cache.collegesByName = _(exports.cache.colleges)
       .flatten()
       .sort(sortByName)
+    exports.cache.collegesByRank = _(exports.cache.colleges)
+      .flatten()
+      .sort(sortByRank)
 
     done(err)
   })

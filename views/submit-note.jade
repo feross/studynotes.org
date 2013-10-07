@@ -16,11 +16,11 @@ block content
       .col2
         select.select2(name='course', data-placeholder='Which AP course?')
           option
-          each course in modelCache.coursesArray
+          each course in modelCache.coursesByName
             option(value=course.slug, data-alt=course.shortName, selected=(note && (note.course === course.slug)))= course.name
       .col2
         select(name='allNotetypes', style='display: none;')
-          each course in modelCache.coursesArray
+          each course in modelCache.coursesByName
             each notetype in course.notetypes
               option(value=notetype.slug, data-course=course.slug, selected=(note && (note.notetype === notetype.slug)))= notetype.singularName || notetype.name
         select.select2(name='notetype', data-placeholder='What kind of note?', disabled)

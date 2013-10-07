@@ -1,6 +1,6 @@
 .browseWrapper
   .browse.browse-courses
-    each course in modelCache.coursesArray
+    each course in modelCache.coursesByName
       div
         h2: a(href=course.url)= course.name
         if (course.notetypes)
@@ -15,19 +15,19 @@
     div
       h2: a(href='/colleges/') Admissions Essays
       ul
-        each college in modelCache.collegesArray.slice(0, 7)
+        each college in modelCache.collegesByName.slice(0, 7)
           li: a(href=college.url, title='#{ college.name } Sample Essays') #{ college.shortName } Essays
     div
       ul
-        each college in modelCache.collegesArray.slice(7, 15)
+        each college in modelCache.collegesByName.slice(7, 15)
           li: a(href=college.url, title='#{ college.name } Sample Essays') #{ college.shortName } Essays
     div
       ul
-        each college in modelCache.collegesArray.slice(15, 23)
+        each college in modelCache.collegesByName.slice(15, 23)
           li: a(href=college.url, title='#{ college.name } Sample Essays') #{ college.shortName } Essays
     div
       ul
-        each college in modelCache.collegesArray.slice(23)
+        each college in modelCache.collegesByName.slice(23)
           li: a(href=college.url, title='#{ college.name } Sample Essays') #{ college.shortName } Essays
 
       a.btn(href='/submit/essay/') Add your essay
