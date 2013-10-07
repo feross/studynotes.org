@@ -36,7 +36,7 @@ College.virtual('heroImage').get(function () {
 College.plugin(plugin.modifyDate)
 College.plugin(plugin.createDate)
 College.plugin(plugin.absoluteUrl)
-College.plugin(plugin.slug)
+College.plugin(plugin.slug, { model: 'College' })
 College.plugin(plugin.hits)
 
 module.exports = mongoose.model('College', College)

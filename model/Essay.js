@@ -79,7 +79,7 @@ Essay.pre('save', function (next) {
 Essay.plugin(plugin.modifyDate)
 Essay.plugin(plugin.createDate)
 Essay.plugin(plugin.absoluteUrl)
-Essay.plugin(plugin.slug)
+Essay.plugin(plugin.slug, { model: 'Essay' })
 Essay.plugin(plugin.hits)
 
 module.exports = mongoose.model('Essay', Essay)

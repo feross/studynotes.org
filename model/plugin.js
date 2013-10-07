@@ -68,6 +68,10 @@ exports.absoluteUrl = function (schema, opts) {
  * time, we automatically generate one which acts as the slug.
  */
 exports.slug = function (schema, opts) {
+  // schema.virtual('slug').get(function () {
+  //   return this._id
+  // })
+
   schema.pre('save', function (next) {
     var doc = this
 
@@ -90,7 +94,7 @@ exports.slug = function (schema, opts) {
       }
       num += 1
 
-      mongoose.model(doc.constructor)
+      mongoose.model(opts.model)
         .count({ _id: potentialSlug }, function (err, count) {
           if (err) return cb(err)
 
