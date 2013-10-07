@@ -2,6 +2,7 @@
 "use strict";
 
 var config = require('../config')
+var email = require('../lib/email')
 var express = require('express')
 var httpStatus = require('http-status-codes')
 
@@ -21,11 +22,11 @@ module.exports = function (app) {
   })
 
   app.use(function (err, req, res, next) {
-    // Log the exception
     console.error('EXCEPTION: ' + req.url)
     console.error(err.stack)
     console.error('HEADERS:')
     console.dir(req.headers)
+    email.notifyOnException({ err: err, req: req })
 
     var code = 500
     if (typeof err.status === 'number') {

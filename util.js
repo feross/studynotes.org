@@ -5,6 +5,7 @@ var bytes = require('bytes')
 var config = require('./config')
 var cp = require('child_process')
 var debug = require('debug')('util')
+var email = require('./lib/email')
 var express = require('express')
 var fs = require('fs')
 var htmlParser = require('html-parser')
@@ -79,6 +80,7 @@ exports.run = function (ServerConstructor) {
   process.on('uncaughtException', function (err) {
     console.error('\nUNCAUGHT EXCEPTION')
     console.error(err.stack)
+    email.notifyOnException({ err: err })
   })
 }
 
