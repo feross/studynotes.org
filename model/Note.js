@@ -5,14 +5,27 @@ var _ = require('underscore')
 var model = require('./')
 var mongoose = require('mongoose')
 var plugin = require('./plugin')
+var validate = require('mongoose-validator').validate
+var util = require('../util')
 
 var Note = mongoose.Schema({
   _id: {
     type: String,
     unique: true
   },
-  name: { type: String, required: true, index: true },
-  body: { type: String, required: true },
+  name: {
+    type: String,
+    index: true,
+    validate: [
+      validate({ message: 'Please give the note a title.' }, 'notEmpty')
+    ]
+  },
+  body: {
+    type: String,
+    validate: [
+      validate({ message: 'It looks like you forgot to include the actual note.' }, 'notEmpty')
+    ]
+  },
   course: {
     type: String,
     ref: 'Course',
@@ -28,6 +41,13 @@ var Note = mongoose.Schema({
 
 Note.index({ course: 1, notetype: 1})
 
+// Trim whitespace
+Note.pre('save', function (next) {
+  var note = this
+  note.name = note.name.trim()
+  next()
+})
+
 Note.virtual('url').get(function () {
   var courseId = this.populated('course') || this.course
   var notetypeId = this.populated('notetype') || this.notetype
@@ -40,11 +60,21 @@ Note.virtual('searchDesc').get(function () {
 
   var courseId = note.populated('course') || note.course
   var course = model.cache.courses[courseId]
+  var notetypeId = note.populated('notetype') || note.notetype
   var notetype = _.find(course.notetypes, function (n) {
-    return n.id == note.notetype
+    return n.id == notetypeId
   })
 
   return course.name + ' ' + (notetype.singularName || notetype.name)
+})
+
+// Sanitize to strip bad html before saving
+Note.pre('save', function (next) {
+  var note = this
+  if (note.isModified('body')) {
+    note.body = util.sanitizeHTML(note.body)
+  }
+  next()
 })
 
 Note.plugin(plugin.modifyDate)

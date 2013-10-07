@@ -10,7 +10,16 @@ var Course = mongoose.Schema({
     type: String,
     unique: true
   },
-  name: { type: String, required: true, index: true },
+  name: {
+    type: String,
+    required: true,
+    index: true
+  },
+  shortName: {
+    type: String,
+    required: true,
+    index: true,
+  },
   desc: String,
   examDate: Date,
   notetypes: [{

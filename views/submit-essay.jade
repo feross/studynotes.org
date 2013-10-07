@@ -22,15 +22,15 @@ block content
       textarea.editor(name='prompt', placeholder='Paste the essay prompt here... (optional)')= (essay && essay.prompt)
     .row(style='margin: 0')
       .toolbar-ghost
-          #editor-toolbar.toolbar.clearfix(style='display: none;')
-            a(data-wysihtml5-command='formatInline', data-wysihtml5-command-value='strong'): i.icon-bold
-            a(data-wysihtml5-command='formatInline', data-wysihtml5-command-value='em'): i.icon-italic
-            a(data-wysihtml5-command='underline'): i.icon-underline
-            .space
-            a(data-wysihtml5-command='insertOrderedList'): i.icon-list-ol
-            a(data-wysihtml5-command='insertUnorderedList'): i.icon-list-ul
-            .space
-            a(data-wysihtml5-command='formatBlock', data-wysihtml5-command-value='h2') Heading
+        #editor-toolbar.toolbar.clearfix(style='display: none;')
+          a(data-wysihtml5-command='formatInline', data-wysihtml5-command-value='strong'): i.icon-bold
+          a(data-wysihtml5-command='formatInline', data-wysihtml5-command-value='em'): i.icon-italic
+          a(data-wysihtml5-command='underline'): i.icon-underline
+          .space
+          a(data-wysihtml5-command='insertOrderedList'): i.icon-list-ol
+          a(data-wysihtml5-command='insertUnorderedList'): i.icon-list-ul
+          .space
+          a(data-wysihtml5-command='formatBlock', data-wysihtml5-command-value='h2') Heading
     .row
       textarea.editor(name='body', placeholder='Paste the essay here...', data-toolbar='editor-toolbar')= (essay && essay.body)
     .row

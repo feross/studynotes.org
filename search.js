@@ -18,7 +18,10 @@ exports.autocomplete = function (query, cb) {
   async.auto({
     courses: function (cb) {
       model.Course
-        .find({ name: exports.regexForQuery(query) })
+        .find({ $or: [
+          { name: exports.regexForQuery(query) },
+          { shortName: exports.regexForQuery(query) }
+        ]})
         .sort('-hits')
         .limit(MAX_RESULTS)
         .select('name hits')

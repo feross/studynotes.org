@@ -1,0 +1,44 @@
+extends layouts/main
+
+append stylesheets
+  link(rel='stylesheet', href='#{ config.cdnOrigin }/out/bower_components/select2/select2.css')
+
+block content
+  if (locals.errors.length)
+    .errors
+      each msg in errors
+        div= msg
+  form(method='POST')
+    input(type='hidden', name='_csrf', value=csrf)
+    .row
+      input(name='name', type='text', placeholder='Note Title', value=(note && note.name), autofocus, required)
+    .row
+      .col2
+        select.select2(name='course', data-placeholder='Which AP course?')
+          option
+          each course in modelCache.coursesArray
+            option(value=course.slug, data-alt=course.shortName, selected=(note && (note.course === course.slug)))= course.name
+      .col2
+        select(name='allNotetypes', style='display: none;')
+          each course in modelCache.coursesArray
+            each notetype in course.notetypes
+              option(value=notetype.slug, data-course=course.slug, selected=(note && (note.notetype === notetype.slug)))= notetype.singularName || notetype.name
+        select.select2(name='notetype', data-placeholder='What kind of note?', disabled)
+          option
+
+    .row(style='margin: 0')
+      .toolbar-ghost
+        #editor-toolbar.toolbar.clearfix(style='display: none;')
+          a(data-wysihtml5-command='formatInline', data-wysihtml5-command-value='strong'): i.icon-bold
+          a(data-wysihtml5-command='formatInline', data-wysihtml5-command-value='em'): i.icon-italic
+          a(data-wysihtml5-command='underline'): i.icon-underline
+          .space
+          a(data-wysihtml5-command='insertOrderedList'): i.icon-list-ol
+          a(data-wysihtml5-command='insertUnorderedList'): i.icon-list-ul
+          .space
+          a(data-wysihtml5-command='formatBlock', data-wysihtml5-command-value='h2') Heading
+    .row
+      textarea.editor(name='body', placeholder='Paste the note here...', data-toolbar='editor-toolbar')= (note && note.body)
+    .row
+      button.btn.large(type='submit') Submit Note
+

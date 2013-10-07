@@ -1,6 +1,6 @@
-function formatSelect2 (college) {
-  var $elem = $(college.element)
-  return '<img class="select2-icon" src="' + config.cdnOrigin + '/images/icon/' + $elem.val() + '.png"/>' + college.text
+function formatSelect2 (option) {
+  var $elem = $(option.element)
+  return '<img class="select2-icon" src="' + config.cdnOrigin + '/images/icon/' + $elem.val() + '.png"/>' + option.text
 }
 
 // Initialize select2 on <select> elements
@@ -10,7 +10,8 @@ $('.select2').select2({
   formatSelection: formatSelect2,
   matcher: function(term, text, opt) {
     return text.toLowerCase().indexOf(term.toLowerCase()) >= 0 ||
-      opt.attr('data-alt').toLowerCase().indexOf(term.toLowerCase()) >= 0
+      (opt.attr('data-alt')
+        && opt.attr('data-alt').toLowerCase().indexOf(term.toLowerCase()) >= 0)
   }
 })
 

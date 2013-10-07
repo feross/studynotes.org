@@ -17,7 +17,7 @@ var Essay = mongoose.Schema({
     type: String,
     index: true,
     validate: [
-      validate({ message: 'Please give your essay a title.' }, 'notEmpty')
+      validate({ message: 'Please give the essay a title.' }, 'notEmpty')
     ]
   },
   prompt: String,
