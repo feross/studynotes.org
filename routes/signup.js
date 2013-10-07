@@ -25,7 +25,7 @@ module.exports = function (app) {
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
-      collegeId: college && college._id,
+      college: college && college._id,
       collegeMajor: req.body.collegeMajor,
       collegeYear: req.body.collegeYear
     })

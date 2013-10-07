@@ -45,7 +45,12 @@ var User = new mongoose.Schema({
     ref: 'College'
   },
   collegeMajor: String,
-  collegeYear: Number,
+  collegeYear: {
+    type: String,
+    validate: [
+      validate({ message: 'Only use numbers for your graduation year.' }, 'isNumeric')
+    ]
+  },
   admin: Boolean
 })
 
@@ -80,7 +85,7 @@ User.virtual('searchDesc').get(function () {
 
 User.virtual('hasGraduated').get(function () {
   if (this.collegeYear === undefined) return true
-  return this.collegeYear <= (new Date()).getFullYear()
+  return Number(this.collegeYear) <= (new Date()).getFullYear()
 })
 
 /**
