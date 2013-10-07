@@ -11,7 +11,11 @@ var Notetype = mongoose.Schema({
     type: String,
     unique: true
   },
-  name: { type: String, required: true, index: true },
+  name: {
+    type: String,
+    index: true,
+    required: true
+  },
   singularName: String,
   shortDesc: String,
   desc: String

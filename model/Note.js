@@ -29,14 +29,19 @@ var Note = mongoose.Schema({
   course: {
     type: String,
     ref: 'Course',
+    index: true,
     required: true
   },
   notetype: {
     type: String,
     ref: 'Notetype',
+    index: true,
     required: true
   },
-  ordering: Number
+  ordering: {
+    type: Number,
+    index: true
+  }
 })
 
 Note.index({ course: 1, notetype: 1})
