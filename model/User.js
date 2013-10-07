@@ -117,7 +117,7 @@ User.methods.comparePassword = function (password, cb) {
 User.plugin(plugin.modifyDate)
 User.plugin(plugin.createDate)
 User.plugin(plugin.absoluteUrl)
-User.plugin(plugin.slug, { model: 'User' })
+User.plugin(plugin.slug)
 User.plugin(plugin.hits)
 
 module.exports = mongoose.model('User', User)
