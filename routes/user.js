@@ -19,7 +19,7 @@ module.exports = function (app) {
         if (!user) return next()
 
         model.Essay
-          .find({ user: user._id, anon: { $exists: false } })
+          .find({ user: user._id, anon: false })
           .populate('college')
           .select('-body -prompt')
           .exec(cb)
