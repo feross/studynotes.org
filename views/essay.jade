@@ -9,7 +9,7 @@ append sidebar
       h3.accepted= user.collegeMajor
     if (user.college && user.collegeYear)
       h3.accepted
-        | #{ user.hasGraduated ? 'Attended ' : 'Attending ' }
+        | #{ user.hasGraduated ? 'Graduated ' : 'Attending ' }
         a(href=user.college.url)= user.college.shortName
         | #{ ' \'' + user.collegeYear.toString().substring(2) }
     if (!user.college || user.college.id !== college.id)
@@ -76,4 +76,4 @@ block content
   //- p It's a bad idea.
 
   h2 How to cite this essay (with MLA)
-  .cite #{ user.mlaName }. "#{essay.name}" StudyNotes.org. StudyNotes, Inc., #{moment(essay.createDate).format('DD MMM. YYYY.')} Web. #{moment().format('DD MMM. YYYY.')} &lt;#{essay.absoluteUrl}&gt;.
+  .cite #{ user.getMlaName(essay.anon) }. "#{essay.name}" StudyNotes.org. StudyNotes, Inc., #{moment(essay.createDate).format('DD MMM. YYYY.')} Web. #{moment().format('DD MMM. YYYY.')} &lt;#{essay.absoluteUrl}&gt;.

@@ -95,6 +95,14 @@ User.virtual('mlaName').get(function () {
   }
 })
 
+User.methods.getMlaName = function (anon) {
+  if (!this.populated('college')) throw new Error('must populate college')
+  if (anon)
+    return 'Anonymous ' + this.college.shortName + ' Student'
+  else
+    return this.mlaName
+}
+
 User.virtual('searchDesc').get(function () {
   return 'User'
 })
