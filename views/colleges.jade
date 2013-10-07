@@ -1,7 +1,11 @@
-extends layouts/main
+extends layouts/main-sidebar
 
 append sidebar
   include includes/ads/adsense-rect
+  h2 College Essay Stats
+  ul
+    li #{ util.addCommas(essayCount) } essays for #{ colleges.length } <a href='/colleges/'>universities</a>
+    li.online
   include includes/ads/adsense-rect
 
 block content

@@ -13,9 +13,6 @@ ul.listing
   .content &
     font-weight: bold
 
-ul.relatedNotes
-  li
-    ellipsis()
 
 .content
   ul:not(.listing)
@@ -26,7 +23,7 @@ ul.relatedNotes
     h3
       float: left
 
-    .author
+    .author, .college
       float: right
       position: relative
       top: -6px
@@ -44,12 +41,14 @@ ul.relatedNotes
         margin-top: 8px
 
       img
-        border-radius: 20px
-        box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.35)
         float: right
         height: 40px
         margin: 0 0 0 10px
         width: 40px
+
+    .author img
+      border-radius: 20px
+      box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.35)
 
   .body
     // Make inline headings look less dramatic

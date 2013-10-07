@@ -13,7 +13,7 @@
 .browseWrapper
   .browse.browse-colleges
     div
-      h2: a(href='/colleges/') Admissions Essays
+      h2: a(href='/colleges/essays/') Admissions Essays
       ul
         each college in modelCache.collegesByName.slice(0, 7)
           li: a(href=college.url, title='#{ college.name } Sample Essays') #{ college.shortName } Essays

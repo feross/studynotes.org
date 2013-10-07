@@ -1,0 +1,40 @@
+extends layouts/main-sidebar
+
+block content
+  h2 Showing #{ essays.length } Essays from #{ collegeCount } Universities
+  include includes/toolbar
+  - var num = 1
+  each essay in essays
+    .entry
+      .heading.clearfix
+        h3
+          | !{ num + '. ' }
+          a(href=essay.url)= essay.name
+        .college
+          a(href=essay.college.url, title=essay.college.name)
+            img(src='#{ config.cdnOrigin }/images/icon/#{ essay.college.id }.png')
+        .author
+          a(href=essay.user.getUrl(essay.anon))
+            span by #{ essay.user.getName(essay.anon) }
+            img(src=essay.user.getGravatar(essay.anon))
+      .expandify.no-btn
+        //- TODO: shorten, while preserving HTML
+        .body
+          | !{ essay.body }
+
+    - num += 1
+
+append sidebar
+  include includes/ads/adsense-rect
+
+  h2 Top 25 Colleges
+  ul
+    each college in modelCache.collegesByRank
+      li: a(href=college.url)= college.name
+
+  include includes/ads/adsense-rect
+
+  h2 Essay Database Stats
+  ul
+    li #{ util.addCommas(essays.length) } essays for #{ collegeCount } <a href='/colleges/'>universities</a>
+    li.online

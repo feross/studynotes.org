@@ -75,6 +75,11 @@ function loadCache (done) {
       if(a.name > b.name) return 1
       return 0
     }
+    function sortByRank (a, b) {
+      if(a.rank < b.rank) return -1
+      if(a.rank > b.rank) return 1
+      return 0
+    }
     exports.cache.coursesByName = _(exports.cache.courses)
       .flatten()
       .sort(sortByName)
