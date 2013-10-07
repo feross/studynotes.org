@@ -26,10 +26,16 @@ block content
 
       - num += 1
 
-  else
-    h3 No #{ college.shortName } essays have been posted yet! Represent your college, <a href="/submit/essay/">share your essay</a>!
-
   include includes/toolbar
+
+  h2 #{ college.shortName } admittees, submit your essays!
+
+  p If you were one of the <strong>lucky few #{ college.shortName } admittees</strong>, please upload your essay to help the next generation of students write better admissions essays!
+
+  p We want to level the playing field so that any qualified student can <strong>write a powerful application</strong>, regardless of their background. Please support our efforts!
+
+  p.center: a.btn.large(href='/submit/essay/') Upload your essay
+
 
 append sidebar
   include includes/ads/adsense-rect
