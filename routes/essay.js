@@ -56,7 +56,7 @@ module.exports = function (app) {
 
       res.render('essay', {
         breadcrumbs: [
-          { name: 'College Essays', url: '/colleges/' },
+          { name: 'College Essays', url: '/colleges/essays/' },
           college
         ],
         college: college,

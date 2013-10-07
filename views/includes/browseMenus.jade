@@ -8,7 +8,7 @@
             each notetype in course.notetypes
               li: a(href=course.notetypeUrl(notetype))= notetype.name
     div
-      a.btn(href='/submit/note/') Add your notes
+      a.btn(href='/submit/note/') Upload your notes
 
 .browseWrapper
   .browse.browse-colleges
@@ -30,4 +30,4 @@
         each college in modelCache.collegesByName.slice(23)
           li: a(href=college.url, title='#{ college.name } Sample Essays') #{ college.shortName } Essays
 
-      a.btn(href='/submit/essay/') Add your essay
+      a.btn(href='/submit/essay/') Upload your essay
