@@ -9,3 +9,8 @@ exports.netdna = {
   consumerSecret: '',
   zoneId: ''
 }
+
+exports.gmail = {
+  user: '',
+  pass: ''
+}
