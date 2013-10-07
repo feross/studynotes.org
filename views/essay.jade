@@ -50,13 +50,13 @@ append sidebar
       h2.name= user.getName(essay.anon)
     if (user.collegeMajor)
       h3.accepted= user.collegeMajor
+    if (!user.college || user.college.id !== college.id)
+      h3.accepted Accepted at <a href='#{ college.url }'>#{ college.shortName }</a>
     if (user.college && user.collegeYear)
       h3.accepted
         | #{ user.hasGraduated ? 'Graduated ' : 'Attending ' }
         a(href=user.college.url)= user.college.shortName
         | #{ ' \'' + user.collegeYear.toString().substring(2) }
-    if (!user.college || user.college.id !== college.id)
-      h3.accepted Accepted at <a href='#{ college.url }'>#{ college.shortName }</a>
 
   if (essay.admitsphere)
     h3 Visit AdmitSphere
