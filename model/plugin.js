@@ -73,10 +73,10 @@ exports.slug = function (schema, opts) {
     if (doc._id) return next()
 
     var initialSlug = _s.slugify(doc.name)
-    if (initialSlug.length > config.maxSlugLength) {
-      initialSlug = initialSlug
-        .substring(0, config.maxSlugLength)
-        .replace(/-$/, '') // no trailing dashes in slug
+
+    // Remove words from the end of the slug until the length is okay
+    while (initialSlug.length > config.maxSlugLength) {
+      initialSlug = initialSlug.replace(/-([^-]*)$/, '')
     }
 
     var num = 0 // number to append to slug to try to make it unique
