@@ -15,15 +15,19 @@
     div
       h2: a(href='/colleges/') Admissions Essays
       ul
-        each college in modelCache.collegesArray.slice(0, 8)
+        each college in modelCache.collegesArray.slice(0, 7)
           li: a(href=college.url, title='#{ college.name } Sample Essays') #{ college.shortName } Essays
     div
       ul
-        each college in modelCache.collegesArray.slice(8, 17)
+        each college in modelCache.collegesArray.slice(7, 15)
           li: a(href=college.url, title='#{ college.name } Sample Essays') #{ college.shortName } Essays
     div
       ul
-        each college in modelCache.collegesArray.slice(17)
+        each college in modelCache.collegesArray.slice(15, 23)
           li: a(href=college.url, title='#{ college.name } Sample Essays') #{ college.shortName } Essays
     div
+      ul
+        each college in modelCache.collegesArray.slice(23)
+          li: a(href=college.url, title='#{ college.name } Sample Essays') #{ college.shortName } Essays
+
       a.btn(href='/submit/essay/') Add your essay
