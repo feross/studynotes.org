@@ -11,6 +11,7 @@ module.exports = function (app) {
       user: function (cb) {
         model.User
           .findOne({ _id: req.params.userId })
+          .populate('college')
           .exec(cb)
       },
       essays: ['user', function (cb, results) {
@@ -18,7 +19,7 @@ module.exports = function (app) {
         if (!user) return next()
 
         model.Essay
-          .find({ user: user._id })
+          .find({ user: user._id, anon: { $exists: false } })
           .populate('college')
           .select('-body -prompt')
           .exec(cb)

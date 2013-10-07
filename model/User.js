@@ -41,10 +41,6 @@ var User = new mongoose.Schema({
     type: String,
     ref: 'College'
   },
-  collegeId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'College'
-  },
   collegeMajor: String,
   collegeYear: {
     type: String,
