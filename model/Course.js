@@ -22,6 +22,7 @@ var Course = mongoose.Schema({
   },
   desc: String,
   examDate: Date,
+  textbook: String, // TODO: support multiple textbooks
   notetypes: [{
     type: String,
     ref: 'Notetype'

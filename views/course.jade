@@ -19,4 +19,6 @@ block content
   if (course.notetypes)
     each notetype in course.notetypes
       h2: a(href=course.notetypeUrl(notetype))= notetype.name
-      p.desc!= notetype.shortDesc
+
+      - var desc = (notetype.shortDesc || notetype.desc).replace(/COURSE_SHORTNAME/g, course.shortName).replace(/COURSE_TEXTBOOK/g, course.textbook).replace(/COURSE/g, course.name)
+      p.desc!= desc
