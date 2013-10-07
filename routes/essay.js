@@ -27,13 +27,6 @@ module.exports = function (app) {
           .select('-body -prompt')
           .exec(cb)
       }
-      // TODO: remove
-      // populateUserCollege: ['essay', function (cb, results) {
-      //   var essay = results.essay
-      //   if (!essay) return next()
-
-      //   essay.userId.populate('college', cb)
-      // }]
     }, function (err, results) {
       if (err) return next(err)
       var essays = results.essays
