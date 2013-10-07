@@ -1,5 +1,10 @@
 extends layouts/main-sidebar
 
+append toolbar
+  if next
+    a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next →
+    .navigate-msg Use ← → keys to navigate
+
 block content
   include includes/breadcrumbs
   h1= essay.name
@@ -73,7 +78,3 @@ append sidebar
 
   //- include includes/relatedessays
 
-append toolbar
-  if next
-    a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next →
-    .navigate-msg Use ← → keys to navigate
