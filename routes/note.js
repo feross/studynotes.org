@@ -48,7 +48,10 @@ module.exports = function (app) {
 
       res.render('note', {
         ads: true,
-        breadcrumbs: [ course, notetype ],
+        breadcrumbs: [ course, {
+          name: notetype.name,
+          url: course.notetypeUrl(notetype)
+        } ],
         course: course,
         note: note,
         next: nextNote,
