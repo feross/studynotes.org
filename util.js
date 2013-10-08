@@ -9,6 +9,7 @@ var email = require('./lib/email')
 var express = require('express')
 var fs = require('fs')
 var htmlParser = require('html-parser')
+var htmlTruncate = require('html-truncate')
 var mkdirp = require('mkdirp')
 var nodeUtil = require('util')
 var once = require('once')
@@ -227,6 +228,8 @@ exports.sanitizeHTML = function (html) {
   })
   return sanitized
 }
+
+exports.truncate = htmlTruncate
 
 // Make `inherits` from node's "util" module available
 exports.inherits = nodeUtil.inherits

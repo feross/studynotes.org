@@ -46,6 +46,7 @@
     "underscore.string": "~2.3.3",
     "bower": "~1.2.7",
     "formage": "~1.6.18",
-    "nodemailer": "~0.5.3"
+    "nodemailer": "~0.5.3",
+    "html-truncate": "~1.0.3"
   }
 }

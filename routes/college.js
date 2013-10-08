@@ -75,7 +75,6 @@ module.exports = function (app) {
           .find({ college: college.id })
           .populate('user')
           .sort('-hits')
-          .limit(20)
           .exec(cb)
       },
       populateColleges: ['essays', function (cb, results) {
@@ -88,6 +87,7 @@ module.exports = function (app) {
       if (err) return next(err)
 
       res.render('college', {
+        breadcrumbs: [ { name: 'College Essays', url: '/colleges/essays/' } ],
         college: college,
         essays: essays,
         title: 'Sample ' + college.shortName + ' Admissions Essays',

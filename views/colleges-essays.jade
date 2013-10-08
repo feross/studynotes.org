@@ -17,10 +17,8 @@ block content
           a(href=essay.user.getUrl(essay.anon))
             span by #{ essay.user.getName(essay.anon) }
             img(src=essay.user.getGravatar(essay.anon))
-      .expandify.no-btn
-        //- TODO: shorten, while preserving HTML
-        .body
-          | !{ essay.body }
+      .body
+        | !{ util.truncate(essay.body, 300) }
 
     - num += 1
 

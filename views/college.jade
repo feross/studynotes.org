@@ -1,12 +1,14 @@
 extends layouts/main-sidebar
 
 block content
+  include includes/breadcrumbs
+
   if (college.desc)
     h2 About #{ college.name }
     .expandify
       | !{ college.desc }
 
-  if (locals.essays && locals.essays.length)
+  if (locals.essays && essays.length)
     h2 Top #{ essays.length } #{ college.shortName } Essays
     - var num = 1
     each essay in essays
@@ -19,10 +21,8 @@ block content
             a(href=essay.user.getUrl(essay.anon))
               span by #{ essay.user.getName(essay.anon) }
               img(src=essay.user.getGravatar(essay.anon))
-        .expandify.no-btn
-          //- TODO: shorten, while preserving HTML
-          .body
-            | !{ essay.body }
+        .body
+          | !{ util.truncate(essay.body, 300) }
 
       - num += 1
 
