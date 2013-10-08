@@ -14,7 +14,9 @@ block content
 
   h2
     | Free Sample College Admissions Essays
-    a.btn(href='/submit/essay/') Submit your essay
+    a.btn(href='/submit/essay/')
+      i.icon-cloud-upload
+      | Submit an essay
 
   p Learn how to write a powerful college application by studying our database of <strong>#{ essayCount } successful college admissions essays</strong>. The secrets aren't secret anymore — see what actually worked for top students.
   .row
@@ -105,10 +107,11 @@ block content
 
 
 append sidebar
-  .center
-    a.btn.large(href='/submit/essay/') Submit college essay
-
-  a(href='https://twitter.com/share', class='twitter-share-button', data-url='#{ locals.url }', data-via='StudyNotesApp', data-size='large') Tweet
+  div
+    a(href='https://twitter.com/share', class='twitter-share-button', data-url='#{ locals.url }', data-via='StudyNotesApp', data-size='large', style='float: left') Tweet
+    h4(style='float: left; display: inline; margin-right: 10px; color: #FFF;')
+      span.onlineNum
+      | #{ ' students online' }
 
   div(class='fb-like', data-href='#{ locals.url }', data-send='false', data-width='336', data-show-faces='false')
 
