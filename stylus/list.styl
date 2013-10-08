@@ -5,12 +5,16 @@ ul
   .row &:not(.listing)
     padding: 0 10px 0 0
 
+  &.tight
+    li
+      ellipsis()
   &.more
+    li
+      ellipsis()
     a:visited
       color: BLUE_LIGHT
 
   li
-    ellipsis()
     list-style-position: inside
 
   .row
@@ -22,6 +26,7 @@ ul
     li
       background: #EEE
       color: GRAY_DARKEST
+      ellipsis()
       padding: 10px 25px
     li:nth-child(even)
       background: #FFF

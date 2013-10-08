@@ -8,7 +8,7 @@ block content
     each course in modelCache.coursesByName
       .col3
         h3: a(href=course.url, title=course.shortName)= course.name
-        ul
+        ul.tight
           each notetype in course.notetypes
             li: a(href=course.notetypeUrl(notetype))= notetype.name
 
@@ -21,26 +21,26 @@ block content
   p Learn how to write a powerful college application by studying our database of <strong>#{ essayCount } successful college admissions essays</strong>. The secrets aren't secret anymore — see what actually worked for top students.
   .row
     .col4
-      ul
+      ul.tight
         each college in modelCache.collegesByRank.slice(0, 3)
           li: a(href=college.url, title=college.name)= college.shortName
     .col4
-      ul
+      ul.tight
         each college in modelCache.collegesByRank.slice(3, 6)
           li: a(href=college.url, title=college.name)= college.shortName
     .col4
-      ul
+      ul.tight
         each college in modelCache.collegesByRank.slice(6, 9)
           li: a(href=college.url, title=college.name)= college.shortName
     .col4
-      ul
+      ul.tight
         each college in modelCache.collegesByRank.slice(9, 12)
           li: a(href=college.url, title=college.name)= college.shortName
 
   .row
     .col2
       h2 New College Essays
-      ul
+      ul.tight
         each essay in newEssays
           li
             strong: a(href=essay.college.url)= essay.college.shortName + ':'
@@ -51,7 +51,7 @@ block content
 
     .col2
       h2 New AP Notes
-      ul
+      ul.tight
         each note in newNotes
           li
             strong: a(href=note.course.url)= note.course.name + ':'
