@@ -93,11 +93,7 @@ User.virtual('mlaName').get(function () {
 
 User.methods.getMlaName = function (anon) {
   if (anon) {
-    if (this.college && this.populated('college')) {
-      return 'Anonymous ' + this.college.shortName + ' Student'
-    } else {
-      return 'Anonymous Student'
-    }
+    return 'Anonymous Student'
   } else {
     return this.mlaName
   }
