@@ -26,10 +26,19 @@ module.exports = function (app) {
       newNotes: function (cb) {
         model.Note
           .find()
-          .sort('created')
-          .limit(10)
+          .sort('-createDate')
+          .limit(5)
           .select('-body')
           .populate('course notetype')
+          .exec(cb)
+      },
+      newEssays: function (cb) {
+        model.Essay
+          .find()
+          .sort('-createDate')
+          .limit(5)
+          .select('-body -prompt')
+          .populate('college')
           .exec(cb)
       }
     }, function (err, results) {

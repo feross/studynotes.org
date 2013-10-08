@@ -1,20 +1,5 @@
 extends layouts/main-sidebar
 
-append sidebar
-  .center
-    a.btn.large(href='/submit/essay/') Upload college essay
-
-  a(class='twitter-timeline', href='https://twitter.com/StudyNotesApp', data-widget-id='382664807926624257') Tweets by @StudyNotesApp
-
-  h3 StudyNotes In Numbers
-  ul
-    li #{ util.addCommas(noteCount) } notes for #{ courseCount } <a href='/courses/'>AP courses</a>
-    li #{ util.addCommas(essayCount) } essays for #{ collegeCount } <a href='/colleges/'>elite universities</a>
-    li #{ util.addCommas(userCount) } registered users
-    li.online
-
-  include includes/ads/adsense-rect
-
 block content
 
   include includes/toolbar
@@ -29,11 +14,25 @@ block content
     li: h3: a(href='/english/') AP English Language and Composition
     li: h3: a(href='/english/') AP English Literature and Composition
 
-  //- ul
-  //-   each note in newNotes
-  //-     li
-  //-       a(href=note.url)= note.name
-  //-       span= ' (' + note.courseId.name + ')'
+  h2 Newest College Essay Uploads
+  ul
+    each essay in newEssays
+      li
+        strong
+          a(href=essay.college.url)= essay.college.shortName
+          span= ' / '
+        a(href=essay.url)= ' ' + essay.name
+        span.gray= ' (' + moment(essay.createDate).fromNow() + ')'
+
+  h2 Newest Note Uploads
+  ul
+    each note in newNotes
+      li
+        strong
+          a(href=note.course.url)= note.course.name
+          span= ': '
+        a(href=note.url)= note.name
+        span.gray= ' (' + moment(note.createDate).fromNow() + ')'
 
   h2 Over the coming weeks, we will have notes for the following courses:
 
@@ -81,3 +80,19 @@ block content
     li course information
 
   p StudyNotes is the best place for AP Gov, AP USH, and AP English notes and we'll soon be the best for all AP classes!
+
+
+append sidebar
+  .center
+    a.btn.large(href='/submit/essay/') Upload college essay
+
+  a(class='twitter-timeline', href='https://twitter.com/StudyNotesApp', data-widget-id='382664807926624257') Tweets by @StudyNotesApp
+
+  h3 StudyNotes In Numbers
+  ul
+    li #{ util.addCommas(noteCount) } notes for #{ courseCount } <a href='/courses/'>AP courses</a>
+    li #{ util.addCommas(essayCount) } essays for #{ collegeCount } <a href='/colleges/'>elite universities</a>
+    li #{ util.addCommas(userCount) } registered users
+    li.online
+
+  include includes/ads/adsense-rect
