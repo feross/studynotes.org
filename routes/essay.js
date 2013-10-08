@@ -61,6 +61,7 @@ module.exports = function (app) {
         ],
         college: college,
         essay: essay,
+        essays: essays,
         next: nextEssay,
         prev: prevEssay,
         title: essay.name + ' - ' + college.name,

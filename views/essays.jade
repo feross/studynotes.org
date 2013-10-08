@@ -31,7 +31,7 @@ append sidebar
       | Submit an essay
 
   h2 Top 25 Colleges
-  ul
+  ul.more
     each college in modelCache.collegesByRank
       li: a(href=college.url)= college.name
 

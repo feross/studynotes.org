@@ -81,5 +81,10 @@ append sidebar
     li Averaging #{ util.addCommas(util.hitsPerDay(essay.hits, essay.createDate)) } views per day
     li.online
 
+  h2 More #{ college.shortName } Essays
+  ul.more
+    each essay in essays
+      li: a(href=essay.url)= essay.name
+
   //- include includes/relatedessays
 

@@ -48,7 +48,7 @@ module.exports = function (app) {
     }, function (err, results) {
       if (err) return next(err)
 
-      res.render('colleges-essays', {
+      res.render('essays', {
         collegeCount: results.collegeCount,
         essays: results.essays,
         title: 'Sample Admissions Essays',
