@@ -36,9 +36,9 @@ function onMessage (str) {
     $('.online')
       .text(message.count + ' ' + studentsStr + ' online ' + pageStr)
       .show()
-    $('.onlineNum')
-      .text(message.count)
-      .show()
+
+    $('.onlineNum span').text(message.count)
+    $('.onlineNum').show()
   }
 }
 
