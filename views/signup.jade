@@ -1,8 +1,5 @@
 extends layouts/form
 
-append stylesheets
-  link(rel='stylesheet', href='#{ config.cdnOrigin }/out/bower_components/select2/select2.css')
-
 block content
   //- h1 Hey there! Let's get started.
   //- h2 What would you like to do?
@@ -28,17 +25,8 @@ block content
       input(name='email', type='email', placeholder='email', value=(user && user.email), required)
     .row
       input(name='password', type='password', placeholder='password', value=(user && user.password), required)
-    .row
-      select.select2(name='college', data-placeholder='What university do/did you attend?')
-        option
-        each college in modelCache.collegesByName
-          option(value='#{ college._id }' selected=(essay && (essay.college === college._id)))= college.name
-    .row
-      input(name='collegeMajor', type='text', placeholder='college major', value=(user && user.collegeMajor))
-    .row
-      input(name='collegeYear', type='text', placeholder='graduation year', value=(user && user.collegeYear))
     .row.submit
-      button.btn.large(type='submit') Sign Up
+      button.btn.large(type='submit') Sign up
 
 block footer
   span Or <a href="/login/">log in</a> if you already have an account
