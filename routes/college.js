@@ -87,7 +87,7 @@ module.exports = function (app) {
       if (err) return next(err)
 
       res.render('college', {
-        breadcrumbs: [ { name: 'College Essays', url: '/colleges/essays/' } ],
+        // breadcrumbs: [ { name: 'College Essays', url: '/colleges/essays/' } ],
         college: college,
         essays: essays,
         title: 'Sample ' + college.shortName + ' Admissions Essays',
