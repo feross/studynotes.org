@@ -72,11 +72,7 @@ User.methods.getUrl = function (anon) {
 
 User.methods.getName = function (anon) {
   if (anon) {
-    if (this.college && this.populated('college')) {
-      return this.college.shortName + ' Student'
-    } else {
-      return 'Student'
-    }
+    return 'Anonymous Student'
   } else {
     return this.name
   }

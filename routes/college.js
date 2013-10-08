@@ -42,11 +42,6 @@ module.exports = function (app) {
           .sort('-hits')
           .exec(cb)
       },
-      populateColleges: ['essays', function (cb, results) {
-        async.each(results.essays, function (essay, cb2) {
-          essay.user.populate('college', cb2)
-        }, cb)
-      }],
       collegeCount: function (cb) {
         model.College.count().exec(cb)
       }
