@@ -38,6 +38,22 @@
   .online, .onlineNum
     display: none
 
+  & > .tweet-home // needed more specificity
+    margin-bottom: 1em
+    overflow: hidden
+
+    h4
+      color: #FFF
+      display: inline
+      float: left
+      margin: 0
+
+    iframe
+      float: right
+
+  .fb-home
+    margin-bottom: 0.5em
+
 .countdown
   color: GRAY_DARKEST
 
@@ -64,15 +80,3 @@
 
     &.left-to-study
       font-weight: normal
-
-.tweet-home
-  margin-bottom: 0
-
-  h4
-    color: #FFF
-    display: inline
-    float: left
-    margin-right: 10px
-
-  iframe
-    float: right
