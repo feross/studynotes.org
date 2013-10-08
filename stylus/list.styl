@@ -1,22 +1,29 @@
-ul.listing
-  list-style: none
-  margin-bottom: 25px
+ul
+  .content &:not(.listing)
+    padding-left: 20px
+
+  .row &:not(.listing)
+    padding: 0 10px 0 0
 
   li
-    background: #EEE
-    color: GRAY_DARKEST
     ellipsis()
-    padding: 10px 25px
-  li:nth-child(even)
-    background: #FFF
+    list-style-position: inside
 
-  .content &
-    font-weight: bold
+  .row
 
+  &.listing
+    list-style: none
+    margin-bottom: 25px
 
-.content
-  ul:not(.listing)
-    padding-left: 20px
+    li
+      background: #EEE
+      color: GRAY_DARKEST
+      padding: 10px 25px
+    li:nth-child(even)
+      background: #FFF
+
+    .content &
+      font-weight: bold
 
 .entry
   .heading

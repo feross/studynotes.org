@@ -95,16 +95,27 @@ HOVER = '&:hover, &:focus, &:active'
   &:last-child
     padding-left: 7px
 
-// .col3
-//   @extend .col
-//   width: 33.3%
-//   &:first-child
-//     margin-right: 10px
-//   &:nth-child(2)
-//     margin-left: 5px
-//     margin-right: 5px
-//   &:last-child
-//     margin-left: 10px
+.col3
+  @extend .col
+  width: 33.3%
+  &:first-child
+    padding-right: 10px
+  &:nth-child(2)
+    padding-left: 5px
+    padding-right: 5px
+  &:last-child
+    padding-left: 10px
+
+.col4
+  @extend .col
+  width: 25%
+  &:first-child
+    padding-right: 10px
+  &:nth-child(2), &:nth-child(3)
+    padding-left: 5px
+    padding-right: 5px
+  &:last-child
+    padding-left: 10px
 
 ellipsis()
   overflow: hidden
@@ -175,6 +186,10 @@ h1, h2, h3, h4, h5
   font-weight: 500
   margin: 0
   text-rendering: optimizelegibility
+
+  .btn
+    float: right
+
 h1, .hero .title
   font-size: 2.3em
   line-height: (3 / 2.3)em

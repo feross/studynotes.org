@@ -3,10 +3,9 @@
     each course in modelCache.coursesByName
       div
         h2: a(href=course.url)= course.name
-        if (course.notetypes)
-          ul
-            each notetype in course.notetypes
-              li: a(href=course.notetypeUrl(notetype))= notetype.name
+        ul
+          each notetype in course.notetypes
+            li: a(href=course.notetypeUrl(notetype))= notetype.name
     //- div
     //-   a.btn(href='/submit/note/') Upload your notes
 
