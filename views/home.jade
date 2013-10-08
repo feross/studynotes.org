@@ -1,9 +1,6 @@
 extends layouts/main-sidebar
 
 block content
-
-  include includes/toolbar
-
   h2 Free AP Notes and Study Materials
   p We have the best Advanced Placement* study guides, practice tests, and notes on the web, contributed and curated by students and teachers like yourself. <strong>The site is used by millions of students in all 50 U.S. states to prepare for AP* courses and exams.</strong>
 
@@ -110,6 +107,10 @@ block content
 append sidebar
   .center
     a.btn.large(href='/submit/essay/') Submit college essay
+
+  a(href='https://twitter.com/share', class='twitter-share-button', data-url='#{ locals.url }', data-via='StudyNotesApp', data-size='large') Tweet
+
+  div(class='fb-like', data-href='#{ locals.url }', data-send='false', data-width='336', data-show-faces='false')
 
   a(class='twitter-timeline', href='https://twitter.com/StudyNotesApp', data-widget-id='382664807926624257') Tweets by @StudyNotesApp
 
