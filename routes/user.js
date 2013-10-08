@@ -38,7 +38,8 @@ module.exports = function (app) {
         essays: essays,
         hero: {
           title: user.name,
-          desc: 'Notes, Essays, and StudyNotes contributions'
+          desc: 'Notes, Essays, and StudyNotes contributions',
+          image: 'books.jpg'
         },
         title: user.name + '\'s Notes and Essays',
         totalHits: totalHits,

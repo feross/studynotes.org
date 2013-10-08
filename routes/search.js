@@ -10,7 +10,8 @@ module.exports = function (app) {
       title: 'Search Results for ' + q,
       searchTerm: q,
       hero: {
-        title: 'Search Results for "' + q + '"'
+        title: 'Search Results for "' + q + '"',
+        image: 'clouds.jpg'
       }
     })
   })

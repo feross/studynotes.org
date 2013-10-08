@@ -8,7 +8,8 @@ module.exports = function (app) {
       title: 'About',
       hero: {
         title: 'Say Hello to StudyNotes!',
-        desc: 'Fast, free study tools for AP* students'
+        desc: 'Fast, free study tools for AP* students',
+        image: 'books.jpg'
       }
     })
   })
@@ -30,7 +31,8 @@ module.exports = function (app) {
       title: 'Contact Us',
       hero: {
         title: 'Contact Us',
-        desc: 'We\'d love to hear from you!'
+        desc: 'We\'d love to hear from you!',
+        image: 'books.jpg'
       }
     })
   })
@@ -63,7 +65,7 @@ module.exports = function (app) {
       title: 'Our Stance on Plagiarism',
       hero: {
         title: 'Our Stance on Plagiarism',
-        desc: 'Don\'t do it!'
+        image: 'books.jpg'
       }
     })
   })
@@ -73,7 +75,8 @@ module.exports = function (app) {
       url: '/privacy',
       title: 'Privacy Policy',
       hero: {
-        title: 'Privacy Policy'
+        title: 'Privacy Policy',
+        image: 'books.jpg'
       }
     })
   })
@@ -95,7 +98,7 @@ module.exports = function (app) {
       title: 'Terms and Conditions',
       hero: {
         title: 'Terms and Conditions',
-        image: 'privacy.jpg'
+        image: 'books.jpg'
       }
     })
   })

@@ -58,7 +58,8 @@ module.exports = function (app) {
     res.render('submit-note', {
       hero: {
         title: 'Add a note to StudyNotes',
-        desc: 'Help future generations of AP students. Share your notes.'
+        desc: 'Help future generations of AP students. Share your notes.',
+        image: 'clouds.jpg'
       },
       title: 'Submit a note',
       url: '/submit/note',
