@@ -73,8 +73,7 @@ module.exports = function (app) {
       url: '/privacy',
       title: 'Privacy Policy',
       hero: {
-        title: 'Privacy Policy',
-        desc: 'i.e. excellent bedtime reading!'
+        title: 'Privacy Policy'
       }
     })
   })
@@ -86,6 +85,17 @@ module.exports = function (app) {
       hero: {
         title: 'Book Store',
         desc: 'Get extra help with study guides from Amazon.com'
+      }
+    })
+  })
+
+  app.get('/terms', function (req, res) {
+    res.render('terms', {
+      url: '/terms',
+      title: 'Terms and Conditions',
+      hero: {
+        title: 'Terms and Conditions',
+        image: 'privacy.jpg'
       }
     })
   })
