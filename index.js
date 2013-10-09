@@ -102,8 +102,10 @@ Site.prototype.start = function (done) {
         self.server.listen(self.port, cb)
       }
     ], function (err) {
-      if (!err) debug('StudyNotes listening on ' + self.port)
-      util.triggerLiveReload()
+      if (!err) {
+        debug('StudyNotes listening on ' + self.port)
+        if (!config.isProd) util.triggerLiveReload()
+      }
       done(err)
     })
   }

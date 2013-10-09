@@ -32,6 +32,8 @@ exports.truncate = truncate
  * @param  {function(*)} ServerConstructor
  */
 exports.run = function (ServerConstructor) {
+  console.time('startup')
+
   // Clone the argv object to avoid interfering with other modules
   var opts = util.extend({}, optimist.argv)
 
@@ -65,6 +67,7 @@ exports.run = function (ServerConstructor) {
       console.error(err.stack)
       process.exit(1)
     }
+    console.timeEnd('startup')
   })
 
   process.on('uncaughtException', function (err) {
@@ -160,10 +163,8 @@ exports.expressLogger = function (debug) {
  * Manually trigger LiveReload to refresh the browser (during development)
  */
 exports.triggerLiveReload = function () {
-  if (!config.isProd) {
-    mkdirp.sync(config.tmp)
-    touch.sync(path.join(config.tmp, 'restart.txt'))
-  }
+  mkdirp.sync(config.tmp)
+  touch.sync(path.join(config.tmp, 'restart.txt'))
 }
 
 /**
