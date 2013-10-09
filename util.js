@@ -196,7 +196,7 @@ exports.hitsPerDay = function (hits, date) {
   return Math.round(hits / days)
 }
 
-var elementsWhitelist = [
+var defaultElementsWhitelist = [
   'p', 'br',
   'strong', 'b', 'em', 'i', 'u',
   'ol', 'ul', 'li',
@@ -205,26 +205,32 @@ var elementsWhitelist = [
   'sub', 'sup'
 ]
 
-var attributesWhitelist = [
+var defaultAttributesWhitelist = [
 
 ]
 
 /**
  * Sanitize dirty (user-provided) HTML to remove bad html tags. Uses a
  * whitelist approach, where only the tags we explicitly allow are kept.
- * @param  {String} html dirty HTML
- * @return {String}      sanitized HTML
+ *
+ * @param  {String} html                dirty HTML
+ * @param  {Array=} elementsWhitelist   elements to keep
+ * @param  {Array=} attributesWhitelist attributes to keep
+ * @return {String}                     sanitized HTML
  */
-exports.sanitizeHTML = function (html) {
+exports.sanitizeHTML = function (html, elementsWhitelist, attributesWhitelist) {
+  elementsWhitelist || (elementsWhitelist = defaultElementsWhitelist)
+  attributesWhitelist || (attributesWhitelist = defaultAttributesWhitelist)
+
   var sanitized = htmlParser.sanitize(html, {
-      elements: function (name) {
-        return elementsWhitelist.indexOf(name) === -1
-      },
-      attributes: function (name) {
-        return attributesWhitelist.indexOf(name) === -1
-      },
-      comments: true,
-      doctype: true
+    elements: function (name) {
+      return elementsWhitelist.indexOf(name) === -1
+    },
+    attributes: function (name) {
+      return attributesWhitelist.indexOf(name) === -1
+    },
+    comments: true,
+    doctype: true
   })
   return sanitized
 }

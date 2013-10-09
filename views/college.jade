@@ -22,7 +22,7 @@ block content
               span by #{ essay.user.getName(essay.anon) }
               img(src=essay.user.getGravatar(essay.anon))
         .body
-          | !{ util.truncate(essay.body, 300) }
+          | !{ util.truncate(util.sanitizeHTML(essay.body, ['p']), 300) }
 
       - num += 1
 
