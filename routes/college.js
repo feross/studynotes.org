@@ -117,7 +117,7 @@ module.exports = function (app) {
         college: college,
         essays: essays,
         title: 'About ' + college.name,
-        url: college.url
+        url: college.url + 'about/'
       })
 
       college.hit()
