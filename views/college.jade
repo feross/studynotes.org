@@ -11,6 +11,8 @@ block content
         | #{ 'Read more ' }
         i.icon-double-angle-right
 
+  include includes/toolbar
+
   if (locals.essays && essays.length)
     h2 Top #{ essays.length } #{ college.shortName } Essays
     - var num = 1
@@ -31,7 +33,7 @@ block content
 
       - num += 1
 
-  include includes/toolbar
+    hr
 
   h2 #{ college.shortName } admittees, submit your essays!
 
