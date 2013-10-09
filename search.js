@@ -173,7 +173,8 @@ exports.weight = function (result, query){
   }
 
   // Word match
-  words.forEach(function (word){
+  words.forEach(function (word) {
+    if (word.length <= 3) return
     var re = new RegExp('(^|\\s)' + util.escapeRegExp(word) + '($|\\s)', 'i')
     if (re.test(result.name)) {
       weight += WORD_MATCH
