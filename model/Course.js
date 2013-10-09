@@ -54,4 +54,4 @@ Course.plugin(plugin.absoluteUrl)
 Course.plugin(plugin.slug, { model: 'Course' })
 Course.plugin(plugin.hits)
 
-module.exports = mongoose.model('Course', Course)
+module.exports = Course

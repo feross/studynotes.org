@@ -14,12 +14,21 @@ var Schema = mongoose.Schema
 // over *only* the models, skipping methods like `connect`.
 exports.models = {}
 
-// Export all models in /model folder
+// Set up each Schema in the /model folder
 var files = fs.readdirSync(__dirname)
 files.forEach(function (file) {
   var name = path.basename(file, '.js')
   if (name === 'index' || name === 'plugin') return
-  exports[name] = exports.models[name] = require('./' + name)
+
+  // Set Schema options
+  var schema = require('./' + name)
+  schema.set('autoIndex', !config.isProd) // no indexing in production
+
+  // Create Model object from Schema
+  var model = mongoose.model(name, schema)
+
+  // Export the Model
+  exports[name] = exports.models[name] = model
 })
 
 exports.connect = function (cb) {

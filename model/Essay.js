@@ -82,4 +82,4 @@ Essay.plugin(plugin.absoluteUrl)
 Essay.plugin(plugin.slug, { model: 'Essay' })
 Essay.plugin(plugin.hits)
 
-module.exports = mongoose.model('Essay', Essay)
+module.exports = Essay

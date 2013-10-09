@@ -39,4 +39,4 @@ College.plugin(plugin.absoluteUrl)
 College.plugin(plugin.slug, { model: 'College' })
 College.plugin(plugin.hits)
 
-module.exports = mongoose.model('College', College)
+module.exports = College

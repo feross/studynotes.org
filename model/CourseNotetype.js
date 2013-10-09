@@ -33,4 +33,4 @@ CourseNotetype.plugin(plugin.createDate)
 CourseNotetype.plugin(plugin.absoluteUrl)
 CourseNotetype.plugin(plugin.hits)
 
-module.exports = mongoose.model('CourseNotetype', CourseNotetype)
+module.exports = CourseNotetype

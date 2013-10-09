@@ -25,4 +25,4 @@ Notetype.plugin(plugin.modifyDate)
 Notetype.plugin(plugin.createDate)
 Notetype.plugin(plugin.slug, { model: 'Notetype' })
 
-module.exports = mongoose.model('Notetype', Notetype)
+module.exports = Notetype

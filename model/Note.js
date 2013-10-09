@@ -88,4 +88,4 @@ Note.plugin(plugin.absoluteUrl)
 Note.plugin(plugin.slug, { model: 'Note' })
 Note.plugin(plugin.hits)
 
-module.exports = mongoose.model('Note', Note)
+module.exports = Note
