@@ -24,6 +24,8 @@ module.exports = function (app) {
         var user = results.essay && results.essay.user
         if (user) {
           user.populate('college', cb)
+        } else {
+          cb()
         }
       }],
       essays: function (cb) {
