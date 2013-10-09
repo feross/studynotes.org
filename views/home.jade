@@ -13,29 +13,29 @@ block content
             li: a(href=course.notetypeUrl(notetype))= notetype.name
 
   h2
-    | Free Sample College Admissions Essays
+    | Free Sample Admissions Essays
     a.btn(href='/submit/essay/')
       i.icon-cloud-upload
       | Submit an essay
 
-  p Learn how to write a powerful college application by studying our database of <strong>#{ essayCount } successful college admissions essays</strong>. The secrets aren't secret anymore — see what actually worked for top students.
+  p Learn how to write a powerful college application by studying our database of <strong>#{ essayCount } successful admissions essays</strong>. The secrets aren't secret anymore — see what actually worked for top students.
   .row
     .col4
       ul.tight
         each college in modelCache.collegesByRank.slice(0, 3)
-          li: a(href=college.url, title=college.name)= college.shortName
+          li: a(href=college.url)= college.shortName
     .col4
       ul.tight
         each college in modelCache.collegesByRank.slice(3, 6)
-          li: a(href=college.url, title=college.name)= college.shortName
+          li: a(href=college.url)= college.shortName
     .col4
       ul.tight
         each college in modelCache.collegesByRank.slice(6, 9)
-          li: a(href=college.url, title=college.name)= college.shortName
+          li: a(href=college.url)= college.shortName
     .col4
       ul.tight
         each college in modelCache.collegesByRank.slice(9, 12)
-          li: a(href=college.url, title=college.name)= college.shortName
+          li: a(href=college.url)= college.shortName
 
   .row
     .col2
@@ -121,7 +121,7 @@ append sidebar
   h3 StudyNotes In Numbers
   ul
     li #{ util.addCommas(noteCount) } notes for #{ courseCount } <a href='/courses/'>AP courses</a>
-    li #{ util.addCommas(essayCount) } essays for #{ collegeCount } <a href='/colleges/'>elite universities</a>
+    li #{ util.addCommas(essayCount) } admissions essays for #{ collegeCount } <a href='/colleges/'>universities</a>
     li #{ util.addCommas(userCount) } registered users
     li.online
 
