@@ -25,6 +25,10 @@ module.exports = function (app) {
     console.error('\n[UNCAUGHT EXCEPTION] ' + req.method + ': ' + req.url)
     console.error('\nHTTP HEADERS:')
     console.dir(req.headers)
+    if (req.params) {
+      console.error('\nHTTP GET PARAMETERS:')
+      console.dir(req.params)
+    }
     if (req.body) {
       console.error('\nHTTP BODY:')
       console.dir(req.body)
