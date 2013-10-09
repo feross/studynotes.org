@@ -32,8 +32,6 @@ exports.truncate = truncate
  * @param  {function(*)} ServerConstructor
  */
 exports.run = function (ServerConstructor) {
-  console.time('startup')
-
   // Clone the argv object to avoid interfering with other modules
   var opts = util.extend({}, optimist.argv)
 
@@ -67,7 +65,6 @@ exports.run = function (ServerConstructor) {
       console.error(err.stack)
       process.exit(1)
     }
-    console.timeEnd('startup')
   })
 
   process.on('uncaughtException', function (err) {
@@ -83,22 +80,6 @@ exports.run = function (ServerConstructor) {
  */
 exports.uuid = function () {
   return uuid.v1()
-}
-
-/**
- * Add commas to an integer, so that it's easier to read.
- * @param {Integer} x The number
- * @return {String} The number with commas
- */
-
-exports.addCommas = function (x) {
-  x += '' // convert to String
-  var rgx = /(\d+)(\d{3})/
-
-  while (rgx.test(x)) {
-    x = x.replace(rgx, '$1' + ',' + '$2')
-  }
-  return x
 }
 
 /**

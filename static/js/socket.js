@@ -26,8 +26,8 @@ function onMessage (str) {
     return
   }
   if (message.type === 'update') {
-    var count = message.count
-    var studentsStr = (count === 1)
+    // Set a phrase with live visitor count
+    var studentsStr = (message.count === 1)
       ? 'student'
       : 'students'
     var pageStr = (window.location.pathname === '/')
@@ -37,8 +37,14 @@ function onMessage (str) {
       .text(message.count + ' ' + studentsStr + ' online ' + pageStr)
       .show()
 
-    $('.onlineNum span').text(message.count)
+    // Set just the visitor count number, no other words
+    $('.onlineNum span').text(util.addCommas(message.count))
     $('.onlineNum').show()
+
+    // Set the total hits number, no other words
+    if (message.totalHits) {
+      $('.totalHits').text(util.addCommas(message.totalHits))
+    }
   }
 }
 

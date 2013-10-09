@@ -47,7 +47,11 @@ module.exports = function (app) {
       var locals = {
         hero: {
           title: 'Study Notes',
-          desc: 'Fast, free study tools for AP students'
+          desc: 'Fast, free study guides, trusted <span class="totalHits">15,000,000</span> times (and counting)',
+          descRaw: true,
+          image: 'ucla.jpg'
+
+          // desc: 'Fast, free study tools for AP students',
           // desc: 'The best AP study guides'
           // desc: 'Study tools for smart students'
           // desc: 'The secret to getting a 5 on the AP exam'

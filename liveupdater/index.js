@@ -1,9 +1,12 @@
 module.exports = LiveUpdater
 
+var _ = require('underscore')
+var async = require('async')
 var config = require('../config')
 var debug = require('debug')('studynotes:liveupdater')
 var engine = require('engine.io')
 var http = require('http')
+var model = require('../model')
 var util = require('../util')
 
 function LiveUpdater (opts, cb) {
@@ -17,9 +20,9 @@ function LiveUpdater (opts, cb) {
   self.start(cb)
 }
 
-LiveUpdater.prototype.start = function (cb) {
+LiveUpdater.prototype.start = function (done) {
   var self = this
-  cb || (cb = function () {})
+  done || (done = function () {})
 
   var server = http.createServer()
   self.engine = engine.attach(server, {
@@ -30,7 +33,15 @@ LiveUpdater.prototype.start = function (cb) {
     socket.on('close', self.onSocketClose.bind(self, socket))
   })
 
-  server.listen(self.port)
+  async.series([
+    model.connect,
+    function (cb) {
+      self.getTotalHits(cb)
+    },
+    function (cb) {
+      server.listen(self.port, cb)
+    }
+  ], done)
 }
 
 LiveUpdater.prototype.getOnlineCount = function (pathname) {
@@ -49,6 +60,26 @@ LiveUpdater.prototype.getOnlineCount = function (pathname) {
   }
 }
 
+LiveUpdater.prototype.getTotalHits = function (cb) {
+  var self = this
+  async.map(_(model.models).toArray(), function (model, cb) {
+    model
+      .find()
+      .select('hits -_id')
+      .exec(cb)
+  }, function (err, results) {
+    if (err) return cb(err)
+
+    self.totalHits = _(results).reduce(function (acc, docs) {
+      return acc + _(docs).reduce(function (acc2, doc) {
+        return acc2 + (doc.hits || 0)
+      }, 0)
+    }, 0)
+
+    cb(null)
+  })
+}
+
 LiveUpdater.prototype.sendUpdates = function (pathname) {
   var self = this
   var sockets = self.online[pathname]
@@ -56,9 +87,18 @@ LiveUpdater.prototype.sendUpdates = function (pathname) {
   // Early return if there are no updates to send
   if (!sockets || sockets.length === 0) return
 
-  var count = self.getOnlineCount(pathname)
+  var update = {
+    type: 'update',
+    count: self.getOnlineCount(pathname)
+  }
+
+  if (pathname === '/') {
+    update.totalHits = self.totalHits
+  }
+
+  var message = JSON.stringify(update)
   sockets.forEach(function (socket) {
-    socket.send(JSON.stringify({ type: 'update', count: count }))
+    socket.send(message)
   })
 
   if (pathname !== '/') self.sendUpdates('/')
@@ -79,10 +119,17 @@ LiveUpdater.prototype.onSocketMessage = function (socket, str) {
     // Only accept the first 'online' message
     if (socket.pathname) return
 
-    var pathname = socket.pathname = message.pathname
+    var pathname = message.pathname
+    socket.pathname = pathname
 
-    if (self.online[pathname] === undefined) self.online[pathname] = []
+    // If this is a new path, create new array
+    if (self.online[pathname] === undefined) {
+      self.online[pathname] = []
+    }
+
     self.online[pathname].push(socket)
+
+    self.totalHits += 1
 
     self.sendUpdates(pathname)
   }

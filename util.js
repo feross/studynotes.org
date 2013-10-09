@@ -22,6 +22,22 @@ util.extend = function (dest /*, ... */) {
   return dest
 }
 
+/**
+ * Add commas to an integer, so that it's easier to read.
+ * @param {Integer} x The number
+ * @return {String} The number with commas
+ */
+
+util.addCommas = function (x) {
+  x += '' // convert to String
+  var rgx = /(\d+)(\d{3})/
+
+  while (rgx.test(x)) {
+    x = x.replace(rgx, '$1' + ',' + '$2')
+  }
+  return x
+}
+
 if (typeof module !== 'undefined') {
   module.exports = util
   util.extend(util, require('./util-node'))
