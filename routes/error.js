@@ -22,10 +22,17 @@ module.exports = function (app) {
   })
 
   app.use(function (err, req, res, next) {
-    console.error('EXCEPTION: ' + req.url)
-    console.error(err.stack)
-    console.error('HEADERS:')
+    console.error('\n[UNCAUGHT EXCEPTION] ' + req.method + ': ' + req.url)
+    console.error('\nHTTP HEADERS:')
     console.dir(req.headers)
+    if (req.body) {
+      console.error('\nHTTP BODY:')
+      console.dir(req.body)
+    }
+    console.error('')
+    console.error(err.stack)
+    console.error('')
+
     email.notifyOnException({ err: err, req: req })
 
     var code = 500
