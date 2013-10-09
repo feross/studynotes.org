@@ -47,7 +47,7 @@ module.exports = function (app) {
       var locals = {
         hero: {
           title: 'Study Notes',
-          desc: 'Fast, free study guides. Trusted <span class="totalHits">15,000,000</span> times (and counting).',
+          desc: 'Fast, free study guides. Trusted <span class="totalHits">15,000,000</span> times (and&nbsp;counting)',
           descRaw: true,
           image: 'ucla.jpg'
 

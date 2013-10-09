@@ -302,9 +302,20 @@ hr
 body.signup, body.signup2
   background: center center url(cdnOrigin + '/images/hero/colleges.jpg') no-repeat fixed
   background-size: cover
+
 body.login
   background: center center url(cdnOrigin + '/images/hero/ucla.jpg') no-repeat fixed
   background-size: cover
+
+body.home
+  .totalHits
+    display: inline-block
+    @media DESKTOP
+      min-width: 145px
+    @media TABLET
+      min-width: 150px
+    @media DESKTOP
+      min-width: 175px
 
 @import 'header'
 @import 'browseMenu'
