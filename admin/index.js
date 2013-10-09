@@ -1,11 +1,11 @@
 /*jslint node: true */
 "use strict";
 
-var config = require('./config')
+var config = require('../config')
 var express = require('express')
 var formage = require('formage')
 var http = require('http')
-var model = require('./model')
+var model = require('../model')
 var path = require('path')
 
 var app = express()

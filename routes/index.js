@@ -4,7 +4,7 @@
 var config = require('../config')
 var express = require('express')
 var path = require('path')
-var randomquote = require('../randomquote')
+var randomquote = require('../lib/randomquote')
 var util = require('../util')
 
 module.exports = function (app) {

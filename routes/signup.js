@@ -3,7 +3,7 @@
 
 var _ = require('underscore')
 var async = require('async')
-var auth = require('../auth')
+var auth = require('../lib/auth')
 var bcrpyt = require('bcrypt')
 var email = require('../lib/email')
 var model = require('../model')

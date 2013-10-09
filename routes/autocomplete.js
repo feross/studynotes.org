@@ -1,7 +1,7 @@
 /*jslint node: true */
 "use strict";
 
-var search = require('../search')
+var search = require('../lib/search')
 
 module.exports = function (app) {
   app.get('/autocomplete', function (req, res, next) {

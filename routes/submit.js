@@ -2,7 +2,7 @@
 "use strict";
 
 var _ = require('underscore')
-var auth = require('../auth')
+var auth = require('../lib/auth')
 var email = require('../lib/email')
 var model = require('../model')
 

@@ -35,4 +35,4 @@ deploy:
 	cd $(APP_DIR) && git pull
 	cd $(APP_DIR) && make init
 	sudo supervisorctl reload && sleep 3 && sudo supervisorctl restart studynotes-site && sudo supervisorctl restart studynotes-liveupdater
-	cd $(APP_DIR) && sleep 20 && node purge-netdna.js
+	cd $(APP_DIR) && sleep 20 && node lib/purge-netdna.js

@@ -1,7 +1,7 @@
 /*jslint node: true */
 "use strict";
 
-var auth = require('../auth')
+var auth = require('../lib/auth')
 var config = require('../config')
 var passport = require('passport')
 var url = require('url')

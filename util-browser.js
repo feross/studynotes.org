@@ -1,7 +1,5 @@
 // Client utility functions
 
-var util = {}
-
 util.isPhone = function () {
   return $(window).width() < 800 - 25 // account for scrollbar
 }
