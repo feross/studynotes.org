@@ -21,9 +21,9 @@ header.header
       li: a.courses(href='/courses/', title='Browse all AP study notes')
         i.icon-chevron-down.hide-phone
         span AP Notes
-      li: a.colleges(href='/colleges/essays/', title='Browse all college admissions essays')
+      li: a.colleges(href='/colleges/essays/', title='Browse all admissions essays')
         i.icon-chevron-down.hide-phone
-        span College Essays
+        span Admissions Essays
       if (locals.currentUser)
         li: a(href='#{currentUser.url}', title='Manage your account')
           img(src='#{ currentUser.gravatarBlank }', width=21, height=21).hide-phone.hide-tablet
