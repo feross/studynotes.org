@@ -1,39 +1,16 @@
 extends layouts/main-sidebar
 
 block content
-  //- include includes/breadcrumbs
+  include includes/breadcrumbs
 
-  if (college.desc)
-    h2 About #{ college.name }
-    .entry
-      | !{ util.truncate(college.desc, 300) }
-      a(href='about/')
-        | #{ 'Read more ' }
-        i.icon-double-angle-right
-
-  if (locals.essays && essays.length)
-    h2 Top #{ essays.length } #{ college.shortName } Essays
-    - var num = 1
-    each essay in essays
-      .entry
-        .heading.clearfix
-          h3
-            | !{ num + '. ' }
-            a(href=essay.url)= essay.name
-          .author
-            a(href=essay.user.getUrl(essay.anon))
-              span by #{ essay.user.getName(essay.anon) }
-              img(src=essay.user.getGravatar(essay.anon))
-        | !{ util.truncate(util.sanitizeHTML(essay.body, ['p']), 300) }
-        a(href=essay.url)
-          | #{ 'Read more ' }
-          i.icon-double-angle-right
-
-      - num += 1
-
+  h1 About #{ college.name }
   include includes/toolbar
 
+  | !{ college.desc }
+
   h2 #{ college.shortName } admittees, submit your essays!
+
+  hr
 
   p If you were one of the <strong>lucky few #{ college.shortName } admittees</strong>, please submit your essay to help the next generation of students write better admissions essays!
 
@@ -58,9 +35,12 @@ append sidebar
   .map
     img(src='http://maps.googleapis.com/maps/api/staticmap?center=#{ encodeURIComponent(college.location) }&zoom=8&size=336x200&maptype=roadmap&sensor=false')
 
+  h2 Top #{ college.shortName } Essays
+  ul.more
+    each essay in essays
+      li: a(href=essay.url)= essay.name
+
   h2 Page Stats
   ul
     li #{ util.addCommas(college.hits) } views
     li.online
-
-  include includes/ads/adsense-rect

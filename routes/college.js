@@ -64,9 +64,7 @@ module.exports = function (app) {
   })
 
   app.get('/:collegeId', function (req, res, next) {
-    var collegeId = req.params.collegeId
-
-    var college = model.cache.colleges[collegeId]
+    var college = model.cache.colleges[req.params.collegeId]
     if (!college) return next()
 
     async.auto({
@@ -91,6 +89,34 @@ module.exports = function (app) {
         college: college,
         essays: essays,
         title: 'Sample ' + college.shortName + ' Admissions Essays',
+        url: college.url
+      })
+
+      college.hit()
+    })
+  })
+
+  app.get('/:collegeId/about', function (req, res, next) {
+    var college = model.cache.colleges[req.params.collegeId]
+    if (!college) return next()
+
+    async.auto({
+      essays: function (cb) {
+        model.Essay
+          .find({ college: college.id })
+          .select('-body -prompt')
+          .sort('-hits')
+          .exec(cb)
+      }
+    }, function (err, results) {
+      var essays = results.essays
+      if (err) return next(err)
+
+      res.render('college-about', {
+        breadcrumbs: [ { name: 'College Essays', url: '/colleges/essays/' } ],
+        college: college,
+        essays: essays,
+        title: 'About ' + college.name,
         url: college.url
       })
 
