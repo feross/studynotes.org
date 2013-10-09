@@ -123,6 +123,11 @@ append sidebar
     li #{ util.addCommas(noteCount) } notes for #{ courseCount } <a href='/courses/'>AP courses</a>
     li #{ util.addCommas(essayCount) } admissions essays for #{ collegeCount } <a href='/colleges/'>universities</a>
     li #{ util.addCommas(userCount) } registered users
-    li.online
+    li
+      span.totalHits Lots of
+      | #{ ' note views (whole site) ' }
+    li.onlineNum
+      span
+      | #{ ' students online now (whole site)' }
 
   include includes/ads/adsense-rect
