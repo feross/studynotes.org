@@ -9,7 +9,6 @@ module.exports = function (app) {
 
     search.autocomplete(q, function(err, results) {
       if (err) return next(err)
-      // res.send(500, { error: 'Search error' })
       res.send({
         q: q,
         results: results

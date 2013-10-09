@@ -13,6 +13,7 @@ var WORD_MATCH = 100
 var MAX_RESULTS = 8
 
 exports.autocomplete = function (query, cb) {
+  query || (query = '')
   query = query.trim()
 
   async.auto({
