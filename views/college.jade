@@ -53,7 +53,7 @@ append sidebar
 
   h2 Located in #{ college.location }
   .map
-    a(href='http://maps.google.com/?q=#{ college.name }')
+    a(href='about/')
       img(src='http://maps.googleapis.com/maps/api/staticmap?center=#{ encodeURIComponent(college.location) }&zoom=8&size=336x200&scale=2&maptype=roadmap&sensor=false&visual_refresh=true')
 
   h2 Page Stats
