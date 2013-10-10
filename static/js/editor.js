@@ -17,7 +17,7 @@ $('.select2').select2({
 
 var $selectCollege = $('select[name="college"]')
 var $style = $('#heroStyle')
-var currentHero = $selectCollege.val() || $('body').attr('class').trim()
+var currentHero = $selectCollege.val() || 'amjed'
 
 if ($style.length) {
   $selectCollege.on('change', function () {
