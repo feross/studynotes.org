@@ -1,24 +1,28 @@
 extends layouts/main-sidebar
 
 block content
-  //- include includes/breadcrumbs
+  include includes/breadcrumbs
+  if (locals.essays && essays.length)
+    h1 Top #{ essays.length } Successful #{ college.shortName } Essays
+  else
+    h1 #{ college.shortName } Essays
 
-  if (college.desc)
-    h2 About #{ college.name }
-    .entry
-      | !{ util.truncate(college.desc, 300) }
-      a(href='about/')
-        | #{ 'Read more ' }
-        i.icon-double-angle-right
 
   include includes/toolbar
 
   if (locals.essays && essays.length)
-    h2 Top #{ essays.length } #{ college.shortName } Essays
-
     include includes/essay-list
 
     hr
+
+  h2 About #{ college.name }
+  .entry
+    | !{ util.truncate(college.desc, 300) }
+    a(href='about/')
+      | #{ 'Read more ' }
+      i.icon-double-angle-right
+
+  hr
 
   h2 #{ college.shortName } admittees, submit your essays!
 
@@ -34,6 +38,12 @@ block content
 
 append sidebar
   include ads/adsense-rect
+
+  p.center
+    a.btn.large(href='/submit/essay/')
+      i.icon-cloud-upload
+      | Submit an essay
+
   h2 #{ college.shortName } Stats
   ul
     li #{ college.acceptRate }% acceptance rate
@@ -43,7 +53,8 @@ append sidebar
 
   h2 Located in #{ college.location }
   .map
-    img(src='http://maps.googleapis.com/maps/api/staticmap?center=#{ encodeURIComponent(college.location) }&zoom=8&size=336x200&maptype=roadmap&sensor=false')
+    a(href='http://maps.google.com/?q=#{ college.name }')
+      img(src='http://maps.googleapis.com/maps/api/staticmap?center=#{ encodeURIComponent(college.location) }&zoom=8&size=336x200&scale=2&maptype=roadmap&sensor=false&visual_refresh=true')
 
   h2 Page Stats
   ul

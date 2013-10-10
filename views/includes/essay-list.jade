@@ -7,7 +7,7 @@ each essay in essays
         | !{ num + '. ' }
         a(href=essay.url)= essay.name
 
-      if (essay.college && essay.populated('college'))
+      if (essay.populated('college'))
         .college
           a(href=essay.college.url, title=essay.college.name)
             img(src='#{ config.cdnOrigin }/images/icon/#{ essay.college.id }.png')
@@ -25,6 +25,6 @@ each essay in essays
       else
         p Preview unavailable, click to read
 
-      a.read-more(href=essay.url)
-        | #{ 'Read more ' }
+      a.read-more(href=essay.url, title=essay.name)
+        | !{ 'Read&nbsp;more&nbsp;' }
         i.icon-double-angle-right

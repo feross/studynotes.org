@@ -26,7 +26,7 @@ if (locals.hero)
   if (hero.tabs && hero.tabs.length)
     ul.tabs.clearfix
       each tab in hero.tabs
-        li(class='#{(tab.on) ? "on" : ""}')
+        li(class='#{(tab.on || tab.view === view || (_.isArray(tab.view) && (tab.view.indexOf(view) >= 0))) ? "on" : ""}')
           a(href='#{tab.url}')= tab.name
         //- Force a space between tabs for inline-block spacing
         | #{ ' ' }

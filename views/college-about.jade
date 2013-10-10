@@ -6,24 +6,6 @@ block content
   h1 About #{ college.name }
   include includes/toolbar
 
-  | !{ college.desc }
-
-  h2 #{ college.shortName } admittees, submit your essays!
-
-  hr
-
-  p If you were one of the <strong>lucky few #{ college.shortName } admittees</strong>, please submit your essay to help the next generation of students write better admissions essays!
-
-  p We want to level the playing field so that any qualified student can <strong>write a powerful application</strong>, regardless of their background. Please support our efforts!
-
-  p.center
-    a.btn.large(href='/submit/essay/')
-      i.icon-cloud-upload
-      | Submit an essay
-
-
-append sidebar
-  include ads/adsense-rect
   h2 #{ college.shortName } Stats
   ul
     li #{ college.acceptRate }% acceptance rate
@@ -31,14 +13,24 @@ append sidebar
     li $#{ util.addCommas(college.tuition) } tuition &amp; fees
     li ##{ college.rank } in US News &amp; World Report
 
-  h2 Located in #{ college.location }
+  h2 #{ college.shortName } is Located in #{ college.location }
   .map
-    img(src='http://maps.googleapis.com/maps/api/staticmap?center=#{ encodeURIComponent(college.location) }&zoom=8&size=336x200&maptype=roadmap&sensor=false')
+    a(href='http://maps.google.com/?q=#{ college.name }')
+      img(src='http://maps.googleapis.com/maps/api/staticmap?center=#{ encodeURIComponent(college.location) }&zoom=6&size=640x250&scale=2&maptype=roadmap&sensor=false&visual_refresh=true')
+
+  h2 #{ college.shortName } Facts — you should know this stuff!
+  | !{ college.desc }
+
+
+append sidebar
+  include ads/adsense-rect
 
   h2 Top #{ college.shortName } Essays
   ul.more
     each essay in essays
       li: a(href=essay.url)= essay.name
+
+  include ads/adsense-rect
 
   h2 Page Stats
   ul

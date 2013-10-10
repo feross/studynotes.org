@@ -14,6 +14,7 @@ module.exports = function (app) {
   var render = app.render
   app.render = function (view, opts, fn) {
     // Set default template local variables
+    opts.view = view
     opts.cls || (opts.cls = '')
     opts.randomquote || (opts.randomquote = randomquote())
     opts.searchTerm || (opts.searchTerm = '')
@@ -40,19 +41,31 @@ module.exports = function (app) {
 
       opts.hero = {
         desc: 'Class Notes, Test Prep, Review Materials, and More',
+        image: opts.course.heroImage,
         tabs: tabs,
         title: opts.course.name,
-        url: opts.course.url,
-        image: opts.course.heroImage
+        url: opts.course.url
       }
     }
     // If rendering a college-related view
-    else if (opts.college) {
+    else if (opts.college && opts.essays) {
       opts.hero = {
-        title: opts.college.shortName + ' Admissions Essays',
         desc: 'College essays from students who got accepted at ' + opts.college.name,
-        url: opts.college.url,
-        image: opts.college.heroImage
+        image: opts.college.heroImage,
+        tabs: [
+          {
+            name: opts.college.shortName + ' Essays',
+            url: opts.college.url,
+            view: ['college', 'essay']
+          },
+          {
+            name: 'About ' + opts.college.shortName,
+            url: opts.college.url + 'about/',
+            view: 'college-about'
+          }
+        ],
+        title: opts.college.shortName + ' Admissions Essays',
+        url: opts.college.url
       }
     }
     // If rendering any other type of view and heroImage is missing
