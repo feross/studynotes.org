@@ -80,13 +80,13 @@ function loadCache (done) {
     }
   ], function (err) {
     function sortByName (a, b) {
-      if(a.name < b.name) return -1
-      if(a.name > b.name) return 1
+      if (a.name < b.name) return -1
+      if (a.name > b.name) return 1
       return 0
     }
     function sortByRank (a, b) {
-      if(a.rank < b.rank) return -1
-      if(a.rank > b.rank) return 1
+      if (a.rank < b.rank) return -1
+      if (a.rank > b.rank) return 1
       return 0
     }
     exports.cache.coursesByName = _(exports.cache.courses)
@@ -94,7 +94,11 @@ function loadCache (done) {
       .sort(sortByName)
     exports.cache.collegesByName = _(exports.cache.colleges)
       .flatten()
-      .sort(sortByName)
+      .sort(function (a, b) {
+        if (a.id === 'common-app') return -1 // force common-app to sort first
+        if (b.id === 'common-app') return 1
+        return sortByName(a, b)
+      })
     exports.cache.collegesByRank = _(exports.cache.colleges)
       .flatten()
       .sort(sortByRank)
