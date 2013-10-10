@@ -13,7 +13,8 @@ module.exports = function (app) {
       url: '/courses',
       hero: {
         title: 'AP Courses',
-        desc: 'Which AP class do you want to study for?'
+        desc: 'Which AP class do you want to study for?',
+        image: 'leaves.jpg'
       }
     })
   })
