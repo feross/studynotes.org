@@ -26,6 +26,10 @@ var Note = mongoose.Schema({
       validate({ message: 'It looks like you forgot to include the actual note.' }, 'notEmpty')
     ]
   },
+  ordering: {
+    type: Number,
+    index: true
+  },
   course: {
     type: String,
     ref: 'Course',
@@ -38,10 +42,13 @@ var Note = mongoose.Schema({
     index: true,
     required: true
   },
-  ordering: {
-    type: Number,
-    index: true
-  }
+  user: {
+    type: String,
+    ref: 'User',
+    index: true,
+    required: true
+  },
+  anon: Boolean
 })
 
 Note.index({ course: 1, notetype: 1})

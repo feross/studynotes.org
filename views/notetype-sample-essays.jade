@@ -8,12 +8,9 @@ block content
   h1= notetype.name
   include includes/toolbar
 
-  include ads/adsense-inline-rect
-
   - var desc = (notetype.desc || notetype.shortDesc).replace(/COURSE_SHORTNAME/g, course.shortName).replace(/COURSE_TEXTBOOK/g, course.textbook).replace(/COURSE/g, course.name)
 
   p!= desc
 
-  ul.listing
-    each note in notes
-      li: a(href='#{note.url}')= note.name
+  - var essays = notes
+  include includes/essay-list

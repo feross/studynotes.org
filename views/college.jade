@@ -15,23 +15,8 @@ block content
 
   if (locals.essays && essays.length)
     h2 Top #{ essays.length } #{ college.shortName } Essays
-    - var num = 1
-    each essay in essays
-      .entry
-        .heading.clearfix
-          h3
-            | !{ num + '. ' }
-            a(href=essay.url)= essay.name
-          .author
-            a(href=essay.user.getUrl(essay.anon))
-              span by #{ essay.user.getName(essay.anon) }
-              img(src=essay.user.getGravatar(essay.anon))
-        | !{ util.truncate(util.sanitizeHTML(essay.body, ['p']), 300) }
-        a(href=essay.url)
-          | #{ 'Read more ' }
-          i.icon-double-angle-right
 
-      - num += 1
+    include includes/essay-list
 
     hr
 
@@ -48,7 +33,7 @@ block content
 
 
 append sidebar
-  include includes/ads/adsense-rect
+  include ads/adsense-rect
   h2 #{ college.shortName } Stats
   ul
     li #{ college.acceptRate }% acceptance rate
@@ -65,4 +50,4 @@ append sidebar
     li #{ util.addCommas(college.hits) } views
     li.online
 
-  include includes/ads/adsense-rect
+  include ads/adsense-rect

@@ -72,14 +72,14 @@ append sidebar
       i.icon-cloud-upload
       | Submit an essay
 
-  include includes/ads/adsense-rect
+  include ads/adsense-rect
 
   h2 More #{ college.shortName } Essays
   ul.more
     each essay in essays
       li: a(href=essay.url)= essay.name
 
-  include includes/ads/adsense-rect
+  include ads/adsense-rect
 
   h2 Essay Stats
   ul

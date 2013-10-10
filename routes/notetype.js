@@ -17,11 +17,17 @@ module.exports = function (app) {
 
     async.auto({
       notes: function (cb) {
-        model.Note
+        var query = model.Note
           .find({ course: course.id, notetype: notetype.id })
-          .select('-body')
-          .sort('ordering')
-          .exec(cb)
+          .sort('ordering -hits')
+
+        if (notetype.id == 'sample-essays') {
+          query.populate('user')
+        } else {
+          query.select('-body')
+        }
+
+        query.exec(cb)
       },
       courseNotetype: function (cb) {
         model.CourseNotetype
@@ -47,7 +53,10 @@ module.exports = function (app) {
       var notes = results.notes
       var courseNotetype = results.courseNotetype
 
-      res.render('notetype', {
+      var view = 'notetype'
+      if (notetype.id === 'sample-essays') view = 'notetype-sample-essays'
+
+      res.render(view, {
         breadcrumbs: [ course ],
         course: course,
         notetype: notetype,
