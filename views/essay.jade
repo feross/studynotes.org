@@ -11,6 +11,7 @@ block content
 
   include includes/toolbar
 
+  include ads/adsense-inline-rect
   if essay.prompt
     .prompt !{essay.prompt}
 
@@ -40,10 +41,6 @@ block content
         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
-
-  //- hr
-  //- h2 On copying
-  //- p It's a bad idea.
 
   h2 How to cite this essay (with MLA)
   .cite #{ user.getMlaName(essay.anon) }. "#{essay.name}" StudyNotes.org. StudyNotes, Inc., #{moment(essay.createDate).format('DD MMM. YYYY.')} Web. #{moment().format('DD MMM. YYYY.')} &lt;#{essay.absoluteUrl}&gt;.
