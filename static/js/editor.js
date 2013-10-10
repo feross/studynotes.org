@@ -165,7 +165,7 @@ var parserRules = {
         "rename_tag": "div"
     },
     "h1": {
-        "rename_tag": "h2"
+        "rename_tag": "h3"
     },
     "head": {
         "remove": 1
@@ -206,7 +206,7 @@ var parserRules = {
         "rename_tag": "div"
     },
     "big": {
-        "rename_tag": "h2",
+        "rename_tag": "h3",
     },
     "button": {
         "rename_tag": "span"
@@ -412,7 +412,9 @@ var parserRules = {
     "ruby": {
         "rename_tag": "span"
     },
-    "h2": {},
+    "h2": {
+        "rename_tag": "h3"
+    },
     "ins": {
         "rename_tag": "span"
     },
