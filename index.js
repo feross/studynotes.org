@@ -25,6 +25,7 @@ var mongoose = require('mongoose')
 var MongoStore = require('connect-mongo')(express)
 var passport = require('passport')
 var path = require('path')
+var url = require('url')
 var util = require('./util')
 
 function Site (opts, cb) {
@@ -130,6 +131,13 @@ Site.prototype.addTemplateGlobals = function () {
 }
 
 Site.prototype.addHeaders = function (req, res, next) {
+  var extname = path.extname(url.parse(req.url).pathname)
+
+  // Add cross-domain header for fonts, required by spec, Firefox, and IE.
+  if (['.eot', '.ttf', '.otf', '.woff'].indexOf(extname) > 0) {
+    res.header('Access-Control-Allow-Origin', '*')
+  }
+
   // Enforces secure (HTTP over SSL/TLS) connections to the server. This reduces
   // impact of bugs leaking session data through cookies and external links.
   // TODO: enable once we support HTTPS
@@ -168,13 +176,23 @@ Site.prototype.canonicalize = function (req, res, next) {
 Site.prototype.serveStatic = function () {
   var self = this
 
+  // Favicon middleware makes favicon requests fast
   self.app.use(express.favicon(path.join(config.root, 'static/favicon.ico')))
+
   var staticMiddleware = express.static(path.join(config.root, 'static'), {
     maxAge: config.maxAge
   })
+
+  // Serve static files, they take precedence over the routes.
   self.app.use(staticMiddleware)
+
+  // Also serve static files from the /static folder, but no routes. This is so
+  // that we can point the CDN at this folder and have it mirror ONLY the static
+  // files, no other site content.
   self.app.use('/static', function (req, res, next) {
     staticMiddleware(req, res, function (err) {
+      // If this next() function gets called, the file does not exist, so return
+      // 404, and don't proceed to further middlewares/routes.
       if (err) return next(err)
       res.send(404)
     })
