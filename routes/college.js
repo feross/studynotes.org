@@ -7,8 +7,8 @@ var model = require('../model')
 
 module.exports = function (app) {
   var tabs = [
-    { name: 'All Essays', url: '/colleges/essays/', view: 'essays' },
-    { name: 'All Colleges', url: '/colleges/', view: 'colleges' }
+    { name: 'Top College Essays', url: '/colleges/essays/', view: 'essays' },
+    { name: 'Top Universities', url: '/colleges/', view: 'colleges' }
   ]
 
   app.get('/colleges/essays', function (req, res, next) {
