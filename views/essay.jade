@@ -74,17 +74,16 @@ append sidebar
 
   include includes/ads/adsense-rect
 
+  h2 More #{ college.shortName } Essays
+  ul.more
+    each essay in essays
+      li: a(href=essay.url)= essay.name
+
+  include includes/ads/adsense-rect
+
   h2 Essay Stats
   ul
     li Posted <span title='#{ moment(essay.createDate).format("MMMM Do, YYYY, h:mm:ss a") }'>#{ moment(essay.createDate).fromNow() }</span>
     li #{ util.addCommas(essay.hits) } views
     li Averaging #{ util.addCommas(util.hitsPerDay(essay.hits, essay.createDate)) } views per day
     li.online
-
-  h2 More #{ college.shortName } Essays
-  ul.more
-    each essay in essays
-      li: a(href=essay.url)= essay.name
-
-  //- include includes/relatedessays
-
