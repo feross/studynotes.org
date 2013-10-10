@@ -54,7 +54,7 @@ var Note = mongoose.Schema({
 Note.index({ course: 1, notetype: 1})
 
 // Trim whitespace
-Note.pre('save', function (next) {
+Note.pre('validate', function (next) {
   var note = this
   note.name = note.name.trim()
   next()

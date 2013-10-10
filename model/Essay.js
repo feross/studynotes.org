@@ -44,7 +44,7 @@ var Essay = mongoose.Schema({
 })
 
 // Trim whitespace
-Essay.pre('save', function (next) {
+Essay.pre('validate', function (next) {
   var essay = this
   essay.name = essay.name.trim()
   next()
