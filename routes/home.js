@@ -49,7 +49,7 @@ module.exports = function (app) {
           title: 'Study Notes',
           desc: 'Fast, free study guides. Trusted <span class="totalHits">15,100,100</span> times (and&nbsp;counting)',
           descRaw: true,
-          image: 'ucla.jpg'
+          image: 'amjed.jpg'
 
           // desc: 'Fast, free study tools for AP students',
           // desc: 'The best AP study guides'
