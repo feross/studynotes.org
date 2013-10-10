@@ -88,7 +88,7 @@ module.exports = function (app) {
         } else {
           res.redirect('/submit/essay/')
         }
-        email.notifyAdmin('User added details (signup2)', user)
+        email.notifyAdmin('New user', user)
       }
     })
   })
