@@ -7,6 +7,7 @@ block content
   else
     h1 #{ college.shortName } Essays
 
+  p These college essays are from students who got accepted at #{ college.name }. Use them to get inspiration for your own essays and knock the socks off those admissions officers!
 
   include includes/toolbar
 
@@ -44,17 +45,19 @@ append sidebar
       i.icon-cloud-upload
       | Submit an essay
 
-  h2 #{ college.shortName } Stats
-  ul
-    li #{ college.acceptRate }% acceptance rate
-    li #{ util.addCommas(college.enrollment) } enrolled students
-    li $#{ util.addCommas(college.tuition) } tuition &amp; fees
-    li ##{ college.rank } in US News &amp; World Report
+  if (college.acceptRate)
+    h2 #{ college.shortName } Stats
+    ul
+      li #{ college.acceptRate }% acceptance rate
+      li #{ util.addCommas(college.enrollment) } enrolled students
+      li $#{ util.addCommas(college.tuition) } tuition &amp; fees
+      li ##{ college.rank } in US News &amp; World Report
 
-  h2 Located in #{ college.location }
-  .map
-    a(href='about/')
-      img(src='http://maps.googleapis.com/maps/api/staticmap?center=#{ encodeURIComponent(college.location) }&zoom=8&size=336x200&scale=2&maptype=roadmap&sensor=false&visual_refresh=true')
+  if (college.location)
+    h2 Located in #{ college.location }
+    .map
+      a(href='about/')
+        img(src='http://maps.googleapis.com/maps/api/staticmap?center=#{ encodeURIComponent(college.location) }&zoom=8&size=336x200&scale=2&maptype=roadmap&sensor=false&visual_refresh=true')
 
   h2 Page Stats
   ul

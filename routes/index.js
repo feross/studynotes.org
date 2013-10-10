@@ -50,7 +50,7 @@ module.exports = function (app) {
     // If rendering a college-related view
     else if (opts.college && opts.essays) {
       opts.hero = {
-        desc: 'College essays from students who got accepted at ' + opts.college.name,
+        // desc: 'College Essays That Worked',
         image: opts.college.heroImage,
         tabs: [
           {

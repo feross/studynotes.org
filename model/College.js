@@ -13,12 +13,12 @@ var College = mongoose.Schema({
   name: { type: String, required: true, index: true },
   shortName: { type: String, required: true, index: true },
   desc: { type: String, required: true },
-  tuition: { type: Number, required: true },
+  tuition: { type: Number },
   inStateTuition: { type: Number },
-  enrollment: { type: Number, required: true },
-  acceptRate: { type: Number, required: true },
-  location: {type: String, required: true },
-  rank: {type: Number, required: true, index: true }
+  enrollment: { type: Number },
+  acceptRate: { type: Number },
+  location: {type: String },
+  rank: {type: Number, index: true }
 })
 
 College.virtual('url').get(function () {

@@ -11,7 +11,8 @@ module.exports = function (app) {
     res.render('submit-essay', {
       hero: {
         title: 'Add an essay to StudyNotes',
-        desc: 'Help everyone write a powerful essay, regardless of their background.'
+        desc: 'Help everyone write a powerful essay, regardless of their background.',
+        image: 'amjed.jpg'
       },
       title: 'Submit an essay',
       url: '/submit/essay',

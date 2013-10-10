@@ -54,7 +54,7 @@ module.exports = function (app) {
           title: 'Top ' + colleges.length + ' Colleges',
           url: '/colleges/',
           hero: {
-            title: 'Best Colleges',
+            title: 'Top Universities',
             tabs: tabs
           }
         })
