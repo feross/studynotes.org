@@ -1,16 +1,26 @@
 extends layouts/main-sidebar
 
-append sidebar
-  include ads/adsense-rect
-  h2 College Essay Stats
-  ul
-    li #{ util.addCommas(essayCount) } essays for #{ colleges.length } <a href='/colleges/'>universities</a>
-    li.online
-  include ads/adsense-rect
-
 block content
+  h1 Top #{ colleges.length } Colleges
+  p Learn about these top US univerities and read admissions essays that worked. <strong>Which college is right for you?</strong>
+
+  include includes/toolbar
 
   if (locals.colleges)
     ul.listing
       each college in colleges
-        li: a(href='#{college.url}')= college.name
+        li: a(href='#{college.url}')= college.rank + '. ' + college.name
+
+append sidebar
+  include ads/adsense-rect
+
+  .center
+    a.btn.large(href='/submit/essay/')
+      i.icon-cloud-upload
+      | Submit an essay
+
+  h2 Essay Database Stats
+  ul
+    li #{ util.addCommas(essayCount) } essays for #{ colleges.length } <a href='/colleges/'>universities</a>
+    li.online
+  include ads/adsense-rect

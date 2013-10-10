@@ -22,7 +22,7 @@ files.forEach(function (file) {
 
   // Set Schema options
   var schema = require('./' + name)
-  schema.set('autoIndex', !config.isProd) // no indexing in production
+  schema.set('autoIndex', config.isProd) // no index during dev (slow)
 
   // Create Model object from Schema
   var model = mongoose.model(name, schema)

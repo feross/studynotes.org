@@ -32,7 +32,7 @@ module.exports = function (app) {
     if (opts.course) {
       var tabs = opts.course.notetypes.map(function (notetype) {
         return {
-          _id: notetype._id,
+          on: notetype.id === (opts.notetype && opts.notetype.id),
           name: notetype.name,
           url: opts.course.notetypeUrl(notetype)
         }
@@ -50,7 +50,7 @@ module.exports = function (app) {
     else if (opts.college) {
       opts.hero = {
         title: opts.college.shortName + ' Admissions Essays',
-        desc: 'Top essays from students who got accepted at ' + opts.college.name,
+        desc: 'College essays from students who got accepted at ' + opts.college.name,
         url: opts.college.url,
         image: opts.college.heroImage
       }

@@ -6,14 +6,8 @@ var async = require('async')
 var model = require('../model')
 
 module.exports = function (app) {
-  var tabs = []
-  // var tabs =  [
-  //   { name: 'All Colleges', url: '/colleges/' },
-  //   { name: 'All Essays', url: '/colleges/essays/' }
-  // ]
-
   app.get('/colleges', function (req, res, next) {
-    var colleges = _.flatten(model.cache.colleges)
+    var colleges = model.cache.collegesByRank
     model.Essay
       .count()
       .exec(function (err, essayCount) {
@@ -22,12 +16,14 @@ module.exports = function (app) {
         res.render('colleges', {
           colleges: colleges,
           essayCount: essayCount,
-          title: 'Elite College Admissions Essays',
+          title: 'Top ' + colleges.length + ' Colleges',
           url: '/colleges/',
           hero: {
-            title: 'Elite College Admissions Essays',
-            desc: 'Learn from these essays that worked.',
-            tabs: tabs
+            title: 'Best Colleges',
+            tabs: [
+              { name: 'All Essays', url: '/colleges/essays/' },
+              { name: 'All Colleges', url: '/colleges/', on: true }
+            ]
           }
         })
       })
@@ -48,16 +44,21 @@ module.exports = function (app) {
     }, function (err, results) {
       if (err) return next(err)
 
+      var tabs = [1].on = true
+
       res.render('essays', {
         collegeCount: results.collegeCount,
         essays: results.essays,
-        title: 'Sample Admissions Essays',
+        title: 'College Essays - Top ' + results.essays.length + ' Essays That Worked',
+        forceTitle: true,
         url: '/colleges/essays/',
         hero: {
-          title: 'Elite College Admissions Essays',
-          desc: 'Learn from these essays that worked.',
+          title: 'College Admissions Essays',
           image: 'colleges.jpg',
-          tabs: tabs
+          tabs: [
+            { name: 'All Essays', url: '/colleges/essays/', on: true },
+            { name: 'All Colleges', url: '/colleges/' }
+          ]
         }
       })
     })

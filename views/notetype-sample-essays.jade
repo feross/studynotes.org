@@ -6,11 +6,11 @@ block sidebar
 block content
   include includes/breadcrumbs
   h1= notetype.name
-  include includes/toolbar
 
   - var desc = (notetype.desc || notetype.shortDesc).replace(/COURSE_SHORTNAME/g, course.shortName).replace(/COURSE_TEXTBOOK/g, course.textbook).replace(/COURSE/g, course.name)
-
   p!= desc
+
+  include includes/toolbar
 
   - var essays = notes
   include includes/essay-list
