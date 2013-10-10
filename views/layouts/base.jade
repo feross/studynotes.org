@@ -18,7 +18,7 @@ html(class='no-js #{layout}', lang='en')
     link(rel='dns-prefetch', href='http://c.statcounter.com')
 
     - if (locals.forceTitle)
-      - pageTitle = locals.forceTitle
+      - pageTitle = title
     - else if (locals.title)
       - pageTitle = title + ' - Study Notes'
     - else
