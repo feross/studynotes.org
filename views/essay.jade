@@ -13,7 +13,8 @@ block content
 
   include ads/adsense-inline-rect
   if essay.prompt
-    .prompt !{essay.prompt}
+    .prompt <strong>Prompt: </strong> !{essay.prompt}
+    hr
 
   .body !{essay.body}
 
