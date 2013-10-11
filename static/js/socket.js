@@ -1,4 +1,5 @@
 var socket
+var lastTotalHits
 
 function openSocket () {
   socket = eio(config.engineEndpoint, {
@@ -39,7 +40,14 @@ function onMessage (str) {
 
     // Set the total hits number, no other words
     if (message.totalHits) {
-      $('.totalHits').text(util.addCommas(message.totalHits))
+      if (lastTotalHits !== message.totalHits) {
+        $('.totalHits').text(util.addCommas(message.totalHits)).removeClass('pulse animated')
+
+        setTimeout(function () {
+          $('.totalHits').addClass('pulse animated')
+        }, 10)
+      }
+      lastTotalHits = message.totalHits
     }
   }
 }
