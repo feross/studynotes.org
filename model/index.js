@@ -79,19 +79,27 @@ function loadCache (done) {
         })
     }
   ], function (err) {
-    function sortByName (a, b) {
+    function sortByName (a, b) { // Alphanumeric sort
       if (a.name < b.name) return -1
       if (a.name > b.name) return 1
       return 0
     }
-    function sortByRank (a, b) {
+    function sortByRank (a, b) { // Higher rank first
       if (a.rank < b.rank) return -1
       if (a.rank > b.rank) return 1
+      return 0
+    }
+    function sortByHits (a, b) { // Most hits first
+      if (a.hits > b.hits) return -1
+      if (a.hits < b.hits) return 1
       return 0
     }
     exports.cache.coursesByName = _(exports.cache.courses)
       .flatten()
       .sort(sortByName)
+    exports.cache.coursesByHits = _(exports.cache.courses)
+      .flatten()
+      .sort(sortByHits)
     exports.cache.collegesByName = _(exports.cache.colleges)
       .flatten()
       .sort(function (a, b) {

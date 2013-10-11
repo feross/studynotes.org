@@ -79,7 +79,7 @@ module.exports = function (app) {
       return res.redirect('/submit/note/')
     }
     var notetype = _(course.notetypes).find(function (n) {
-      return n.slug === req.body.notetype
+      return n.id === req.body.notetype
     })
     if (!notetype) {
       req.flash('error', 'Please select a note type from the list.')
@@ -90,9 +90,9 @@ module.exports = function (app) {
     var note = new model.Note({
       name: req.body.name,
       body: req.body.body,
-      courseId: course.id,
-      notetypeId: notetype.id,
-      userId: req.user.id
+      course: course.id,
+      notetype: notetype.id,
+      user: req.user.id
     })
     note.save(function (err) {
       if (err && err.name === 'ValidationError') {

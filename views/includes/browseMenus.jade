@@ -1,16 +1,20 @@
 .browseWrapper
-  .browse.browse-courses
-    each course in modelCache.coursesByName
+  nav.browse.browse-courses
+    each course in modelCache.coursesByHits
       div
         h2: a(href=course.url, title=course.shortName)= course.name
         ul
           each notetype in course.notetypes
             li: a(href=course.notetypeUrl(notetype), title='#{ course.name + " " + notetype.name }')= notetype.name
-    //- div
-    //-   a.btn(href='/submit/note/') Submit your notes
+
+        //- Last course
+        if (course === modelCache.coursesByHits[modelCache.coursesByHits.length - 1])
+          a.btn(href='/submit/note/')
+            i.icon-cloud-upload
+            | Submit notes
 
 .browseWrapper
-  .browse.browse-colleges
+  nav.browse.browse-colleges
     div
       h2: a(href='/colleges/essays/') Admissions Essays
       ul
