@@ -1,4 +1,5 @@
 APP_SERVER = studynotes.org
+DB_SERVER = athena.feross.net
 APP_DIR = /home/feross/www/studynotes.org
 
 .PHONY : default
@@ -9,6 +10,7 @@ default:
 
 .PHONY : offline
 offline:
+	mongod &
 	DEBUG="studynotes:*" nodemon run.js --offline
 
 .PHONY : init
@@ -23,6 +25,11 @@ upload-secret:
 .PHONY : download-secret
 download-secret:
 	rsync -a -O -v -e "ssh -p 44444" feross@$(APP_SERVER):"$(APP_DIR)/secret.js" .
+
+.PHONY : download-db
+download-db:
+	rsync -a -O -v --exclude "sessions.bson" --exclude "sessions.metadata.json" -e "ssh -p 44444" feross@$(DB_SERVER):"/home/feross/backups/mongo/daily/studynotes/" tmp/db
+	mongorestore --db studynotes --drop tmp/db
 
 # Trigger a deploy (from remote CI server)
 .PHONY : trigger
