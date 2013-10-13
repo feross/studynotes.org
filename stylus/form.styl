@@ -18,11 +18,11 @@ CONTENT_WIDTH = 580px
     font-size: 1em
     width: 100%
 
-  input, textarea
+  input, textarea, .cke_chrome
     border: 2px solid GRAY_DARK
 
-    &:focus, &:active
-      border-color: BLUE
+    &:focus, &:active, &.cke_focus
+      border: 2px solid BLUE
       outline: 0
       box-shadow: 0 0 5px rgba(BLUE, 0.4)
 
@@ -32,7 +32,7 @@ CONTENT_WIDTH = 580px
 
   input
     border-radius: 25px
-  textarea
+  textarea, .cke_chrome, .cke_wysiwyg_frame
     border-radius: 10px
 
   .select2-container

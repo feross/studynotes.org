@@ -1,45 +1,15 @@
-#editor-toolbar
-  padding: 6px 0
+.cke_chrome
+  padding: 0 0 10px 0 !important // to override their default
+  overflow: hidden
 
-  &:not(.sticky)
-    border: 0
+body.cke_editable
+  font-family: 'Lucida Grande', sans-serif
+  font-size: 15px !important
+  line-height: 1.5em !important
+  margin: 10px
 
-  .space
-    float: left
-    display: block
-    height: 30px
-    width: 15px
-
-  a
-    border-radius: 3px
-    box-shadow: 0 1px 1px rgba(0,0,0,0.2)
-    display: block
-    float: left
-    margin: 2px 5px
-    min-width: 35px
-
-    {LINK}
-      border: 1px solid GRAY_DARK
-      background-color: GRAY_LIGHTER
-      color: GRAY_DARK
-      padding: 3px 8px 1px 8px
-
-    {HOVER}
-      border: 1px solid #000
-      color: #000
-      text-decoration: none
-
-    &.wysihtml5-command-active
-      {LINK}
-        border: 2px solid RED
-        background-color: RED_LIGHT
-        color: RED
-        padding: 2px 7px 0px 7px
-
-    i
-      display: block
-      line-height: 1.5em
-      text-align: center
-
-.wysihtml5-sandbox
-  padding: 2px !important
+  &.placeholder
+    color: GRAY_DARK
+    font-size: 1em
+    font-size: 18px !important
+    line-height: 1.5em !important

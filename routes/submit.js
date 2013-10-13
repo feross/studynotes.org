@@ -12,7 +12,8 @@ module.exports = function (app) {
       hero: {
         title: 'Add an essay to StudyNotes',
         desc: 'Help everyone write a powerful essay, regardless of their background.',
-        image: 'amjed.jpg'
+        image: 'amjed.jpg',
+        url: '#'
       },
       title: 'Submit an essay',
       url: '/submit/essay',
@@ -60,7 +61,8 @@ module.exports = function (app) {
       hero: {
         title: 'Add a note to StudyNotes',
         desc: 'Help future generations of AP students. Share your notes.',
-        image: 'clouds.jpg'
+        image: 'clouds.jpg',
+        url: '#'
       },
       title: 'Submit a note',
       url: '/submit/note',

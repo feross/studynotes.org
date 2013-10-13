@@ -1,11 +1,17 @@
-ul
-  .content &:not(.listing)
-    padding-left: 20px
+ul, ol
+  margin: 0 0 1.5em 1.5em
+  padding: 0
 
-  .row &:not(.listing)
-    padding: 0 10px 0 0
+  li
+    list-style-position: inside
+
+  // no margin between nested lists
+  ul, ol
+    margin-top: 0.75em
+    margin-bottom: 0.75em
 
   &.tight
+    margin-left: 0
     li
       ellipsis()
   &.more
@@ -14,12 +20,9 @@ ul
     a:visited
       color: BLUE_LIGHT
 
-  li
-    list-style-position: inside
-
   &.listing
     list-style: none
-    margin-bottom: 25px
+    margin-left: 0
 
     li
       background: #EEE

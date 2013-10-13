@@ -132,11 +132,10 @@ ellipsis()
 *, *:before, *:after
   box-sizing: border-box
 
-html
+html.studynotes // i.e. not within ckeditor
   overflow-y: scroll
 
 body
-  background: #F4F4F4 url(cdnOrigin + '/images/body.gif')
   color: GRAY_DARKEST
   font-family: BODY_FONT
   font-size: 18px
@@ -155,6 +154,9 @@ body
     font-size: DESKTOP_FONT_SIZE
     line-height: 1.5em
 
+body:not(.cke_editable)
+  background: #F4F4F4 url(cdnOrigin + '/images/body.gif')
+
 img, iframe, video
   max-width: 100%
 
@@ -165,10 +167,6 @@ img, video
     margin-bottom: (TABLET_FONT_SIZE * 1.5)px
   @media DESKTOP
     margin-bottom: (DESKTOP_FONT_SIZE * 1.5)px
-
-ul, ol, pre
-  margin: 0 0 1.5em 0
-  padding: 0
 
 a
   {LINK}
@@ -216,7 +214,7 @@ h5
   line-height: (1.5 / 1)em
   margin-bottom: 1.5em
 
-p, blockquote
+p, blockquote, pre
   margin: 0 0 1.5em 0
 
 blockquote
@@ -341,5 +339,4 @@ body.home
 @import 'essay'
 @import 'footer'
 @import 'form'
-@import 'submit'
 @import 'editor'
