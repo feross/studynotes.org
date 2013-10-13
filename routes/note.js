@@ -4,6 +4,7 @@
 var _ = require('underscore')
 var async = require('async')
 var model = require('../model')
+var sort = require('../lib/sort')
 
 module.exports = function (app) {
   app.get('/:courseId/:notetypeId/:noteId', function (req, res, next) {
@@ -42,6 +43,10 @@ module.exports = function (app) {
       if (req.query.edit) {
         req.flash('note', note)
         return res.redirect('/submit/note/')
+      }
+
+      if (notetype.hasChapters) {
+        notes.sort(sort.sortChapters)
       }
 
       var index
