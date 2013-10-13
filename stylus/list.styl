@@ -1,9 +1,6 @@
 ul, ol
-  margin: 0 0 1.5em 1.5em
+  margin: 0 0 1.5em 2em
   padding: 0
-
-  li
-    list-style-position: inside
 
   // no margin between nested lists
   ul, ol
@@ -34,6 +31,46 @@ ul, ol
 
     .content &
       font-weight: bold
+
+ul li
+  list-style-position: inside
+
+// APA-style lists
+ol
+  counter-reset: level1
+
+  :not(li) > &
+    margin-left: 0
+
+  li
+    list-style: none
+  li:before
+    content: counter(level1, upper-roman) ". "
+    counter-increment: level1
+
+  ol
+    counter-reset: level2
+    li:before
+      content: counter(level2, upper-alpha) ". "
+      counter-increment: level2
+
+    ol
+      counter-reset: level3
+      li:before
+        content: counter(level3, decimal) ". "
+        counter-increment: level3
+
+      ol
+        counter-reset: level4
+        li:before
+          content: counter(level4, lower-alpha) ". "
+          counter-increment: level4
+
+        ol
+          counter-reset: level5
+          li:before
+            content: "(" counter(level5, decimal) ") "
+            counter-increment: level5
 
 .entry
   margin-bottom: 1.5em
