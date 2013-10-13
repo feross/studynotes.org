@@ -9,6 +9,7 @@ var mongoose = require('mongoose')
 var once = require('once')
 var path = require('path')
 var Schema = mongoose.Schema
+var sort = require('../lib/sort')
 
 // Object that contains the exported models, useful for iterating
 // over *only* the models, skipping methods like `connect`.
@@ -79,37 +80,23 @@ function loadCache (done) {
         })
     }
   ], function (err) {
-    function sortByName (a, b) { // Alphanumeric sort
-      if (a.name < b.name) return -1
-      if (a.name > b.name) return 1
-      return 0
-    }
-    function sortByRank (a, b) { // Higher rank first
-      if (a.rank < b.rank) return -1
-      if (a.rank > b.rank) return 1
-      return 0
-    }
-    function sortByHits (a, b) { // Most hits first
-      if (a.hits > b.hits) return -1
-      if (a.hits < b.hits) return 1
-      return 0
-    }
+
     exports.cache.coursesByName = _(exports.cache.courses)
       .flatten()
-      .sort(sortByName)
+      .sort(sort.byProp('name'))
     exports.cache.coursesByHits = _(exports.cache.courses)
       .flatten()
-      .sort(sortByHits)
+      .sort(sort.byProp('hits', true))
     exports.cache.collegesByName = _(exports.cache.colleges)
       .flatten()
       .sort(function (a, b) {
         if (a.id === 'common-app') return -1 // force common-app to sort first
         if (b.id === 'common-app') return 1
-        return sortByName(a, b)
+        return sort.byProp('name')
       })
     exports.cache.collegesByRank = _(exports.cache.colleges)
       .flatten()
-      .sort(sortByRank)
+      .sort(sort.byProp('rank'))
 
     done(err)
   })

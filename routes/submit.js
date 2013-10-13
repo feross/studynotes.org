@@ -120,6 +120,7 @@ module.exports = function (app) {
         note.course = course.id
         note.notetype = notetype.id
         note.user = req.user.id
+        note.anon = !!req.body.anon
 
         r.note.save(cb)
       }]

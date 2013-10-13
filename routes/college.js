@@ -16,8 +16,9 @@ module.exports = function (app) {
       essays: function (cb) {
         model.Essay
           .find()
-          .populate('user college')
+          .select('-prompt')
           .sort('-hits')
+          .populate('user college')
           .exec(cb)
       },
       collegeCount: function (cb) {
@@ -97,8 +98,9 @@ module.exports = function (app) {
       essays: function (cb) {
         model.Essay
           .find({ college: college.id })
-          .populate('user')
+          .select('-prompt')
           .sort('-hits')
+          .populate('user')
           .exec(cb)
       },
       populateColleges: ['essays', function (cb, results) {

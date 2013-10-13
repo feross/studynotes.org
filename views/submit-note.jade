@@ -31,4 +31,7 @@ block content
       textarea(name='body', placeholder='Paste the note here...')= (note && note.body)
     .row.submit
       button.btn.large(type='submit') Submit Note
-
+      div(style='display: inline-block')
+        input(name='anon', id='anon', type='checkbox', value='true')
+        .checkbox
+        label(for='anon') Anonymous

@@ -4,6 +4,7 @@
 var _ = require('underscore')
 var async = require('async')
 var model = require('../model')
+var sort = require('../lib/sort')
 
 module.exports = function (app) {
   app.get('/:courseId/:notetypeId', function (req, res, next) {
@@ -55,6 +56,18 @@ module.exports = function (app) {
 
       var view = 'notetype'
       if (notetype.id === 'sample-essays') view = 'notetype-sample-essays'
+
+      // Sensical sort for numbers
+      if (notetype.hasChapters) {
+        var re = /[^0-9]*([0-9]+)[^0-9]*/
+        notes.sort(function (a, b) {
+          a = Number(re.exec(a.name)[1])
+          b = Number(re.exec(b.name)[1])
+          if (a < b) return -1
+          if (a > b) return 1
+          return 0
+        })
+      }
 
       res.render(view, {
         breadcrumbs: [ course ],

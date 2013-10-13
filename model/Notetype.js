@@ -18,7 +18,8 @@ var Notetype = mongoose.Schema({
   },
   singularName: String,
   shortDesc: String,
-  desc: String
+  desc: String,
+  hasChapters: Boolean
 })
 
 Notetype.plugin(plugin.modifyDate)
