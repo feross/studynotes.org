@@ -1,9 +1,14 @@
 extends layouts/main-sidebar
 
 append toolbar
-  if next
+  if locals.currentUser && currentUser.admin
+    a.btn.red.edit(href='?edit=1') Edit
+  if locals.next
     a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next →
     .navigate-msg Use ← → keys to navigate
+  if !locals.next && locals.prev
+    a.btn.prev(href='#{prev.url}', title='Prev: #{prev.name}') ← Prev
+    .navigate-msg Last note in this set
 
 block content
   include includes/breadcrumbs

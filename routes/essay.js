@@ -44,7 +44,7 @@ module.exports = function (app) {
 
       var index
       essays.forEach(function (e, i) {
-        if (e._id === essay._id) index = i
+        if (e.id === essay.id) index = i
       })
 
       var prevEssay

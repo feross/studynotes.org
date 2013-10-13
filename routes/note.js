@@ -39,6 +39,11 @@ module.exports = function (app) {
       var note = results.note
       if (!note) return next()
 
+      if (req.query.edit) {
+        req.flash('note', note)
+        return res.redirect('/submit/note/')
+      }
+
       var index
       notes.forEach(function (n, i) {
         if (n.id === note.id) index = i

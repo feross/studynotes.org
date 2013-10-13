@@ -1,7 +1,7 @@
-$('select[name="course"]').on('change', function (e) {
-  if (!e.added) return
+$('select[name="course"]').on('change', function (e, force) {
+  if (!e.added && !force) return
 
-  var course = e.val
+  var course = $('select[name="course"] option:selected').val()
   var $notetype = $('select[name="notetype"]')
 
   $notetype
@@ -19,4 +19,10 @@ $('select[name="course"]').on('change', function (e) {
   })
 
   $notetype.trigger('change')
+})
+
+$(function () {
+  if ($('select[name="course"] option:selected').val()) {
+    $('select[name="course"]').trigger('change', true)
+  }
 })

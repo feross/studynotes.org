@@ -2,6 +2,7 @@
 "use strict";
 
 var _ = require('underscore')
+var async = require('async')
 var auth = require('../lib/auth')
 var email = require('../lib/email')
 var model = require('../model')
@@ -88,15 +89,41 @@ module.exports = function (app) {
       req.flash('note', req.body)
       return res.redirect('/submit/note/')
     }
+    var isEdit = req.body._id
 
-    var note = new model.Note({
-      name: req.body.name,
-      body: req.body.body,
-      course: course.id,
-      notetype: notetype.id,
-      user: req.user.id
-    })
-    note.save(function (err) {
+    async.auto({
+      note: function (cb) {
+        if (isEdit) {
+          model.Note
+            .findById(req.body._id)
+            .exec(cb)
+        } else {
+          cb(null, new model.Note())
+        }
+      },
+      permission: ['note', function (cb, r) {
+        if (!r.note) return cb(new Error('No note with id ' + req.body._id))
+
+        if (!r.note.user // new note, no permission needed
+            || r.note.user.id === req.user.id // same user
+            || req.user.admin) { // admin
+          cb(null)
+        } else {
+          cb(new Error('Cannot edit another user\'s note'))
+        }
+      }],
+      save: ['permission', function (cb, r) {
+        var note = r.note
+
+        note.name = req.body.name
+        note.body = req.body.body
+        note.course = course.id
+        note.notetype = notetype.id
+        note.user = req.user.id
+
+        r.note.save(cb)
+      }]
+    }, function (err, r) {
       if (err && err.name === 'ValidationError') {
         _(err.errors).map(function (error) {
           req.flash('error', error.type)
@@ -106,8 +133,8 @@ module.exports = function (app) {
       } else if (err) {
         next(err)
       } else {
-        res.redirect(note.url)
-        email.notifyAdmin('New note', note)
+        res.redirect(r.note.url)
+        if (!isEdit) email.notifyAdmin('New note', r.note)
       }
     })
   })

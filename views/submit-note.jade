@@ -10,6 +10,8 @@ block content
         div= msg
   form(method='POST')
     input(type='hidden', name='_csrf', value=csrf)
+    if note && note._id
+      input(type='hidden', name='_id', value=note._id)
     .row
       input(name='name', type='text', placeholder='Note Title', value=(note && note.name), autofocus, required)
     .row
@@ -25,9 +27,8 @@ block content
               option(value=notetype.id, data-course=course.id, selected=(note && (note.notetype === notetype.id)))= notetype.singularName || notetype.name
         select.select2(name='notetype', data-placeholder='What kind of note?', disabled)
           option
-
     .row
-      textarea(name='body', placeholder='Paste the note here...', data-toolbar='editor-toolbar')= (note && note.body)
+      textarea(name='body', placeholder='Paste the note here...')= (note && note.body)
     .row.submit
       button.btn.large(type='submit') Submit Note
 
