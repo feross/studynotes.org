@@ -5,7 +5,14 @@ block content
   p We have the best Advanced Placement* study guides, practice tests, and notes on the web, contributed and curated by students and teachers like yourself. <strong>The site is used by millions of students in all 50 U.S. states to prepare for AP* courses and exams.</strong>
 
   .row
-    each course in modelCache.coursesByName
+    each course in modelCache.coursesByHits.slice(0, 4)
+      .col4
+        h3: a(href=course.url, title=course.shortName)= course.name
+        ul.tight
+          each notetype in course.notetypes
+            li: a(href=course.notetypeUrl(notetype))= notetype.name
+  .row
+    each course in modelCache.coursesByHits.slice(4, 8)
       .col4
         h3: a(href=course.url, title=course.shortName)= course.name
         ul.tight
@@ -22,19 +29,19 @@ block content
   .row
     .col4
       ul.tight
-        each college in modelCache.collegesByRank.slice(0, 3)
+        each college in modelCache.collegesByRank.slice(0, 4)
           li: a(href=college.url)= college.shortName
     .col4
       ul.tight
-        each college in modelCache.collegesByRank.slice(3, 6)
+        each college in modelCache.collegesByRank.slice(4, 8)
           li: a(href=college.url)= college.shortName
     .col4
       ul.tight
-        each college in modelCache.collegesByRank.slice(6, 9)
+        each college in modelCache.collegesByRank.slice(8, 12)
           li: a(href=college.url)= college.shortName
     .col4
       ul.tight
-        each college in modelCache.collegesByRank.slice(9, 12)
+        each college in modelCache.collegesByRank.slice(12, 16)
           li: a(href=college.url)= college.shortName
 
   .row
@@ -79,10 +86,8 @@ block content
     li AP Japanese Language and Culture
     li AP Latin
     li AP Macroeconomics (AP Econ)
-    li AP Microeconomics
     li AP Music Theory
     li AP Physics (B &amp; C)
-    li AP Psychology (AP Psych)
     li AP Spanish Language
     li AP Spanish Literature and Culture
     li AP Statistics (AP Stats)
