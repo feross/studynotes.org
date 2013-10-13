@@ -1,6 +1,6 @@
 !!! 5
 block vars
-html(class='no-js #{layout}', lang='en')
+html(class='studynotes #{layout}', lang='en')
   head
     meta(charset='utf-8')
 
@@ -167,6 +167,10 @@ html(class='no-js #{layout}', lang='en')
       | <script>window.countdownDate = new Date('#{course.examDate}')</script>
 
     //- Compiled StudyNotes JS
+    script.
+      var CKEDITOR_BASEPATH = '#{ config.cdnOrigin }/js/ckeditor/'
+      //- var CKEDITOR_BASEPATH = '#{ config.cdnOrigin }/out/bower_components/ckeditor/'
+
     script(async, src='#{ config.cdnOrigin }/out/js/main-#{locals.JS_MD5}.js')
 
     block scripts

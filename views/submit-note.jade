@@ -26,19 +26,8 @@ block content
         select.select2(name='notetype', data-placeholder='What kind of note?', disabled)
           option
 
-    .row(style='margin: 0')
-      .toolbar-ghost
-        #editor-toolbar.toolbar.clearfix(style='display: none;')
-          a(data-wysihtml5-command='formatInline', data-wysihtml5-command-value='strong'): i.icon-bold
-          a(data-wysihtml5-command='formatInline', data-wysihtml5-command-value='em'): i.icon-italic
-          a(data-wysihtml5-command='underline'): i.icon-underline
-          .space
-          a(data-wysihtml5-command='insertOrderedList'): i.icon-list-ol
-          a(data-wysihtml5-command='insertUnorderedList'): i.icon-list-ul
-          .space
-          a(data-wysihtml5-command='formatBlock', data-wysihtml5-command-value='h3') Heading
     .row
-      textarea.editor(name='body', placeholder='Paste the note here...', data-toolbar='editor-toolbar')= (note && note.body)
+      textarea(name='body', placeholder='Paste the note here...', data-toolbar='editor-toolbar')= (note && note.body)
     .row.submit
       button.btn.large(type='submit') Submit Note
 

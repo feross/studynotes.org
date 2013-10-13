@@ -9,8 +9,6 @@
     "moment": "*",
     "select2": "*",
     "transparency": "*",
-    "underscore": "*",
-    "wysihtml5": "xing/wysihtml5#master",
-    "wysihtml5_size_matters": "smidwap/wysihtml5_size_matters"
+    "underscore": "*"
   }
 }

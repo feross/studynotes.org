@@ -6,7 +6,7 @@ block content
 
   .row
     each course in modelCache.coursesByName
-      .col3
+      .col4
         h3: a(href=course.url, title=course.shortName)= course.name
         ul.tight
           each notetype in course.notetypes

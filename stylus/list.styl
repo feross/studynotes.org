@@ -1,11 +1,14 @@
-ul
-  .content &:not(.listing)
-    padding-left: 20px
+ul, ol
+  margin: 0 0 1.5em 2em
+  padding: 0
 
-  .row &:not(.listing)
-    padding: 0 10px 0 0
+  // no margin between nested lists
+  ul, ol
+    margin-top: 0.75em
+    margin-bottom: 0.75em
 
   &.tight
+    margin-left: 0
     li
       ellipsis()
   &.more
@@ -14,12 +17,9 @@ ul
     a:visited
       color: BLUE_LIGHT
 
-  li
-    list-style-position: inside
-
   &.listing
     list-style: none
-    margin-bottom: 25px
+    margin-left: 0
 
     li
       background: #EEE
@@ -31,6 +31,46 @@ ul
 
     .content &
       font-weight: bold
+
+ul li
+  list-style-position: inside
+
+// APA-style lists
+ol
+  counter-reset: level1
+
+  :not(li) > &
+    margin-left: 0
+
+  li
+    list-style: none
+  li:before
+    content: counter(level1, upper-roman) ". "
+    counter-increment: level1
+
+  ol
+    counter-reset: level2
+    li:before
+      content: counter(level2, upper-alpha) ". "
+      counter-increment: level2
+
+    ol
+      counter-reset: level3
+      li:before
+        content: counter(level3, decimal) ". "
+        counter-increment: level3
+
+      ol
+        counter-reset: level4
+        li:before
+          content: counter(level4, lower-alpha) ". "
+          counter-increment: level4
+
+        ol
+          counter-reset: level5
+          li:before
+            content: "(" counter(level5, decimal) ") "
+            counter-increment: level5
 
 .entry
   margin-bottom: 1.5em
