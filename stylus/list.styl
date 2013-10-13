@@ -1,9 +1,9 @@
+.content li
+  margin-bottom: 0.75em
+
 ul, ol
   margin: 0 0 1.5em 2em
   padding: 0
-
-  li:not(:last-child)
-    margin-bottom: 0.75em
 
   ul, ol
     margin-top: 0.75em
@@ -13,6 +13,7 @@ ul, ol
     margin-left: 0
     li
       ellipsis()
+
   &.more
     li
       ellipsis()
@@ -20,6 +21,7 @@ ul, ol
       color: BLUE_LIGHT
 
   &.listing
+    font-weight: bold
     list-style: none
     margin-left: 0
 
@@ -29,11 +31,9 @@ ul, ol
       ellipsis()
       padding: 10px 25px
       margin-bottom: 0
+
     li:nth-child(even)
       background: #FFF
-
-    .content &
-      font-weight: bold
 
 ul
   li
