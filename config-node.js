@@ -25,7 +25,7 @@ exports.maxAge = exports.isProd
   ? 7 * 24 * 3600000 // 7 days
   : 0
 
-exports.maxSlugLength = 30
+exports.maxSlugLength = 40
 
 exports.mongo = {
   host: exports.isProd
