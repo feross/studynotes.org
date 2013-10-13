@@ -1,3 +1,4 @@
+include mixins/entries
 extends layouts/main-sidebar
 
 block sidebar
@@ -12,5 +13,5 @@ block content
 
   include includes/toolbar
 
-  - var essays = notes
-  include includes/essay-list
+  if (notes.length)
+    +entries(notes)

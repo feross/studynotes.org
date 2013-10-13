@@ -1,0 +1,31 @@
+mixin entries(entries)
+  - var num = 0
+  each entry in entries
+    - num += 1
+    .entry
+      .heading
+        h3
+          | !{ num + '. ' }
+          a(href=entry.url)= entry.name
+
+        if (entry.populated('college'))
+          .college
+            a(href=entry.college.url, title=entry.college.name)
+              img(src='#{ config.cdnOrigin }/images/icon/#{ entry.college.id }.png')
+
+        if (entry.populated('user'))
+          .author
+            a(href=entry.user.getUrl(entry.anon))
+              span by #{ entry.user.getName(entry.anon) }
+              img(src=entry.user.getGravatar(entry.anon))
+
+      - var body = util.truncate(util.sanitizeHTML(entry.body, ['p']), 300).trim()
+      .body
+        if (body)
+          | !{ body }
+        else
+          p Preview unavailable, click to read
+
+        a.read-more(href=entry.url, title=entry.name)
+          | !{ 'Read&nbsp;more&nbsp;' }
+          i.icon-double-angle-right

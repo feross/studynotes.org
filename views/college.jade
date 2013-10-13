@@ -1,3 +1,4 @@
+include mixins/entries
 extends layouts/main-sidebar
 
 block content
@@ -11,8 +12,8 @@ block content
 
   include includes/toolbar
 
-  if (locals.essays && essays.length)
-    include includes/essay-list
+  if (essays.length)
+    +entries(essays)
 
     hr
 

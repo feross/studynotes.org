@@ -14,40 +14,47 @@ module.exports = function (app) {
           .populate('college')
           .exec(cb)
       },
-      essays: ['user', function (cb, results) {
-        var user = results.user
-        if (!user) return next()
-
+      essays: function (cb) {
         model.Essay
-          .find({ user: user._id, anon: false })
+          .find({ user: req.params.userId, anon: false })
+          .select('-prompt')
+          .sort('-hits')
           .populate('college')
-          .select('-body -prompt')
           .exec(cb)
-      }]
-    }, function (err, results) {
+      },
+      notes: function (cb) {
+        model.Note
+          .find({ user: req.params.userId, anon: false })
+          .sort('-hits')
+          .populate('course')
+          .exec(cb)
+      }
+    }, function (err, r) {
       if (err) return next(err)
 
-      var user = results.user
-      var essays = results.essays
+      if (!r.user) return next()
 
-      var totalHits = _(essays).reduce(function (total, essay) {
-        return essay.hits + total
+      var essayHits = _(r.essays).reduce(function (total, essay) {
+        return total + essay.hits
       }, 0)
+      var totalHits = _(r.notes).reduce(function (total, note) {
+        return total + note.hits
+      }, essayHits)
 
       res.render('user', {
-        essays: essays,
+        essays: r.essays,
+        notes: r.notes,
         hero: {
-          title: user.name,
-          desc: 'Notes, Essays, and StudyNotes contributions',
+          title: r.user.name,
           image: 'books.jpg'
         },
-        title: user.name + '\'s Notes and Essays',
+        title: r.user.name + '\'s Notes and Essays',
         totalHits: totalHits,
-        url: user.url,
-        user: user
+        url: r.user.url,
+        user: r.user
       })
 
-      user.hit()
+      r.user.hit()
 
     })
   })
