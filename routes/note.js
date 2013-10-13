@@ -20,7 +20,7 @@ module.exports = function (app) {
       notes: function (cb) {
         model.Note
           .find({ course: course.id, notetype: notetype.id })
-          .sort('ordering')
+          .sort('ordering -hits')
           .select('-body')
           .exec(cb)
       },
@@ -39,12 +39,19 @@ module.exports = function (app) {
       var note = results.note
       if (!note) return next()
 
-      var nextNote = _.find(notes, function (n) {
-        return n.ordering === note.ordering + 1
+      var index
+      notes.forEach(function (n, i) {
+        if (n.id === note.id) index = i
       })
-      var prevNote = _.find(notes, function (n) {
-        return n.ordering === note.ordering - 1
-      })
+
+      var prevNote
+      var nextNote
+      if (index > 0) {
+        prevNote = notes[index - 1]
+      }
+      if (index < notes.length - 1) {
+        nextNote = notes[index + 1]
+      }
 
       res.render('note', {
         breadcrumbs: [ course, {
