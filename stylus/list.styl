@@ -1,9 +1,13 @@
-.content li
+.content li, html:not(.studynotes) li
   margin-bottom: 0.75em
 
 ul, ol
   margin: 0 0 1.5em 2em
   padding: 0
+
+  // No left margin on outermost list
+  :not(li) > &
+    margin-left: 0
 
   ul, ol
     margin-top: 0.75em
@@ -42,9 +46,6 @@ ul
 // APA-style lists
 ol
   counter-reset: level1
-
-  :not(li) > &
-    margin-left: 0
 
   li
     list-style: none
