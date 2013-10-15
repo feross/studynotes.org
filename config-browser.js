@@ -17,7 +17,7 @@ config.simpleEditor = {
 config.richEditor = {
   allowedContent: 'p strong b em i u ol ul li h1 h2 h3 h4 h5 h6 sub sup',
   autoGrow_minHeight: 200,
-  autoGrow_maxHeight: 500,
+  autoGrow_maxHeight: 400,
   autoGrow_onStartup: true,
   contentsCss: '/out/css/main.css',
   customConfig: '', // no external config file
