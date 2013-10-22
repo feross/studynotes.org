@@ -46,7 +46,6 @@ module.exports = function (app) {
         req.login(user, function (err) {
           if (err) return next(err)
           res.redirect('/signup2/')
-          email.notifyAdmin('New user', user)
         })
       }
     })
