@@ -16,7 +16,7 @@
     "bytes": "~0.2.1",
     "connect-flash": "~0.1.1",
     "connect-mongo": "~0.3.3",
-    "connect-slashes": "0.0.10",
+    "connect-slashes": "feross/connect-slashes",
     "debug": "~0.7.2",
     "engine.io": "~0.7.9",
     "engine.io-client": "~0.7.9",
