@@ -1,5 +1,7 @@
 {
   "asi": true,
   "laxbreak": true,
-  "expr": true
+  "expr": true,
+  "node": true,
+  "strict": false
 }
