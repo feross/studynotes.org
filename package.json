@@ -1,6 +1,6 @@
 {
   "name": "studynotes",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "The StudyNotes.org website. Helping students learn faster and better.",
   "homepage": "http://www.apstudynotes.org",
   "main": "index.js",
