@@ -1,13 +1,9 @@
 {
   "name": "studynotes",
   "version": "0.1.0",
-  "engines": {
-    "node": ">=0.10.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/feross/StudyNotes.git"
-  },
+  "description": "The StudyNotes.org website. Helping students learn faster and better.",
+  "homepage": "http://www.apstudynotes.org",
+  "main": "index.js",
   "dependencies": {
     "async": "~0.2.9",
     "bcrypt": "~0.7.7",
@@ -51,15 +47,23 @@
     "formage": "2.x",
     "tape": "2.x"
   },
-  "description": "The StudyNotes.org website. Helping students learn faster and better.",
-  "bugs": {
-    "url": "https://github.com/feross/StudyNotes/issues"
-  },
-  "homepage": "https://github.com/feross/StudyNotes",
-  "main": "index.js",
   "scripts": {
     "test": "tape test/*.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/feross/StudyNotes.git"
+  },
+  "keywords": [
+    "AP notes",
+    "college essays",
+    "high school",
+    "college prep",
+    "AP exam"
+  ],
   "author": "Feross Aboukhadijeh <feross@feross.org> (http://feross.org/)",
-  "license": "MIT"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/feross/StudyNotes/issues"
+  }
 }
