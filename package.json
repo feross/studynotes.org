@@ -47,8 +47,9 @@
     "underscore.string": "~2.3.3"
   },
   "devDependencies": {
-    "bower": "~1.2.7",
-    "formage": "~2.2.11"
+    "bower": "1.x",
+    "formage": "2.x",
+    "tape": "2.x"
   },
   "description": "The StudyNotes.org website. Helping students learn faster and better.",
   "bugs": {
@@ -57,7 +58,7 @@
   "homepage": "https://github.com/feross/StudyNotes",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tape test/*.js"
   },
   "author": "Feross Aboukhadijeh <feross@feross.org> (http://feross.org/)",
   "license": "MIT"
