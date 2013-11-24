@@ -1,13 +1,12 @@
 {
   "name": "studynotes",
   "version": "0.1.0",
-  "private": true,
   "engines": {
     "node": ">=0.10.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/feross/StudyNotes.org.git"
+    "url": "https://github.com/feross/StudyNotes.git"
   },
   "dependencies": {
     "async": "~0.2.9",
@@ -15,38 +14,51 @@
     "beepbeep": "~1.0.1",
     "bytes": "~0.2.1",
     "connect-flash": "~0.1.1",
-    "connect-mongo": "~0.3.3",
-    "connect-slashes": "~0.0.11",
+    "connect-mongo": "~0.4.0",
+    "connect-slashes": "~1.0.2",
     "debug": "~0.7.2",
     "engine.io": "~0.7.9",
     "engine.io-client": "~0.7.9",
     "express": "~3.4.0",
     "html-parser": "~0.7.0",
+    "html-truncate": "~1.0.3",
     "http-status-codes": "~1.0.2",
     "jade": "~0.35.0",
-    "MD5": "~1.1.0",
+    "MD5": "~1.2.0",
     "mkdirp": "~0.3.5",
-    "moment": "~2.2.1",
-    "mongoose": "~3.6.20",
+    "moment": "~2.4.0",
+    "mongoose": "~3.8.1",
     "mongoose-validator": "~0.2.2",
     "nagger": "~1.0.4",
-    "netdna": "0.0.5",
+    "netdna": "0.0.6",
     "nib": "~1.0.1",
     "node-uuid": "~1.4.1",
-    "once": "~1.2.0",
+    "nodemailer": "~0.5.3",
+    "once": "~1.3.0",
     "optimist": "~0.6.0",
     "passport": "~0.1.17",
     "passport-local": "~0.1.6",
     "posix": "~1.0.2",
     "purge-netdna": "~1.0.1",
-    "stylus": "~0.38.0",
+    "stylus": "~0.40.3",
     "touch": "0.0.2",
     "uglify-js": "~2.4.0",
     "underscore": "~1.5.2",
-    "underscore.string": "~2.3.3",
+    "underscore.string": "~2.3.3"
+  },
+  "devDependencies": {
     "bower": "~1.2.7",
-    "formage": "~1.6.18",
-    "nodemailer": "~0.5.3",
-    "html-truncate": "~1.0.3"
-  }
+    "formage": "~2.2.11"
+  },
+  "description": "Now with 100% more open source goodness!",
+  "bugs": {
+    "url": "https://github.com/feross/StudyNotes/issues"
+  },
+  "homepage": "https://github.com/feross/StudyNotes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Feross Aboukhadijeh <feross@feross.org> (http://feross.org/)",
+  "license": "MIT"
 }
