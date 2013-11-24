@@ -3,12 +3,12 @@ header.header
     ul.left
       li.home
         a(href='/', title='Go to the front page of StudyNotes', class='home')
-          i.icon-home.hide-phone.hide-tablet
+          i.fa.fa-home.hide-phone.hide-tablet
           span Study Notes
 
     //- "off" class gets removed after search bar is positioned in JS
     .search.off
-      i.icon-search
+      i.fa.fa-search
       form(action='/search/', method='GET')
         input(autocorrect='off', autocomplete='off', spellcheck='false', name='q', placeholder='Search for AP Courses, Topics, and more...', type='text', value='#{locals.searchTerm}', autofocus=(searchFocus === false ? undefined : 'autofocus'))
 
@@ -19,23 +19,23 @@ header.header
 
     ul.right
       li: a.courses(href='/courses/', title='Browse all AP study notes')
-        i.icon-chevron-down.hide-phone
+        i.fa.fa-chevron-down.hide-phone
         span AP Notes
       li: a.colleges(href='/colleges/essays/', title='Browse all admissions essays')
-        i.icon-chevron-down.hide-phone
+        i.fa.fa-chevron-down.hide-phone
         span Admissions Essays
       if (locals.currentUser)
         li: a(href='#{currentUser.url}', title='Manage your account')
           img(src='#{ currentUser.gravatarBlank }', width=21, height=21).hide-phone.hide-tablet
-          i.icon-user.hide-phone.hide-tablet
+          i.fa.fa-user.hide-phone.hide-tablet
           span= currentUser.firstName
         li: a.logout(href='#logout', title='Logout of StudyNotes')
-          i.icon-signout.hide-phone.hide-tablet
+          i.fa.fa-sign-out.hide-phone.hide-tablet
           span Logout
       else
         li: a(href='/signup', title='Create a StudyNotes Account')
-          i.icon-check.hide-phone.hide-tablet
+          i.fa.fa-check-square-o.hide-phone.hide-tablet
           span Sign Up
         li: a(href='/login', title='Login to StudyNotes')
-          i.icon-signin.hide-phone.hide-tablet
+          i.fa.fa-sign-in.hide-phone.hide-tablet
           span Log In

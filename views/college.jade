@@ -22,7 +22,7 @@ block content
     | !{ util.truncate(college.desc, 300) }
     a(href='about/')
       | #{ 'Read more ' }
-      i.icon-double-angle-right
+      i.fa.fa-double-angle-right
 
   hr
 
@@ -34,7 +34,7 @@ block content
 
   p.center
     a.btn.large(href='/submit/essay/')
-      i.icon-cloud-upload
+      i.fa.fa-cloud-upload
       | Submit an essay
 
 
@@ -43,7 +43,7 @@ append sidebar
 
   p.center
     a.btn.large(href='/submit/essay/')
-      i.icon-cloud-upload
+      i.fa.fa-cloud-upload
       | Submit an essay
 
   if (college.acceptRate)

@@ -10,7 +10,7 @@
         //- Last course
         if (course === modelCache.coursesByHits[modelCache.coursesByHits.length - 1])
           a.btn(href='/submit/note/')
-            i.icon-cloud-upload
+            i.fa.fa-cloud-upload
             | Submit notes
 
 .browseWrapper
@@ -34,5 +34,5 @@
           li: a(href=college.url) #{ college.shortName } Essays
 
       a.btn(href='/submit/essay/')
-        i.icon-cloud-upload
+        i.fa.fa-cloud-upload
         | Submit an essay

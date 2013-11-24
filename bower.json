@@ -2,13 +2,13 @@
   "name": "studynotes",
   "version": "0.0.1",
   "dependencies": {
-    "font-awesome": "*",
-    "jquery": "*",
-    "jquery-placeholder": "*",
-    "keymaster": "*",
-    "moment": "*",
-    "select2": "*",
-    "transparency": "*",
-    "underscore": "*"
+    "font-awesome": "~4.0.3",
+    "jquery": "~2.0.3",
+    "jquery-placeholder": "~2.0.7",
+    "keymaster": "~1.6.1",
+    "moment": "~2.4.0",
+    "select2": "~3.4.5",
+    "transparency": "~0.9.14",
+    "underscore": "~1.5.2"
   }
 }

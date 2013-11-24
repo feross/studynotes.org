@@ -17,12 +17,12 @@ function toggleBrowseMenu (menu, toggle) {
   var icon = menu.$btn.find('i')
   if (toggle) {
     icon
-      .removeClass('icon-chevron-down')
-      .addClass('icon-chevron-up')
+      .removeClass('fa-chevron-down')
+      .addClass('fa-chevron-up')
   } else {
     icon
-      .addClass('icon-chevron-down')
-      .removeClass('icon-chevron-up')
+      .addClass('fa-chevron-down')
+      .removeClass('fa-chevron-up')
   }
 }
 

@@ -27,3 +27,4 @@ tmp/
 Thumbs.db
 *.sublime-workspace
 *.sublime-project
+views/layouts/base.jade
