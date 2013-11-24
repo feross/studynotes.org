@@ -1,5 +1,8 @@
 # [StudyNotes.org](http://studynotes.org)
 
+[![Build Status](https://travis-ci.org/feross/StudyNotes.png?branch=master)](https://travis-ci.org/feross/StudyNotes)
+[![Dependency Status](https://david-dm.org/feross/StudyNotes.png)](https://david-dm.org/feross/StudyNotes)
+
 Now with 100% more open source goodness!
 
 ## Installation
