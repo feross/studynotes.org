@@ -50,7 +50,7 @@
     "bower": "~1.2.7",
     "formage": "~2.2.11"
   },
-  "description": "Now with 100% more open source goodness!",
+  "description": "The StudyNotes.org website. Helping students learn faster and better.",
   "bugs": {
     "url": "https://github.com/feross/StudyNotes/issues"
   },

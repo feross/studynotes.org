@@ -1,36 +1,27 @@
-# [StudyNotes.org](http://studynotes.org)
+# [StudyNotes](http://studynotes.org)
+### Helping students learn faster and better.
 
 [![Build Status](https://travis-ci.org/feross/StudyNotes.png?branch=master)](https://travis-ci.org/feross/StudyNotes)
 [![Dependency Status](https://david-dm.org/feross/StudyNotes.png)](https://david-dm.org/feross/StudyNotes)
 
-Now with 100% more open source goodness!
+## Top notes and essays
+
+- [AP US History Notes](http://www.apstudynotes.org/us-history/)
+- [AP US Government Note](http://www.apstudynotes.org/us-government/)
+- [AP English Notes](http://www.apstudynotes.org/english/)
+- [AP Psychology Notes](http://www.apstudynotes.org/psychology/)
+- [AP Microeconomics Notes](http://www.apstudynotes.org/microeconomics/)
+- [College Essays](http://www.apstudynotes.org/colleges/essays/)
+- [Stanford Essays](http://www.apstudynotes.org/stanford/)
 
 ## Installation
 
-### Server dependencies
-- Node.js
-- Nginx
-- MongoDB
-- Cairo
-  - OS X: Install XQuartz, then `brew install cairo`
-  - Ubuntu: `sudo aptitude install libcairo2-dev`
+`npm install studynotes`
 
-### Other tech used (installed automatically)
+## Dependencies
 
-```
-"dependencies": {
-    "express": "*",
-    "jade": "*",
-    "underscore": "~1.4.4",
-    "stylus": "*",
-    "nib": "*",
-    "mongoose": "*",
-    "async": "~0.2.5",
-    "underscore.string": "*",
-    "moment": "*",
-    "uglify-js": "*",
-    "MD5": "*",
-    "futils": "*",
-    "simple-build": "~0.1.4"
-  }
-```
+[See visualization on Yasiv](http://www.yasiv.com/npm#view/studynotes).
+
+## License
+
+MIT
