@@ -62,7 +62,7 @@
     "AP exam"
   ],
   "author": "Feross Aboukhadijeh <feross@feross.org> (http://feross.org/)",
-  "license": "MIT",
+  "license": "GPLv3",
   "bugs": {
     "url": "https://github.com/feross/StudyNotes/issues"
   }

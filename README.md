@@ -24,4 +24,4 @@
 
 ## License
 
-MIT
+GPLv3
