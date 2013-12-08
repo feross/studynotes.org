@@ -31,6 +31,7 @@ LiveUpdater.prototype.start = function (done) {
   self.engine.on('connection', function (socket) {
     socket.on('message', self.onSocketMessage.bind(self, socket))
     socket.on('close', self.onSocketClose.bind(self, socket))
+    socket.on('error', self.onSocketError.bind(self, socket))
   })
 
   async.series([
@@ -132,6 +133,15 @@ LiveUpdater.prototype.onSocketMessage = function (socket, str) {
     self.totalHits += 1
 
     self.sendUpdates(pathname)
+  }
+}
+
+LiveUpdater.prototype.onSocketError = function (socket) {
+  var self = this
+  try {
+    socket.close()
+  } catch (e) {
+    self.onSocketClose(socket)
   }
 }
 
