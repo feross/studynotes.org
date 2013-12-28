@@ -1,29 +1,5 @@
-# Dependencies
-bower_components/
-node_modules/
-
 # Password file
 secret.js
 
 # Built files
 static/out/
-tmp/
-
-# Override bad GitHub for Mac default
-!Icon
-
-# Numerous always-ignore extensions
-*.diff
-*.err
-*.orig
-*.log
-*.rej
-*.swo
-*.swp
-*.vi
-*~
-*.sass-cache
-.DS_Store
-Thumbs.db
-*.sublime-workspace
-*.sublime-project
