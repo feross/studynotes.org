@@ -43,6 +43,6 @@ var CKBUILDER_CONFIG = {
 		'toolbar' : 1
 	},
 	languages : {
-		'en' : 1,
+		'en' : 1
 	}
 };
