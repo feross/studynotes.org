@@ -5,8 +5,8 @@ APP_DIR = /home/feross/www/studynotes.org
 .PHONY : default
 default:
 	ssh -L 27017:localhost:27017 -N feross@athena &
-	node ./node_modules/nagger/index.js
-	DEBUG="studynotes:*" nodemon run.js
+	./node_modules/.bin/nagger
+	DEBUG="studynotes:*" ./node_modules/.bin/nodemon --ext ".js|.jade|.css" run.js
 
 .PHONY : offline
 offline:

@@ -1,5 +1,4 @@
-.git/
-node_modules/
-out/
-static/images/
-tmp/restart.txt
+./tmp/reload.txt
+/out/*
+/.git/*
+/node_modules/*

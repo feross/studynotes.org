@@ -45,12 +45,12 @@
     "transparency": "~0.9.14",
     "uglify-js": "~2.4.0",
     "underscore": "~1.5.2",
-    "underscore.string": "~2.3.3",
-    "browserify": "~3.16.0"
+    "underscore.string": "~2.3.3"
   },
   "devDependencies": {
     "formage": "2.x",
-    "tape": "2.x"
+    "tape": "2.x",
+    "nodemon": "~0.7.10"
   },
   "scripts": {
     "test": "tape test/*.js"
@@ -63,8 +63,7 @@
     "AP notes",
     "college essays",
     "high school",
-    "college prep",
-    "AP exam"
+    "college prep"
   ],
   "author": "Feross Aboukhadijeh <feross@feross.org> (http://feross.org/)",
   "license": "GPLv3",
