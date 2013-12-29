@@ -114,22 +114,6 @@ LiveUpdater.prototype.onSocketClose = function (socket) {
   }
 }
 
-LiveUpdater.prototype.getOnlineCount = function (pathname) {
-  var self = this
-
-  if (pathname === '/') {
-    // Show total users across site on homepage
-    var count = 0
-    for (var p in self.online) {
-      var sockets = self.online[p]
-      count += sockets.length
-    }
-    return count
-  } else {
-    return self.online[pathname].length
-  }
-}
-
 LiveUpdater.prototype.getTotalHits = function (cb) {
   var self = this
   async.map(_(model.models).toArray(), function (model, cb) {
@@ -150,6 +134,17 @@ LiveUpdater.prototype.getTotalHits = function (cb) {
   })
 }
 
+LiveUpdater.prototype.getTotalOnline = function () {
+  var self = this
+  // Show total users across site on homepage
+  var count = 0
+  for (var p in self.online) {
+    var sockets = self.online[p]
+    count += sockets.length
+  }
+  return count
+}
+
 /**
  * Send updates whenever a visitor arrives/leaves a particular page.
  * @param  {String} pathname
@@ -166,7 +161,9 @@ LiveUpdater.prototype.sendUpdates = function (pathname) {
 
   var update = {
     type: 'update',
-    count: self.getOnlineCount(pathname)
+    count: (pathname === '/')
+      ? self.getTotalOnline()
+      : self.online[pathname].length
   }
 
   var message = JSON.stringify(update)
@@ -215,8 +212,9 @@ LiveUpdater.prototype.sendStatsUpdates = function (pathname) {
 
   var update = {
     type: 'statsUpdate',
-    count: self.getOnlineCount(pathname),
-    pathname: pathname
+    count: self.online[pathname].length,
+    pathname: pathname,
+    totalHits: self.totalHits
   }
 
   var message = JSON.stringify(update)
