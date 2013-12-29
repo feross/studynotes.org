@@ -76,7 +76,9 @@ LiveUpdater.prototype.onSocketMessage = function (socket, str) {
     if (pathname === '/stats/') {
       var stats = {}
       for (var page in self.online) {
-        stats[page] = self.online[page].length
+        var len = self.online[page].length
+        if (len > 0)
+          stats[page] = len
       }
       var update = {
         type: 'stats',
