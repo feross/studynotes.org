@@ -21,8 +21,6 @@ function LiveUpdater (opts, cb) {
   self.online = {}
   self.titles = {}
 
-  self.jquery = fs.readFileSync(path.join(config.root, 'node_modules/jquery/dist/jquery.min.js'), 'utf8')
-
   self.start(cb)
 }
 
@@ -44,6 +42,13 @@ LiveUpdater.prototype.start = function (done) {
     model.connect,
     function (cb) {
       self.getTotalHits(cb)
+    },
+    function (cb) {
+      self.jquery = fs.readFile(
+        path.join(config.root, 'node_modules/jquery/dist/jquery.min.js'),
+        { encoding: 'utf8' },
+        cb
+      )
     },
     function (cb) {
       server.listen(self.port, cb)
@@ -68,8 +73,7 @@ LiveUpdater.prototype.onSocketMessage = function (socket, str) {
     if (socket.url)
       return
 
-    var url = message.url
-    socket.url = url
+    var url = socket.url = message.url
 
     // If this is a new path, create new array
     if (self.online[url] === undefined) {
