@@ -76,8 +76,8 @@ function renderStats () {
   $('.stats').show()
 
   var urlsByCount = Object.keys(stats).sort(function (a, b) {
-    if (stats[a] < stats[b]) return 1
-    if (stats[a] > stats[b]) return -1
+    if (stats[a].count < stats[b].count) return 1
+    if (stats[a].count > stats[b].count) return -1
     return 0
   })
   var rows = []
