@@ -66,7 +66,7 @@ module.exports = function (app) {
         essays: essays,
         next: nextEssay,
         prev: prevEssay,
-        title: essay.name + ' - College Essay - ' + college.shortName,
+        title: [essay.name, 'Sample ' + college.shortName + ' Essay'].join(' - '),
         forceTitle: true,
         url: essay.url,
         user: essay.user
