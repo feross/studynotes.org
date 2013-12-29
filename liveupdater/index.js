@@ -260,6 +260,9 @@ LiveUpdater.prototype.getTitle = function (url) {
 
         title = window.$('title').text()
 
+        if (title === 'Site is under maintenance!')
+          return
+
         var index = title.indexOf('- Study Notes')
         if (index !== -1)
           title = title.substring(0, index)
