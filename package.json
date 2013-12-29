@@ -16,10 +16,14 @@
     "engine.io": "~0.7.9",
     "engine.io-client": "~0.7.9",
     "express": "~3.4.0",
+    "font-awesome": "git://github.com/FortAwesome/Font-Awesome",
     "html-parser": "~0.7.0",
     "html-truncate": "~1.0.3",
     "http-status-codes": "~1.0.2",
     "jade": "~1.0.0",
+    "jquery": "~2.1.0-beta3",
+    "jquery-placeholder": "~2.0.7",
+    "keymaster": "git://github.com/madrobby/keymaster",
     "MD5": "~1.2.0",
     "mkdirp": "~0.3.5",
     "moment": "~2.5.0",
@@ -38,12 +42,13 @@
     "purge-netdna": "~1.0.1",
     "stylus": "~0.41.0",
     "touch": "0.0.2",
+    "transparency": "~0.9.14",
     "uglify-js": "~2.4.0",
     "underscore": "~1.5.2",
-    "underscore.string": "~2.3.3"
+    "underscore.string": "~2.3.3",
+    "browserify": "~3.16.0"
   },
   "devDependencies": {
-    "bower": "1.x",
     "formage": "2.x",
     "tape": "2.x"
   },

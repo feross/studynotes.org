@@ -84,7 +84,8 @@ html(class='studynotes #{layout}', lang='en')
       | <script type="text/javascript" src="//use.typekit.net/djj4afz.js"></script>
       | <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
-    link(rel='stylesheet', href='#{ config.cdnOrigin }/out/bower_components/font-awesome/css/font-awesome.min.css')
+    link(rel='stylesheet', href='#{ config.cdnOrigin }/out/node_modules/font-awesome/css/font-awesome.min.css')
+    link(rel='stylesheet', href='#{ config.cdnOrigin }/out/node_modules/select2/select2.css')
     link(rel='stylesheet', href='#{ config.cdnOrigin }/out/css/main-#{ locals.CSS_MD5 }.css')
 
     //- Adsense styles must be inline
@@ -169,7 +170,6 @@ html(class='studynotes #{layout}', lang='en')
     //- Compiled StudyNotes JS
     script.
       var CKEDITOR_BASEPATH = '#{ config.cdnOrigin }/js/ckeditor/'
-      //- var CKEDITOR_BASEPATH = '#{ config.cdnOrigin }/out/bower_components/ckeditor/'
 
     script(async, src='#{ config.cdnOrigin }/out/js/main-#{locals.JS_MD5}.js')
 

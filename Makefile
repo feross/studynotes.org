@@ -16,7 +16,10 @@ offline:
 .PHONY : init
 init:
 	npm install --quiet
-	./node_modules/.bin/bower install --quiet
+
+.PHONY : update-deps
+update-deps:
+	git subtree pull --prefix lib/select2 git@github.com:ivaynberg/select2.git master --squash
 
 .PHONY : upload-secret
 upload-secret:
