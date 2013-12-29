@@ -16,7 +16,7 @@
 .browseWrapper
   nav.browse.browse-colleges
     div
-      h2: a(href='/colleges/essays/') Admissions Essays
+      h2: a(href='/essays/') Admissions Essays
       ul
         each college in modelCache.collegesByName.slice(0, 7)
           li: a(href=college.url) #{ college.shortName } Essays

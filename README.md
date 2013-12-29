@@ -11,7 +11,7 @@
 - [AP English Notes](http://www.apstudynotes.org/english/)
 - [AP Psychology Notes](http://www.apstudynotes.org/psychology/)
 - [AP Microeconomics Notes](http://www.apstudynotes.org/microeconomics/)
-- [College Essays](http://www.apstudynotes.org/colleges/essays/)
+- [College Essays](http://www.apstudynotes.org/essays/)
 - [Stanford Essays](http://www.apstudynotes.org/stanford/)
 
 ## Installation

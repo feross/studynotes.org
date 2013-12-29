@@ -7,11 +7,11 @@ var model = require('../model')
 
 module.exports = function (app) {
   var tabs = [
-    { name: 'Top College Essays', url: '/colleges/essays/', view: 'essays' },
+    { name: 'Top College Essays', url: '/essays/', view: 'essays' },
     { name: 'Top Universities', url: '/colleges/', view: 'colleges' }
   ]
 
-  app.get('/colleges/essays', function (req, res, next) {
+  app.get('/essays', function (req, res, next) {
     async.auto({
       essays: function (cb) {
         model.Essay
@@ -32,7 +32,7 @@ module.exports = function (app) {
         essays: results.essays,
         title: 'College Essays - Top ' + results.essays.length + ' Essays That Worked',
         forceTitle: true,
-        url: '/colleges/essays/',
+        url: '/essays/',
         hero: {
           title: 'College Admissions Essays',
           image: 'colleges.jpg',
@@ -79,7 +79,7 @@ module.exports = function (app) {
       if (err) return next(err)
 
       res.render('college-about', {
-        breadcrumbs: [ { name: 'College Essays', url: '/colleges/essays/' } ],
+        breadcrumbs: [ { name: 'College Essays', url: '/essays/' } ],
         college: college,
         essays: essays,
         title: 'About ' + college.name,
@@ -113,7 +113,7 @@ module.exports = function (app) {
       if (err) return next(err)
 
       res.render('college', {
-        breadcrumbs: [ { name: 'College Essays', url: '/colleges/essays/' } ],
+        breadcrumbs: [ { name: 'College Essays', url: '/essays/' } ],
         college: college,
         essays: essays,
         title: 'Top ' + essays.length + ' ' + college.shortName + ' Admissions Essays',
