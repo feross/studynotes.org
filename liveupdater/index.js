@@ -268,6 +268,7 @@ LiveUpdater.prototype.getTitle = function (url) {
           title = title.substring(0, index)
 
         self.titles[url] = title
+        self.sendStatsUpdates(url)
       }
     })
     return url
