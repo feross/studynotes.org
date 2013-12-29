@@ -21,6 +21,11 @@ function LiveUpdater (opts, cb) {
   self.online = {}
   self.titles = {}
 
+  self.jquery = fs.readFileSync(
+    path.join(config.root, 'node_modules/jquery/dist/jquery.min.js'),
+    { encoding: 'utf8' }
+  )
+
   self.start(cb)
 }
 
@@ -44,13 +49,6 @@ LiveUpdater.prototype.start = function (done) {
       self.getTotalHits(cb)
     },
     function (cb) {
-      self.jquery = fs.readFile(
-        path.join(config.root, 'node_modules/jquery/dist/jquery.min.js'),
-        { encoding: 'utf8' },
-        cb
-      )
-    },
-    function (cb) {
       server.listen(self.port, cb)
     }
   ], done)
@@ -68,7 +66,6 @@ LiveUpdater.prototype.onSocketMessage = function (socket, str) {
   }
 
   if (message.type === 'online') {
-    console.log(self.online)
     // Only accept the first 'online' message
     if (socket.url)
       return
