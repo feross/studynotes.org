@@ -45,6 +45,75 @@ LiveUpdater.prototype.start = function (done) {
   ], done)
 }
 
+LiveUpdater.prototype.onSocketMessage = function (socket, str) {
+  var self = this
+  var message
+  try {
+    debug('Received message: ' + str)
+    message = JSON.parse(str)
+  } catch (e) {
+    debug('Discarding non-JSON message: ' + message)
+    return
+  }
+
+  if (message.type === 'online') {
+    // Only accept the first 'online' message
+    if (socket.pathname)
+      return
+
+    var pathname = message.pathname
+    socket.pathname = pathname
+
+    // If this is a new path, create new array
+    if (self.online[pathname] === undefined) {
+      self.online[pathname] = []
+    }
+
+    self.online[pathname].push(socket)
+    self.totalHits += 1
+
+    // If this is the stats page, send the initial stats
+    if (pathname === '/stats/') {
+      var stats = {}
+      for (var page in self.online) {
+        stats[page] = self.online[page].length
+      }
+      var update = {
+        type: 'stats',
+        stats: stats
+      }
+      socket.send(JSON.stringify(update))
+    }
+
+    // Send updates to other users
+    self.sendUpdates(pathname)
+    self.sendHomeUpdates()
+  } else {
+    console.error('Received unknown message type: ' + message.type)
+  }
+}
+
+LiveUpdater.prototype.onSocketError = function (socket) {
+  var self = this
+  try {
+    socket.close()
+  } catch (e) {
+    self.onSocketClose(socket)
+  }
+}
+
+LiveUpdater.prototype.onSocketClose = function (socket) {
+  var self = this
+  var pathname = socket.pathname
+  var sockets = self.online[pathname]
+
+  if (sockets) {
+    var index = sockets.indexOf(socket)
+    sockets.splice(index, 1)
+    self.sendUpdates(pathname)
+  }
+}
+
 LiveUpdater.prototype.getOnlineCount = function (pathname) {
   var self = this
 
@@ -81,79 +150,79 @@ LiveUpdater.prototype.getTotalHits = function (cb) {
   })
 }
 
+/**
+ * Send updates whenever a visitor arrives/leaves a particular page.
+ * @param  {String} pathname
+ */
 LiveUpdater.prototype.sendUpdates = function (pathname) {
   var self = this
   var sockets = self.online[pathname]
 
+  self.sendStatsUpdates(pathname)
+
   // Early return if there are no updates to send
-  if (!sockets || sockets.length === 0) return
+  if (!sockets || sockets.length === 0)
+    return
 
   var update = {
     type: 'update',
     count: self.getOnlineCount(pathname)
   }
 
-  if (pathname === '/') {
-    update.totalHits = self.totalHits
+  var message = JSON.stringify(update)
+  sockets.forEach(function (socket) {
+    socket.send(message)
+  })
+}
+
+/**
+ * Send a special update message to visitors on "/" with `totalHit` value,
+ * whenever any visitor (across the site) arrives/leaves.
+ */
+LiveUpdater.prototype.sendHomeUpdates = function () {
+  var self = this
+
+  var sockets = self.online['/']
+
+  // Early return if there are no updates to send
+  if (!sockets || sockets.length === 0)
+    return
+
+  var update = {
+    type: 'update',
+    totalHits: self.totalHits
   }
 
   var message = JSON.stringify(update)
   sockets.forEach(function (socket) {
     socket.send(message)
   })
-
-  if (pathname !== '/') self.sendUpdates('/')
 }
 
-
-LiveUpdater.prototype.onSocketMessage = function (socket, str) {
+/**
+ * Send a special update message to visitors on "/stats/" pages, whenever any
+ * visitor (across the site) arrives/leaves.
+ * @param  {String} pathname
+ */
+LiveUpdater.prototype.sendStatsUpdates = function (pathname) {
   var self = this
-  var message
-  try {
-    debug('Received message: ' + str)
-    message = JSON.parse(str)
-  } catch (e) {
-    debug('Discarding non-JSON message: ' + message)
+
+  var sockets = self.online['/stats/']
+
+  // Early return if there are no updates to send
+  if (!sockets || sockets.length === 0)
     return
+
+  var update = {
+    type: 'statsUpdate',
+    count: self.getOnlineCount(pathname),
+    pathname: pathname
   }
-  if (message.type === 'online') {
-    // Only accept the first 'online' message
-    if (socket.pathname) return
 
-    var pathname = message.pathname
-    socket.pathname = pathname
-
-    // If this is a new path, create new array
-    if (self.online[pathname] === undefined) {
-      self.online[pathname] = []
-    }
-
-    self.online[pathname].push(socket)
-
-    self.totalHits += 1
-
-    self.sendUpdates(pathname)
-  }
-}
-
-LiveUpdater.prototype.onSocketError = function (socket) {
-  var self = this
-  try {
-    socket.close()
-  } catch (e) {
-    self.onSocketClose(socket)
-  }
-}
-
-LiveUpdater.prototype.onSocketClose = function (socket) {
-  var self = this
-  var sockets = self.online[socket.pathname]
-
-  if (sockets) {
-    var index = sockets.indexOf(socket)
-    sockets.splice(index, 1)
-    self.sendUpdates(socket.pathname)
-  }
+  var message = JSON.stringify(update)
+  sockets.forEach(function (socket) {
+    socket.send(message)
+  })
 }
 
 if (!module.parent) util.run(LiveUpdater)

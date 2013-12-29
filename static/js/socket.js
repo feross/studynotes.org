@@ -1,5 +1,6 @@
 var socket
 var lastTotalHits
+var stats
 
 function openSocket () {
   socket = eio(config.engineEndpoint, {
@@ -26,17 +27,19 @@ function onMessage (str) {
     // console.log('Discarding non-JSON message: ' + message)
     return
   }
+
   if (message.type === 'update') {
+    if (message.count) {
+      // Set a phrase with live visitor count
+      var studentsStr = (message.count === 1) ? 'student' : 'students'
+      $('.online')
+        .text(message.count + ' ' + studentsStr + ' online now (this page)')
+        .show()
 
-    // Set a phrase with live visitor count
-    var studentsStr = (message.count === 1) ? 'student' : 'students'
-    $('.online')
-      .text(message.count + ' ' + studentsStr + ' online now (this page)')
-      .show()
-
-    // Set just the visitor count number, no other words
-    $('.onlineNum span').text(util.addCommas(message.count))
-    $('.onlineNum').show()
+      // Set just the visitor count number, no other words
+      $('.onlineNum span').text(util.addCommas(message.count))
+      $('.onlineNum').show()
+    }
 
     // Set the total hits number, no other words
     if (message.totalHits) {
@@ -49,10 +52,49 @@ function onMessage (str) {
       }
       lastTotalHits = message.totalHits
     }
+  } else if (message.type === 'stats') {
+    stats = message.stats
+    renderStats()
+  } else if (message.type === 'statsUpdate') {
+    if (!stats)
+      return
+    if (message.count === 0)
+      delete stats[message.pathname]
+    else
+      stats[message.pathname] = message.count
+    renderStats()
   }
 }
 
 function onClose () {
   // console.log('Lost socket to server, reconnecting in ' + config.socketReconnectTimeout)
   setTimeout(openSocket, config.socketReconnectTimeout)
+}
+
+function renderStats () {
+  $('.loading').hide()
+  $('.stats').show()
+
+  var pagesByCount = Object.keys(stats).sort(function (a, b) {
+    if (stats[a] < stats[b]) return 1
+    if (stats[a] > stats[b]) return -1
+    return 0
+  })
+  var rows = []
+  pagesByCount.forEach(function (url) {
+    rows.push({
+      url: url,
+      count: stats[url]
+    })
+  })
+
+  $('.stats tbody')
+    .render(rows, {
+      url: {
+        href: function (params) {
+          return this.url
+        }
+      }
+    })
+    .removeClass('off')
 }

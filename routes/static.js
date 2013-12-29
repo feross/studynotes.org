@@ -102,4 +102,16 @@ module.exports = function (app) {
       }
     })
   })
+
+  app.get('/stats', function (req, res) {
+    res.render('stats', {
+      url: '/stats',
+      title: 'Live Study Stats',
+      hero: {
+        title: 'Live Study Stats',
+        image: 'books.jpg'
+      }
+    })
+  })
+
 }

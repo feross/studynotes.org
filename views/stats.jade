@@ -1,0 +1,14 @@
+extends layouts/main
+
+block content
+  .loading Loading...
+
+  table.stats.off
+    thead
+      tr
+        th Page
+        th Number of visitors
+    tbody
+      tr.row
+        td: a.url(href='#')
+        td.count
