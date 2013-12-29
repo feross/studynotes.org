@@ -130,7 +130,7 @@ $searchInput.on('focus', function (e) {
 $searchInput.on('keyup', doSearchAutocomplete)
 
 $('.header .autocomplete').on('mouseover', '.result', function (e) {
-  var position = parseInt($(this).attr('data-position'), 10)
+  var position = Number($(this).attr('data-position'))
   setAutocompletePosition(position)
 })
 

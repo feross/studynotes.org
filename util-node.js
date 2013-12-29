@@ -145,7 +145,7 @@ exports.expressLogger = function (debug) {
  */
 exports.triggerLiveReload = function () {
   mkdirp.sync(config.tmp)
-  touch.sync(path.join(config.tmp, 'restart.txt'))
+  touch.sync(path.join(config.tmp, 'reload.txt'))
 }
 
 /**
