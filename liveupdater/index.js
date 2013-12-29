@@ -73,7 +73,7 @@ LiveUpdater.prototype.onSocketMessage = function (socket, str) {
     if (socket.url)
       return
 
-    var url = socket.url = message.url
+    var url = socket.url = message.url || message.pathname
 
     // If this is a new path, create new array
     if (self.online[url] === undefined) {
