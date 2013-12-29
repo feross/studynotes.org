@@ -92,7 +92,7 @@ function loadCache (done) {
       .sort(function (a, b) {
         if (a.id === 'common-app') return -1 // force common-app to sort first
         if (b.id === 'common-app') return 1
-        return sort.byProp('name')
+        return sort.byProp('name')(a, b)
       })
     exports.cache.collegesByRank = _(exports.cache.colleges)
       .flatten()
