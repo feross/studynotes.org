@@ -5,15 +5,15 @@ block content
   p We have the best Advanced Placement* study guides, practice tests, and notes on the web, contributed and curated by students and teachers like yourself. <strong>The site is used by millions of students in all 50 U.S. states to prepare for AP* courses and exams.</strong>
 
   .row
-    each course in modelCache.coursesByHits.slice(0, 4)
-      .col4
+    each course in modelCache.coursesByHits.slice(0, 3)
+      .col3
         h3: a(href=course.url, title=course.shortName)= course.name
         ul.tight
           each notetype in course.notetypes
             li: a(href=course.notetypeUrl(notetype))= notetype.name
   .row
-    each course in modelCache.coursesByHits.slice(4, 8)
-      .col4
+    each course in modelCache.coursesByHits.slice(3, 6)
+      .col3
         h3: a(href=course.url, title=course.shortName)= course.name
         ul.tight
           each notetype in course.notetypes
