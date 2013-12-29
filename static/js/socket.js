@@ -12,7 +12,7 @@ function openSocket () {
 
     socket.send(JSON.stringify({
       type: 'online',
-      pathname: window.location.pathname
+      url: window.location.pathname
     }))
   }
 }
@@ -59,9 +59,9 @@ function onMessage (str) {
     if (!stats)
       return
     if (message.count === 0)
-      delete stats[message.pathname]
+      delete stats[message.url]
     else
-      stats[message.pathname] = message.count
+      stats[message.url] = message
     renderStats()
   }
 }
@@ -75,22 +75,20 @@ function renderStats () {
   $('.loading').hide()
   $('.stats').show()
 
-  var pagesByCount = Object.keys(stats).sort(function (a, b) {
+  var urlsByCount = Object.keys(stats).sort(function (a, b) {
     if (stats[a] < stats[b]) return 1
     if (stats[a] > stats[b]) return -1
     return 0
   })
   var rows = []
-  pagesByCount.forEach(function (url) {
-    rows.push({
-      url: url,
-      count: stats[url]
-    })
+  urlsByCount.forEach(function (url) {
+    var data = stats[url]
+    rows.push(data)
   })
 
   $('.stats tbody')
     .render(rows, {
-      url: {
+      title: {
         href: function (params) {
           return this.url
         }

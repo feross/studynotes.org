@@ -5,8 +5,11 @@ var async = require('async')
 var config = require('../config')
 var debug = require('debug')('studynotes:liveupdater')
 var engine = require('engine.io')
+var fs = require('fs')
 var http = require('http')
+var jsdom = require('jsdom')
 var model = require('../model')
+var path = require('path')
 var util = require('../util')
 
 function LiveUpdater (opts, cb) {
@@ -16,6 +19,9 @@ function LiveUpdater (opts, cb) {
   /** @type {number} port */
   self.port || (self.port = config.ports.liveupdater)
   self.online = {}
+  self.titles = {}
+
+  self.jquery = fs.readFileSync(path.join(config.root, 'node_modules/jquery/dist/jquery.min.js'), 'utf8')
 
   self.start(cb)
 }
@@ -58,37 +64,27 @@ LiveUpdater.prototype.onSocketMessage = function (socket, str) {
 
   if (message.type === 'online') {
     // Only accept the first 'online' message
-    if (socket.pathname)
+    if (socket.url)
       return
 
-    var pathname = message.pathname
-    socket.pathname = pathname
+    var url = message.url
+    socket.url = url
 
     // If this is a new path, create new array
-    if (self.online[pathname] === undefined) {
-      self.online[pathname] = []
+    if (self.online[url] === undefined) {
+      self.online[url] = []
     }
 
-    self.online[pathname].push(socket)
+    self.online[url].push(socket)
     self.totalHits += 1
 
     // If this is the stats page, send the initial stats
-    if (pathname === '/stats/') {
-      var stats = {}
-      for (var page in self.online) {
-        var len = self.online[page].length
-        if (len > 0)
-          stats[page] = len
-      }
-      var update = {
-        type: 'stats',
-        stats: stats
-      }
-      socket.send(JSON.stringify(update))
+    if (url === '/stats/') {
+      self.sendStats(socket)
     }
 
     // Send updates to other users
-    self.sendUpdates(pathname)
+    self.sendUpdates(url)
     self.sendHomeUpdates()
   } else {
     console.error('Received unknown message type: ' + message.type)
@@ -106,13 +102,13 @@ LiveUpdater.prototype.onSocketError = function (socket) {
 
 LiveUpdater.prototype.onSocketClose = function (socket) {
   var self = this
-  var pathname = socket.pathname
-  var sockets = self.online[pathname]
+  var url = socket.url
+  var sockets = self.online[url]
 
   if (sockets) {
     var index = sockets.indexOf(socket)
     sockets.splice(index, 1)
-    self.sendUpdates(pathname)
+    self.sendUpdates(url)
   }
 }
 
@@ -147,15 +143,36 @@ LiveUpdater.prototype.getTotalOnline = function () {
   return count
 }
 
+LiveUpdater.prototype.sendStats = function (socket) {
+  var self = this
+
+  var stats = {}
+  for (var url in self.online) {
+    var count = self.online[url].length
+    if (count > 0) {
+      stats[url] = {
+        url: url,
+        count: count,
+        title: self.getTitle(url)
+      }
+    }
+  }
+  var update = {
+    type: 'stats',
+    stats: stats
+  }
+  socket.send(JSON.stringify(update))
+}
+
 /**
  * Send updates whenever a visitor arrives/leaves a particular page.
- * @param  {String} pathname
+ * @param  {String} url
  */
-LiveUpdater.prototype.sendUpdates = function (pathname) {
+LiveUpdater.prototype.sendUpdates = function (url) {
   var self = this
-  var sockets = self.online[pathname]
+  var sockets = self.online[url]
 
-  self.sendStatsUpdates(pathname)
+  self.sendStatsUpdates(url)
 
   // Early return if there are no updates to send
   if (!sockets || sockets.length === 0)
@@ -163,9 +180,9 @@ LiveUpdater.prototype.sendUpdates = function (pathname) {
 
   var update = {
     type: 'update',
-    count: (pathname === '/')
+    count: (url === '/')
       ? self.getTotalOnline()
-      : self.online[pathname].length
+      : self.online[url].length
   }
 
   var message = JSON.stringify(update)
@@ -201,11 +218,10 @@ LiveUpdater.prototype.sendHomeUpdates = function () {
 /**
  * Send a special update message to visitors on "/stats/" pages, whenever any
  * visitor (across the site) arrives/leaves.
- * @param  {String} pathname
+ * @param  {String} url
  */
-LiveUpdater.prototype.sendStatsUpdates = function (pathname) {
+LiveUpdater.prototype.sendStatsUpdates = function (url) {
   var self = this
-
   var sockets = self.online['/stats/']
 
   // Early return if there are no updates to send
@@ -214,15 +230,41 @@ LiveUpdater.prototype.sendStatsUpdates = function (pathname) {
 
   var update = {
     type: 'statsUpdate',
-    count: self.online[pathname].length,
-    pathname: pathname,
-    totalHits: self.totalHits
+    totalHits: self.totalHits,
+
+    count: self.online[url].length,
+    url: url,
+    title: self.getTitle(url)
   }
 
   var message = JSON.stringify(update)
   sockets.forEach(function (socket) {
     socket.send(message)
   })
+}
+
+LiveUpdater.prototype.getTitle = function (url) {
+  var self = this
+
+  var title = self.titles[url]
+  if (title) {
+    return title
+  } else {
+    jsdom.env({
+      url: config.siteOrigin + url,
+      src: [self.jquery],
+      done: function (errors, window) {
+        title = window.$('title').text()
+
+        var index = title.indexOf('- Study Notes')
+        if (index !== -1)
+          title = title.substring(0, index)
+
+        self.titles[url] = title
+      }
+    })
+    return url
+  }
 }
 
 if (!module.parent) util.run(LiveUpdater)

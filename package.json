@@ -23,6 +23,7 @@
     "jade": "~1.0.0",
     "jquery": "~2.1.0-beta3",
     "jquery-placeholder": "~2.0.7",
+    "jsdom": "~0.8.10",
     "keymaster": "git://github.com/madrobby/keymaster",
     "MD5": "~1.2.0",
     "mkdirp": "~0.3.5",
