@@ -24,7 +24,7 @@ config.siteOrigin = config.isProd
 
 config.cdnOrigin = config.isProd
   ? 'http://cdn.apstudynotes.org'
-  : '/static'
+  : '/out'
 
 if (typeof module !== 'undefined') {
   module.exports = config

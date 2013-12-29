@@ -1,5 +1,5 @@
 .git/
 node_modules/
-static/out/
+out/
 static/images/
 tmp/restart.txt

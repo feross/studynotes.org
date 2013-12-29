@@ -179,17 +179,17 @@ Site.prototype.serveStatic = function () {
   // Favicon middleware makes favicon requests fast
   self.app.use(express.favicon(path.join(config.root, 'static/favicon.ico')))
 
-  var staticMiddleware = express.static(path.join(config.root, 'static'), {
+  var staticMiddleware = express.static(path.join(config.root, 'out'), {
     maxAge: config.maxAge
   })
 
   // Serve static files, they take precedence over the routes.
   self.app.use(staticMiddleware)
 
-  // Also serve static files from the /static folder, but no routes. This is so
-  // that we can point the CDN at this folder and have it mirror ONLY the static
+  // Also mount the static files at "/static", without routes. This is so that
+  // we can point the CDN at this folder and have it mirror ONLY the static
   // files, no other site content.
-  self.app.use('/static', function (req, res, next) {
+  self.app.use('/out', function (req, res, next) {
     staticMiddleware(req, res, function (err) {
       // If this next() function gets called, the file does not exist, so return
       // 404, and don't proceed to further middlewares/routes.

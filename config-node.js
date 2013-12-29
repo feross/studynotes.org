@@ -8,7 +8,7 @@ exports.isProd = (process.env.NODE_ENV === 'production')
 
 exports.root = __dirname
 exports.tmp = path.join(exports.root, 'tmp')
-exports.out = path.join(exports.root, 'static', 'out')
+exports.out = path.join(exports.root, 'out')
 
 exports.numCpus = exports.isProd
   ? os.cpus().length
