@@ -63,6 +63,7 @@ LiveUpdater.prototype.onSocketMessage = function (socket, str) {
   }
 
   if (message.type === 'online') {
+    console.log(self.online)
     // Only accept the first 'online' message
     if (socket.url)
       return
@@ -253,7 +254,9 @@ LiveUpdater.prototype.getTitle = function (url) {
     jsdom.env({
       url: config.siteOrigin + url,
       src: [self.jquery],
-      done: function (errors, window) {
+      done: function (err, window) {
+        if (err) return console.error(err)
+
         title = window.$('title').text()
 
         var index = title.indexOf('- Study Notes')
