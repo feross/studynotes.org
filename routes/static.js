@@ -54,7 +54,8 @@ module.exports = function (app) {
       title: 'Photo Credits',
       hero: {
         title: 'Photo Credits',
-        desc: 'Many thanks for the beautiful photos!'
+        desc: 'Many thanks for the beautiful photos!',
+        image: 'european-history.jpg'
       }
     })
   })
