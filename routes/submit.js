@@ -134,8 +134,13 @@ module.exports = function (app) {
       } else if (err) {
         next(err)
       } else {
-        res.redirect(r.note.url)
-        if (!isEdit) email.notifyAdmin('New note', r.note)
+        req.flash('note', {
+          course: r.note.course,
+          notetype: r.note.notetype
+        })
+        res.redirect('/submit/note/')
+        if (!isEdit)
+          email.notifyAdmin('New note', r.note)
       }
     })
   })
