@@ -1,5 +1,6 @@
 /*jslint node: true */
 
+var fs = require('fs')
 var os = require('os')
 var path = require('path')
 
@@ -34,14 +35,14 @@ exports.mongo = {
   database: 'studynotes'
 }
 
-var jsMd5
-var cssMd5
+var MD5_JS
+var MD5_CSS
 try {
-  if (exports.isProd) {
-    jsMd5 = fs.readFileSync(__dirname + '/out/MD5_JS').toString()
-    cssMd5 = fs.readFileSync(__dirname + '/out/MD5_CSS').toString()
+  if (config.isProd) {
+    MD5_JS = fs.readFileSync(__dirname + '/out/MD5_JS').toString()
+    MD5_CSS = fs.readFileSync(__dirname + '/out/MD5_CSS').toString()
   }
 } catch (e) {}
 
-exports.jsPath = '/main' + (jsMd5 ? '-' + jsMd5 : '') + '.js'
-exports.cssPath = '/main' + (cssMd5 ? '-' + cssMd5 : '') + '.css'
+exports.jsPath = '/main' + (MD5_JS ? '-' + MD5_JS : '') + '.js'
+exports.cssPath = '/main' + (MD5_CSS ? '-' + MD5_CSS : '') + '.css'
