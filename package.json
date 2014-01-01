@@ -8,6 +8,7 @@
     "async": "~0.2.9",
     "bcrypt": "~0.7.7",
     "bytes": "~0.2.1",
+    "closurecompiler": "~1.3.0",
     "connect-flash": "~0.1.1",
     "connect-mongo": "~0.4.0",
     "connect-slashes": "~1.2.0",
@@ -43,7 +44,6 @@
     "stylus": "~0.41.0",
     "touch": "0.0.2",
     "transparency": "~0.9.14",
-    "uglify-js": "~2.4.0",
     "underscore": "~1.5.2",
     "underscore.string": "~2.3.3"
   },
@@ -92,7 +92,7 @@
     }
   },
   "scripts": {
-    "build-js": "browserify -r ./util-browser -r ./config-browser static/js/main.js -o out/main.js",
+    "build-js": "browserify -r ./util-browser -r ./config-browser static/js/main.js > out/main.js && node ./bin/minify out/main.js",
     "build-css": "stylus -u nib stylus/main.styl -o out/ -c",
     "build": "npm run build-js && npm run build-css && node ./bin/postbuild.js",
     "watch-js": "watchify -r ./util-browser -r ./config-browser static/js/main.js -o out/main.js -dv",

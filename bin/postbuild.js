@@ -6,13 +6,6 @@ var config = require('../config')
 var fs = require('fs')
 var md5 = require('MD5')
 
-// function buildJSUglify (inFilenames, outFilename, cb) {
-//   var command = UGLIFY + ' ' + inFilenames.join(' ') +
-//   (config.isProd ? ' --compress' : ' --beautify') +
-//   ' -o ' + outFilename
-//   cp.exec(command, {}, cb)
-// }
-
 async.auto({
   MD5_JS: function (cb) {
     calculateMd5(config.out + '/main.js', function (err, md5) {
