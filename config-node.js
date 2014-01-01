@@ -1,16 +1,15 @@
 /*jslint node: true */
 
+var config = require('./config')
 var fs = require('fs')
 var os = require('os')
 var path = require('path')
-
-exports.isProd = (process.env.NODE_ENV === 'production')
 
 exports.root = __dirname
 exports.tmp = path.join(exports.root, 'tmp')
 exports.out = path.join(exports.root, 'out')
 
-exports.numCpus = exports.isProd
+exports.numCpus = config.isProd
   ? os.cpus().length
   : 1
 
@@ -21,14 +20,14 @@ exports.numCpus = exports.isProd
  *
  * @type {number}
  */
-exports.maxAge = exports.isProd
+exports.maxAge = config.isProd
   ? 7 * 24 * 3600000 // 7 days
   : 0
 
 exports.maxSlugLength = 40
 
 exports.mongo = {
-  host: exports.isProd
+  host: config.isProd
     ? 'athena.feross.net'
     : 'localhost',
   port: '27017',
