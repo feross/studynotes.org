@@ -1,4 +1,24 @@
+var $ = require('jquery')
+
+require('ckeditor')
+require('jquery-placeholder')
+require('select2')
+require('transparency')
+
+var key = require('keymaster')
 var throttle = require('lodash.throttle')
+
+var util = require('../../util')
+
+var Countdown = require('./Countdown')
+var browse = require('./browse')
+var toolbar = require('./toolbar')
+var editor = require('./editor')
+var submitNote = require('./submit-note')
+var socket = require('./socket')
+var search = require('./search')
+
+var $window = $(window)
 
 $.ajaxSetup({
   // Disable caching of XHR GET responses globally
@@ -47,6 +67,7 @@ $window.on('scroll', throttle(onScroll, 100))
  * Filter keystrokes from keymaster when user is searching.
  * https://github.com/madrobby/keymaster
  */
+var $searchInput = $('.header .search input')
 key.filter = function (event) {
   return $searchInput.val() === ''
 }
@@ -84,3 +105,4 @@ updateSearchWidthWhileLoading()
 $(window).load(function () {
   loaded = true
 })
+

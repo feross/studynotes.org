@@ -11,7 +11,7 @@ var $searchInput = $('.header .search input')
  * Set search bar's width so it fills the header correctly.
  * (Need to ensure this gets called after Typekit fonts are loaded.)
  */
-function updateSearchWidth () {
+window.updateSearchWidth = function () {
   var headerLeftWidth = $headerLeft.width()
   var headerRightWidth = $headerRight.width()
 
@@ -115,7 +115,7 @@ function renderAutocomplete (data) {
     .removeClass('off')
 }
 
-function hideAutocomplete () {
+window.hideAutocomplete = function () {
   $search.removeClass('searching')
   $autocomplete.addClass('off')
   setAutocompletePosition(0)

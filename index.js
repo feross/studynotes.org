@@ -49,21 +49,15 @@ Site.prototype.start = function (done) {
       exec: __filename
     })
 
-    builder.build(function (err, output) {
-      if (err) return done(err)
-
-      debug('Spawning ' + config.numCpus + ' workers')
-      for (var i = 0; i < config.numCpus; i++) {
-        cluster.fork({
-          'CSS_MD5': output.cssMd5,
-          'JS_MD5': output.jsMd5
-        })
-      }
-      cluster.on('exit', function (worker, code, signal) {
-        console.error('Worker %s died (%s)', worker.process.pid, code)
-      })
-      done(null)
+    debug('Spawning ' + config.numCpus + ' workers')
+    for (var i = 0; i < config.numCpus; i++) {
+      cluster.fork()
+    }
+    cluster.on('exit', function (worker, code, signal) {
+      console.error('Worker %s died (%s)', worker.process.pid, code)
     })
+    done(null)
+
   } else {
     console.log('Worker %s started', cluster.worker.id)
     self.app = express()
@@ -124,9 +118,6 @@ Site.prototype.addTemplateGlobals = function () {
   self.app.locals.pretty = true
   self.app.locals.offline = self.offline
   self.app.locals.util = util
-
-  self.app.locals.CSS_MD5 = process.env.CSS_MD5
-  self.app.locals.JS_MD5 = process.env.JS_MD5
 }
 
 Site.prototype.addHeaders = function (req, res, next) {
@@ -178,22 +169,34 @@ Site.prototype.serveStatic = function () {
   // Favicon middleware makes favicon requests fast
   self.app.use(express.favicon(path.join(config.root, 'static/favicon.ico')))
 
-  var staticMiddleware = express.static(path.join(config.root, 'out'), {
-    maxAge: config.maxAge
-  })
+  // Setup static middlewares
+  var opts = { maxAge: config.maxAge }
+  var static = express.static(path.join(config.root, 'static'), opts)
+  var out = express.static(path.join(config.root, 'out'), opts)
+  var nodeModules = express.static(path.join(config.root, 'node_modules'), opts)
+  var lib = express.static(path.join(config.root, 'lib'), opts)
 
   // Serve static files, they take precedence over the routes.
-  self.app.use(staticMiddleware)
+  self.app.use(static)
 
   // Also mount the static files at "/static", without routes. This is so that
   // we can point the CDN at this folder and have it mirror ONLY the static
   // files, no other site content.
-  self.app.use('/out', function (req, res, next) {
-    staticMiddleware(req, res, function (err) {
-      // If this next() function gets called, the file does not exist, so return
-      // 404, and don't proceed to further middlewares/routes.
+  self.app.use('/cdn', function (req, res, next) {
+    static(req, res, function (err) {
       if (err) return next(err)
-      res.send(404)
+      out(req, res, function (err) {
+        if (err) return next(err)
+        nodeModules(req, res, function (err) {
+          if (err) return next(err)
+          lib(req, res, function (err) {
+            if (err) return next(err)
+            // If this next() function gets called, the file does not exist, so
+            // return 404, and don't proceed to further middlewares/routes.
+            res.send(404)
+          })
+        })
+      })
     })
   })
 }

@@ -1,7 +1,6 @@
 /*jslint node: true */
-// Utility functions. For node and the browser.
 
-var util = {}
+exports = module.exports = {}
 
 /**
  * Copy all of the properties in the source objects over to the destination
@@ -9,7 +8,7 @@ var util = {}
  * source will override properties of the same name in previous arguments.
  * @type {function(Object, ...[Object]): Object}
  */
-util.extend = function (dest /*, ... */) {
+exports.extend = function (dest /*, ... */) {
   var sources = Array.prototype.slice.call(arguments, 1)
   sources.forEach(function (source) {
     for (var prop in source) {
@@ -27,7 +26,7 @@ util.extend = function (dest /*, ... */) {
  * @return {String} The number with commas
  */
 
-util.addCommas = function (x) {
+exports.addCommas = function (x) {
   x += '' // convert to String
   var rgx = /(\d+)(\d{3})/
 
@@ -37,7 +36,4 @@ util.addCommas = function (x) {
   return x
 }
 
-if (typeof module !== 'undefined') {
-  module.exports = util
-  util.extend(util, require('./util-node'))
-}
+exports.extend(exports, require('./util-' + (process.browser ? 'browser' : 'node')))

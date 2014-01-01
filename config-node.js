@@ -34,4 +34,14 @@ exports.mongo = {
   database: 'studynotes'
 }
 
-exports.level = path.join(exports.root, 'db/store')
+var jsMd5
+var cssMd5
+try {
+  if (exports.isProd) {
+    jsMd5 = fs.readFileSync(__dirname + '/out/MD5_JS').toString()
+    cssMd5 = fs.readFileSync(__dirname + '/out/MD5_CSS').toString()
+  }
+} catch (e) {}
+
+exports.jsPath = '/main' + (jsMd5 ? '-' + jsMd5 : '') + '.js'
+exports.cssPath = '/main' + (cssMd5 ? '-' + cssMd5 : '') + '.css'

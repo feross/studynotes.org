@@ -2,21 +2,6 @@ APP_SERVER = studynotes.org
 DB_SERVER = athena.feross.net
 APP_DIR = /home/feross/www/studynotes.org
 
-.PHONY : default
-default:
-	ssh -L 27017:localhost:27017 -N feross@athena &
-	./node_modules/.bin/nagger
-	DEBUG="studynotes:*" ./node_modules/.bin/nodemon --ext ".js|.jade|.css" run.js
-
-.PHONY : offline
-offline:
-	mongod &
-	DEBUG="studynotes:*" nodemon run.js --offline
-
-.PHONY : init
-init:
-	npm install --quiet
-
 .PHONY : update-deps
 update-deps:
 	git subtree pull --prefix lib/select2 git@github.com:ivaynberg/select2.git master --squash
@@ -43,6 +28,6 @@ trigger:
 .PHONY : deploy
 deploy:
 	cd $(APP_DIR) && git pull
-	cd $(APP_DIR) && make init
+	cd $(APP_DIR) && npm install --quiet
 	sudo supervisorctl reload && sleep 3 && sudo supervisorctl restart studynotes-site && sudo supervisorctl restart studynotes-liveupdater
-	cd $(APP_DIR) && sleep 30 && node lib/purge-netdna.js
+	cd $(APP_DIR) && sleep 10 && node lib/purge-netdna.js

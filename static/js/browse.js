@@ -1,5 +1,7 @@
 // Browse menu dropdown
 
+var util = require('../../util')
+
 /**
  * Show or hide the browse menus. If no `menu` parameter is provided, then
  * this shows
@@ -26,7 +28,7 @@ function toggleBrowseMenu (menu, toggle) {
   }
 }
 
-function closeBrowseMenus () {
+window.closeBrowseMenus = function () {
   browseMenus.forEach(function (menu) {
     toggleBrowseMenu(menu, false)
   })

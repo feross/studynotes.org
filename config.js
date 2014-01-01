@@ -1,32 +1,25 @@
 /*jslint node: true */
 
-// Configuration settings. For node and the browser.
+var util = require('./util')
 
-var config = {}
+exports.isProd = process.browser
+  ? !/^local/.test(window.location.hostname)
+  : (process.env.NODE_ENV === 'production')
 
-config.isNode = (typeof module !== 'undefined')
-
-config.isProd = config.isNode
-  ? (process.env.NODE_ENV === 'production')
-  : !/^local/.test(window.location.hostname)
-
-config.ports = {
-  site: config.isProd ? 7300 : 4000,
-  liveupdater: config.isProd ? 7301 : 4001,
+exports.ports = {
+  site: exports.isProd ? 7300 : 4000,
+  liveupdater: exports.isProd ? 7301 : 4001,
   admin: 4002
 }
 
-config.siteOrigin = config.isProd
+exports.siteOrigin = exports.isProd
   ? 'http://www.apstudynotes.org'
-  : config.isNode
-    ? 'http://localhost:' + config.ports.site
-    : window.location.origin
+  : process.browser
+    ? window.location.origin
+    : 'http://localhost:' + exports.ports.site
 
-config.cdnOrigin = config.isProd
+exports.cdnOrigin = exports.isProd
   ? 'http://cdn.apstudynotes.org'
-  : '/out'
+  : '/cdn'
 
-if (typeof module !== 'undefined') {
-  module.exports = config
-  require('./util').extend(config, require('./config-node'))
-}
+util.extend(exports, require('./config-' + (process.browser ? 'browser' : 'node')))

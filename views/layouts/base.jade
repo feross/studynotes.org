@@ -84,9 +84,9 @@ html(class='studynotes #{layout}', lang='en')
       | <script type="text/javascript" src="//use.typekit.net/djj4afz.js"></script>
       | <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
-    link(rel='stylesheet', href='#{ config.cdnOrigin }/node_modules/font-awesome/css/font-awesome.min.css')
-    link(rel='stylesheet', href='#{ config.cdnOrigin }/lib/select2/select2.css')
-    link(rel='stylesheet', href='#{ config.cdnOrigin }/css/main-#{ locals.CSS_MD5 }.css')
+    link(rel='stylesheet', href='#{ config.cdnOrigin }/font-awesome/css/font-awesome.min.css')
+    link(rel='stylesheet', href='#{ config.cdnOrigin }/select2/select2.css')
+    link(rel='stylesheet', href='#{ config.cdnOrigin }#{ config.cssPath }')
 
     //- Adsense styles must be inline
     style.
@@ -169,9 +169,9 @@ html(class='studynotes #{layout}', lang='en')
 
     //- Compiled StudyNotes JS
     script.
-      var CKEDITOR_BASEPATH = '#{ config.cdnOrigin }/lib/ckeditor/'
+      var CKEDITOR_BASEPATH = '#{ config.cdnOrigin }/ckeditor/'
 
-    script(async, src='#{ config.cdnOrigin }/js/main-#{locals.JS_MD5}.js')
+    script(async, src='#{ config.cdnOrigin }#{ config.jsPath }')
 
     block scripts
 

@@ -1,3 +1,5 @@
+var moment = require('moment')
+
 /**
  * Countdown to a specific date
  * @param {String} selector jQuery selector to bind the countdown timer to
