@@ -5,7 +5,7 @@ var $content = $('.content')
 var $toolbar = $('.content .toolbar')
 var $toolbarGhost = $('.content .toolbar-ghost')
 
-function toolbarOnScroll () {
+window.toolbarOnScroll = function () {
   var toolbarTop = $toolbarGhost.length
     ? $toolbarGhost.offset().top
     : null

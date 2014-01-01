@@ -1,4 +1,9 @@
-./tmp/reload.txt
+.DS_Store
+tmp/reload.txt
+
 /out/*
 /.git/*
 /node_modules/*
+
+/static/js/*
+/stylus/*

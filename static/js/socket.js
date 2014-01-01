@@ -2,6 +2,10 @@ var socket
 var lastTotalHits
 var stats
 
+var config = require('../../config')
+var eio = require('engine.io-client')
+var util = require('../../util')
+
 function openSocket () {
   socket = eio(config.engineEndpoint, {
     transports: ['polling', 'websocket']

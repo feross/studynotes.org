@@ -7,7 +7,6 @@
   "dependencies": {
     "async": "~0.2.9",
     "bcrypt": "~0.7.7",
-    "beepbeep": "~1.0.1",
     "bytes": "~0.2.1",
     "connect-flash": "~0.1.1",
     "connect-mongo": "~0.4.0",
@@ -25,12 +24,12 @@
     "jquery-placeholder": "~2.0.7",
     "jsdom": "~0.8.10",
     "keymaster": "git://github.com/madrobby/keymaster",
+    "lodash.throttle": "~2.4.1",
     "MD5": "~1.2.0",
     "mkdirp": "~0.3.5",
     "moment": "~2.5.0",
     "mongoose": "~3.8.1",
     "mongoose-validator": "~0.2.2",
-    "nagger": "~1.0.4",
     "netdna": "0.0.6",
     "nib": "~1.0.1",
     "node-uuid": "~1.4.1",
@@ -51,9 +50,59 @@
   "devDependencies": {
     "formage": "2.x",
     "tape": "2.x",
-    "nodemon": "~0.7.10"
+    "nodemon": "~0.7.10",
+    "browserify-shim": "~3.1.4",
+    "browserify": "~3.18.0"
+  },
+  "browser": {
+    "ckeditor": "./lib/ckeditor/ckeditor.js",
+    "jquery": "./node_modules/jquery/dist/jquery.min.js",
+    "jquery-placeholder": "./node_modules/jquery-placeholder/jquery.placeholder.js",
+    "keymaster": "./node_modules/keymaster/keymaster.js",
+    "select2": "./lib/select2/select2.js",
+    "transparency": "./node_modules/transparency/dist/transparency.min.js"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browserify-shim": {
+    "ckeditor": "CKEDITOR",
+    "jquery": {
+      "exports": "jQuery"
+    },
+    "jquery-placeholder": {
+      "depends": [
+        "jquery:jQuery"
+      ]
+    },
+    "keymaster": "key",
+    "select2": {
+      "exports": "Select2",
+      "depends": [
+        "jquery:jQuery"
+      ]
+    },
+    "transparency": {
+      "exports": "Transparency",
+      "depends": [
+        "jquery:jQuery"
+      ]
+    }
   },
   "scripts": {
+    "build-js": "browserify -r ./util-browser -r ./config-browser static/js/main.js -o out/main.js",
+    "build-css": "stylus -u nib -u ./stylus/vars.js stylus/main.styl -o out/ -c",
+    "build": "npm run build-js && npm run build-css && node ./bin/postbuild.js",
+    "watch-js": "watchify -r ./util-browser -r ./config-browser static/js/main.js -o out/main.js -dv",
+    "watch-css": "stylus -u nib -u ./stylus/vars.js stylus/main.styl -o out/ -w",
+    "watch": "npm run watch-js & npm run watch-css",
+    "db-tunnel": "ssh -L 27017:localhost:27017 -N feross@athena",
+    "db-local": "mongod",
+    "start": "npm run db-tunnel & npm run watch & (sleep 3 && DEBUG=\"studynotes:*\" nodemon run.js)",
+    "offline": "npm run db-local & npm run watch & (sleep 1 && DEBUG=\"studynotes:*\" nodemon run.js --offline)",
+    "postinstall": "npm run build",
     "test": "tape test/*.js"
   },
   "repository": {

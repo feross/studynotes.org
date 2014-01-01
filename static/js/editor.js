@@ -1,3 +1,6 @@
+var $ = require('jquery')
+var config = require('../../config')
+
 function formatSelect2 (option) {
   var $elem = $(option.element)
   return '<img class="select2-icon" src="' + config.cdnOrigin + '/images/icon/' + $elem.val() + '.png"/>' + option.text

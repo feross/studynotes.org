@@ -1,5 +1,4 @@
 /*jslint node: true */
-"use strict";
 
 var auth = require('../lib/auth')
 var config = require('../config')

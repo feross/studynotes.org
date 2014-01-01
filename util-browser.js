@@ -1,17 +1,16 @@
-// Client utility functions
-
-util.isPhone = function () {
+exports.isPhone = function () {
   return $(window).width() < 800 - 25 // account for scrollbar
 }
 
-util.hasPlaceholderSupport = function () {
+exports.hasPlaceholderSupport = function () {
   var i = document.createElement('input')
   return 'placeholder' in i
 }
 
+/**
+ * Avoid `console` errors in browsers that lack a console.
+ */
 ;(function() {
-
-  // Avoid `console` errors in browsers that lack a console.
   var method
   var noop = function noop() {}
   var methods = [
@@ -31,5 +30,4 @@ util.hasPlaceholderSupport = function () {
       console[method] = noop
     }
   }
-
 }())

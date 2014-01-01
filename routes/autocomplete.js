@@ -1,5 +1,4 @@
 /*jslint node: true */
-"use strict";
 
 var search = require('../lib/search')
 

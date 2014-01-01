@@ -1,5 +1,4 @@
 /*jslint node: true */
-"use strict";
 
 var async = require('async')
 var model = require('../model')

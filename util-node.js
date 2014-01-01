@@ -1,5 +1,4 @@
 /*jslint node: true */
-"use strict";
 
 var bytes = require('bytes')
 var config = require('./config')

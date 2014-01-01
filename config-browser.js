@@ -1,25 +1,25 @@
-// Browser-specific configuration
+var config = require('./config')
 
 /** @type {number} 10-60s */
-config.socketReconnectTimeout = Math.floor(Math.random() * 50000) + 10000
+exports.socketReconnectTimeout = Math.floor(Math.random() * 50000) + 10000
 
-config.engineEndpoint = 'ws://' + window.location.hostname + ':' + config.ports.liveupdater
+exports.engineEndpoint = 'ws://' + window.location.hostname + ':' + config.ports.liveupdater
 
-config.simpleEditor = {
+exports.simpleEditor = {
   allowedContent: 'p strong b em i u ol ul li sub sup',
   autoGrow_minHeight: 100,
   autoGrow_onStartup: true,
-  contentsCss: '/css/main.css',
+  contentsCss: config.cdnOrigin + '/main.css',
   customConfig: '', // no external config file
   removePlugins: 'toolbar'
 }
 
-config.richEditor = {
+exports.richEditor = {
   allowedContent: 'p strong b em i u ol ul li h1 h2 h3 h4 h5 h6 sub sup',
   autoGrow_minHeight: 200,
   autoGrow_maxHeight: 400,
   autoGrow_onStartup: true,
-  contentsCss: '/css/main.css',
+  contentsCss: config.cdnOrigin + '/main.css',
   customConfig: '', // no external config file
   toolbarGroups: [
     { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
