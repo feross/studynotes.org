@@ -2,4 +2,5 @@
 secret.js
 
 # Built files
-out/
+out/*
+!out/placeholder.txt
