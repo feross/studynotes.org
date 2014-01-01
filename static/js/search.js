@@ -37,7 +37,7 @@ var autocompletePosition = 0 // 0 = nothing selected, 1 = first result
  * @param {number} position index
  */
 function setAutocompletePosition (position) {
-  autocompletePosition = _.isNaN(position)
+  autocompletePosition = isNaN(position)
     ? 1
     : position
 

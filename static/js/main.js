@@ -1,3 +1,5 @@
+var throttle = require('lodash.throttle')
+
 $.ajaxSetup({
   // Disable caching of XHR GET responses globally
   // (workaround for jQuery callbacks not firing if the response was cached)
@@ -29,7 +31,7 @@ function onResize () {
   updateSearchWidth()
   toolbarOnScroll()
 }
-$window.on('resize', _.throttle(onResize, 100))
+$window.on('resize', throttle(onResize, 100))
 
 /**
  * Browser scroll event
@@ -39,7 +41,7 @@ function onScroll () {
   hideAutocomplete()
   toolbarOnScroll()
 }
-$window.on('scroll', _.throttle(onScroll, 100))
+$window.on('scroll', throttle(onScroll, 100))
 
 /**
  * Filter keystrokes from keymaster when user is searching.

@@ -27,7 +27,7 @@ function toggleBrowseMenu (menu, toggle) {
 }
 
 function closeBrowseMenus () {
-  _(browseMenus).each(function (menu) {
+  browseMenus.forEach(function (menu) {
     toggleBrowseMenu(menu, false)
   })
 }
