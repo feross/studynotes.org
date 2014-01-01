@@ -1,5 +1,4 @@
 /*jslint node: true */
-"use strict";
 
 var os = require('os')
 var path = require('path')

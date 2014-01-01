@@ -1,5 +1,4 @@
 /*jslint node: true */
-"use strict";
 
 module.exports = function (app) {
   app.get('/search', function (req, res) {

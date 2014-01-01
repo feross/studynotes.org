@@ -1,5 +1,4 @@
 /*jslint node: true */
-"use strict";
 
 var _s = require('underscore.string')
 var async = require('async')

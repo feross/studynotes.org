@@ -1,5 +1,4 @@
 /*jslint node: true */
-"use strict";
 
 var model = require('./')
 var mongoose = require('mongoose')

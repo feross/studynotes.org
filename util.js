@@ -1,5 +1,4 @@
 /*jslint node: true */
-
 // Utility functions. For node and the browser.
 
 var util = {}

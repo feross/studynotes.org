@@ -1,5 +1,4 @@
 /*jslint node: true */
-"use strict";
 
 var bcrypt = require('bcrypt')
 var config = require('../config')
