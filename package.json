@@ -103,6 +103,7 @@
     "start": "npm run db-tunnel & npm run watch & (sleep 3 && DEBUG=\"studynotes:*\" nodemon run.js)",
     "offline": "npm run db-local & npm run watch & (sleep 1 && DEBUG=\"studynotes:*\" nodemon run.js --offline)",
     "postinstall": "npm run build",
+    "postupdate": "npm run build",
     "test": "tape test/*.js"
   },
   "repository": {
