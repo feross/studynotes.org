@@ -34,7 +34,7 @@ model.connect(function (err) {
 })
 
 app.get('/', function(req, res) {
-    res.redirect('/admin')
+  res.redirect('/admin')
 })
 
 http.createServer(app).listen(config.ports.admin, function () {

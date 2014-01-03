@@ -10,7 +10,11 @@ module.exports = function (app) {
     if (req.user) {
       res.redirect('/')
     } else {
-      res.render('login', { errors: req.flash('error') })
+      res.render('login', {
+        title: 'Login',
+        url: '/login',
+        errors: req.flash('error')
+      })
     }
   })
 
