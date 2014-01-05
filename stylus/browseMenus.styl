@@ -30,7 +30,7 @@
     transition-property: padding, height
     transition-duration: .3s
 
-  & > div
+  .col4
     border-right: 1px solid GRAY_DARKEST
     display: block
     float: left
@@ -47,18 +47,15 @@
       margin-bottom: 0.2em
       text-transform: uppercase
 
+      &:not(:first-child)
+        margin-top: 0.7em
+
     ul
       margin: 0
 
     li
       font-size: 0.88em
       list-style: none
-
-  &.browse-courses > div
-    width: 25%
-
-  &.browse-colleges > div
-    width: 25%
 
   a
     {LINK}

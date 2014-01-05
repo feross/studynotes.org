@@ -18,6 +18,13 @@ block content
         ul.tight
           each notetype in course.notetypes
             li: a(href=course.notetypeUrl(notetype))= notetype.name
+  .row
+    each course in modelCache.coursesByHits.slice(7, 9)
+      .col3
+        h3: strong: a(href=course.url, title=course.shortName)= course.name
+        ul.tight
+          each notetype in course.notetypes
+            li: a(href=course.notetypeUrl(notetype))= notetype.name
 
   h2
     | Free Sample Admissions Essays

@@ -1,38 +1,56 @@
 .browseWrapper
   nav.browse.browse-courses
-    each course in modelCache.coursesByHits
-      div
-        h2: a(href=course.url, title=course.shortName)= course.name
-        ul
-          each notetype in course.notetypes
-            li: a(href=course.notetypeUrl(notetype), title='#{ course.name + " " + notetype.name }')= notetype.name
+    .row
+      .col4
+        each course in modelCache.coursesByName.slice(0, 2)
+          h2: a(href=course.url, title=course.shortName)= course.name
+          ul
+            each notetype in course.notetypes
+              li: a(href=course.notetypeUrl(notetype), title='#{ course.name + " " + notetype.name }')= notetype.name
+      .col4
+        each course in modelCache.coursesByName.slice(2, 5)
+          h2: a(href=course.url, title=course.shortName)= course.name
+          ul
+            each notetype in course.notetypes
+              li: a(href=course.notetypeUrl(notetype), title='#{ course.name + " " + notetype.name }')= notetype.name
+      .col4
+        each course in modelCache.coursesByName.slice(5, 6)
+          h2: a(href=course.url, title=course.shortName)= course.name
+          ul
+            each notetype in course.notetypes
+              li: a(href=course.notetypeUrl(notetype), title='#{ course.name + " " + notetype.name }')= notetype.name
+      .col4
+        each course in modelCache.coursesByName.slice(6, 7)
+          h2: a(href=course.url, title=course.shortName)= course.name
+          ul
+            each notetype in course.notetypes
+              li: a(href=course.notetypeUrl(notetype), title='#{ course.name + " " + notetype.name }')= notetype.name
 
-        //- Last course
-        if (course === modelCache.coursesByHits[modelCache.coursesByHits.length - 1])
-          a.btn(href='/submit/note/')
-            i.fa.fa-cloud-upload
-            | Submit notes
+        a.btn(href='/submit/note/')
+          i.fa.fa-cloud-upload
+          | Submit notes
 
 .browseWrapper
   nav.browse.browse-colleges
-    div
-      h2: a(href='/essays/') Admissions Essays
-      ul
-        each college in modelCache.collegesByName.slice(0, 7)
-          li: a(href=college.url) #{ college.shortName } Essays
-    div
-      ul
-        each college in modelCache.collegesByName.slice(7, 15)
-          li: a(href=college.url) #{ college.shortName } Essays
-    div
-      ul
-        each college in modelCache.collegesByName.slice(15, 23)
-          li: a(href=college.url) #{ college.shortName } Essays
-    div
-      ul
-        each college in modelCache.collegesByName.slice(23)
-          li: a(href=college.url) #{ college.shortName } Essays
+    .row
+      .col4
+        h2: a(href='/essays/') Admissions Essays
+        ul
+          each college in modelCache.collegesByName.slice(0, 7)
+            li: a(href=college.url) #{ college.shortName } Essays
+      .col4
+        ul
+          each college in modelCache.collegesByName.slice(7, 15)
+            li: a(href=college.url) #{ college.shortName } Essays
+      .col4
+        ul
+          each college in modelCache.collegesByName.slice(15, 23)
+            li: a(href=college.url) #{ college.shortName } Essays
+      .col4
+        ul
+          each college in modelCache.collegesByName.slice(23)
+            li: a(href=college.url) #{ college.shortName } Essays
 
-      a.btn(href='/submit/essay/')
-        i.fa.fa-cloud-upload
-        | Submit an essay
+        a.btn(href='/submit/essay/')
+          i.fa.fa-cloud-upload
+          | Submit an essay

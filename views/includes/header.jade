@@ -24,6 +24,7 @@ header.header
       li: a.colleges(href='/essays/', title='Browse all admissions essays')
         i.fa.fa-chevron-down.hide-phone
         span Admissions Essays
+
       if (locals.currentUser)
         li: a(href='#{currentUser.url}', title='Manage your account')
           img(src='#{ currentUser.gravatarBlank }', width=21, height=21).hide-phone.hide-tablet
