@@ -1,22 +1,21 @@
 var $ = require('jquery')
 require('jquery-placeholder')
-
 require('select2')
 require('transparency')
 require('ckeditor')
 
-var key = require('keymaster')
-var throttle = require('lodash.throttle')
-
-var util = require('../../util')
-
-var Countdown = require('./Countdown')
 var browse = require('./browse')
-var toolbar = require('./toolbar')
+var Countdown = require('./Countdown')
 var editor = require('./editor')
-var submitNote = require('./submit-note')
-var socket = require('./socket')
+var key = require('keymaster')
+var notify = require('./notify')
 var search = require('./search')
+var socket = require('./socket')
+var submitNote = require('./submit-note')
+var throttle = require('lodash.throttle')
+var toolbar = require('./toolbar')
+var url = require('url')
+var util = require('../../util')
 
 var $window = $(window)
 
@@ -106,3 +105,9 @@ $(window).load(function () {
   loaded = true
 })
 
+// "Welcome back" message
+if (localStorage.returning &&
+    url.parse(document.referrer).host !== window.location.host) {
+  notify.big.info('Welcome back!', { timeout: 3000 })
+}
+localStorage.returning = true

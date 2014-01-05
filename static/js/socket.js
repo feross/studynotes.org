@@ -7,8 +7,6 @@ var eio = require('engine.io-client')
 var notify = require('./notify')
 var util = require('../../util')
 
-notify.big.info('Welcome back!', { timeout: 2000 })
-
 function openSocket () {
   socket = eio(config.engineEndpoint, {
     transports: ['polling', 'websocket']
