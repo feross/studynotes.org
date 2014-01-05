@@ -26,7 +26,7 @@ module.exports = function (app) {
 
   app.post('/logout', function (req, res) {
     req.logout()
-    res.redirect('/')
+    res.send(200) // redirect happens on client-side
   })
 
   // TODO

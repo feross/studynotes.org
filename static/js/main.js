@@ -41,8 +41,8 @@ $("a[href^='http:'], a[href^='https:']")
 // Logout via XHR POST
 $('.logout').click(function (e) {
   e.preventDefault()
-  $.post('/logout', function () {
-    window.location = '/'
+  $.post('/logout/', function () {
+    window.location = window.location.href
   })
 })
 
