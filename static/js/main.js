@@ -1,9 +1,9 @@
 var $ = require('jquery')
-
-require('ckeditor')
 require('jquery-placeholder')
+
 require('select2')
 require('transparency')
+require('ckeditor')
 
 var key = require('keymaster')
 var throttle = require('lodash.throttle')

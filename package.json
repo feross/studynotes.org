@@ -69,9 +69,7 @@
   },
   "browserify-shim": {
     "ckeditor": "CKEDITOR",
-    "jquery": {
-      "exports": "jQuery"
-    },
+    "jquery": "jQuery",
     "jquery-placeholder": {
       "depends": [
         "jquery:jQuery"
