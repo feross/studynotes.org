@@ -162,18 +162,13 @@ html(class='studynotes #{layout}', lang='en')
     block body
 
     input(type='hidden', name='_csrf', value=csrf)
-
     //- Google+ verification
     a(href='https://plus.google.com/106052504873007659547', rel='publisher', style='display: none') Google+
 
-    //- Countdown script
     if (locals.course)
       | <script>window.countdownDate = new Date('#{course.examDate}')</script>
-
-    //- Compiled StudyNotes JS
     script.
       var CKEDITOR_BASEPATH = '#{ config.cdnOrigin }/ckeditor/'
-
     script(async, src='#{ config.cdnOrigin }#{ config.jsPath }')
 
     block scripts
