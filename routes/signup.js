@@ -15,7 +15,7 @@ module.exports = function (app) {
       res.redirect('/')
     } else {
       res.render('signup', {
-        title: 'Signup',
+        title: 'Sign Up',
         url: '/signup',
         errors: req.flash('error'),
         user: req.flash('user')[0]

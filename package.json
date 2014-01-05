@@ -7,6 +7,8 @@
   "dependencies": {
     "async": "~0.2.9",
     "bcrypt": "~0.7.7",
+    "browserify-shim": "~3.1.4",
+    "browserify": "~3.18.0",
     "bytes": "~0.2.1",
     "closurecompiler": "~1.3.0",
     "connect-flash": "~0.1.1",
@@ -50,9 +52,7 @@
   "devDependencies": {
     "formage": "2.x",
     "tape": "2.x",
-    "nodemon": "~0.7.10",
-    "browserify-shim": "~3.1.4",
-    "browserify": "~3.18.0"
+    "nodemon": "~0.7.10"
   },
   "browser": {
     "ckeditor": "./lib/ckeditor/ckeditor.js",
