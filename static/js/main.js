@@ -108,6 +108,6 @@ $(window).load(function () {
 // "Welcome back" message
 if (localStorage.returning &&
     url.parse(document.referrer).host !== window.location.host) {
-  notify.big.info('Welcome back!', { timeout: 3000 })
+  notify.big.info('Welcome back!', { timeout: 2000 })
 }
 localStorage.returning = true
