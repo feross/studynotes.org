@@ -48,7 +48,6 @@
     "transparency": "~0.9.14",
     "underscore": "~1.5.2",
     "underscore.string": "~2.3.3",
-    "canvas": "~1.1.2",
     "humane-js": "~3.1.0"
   },
   "devDependencies": {
