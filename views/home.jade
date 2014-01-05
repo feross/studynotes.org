@@ -19,7 +19,7 @@ block content
           each notetype in course.notetypes
             li: a(href=course.notetypeUrl(notetype))= notetype.name
   .row
-    each course in modelCache.coursesByHits.slice(7, 9)
+    each course in modelCache.coursesByHits.slice(6, 9)
       .col3
         h3: strong: a(href=course.url, title=course.shortName)= course.name
         ul.tight
@@ -107,7 +107,6 @@ block content
     li AP Spanish Literature and Culture
     li AP Statistics (AP Stats)
     li AP Studio Art
-    li AP World History (APWH)
 
   h2 Our <strong>free AP notes</strong> include:
 
