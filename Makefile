@@ -24,6 +24,18 @@ download-db:
 trigger:
 	ssh feross@future.feross.net -p 44444 make -f /home/feross/www/studynotes.org/Makefile deploy
 
+.PHONY : install-linux-deps
+install-linux-deps:
+	sudo aptitude update
+	sudo aptitude install libcairo2-dev libjpeg8-dev libpango1.0-dev libgif-dev build-essential g++
+
+.PHONY : install-osx-deps
+install-osx-deps:
+	brew update
+	brew install cairo pixman
+	# Also, ensure "export PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig" is in .zshrc
+	# See issue: https://github.com/Homebrew/homebrew/issues/14123
+
 # Update code and restart server (from app server)
 .PHONY : deploy
 deploy:
