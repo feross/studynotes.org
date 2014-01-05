@@ -7,14 +7,14 @@ block content
   .row
     each course in modelCache.coursesByHits.slice(0, 3)
       .col3
-        h3: a(href=course.url, title=course.shortName)= course.name
+        h3: strong: a(href=course.url, title=course.shortName)= course.name
         ul.tight
           each notetype in course.notetypes
             li: a(href=course.notetypeUrl(notetype))= notetype.name
   .row
     each course in modelCache.coursesByHits.slice(3, 6)
       .col3
-        h3: a(href=course.url, title=course.shortName)= course.name
+        h3: strong: a(href=course.url, title=course.shortName)= course.name
         ul.tight
           each notetype in course.notetypes
             li: a(href=course.notetypeUrl(notetype))= notetype.name
@@ -44,28 +44,37 @@ block content
         each college in modelCache.collegesByRank.slice(12, 16)
           li: a(href=college.url)= college.shortName
 
+  h2 Newest College Essays
   .row
     .col2
-      h2 New College Essays
       ul.tight
-        each essay in newEssays
+        each essay in newEssays.slice(0, 5)
           li
-            strong: a(href=essay.college.url)= essay.college.shortName + ':'
+            a(href=essay.college.url)= essay.college.shortName + ':'
             span= ' '
-            a(href=essay.url)= ' ' + essay.name
+            strong: a(href=essay.url)= ' ' + essay.name
             span.gray= ' (' + moment(essay.createDate).fromNow() + ')'
       p See <a href='/essays/'>all college essays</a>.
-
     .col2
-      h2 New AP Notes
       ul.tight
-        each note in newNotes
+        each essay in newEssays.slice(5, 10)
           li
-            strong: a(href=note.course.url)= note.course.name + ':'
+            a(href=essay.college.url)= essay.college.shortName + ':'
             span= ' '
-            a(href=note.url)= note.name
-            span.gray= ' (' + moment(note.createDate).fromNow() + ')'
-      p See <a href='/courses/'>all AP notes</a>.
+            strong: a(href=essay.url)= ' ' + essay.name
+            span.gray= ' (' + moment(essay.createDate).fromNow() + ')'
+
+
+  .row
+    h2 Newest AP Notes
+    ul.tight
+      each note in newNotes
+        li
+          a(href=note.course.url)= note.course.name + ':'
+          span= ' '
+          strong: a(href=note.url)= note.name
+          span.gray= ' (' + moment(note.createDate).fromNow() + ')'
+    p See <a href='/courses/'>all AP notes</a>.
 
   h2 We will be adding AP notes for the following courses soon:
 
@@ -78,7 +87,6 @@ block content
     li AP Comparative Government &amp; Politics
     li AP Computer Science A
     li AP Environmental Science
-    li AP European History
     li AP French Language and Culture
     li AP German Language and Culture
     li AP Human Geography
