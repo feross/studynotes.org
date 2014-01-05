@@ -42,6 +42,7 @@ $("a[href^='http:'], a[href^='https:']")
 $('.logout').click(function (e) {
   e.preventDefault()
   $.post('/logout/', function () {
+    localStorage.notify = 'You are logged out.'
     window.location = window.location.href
   })
 })
@@ -111,3 +112,9 @@ if (localStorage.returning &&
   notify.big.info('Welcome back!', { timeout: 2000 })
 }
 localStorage.returning = true
+
+if (localStorage.notify) {
+  notify.big.info(localStorage.notify)
+  localStorage.removeItem('notify')
+}
+
