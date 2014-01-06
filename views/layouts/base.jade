@@ -164,7 +164,7 @@ html(class='studynotes #{layout}', lang='en')
     if (locals.notify)
       each msg in locals.notify
         .notify(style='display: none')= msg
-    if (locals.req.session && req.session.messages)
+    if (locals.req && req.session && req.session.messages)
       each msg in req.session.messages
         .notify(style='display: none')= msg
       - delete req.session['messages']
