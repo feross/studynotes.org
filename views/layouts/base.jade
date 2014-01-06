@@ -161,6 +161,14 @@ html(class='studynotes #{layout}', lang='en')
 
     block body
 
+    if (locals.notify)
+      each msg in locals.notify
+        .notify(style='display: none')= msg
+    if (locals.req.session && req.session.messages)
+      each msg in req.session.messages
+        .notify(style='display: none')= msg
+      - delete req.session['messages']
+
     input(type='hidden', name='_csrf', value=csrf)
     //- Google+ verification
     a(href='https://plus.google.com/106052504873007659547', rel='publisher', style='display: none') Google+

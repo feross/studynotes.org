@@ -2,13 +2,13 @@ var humane = require('humane-js')
 
 var big = humane.create({
   clickToClose: true,
-  timeout: 5000,
+  timeout: 4000,
   baseCls: 'humane-jackedup'
 })
 
 var small = humane.create({
   clickToClose: true,
-  timeout: 5000,
+  timeout: 4000,
   baseCls: 'humane-libnotify'
 })
 

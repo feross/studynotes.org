@@ -118,3 +118,7 @@ if (localStorage.notify) {
   localStorage.removeItem('notify')
 }
 
+$('.notify').each(function (item) {
+  var message = $(item).text()
+  notify.big.info(message)
+}
