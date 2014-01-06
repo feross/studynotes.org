@@ -164,10 +164,10 @@ html(class='studynotes #{layout}', lang='en')
     if (locals.notify)
       each msg in locals.notify
         .notify(style='display: none')= msg
-    if (locals.req && req.session && req.session.messages)
-      each msg in req.session.messages
+    if (locals.req && locals.req.session && locals.req.session.messages)
+      each msg in locals.req.session.messages
         .notify(style='display: none')= msg
-      - delete req.session['messages']
+      - delete locals.req.session['messages']
 
     input(type='hidden', name='_csrf', value=csrf)
     //- Google+ verification
