@@ -4,17 +4,18 @@ var _ = require('underscore')
 var async = require('async')
 var config = require('../config')
 var debug = require('debug')('studynotes:liveupdater')
-var engine = require('engine.io')
 var fs = require('fs')
 var http = require('http')
 var jsdom = require('jsdom')
 var model = require('../model')
 var path = require('path')
 var util = require('../util')
+var ws = require('ws')
 
 function LiveUpdater (opts, cb) {
   var self = this
   if (opts) util.extend(self, opts)
+  cb || (cb = function () {})
 
   /** @type {number} port */
   self.port || (self.port = config.ports.liveupdater)
@@ -26,35 +27,23 @@ function LiveUpdater (opts, cb) {
     { encoding: 'utf8' }
   )
 
-  self.start(cb)
-}
+  self.server = new ws.Server({ port: self.port })
 
-LiveUpdater.prototype.start = function (done) {
-  var self = this
-  done || (done = function () {})
-
-  var server = http.createServer()
-  self.engine = engine.attach(server, {
-    transports: ['polling', 'websocket']
-  })
-  self.engine.on('connection', function (socket) {
-    socket.on('message', self.onSocketMessage.bind(self, socket))
-    socket.on('close', self.onSocketClose.bind(self, socket))
-    socket.on('error', self.onSocketError.bind(self, socket))
+  self.server.on('connection', function (socket) {
+    socket.on('message', self.handleMessage.bind(self, socket))
+    socket.on('close', self.handleClose.bind(self, socket))
+    socket.onSend = self.handleSend.bind(self, socket)
   })
 
   async.series([
     model.connect,
     function (cb) {
       self.getTotalHits(cb)
-    },
-    function (cb) {
-      server.listen(self.port, cb)
     }
-  ], done)
+  ], cb)
 }
 
-LiveUpdater.prototype.onSocketMessage = function (socket, str) {
+LiveUpdater.prototype.handleMessage = function (socket, str) {
   var self = this
   var message
   try {
@@ -93,16 +82,15 @@ LiveUpdater.prototype.onSocketMessage = function (socket, str) {
   }
 }
 
-LiveUpdater.prototype.onSocketError = function (socket) {
+LiveUpdater.prototype.handleSend = function (socket, err) {
   var self = this
-  try {
-    socket.close()
-  } catch (e) {
-    self.onSocketClose(socket)
+  if (err) {
+    console.error('Socket error: ' + err.message)
+    self.handleClose(socket)
   }
 }
 
-LiveUpdater.prototype.onSocketClose = function (socket) {
+LiveUpdater.prototype.handleClose = function (socket) {
   var self = this
   var url = socket.url
   var sockets = self.online[url]
@@ -124,8 +112,8 @@ LiveUpdater.prototype.getTotalHits = function (cb) {
   }, function (err, results) {
     if (err) return cb(err)
 
-    self.totalHits = _(results).reduce(function (acc, docs) {
-      return acc + _(docs).reduce(function (acc2, doc) {
+    self.totalHits = results.reduce(function (acc, docs) {
+      return acc + docs.reduce(function (acc2, doc) {
         return acc2 + (doc.hits || 0)
       }, 0)
     }, 0)
@@ -163,7 +151,7 @@ LiveUpdater.prototype.sendStats = function (socket) {
     type: 'stats',
     stats: stats
   }
-  socket.send(JSON.stringify(update))
+  socket.send(JSON.stringify(update), socket.onSend)
 }
 
 /**
@@ -189,7 +177,7 @@ LiveUpdater.prototype.sendUpdates = function (url) {
 
   var message = JSON.stringify(update)
   sockets.forEach(function (socket) {
-    socket.send(message)
+    socket.send(message, socket.onSend)
   })
 }
 
@@ -213,7 +201,7 @@ LiveUpdater.prototype.sendHomeUpdates = function () {
 
   var message = JSON.stringify(update)
   sockets.forEach(function (socket) {
-    socket.send(message)
+    socket.send(message, socket.onSend)
   })
 }
 
@@ -241,7 +229,7 @@ LiveUpdater.prototype.sendStatsUpdates = function (url) {
 
   var message = JSON.stringify(update)
   sockets.forEach(function (socket) {
-    socket.send(message)
+    socket.send(message, socket.onSend)
   })
 }
 

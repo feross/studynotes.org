@@ -3,7 +3,7 @@ var config = require('./config')
 /** @type {number} 10-60s */
 exports.socketReconnectTimeout = Math.floor(Math.random() * 50000) + 10000
 
-exports.engineEndpoint = 'ws://' + window.location.hostname + ':' + config.ports.liveupdater
+exports.wsEndpoint = 'ws://' + window.location.hostname + ':' + config.ports.liveupdater
 
 exports.simpleEditor = {
   allowedContent: 'p strong b em i u ol ul li sub sup',

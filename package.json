@@ -15,13 +15,12 @@
     "connect-mongo": "~0.4.0",
     "connect-slashes": "~1.2.0",
     "debug": "~0.7.2",
-    "engine.io": "~0.7.9",
-    "engine.io-client": "~0.7.9",
     "express": "~3.4.0",
     "font-awesome": "git://github.com/FortAwesome/Font-Awesome",
     "html-parser": "~0.7.0",
     "html-truncate": "~1.0.3",
     "http-status-codes": "~1.0.2",
+    "humane-js": "~3.1.0",
     "jade": "~1.0.0",
     "jquery": "~2.1.0-beta3",
     "jquery-placeholder": "~2.0.7",
@@ -48,7 +47,7 @@
     "transparency": "~0.9.14",
     "underscore": "~1.5.2",
     "underscore.string": "~2.3.3",
-    "humane-js": "~3.1.0"
+    "ws": "~0.4.31"
   },
   "devDependencies": {
     "formage": "2.x",

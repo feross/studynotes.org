@@ -3,14 +3,11 @@ var lastTotalHits
 var stats
 
 var config = require('../../config')
-var eio = require('engine.io-client')
 var notify = require('./notify')
 var util = require('../../util')
 
 function openSocket () {
-  socket = eio(config.engineEndpoint, {
-    transports: ['polling', 'websocket']
-  })
+  socket = new WebSocket(config.wsEndpoint)
   socket.onopen = function () {
     socket.onmessage = onMessage
     socket.onclose = onClose
@@ -21,15 +18,18 @@ function openSocket () {
     }))
   }
 }
-openSocket()
 
-function onMessage (str) {
+if (typeof WebSocket === 'function') {
+  openSocket()
+}
+
+function onMessage (event) {
   var message
   try {
-    // console.log('Received message: ' + str)
-    message = JSON.parse(str)
+    console.log('Received message: ' + event.data)
+    message = JSON.parse(event.data)
   } catch (e) {
-    // console.log('Discarding non-JSON message: ' + message)
+    console.log('Discarding non-JSON message: ' + message)
     return
   }
 
