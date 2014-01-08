@@ -42,7 +42,7 @@ $("a[href^='http:'], a[href^='https:']")
 $('.logout').click(function (e) {
   e.preventDefault()
   $.post('/logout/', function () {
-    localStorage.notify = 'You are logged out.'
+    localStorage.success = 'You are logged out.'
     window.location = window.location.href
   })
 })
@@ -117,8 +117,25 @@ if (localStorage.notify) {
   notify.big.info(localStorage.notify)
   localStorage.removeItem('notify')
 }
-
-$('.notify').each(function (item) {
-  var message = $(item).text()
-  notify.big.info(message)
+if (localStorage.success) {
+  notify.big.info(localStorage.success)
+  localStorage.removeItem('success')
 }
+if (localStorage.error) {
+  notify.big.info(localStorage.error)
+  localStorage.removeItem('error')
+}
+
+$(function () {
+  $('.notify').each(function () {
+    var $item = $(this)
+    console.log($item.text())
+    if ($item.hasClass('notify-success')) {
+      notify.big.success($item.text())
+    } else if ($item.hasClass('notify-error')) {
+      notify.big.error($item.text())
+    } else {
+      notify.big.info($item.text())
+    }
+  })
+})

@@ -22,7 +22,7 @@ module.exports = function (app) {
     failureRedirect: '/login/',
     successReturnToOrRedirect: '/',
     failureFlash: 'Wrong email or password.',
-    successMessage: 'You are logged in!'
+    successFlash: 'You are logged in!'
   }))
 
   app.post('/logout', function (req, res) {
