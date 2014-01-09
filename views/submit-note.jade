@@ -29,6 +29,6 @@ block content
     .row.submit
       button.btn.large(type='submit') Submit Note
       div(style='display: inline-block')
-        input(name='anon', id='anon', type='checkbox', value='true')
+        input(name='anon', id='anon', type='checkbox', checked=(note && note.anon))
         .checkbox
         label(for='anon') Anonymous

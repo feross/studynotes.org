@@ -34,9 +34,10 @@ module.exports = function (app) {
           .exec(cb)
       }
     }, function (err, results) {
-      if (err) return next(err)
       var notes = results.notes
       var note = results.note
+
+      if (err) return next(err)
       if (!note) return next()
 
       if (req.query.edit) {
