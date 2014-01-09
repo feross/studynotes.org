@@ -177,7 +177,8 @@ html(class='studynotes #{layout}', lang='en')
     a(href='https://plus.google.com/106052504873007659547', rel='publisher', style='display: none') Google+
 
     if (locals.course)
-      | <script>window.countdownDate = new Date('#{course.examDate}')</script>
+      script.
+        window.countdownDate = new Date('#{course.examDate}')
     script.
       var CKEDITOR_BASEPATH = '#{ config.cdnOrigin }/ckeditor/'
     script(async, src='#{ config.cdnOrigin }#{ config.jsPath }')
