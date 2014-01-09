@@ -148,8 +148,9 @@ html(class='studynotes #{layout}', lang='en')
           background-size: auto auto, 100% 100%, cover;
         }
 
-      //if IE 9
-        link(rel='stylesheet', href='#{ config.cdnOrigin }/css/ie.css')
+      <!--[if IE 9]>
+      link(rel='stylesheet', href='#{ config.cdnOrigin }/css/ie9.css')
+      <![endif]-->
 
     block stylesheets
 
