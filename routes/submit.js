@@ -61,8 +61,9 @@ module.exports = function (app) {
         essay.prompt = req.body.prompt
         essay.body = req.body.body
         essay.college = college._id
-        essay.user = req.user._id
         essay.anon = !!req.body.anon
+
+        essay.user = essay.user || req.user._id
 
         essay.save(cb)
       }]
@@ -145,8 +146,9 @@ module.exports = function (app) {
         note.body = req.body.body
         note.course = course.id
         note.notetype = notetype.id
-        note.user = req.user.id
         note.anon = !!req.body.anon
+
+        note.user = note.user || req.user.id
 
         note.save(cb)
       }]
