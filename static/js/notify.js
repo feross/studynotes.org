@@ -1,7 +1,6 @@
 var humane = require('humane-js')
 
 var big = humane.create({
-  clickToClose: true,
   timeout: 4000,
   baseCls: 'humane-jackedup'
 })
