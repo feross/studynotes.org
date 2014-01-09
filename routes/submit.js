@@ -31,16 +31,42 @@ module.exports = function (app) {
       req.flash('essay', req.body)
       return res.redirect('/submit/essay/')
     }
+    var isEdit = req.body._id
 
-    var essay = new model.Essay({
-      name: req.body.name,
-      prompt: req.body.prompt,
-      body: req.body.body,
-      college: college._id,
-      user: req.user._id,
-      anon: !!req.body.anon
-    })
-    essay.save(function (err) {
+    async.auto({
+      essay: function (cb) {
+        if (isEdit) {
+          model.Essay
+            .findById(req.body._id)
+            .exec(cb)
+        } else {
+          cb(null, new model.Essay())
+        }
+      },
+      permission: ['essay', function (cb, r) {
+        if (!r.essay) return cb(new Error('No essay with id ' + req.body._id))
+
+        if (!r.essay.user // new note, no permission needed
+            || r.essay.user.id === req.user.id // same user
+            || req.user.admin) { // admin
+          cb(null)
+        } else {
+          cb(new Error('Cannot edit another user\'s essay'))
+        }
+      }],
+      save: ['permission', function (cb, r) {
+        var essay = r.essay
+
+        essay.name = req.body.name
+        essay.prompt = req.body.prompt
+        essay.body = req.body.body
+        essay.college = college._id
+        essay.user = req.user._id
+        essay.anon = !!req.body.anon
+
+        essay.save(cb)
+      }]
+    }, function (err, r) {
       if (err && err.name === 'ValidationError') {
         _(err.errors).map(function (error) {
           req.flash('error', error.type)
@@ -50,8 +76,9 @@ module.exports = function (app) {
       } else if (err) {
         next(err)
       } else {
-        res.redirect(essay.url)
-        email.notifyAdmin('New essay', essay)
+        res.redirect(r.essay.url)
+        if (!isEdit)
+          email.notifyAdmin('New essay', r.essay)
       }
     })
   })
@@ -121,7 +148,7 @@ module.exports = function (app) {
         note.user = req.user.id
         note.anon = !!req.body.anon
 
-        r.note.save(cb)
+        note.save(cb)
       }]
     }, function (err, r) {
       if (err && err.name === 'ValidationError') {

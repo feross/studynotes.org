@@ -7,6 +7,8 @@ block content
         div= msg
   form(method='POST')
     input(type='hidden', name='_csrf', value=csrf)
+    if essay && essay._id
+      input(type='hidden', name='_id', value=essay._id)
     .row
       .col2
         input(name='name', type='text', placeholder='Essay Title', value=(essay && essay.name), autofocus, required)
@@ -22,6 +24,6 @@ block content
     .row.submit
       button.btn.large(type='submit') Submit Essay
       div(style='display: inline-block')
-        input(name='anon', id='anon', type='checkbox', value='true')
+        input(name='anon', id='anon', type='checkbox', checked=(essay && essay.anon))
         .checkbox
         label(for='anon') Anonymous

@@ -41,6 +41,11 @@ module.exports = function (app) {
       if (err) return next(err)
       if (!essay) return next()
 
+      if (req.query.edit) {
+        req.flash('essay', essay)
+        return res.redirect('/submit/essay/')
+      }
+
       var index
       essays.forEach(function (e, i) {
         if (e.id === essay.id) index = i
