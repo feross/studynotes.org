@@ -4,10 +4,10 @@ append toolbar
   if locals.currentUser && currentUser.admin
     a.btn.red.edit(href='?edit=1') Edit
   if locals.next
-    a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next Essay →
+    a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next Essay
     .navigate-msg Use ← → keys to navigate
   if !locals.next && locals.prev
-    a.btn.prev(href='#{prev.url}', title='Prev: #{prev.name}') ← Prev Essay
+    a.btn.prev(href='#{prev.url}', title='Prev: #{prev.name}') Prev Essay
     .navigate-msg Last note in this set
 
 block content
@@ -29,10 +29,10 @@ block content
 
   .noteNav.clearfix
     if prev
-      a.btn.prev(href='#{prev.url}', title='Previous: #{prev.name}') ← Prev Essay
+      a.btn.prev(href='#{prev.url}', title='Previous: #{prev.name}') Prev Essay
 
     if next
-      a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next Essay →
+      a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next Essay
 
   hr
 

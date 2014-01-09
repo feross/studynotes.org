@@ -4,10 +4,10 @@ append toolbar
   if locals.currentUser && currentUser.admin
     a.btn.red.edit(href='?edit=1') Edit
   if locals.next
-    a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next #{ notetype.singularName || '' } →
+    a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next #{ notetype.singularName || '' }
     .navigate-msg Use ← → keys to navigate
   if !locals.next && locals.prev
-    a.btn.prev(href='#{prev.url}', title='Prev: #{prev.name}') ← Prev #{ notetype.singularName || '' }
+    a.btn.prev(href='#{prev.url}', title='Prev: #{prev.name}') Prev #{ notetype.singularName || '' }
     .navigate-msg Last note in this set
 
 block content
@@ -26,10 +26,10 @@ block content
 
   .noteNav.clearfix
     if prev
-      a.btn.prev(href='#{prev.url}', title='Previous: #{prev.name}') ← Prev #{ notetype.singularName || '' }
+      a.btn.prev(href='#{prev.url}', title='Previous: #{prev.name}') Prev #{ notetype.singularName || '' }
 
     if next
-      a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next #{ notetype.singularName || '' } →
+      a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next #{ notetype.singularName || '' }
 
   hr
 
