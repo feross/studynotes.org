@@ -20,7 +20,9 @@ TAB_HEIGHT = 33px
   text-align: left
 
   @media PHONE
-    margin-left: CONTENT_PADDING_PHONE
+    font-size: 0.8em
+    margin-bottom: 40px
+    text-align: center
   @media TABLET
     margin-left: CONTENT_PADDING_TABLET
   @media DESKTOP
@@ -51,9 +53,10 @@ TAB_HEIGHT = 33px
   .desc
     font-size: 1.4em
     text-shadow: 1px 1px 2px rgba(#000, 0.8)
-
     body.home &
       font-size: 2.2em
+    @media PHONE
+      display: none
 
 ul.tabs
   height: TAB_HEIGHT

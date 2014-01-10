@@ -99,6 +99,9 @@ ellipsis()
 .col
   float: left
   vertical-align: top
+  @media PHONE
+    float: none
+    width: 100% !important
 
 .col2
   @extend .col
@@ -106,30 +109,48 @@ ellipsis()
 
   &:first-child
     padding-right: 7px
+    @media PHONE
+      padding-right: 0
   &:last-child
     padding-left: 7px
+    @media PHONE
+      padding-left: 0
 
 .col3
   @extend .col
   width: 33.3%
   &:first-child
     padding-right: 10px
+    @media PHONE
+      padding-right: 0
   &:nth-child(2)
     padding-left: 5px
     padding-right: 5px
+    @media PHONE
+      padding-left: 0
+      padding-right: 0
   &:last-child
     padding-left: 10px
+    @media PHONE
+      padding-left: 0
 
 .col4
   @extend .col
   width: 25%
   &:first-child
     padding-right: 10px
+    @media PHONE
+      padding-right: 0
   &:nth-child(2), &:nth-child(3)
     padding-left: 5px
     padding-right: 5px
+    @media PHONE
+      padding-left: 0
+      padding-right: 0
   &:last-child
     padding-left: 10px
+    @media PHONE
+      padding-left: 0
 
 .hide-phone
   @media PHONE

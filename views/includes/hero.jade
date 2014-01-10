@@ -24,7 +24,7 @@ if (locals.hero)
             h2.desc= hero.desc
 
   if (hero.tabs && hero.tabs.length)
-    ul.tabs.clearfix
+    ul.tabs.clearfix.hide-phone
       each tab in hero.tabs
         li(class='#{(tab.on || tab.view === view || (_.isArray(tab.view) && (tab.view.indexOf(view) >= 0))) ? "on" : ""}')
           a(href='#{tab.url}')= tab.name

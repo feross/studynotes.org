@@ -28,7 +28,7 @@ block content
 
   h2
     | Free Sample Admissions Essays
-    a.btn(href='/submit/essay/')
+    a.btn.hide-phone(href='/submit/essay/')
       i.fa.fa-cloud-upload
       | Submit an essay
 
@@ -126,19 +126,19 @@ block content
 
 
 append sidebar
-  .tweet-home
+  .tweet-home.hide-phone
     .onlineNum
       span
       | #{ ' students online.' }
     a(href='https://twitter.com/share', class='twitter-share-button', data-url='#{ locals.url }', data-via='StudyNotesApp', data-size='large') Tweet
-  .fb-home
+  .fb-home.hide-phone
     | <iframe src="//www.facebook.com/plugins/like.php?href=#{ encodeURIComponent(locals.url) }&amp;width=336&amp;height=35&amp;colorscheme=light&amp;layout=standard&amp;action=like&amp;show_faces=false&amp;send=false&amp;appId=466476846723021" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:336px; height:35px;" allowTransparency="true"></iframe>
 
-  div
+  div.hide-phone
     a(class='twitter-timeline', href='https://twitter.com/StudyNotesApp', data-widget-id='382664807926624257') Tweets by @StudyNotesApp
 
-  h3 StudyNotes In Numbers
-  ul
+  h3.hide-phone StudyNotes In Numbers
+  ul.hide-phone
     li #{ util.addCommas(noteCount) } notes for #{ courseCount } <a href='/courses/'>AP courses</a>
     li #{ util.addCommas(essayCount) } admissions essays for #{ collegeCount } <a href='/colleges/'>universities</a>
     li #{ util.addCommas(userCount) } registered users
