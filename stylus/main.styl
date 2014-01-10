@@ -33,6 +33,7 @@ TABLET_FONT_SIZE = 16px
 DESKTOP_FONT_SIZE = 18px
 
 SIDEBAR_WIDTH = 336px
+SIDEBAR_WIDTH_TABLET = 160px
 
 GUTTER_PHONE = 0px
 GUTTER_TABLET = 18px
@@ -308,7 +309,7 @@ hr
     @media PHONE
       max-width: 100%
     @media TABLET
-      max-width: MAX_WIDTH + SIDEBAR_WIDTH + GUTTER_TABLET
+      max-width: MAX_WIDTH + SIDEBAR_WIDTH_TABLET + GUTTER_TABLET
     @media DESKTOP
       max-width: MAX_WIDTH + SIDEBAR_WIDTH + GUTTER_DESKTOP
 
@@ -319,7 +320,7 @@ hr
   @media PHONE
     float: none
   @media TABLET
-    margin-right: -(SIDEBAR_WIDTH + GUTTER_TABLET)
+    margin-right: -(SIDEBAR_WIDTH_TABLET + GUTTER_TABLET)
   @media DESKTOP
     margin-right: -(SIDEBAR_WIDTH + GUTTER_DESKTOP)
 
@@ -337,7 +338,7 @@ hr
     @media PHONE
       margin-right: 0
     @media TABLET
-      margin-right: SIDEBAR_WIDTH + GUTTER_TABLET
+      margin-right: SIDEBAR_WIDTH_TABLET + GUTTER_TABLET
     @media DESKTOP
       margin-right: SIDEBAR_WIDTH + GUTTER_DESKTOP
 
@@ -361,6 +362,9 @@ hr
     float: right
 
     @media PHONE
+      float: none
+      margin: 0
+    @media TABLET
       float: none
       margin: 0
 
@@ -400,6 +404,11 @@ body.home
       margin-right: -1 * CONTENT_PADDING_PHONE
       margin-bottom: 10px
       text-align: center
+    @media TABLET
+      margin-left: -1 * CONTENT_PADDING_TABLET
+      margin-right: -1 * CONTENT_PADDING_TABLET
+      margin-bottom: 10px
+      text-align: center
   .sidebar &
     margin: 0 0 1em 0
     @media PHONE
@@ -407,6 +416,13 @@ body.home
       margin-right: -1 * CONTENT_PADDING_PHONE
       margin-bottom: 10px
       text-align: center
+    @media TABLET
+      margin-left: -1 * CONTENT_PADDING_TABLET
+      margin-right: -1 * CONTENT_PADDING_TABLET
+      margin-bottom: 10px
+      text-align: center
+    @media DESKTOP
+      min-height: 250px
   img
     margin-bottom: 0
 
