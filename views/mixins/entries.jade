@@ -14,7 +14,7 @@ mixin entries(entries)
               img(src='#{ config.cdnOrigin }/images/icon/#{ entry.college.id }.png')
 
         if (entry.populated('user'))
-          .author
+          .author.hide-phone
             a(href=entry.user.getUrl(entry.anon))
               span by #{ entry.user.getName(entry.anon) }
               img(src=entry.user.getGravatar(entry.anon))
