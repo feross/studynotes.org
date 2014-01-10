@@ -170,13 +170,17 @@ Site.prototype.serveStatic = function () {
 
   // Setup static middlewares
   var opts = { maxAge: config.maxAge }
-  var static = express.static(path.join(config.root, 'static'), opts)
-  var out = express.static(path.join(config.root, 'out'), opts)
-  var nodeModules = express.static(path.join(config.root, 'node_modules'), opts)
-  var lib = express.static(path.join(config.root, 'lib'), opts)
+  var static = express.static(config.root + '/static', opts)
+  var out = express.static(config.root + '/out', opts)
+  var nodeModules = express.static(config.root + '/node_modules', opts)
+  var lib = express.static(config.root + '/lib', opts)
 
   // Serve static files, they take precedence over the routes.
   self.app.use(static)
+
+  // HACK: Make relative URLs in font-awesome work in development
+  if (!config.isProd)
+    self.app.use('/fonts', express.static(config.root + '/node_modules/font-awesome/fonts', opts))
 
   // Also mount the static files at "/static", without routes. This is so that
   // we can point the CDN at this folder and have it mirror ONLY the static
