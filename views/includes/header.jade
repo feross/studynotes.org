@@ -7,7 +7,7 @@ header.header
           span Study Notes
 
     //- "off" class gets removed after search bar is positioned in JS
-    .search.off.hide-phone
+    .search.off
       i.fa.fa-search
       form(action='/search/', method='GET')
         input(autocorrect='off', autocomplete='off', spellcheck='false', name='q', placeholder='Search for AP Courses, Topics, and more...', type='text', value='#{locals.searchTerm}', autofocus=(searchFocus === false ? undefined : 'autofocus'))
@@ -19,26 +19,25 @@ header.header
 
     ul.right
       li: a.courses(href='/courses/', title='Browse all AP study notes')
-        i.fa.fa-chevron-down.hide-phone
+        i.fa.fa-chevron-down
         span AP Notes
       li: a.colleges(href='/essays/', title='Browse all admissions essays')
-        i.fa.fa-chevron-down.hide-phone
-        span College
-        span.hide-phone Essays
+        i.fa.fa-chevron-down
+        span College Essays
 
       if (locals.currentUser)
-        li.hide-phone: a(href='#{currentUser.url}', title='Manage your account')
-          img(src='#{ currentUser.gravatarBlank }', width=21, height=21).hide-phone.hide-tablet
+        li: a(href='#{currentUser.url}', title='Manage your account')
+          img(src='#{ currentUser.gravatarBlank }', width=21, height=21).hide-tablet
           i.fa.fa-user.hide-tablet
           span= currentUser.firstName
-        li.hide-phone: a.logout(href='#logout', title='Logout of StudyNotes')
+        li: a.logout(href='#logout', title='Logout of StudyNotes')
           i.fa.fa-sign-out.hide-tablet
           span Logout
       else
-        li.hide-phone: a(href='/signup/', title='Create a StudyNotes Account')
+        li: a(href='/signup/', title='Create a StudyNotes Account')
           i.fa.fa-check-square-o.hide-tablet
           span Sign Up
         - var loginUrl = '/login/' + (locals.url ? '?returnTo=' + url : '')
-        li.hide-phone: a(href=loginUrl, title='Login to StudyNotes')
+        li: a(href=loginUrl, title='Login to StudyNotes')
           i.fa.fa-sign-in.hide-tablet
           span Log In

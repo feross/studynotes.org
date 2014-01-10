@@ -35,7 +35,10 @@ TAB_HEIGHT = 33px
     padding-top: 45px
     padding-bottom: 65px
     @media PHONE
-      padding-bottom: 45px
+      padding: 30px CONTENT_PADDING_PHONE 30px CONTENT_PADDING_PHONE
+      body.home &
+        padding-top: 50px
+        padding-bottom: 50px
     @media TABLET
       padding-left: CONTENT_PADDING_TABLET
     @media DESKTOP
@@ -52,6 +55,8 @@ TAB_HEIGHT = 33px
 
     body.home &
       font-size: 5em
+      @media PHONE
+        font-size: 4em
 
   .desc
     font-size: 1.4em

@@ -9,6 +9,10 @@
   width: 100%
   z-index: 10
 
+  body.home &
+    @media PHONE
+      display: none
+
   body:not(.solidHeader) &
     background-color: rgba(0,0,0,0.1)
 
@@ -28,21 +32,33 @@
     &.left
       left: 0
 
-      li a
-        {LINK}
-          border-right: HEADER_BORDER
-        {HOVER}
-          border: HEADER_BORDER_FOCUS
-          padding: 14px 16px 0 15px
+      @media PHONE
+        font-size: 18px
+        width: 100%
 
-        body.solidHeader &
+      li
+        @media PHONE
+          text-align: center
+          width: 100%
+
+        a
           {LINK}
-            border-right: SOLID_HEADER_BORDER
+            border-right: HEADER_BORDER
           {HOVER}
-            border: SOLID_HEADER_BORDER_FOCUS
+            border: HEADER_BORDER_FOCUS
+            padding: 14px 16px 0 15px
+
+          body.solidHeader &
+            {LINK}
+              border-right: SOLID_HEADER_BORDER
+            {HOVER}
+              border: SOLID_HEADER_BORDER_FOCUS
 
     &.right
       right: 0
+
+      @media PHONE
+        display: none
 
       li a
         {LINK}
@@ -110,6 +126,9 @@
     padding: 3px 18px 3px 3px
     position: relative
     text-transform: none
+
+    @media PHONE
+      display: none
 
     body.solidHeader &
       color: #000
