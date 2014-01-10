@@ -12,9 +12,9 @@ CONTENT_WIDTH = 580px
       padding-top: 15px
 
   input, textarea, .select2, label
+    form_font()
     color: #000
     display: block
-    font-family: FORM_FONT
     font-size: 1em
     width: 100%
 
@@ -41,11 +41,11 @@ CONTENT_WIDTH = 580px
       filter: none
 
     .select2-choice
+      form_font()
       background: linear-gradient(top, 50% #FFF, #DDD)
       border: 2px solid GRAY_DARK
       border-radius: 10px
       color: #000
-      font-family: FORM_FONT
       font-size: 1em
 
       .select2-arrow
@@ -97,14 +97,14 @@ CONTENT_WIDTH = 580px
       color: GRAY_DARK !important // to override their !important
 
   ::-webkit-input-placeholder
+    form_font()
     color: GRAY_DARK
-    font-family: FORM_FONT
   ::-moz-placeholder
+    form_font()
     color: #222 // Firefox lightens it, for some reason
-    font-family: FORM_FONT
   :-ms-input-placeholder
+    form_font()
     color: GRAY_DARK
-    font-family: FORM_FONT
 
   input[type='radio'],
   input[type='checkbox'],

@@ -1,9 +1,16 @@
 @import 'nib'
 @import 'colors'
 
-HERO_FONT = 'adelle', Helvetica, serif
-BODY_FONT = 'proxima-nova', Helvetica, sans-serif
-FORM_FONT = 'Lucida Grande', sans-serif
+hero_font()
+  font-family: 'adelle', Helvetica, serif
+  .wf-loading &
+    visibility: hidden
+
+body_font()
+  font-family: 'proxima-nova', Helvetica, sans-serif
+
+form_font()
+  font-family: 'Lucida Grande', sans-serif
 
 HEADER_HEIGHT = 50px
 HERO_HEIGHT = 400px + HEADER_HEIGHT
@@ -34,11 +41,15 @@ CONTENT_PADDING_DESKTOP = 54px
 
 MAX_WIDTH = 1050px
 
-
 // For convenience, when styling links
 
 LINK = '&:link, &:visited'
 HOVER = '&:hover, &:focus, &:active'
+
+ellipsis()
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
 
 .clearfix:before, .clearfix:after
   content: ""
@@ -117,11 +128,6 @@ HOVER = '&:hover, &:focus, &:active'
   &:last-child
     padding-left: 10px
 
-ellipsis()
-  overflow: hidden
-  text-overflow: ellipsis
-  white-space: nowrap
-
 .hide-phone
   @media PHONE
     display: none !important
@@ -136,8 +142,8 @@ html.studynotes // i.e. not within ckeditor
   overflow-y: scroll
 
 body
+  body_font()
   color: GRAY_DARKEST
-  font-family: BODY_FONT
   font-size: 18px
   line-height: 1.5em
   margin: 0
@@ -186,7 +192,7 @@ a[href^="mailto"]
   font-weight: bold
 
 h1, h2, h3, h4, h5
-  font-family: HERO_FONT
+  hero_font()
   font-weight: 500
   margin: 0
   text-rendering: optimizelegibility
