@@ -1,7 +1,5 @@
-.breadcrumbs
-  a(href='/') Home
-  span.divider
-  if (locals.breadcrumbs)
+if (locals.breadcrumbs)
+  .breadcrumbs
     each link, i in locals.breadcrumbs
       if (link.url)
         a(href='#{link.url}')= link.name

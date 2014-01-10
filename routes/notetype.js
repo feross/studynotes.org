@@ -61,7 +61,6 @@ module.exports = function (app) {
       }
 
       res.render(view, {
-        breadcrumbs: [ course ],
         course: course,
         notetype: notetype,
         courseNotetype: courseNotetype,

@@ -64,10 +64,10 @@ module.exports = function (app) {
       }
 
       res.render('note', {
-        breadcrumbs: [ course, {
-          name: notetype.name,
+        breadcrumbs: [{
+          name: notetype.singularName || notetype.name,
           url: course.notetypeUrl(notetype)
-        } ],
+        }],
         course: course,
         note: note,
         next: nextNote,
