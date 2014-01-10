@@ -87,6 +87,16 @@ html(class='studynotes #{layout}', lang='en')
       //-| <script type="text/javascript" src="//use.typekit.net/djj4afz.js"></script>
       //-| <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
+    //- Detect mobile browsers. Inlined to avoid a reflow by setting class later
+    //- in page-load process.
+    script.
+      (function () {
+        if ((/iPhone|iPod|iPad|Android|BlackBerry/).test(navigator.userAgent)) {
+          var html = document.getElementsByTagName("html")[0]
+          html.className = html.className + ' isMobile'
+        }
+      })()
+
     //- Adsense styles must be inline
     style.
       .studynotes-in-content {

@@ -19,10 +19,10 @@ header.header
 
     ul.right
       li: a.courses(href='/courses/', title='Browse all AP study notes')
-        i.fa.fa-chevron-down
+        i.fa.fa-chevron-down.hide-mobile
         span AP Notes
       li: a.colleges(href='/essays/', title='Browse all admissions essays')
-        i.fa.fa-chevron-down
+        i.fa.fa-chevron-down.hide-mobile
         span College Essays
 
       if (locals.currentUser)

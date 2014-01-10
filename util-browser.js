@@ -1,7 +1,3 @@
-exports.isPhone = function () {
-  return $(window).width() < 800 - 25 // account for scrollbar
-}
-
 exports.hasPlaceholderSupport = function () {
   var i = document.createElement('input')
   return 'placeholder' in i
