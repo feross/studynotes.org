@@ -28,7 +28,7 @@ PHONE = 'only screen and (max-width: 799px)'
 TABLET = 'only screen and (min-width: 800px) and (max-width: 1099px)'
 DESKTOP = 'only screen and (min-width: 1100px)'
 
-PHONE_FONT_SIZE = 15px
+PHONE_FONT_SIZE = 14px
 TABLET_FONT_SIZE = 16px
 DESKTOP_FONT_SIZE = 18px
 
@@ -351,6 +351,10 @@ hr
   .pull-right
     margin: 0 0 0 20px
     float: right
+
+  h1
+    @media PHONE
+      text-align: center
 
 body.signup, body.signup2
   background: center center url('images/hero/colleges.jpg') no-repeat fixed
