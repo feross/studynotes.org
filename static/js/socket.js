@@ -19,7 +19,7 @@ function openSocket () {
   }
 }
 
-if (typeof WebSocket === 'function') {
+if (typeof WebSocket === 'function' && !util.isPhone()) {
   openSocket()
 }
 
