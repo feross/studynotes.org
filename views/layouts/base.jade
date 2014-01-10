@@ -93,41 +93,44 @@ html(class='studynotes #{layout}', lang='en')
         width: 336px;
         height: 280px;
       }
-      @media (max-width: 799px) {
+      @media (max-width: 699px) {
+        .studynotes-in-content {
+          width: 320px;
+          height: 100px;
+          left: 0;
+          position: absol
+        }
+      }
+      @media (min-width: 700px) and (max-width: 1024px) {
+        .studynotes-in-content {
+          width: 300px;
+          height: 250px;
+        }
+      }
+      @media (min-width: 1025px) {
         .studynotes-in-content {
           width: 336px;
           height: 280px;
         }
       }
-      @media (min-width: 800px) and (max-width: 1099px) {
-        .studynotes-in-content {
-          width: 336px;
-          height: 280px;
-        }
-      }
-      @media (min-width: 1100px) {
-        .studynotes-in-content {
-          width: 336px;
-          height: 280px;
-        }
-      }
+
       .studynotes-sidebar {
         width: 336px;
         height: 280px;
       }
-      @media (max-width: 799px) {
+      @media (max-width: 699px) {
         .studynotes-sidebar {
-          width: 336px;
-          height: 280px;
+          width: 300px;
+          height: 250px;
         }
       }
-      @media (min-width: 800px) and (max-width: 1099px) {
+      @media (min-width: 700px) and (max-width: 1024px) {
         .studynotes-sidebar {
-          width: 160px;
-          height: 600px;
+          width: 300px;
+          height: 250px;
         }
       }
-      @media (min-width: 1100px) {
+      @media (min-width: 1025px) {
         .studynotes-sidebar {
           width: 336px;
           height: 280px;

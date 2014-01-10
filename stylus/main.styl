@@ -24,9 +24,9 @@ SOLID_HEADER_BORDER = 1px solid GRAY_LIGHT
 HEADER_BORDER_FOCUS = 3px solid #FFF
 SOLID_HEADER_BORDER_FOCUS = 3px solid #000
 
-PHONE = 'only screen and (max-width: 799px)'
-TABLET = 'only screen and (min-width: 800px) and (max-width: 1099px)'
-DESKTOP = 'only screen and (min-width: 1100px)'
+PHONE = 'only screen and (max-width: 699px)'
+TABLET = 'only screen and (min-width: 700px) and (max-width: 1024px)'
+DESKTOP = 'only screen and (min-width: 1025px)'
 
 PHONE_FONT_SIZE = 15px
 TABLET_FONT_SIZE = 16px
@@ -354,8 +354,12 @@ hr
     float: left
 
   .pull-right
-    margin: 0 0 0 20px
+    margin: 0 0 5px 20px
     float: right
+
+    @media PHONE
+      float: none
+      margin: 0
 
   h1
     @media PHONE
@@ -372,8 +376,6 @@ body.login
 body.home
   .hero .totalHits
     display: inline-block
-    @media PHONE
-      min-width: 150px
     @media TABLET
       min-width: 160px
     @media DESKTOP
@@ -388,8 +390,15 @@ body.home
     li
       margin-bottom: 0
 
-.da img
-  margin-bottom: 0
+.da
+  @media PHONE
+    .content &
+      margin-left: -1 * CONTENT_PADDING_PHONE
+      margin-right: -1 * CONTENT_PADDING_PHONE
+      margin-bottom: 10px
+      text-align: center
+  img
+    margin-bottom: 0
 
 @import 'animations'
 @import 'header'
