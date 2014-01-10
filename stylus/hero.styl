@@ -15,28 +15,31 @@ TAB_HEIGHT = 33px
 .hero
   color: #FFF
   display: block
-  margin-top: 45px
-  margin-bottom: 65px
   text-align: left
 
   @media PHONE
     font-size: 0.8em
-    margin-bottom: 40px
     text-align: center
-  @media TABLET
-    margin-left: CONTENT_PADDING_TABLET
-  @media DESKTOP
-    margin-left: CONTENT_PADDING_DESKTOP
 
   body.home &
     text-align: center
-    margin-left: 0
+    padding-left: 0
 
   a
     {LINK}
       color: #FFF
     {HOVER}
       text-decoration: none
+
+    display: block
+    padding-top: 45px
+    padding-bottom: 65px
+    @media PHONE
+      padding-bottom: 40px
+    @media TABLET
+      padding-left: CONTENT_PADDING_TABLET
+    @media DESKTOP
+      padding-left: CONTENT_PADDING_DESKTOP
 
   .title, .desc
     hero_font()
