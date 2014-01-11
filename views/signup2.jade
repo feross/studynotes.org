@@ -15,7 +15,8 @@ block content
       select.select2(name='college', data-placeholder='What university do/did you attend?')
         option
         each college in modelCache.collegesByName
-          option(value=college.id, data-alt=college.shortName, selected=(user && (user.college === college.id)))= college.name
+          if (college.id !== 'common-app')
+            option(value=college.id, data-alt=college.shortName, selected=(user && (user.college === college.id)))= college.name
     .row
       input(name='collegeYear', type='text', placeholder='graduation year', value=(user && user.collegeYear))
     .row

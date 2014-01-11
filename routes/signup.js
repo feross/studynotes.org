@@ -67,6 +67,9 @@ module.exports = function (app) {
     if (!user) return next(new Error('No logged in user'))
 
     var college = model.cache.colleges[req.body.college]
+    if (college.id === 'common-app')
+      college = null
+
     user.college = college && college.id
     user.collegeMajor = req.body.collegeMajor
     user.collegeYear = req.body.collegeYear
