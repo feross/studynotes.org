@@ -71,8 +71,8 @@ module.exports = function (app) {
       college = null
 
     user.college = college && college.id
-    user.collegeMajor = req.body.collegeMajor
-    user.collegeYear = req.body.collegeYear
+    user.collegeMajor = req.body.collegeMajor || undefined
+    user.collegeYear = req.body.collegeYear || undefined
 
     user.save(function (err) {
       if (err && err.name === 'ValidationError') {
