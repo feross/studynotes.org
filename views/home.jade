@@ -131,7 +131,7 @@ append sidebar
       span
       | #{ ' students online.' }
     a(href='https://twitter.com/share', class='twitter-share-button', data-url='#{ locals.url }', data-via='StudyNotesApp', data-size='large') Tweet
-  .fb-home.hide-phone
+  .fb-home.hide-phone.hide-tablet
     | <iframe src="//www.facebook.com/plugins/like.php?href=#{ encodeURIComponent(locals.url) }&amp;width=336&amp;height=35&amp;colorscheme=light&amp;layout=standard&amp;action=like&amp;show_faces=false&amp;send=false&amp;appId=466476846723021" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:336px; height:35px;" allowTransparency="true"></iframe>
 
   div.hide-phone.hide-tablet
