@@ -41,10 +41,14 @@ $("a[href^='http:'], a[href^='https:']")
 // Logout via XHR POST
 $('.logout').click(function (e) {
   e.preventDefault()
-  $.post('/logout/', function () {
-    localStorage.success = 'You are logged out.'
-    window.location = window.location.href
-  })
+  $.post('/logout/')
+    .done(function () {
+      localStorage.success = 'You are logged out.'
+      window.location = window.location.href
+    })
+    .fail(function () {
+      notify.big.error('Error contacting the server!')
+    })
 })
 
 function onResize () {
