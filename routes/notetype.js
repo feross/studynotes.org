@@ -21,7 +21,7 @@ module.exports = function (app) {
           .find({ course: course.id, notetype: notetype.id })
           .sort('ordering -hits')
 
-        if (notetype.id == 'sample-essays') {
+        if (notetype.id === 'sample-essays') {
           query.populate('user')
         } else {
           query.select('-body')

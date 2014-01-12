@@ -138,7 +138,7 @@ $('.header .autocomplete').on('mouseover', '.result', function (e) {
 // Autocomplete keyboard navigation
 $searchInput.on('keydown', function (e) {
   // UP
-  if (e.which == 38) {
+  if (e.which === 38) {
     if ($searchInput.val() === '') {
       $searchInput.trigger('blur') // User meant to scroll page down -- not type into search box
     } else {
@@ -147,7 +147,7 @@ $searchInput.on('keydown', function (e) {
     }
 
   // DOWN
-  } else if (e.which == 40) {
+  } else if (e.which === 40) {
     if ($searchInput.val() === '') {
       $searchInput.trigger('blur')
     } else {
@@ -156,7 +156,7 @@ $searchInput.on('keydown', function (e) {
     }
 
   // SPACE
-  } else if (e.which == 32) {
+  } else if (e.which === 32) {
     if ($searchInput.val() === '') {
       $searchInput.trigger('blur')
     }
