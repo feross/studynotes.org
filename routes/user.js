@@ -14,7 +14,7 @@ module.exports = function (app) {
       essays: function (cb) {
         model.Essay
           .find({ user: req.params.userId, anon: false })
-          .select('-prompt -body')
+          .select('-prompt')
           .sort('-hits')
           .populate('college')
           .exec(cb)
