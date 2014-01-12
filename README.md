@@ -1,5 +1,5 @@
 # [StudyNotes](http://studynotes.org)
-### Helping students learn faster and better!!!!!!!
+### Helping students learn faster and better!
 
 [![Build Status](https://travis-ci.org/feross/StudyNotes.png?branch=master)](https://travis-ci.org/feross/StudyNotes)
 [![Dependency Status](https://david-dm.org/feross/StudyNotes.png)](https://david-dm.org/feross/StudyNotes)
