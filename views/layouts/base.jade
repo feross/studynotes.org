@@ -97,27 +97,50 @@ html(class='studynotes #{layout}', lang='en')
         }
       })()
 
-    //- Adsense styles must be inline
-    style.
-      @media (max-width: 699px) {
-        .adsense-in-content {
-          width: 320px;
-          height: 50px;
+    //- Inline AdSense
+    if (locals.random > 0.75)
+      //- 300x600 test
+      style.
+        @media (max-width: 699px) {
+          .adsense-in-content {
+            width: 320px;
+            height: 50px;
+          }
         }
-      }
-      @media (min-width: 700px) and (max-width: 1024px) {
-        .adsense-in-content {
-          width: 320px;
-          height: 50px;
+        @media (min-width: 700px) and (max-width: 1024px) {
+          .adsense-in-content {
+            width: 336px;
+            height: 280px;
+          }
         }
-      }
-      @media (min-width: 1025px) {
-        .adsense-in-content {
-          width: 336px;
-          height: 280px;
+        @media (min-width: 1025px) {
+          .adsense-in-content {
+            width: 300px;
+            height: 600px;
+          }
         }
-      }
+    else
+      style.
+        @media (max-width: 699px) {
+          .adsense-in-content {
+            width: 320px;
+            height: 50px;
+          }
+        }
+        @media (min-width: 700px) and (max-width: 1024px) {
+          .adsense-in-content {
+            width: 336px;
+            height: 280px;
+          }
+        }
+        @media (min-width: 1025px) {
+          .adsense-in-content {
+            width: 336px;
+            height: 280px;
+          }
+        }
 
+    style.
       @media (max-width: 699px) {
         .adsense-sidebar {
           width: 300px;
