@@ -4,7 +4,7 @@ footer.footer
       p.randomquote
         q= randomquote.text
         | #{ ' ' }
-        span.author!= randomquote.author.replace(' ', '&nbsp;')
+        span.quote-attribution!= randomquote.author.replace(' ', '&nbsp;')
 
     .row
       .col
