@@ -1,5 +1,7 @@
 // Search and autocomplete
 
+var config = require('../../config')
+
 var $autocomplete = $('.header .autocomplete')
 var $headerLeft = $('.header .left')
 var $headerRight = $('.header .right')
@@ -100,11 +102,19 @@ function renderAutocomplete (data) {
           return this.name
         }
       },
+      icon: {
+        src: function (params) {
+          if (this.type === 'Course' || this.type === 'College')
+            return config.cdnOrigin + '/images/icon/' + this.id + '.png'
+          else
+            return config.cdnOrigin + '/images/icon/transparent.png'
+        }
+      },
       result: {
         href: function (params) {
           return this.url
         },
-        'data-position': function (params) { // position
+        'data-position': function (params) {
           return this.position
         },
         'class': function (params) {

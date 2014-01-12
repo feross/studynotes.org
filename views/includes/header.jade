@@ -14,6 +14,7 @@ header.header
 
     .autocomplete.off
       a.result(href='#')
+        img.icon(src='#{ config.cdnOrigin }/images/icon/transparent.png')
         span.name
         span.desc
 
@@ -27,7 +28,7 @@ header.header
 
       if (locals.currentUser)
         li: a(href='#{currentUser.url}', title='Manage your account')
-          img(src='#{ currentUser.gravatarBlank }', width=21, height=21).hide-tablet
+          img.gravatar(src='#{ currentUser.gravatarBlank }', width=21, height=21).hide-tablet
           i.fa.fa-user.hide-tablet
           span= currentUser.firstName
         li: a.logout(href='#logout', title='Logout of StudyNotes')

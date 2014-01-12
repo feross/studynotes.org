@@ -107,7 +107,7 @@
     margin-top: 0
     vertical-align: top
 
-  img
+  .gravatar
     border-radius: 5px
     height: 21px
     margin-left: -2px
@@ -208,7 +208,7 @@
         color: black
         display: block
         ellipsis()
-        padding: 8px 14px
+        padding: 10px 14px
         width: 100%
         z-index: 50
 
@@ -218,6 +218,17 @@
 
       &.selected
         background-color: BLUE_LIGHTER
+
+      img
+        display: none
+
+      &.course, &.college
+        img
+          display: inline-block
+          float: left
+          height: 22px
+          margin: -4px 10px 0 0
+          width: 22px
 
       .desc
         color: GRAY
