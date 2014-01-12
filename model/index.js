@@ -12,6 +12,8 @@ var sort = require('../lib/sort')
 // over *only* the models, skipping methods like `connect`.
 exports.models = {}
 
+exports.cache = {}
+
 // Set up each Schema in the /model folder
 var files = fs.readdirSync(__dirname)
 files.forEach(function (file) {
@@ -45,21 +47,18 @@ exports.connect = function (cb) {
   })
 }
 
-exports.cache = {}
 
 function loadCache (done) {
   async.auto({
     courses: function (cb) {
       exports.Course
         .find()
-        .sort('-hits')
         .populate('notetypes')
         .exec(cb)
     },
     colleges: function (cb) {
       exports.College
         .find()
-        .sort('-hits')
         .exec(cb)
     }
   }, function (err, r) {
@@ -84,7 +83,8 @@ function loadCache (done) {
     exports.cache.collegesByName = _(exports.cache.colleges)
       .flatten()
       .sort(function (a, b) {
-        if (a.id === 'common-app') return -1 // force common-app to sort first
+        // force common-app to sort first
+        if (a.id === 'common-app') return -1
         if (b.id === 'common-app') return 1
         return sort.byProp('name')(a, b)
       })
