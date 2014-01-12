@@ -15,15 +15,11 @@ TAB_HEIGHT = 33px
 .hero
   color: #FFF
   display: block
-  text-align: left
+  text-align: center
 
   @media PHONE
     font-size: 0.85em
     text-align: center
-
-  body.home &
-    text-align: center
-    padding-left: 0
 
   a
     {LINK}
@@ -33,7 +29,9 @@ TAB_HEIGHT = 33px
 
     display: block
     padding-top: 45px
-    padding-bottom: 65px
+    padding-bottom: 45px
+    body.home &
+      padding-bottom: 65px
     @media PHONE
       padding: 25px CONTENT_PADDING_PHONE 25px CONTENT_PADDING_PHONE
       body.home &
@@ -46,7 +44,7 @@ TAB_HEIGHT = 33px
 
   .title, .desc
     hero_font()
-    margin: 0 0 0.3em 0
+    margin: 0
 
   .title
     font-size: 3.2em
@@ -55,15 +53,16 @@ TAB_HEIGHT = 33px
     @media PHONE
       font-size: 2.8em
     body.home &
-      font-size: 5em
+      font-size: 4.5em
       @media PHONE
         font-size: 3.5em
 
   .desc
     font-size: 1.4em
+    margin-top: 0.3em
     text-shadow: 1px 1px 2px rgba(#000, 0.8)
     body.home &
-      font-size: 2.2em
+      font-size: 2em
     @media PHONE
       display: none
 

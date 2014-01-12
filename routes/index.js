@@ -37,10 +37,9 @@ module.exports = function (app) {
       })
 
       opts.hero = {
-        desc: 'Class Notes, Test Prep, Review Materials, and More',
         image: opts.course.heroImage,
         tabs: tabs,
-        title: opts.course.name,
+        title: opts.course.name + ' Notes',
         url: opts.course.url
       }
     }
