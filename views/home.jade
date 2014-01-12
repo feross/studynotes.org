@@ -57,19 +57,19 @@ block content
       ul.tight
         each essay in newEssays.slice(0, 5)
           li
-            a(href=essay.college.url)= essay.college.shortName + ':'
-            span= ' '
-            strong: a(href=essay.url)= ' ' + essay.name
-            span.gray= ' (' + moment(essay.createDate).fromNow() + ')'
+            strong: a(href=essay.college.url)= essay.college.shortName
+            span= ': '
+            a(href=essay.url)= ' ' + essay.name
+            small.gray: em= ' ' + moment(essay.createDate).fromNow()
       p See <a href='/essays/'>all college essays</a>.
     .col2
       ul.tight
         each essay in newEssays.slice(5, 10)
           li
-            a(href=essay.college.url)= essay.college.shortName + ':'
-            span= ' '
-            strong: a(href=essay.url)= ' ' + essay.name
-            span.gray= ' (' + moment(essay.createDate).fromNow() + ')'
+            strong: a(href=essay.college.url)= essay.college.shortName
+            span= ': '
+            a(href=essay.url)= ' ' + essay.name
+            small.gray: em= ' ' + moment(essay.createDate).fromNow()
 
 
   .row
@@ -77,10 +77,10 @@ block content
     ul.tight
       each note in newNotes
         li
-          a(href=note.course.url)= note.course.name + ':'
-          span= ' '
-          strong: a(href=note.url)= note.name
-          span.gray= ' (' + moment(note.createDate).fromNow() + ')'
+          strong: a(href=note.notetype.url)= note.course.shortName + ' ' + note.notetype.name
+          span= ': '
+          a(href=note.url)= note.name
+          small.gray: em= ' ' + moment(note.createDate).fromNow()
     p See <a href='/courses/'>all AP notes</a>.
 
   .row
@@ -92,47 +92,44 @@ block content
             td: a.title(href=user.url)= user.name
             td #{ user.submissionCount } submissions
 
-  h2 We will be adding AP notes for the following courses eventually:
+  .row
+    .col2
+      h2 Our <strong>free AP notes</strong> include:
+      ul
+        li course guides
+        li chapter outlines
+        li topic outlines
+        li vocabulary &amp; key terms
+        li important historical documents
+        li biographies
+        li timelines
+        li practice quizzes
+        li practice tests
 
-  ul
-    li AP Art History
-    li AP Biology (AP Bio)
-    li AP Calculus (AB &amp; BC)
-    li AP Chemistry (AP Chem)
-    li AP Chinese Language and Culture
-    li AP Comparative Government &amp; Politics
-    li AP Computer Science A
-    li AP Environmental Science
-    li AP French Language and Culture
-    li AP German Language and Culture
-    li AP Human Geography
-    li AP Italian Language and Culture
-    li AP Japanese Language and Culture
-    li AP Latin
-    li AP Macroeconomics (AP Econ)
-    li AP Music Theory
-    li AP Physics (B &amp; C)
-    li AP Spanish Language
-    li AP Spanish Literature and Culture
-    li AP Statistics (AP Stats)
-    li AP Studio Art
-
-  h2 Our <strong>free AP notes</strong> include:
-
-  ul
-    li course guides
-    li chapter outlines
-    li topic outlines
-    li vocabulary &amp; key terms
-    li important historical documents
-    li biographies
-    li timelines
-    li formulas
-    li practice quizzes
-    li practice tests
-    li cram sheets
-    li course information
-
+    .col2
+      h2 These <strong>AP courses</strong> coming soon:
+      ul
+        li AP Art History
+        li AP Biology (AP Bio)
+        li AP Calculus (AB &amp; BC)
+        li AP Chemistry (AP Chem)
+        li AP Chinese Language and Culture
+        li AP Comparative Government &amp; Politics
+        li AP Computer Science A
+        li AP Environmental Science
+        li AP French Language and Culture
+        li AP German Language and Culture
+        li AP Human Geography
+        li AP Italian Language and Culture
+        li AP Japanese Language and Culture
+        li AP Latin
+        li AP Macroeconomics (AP Econ)
+        li AP Music Theory
+        li AP Physics (B &amp; C)
+        li AP Spanish Language
+        li AP Spanish Literature and Culture
+        li AP Statistics (AP Stats)
+        li AP Studio Art
 
 append sidebar
   .tweet-home.hide-phone.hide-tablet
