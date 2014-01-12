@@ -1,5 +1,7 @@
 /*jslint node: true */
 
+var _ = require('underscore')
+var async = require('async')
 var bcrypt = require('bcrypt')
 var config = require('../config')
 var model = require('./')
@@ -106,6 +108,34 @@ User.virtual('hasGraduated').get(function () {
   if (this.collegeYear === undefined) return true
   return Number(this.collegeYear) <= (new Date()).getFullYear()
 })
+
+User.methods.totalHits = function (cb) {
+  var user = this
+  async.auto({
+    essays: function (cb) {
+      model.Essay
+        .find({ user: user.id, anon: false })
+        .select('-prompt -body')
+        .exec(cb)
+    },
+    notes: function (cb) {
+      model.Note
+        .find({ user: user.id, anon: false })
+        .select('-body')
+        .exec(cb)
+    }
+  }, function (err, r) {
+    if (err) cb(err)
+    var essayHits = _(r.essays).reduce(function (total, essay) {
+      return total + essay.hits
+    }, 0)
+    var totalHits = _(r.notes).reduce(function (total, note) {
+      return total + note.hits
+    }, essayHits)
+
+    cb(totalHits)
+  })
+}
 
 /**
  * Returns the URL to the user's Gravatar image, based on their email address.
