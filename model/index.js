@@ -50,35 +50,32 @@ exports.connect = function (cb) {
 exports.cache = {}
 
 function loadCache (done) {
-  async.parallel([
-    function (cb) {
+  async.auto({
+    courses: function (cb) {
       exports.Course
         .find()
         .sort('-hits')
         .populate('notetypes')
-        .exec(function (err, courses) {
-          if (err) return cb(err)
-          exports.cache.courses = {}
-          courses.forEach(function (course) {
-            exports.cache.courses[course._id] = course
-          })
-          cb(null)
-        })
+        .exec(cb)
     },
-    function (cb) {
+    colleges: function (cb) {
       exports.College
         .find()
         .sort('-hits')
-        .exec(function (err, colleges) {
-          if (err) return cb(err)
-          exports.cache.colleges = {}
-          colleges.forEach(function (college) {
-            exports.cache.colleges[college._id] = college
-          })
-          cb(null)
-        })
+        .exec(cb)
     }
-  ], function (err) {
+  }, function (err, r) {
+    if (err) return cb(err)
+
+    exports.cache.courses = {}
+    r.courses.forEach(function (course) {
+      exports.cache.courses[course._id] = course
+    })
+
+    exports.cache.colleges = {}
+    r.colleges.forEach(function (college) {
+      exports.cache.colleges[college._id] = college
+    })
 
     exports.cache.coursesByName = _(exports.cache.courses)
       .flatten()

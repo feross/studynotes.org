@@ -15,7 +15,10 @@ var Notetype = mongoose.Schema({
     index: true,
     required: true
   },
-  singularName: String,
+  singularName: {
+    type: String,
+    required: true
+  },
   shortDesc: String,
   desc: String,
   hasChapters: Boolean

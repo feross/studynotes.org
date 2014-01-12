@@ -27,7 +27,7 @@ module.exports = function (app) {
         model.Note
           .find()
           .sort('-createDate')
-          .limit(10)
+          .limit(Object.keys(model.cache.courses).length)
           .select('-body')
           .populate('course notetype')
           .exec(cb)

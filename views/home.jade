@@ -1,30 +1,48 @@
 extends layouts/main-sidebar
 
 block content
-  h2 Free AP Notes and AP Study Guides
-  p We have the best Advanced Placement* study guides, practice tests, and notes on the web, contributed and curated by students and teachers like yourself. <strong>The site is used by millions of students in all 50 U.S. states to prepare for AP* courses and exams.</strong>
+  h2 Free AP Notes and Study Tools
+  p We have the best AP study guides, practice tests, and notes on the web — contributed and curated by students and teachers like yourself. <strong>This site is used by millions of students to prepare for AP exams.</strong>
 
   .row
-    each course in modelCache.coursesByHits.slice(0, 3)
-      .col3
-        h3: strong: a(href=course.url, title=course.shortName)= course.name
+    .col2(style='width: 35%')
+      h2 Pick an AP Class
+      ul.tight
+        each course in modelCache.coursesByName
+          li: strong: a(href=course.url, title=course.shortName)= course.name
+    .col2(style='width: 65%')
+      .row
+        h2 Newest Notes
         ul.tight
-          each notetype in course.notetypes
-            li: a(href=course.notetypeUrl(notetype))= notetype.name
-  .row
-    each course in modelCache.coursesByHits.slice(3, 6)
-      .col3
-        h3: strong: a(href=course.url, title=course.shortName)= course.name
-        ul.tight
-          each notetype in course.notetypes
-            li: a(href=course.notetypeUrl(notetype))= notetype.name
-  .row
-    each course in modelCache.coursesByHits.slice(6, 9)
-      .col3
-        h3: strong: a(href=course.url, title=course.shortName)= course.name
-        ul.tight
-          each notetype in course.notetypes
-            li: a(href=course.notetypeUrl(notetype))= notetype.name
+          each note in newNotes
+            li
+              strong: a(href=note.notetype.url)= note.course.shortName + ' ' + note.notetype.singularName
+              span= ': '
+              a(href=note.url)= note.name
+              small.gray: em= ' ' + moment(note.createDate).fromNow()
+
+
+  //- .row
+  //-   each course in modelCache.coursesByHits.slice(0, 3)
+  //-     .col3
+  //-       h3: strong: a(href=course.url, title=course.shortName)= course.name
+  //-       ul.tight
+  //-         each notetype in course.notetypes
+  //-           li: a(href=course.notetypeUrl(notetype))= notetype.name
+  //- .row
+  //-   each course in modelCache.coursesByHits.slice(3, 6)
+  //-     .col3
+  //-       h3: strong: a(href=course.url, title=course.shortName)= course.name
+  //-       ul.tight
+  //-         each notetype in course.notetypes
+  //-           li: a(href=course.notetypeUrl(notetype))= notetype.name
+  //- .row
+  //-   each course in modelCache.coursesByHits.slice(6, 9)
+  //-     .col3
+  //-       h3: strong: a(href=course.url, title=course.shortName)= course.name
+  //-       ul.tight
+  //-         each notetype in course.notetypes
+  //-           li: a(href=course.notetypeUrl(notetype))= notetype.name
 
   h2
     | Free Sample Admissions Essays
@@ -70,18 +88,6 @@ block content
             span= ': '
             a(href=essay.url)= ' ' + essay.name
             small.gray: em= ' ' + moment(essay.createDate).fromNow()
-
-
-  .row
-    h2 Newest AP Notes
-    ul.tight
-      each note in newNotes
-        li
-          strong: a(href=note.notetype.url)= note.course.shortName + ' ' + note.notetype.name
-          span= ': '
-          a(href=note.url)= note.name
-          small.gray: em= ' ' + moment(note.createDate).fromNow()
-    p See <a href='/courses/'>all AP notes</a>.
 
   .row
     h2 Top Users
