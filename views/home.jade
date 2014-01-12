@@ -16,7 +16,8 @@ block content
         ul.tight
           each note in newNotes
             li
-              strong: a(href=note.notetype.url)= note.course.shortName + ' ' + note.notetype.singularName
+              strong
+                a(href=note.course.notetypeUrl(note.notetype))= note.course.shortName + ' ' + note.notetype.singularName
               span= ': '
               a(href=note.url)= note.name
               small.gray: em= ' ' + moment(note.createDate).fromNow()
