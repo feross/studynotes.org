@@ -11,7 +11,7 @@ footer.footer
         h3 AP Courses
         ul
           each course in modelCache.coursesByName
-            li: a(href='#{course.url}')= course.name
+            li: a(href='#{course.url}') #{ course.name } Notes
           li: a(href='/submit/note/'): strong Submit Notes
 
       .col
