@@ -1,15 +1,5 @@
 extends layouts/main-sidebar
 
-append sidebar
-  include ads/adsense-rect
-  include includes/countdown
-  include ads/adsense-rect
-  h2 #{ course.name } Stats
-  ul
-    li Exam Date: #{ moment(course.examDate).format("MMMM Do, YYYY") }
-    li #{ util.addCommas(course.hits) } views
-    li.online
-
 block content
   include includes/toolbar
 
@@ -21,3 +11,13 @@ block content
 
       - var desc = (notetype.shortDesc || notetype.desc).replace(/COURSE_SHORTNAME/g, course.shortName).replace(/COURSE_TEXTBOOK/g, course.textbook).replace(/COURSE/g, course.name)
       p.desc!= desc
+
+append sidebar
+  include ads/adsense-rect
+  include includes/countdown
+  include ads/adsense-rect
+  h2 #{ course.shortName } Stats
+  ul
+    li Exam Date: #{ moment(course.examDate).format("MMMM Do, YYYY") }
+    li #{ util.addCommas(course.hits) } views
+    li.online
