@@ -3,7 +3,7 @@ extends layouts/main-sidebar
 block content
   include includes/toolbar
 
-  include ads/adsense-inline-rect
+  include ads/adsense-in-content
 
   if (course.notetypes)
     each notetype in course.notetypes
@@ -13,9 +13,9 @@ block content
       p.desc!= desc
 
 append sidebar
-  include ads/adsense-rect
+  include ads/adsense-sidebar
   include includes/countdown
-  include ads/adsense-rect
+  include ads/adsense-sidebar
   h2 #{ course.shortName } Stats
   ul
     li Exam Date: #{ moment(course.examDate).format("MMMM Do, YYYY") }

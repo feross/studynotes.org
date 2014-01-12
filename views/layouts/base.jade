@@ -99,47 +99,47 @@ html(class='studynotes #{layout}', lang='en')
 
     //- Adsense styles must be inline
     style.
-      .studynotes-in-content {
+      .adsense-in-content {
         width: 336px;
         height: 280px;
       }
       @media (max-width: 699px) {
-        .studynotes-in-content {
+        .adsense-in-content {
           width: 320px;
           height: 50px;
         }
       }
       @media (min-width: 700px) and (max-width: 1024px) {
-        .studynotes-in-content {
+        .adsense-in-content {
           width: 320px;
           height: 50px;
         }
       }
       @media (min-width: 1025px) {
-        .studynotes-in-content {
+        .adsense-in-content {
           width: 336px;
           height: 280px;
         }
       }
 
-      .studynotes-sidebar {
+      .adsense-sidebar {
         width: 336px;
         height: 280px;
       }
       @media (max-width: 699px) {
-        .studynotes-sidebar {
+        .adsense-sidebar {
           width: 300px;
           height: 250px;
         }
       }
       @media (min-width: 700px) and (max-width: 1024px) {
-        .studynotes-sidebar {
+        .adsense-sidebar {
           width: 160px;
           height: 600px;
         }
       }
       @media (min-width: 1025px) {
-        .studynotes-sidebar {
+        .adsense-sidebar {
           width: 336px;
           height: 280px;
         }
@@ -197,7 +197,7 @@ html(class='studynotes #{layout}', lang='en')
     if (!locals.offline)
       //- Adsense (responsive ads) (async)
       if (config.isProd)
-        script(async, src='http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')
+        script(async, src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')
 
       //- Twitter SDK (async)
       script.

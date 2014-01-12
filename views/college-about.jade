@@ -25,14 +25,14 @@ block content
 
 
 append sidebar
-  include ads/adsense-rect
+  include ads/adsense-sidebar
 
   h2 Top #{ college.shortName } Essays
   ul.more
     each essay in essays
       li: a(href=essay.url)= essay.name
 
-  include ads/adsense-rect
+  include ads/adsense-sidebar
 
   h2 Page Stats
   ul

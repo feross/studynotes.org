@@ -11,7 +11,7 @@ block content
     +entries(essays)
 
 append sidebar
-  include ads/adsense-rect
+  include ads/adsense-sidebar
 
   .center
     a.btn.large(href='/submit/essay/')
@@ -23,7 +23,7 @@ append sidebar
     each college in modelCache.collegesByRank
       li: a(href=college.url)= college.name
 
-  include ads/adsense-rect
+  include ads/adsense-sidebar
 
   h2 Essay Database Stats
   ul

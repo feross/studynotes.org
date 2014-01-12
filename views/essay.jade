@@ -16,7 +16,7 @@ block content
 
   include includes/toolbar
 
-  include ads/adsense-inline-rect
+  include ads/adsense-in-content
   if essay.prompt
     .prompt <strong>Prompt: </strong> !{essay.prompt}
     hr
@@ -69,7 +69,7 @@ append sidebar
   if (essay.admitsphere)
     p This essay comes from AdmitSphere who kindly allowed it to be republished here.
 
-  include ads/adsense-rect
+  include ads/adsense-sidebar
 
   .center
     a.btn.large(href='/submit/essay/')
@@ -81,7 +81,7 @@ append sidebar
     each essay in essays
       li: a(href=essay.url)= essay.name
 
-  include ads/adsense-rect
+  include ads/adsense-sidebar
 
   h2 Essay Stats
   ul

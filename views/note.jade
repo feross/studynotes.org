@@ -16,7 +16,7 @@ block content
 
   include includes/toolbar
 
-  include ads/adsense-inline-rect
+  include ads/adsense-in-content
 
   | !{note.body}
 
@@ -50,7 +50,7 @@ block content
 
 
 append sidebar
-  include ads/adsense-rect
+  include ads/adsense-sidebar
 
   h2 Note Stats
   ul
@@ -63,4 +63,4 @@ append sidebar
       each note in relatedNotes
         li: a(href='#{note.url}')= note.name
 
-  include ads/adsense-rect
+  include ads/adsense-sidebar
