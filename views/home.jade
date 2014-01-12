@@ -83,7 +83,16 @@ block content
           span.gray= ' (' + moment(note.createDate).fromNow() + ')'
     p See <a href='/courses/'>all AP notes</a>.
 
-  h2 We will be adding AP notes for the following courses soon:
+  .row
+    h2 Top Users
+    table
+      tbody
+        each user in topUsers
+          tr
+            td: a.title(href=user.url)= user.name
+            td #{ user.submissionCount } submissions
+
+  h2 We will be adding AP notes for the following courses eventually:
 
   ul
     li AP Art History

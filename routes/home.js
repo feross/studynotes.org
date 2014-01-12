@@ -1,5 +1,6 @@
 /*jslint node: true */
 
+var _ = require('underscore')
 var async = require('async')
 var model = require('../model')
 var util = require('../util')
@@ -39,8 +40,51 @@ module.exports = function (app) {
           .select('-body -prompt')
           .populate('college')
           .exec(cb)
+      },
+      topUsers: function (cb) {
+        async.auto({
+          notes: function (cb2) {
+            model.Note
+              .find()
+              .select('user')
+              .exec(cb2)
+          },
+
+          essays: function (cb2) {
+            model.Essay
+              .find()
+              .select('user')
+              .exec(cb2)
+          },
+
+          topUsers: ['notes', 'essays', function (cb2, r) {
+            var submissions = r.notes.concat(r.essays)
+            var counts = _.countBy(submissions, function (s) { return s.user })
+            var userIds = _.sortBy(Object.keys(counts), function (k) {
+              return -1 * counts[k]
+            })
+            userIds = userIds.slice(0, 10)
+
+            model.User
+              .find({ _id: { $in: userIds } })
+              .exec(function (err, users) {
+                if (err) return cb2(err)
+                users = _.indexBy(users, '_id')
+
+                var sortedUsers = userIds.map(function (id) {
+                  var user = users[id]
+                  user.submissionCount = counts[id]
+                  return user
+                })
+                cb2(null, sortedUsers)
+              })
+          }]
+        }, function (err, r) {
+          if (err) return cb(err)
+          cb(null, r.topUsers)
+        })
       }
-    }, function (err, results) {
+    }, function (err, r) {
       if (err) return next(err)
 
       var locals = {
@@ -49,7 +93,6 @@ module.exports = function (app) {
           desc: 'Fast, free study guides. <span class="hide-mobile">Trusted <span class="totalHits animated small">millions of</span> times (and&nbsp;counting)</span>',
           descRaw: true,
           image: 'amjed.jpg'
-
           // desc: 'Fast, free study tools for AP students',
           // desc: 'The best AP study guides'
           // desc: 'Study tools for smart students'
@@ -57,7 +100,7 @@ module.exports = function (app) {
         },
         url: '/',
       }
-      util.extend(locals, results)
+      util.extend(locals, r)
 
       res.render('home', locals)
     })
