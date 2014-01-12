@@ -98,7 +98,7 @@ html(class='studynotes #{layout}', lang='en')
       })()
 
     //- Inline AdSense
-    if (locals.random > 0.75)
+    if (locals.random() > 0.50)
       //- 300x600 test
       style.
         @media (max-width: 699px) {
@@ -140,25 +140,46 @@ html(class='studynotes #{layout}', lang='en')
           }
         }
 
-    style.
-      @media (max-width: 699px) {
-        .adsense-sidebar {
-          width: 300px;
-          height: 250px;
+    if (locals.random() > 0.50)
+      style.
+        @media (max-width: 699px) {
+          .adsense-sidebar {
+            width: 300px;
+            height: 250px;
+          }
         }
-      }
-      @media (min-width: 700px) and (max-width: 1024px) {
-        .adsense-sidebar {
-          width: 160px;
-          height: 600px;
+        @media (min-width: 700px) and (max-width: 1024px) {
+          .adsense-sidebar {
+            width: 160px;
+            height: 600px;
+          }
         }
-      }
-      @media (min-width: 1025px) {
-        .adsense-sidebar {
-          width: 336px;
-          height: 280px;
+        @media (min-width: 1025px) {
+          .adsense-sidebar {
+            width: 300px;
+            height: 600px;
+          }
         }
-      }
+    else
+      style.
+        @media (max-width: 699px) {
+          .adsense-sidebar {
+            width: 300px;
+            height: 250px;
+          }
+        }
+        @media (min-width: 700px) and (max-width: 1024px) {
+          .adsense-sidebar {
+            width: 160px;
+            height: 600px;
+          }
+        }
+        @media (min-width: 1025px) {
+          .adsense-sidebar {
+            width: 336px;
+            height: 280px;
+          }
+        }
 
     if (locals.hero && hero.image)
       style(id='heroStyle').

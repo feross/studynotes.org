@@ -234,7 +234,7 @@ Site.prototype.addTemplateLocals = function (req, res, next) {
   res.locals.currentUser = req.user
   res.locals.req = req
   res.locals.csrf = req.csrfToken()
-  res.locals.random = Math.random()
+  res.locals.random = Math.random
   next()
 }
 
