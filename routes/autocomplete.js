@@ -1,5 +1,3 @@
-/*jslint node: true */
-
 var search = require('../lib/search')
 
 module.exports = function (app) {

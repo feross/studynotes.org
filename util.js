@@ -1,5 +1,3 @@
-/*jslint node: true */
-
 exports = module.exports = {}
 
 /**

@@ -1,5 +1,3 @@
-/*jslint node: true */
-
 module.exports = function (app) {
   app.get('/search', function (req, res) {
     var q = req.query.q

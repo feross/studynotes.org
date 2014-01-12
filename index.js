@@ -1,5 +1,3 @@
-/*jslint node: true */
-
 module.exports = Site
 
 var secret = require('./secret')

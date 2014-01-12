@@ -1,5 +1,3 @@
-/*jslint node: true */
-
 var bytes = require('bytes')
 var config = require('./config')
 var cp = require('child_process')

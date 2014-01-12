@@ -1,5 +1,3 @@
-/*jslint node: true */
-
 var auth = require('../lib/auth')
 var config = require('../config')
 var passport = require('passport')

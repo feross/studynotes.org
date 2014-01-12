@@ -1,5 +1,3 @@
-/*jslint node: true */
-
 var config = require('../config')
 var express = require('express')
 var path = require('path')

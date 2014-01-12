@@ -1,5 +1,3 @@
-/*jslint node: true */
-
 var config = require('./config')
 var fs = require('fs')
 var os = require('os')

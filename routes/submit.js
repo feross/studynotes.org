@@ -1,5 +1,3 @@
-/*jslint node: true */
-
 var _ = require('underscore')
 var async = require('async')
 var auth = require('../lib/auth')

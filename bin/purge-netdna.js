@@ -1,5 +1,3 @@
-/*jslint node: true */
-
 var purgeNetDNA = require('purge-netdna')
 var secret = require('../secret.js')
 

@@ -1,5 +1,3 @@
-/*jslint node: true */
-
 var config = require('../config')
 var email = require('../lib/email')
 var express = require('express')

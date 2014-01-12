@@ -1,5 +1,3 @@
-/*jslint node: true */
-
 var model = require('./')
 var mongoose = require('mongoose')
 var plugin = require('./plugin')

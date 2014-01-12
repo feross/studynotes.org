@@ -1,5 +1,3 @@
-/*jslint node: true */
-
 var async = require('async')
 var cp = require('child_process')
 var config = require('../config')

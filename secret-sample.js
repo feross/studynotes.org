@@ -1,5 +1,3 @@
-/*jslint node: true */
-
 exports.cookieSecret = ''
 
 exports.netdna = {

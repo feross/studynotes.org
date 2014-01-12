@@ -1,5 +1,3 @@
-/*jslint node: true */
-
 var util = require('./util')
 
 exports.isProd = process.browser

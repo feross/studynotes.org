@@ -1,5 +1,3 @@
-/*jslint node: true */
-
 var _s = require('underscore.string')
 var async = require('async')
 var config = require('../config')
