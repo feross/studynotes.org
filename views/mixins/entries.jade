@@ -9,7 +9,7 @@ mixin entries(entries)
           a(href=entry.url)= entry.name
 
         if (entry.populated('college'))
-          .college
+          .collegeLogo
             a(href=entry.college.url, title=entry.college.name)
               img(src='#{ config.cdnOrigin }/images/icon/#{ entry.college.id }.png')
 

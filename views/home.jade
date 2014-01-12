@@ -45,14 +45,22 @@ block content
             a(href=essay.url)= ' ' + essay.name
             small.gray: em= ' ' + moment(essay.createDate).fromNow()
 
-  .row
+  .topUsers
     h2 Top Users
-    table
-      tbody
-        each user in topUsers
-          tr
-            td: a.title(href=user.url)= user.name
-            td #{ user.submissionCount } submissions
+    .row
+      each user in topUsers.slice(0, 4)
+        .col4.author
+          a(href=user.url)
+            img(src=user.gravatar)
+            span= user.name
+          .gray #{ user.submissionCount } submissions
+    .row
+      each user in topUsers.slice(4, 8)
+        .col4.author
+          a(href=user.url)
+            img(src=user.gravatar)
+            span= user.name
+          .gray #{ user.submissionCount } submissions
 
   .row
     .col2
