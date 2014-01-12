@@ -34,7 +34,7 @@ module.exports = function (app) {
         model.Essay
           .find()
           .sort('-createDate')
-          .limit(10)
+          .limit(Object.keys(model.cache.collegesByName).length / 2)
           .select('-body -prompt')
           .populate('college')
           .exec(cb)

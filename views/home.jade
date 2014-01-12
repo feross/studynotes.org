@@ -11,38 +11,14 @@ block content
         each course in modelCache.coursesByName
           li: strong: a(href=course.url, title=course.shortName)= course.name
     .col2(style='width: 65%')
-      .row
-        h2 Newest Notes
-        ul.tight
-          each note in newNotes
-            li
-              strong
-                a(href=note.course.notetypeUrl(note.notetype))= note.course.shortName + ' ' + note.notetype.singularName
-              span= ': '
-              a(href=note.url)= note.name
-              small.gray: em= ' ' + moment(note.createDate).fromNow()
-
-  //- .row
-  //-   each course in modelCache.coursesByHits.slice(0, 3)
-  //-     .col3
-  //-       h3: strong: a(href=course.url, title=course.shortName)= course.name
-  //-       ul.tight
-  //-         each notetype in course.notetypes
-  //-           li: a(href=course.notetypeUrl(notetype))= notetype.name
-  //- .row
-  //-   each course in modelCache.coursesByHits.slice(3, 6)
-  //-     .col3
-  //-       h3: strong: a(href=course.url, title=course.shortName)= course.name
-  //-       ul.tight
-  //-         each notetype in course.notetypes
-  //-           li: a(href=course.notetypeUrl(notetype))= notetype.name
-  //- .row
-  //-   each course in modelCache.coursesByHits.slice(6, 9)
-  //-     .col3
-  //-       h3: strong: a(href=course.url, title=course.shortName)= course.name
-  //-       ul.tight
-  //-         each notetype in course.notetypes
-  //-           li: a(href=course.notetypeUrl(notetype))= notetype.name
+      h2 Newest Notes
+      ul.tight
+        each note in newNotes
+          li
+            strong: a(href=note.course.notetypeUrl(note.notetype))= note.course.shortName + ' ' + note.notetype.singularName
+            span= ': '
+            a(href=note.url)= note.name
+            small.gray: em= ' ' + moment(note.createDate).fromNow()
 
   h2
     | Free Sample Admissions Essays
@@ -50,42 +26,24 @@ block content
       i.fa.fa-cloud-upload
       | Submit an essay
 
-  p Learn how to write a powerful college application by studying our database of <strong>#{ essayCount } successful admissions essays</strong>. The secrets aren't secret anymore — see what actually worked for top students.
-  .row
-    .col4
-      ul.tight
-        each college in modelCache.collegesByRank.slice(0, 4)
-          li: a(href=college.url)= college.shortName
-    .col4
-      ul.tight
-        each college in modelCache.collegesByRank.slice(4, 8)
-          li: a(href=college.url)= college.shortName
-    .col4
-      ul.tight
-        each college in modelCache.collegesByRank.slice(8, 12)
-          li: a(href=college.url)= college.shortName
-    .col4
-      ul.tight
-        each college in modelCache.collegesByRank.slice(12, 16)
-          li: a(href=college.url)= college.shortName
-
-  h2 Newest College Essays
+  p Learn how to write a powerful college application by studying <a href='/essays/'>our database</a> of <strong>#{ essayCount } successful admissions essays</strong>. The secrets aren't secret anymore — see what actually worked for top students.
   .row
     .col2
-      ul.tight
-        each essay in newEssays.slice(0, 5)
-          li
-            strong: a(href=essay.college.url)= essay.college.shortName
-            span= ': '
-            a(href=essay.url)= ' ' + essay.name
-            small.gray: em= ' ' + moment(essay.createDate).fromNow()
-      p See <a href='/essays/'>all college essays</a>.
+      h2 Pick a College
+      .row
+        .col2
+          ul.tight
+            each college in modelCache.collegesByName.slice(0, 13)
+              li: strong: a(href=college.url)= college.shortName
+        .col2
+          ul.tight
+            each college in modelCache.collegesByName.slice(13, 26)
+              li: strong: a(href=college.url)= college.shortName
     .col2
+      h2 New College Essays
       ul.tight
-        each essay in newEssays.slice(5, 10)
+        each essay in newEssays.slice(0, 16)
           li
-            strong: a(href=essay.college.url)= essay.college.shortName
-            span= ': '
             a(href=essay.url)= ' ' + essay.name
             small.gray: em= ' ' + moment(essay.createDate).fromNow()
 
@@ -100,7 +58,7 @@ block content
 
   .row
     .col2
-      h2 Our <strong>free AP notes</strong> include:
+      h2 Our <strong>free AP notes</strong> include
       ul
         li course guides
         li chapter outlines
@@ -113,7 +71,7 @@ block content
         li practice tests
 
     .col2
-      h2 These <strong>AP courses</strong> coming soon:
+      h2 Many <strong>AP courses</strong> coming soon
       ul
         li AP Art History
         li AP Biology (AP Bio)
