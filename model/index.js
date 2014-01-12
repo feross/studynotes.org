@@ -63,7 +63,7 @@ function loadCache (done) {
         .exec(cb)
     }
   }, function (err, r) {
-    if (err) return cb(err)
+    if (err) return done(err)
 
     exports.cache.courses = {}
     r.courses.forEach(function (course) {
