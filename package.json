@@ -90,6 +90,7 @@
     }
   },
   "scripts": {
+    "admin": "nodemon admin/index.js",
     "build-js": "browserify -r ./util-browser -r ./config-browser static/js/main.js > out/main.js && node ./bin/minify out/main.js",
     "build-css": "stylus -u nib stylus/main.styl -o out/ --include-css -c && node ./bin/transform-css.js out/main.css",
     "build": "npm run build-js && npm run build-css && node ./bin/postbuild.js",
@@ -98,7 +99,7 @@
     "watch": "npm run watch-js & npm run watch-css",
     "db-tunnel": "ssh -L 27017:localhost:27017 -N feross@athena",
     "db-local": "mongod",
-    "start": "npm run db-tunnel & npm run watch & (sleep 3 && DEBUG=\"studynotes:*\" nodemon run.js)",
+    "start": "npm run db-tunnel & npm run watch & (sleep 2 && DEBUG=\"studynotes:*\" nodemon run.js)",
     "offline": "npm run db-local & npm run watch & (sleep 1 && DEBUG=\"studynotes:*\" nodemon run.js --offline)",
     "test": "tape test/*.js"
   },
