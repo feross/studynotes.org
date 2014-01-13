@@ -115,6 +115,7 @@ Site.prototype.addTemplateGlobals = function () {
   self.app.locals.moment = moment
   self.app.locals.offline = self.offline
   self.app.locals.pretty = true
+  self.app.locals.random = Math.random
   self.app.locals.util = util
 }
 
@@ -231,7 +232,6 @@ Site.prototype.addTemplateLocals = function (req, res, next) {
   res.locals.currentUser = req.user
   res.locals.req = req
   res.locals.csrf = req.csrfToken()
-  res.locals.random = Math.random
   next()
 }
 
