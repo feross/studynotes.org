@@ -23,6 +23,7 @@ block content
   hr
 
   p.keepStudying You just finished <strong>#{note.name}</strong>. Nice&nbsp;work!
+  p.keepStudying Go back to <a href="#{ course.notetypeUrl(notetype) }">all #{ notetype.name.toLowerCase() }</a>.
 
   .noteNav.clearfix
     if prev
