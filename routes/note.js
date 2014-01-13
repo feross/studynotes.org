@@ -62,10 +62,6 @@ module.exports = function (app) {
       }
 
       res.render('note', {
-        breadcrumbs: [{
-          name: notetype.singularName || notetype.name,
-          url: course.notetypeUrl(notetype)
-        }],
         course: course,
         note: note,
         next: nextNote,
