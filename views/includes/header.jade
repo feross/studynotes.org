@@ -35,10 +35,10 @@ header.header
           i.fa.fa-sign-out.hide-tablet
           span Logout
       else
-        li: a(href='/signup/', title='Create a StudyNotes Account')
+        li: a(href='#{ config.secureOrigin }/signup/', title='Create a StudyNotes Account')
           i.fa.fa-check-square-o.hide-tablet
           span Sign Up
-        - var loginUrl = '/login/' + (locals.url ? '?returnTo=' + url : '')
+        - var loginUrl = config.secureOrigin + '/login/' + (locals.url ? '?returnTo=' + url : '')
         li: a(href=loginUrl, title='Login to StudyNotes')
           i.fa.fa-sign-in.hide-tablet
           span Log In

@@ -14,6 +14,11 @@ exports.siteOrigin = exports.isProd
   ? '//www.apstudynotes.org'
   : '//localhost:' + exports.ports.site
 
+exports.secureOrigin = (exports.isProd
+  ? 'https:'
+  : 'http:'
+) + exports.siteOrigin
+
 exports.cdnOrigin = exports.isProd
   ? '//cdn.apstudynotes.org'
   : '/cdn'
