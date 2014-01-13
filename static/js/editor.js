@@ -7,19 +7,21 @@ function formatSelect2 (option) {
 }
 
 // Initialize select2 on <select> elements
-var $select2 = $('.select2')
-if ($select2.length) {
-  $select2.select2({
-    escapeMarkup: function(m) { return m },
-    formatResult: formatSelect2,
-    formatSelection: formatSelect2,
-    matcher: function(term, text, opt) {
-      return text.toLowerCase().indexOf(term.toLowerCase()) >= 0 ||
-        (opt.attr('data-alt')
-          && opt.attr('data-alt').toLowerCase().indexOf(term.toLowerCase()) >= 0)
-    }
-  })
-}
+$(function () {
+  var $select2 = $('.select2')
+  if ($select2.length) {
+    $select2.select2({
+      escapeMarkup: function(m) { return m },
+      formatResult: formatSelect2,
+      formatSelection: formatSelect2,
+      matcher: function(term, text, opt) {
+        return text.toLowerCase().indexOf(term.toLowerCase()) >= 0 ||
+          (opt.attr('data-alt')
+            && opt.attr('data-alt').toLowerCase().indexOf(term.toLowerCase()) >= 0)
+      }
+    })
+  }
+})
 
 var $selectCollege = $('select[name="college"]')
 var $style = $('#heroStyle')
@@ -37,10 +39,12 @@ if ($style.length) {
   })
 }
 
-if ($('textarea[name="prompt"]').length) {
-  var promptEditor = CKEDITOR.replace('prompt', config.simpleEditor)
-}
+$(function () {
+  if ($('textarea[name="prompt"]').length) {
+    var promptEditor = CKEDITOR.replace('prompt', config.simpleEditor)
+  }
 
-if ($('textarea[name="body"]').length) {
-  var bodyEditor = CKEDITOR.replace('body', config.richEditor)
-}
+  if ($('textarea[name="body"]').length) {
+    var bodyEditor = CKEDITOR.replace('body', config.richEditor)
+  }
+})

@@ -1,5 +1,8 @@
 extends layouts/main
 
+block vars
+  - var extraJS = true
+
 block content
   if (locals.errors.length)
     .errors

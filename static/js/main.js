@@ -1,8 +1,7 @@
 var $ = require('jquery')
 require('jquery-placeholder')
-require('select2')
 require('transparency')
-require('ckeditor')
+require('select2')
 
 var browse = require('./browse')
 var Countdown = require('./Countdown')

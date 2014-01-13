@@ -229,9 +229,12 @@ html(class='studynotes #{layout}', lang='en')
     if (locals.course)
       script.
         window.countdownDate = new Date('#{course.examDate}')
-    script.
-      var CKEDITOR_BASEPATH = '#{ config.cdnOrigin }/ckeditor/'
-    script(async, src='#{ config.cdnOrigin }#{ config.jsPath }')
+
+    if (typeof extraJS !== 'undefined' && !!extraJS)
+      script(src='#{ config.cdnOrigin }#{ config.jsMainPath }')
+      script(src='#{ config.cdnOrigin }#{ config.jsExtraPath }')
+    else
+      script(async, src='#{ config.cdnOrigin }#{ config.jsMainPath }')
 
     block scripts
 

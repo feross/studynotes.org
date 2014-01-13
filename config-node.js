@@ -32,14 +32,17 @@ exports.mongo = {
   database: 'studynotes'
 }
 
-var MD5_JS
+var MD5_JS_MAIN
+var MD5_JS_EXTRA
 var MD5_CSS
 try {
   if (config.isProd) {
-    MD5_JS = fs.readFileSync(__dirname + '/out/MD5_JS').toString()
+    MD5_JS_MAIN = fs.readFileSync(__dirname + '/out/MD5_JS_MAIN').toString()
+    MD5_JS_EXTRA = fs.readFileSync(__dirname + '/out/MD5_JS_EXTRA').toString()
     MD5_CSS = fs.readFileSync(__dirname + '/out/MD5_CSS').toString()
   }
 } catch (e) {}
 
-exports.jsPath = '/main' + (MD5_JS ? '-' + MD5_JS : '') + '.js'
+exports.jsMainPath = '/main' + (MD5_JS_MAIN ? '-' + MD5_JS_MAIN : '') + '.js'
+exports.jsExtraPath = '/extra' + (MD5_JS_EXTRA ? '-' + MD5_JS_EXTRA : '') + '.js'
 exports.cssPath = '/main' + (MD5_CSS ? '-' + MD5_CSS : '') + '.css'
