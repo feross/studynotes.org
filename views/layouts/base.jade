@@ -61,8 +61,8 @@ html(class='studynotes #{layout}', lang='en')
     meta(property='fb:app_id', content='466476846723021')
 
     if (locals.url)
-      meta(property='og:url', content='#{locals.url}')
-      link(rel='canonical', href='#{locals.url}')
+      meta(property='og:url', content='http:#{locals.url}')
+      link(rel='canonical', href='http:#{locals.url}')
 
     //- TODO: add rss support
     //- <link rel='alternate' type='application/atom+xml' title=' href=' />
