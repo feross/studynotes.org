@@ -73,7 +73,9 @@ Site.prototype.start = function (done) {
     self.app.use(util.expressLogger(debug))
     self.app.use(express.compress())
     self.app.use(self.addHeaders)
-    if (config.isProd) self.app.use(self.canonicalize)
+
+    if (config.isProd)
+      self.app.use(self.canonicalize)
 
     self.serveStatic()
     self.app.use(connectSlashes())
@@ -149,9 +151,9 @@ Site.prototype.canonicalize = function (req, res, next) {
   if (req.host !== 'www.apstudynotes.org') {
     // redirect alternate domains to homepage
     res.redirect(301, config.siteOrigin)
-  } else if (req.protocol !== 'http') {
-    // redirect HTTP to HTTPS
-    res.redirect(301, config.siteOrigin + req.url)
+  } else if (req.isAuthenticated() && req.protocol !== 'https') {
+    // redirect HTTP to HTTPS for authenticated users
+    res.redirect('https:' + config.siteOrigin + req.url)
   } else {
     next()
   }

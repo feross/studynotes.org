@@ -11,13 +11,11 @@ exports.ports = {
 }
 
 exports.siteOrigin = exports.isProd
-  ? 'http://www.apstudynotes.org'
-  : process.browser
-    ? window.location.origin
-    : 'http://localhost:' + exports.ports.site
+  ? '//www.apstudynotes.org'
+  : '//localhost:' + exports.ports.site
 
 exports.cdnOrigin = exports.isProd
-  ? 'http://cdn.apstudynotes.org'
+  ? '//cdn.apstudynotes.org'
   : '/cdn'
 
 util.extend(exports, require('./config-' + (process.browser ? 'browser' : 'node')))

@@ -4,11 +4,12 @@ var auth = require('../lib/auth')
 var bcrpyt = require('bcrypt')
 var email = require('../lib/email')
 var model = require('../model')
+var ssl = require('../lib/ssl')
 
 module.exports = function (app) {
   // Page 1
 
-  app.get('/signup', auth.returnTo, function (req, res) {
+  app.get('/signup', ssl.ensureSSL, auth.returnTo, function (req, res) {
     if (req.user) {
       res.redirect('/')
     } else {
@@ -21,7 +22,7 @@ module.exports = function (app) {
     }
   })
 
-  app.post('/signup', function (req, res, next) {
+  app.post('/signup', ssl.ensureSSL, function (req, res, next) {
     var user = new model.User({
       name: req.body.name,
       email: req.body.email,
@@ -52,7 +53,7 @@ module.exports = function (app) {
 
   // Page 2
 
-  app.get('/signup2', auth.returnTo, function (req, res) {
+  app.get('/signup2', ssl.ensureSSL, auth.returnTo, function (req, res) {
     if (!req.user) return res.redirect('/signup/')
     res.render('signup2', {
       errors: req.flash('error'),
@@ -60,7 +61,7 @@ module.exports = function (app) {
     })
   })
 
-  app.post('/signup2', function (req, res, next) {
+  app.post('/signup2', ssl.ensureSSL, function (req, res, next) {
     var user = req.user
     if (!user) return next(new Error('No logged in user'))
 
