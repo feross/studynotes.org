@@ -4,6 +4,7 @@ require('transparency')
 require('select2')
 
 var browse = require('./browse')
+var config = require('../../config')
 var Countdown = require('./Countdown')
 var editor = require('./editor')
 var key = require('keymaster')
@@ -33,8 +34,8 @@ $.ajaxSetup({
 })
 
 // Make external links open in new window
-$("a[href^='http:'], a[href^='https:']")
-  .not("[href*='www.apstudynotes.org']")
+$('a[href^="http:"], a[href^="https:"]')
+  .not('[href*="' + config.siteOrigin + '"]')
   .attr('target','_blank')
 
 // Logout via XHR POST
