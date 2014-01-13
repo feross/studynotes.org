@@ -1,4 +1,4 @@
-# [StudyNotes](http://studynotes.org)
+# [StudyNotes](http://www.apstudynotes.org)
 ### Helping students learn faster and better!
 
 [![Build Status](https://travis-ci.org/feross/StudyNotes.png?branch=master)](https://travis-ci.org/feross/StudyNotes)

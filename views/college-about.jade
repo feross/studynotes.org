@@ -10,7 +10,7 @@ block content
     h2 #{ college.shortName } is Located in #{ college.location }
     .map
       a(href='http://maps.google.com/?q=#{ college.name }')
-        img(src='http://maps.googleapis.com/maps/api/staticmap?center=#{ encodeURIComponent(college.name) }&markers=#{ encodeURIComponent(college.name) }&zoom=7&size=640x220&scale=2&maptype=roadmap&sensor=false&visual_refresh=true')
+        img(src='//maps.googleapis.com/maps/api/staticmap?center=#{ encodeURIComponent(college.name) }&markers=#{ encodeURIComponent(college.name) }&zoom=7&size=640x220&scale=2&maptype=roadmap&sensor=false&visual_refresh=true')
 
   if (college.acceptRate)
     h2 #{ college.shortName } Stats

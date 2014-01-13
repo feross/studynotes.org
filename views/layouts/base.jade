@@ -11,11 +11,16 @@ html(class='studynotes #{layout}', lang='en')
     link(rel='dns-prefetch', href='//p.twitter.com')
     link(rel='dns-prefetch', href='//www.facebook.com')
     link(rel='dns-prefetch', href='//widget.uservoice.com')
-    link(rel='dns-prefetch', href='http://edge.quantserve.com')
-    link(rel='dns-prefetch', href='http://pixel.quantserve.com')
-    link(rel='dns-prefetch', href='http://www.google-analytics.com')
-    link(rel='dns-prefetch', href='http://www.statcounter.com')
-    link(rel='dns-prefetch', href='http://c.statcounter.com')
+    link(rel='dns-prefetch', href='//pixel.quantserve.com')
+    link(rel='dns-prefetch', href='//c.statcounter.com')
+    if (req.protocol === 'https')
+      link(rel='dns-prefetch', href='https://secure.quantserve.com')
+      link(rel='dns-prefetch', href='https://ssl.google-analytics.com')
+      link(rel='dns-prefetch', href='https://secure.statcounter.com')
+    else
+      link(rel='dns-prefetch', href='http://edge.quantserve.com')
+      link(rel='dns-prefetch', href='http://www.google-analytics.com')
+      link(rel='dns-prefetch', href='http://www.statcounter.com')
 
     - if (locals.forceTitle)
       - pageTitle = title
@@ -313,7 +318,9 @@ html(class='studynotes #{layout}', lang='en')
         var sc_project=3533945;
         var sc_invisible=1;
         var sc_security="1577ef81";
-      script(src='http://www.statcounter.com/counter/counter.js')
+        var sc_https=1;
+        var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
+        document.write("<sc"+"ript src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
       noscript
         div.statcounter
-          img.statcounter(src='http://c.statcounter.com/3533945/0/1577ef81/1/', alt='')
+          img.statcounter(src='//c.statcounter.com/3533945/0/1577ef81/1/')
