@@ -90,7 +90,6 @@
     }
   },
   "scripts": {
-    "admin": "nodemon admin/index.js",
     "build-js": "browserify -r ./util-browser -r ./config-browser static/js/main.js > out/main.js && node ./bin/minify out/main.js",
     "build-css": "stylus -u nib stylus/main.styl -o out/ --include-css -c && node ./bin/transform-css.js out/main.css",
     "build": "npm run build-js && npm run build-css && node ./bin/postbuild.js",
@@ -101,7 +100,9 @@
     "db-local": "mongod",
     "start": "npm run db-tunnel & npm run watch & (sleep 2 && DEBUG=\"studynotes:*\" nodemon run.js)",
     "offline": "npm run db-local & npm run watch & (sleep 1 && DEBUG=\"studynotes:*\" nodemon run.js --offline)",
-    "test": "tape test/*.js"
+    "admin": "nodemon admin/index.js",
+    "test": "tape test/*.js",
+    "push": "npm version patch && git push && npm publish"
   },
   "repository": {
     "type": "git",
