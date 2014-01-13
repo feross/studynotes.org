@@ -176,9 +176,10 @@ Site.prototype.serveStatic = function () {
   // Serve static files, they take precedence over the routes.
   self.app.use(static)
 
-  // HACK: Make relative URLs in font-awesome work in development
+  // HACK: Make CSS relative URLs work in development
   if (!config.isProd)
     self.app.use('/fonts', express.static(config.root + '/node_modules/font-awesome/fonts', opts))
+    self.app.use('/cdn', express.static(config.root + '/lib/select2', opts))
 
   // Also mount the static files at "/static", without routes. This is so that
   // we can point the CDN at this folder and have it mirror ONLY the static
