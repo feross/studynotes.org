@@ -1,7 +1,7 @@
 {
   "name": "studynotes",
   "version": "0.2.1",
-  "description": "The StudyNotes.org website. Helping students learn faster and better.",
+  "description": "The StudyNotes.org website. AP Notes & College Essays. AP US History Notes.",
   "homepage": "http://www.apstudynotes.org",
   "main": "index.js",
   "dependencies": {
