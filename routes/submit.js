@@ -160,13 +160,16 @@ module.exports = function (app) {
       } else if (err) {
         next(err)
       } else {
-        req.flash('note', {
-          course: r.note.course,
-          notetype: r.note.notetype
-        })
-        res.redirect('/submit/note/')
-        if (!isEdit)
+        if (isEdit) {
+          res.redirect(r.note.url)
+        } else {
+          req.flash('note', {
+            course: r.note.course,
+            notetype: r.note.notetype
+          })
+          res.redirect('/submit/note/')
           email.notifyAdmin('New note', r.note)
+        }
       }
     })
   })
