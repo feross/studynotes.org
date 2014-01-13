@@ -10,7 +10,7 @@ var cluster = require('cluster')
 var cp = require('child_process')
 var config = require('./config')
 var connectSlashes = require('connect-slashes')
-var debug = require('debug')('studynotes:index')
+var debug = require('debug')('studynotes:site')
 var express = require('express')
 var flash = require('connect-flash')
 var fs = require('fs')
@@ -42,21 +42,22 @@ Site.prototype.start = function (done) {
   done || (done = function () {})
 
   if (cluster.isMaster) {
+    console.log('Master process will spawn ' + config.numCpus + ' workers')
+
     cluster.setupMaster({
       exec: __filename
     })
 
-    debug('Spawning ' + config.numCpus + ' workers')
     for (var i = 0; i < config.numCpus; i++) {
       cluster.fork()
     }
     cluster.on('exit', function (worker, code, signal) {
-      console.error('Worker %s died (%s)', worker.process.pid, code)
+      console.error('Worker %s died (%s)', worker.id, code)
     })
     done(null)
 
   } else {
-    console.log('Worker %s started', cluster.worker.id)
+    console.log('Worker process %s started', cluster.worker.id)
     self.app = express()
     self.server = http.createServer(self.app)
 
@@ -112,8 +113,8 @@ Site.prototype.addTemplateGlobals = function () {
   self.app.locals.config = config
   self.app.locals.modelCache = model.cache
   self.app.locals.moment = moment
-  self.app.locals.pretty = true
   self.app.locals.offline = self.offline
+  self.app.locals.pretty = true
   self.app.locals.util = util
 }
 
@@ -124,11 +125,6 @@ Site.prototype.addHeaders = function (req, res, next) {
   if (['.eot', '.ttf', '.otf', '.woff'].indexOf(extname) >= 0) {
     res.header('Access-Control-Allow-Origin', '*')
   }
-
-  // Enforces secure (HTTP over SSL/TLS) connections to the server. This reduces
-  // impact of bugs leaking session data through cookies and external links.
-  // TODO: enable once we support HTTPS
-  // res.header('Strict-Transport-Security', 'max-age=500')
 
   // Prevents IE and Chrome from MIME-sniffing a response. Reduces exposure to
   // drive-by download attacks on sites serving user uploaded content.
