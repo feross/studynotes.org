@@ -102,7 +102,7 @@
     "offline": "npm run db-local & npm run watch & (sleep 1 && DEBUG=\"studynotes:*\" nodemon run.js --offline)",
     "admin": "nodemon admin/index.js",
     "test": "tape test/*.js",
-    "push": "npm version patch && git push && npm publish"
+    "push": "git stash -u && npm version patch && git stash pop && git push && npm publish"
   },
   "repository": {
     "type": "git",
