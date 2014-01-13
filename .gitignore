@@ -1,5 +1,6 @@
-# Password file
-secret.js
+# Secret files
+secret/*
+!secret/index-sample.js
 
 # Built files
 out/*

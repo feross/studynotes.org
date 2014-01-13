@@ -1,3 +1,5 @@
+var config = require('../config')
+
 exports.cookieSecret = ''
 
 exports.netdna = {
@@ -10,4 +12,9 @@ exports.netdna = {
 exports.gmail = {
   user: '',
   pass: ''
+}
+
+exports.stripe = {
+  secret: config.isProd ? '' : '',
+  publishable: config.isProd ? '' : ''
 }
