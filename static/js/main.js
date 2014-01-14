@@ -44,7 +44,7 @@ $('.logout').click(function (e) {
   $.post('/logout/')
     .done(function () {
       localStorage.success = 'You are logged out.'
-      window.location = window.location.href
+      window.location = 'http:' + config.siteOrigin + window.location.pathname
     })
     .fail(function () {
       notify.big.error('Error contacting the server!')
