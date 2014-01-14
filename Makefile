@@ -8,11 +8,11 @@ update-deps:
 
 .PHONY : upload-secret
 upload-secret:
-	rsync -a -O -v -e "ssh -p 44444" secret/ feross@$(APP_SERVER):/home/feross/www/studynotes.org/secret/
+	rsync -a -O -v --delete -e "ssh -p 44444" secret/ feross@$(APP_SERVER):/home/feross/www/studynotes.org/secret/
 
 .PHONY : download-secret
 download-secret:
-	rsync -a -O -v -e "ssh -p 44444" feross@$(APP_SERVER):"$(APP_DIR)/secret/" secret/
+	rsync -a -O -v --delete -e "ssh -p 44444" feross@$(APP_SERVER):"$(APP_DIR)/secret/" secret/
 
 .PHONY : download-db
 download-db:
