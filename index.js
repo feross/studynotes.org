@@ -150,7 +150,7 @@ Site.prototype.addHeaders = function (req, res, next) {
 Site.prototype.canonicalize = function (req, res, next) {
   if (req.host !== 'www.apstudynotes.org') {
     // redirect alternate domains to homepage
-    res.redirect(301, 'http:' + config.siteOrigin + req.url)
+    res.redirect(301, req.protocol + ':' + config.siteOrigin + req.url)
   } else if (req.isAuthenticated() && req.protocol !== 'https') {
     // redirect HTTP to HTTPS for authenticated users
     res.redirect(config.secureOrigin + req.url)
