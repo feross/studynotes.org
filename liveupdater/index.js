@@ -5,10 +5,9 @@ var async = require('async')
 var config = require('../config')
 var debug = require('debug')('studynotes:liveupdater')
 var fs = require('fs')
-var http = require('http')
+var https = require('https')
 var jsdom = require('jsdom')
 var model = require('../model')
-var path = require('path')
 var util = require('../util')
 var ws = require('ws')
 
@@ -23,11 +22,17 @@ function LiveUpdater (opts, cb) {
   self.titles = {}
 
   self.jquery = fs.readFileSync(
-    path.join(config.root, 'node_modules/jquery/dist/jquery.min.js'),
+    config.root + '/node_modules/jquery/dist/jquery.min.js',
     { encoding: 'utf8' }
   )
 
-  self.server = new ws.Server({ port: self.port })
+  var httpsServer = https.createServer({
+    key: fs.readFileSync(config.root + '/secret/apstudynotes.org.key'),
+    cert: fs.readFileSync(config.root + '/secret/apstudynotes.org.chained.crt')
+  })
+  httpsServer.listen(self.port)
+
+  self.server = new ws.Server({ server: httpsServer })
 
   self.server.on('connection', function (socket) {
     socket.on('message', self.handleMessage.bind(self, socket))
