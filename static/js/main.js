@@ -43,8 +43,8 @@ $('.logout').click(function (e) {
   e.preventDefault()
   $.post('/logout/')
     .done(function () {
-      localStorage.success = 'You are logged out.'
-      window.location = 'http:' + config.siteOrigin + window.location.pathname
+      window.location = window.encodeURI('http:' + config.siteOrigin +
+          window.location.pathname + '?info=You are logged out!')
     })
     .fail(function () {
       notify.big.error('Error contacting the server!')
@@ -111,23 +111,18 @@ $(window).load(function () {
 })
 
 // "Welcome back" message
-if (localStorage.returning &&
-    url.parse(document.referrer).host !== window.location.host) {
+if (document.cookie.match('returning=true') && // this is a returning visitor
+    url.parse(document.referrer).host !== window.location.host) { // external site
   notify.big.info('Welcome back!', { timeout: 2000 })
 }
-localStorage.returning = true
+document.cookie = 'returning=true'
 
-if (localStorage.notify) {
-  notify.big.info(localStorage.notify)
-  localStorage.removeItem('notify')
-}
-if (localStorage.success) {
-  notify.big.info(localStorage.success)
-  localStorage.removeItem('success')
-}
-if (localStorage.error) {
-  notify.big.info(localStorage.error)
-  localStorage.removeItem('error')
+var match = /(success|error|info)=([^?&]+)/g.exec(window.location.search)
+var msgType = match && match[1]
+var msg = match && match[2]
+if (msgType && msg) {
+  notify.big[msgType](window.decodeURIComponent(msg))
+  window.history.replaceState(null, null, window.location.pathname)
 }
 
 $(function () {
