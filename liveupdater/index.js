@@ -5,16 +5,17 @@ var async = require('async')
 var config = require('../config')
 var debug = require('debug')('studynotes:liveupdater')
 var fs = require('fs')
+var http = require('http')
 var https = require('https')
 var jsdom = require('jsdom')
 var model = require('../model')
 var util = require('../util')
 var ws = require('ws')
 
-function LiveUpdater (opts, cb) {
+function LiveUpdater (opts, done) {
   var self = this
   if (opts) util.extend(self, opts)
-  cb || (cb = function () {})
+  done || (done = function () {})
 
   /** @type {number} port */
   self.port || (self.port = config.ports.liveupdater)
@@ -26,13 +27,15 @@ function LiveUpdater (opts, cb) {
     { encoding: 'utf8' }
   )
 
-  var httpsServer = https.createServer({
-    key: fs.readFileSync(config.root + '/secret/apstudynotes.org.key'),
-    cert: fs.readFileSync(config.root + '/secret/apstudynotes.org.chained.crt')
-  })
-  httpsServer.listen(self.port)
+  var httpServer = config.isProd
+    ? https.createServer({
+      key: fs.readFileSync(config.root + '/secret/apstudynotes.org.key'),
+      cert: fs.readFileSync(config.root + '/secret/apstudynotes.org.chained.crt')
+    })
+    : http.createServer()
 
-  self.server = new ws.Server({ server: httpsServer })
+  httpServer.listen(self.port)
+  self.server = new ws.Server({ server: httpServer })
 
   self.server.on('connection', function (socket) {
     socket.on('message', self.handleMessage.bind(self, socket))
@@ -45,7 +48,10 @@ function LiveUpdater (opts, cb) {
     function (cb) {
       self.getTotalHits(cb)
     }
-  ], cb)
+  ], function (err) {
+    if (!err) debug('StudyNotes listening on ' + self.port)
+    done(err)
+  })
 }
 
 LiveUpdater.prototype.handleMessage = function (socket, str) {
