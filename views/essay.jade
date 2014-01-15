@@ -27,14 +27,13 @@ block content
     .body
       .subscribe-on-blur.unblur
         h2 You must subscribe for $19 to read this essay.
-        p: form(action='', method='POST')
+        p
+          form(action='', method='POST')
             script(src='https://checkout.stripe.com/checkout.js', class='stripe-button', data-key=stripe.publishable, data-amount='1900', data-name='StudyNotes Pro', data-description='Full access to all college essays ($19)', data-image='/128x128.png')
         h4 With <strong>StudyNotes Pro</strong> (one-time payment) you get lifetime access to all #{ essayCount } college essays in our database!
-      .blur
-        !{essay.body}
+      .blur !{essay.body}
   else
-    .body
-      !{essay.body}
+    .body !{essay.body}
 
   hr
 
@@ -83,11 +82,6 @@ append sidebar
     p This essay comes from AdmitSphere who kindly allowed it to be republished here.
 
   include ads/adsense-sidebar
-
-  .center
-    a.btn.large(href='/submit/essay/')
-      i.fa.fa-cloud-upload
-      | Submit an essay
 
   h2 More #{ college.shortName } Essays
   ul.more

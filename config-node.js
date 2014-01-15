@@ -46,3 +46,11 @@ try {
 exports.jsMainPath = '/main' + (MD5_JS_MAIN ? '-' + MD5_JS_MAIN : '') + '.js'
 exports.jsExtraPath = '/extra' + (MD5_JS_EXTRA ? '-' + MD5_JS_EXTRA : '') + '.js'
 exports.cssPath = '/main' + (MD5_CSS ? '-' + MD5_CSS : '') + '.css'
+
+/**
+ * Number of "first click, free" essays that a given session can view before
+ * requesting that they subscribe. The user can always view if they have
+ * "google" in their referer.
+ * @type {Number}
+ */
+exports.numFree = 2

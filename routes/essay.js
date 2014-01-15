@@ -1,6 +1,9 @@
 var _ = require('underscore')
 var async = require('async')
+var config = require('../config')
+var debug = require('debug')('studynotes:routes/essay.js')
 var model = require('../model')
+var url = require('url')
 
 module.exports = function (app) {
   app.get('/:collegeId/:essayId', function (req, res, next) {
@@ -39,6 +42,25 @@ module.exports = function (app) {
       if (err) return next(err)
       if (!r.essay) return next()
 
+      if (!(req.user && req.user.subscriber)) {
+        // They're a "first click free" user
+        if (req.session.free === undefined) {
+          debug('No first click free object, creating one')
+          req.session.free = {}
+        } else {
+          debug('First click free: ' + Object.keys(req.session.free).join(','))
+        }
+
+        if (!req.session.free[req.url]) {
+          if (Object.keys(req.session.free).length < config.numFree
+              || url.parse(req.get('referer')).host.search('google') !== -1) {
+            req.session.free[req.url] = true
+          } else {
+            r.blur = true
+          }
+        }
+      }
+
       if (req.query.edit) {
         req.flash('essay', r.essay)
         return res.redirect('/submit/essay/')
@@ -58,7 +80,6 @@ module.exports = function (app) {
         { name: 'College Essays', url: '/essays/' },
         college
       ]
-      r.blur = true
       r.college = college
       r.title = [r.essay.name, college.shortName + ' Essay'].join(' - ')
       r.forceTitle = true
