@@ -39,6 +39,7 @@ function LiveUpdater (opts, done) {
 
   self.server.on('connection', function (socket) {
     socket.on('message', self.handleMessage.bind(self, socket))
+    socket.on('error', self.handleClose.bind(self, socket))
     socket.on('close', self.handleClose.bind(self, socket))
     socket.onSend = self.handleSend.bind(self, socket)
   })
@@ -257,7 +258,7 @@ LiveUpdater.prototype.getTitle = function (url) {
       url: 'http:' + config.siteOrigin + url,
       src: [self.jquery],
       done: function (err, window) {
-        if (err) return console.error(err)
+        if (err) return console.error('ERROR: getTitle: ' + err.message)
         title = window.$('title').text()
 
         if (title === 'Site is under maintenance!')
