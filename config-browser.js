@@ -4,7 +4,7 @@ var config = require('./config')
 exports.socketReconnectTimeout = Math.floor(Math.random() * 50000) + 10000
 
 exports.wsEndpoint = config.isProd
-  ? 'wss:' + exports.siteOrigin + ':' + config.ports.liveupdater
+  ? 'wss:' + config.siteOrigin + ':' + config.ports.liveupdater
   : 'ws://' + window.location.hostname + ':' + config.ports.liveupdater
 
 exports.simpleEditor = {
