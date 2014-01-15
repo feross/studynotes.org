@@ -314,14 +314,15 @@ html(class='studynotes #{layout}', lang='en')
           var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
         })();
 
-      //- StatCounter (blocking)
-      script.
-        var sc_project=3533945;
-        var sc_invisible=1;
-        var sc_security="1577ef81";
-        var sc_https=1;
-        var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
-        document.write("<sc"+"ript src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
-      noscript
-        div.statcounter
-          img.statcounter(src='//c.statcounter.com/3533945/0/1577ef81/1/')
+      if (config.isProd)
+        //- StatCounter (blocking)
+        script.
+          var sc_project=3533945;
+          var sc_invisible=1;
+          var sc_security="1577ef81";
+          var sc_https=1;
+          var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
+          document.write("<sc"+"ript src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
+        noscript
+          div.statcounter
+            img.statcounter(src='//c.statcounter.com/3533945/0/1577ef81/1/')
