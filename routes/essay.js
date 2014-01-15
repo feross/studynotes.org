@@ -25,6 +25,9 @@ module.exports = function (app) {
           cb()
         }
       }],
+      essayCount: function (cb) {
+        model.Essay.count().exec(cb)
+      },
       essays: function (cb) {
         model.Essay
           .find({ college: college.id })
@@ -32,50 +35,38 @@ module.exports = function (app) {
           .select('-body -prompt')
           .exec(cb)
       }
-    }, function (err, results) {
-      var essays = results.essays
-      var essay = results.essay
-
+    }, function (err, r) {
       if (err) return next(err)
-      if (!essay) return next()
+      if (!r.essay) return next()
 
       if (req.query.edit) {
-        req.flash('essay', essay)
+        req.flash('essay', r.essay)
         return res.redirect('/submit/essay/')
       }
 
       var index
-      essays.forEach(function (e, i) {
-        if (e.id === essay.id) index = i
+      r.essays.forEach(function (e, i) {
+        if (e.id === r.essay.id) index = i
       })
 
-      var prevEssay
-      var nextEssay
-      if (index > 0) {
-        prevEssay = essays[index - 1]
-      }
-      if (index < essays.length - 1) {
-        nextEssay = essays[index + 1]
-      }
+      if (index > 0)
+        r.prev = r.essays[index - 1]
+      if (index < r.essays.length - 1)
+        r.next = r.essays[index + 1]
 
-      res.render('essay', {
-        breadcrumbs: [
-          { name: 'College Essays', url: '/essays/' },
-          college
-        ],
-        blurred: true,
-        college: college,
-        essay: essay,
-        essays: essays,
-        next: nextEssay,
-        prev: prevEssay,
-        title: [essay.name, college.shortName + ' Essay'].join(' - '),
-        forceTitle: true,
-        url: essay.url,
-        user: essay.user
-      })
+      r.breadcrumbs = [
+        { name: 'College Essays', url: '/essays/' },
+        college
+      ]
+      r.blur = true
+      r.college = college
+      r.title = [r.essay.name, college.shortName + ' Essay'].join(' - ')
+      r.forceTitle = true
+      r.url = r.essay.url,
+      r.user = r.essay.user
 
-      essay.hit()
+      res.render('essay', r)
+      r.essay.hit()
     })
   })
 }

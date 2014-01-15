@@ -1,13 +1,33 @@
 body.essay
-  .content
-    .prompt
-      font-style: italic
+  .prompt
+    font-style: italic
 
-  .body.blurred :not(:first-child)
-    color: rgba(255, 255, 255, 0)
+  .body
     cursor: default
+    position: relative
     user-select: none
-    text-shadow: #000 0 0 8px
 
-    .ie10 &, .ie11 &
-      color: rgba(230, 230, 230, 0.6)
+    .blur :not(:first-child):not(:nth-child(2))
+      color: rgba(255, 255, 255, 0)
+      text-shadow: #000 0 0 8px
+
+      .ie10 &, .ie11 &
+        color: rgba(230, 230, 230, 0.6)
+
+      &:nth-child(3)::first-line
+        color: GRAY_DARKEST
+        text-shadow: none
+
+  .subscribe-on-blur
+    background: radial-gradient(rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0.1) 80%)
+    left: 0
+    padding: 175px 150px 150px 150px
+    position: absolute
+    right: 0
+    text-align: center
+    top: 275px
+
+    @media PHONE
+      padding: 150px 50px
+    @media TABLET
+      padding: 150px 100px

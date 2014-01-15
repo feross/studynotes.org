@@ -121,6 +121,7 @@ Site.prototype.addTemplateGlobals = function () {
   self.app.locals.offline = self.offline
   self.app.locals.pretty = true
   self.app.locals.random = Math.random
+  self.app.locals.stripe = { publishable: secret.publishable }
   self.app.locals.util = util
 }
 
