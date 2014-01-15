@@ -63,6 +63,7 @@ module.exports = function (app) {
           { name: 'College Essays', url: '/essays/' },
           college
         ],
+        blurred: true,
         college: college,
         essay: essay,
         essays: essays,

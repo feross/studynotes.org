@@ -14,3 +14,9 @@
 body.course .sidebar, body.notetype .sidebar, body.note .sidebar {
   margin-top: -100px !important;
 }
+
+body.essay .body.blurred {
+  color: #333;
+  filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='5');
+  zoom: 1;
+}

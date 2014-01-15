@@ -16,12 +16,15 @@ block content
 
   include includes/toolbar
 
-  include ads/adsense-in-content
+  if (!blurred)
+    include ads/adsense-in-content
+
   if essay.prompt
     .prompt <strong>Prompt: </strong> !{essay.prompt}
     hr
 
-  .body !{essay.body}
+
+  div(class='body #{ blurred ? "blurred" : "" }') !{essay.body}
 
   hr
 

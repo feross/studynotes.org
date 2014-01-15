@@ -210,6 +210,13 @@ html(class='studynotes #{layout}', lang='en')
         }
       })()
 
+    //- Add .ie10 and .ie11 classes to <html>, if this is IE
+    script.
+      if (/*@cc_on!@*/false && document.documentMode === 10
+          || document.documentMode === 11) {
+        document.documentElement.className+=' ie' + document.documentMode;
+      }
+
     block head
 
   body(class='#{ locals.cls }')

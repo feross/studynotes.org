@@ -2,3 +2,12 @@ body.essay
   .content
     .prompt
       font-style: italic
+
+  .body.blurred :not(:first-child)
+    color: rgba(255, 255, 255, 0)
+    cursor: default
+    user-select: none
+    text-shadow: #000 0 0 8px
+
+    .ie10 &, .ie11 &
+      color: rgba(230, 230, 230, 0.6)
