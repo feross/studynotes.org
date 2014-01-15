@@ -1,5 +1,33 @@
 extends layouts/main-sidebar
 
+append sidebar
+  .tweet-home.hide-phone.hide-tablet
+    .onlineNum
+      span
+      | #{ ' students online.' }
+    a(href='https://twitter.com/share', class='twitter-share-button', data-url='http:#{ locals.url }', data-via='StudyNotesApp') Tweet
+  .fb-home.hide-phone.hide-tablet
+    | <iframe src="//www.facebook.com/plugins/like.php?href=#{ encodeURIComponent('http:' + locals.url) }&amp;width=336&amp;height=35&amp;colorscheme=light&amp;layout=standard&amp;action=like&amp;show_faces=false&amp;send=false&amp;appId=466476846723021" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:336px; height:35px;" allowTransparency="true"></iframe>
+
+  div.hide-phone.hide-tablet
+    a(class='twitter-timeline', href='https://twitter.com/StudyNotesApp', data-widget-id='382664807926624257') Tweets by @StudyNotesApp
+
+  include ads/adsense-sidebar
+  include ads/adsense-sidebar
+
+  h3.hide-phone.hide-tablet StudyNotes In Numbers
+  ul.hide-phone.hide-tablet
+    li #{ util.addCommas(noteCount) } notes for #{ courseCount } <a href='/courses/'>AP courses</a>
+    li #{ util.addCommas(essayCount) } admissions essays for #{ collegeCount } <a href='/colleges/'>universities</a>
+    li #{ util.addCommas(userCount) } registered users
+    li
+      span.totalHits Lots of
+      | #{ ' views (whole site) ' }
+    li.onlineNum
+      span
+      | #{ ' students online now (whole site)' }
+
+
 block content
   h2 Free AP Notes and Study Tools
   p We have the best <strong>AP notes, chapter outlines, and study guides</strong> on the web — contributed by students and teachers like yourself. This site is used by <strong>millions across the U.S.</strong> to prepare for AP exams.
@@ -100,30 +128,3 @@ block content
         li AP Spanish Literature and Culture
         li AP Statistics (AP Stats)
         li AP Studio Art
-
-append sidebar
-  .tweet-home.hide-phone.hide-tablet
-    .onlineNum
-      span
-      | #{ ' students online.' }
-    a(href='https://twitter.com/share', class='twitter-share-button', data-url='http:#{ locals.url }', data-via='StudyNotesApp', data-size='large') Tweet
-  .fb-home.hide-phone.hide-tablet
-    | <iframe src="//www.facebook.com/plugins/like.php?href=#{ encodeURIComponent('http:' + locals.url) }&amp;width=336&amp;height=35&amp;colorscheme=light&amp;layout=standard&amp;action=like&amp;show_faces=false&amp;send=false&amp;appId=466476846723021" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:336px; height:35px;" allowTransparency="true"></iframe>
-
-  div.hide-phone.hide-tablet
-    a(class='twitter-timeline', href='https://twitter.com/StudyNotesApp', data-widget-id='382664807926624257') Tweets by @StudyNotesApp
-
-  include ads/adsense-sidebar
-  include ads/adsense-sidebar
-
-  h3.hide-phone.hide-tablet StudyNotes In Numbers
-  ul.hide-phone.hide-tablet
-    li #{ util.addCommas(noteCount) } notes for #{ courseCount } <a href='/courses/'>AP courses</a>
-    li #{ util.addCommas(essayCount) } admissions essays for #{ collegeCount } <a href='/colleges/'>universities</a>
-    li #{ util.addCommas(userCount) } registered users
-    li
-      span.totalHits Lots of
-      | #{ ' views (whole site) ' }
-    li.onlineNum
-      span
-      | #{ ' students online now (whole site)' }
