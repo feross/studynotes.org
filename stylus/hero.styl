@@ -15,10 +15,14 @@ TAB_HEIGHT = 33px
 .hero
   color: #FFF
   display: block
-  text-align: center
+  text-align: left
 
+  body.home &
+    text-align: center
   @media PHONE
     font-size: 0.85em
+    text-align: center
+  @media TABLET
     text-align: center
 
   a
@@ -70,7 +74,7 @@ ul.tabs
   height: TAB_HEIGHT
   font-size: 16px
   list-style: none
-  margin: 0 0 0 12px
+  margin: 0 0 0 CONTENT_PADDING_DESKTOP
 
   li
     display: inline-block
