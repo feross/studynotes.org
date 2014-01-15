@@ -249,10 +249,12 @@ LiveUpdater.prototype.getTitle = function (url) {
 
   var title = self.titles[url]
   if (title) {
+    debug('getTitle: Using cached title for ' + url)
     return title
   } else {
+    debug('getTitle: Fetching page title for ' + url)
     jsdom.env({
-      url: config.siteOrigin + url,
+      url: 'http:' + config.siteOrigin + url,
       src: [self.jquery],
       done: function (err, window) {
         if (err) return console.error(err)
