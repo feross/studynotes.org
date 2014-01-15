@@ -204,15 +204,14 @@ html(class='studynotes #{layout}', lang='en')
           background-size: auto auto, 100% 100%, cover;
         }
 
-      <!--[if lte IE 8]>
-      link(rel='stylesheet', href='#{ config.cdnOrigin }/css/ie8.css')
-      <![endif]-->
-      <!--[if IE 9]>
-      link(rel='stylesheet', href='#{ config.cdnOrigin }/css/ie9.css')
-      <![endif]-->
-
     block stylesheets
 
+    <!--[if lte IE 9]>
+    link(rel='stylesheet', href='#{ config.cdnOrigin }/css/ie9.css')
+    <![endif]-->
+    <!--[if lte IE 8]>
+    link(rel='stylesheet', href='#{ config.cdnOrigin }/css/ie8.css')
+    <![endif]-->
     block head
 
   body(class='#{ locals.cls }')
