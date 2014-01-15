@@ -1,13 +1,16 @@
 extends layouts/main-sidebar
 
 append sidebar
-  .tweet-home.hide-phone.hide-tablet
-    .onlineNum
-      span
-      | #{ ' students online.' }
-    a(href='https://twitter.com/share', class='twitter-share-button', data-url='http:#{ locals.url }', data-via='StudyNotesApp') Tweet
-  .fb-home.hide-phone.hide-tablet
-    | <iframe src="//www.facebook.com/plugins/like.php?href=#{ encodeURIComponent('http:' + locals.url) }&amp;width=336&amp;height=35&amp;colorscheme=light&amp;layout=standard&amp;action=like&amp;show_faces=false&amp;send=false&amp;appId=466476846723021" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:336px; height:35px;" allowTransparency="true"></iframe>
+  .top-row.hide-phone.hide-tablet
+    .fb-home
+      | <iframe src="//www.facebook.com/plugins/like.php?href=#{ encodeURIComponent('http://www.apstudynotes.org') }&amp;width=150&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=21&amp;appId=466476846723021" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:150px; height:21px;" allowTransparency="true"></iframe>
+    a.twitter-home(href='https://twitter.com/share', class='twitter-share-button', data-url='http://www.apstudynotes.org', data-via='StudyNotesApp') Tweet
+    .plusone-home
+      .g-plusone(data-size='medium', data-href='http://www.apstudynotes.org')
+
+  p.onlineNum.hide-phone-hide-tablet
+    span
+    | #{ ' students online.' }
 
   div.hide-phone.hide-tablet
     a(class='twitter-timeline', href='https://twitter.com/StudyNotesApp', data-widget-id='382664807926624257') Tweets by @StudyNotesApp
