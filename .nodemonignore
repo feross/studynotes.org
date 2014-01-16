@@ -4,6 +4,7 @@ tmp/reload.txt
 /out/*
 /.git/*
 /node_modules/*
+npm-debug.log
 
 /static/js/*
 /stylus/*
