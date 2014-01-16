@@ -26,10 +26,10 @@ if (typeof WebSocket === 'function' && !$('html').hasClass('isMobile')) {
 function onMessage (event) {
   var message
   try {
-    console.log('Received message: ' + event.data)
+    // console.log('Received message: ' + event.data)
     message = JSON.parse(event.data)
   } catch (e) {
-    console.log('Discarding non-JSON message: ' + message)
+    // console.log('Discarding non-JSON message: ' + message)
     return
   }
 

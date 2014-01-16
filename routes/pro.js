@@ -30,7 +30,7 @@ module.exports = function (app) {
           amount: amount, // in cents
           currency: 'usd',
           card: req.body.stripeToken,
-          description: 'StudyNotes Pro for ' + req.body.stripeEmail
+          description: 'StudyNotes Pro (' + req.body.stripeEmail + ')'
         }, cb)
       }],
 
@@ -90,7 +90,6 @@ module.exports = function (app) {
       // Redirect to original essay after signup/login
       req.session.returnTo = r.essay.url
 
-      console.log(r.linkedUser)
       if (r.linkedUser) {
         // Already logged in users will go straight to the essay via `returnTo`
         return res.redirect('/login/')
