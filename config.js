@@ -10,14 +10,16 @@ exports.ports = {
   admin: 4002
 }
 
-exports.siteOrigin = exports.isProd
-  ? '//www.apstudynotes.org'
-  : '//localhost:' + exports.ports.site
+exports.siteHost = exports.isProd
+  ? 'www.apstudynotes.org'
+  : 'localhost:' + exports.ports.site
+
+exports.siteOrigin = '//' + exports.siteHost
 
 exports.secureOrigin = (exports.isProd
-  ? 'https:'
-  : 'http:'
-) + exports.siteOrigin
+  ? 'https://'
+  : 'http://'
+) + exports.siteHost
 
 exports.cdnOrigin = exports.isProd
   ? '//cdn.apstudynotes.org'
