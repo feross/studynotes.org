@@ -25,7 +25,7 @@ module.exports = function (app) {
   app.post('/signup', ssl.ensureSSL, function (req, res, next) {
     var user = new model.User({
       name: req.body.name,
-      email: req.body.email,
+      email: req.body.email || (req.session.pro && req.session.pro.email),
       password: req.body.password
     })
     user.save(function (err) {
@@ -35,7 +35,7 @@ module.exports = function (app) {
         res.redirect('/signup/')
       } else if (err && err.name === 'ValidationError') {
         _(err.errors).each(function (error) {
-          req.flash('error', error.type)
+          req.flash('error', error.message)
         })
         req.flash('user', req.body)
         res.redirect('/signup/')
@@ -45,7 +45,13 @@ module.exports = function (app) {
         // Automatically login the user
         req.login(user, function (err) {
           if (err) return next(err)
-          res.redirect('/signup2/')
+          if (req.session.pro && req.session && req.session.returnTo) {
+            var url = req.session.returnTo
+            delete req.session.returnTo
+            res.redirect(url)
+          } else {
+            res.redirect('/signup2/')
+          }
         })
       }
     })
@@ -76,7 +82,7 @@ module.exports = function (app) {
     user.save(function (err) {
       if (err && err.name === 'ValidationError') {
         _(err.errors).each(function (error) {
-          req.flash('error', error.type)
+          req.flash('error', error.message)
         })
         req.flash('user', req.body)
         res.redirect('/signup2/')
@@ -90,7 +96,7 @@ module.exports = function (app) {
         } else {
           res.redirect('/submit/essay/')
         }
-        // email.notifyAdmin('New user', user)
+        email.notifyAdmin('New user', user)
       }
     })
   })

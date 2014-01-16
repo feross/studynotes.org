@@ -68,7 +68,7 @@ module.exports = function (app) {
     }, function (err, r) {
       if (err && err.name === 'ValidationError') {
         _(err.errors).map(function (error) {
-          req.flash('error', error.type)
+          req.flash('error', error.message)
         })
         req.flash('essay', req.body)
         res.redirect('/submit/essay/')
@@ -153,7 +153,7 @@ module.exports = function (app) {
     }, function (err, r) {
       if (err && err.name === 'ValidationError') {
         _(err.errors).map(function (error) {
-          req.flash('error', error.type)
+          req.flash('error', error.message)
         })
         req.flash('note', req.body)
         res.redirect('/submit/note/')

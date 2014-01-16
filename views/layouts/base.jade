@@ -225,11 +225,12 @@ html(class='studynotes #{layout}', lang='en')
 
     block body
 
-    if (locals.notify)
-      each msg in locals.notify
-        .notify.notify-success(style='display: none')= msg
     each msg in locals.req.flash('success')
       .notify.notify-success(style='display: none')= msg
+    each msg in locals.req.flash('info')
+      .notify.notify-info(style='display: none')= msg
+    each msg in locals.req.flash('error')
+      .notify.notify-error(style='display: none')= msg
 
     input(type='hidden', name='_csrf', value=csrf)
 

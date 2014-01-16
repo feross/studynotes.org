@@ -1,8 +1,12 @@
 extends layouts/form
 
 block content
-  h1 Log in to StudyNotes
-  h2 Provide your email and password
+  if (req.session.pro)
+    h1 You're almost done!
+    h2 <strong>Login</strong> to your StudyNotes account so we know who you are.
+  else
+    h1 Log in to StudyNotes
+    h2 Provide your email and password.
 
   if (locals.errors.length)
     .errors
@@ -12,9 +16,22 @@ block content
   form(method='POST')
     input(type='hidden', name='_csrf', value=csrf)
     .row
-      input(name='email', type='email', placeholder='email', autofocus, required)
+      input(
+        name='email',
+        type='email',
+        placeholder='email',
+        value=email,
+        autofocus=!email,
+        required
+      )
     .row
-      input(name='password', type='password', placeholder='password', required)
+      input(
+        name='password',
+        type='password',
+        placeholder='password',
+        autofocus=!!email,
+        required
+      )
     .row.submit
       button.btn.large(type='submit') Log In
 

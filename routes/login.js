@@ -7,11 +7,13 @@ var url = require('url')
 module.exports = function (app) {
   app.get('/login', ssl.ensureSSL, auth.returnTo, function (req, res) {
     if (req.user) {
-      res.redirect('/')
+      res.redirect(req.session.returnTo || '/')
     } else {
       res.render('login', {
         title: 'Login',
         url: '/login',
+        // pre-fill for Pro users who haven't linked accounts yet
+        email: req.session.pro && req.session.pro.email,
         errors: req.flash('error')
       })
     }
@@ -25,6 +27,10 @@ module.exports = function (app) {
   }))
 
   app.post('/logout', ssl.ensureSSL, function (req, res) {
+    // Give Pro users their "first click, free" back when they logout
+    if (req.isAuthenticated() && req.user.pro)
+      delete req.session.free
+
     req.logout()
     res.send(200) // redirect happens on client-side
   })

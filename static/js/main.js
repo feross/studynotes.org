@@ -128,7 +128,6 @@ if (msgType && msg) {
 $(function () {
   $('.notify').each(function () {
     var $item = $(this)
-    console.log($item.text())
     if ($item.hasClass('notify-success')) {
       notify.big.success($item.text())
     } else if ($item.hasClass('notify-error')) {

@@ -1,7 +1,7 @@
 var _ = require('underscore')
 var async = require('async')
 var config = require('../config')
-var debug = require('debug')('studynotes:routes/essay.js')
+var debug = require('debug')('studynotes:routes/essay')
 var model = require('../model')
 var url = require('url')
 
@@ -42,20 +42,23 @@ module.exports = function (app) {
       if (err) return next(err)
       if (!r.essay) return next()
 
-      if (!(req.user && req.user.subscriber)) {
+      if (!(req.user && req.user.pro)) {
         // They're a "first click free" user
         if (req.session.free === undefined) {
           debug('No first click free object, creating one')
-          req.session.free = {}
+          req.session.free = []
         } else {
-          debug('First click free: ' + Object.keys(req.session.free).join(','))
+          debug('First click free: ' + req.session.free.join(','))
         }
 
-        if (!req.session.free[req.url]) {
-          if (Object.keys(req.session.free).length < config.numFree
-              || url.parse(req.get('referer')).host.search('google') !== -1) {
-            req.session.free[req.url] = true
+        if (req.session.free.indexOf(r.essay.id) === -1) {
+          var referrer = url.parse(req.get('referer') || '').host
+          if (req.session.free.length < config.numFree
+              || (referrer && referrer.search('google') !== -1)) {
+            req.session.free.push(r.essay.id)
           } else {
+            if (config.isProd && req.protocol !== 'https')
+              return res.redirect(config.secureOrigin + req.url)
             r.blur = true
           }
         }

@@ -21,6 +21,7 @@ var mongoose = require('mongoose')
 var MongoStore = require('connect-mongo')(express)
 var passport = require('passport')
 var path = require('path')
+var pro = require('./lib/pro')
 var url = require('url')
 var util = require('./util')
 
@@ -81,6 +82,7 @@ Site.prototype.start = function (done) {
     self.app.use(connectSlashes())
 
     self.setupSessions()
+    self.app.use(pro.checkPro)
 
     if (config.isProd)
       self.app.use(self.sslForAuthedUsers)
@@ -121,7 +123,7 @@ Site.prototype.addTemplateGlobals = function () {
   self.app.locals.offline = self.offline
   self.app.locals.pretty = true
   self.app.locals.random = Math.random
-  self.app.locals.stripe = { publishable: secret.publishable }
+  self.app.locals.stripe = { publishable: secret.stripe.publishable }
   self.app.locals.util = util
 }
 
@@ -241,7 +243,6 @@ Site.prototype.setupSessions = function () {
  * Make certain variables available to templates on this request.
  */
 Site.prototype.addTemplateLocals = function (req, res, next) {
-  res.locals.currentUser = req.user
   res.locals.req = req
   res.locals.csrf = req.csrfToken()
   next()

@@ -1,14 +1,17 @@
 extends layouts/form
 
 block content
+  if (req.session.pro)
+    h1 You're almost done!
+    h2 We just need to know a few more things to <strong>create your account</strong>.
+  else
+    h1 Help students get into college!
+    h2 Share your admissions essays.
+
   //- h1 Hey there! Let's get started.
   //- h2 What would you like to do?
   //- p Submit an Essay - get paid.
   //- p Buy an Essay - get into college.
-
-  h1 Help students get into college
-  h2 Share your admissions essays!
-
   //- h1 Get accepted at a top university
   //- h2 Sign up now to read the best essays!
 
@@ -20,11 +23,31 @@ block content
   form(method='POST')
     input(type='hidden', name='_csrf', value=csrf)
     .row
-      input(name='name', type='text', placeholder='full name', value=(user && user.name), autofocus, required)
+      input(
+        name='name',
+        type='text',
+        placeholder='full name',
+        value=(user && user.name),
+        autofocus,
+        required
+      )
+    if (!req.session.pro)
+      .row
+        input(
+          name='email',
+          type='email',
+          placeholder='email',
+          value=(user && user.email),
+          required
+        )
     .row
-      input(name='email', type='email', placeholder='email', value=(user && user.email), required)
-    .row
-      input(name='password', type='password', placeholder='password', value=(user && user.password), required)
+      input(
+        name='password',
+        type='password',
+        placeholder='password',
+        value=(user && user.password),
+        required
+      )
     .row.submit
       button.btn.large(type='submit') Sign up
 

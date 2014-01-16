@@ -13,11 +13,17 @@ var small = humane.create({
 
 big.info = big.spawn({ addnCls: 'humane-jackedup-info' })
 big.success = big.spawn({ addnCls: 'humane-jackedup-success' })
-big.error = big.spawn({ addnCls: 'humane-jackedup-error' })
+big.error = big.spawn({
+  addnCls: 'humane-jackedup-error',
+  timeout: 15000
+})
 
 small.info = small.spawn({ addnCls: 'humane-libnotify-info' })
 small.success = small.spawn({ addnCls: 'humane-libnotify-success' })
-small.error = small.spawn({ addnCls: 'humane-libnotify-error' })
+small.error = small.spawn({
+  addnCls: 'humane-libnotify-error',
+  timeout: 15000
+})
 
 exports.big = big
 exports.small = small

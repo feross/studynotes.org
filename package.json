@@ -42,6 +42,7 @@
     "passport-local": "~0.1.6",
     "posix": "~1.0.2",
     "purge-netdna": "~1.0.1",
+    "stripe": "~2.3.4",
     "stylus": "~0.42.0",
     "touch": "0.0.2",
     "transparency": "~0.9.14",

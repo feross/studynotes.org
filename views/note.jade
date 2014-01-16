@@ -1,7 +1,7 @@
 extends layouts/main-sidebar
 
 append toolbar
-  if locals.currentUser && currentUser.admin
+  if req.user && req.user.admin
     a.btn.red.edit(href='?edit=1') Edit
   if locals.next
     a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next #{ notetype.hasChapters ? 'Chapter' : notetype.singularName }

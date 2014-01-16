@@ -87,6 +87,7 @@ module.exports = function (app) {
   // Accounts
   require('./signup')(app)
   require('./login')(app)
+  require('./pro')(app)
 
   // Submit
   require('./submit')(app)

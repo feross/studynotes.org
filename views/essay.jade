@@ -36,7 +36,7 @@ append sidebar
 
 
 append toolbar
-  if locals.currentUser && currentUser.admin
+  if req.user && req.user.admin
     a.btn.red.edit(href='?edit=1') Edit
   if locals.next
     a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next Essay
@@ -61,10 +61,22 @@ block content
   if (blur)
     .body
       .subscribe-on-blur.unblur
-        h2 You must subscribe for $19 to read this essay.
+        h2 You must subscribe for $#{ (config.proPrice / 100) } to read this essay.
+
         p
-          form(action='', method='POST')
-            script(src='https://checkout.stripe.com/checkout.js', class='stripe-button', data-key=stripe.publishable, data-amount='1900', data-name='StudyNotes Pro', data-description='Full access to all college essays ($19)', data-image='/128x128.png')
+          form(action='/pro', method='POST')
+            input(type='hidden', name='_csrf', value=csrf)
+            input(type='hidden', name='referringEssay', value=essay.id)
+            script(src='https://checkout.stripe.com/checkout.js',
+              class='stripe-button',
+              data-key=stripe.publishable,
+              data-amount=config.proPrice,
+              data-name='StudyNotes Pro',
+              data-description='Full access to all college essays $' + (config.proPrice / 100),
+              data-image='/128x128.png',
+              data-email=(req.user && req.user.email)
+            )
+
         h4 With <strong>StudyNotes Pro</strong> (one-time payment) you get lifetime access to all #{ essayCount } college essays in our database!
       .blur !{essay.body}
   else

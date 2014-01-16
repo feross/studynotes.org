@@ -47,6 +47,7 @@ var User = new mongoose.Schema({
       validate({ passIfEmpty: true, message: 'Only use numbers for your graduation year.' }, 'isNumeric')
     ]
   },
+  pro: Boolean,
   admin: Boolean
 })
 
