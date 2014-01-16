@@ -165,7 +165,7 @@ Site.prototype.canonicalize = function (req, res, next) {
 // Redirect HTTP to HTTPS for authenticated users
 Site.prototype.sslForAuthedUsers = function (req, res, next) {
   if (req.isAuthenticated() && req.protocol !== 'https') {
-    res.redirect(config.secureOrigin + req.url)
+    res.redirect(config.secureSiteOrigin + req.url)
   } else {
     next()
   }

@@ -16,13 +16,15 @@ exports.siteHost = exports.isProd
 
 exports.siteOrigin = '//' + exports.siteHost
 
-exports.secureOrigin = (exports.isProd
-  ? 'https://'
-  : 'http://'
-) + exports.siteHost
+exports.secureSiteOrigin = (exports.isProd
+  ? 'https:'
+  : 'http:'
+) + exports.siteOrigin
 
 exports.cdnOrigin = exports.isProd
   ? '//cdn.apstudynotes.org'
   : '/cdn'
+
+exports.secureCdnOrigin = (exports.isProd ? 'https:' : '') + exports.cdnOrigin
 
 util.extend(exports, require('./config-' + (process.browser ? 'browser' : 'node')))

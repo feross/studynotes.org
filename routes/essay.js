@@ -58,7 +58,7 @@ module.exports = function (app) {
             req.session.free.push(r.essay.id)
           } else {
             if (config.isProd && req.protocol !== 'https')
-              return res.redirect(config.secureOrigin + req.url)
+              return res.redirect(config.secureSiteOrigin + req.url)
             r.blur = true
           }
         }
