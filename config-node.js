@@ -15,10 +15,10 @@ exports.out = path.join(exports.root, 'out')
 /**
  * Number of "first click, free" essays that a given session can view before
  * requesting that they subscribe. The user can always view if they have
- * "google" in their referer.
+ * a referer from an external site.
  * @type {Number}
  */
-exports.numFree = 2
+exports.numFree = 1
 
 /**
  * Price of pro subscription (in cents!)
