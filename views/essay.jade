@@ -73,7 +73,7 @@ block content
               data-amount=config.proPrice,
               data-name='StudyNotes Pro',
               data-description='Full access to all college essays $' + (config.proPrice / 100),
-              data-image='/128x128.png',
+              data-image='#{ config.cdnOrigin }/images/S.png',
               data-email=(req.user && req.user.email)
             )
 
