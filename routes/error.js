@@ -19,7 +19,8 @@ module.exports = function (app) {
   })
 
   app.use(function (err, req, res, next) {
-    console.error('\n[UNCAUGHT EXCEPTION] ' + req.method + ': ' + req.url)
+    console.error('\n[UNCAUGHT EXCEPTION] ' + req.method + ': ' + req.url + '\n')
+    console.error(err.stack)
     console.error('\nHTTP HEADERS:')
     console.dir(req.headers)
     if (req.params) {
@@ -30,9 +31,6 @@ module.exports = function (app) {
       console.error('\nHTTP BODY:')
       console.dir(req.body)
     }
-    console.error('')
-    console.error(err.stack)
-    console.error('')
 
     email.notifyOnException({ err: err, req: req })
 
