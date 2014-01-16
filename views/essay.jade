@@ -1,5 +1,40 @@
 extends layouts/main-sidebar
 
+append sidebar
+  .author
+    a(href=user.getUrl(essay.anon))
+      img(src=user.getGravatar(essay.anon))
+      h2.name= user.getName(essay.anon)
+    if (user.collegeMajor)
+      h3.accepted= user.collegeMajor
+    if (!user.college || user.college.id !== college.id)
+      h3.accepted Accepted at <a href='#{ college.url }'>#{ college.shortName }</a>
+    if (user.college && user.collegeYear)
+      h3.accepted
+        | #{ user.hasGraduated ? 'Graduated ' : 'Attending ' }
+        a(href=user.college.url)= user.college.shortName
+        | #{ ' \'' + user.collegeYear.toString().substring(2) }
+
+  if (essay.admitsphere)
+    p This essay comes from AdmitSphere who kindly allowed it to be republished here.
+
+  include ads/adsense-sidebar
+
+  h2 More #{ college.shortName } Essays
+  ul.more
+    each essay in essays
+      li: a(href=essay.url)= essay.name
+
+  include ads/adsense-sidebar
+
+  h2 Essay Stats
+  ul
+    li Posted <span title='#{ moment(essay.createDate).format("MMMM Do, YYYY, h:mm:ss a") }'>#{ moment(essay.createDate).fromNow() }</span>
+    li #{ util.addCommas(essay.hits) } views
+    li Averaging #{ util.addCommas(util.hitsPerDay(essay.hits, essay.createDate)) } views per day
+    li.online
+
+
 append toolbar
   if locals.currentUser && currentUser.admin
     a.btn.red.edit(href='?edit=1') Edit
@@ -62,37 +97,3 @@ block content
 
   h2 How to cite this essay (with MLA)
   .cite #{ user.getMlaName(essay.anon) }. "#{essay.name}" StudyNotes.org. StudyNotes, Inc., #{moment(essay.createDate).format('DD MMM. YYYY.')} Web. #{moment().format('DD MMM. YYYY.')} &lt;#{essay.absoluteUrl}&gt;.
-
-append sidebar
-  .author
-    a(href=user.getUrl(essay.anon))
-      img(src=user.getGravatar(essay.anon))
-      h2.name= user.getName(essay.anon)
-    if (user.collegeMajor)
-      h3.accepted= user.collegeMajor
-    if (!user.college || user.college.id !== college.id)
-      h3.accepted Accepted at <a href='#{ college.url }'>#{ college.shortName }</a>
-    if (user.college && user.collegeYear)
-      h3.accepted
-        | #{ user.hasGraduated ? 'Graduated ' : 'Attending ' }
-        a(href=user.college.url)= user.college.shortName
-        | #{ ' \'' + user.collegeYear.toString().substring(2) }
-
-  if (essay.admitsphere)
-    p This essay comes from AdmitSphere who kindly allowed it to be republished here.
-
-  include ads/adsense-sidebar
-
-  h2 More #{ college.shortName } Essays
-  ul.more
-    each essay in essays
-      li: a(href=essay.url)= essay.name
-
-  include ads/adsense-sidebar
-
-  h2 Essay Stats
-  ul
-    li Posted <span title='#{ moment(essay.createDate).format("MMMM Do, YYYY, h:mm:ss a") }'>#{ moment(essay.createDate).fromNow() }</span>
-    li #{ util.addCommas(essay.hits) } views
-    li Averaging #{ util.addCommas(util.hitsPerDay(essay.hits, essay.createDate)) } views per day
-    li.online
