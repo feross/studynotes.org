@@ -92,9 +92,9 @@ module.exports = function (app) {
 
       if (r.linkedUser) {
         // Already logged in users will go straight to the essay via `returnTo`
-        return res.redirect('/login/')
+        res.redirect('/login/')
       } else {
-        return res.redirect('/signup/')
+        res.redirect('/signup/')
       }
       email.notifyAdmin('New order for $' + (amount / 100), r.order)
     })
