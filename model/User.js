@@ -17,22 +17,22 @@ var User = new mongoose.Schema({
     type: String,
     index: true,
     validate: [
-      validate({ message: 'Please share your full name (first and last), don\'t be shy!' }, 'contains', ' '),
-      validate({ message: 'Please share your name, don\'t be shy!' }, 'notEmpty')
+      validate({ message: 'Please share your entire name - don\'t be shy!' }, 'contains', ' '),
+      validate({ message: 'Please share your name - don\'t be shy!' }, 'notEmpty')
     ]
   },
   email: {
     type: String,
     unique: true,
     validate: [
-      validate({ message: 'Your email address is invalid!' }, 'isEmail'),
+      validate({ message: 'Your email address is invalid.' }, 'isEmail'),
       validate({ message: 'An email address is required.' }, 'notEmpty')
     ]
   },
   password: {
     type: String,
     validate: [
-      validate({ message: 'Your password must be at least 6 characters long!' }, 'len', 6, 255),
+      validate({ message: 'Your password must be at least 6 characters.' }, 'len', 6, 255),
       validate({ message: 'You need a password, silly!' }, 'notEmpty')
     ]
   },
