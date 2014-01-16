@@ -15,8 +15,10 @@ body.course .sidebar, body.notetype .sidebar, body.note .sidebar {
   margin-top: -100px !important;
 }
 
-body.essay .body.blur :not(:first-child):not(:nth-child(2)) {
-  color: #333;
-  filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='5');
+body.essay .body .blur :not(:first-child):not(:nth-child(2)) {
   zoom: 1;
+  color: #cccccc;
+  background-color: #ccccce;
+  filter: progid:DXImageTransform.Microsoft.Chroma(color=#ccccce),
+          progid:DXImageTransform.Microsoft.Blur(pixelradius=3);
 }
