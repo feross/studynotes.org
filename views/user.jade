@@ -1,6 +1,29 @@
 include mixins/entries
 extends layouts/main-sidebar
 
+append sidebar
+  .author
+    a(href=user.url)
+      img(src=user.gravatar)
+      h2.name= user.name
+    if (user.collegeMajor)
+      h3.accepted= user.collegeMajor
+    if (user.college)
+      h3.accepted
+        | #{ user.hasGraduated ? 'Graduated ' : 'Attending ' }
+        a(href=user.college.url)= user.college.shortName
+        if (user.collegeYear)
+          | #{ ' \'' + user.collegeYear.toString().substring(2) }
+
+  include ads/adsense-sidebar
+
+  h3 User Stats
+  ul
+    li #{ util.addCommas(totalHits) } views (all submissions)
+    li #{ util.addCommas(user.hits) } profile views
+    li.online
+
+
 block content
   include includes/toolbar
 
@@ -22,25 +45,3 @@ block content
           a(href=note.course.url)= note.course.name + ':'
           | #{ ' ' }
           a(href=note.url)= note.name
-
-append sidebar
-  .author
-    a(href=user.url)
-      img(src=user.gravatar)
-      h2.name= user.name
-    if (user.collegeMajor)
-      h3.accepted= user.collegeMajor
-    if (user.college)
-      h3.accepted
-        | #{ user.hasGraduated ? 'Graduated ' : 'Attending ' }
-        a(href=user.college.url)= user.college.shortName
-        if (user.collegeYear)
-          | #{ ' \'' + user.collegeYear.toString().substring(2) }
-
-  h2 User Stats
-  ul
-    li #{ util.addCommas(totalHits) } views (all submissions)
-    li #{ util.addCommas(user.hits) } profile views
-    li.online
-
-  include ads/adsense-sidebar
