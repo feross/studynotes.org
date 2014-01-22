@@ -22,7 +22,7 @@
     "http-status-codes": "~1.0.2",
     "humane-js": "~3.1.0",
     "jade": "~1.1.2",
-    "jquery": "~2.1.0-beta3",
+    "jquery": "~2.1.0-rc1",
     "jquery-placeholder": "~2.0.7",
     "jsdom": "~0.8.10",
     "keymaster": "git://github.com/madrobby/keymaster",
