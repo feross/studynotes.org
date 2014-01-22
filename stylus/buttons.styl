@@ -2,9 +2,9 @@
   {LINK}, &
     body_font()
     background: BLUE
-    border-radius: 3px
+    border-radius: 4px
     border: 0
-    box-shadow: 0 0 1px GRAY
+    box-shadow: 0 2px BLUE_DARK
     color: #FFF
     cursor: pointer
     display: inline-block
@@ -16,9 +16,15 @@
     text-transform: uppercase
     vertical-align: top
 
-  {HOVER}
+  &:hover, &:focus
     background: BLUE_DARK
+    box-shadow: 0 2px BLUE_DARKER
     text-decoration: none
+
+  &:active
+    box-shadow: 0 0 #000
+    position: relative
+    top: 2px
 
   &.small
     font-size: 16px
@@ -26,7 +32,7 @@
 
   &.large
     font-size: 24px
-    padding: 8px 14px 7px 14px
+    padding: 8px 18px 7px 18px
 
   &.red
     {LINK}, &
