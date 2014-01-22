@@ -9,25 +9,21 @@ body.essay
 
     .blur :not(:first-child):not(:nth-child(2))
       color: rgba(255, 255, 255, 0)
-      text-shadow: #000 0 0 8px
+      text-shadow: #000 0 0 9px
 
       .ie10 &, .ie11 &
         color: rgba(230, 230, 230, 0.6)
 
-      &:nth-child(3)::first-line
-        color: GRAY_DARKEST
-        text-shadow: none
-
   .subscribe-on-blur
-    background: radial-gradient(rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0.1) 80%)
+    background: radial-gradient(rgba(255, 255, 255, 1) 40%, rgba(255, 255, 255, 0.1) 70%)
     left: 0
-    padding: 175px 150px 125px 150px
+    padding: 150px 50px
     position: absolute
     right: 0
     text-align: center
     top: 300px
 
     @media PHONE
-      padding: 150px 50px
+      padding: 150px 20px
     @media TABLET
-      padding: 150px 100px
+      padding: 150px 30px
