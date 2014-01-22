@@ -1,5 +1,20 @@
 extends layouts/main-sidebar
 
+append sidebar
+  include ads/adsense-sidebar
+
+  h2 Top #{ college.shortName } Essays
+  ul.more
+    each essay in essays
+      li: a(href=essay.url)= essay.name
+
+  include ads/adsense-sidebar
+
+  h2 Page Stats
+  ul
+    li #{ util.addCommas(college.hits) } views
+    li.online
+
 block content
   include includes/breadcrumbs
 
@@ -22,19 +37,3 @@ block content
 
   h2 #{ college.shortName } Facts — you should know this stuff!
   | !{ college.desc }
-
-
-append sidebar
-  include ads/adsense-sidebar
-
-  h2 Top #{ college.shortName } Essays
-  ul.more
-    each essay in essays
-      li: a(href=essay.url)= essay.name
-
-  include ads/adsense-sidebar
-
-  h2 Page Stats
-  ul
-    li #{ util.addCommas(college.hits) } views
-    li.online

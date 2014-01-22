@@ -1,5 +1,21 @@
 extends layouts/main-sidebar
 
+append sidebar
+  include ads/adsense-sidebar
+
+  h2 Note Stats
+  ul
+    li #{ util.addCommas(note.hits) } views
+    li.online
+
+  if locals.relatedNotes
+    h2 More #{course.shortName} #{notetype.name}
+    ul.more
+      each note in relatedNotes
+        li: a(href='#{note.url}')= note.name
+
+  include ads/adsense-sidebar
+
 append toolbar
   if req.user && req.user.admin
     a.btn.red.edit(href='?edit=1') Edit
@@ -51,19 +67,3 @@ block content
   h2 How to cite this note (with MLA)
   .cite Aboukhadijeh, Feross. "#{note.name}" StudyNotes.org. StudyNotes, Inc., #{moment(note.createDate).format('DD MMM. YYYY.')} Web. #{moment().format('DD MMM. YYYY.')} &lt;#{note.absoluteUrl}&gt;.
 
-
-append sidebar
-  include ads/adsense-sidebar
-
-  h2 Note Stats
-  ul
-    li #{ util.addCommas(note.hits) } views
-    li.online
-
-  if locals.relatedNotes
-    h2 More #{course.shortName} #{notetype.name}
-    ul.more
-      each note in relatedNotes
-        li: a(href='#{note.url}')= note.name
-
-  include ads/adsense-sidebar
