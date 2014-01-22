@@ -1,3 +1,7 @@
+//
+// REMEMBER TO MANUALLY UPLOAD THIS TO THE SERVER
+//
+
 var config = require('../config')
 
 exports.cookieSecret = ''
