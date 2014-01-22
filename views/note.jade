@@ -22,16 +22,17 @@ block content
 
   hr
 
-  p.keepStudying You just finished <strong>#{note.name}</strong>. Nice&nbsp;work!
-  p.keepStudying Go back to <a href="#{ course.notetypeUrl(notetype) }">all #{ notetype.name.toLowerCase() }</a>.
-
+  .keepStudying
+    p You just finished <strong>#{note.name}</strong>. Nice&nbsp;work!
+    //- p Go back to <a href="#{ course.notetypeUrl(notetype) }">all #{ notetype.name.toLowerCase() }</a>.
   .noteNav.clearfix
-    if prev
-      a.btn.prev(href='#{prev.url}', title='Previous: #{prev.name}') Prev #{ notetype.hasChapters ? 'Chapter' : notetype.singularName }
-
     if next
-      a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next #{ notetype.hasChapters ? 'Chapter' : notetype.singularName }
-
+      p: a.btn.large.next(href='#{next.url}', title='Next: #{next.name}') Study Next #{ notetype.hasChapters ? 'Chapter' : notetype.singularName }
+      if prev
+        p
+          | #{ '(or, study ' }
+          a.prev(href='#{prev.url}', title='Previous: #{prev.name}') previous #{ notetype.hasChapters ? 'chapter' : notetype.singularName.toLowerCase() }
+          | )
 
   hr
 

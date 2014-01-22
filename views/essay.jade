@@ -87,11 +87,13 @@ block content
   p.keepStudying Keep&nbsp;reading more <a href="#{ college.url }">#{ college.shortName } admissions essays</a> — you can't be too prepared!
 
   .noteNav.clearfix
-    if prev
-      a.btn.prev(href='#{prev.url}', title='Previous: #{prev.name}') Prev Essay
-
     if next
-      a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next Essay
+      p: a.btn.large.next(href='#{next.url}', title='Next: #{next.name}') Read Another Essay
+      if prev
+        p
+          | #{ '(or, study ' }
+          a.prev(href='#{prev.url}', title='Previous: #{prev.name}') previous essay
+          | )
 
   hr
 
