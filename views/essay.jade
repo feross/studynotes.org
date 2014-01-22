@@ -61,8 +61,8 @@ block content
   if (blur)
     .body
       .subscribe-on-blur.unblur
-        h2 You must subscribe for $#{ (config.proPrice / 100) } to read this essay.
-
+        h2 Get <strong>StudyNotes Pro</strong> for $#{ (config.proPrice / 100) } to read this essay.
+        h4: em Get into the college of your dreams!
         p
           form(action='/pro', method='POST')
             input(type='hidden', name='_csrf', value=csrf)
@@ -76,8 +76,8 @@ block content
               data-image='#{ config.cdnOrigin }/images/S.png',
               data-email=(req.user && req.user.email)
             )
+        h4 Your <strong>one-time payment</strong> gives you <strong>lifetime access</strong> to #{ essayCount } essays that worked at universities like Stanford, Harvard, and MIT.
 
-        h4 With <strong>StudyNotes Pro</strong> (one-time payment) you get lifetime access to all #{ essayCount } college essays in our database!
       .blur !{essay.body}
   else
     .body !{essay.body}
