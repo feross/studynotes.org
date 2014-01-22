@@ -44,15 +44,24 @@
         a
           {LINK}
             border-right: HEADER_BORDER
+            @media PHONE
+              border-right: 0
           {HOVER}
             border: HEADER_BORDER_FOCUS
             padding: 14px 16px 0 15px
+            @media PHONE
+              padding: 14px 15px 0 15px
 
           body.solidHeader &
             {LINK}
               border-right: SOLID_HEADER_BORDER
+              @media PHONE
+                border-right: 0
             {HOVER}
               border: SOLID_HEADER_BORDER_FOCUS
+              padding: 14px 16px 0 15px
+              @media PHONE
+                padding: 14px 15px 0 15px
 
     &.right
       right: 0
