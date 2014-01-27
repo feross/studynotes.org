@@ -91,13 +91,13 @@
     }
   },
   "scripts": {
-    "build-js-main": "browserify -r ./util-browser -r ./config-browser static/js/main.js > out/main.js && node ./bin/minify out/main.js",
-    "build-js-extra": "browserify -r ./util-browser -r ./config-browser static/js/extra.js > out/extra.js && node ./bin/minify out/extra.js",
+    "build-js-main": "browserify -r ./util-browser -r ./config-browser client/main.js > out/main.js && node ./bin/minify out/main.js",
+    "build-js-extra": "browserify -r ./util-browser -r ./config-browser client/extra.js > out/extra.js && node ./bin/minify out/extra.js",
     "build-js": "npm run build-js-main & npm run build-js-extra",
     "build-css": "stylus -u nib stylus/main.styl -o out/ --include-css -c && node ./bin/transform-css.js out/main.css",
     "build": "npm run build-js && npm run build-css && node ./bin/postbuild.js",
-    "watch-js-main": "watchify -r ./util-browser -r ./config-browser static/js/main.js -o out/main.js -dv",
-    "watch-js-extra": "watchify -r ./util-browser -r ./config-browser static/js/extra.js -o out/extra.js -dv",
+    "watch-js-main": "watchify -r ./util-browser -r ./config-browser client/main.js -o out/main.js -dv",
+    "watch-js-extra": "watchify -r ./util-browser -r ./config-browser client/extra.js -o out/extra.js -dv",
     "watch-js": "npm run watch-js-main & npm run watch-js-extra",
     "watch-css": "stylus -u nib stylus/main.styl -o out/ --include-css -w",
     "watch": "npm run watch-js & npm run watch-css",

@@ -6,5 +6,5 @@ tmp/reload.txt
 /node_modules/*
 npm-debug.log
 
-/static/js/*
+/client/*
 /stylus/*

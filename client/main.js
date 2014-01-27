@@ -4,7 +4,7 @@ require('transparency')
 require('select2')
 
 var browse = require('./browse')
-var config = require('../../config')
+var config = require('../config')
 var Countdown = require('./Countdown')
 var editor = require('./editor')
 var key = require('keymaster')
@@ -15,7 +15,7 @@ var submitNote = require('./submit-note')
 var throttle = require('lodash.throttle')
 var toolbar = require('./toolbar')
 var url = require('url')
-var util = require('../../util')
+var util = require('../util')
 
 var $window = $(window)
 

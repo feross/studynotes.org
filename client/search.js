@@ -1,6 +1,6 @@
 // Search and autocomplete
 
-var config = require('../../config')
+var config = require('../config')
 
 var $autocomplete = $('.header .autocomplete')
 var $headerLeft = $('.header .left')

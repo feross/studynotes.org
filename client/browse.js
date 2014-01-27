@@ -1,6 +1,6 @@
 // Browse menu dropdown
 
-var util = require('../../util')
+var util = require('../util')
 
 /**
  * Show or hide the browse menus. If no `menu` parameter is provided, then

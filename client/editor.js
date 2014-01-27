@@ -1,5 +1,5 @@
 var $ = require('jquery')
-var config = require('../../config')
+var config = require('../config')
 
 function formatSelect2 (option) {
   var $elem = $(option.element)

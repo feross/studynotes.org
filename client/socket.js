@@ -2,9 +2,9 @@ var socket
 var lastTotalHits
 var stats
 
-var config = require('../../config')
+var config = require('../config')
 var notify = require('./notify')
-var util = require('../../util')
+var util = require('../util')
 
 function openSocket () {
   socket = new WebSocket(config.wsEndpoint)
