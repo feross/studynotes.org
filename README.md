@@ -1,8 +1,10 @@
 # [StudyNotes](http://www.apstudynotes.org)
-### Helping students learn faster and better!
+[![Build Status](http://img.shields.io/travis/feross/studynotes.svg)](https://travis-ci.org/feross/studynotes)
+[![NPM Version](http://img.shields.io/npm/v/studynotes.svg)](https://npmjs.org/package/studynotes)
+[![NPM](http://img.shields.io/npm/dm/studynotes.svg)](https://npmjs.org/package/studynotes)
+[![Gittip](http://img.shields.io/gittip/feross.svg)](https://www.gittip.com/feross/)
 
-[![Build Status](https://travis-ci.org/feross/StudyNotes.png?branch=master)](https://travis-ci.org/feross/StudyNotes)
-[![Dependency Status](https://david-dm.org/feross/StudyNotes.png)](https://david-dm.org/feross/StudyNotes)
+### Helping students learn faster and better!
 
 ## Top notes and essays
 
@@ -14,14 +16,16 @@
 - [College Essays](http://www.apstudynotes.org/essays/)
 - [Stanford Essays](http://www.apstudynotes.org/stanford/)
 
-## Installation
+## install
 
-`npm install studynotes`
+```
+npm install studynotes
+```
 
-## Dependencies
+## awesome dependency visualization!
 
-[See visualization on Yasiv](http://www.yasiv.com/npm#view/studynotes).
+Check it out: [Yasiv: studynotes](http://www.yasiv.com/npm#view/studynotes).
 
-## License
+## license
 
-GPLv3
+GPLv3. Copyright (C) [Feross Aboukhadijeh](http://feross.org).
