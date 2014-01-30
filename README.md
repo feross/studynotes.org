@@ -1,5 +1,5 @@
 # [StudyNotes](http://www.apstudynotes.org)
-[![Build Status](http://img.shields.io/travis/feross/studynotes.svg)](https://travis-ci.org/feross/studynotes)
+[![Build Status](http://img.shields.io/travis/feross/StudyNotes.svg)](https://travis-ci.org/feross/StudyNotes)
 [![NPM Version](http://img.shields.io/npm/v/studynotes.svg)](https://npmjs.org/package/studynotes)
 [![NPM](http://img.shields.io/npm/dm/studynotes.svg)](https://npmjs.org/package/studynotes)
 [![Gittip](http://img.shields.io/gittip/feross.svg)](https://www.gittip.com/feross/)
