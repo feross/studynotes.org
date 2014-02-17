@@ -18,7 +18,7 @@ exports.out = path.join(exports.root, 'out')
  * a referer from an external site.
  * @type {Number}
  */
-exports.numFree = 1
+exports.numFree = 3
 
 /**
  * Price of pro subscription (in cents!)
