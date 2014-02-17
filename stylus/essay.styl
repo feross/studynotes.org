@@ -15,15 +15,24 @@ body.essay
         color: rgba(230, 230, 230, 0.6)
 
   .subscribe-on-blur
-    background: radial-gradient(rgba(255, 255, 255, 1) 40%, rgba(255, 255, 255, 0.1) 70%)
+    // background: radial-gradient(rgba(255, 255, 255, 1) 40%, rgba(255, 255, 255, 0.1) 70%)
+    background: BLUE_LIGHTER
+    border-radius: 100px
+    border: 3px solid BLUE
     left: 0
-    padding: 150px 50px
+    margin-top: 150px
+    padding: 50px
     position: absolute
     right: 0
     text-align: center
     top: 325px
 
     @media PHONE
-      padding: 150px 20px
+      border-radius: 40px
+      padding: 20px
     @media TABLET
-      padding: 150px 30px
+      border-radius: 60px
+      padding: 30px
+
+    h4
+      margin-bottom: 0
