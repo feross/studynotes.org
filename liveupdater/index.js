@@ -55,14 +55,14 @@ function LiveUpdater (opts, done) {
   })
 }
 
-LiveUpdater.prototype.handleMessage = function (socket, str) {
+LiveUpdater.prototype.handleMessage = function (socket, data) {
   var self = this
   var message
   try {
-    debug('Received message: ' + str)
-    message = JSON.parse(str)
+    debug('Received message: ' + data)
+    message = JSON.parse(data)
   } catch (e) {
-    debug('Discarding non-JSON message: ' + message)
+    debug('Discarding non-JSON message: ' + data)
     return
   }
 
