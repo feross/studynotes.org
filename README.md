@@ -1,8 +1,4 @@
-# [StudyNotes](http://www.apstudynotes.org)
-[![Build Status](http://img.shields.io/travis/feross/StudyNotes.svg)](https://travis-ci.org/feross/StudyNotes)
-[![NPM Version](http://img.shields.io/npm/v/studynotes.svg)](https://npmjs.org/package/studynotes)
-[![NPM](http://img.shields.io/npm/dm/studynotes.svg)](https://npmjs.org/package/studynotes)
-[![Gittip](http://img.shields.io/gittip/feross.svg)](https://www.gittip.com/feross/)
+# [StudyNotes](http://www.apstudynotes.org) [![travis](https://img.shields.io/travis/feross/StudyNotes.svg)](https://travis-ci.org/feross/StudyNotes) [![npm](https://img.shields.io/npm/v/studynotes.svg)](https://npmjs.org/package/studynotes) [![gittip](https://img.shields.io/gittip/feross.svg)](https://www.gittip.com/feross/)
 
 ### Helping students learn faster and better!
 
