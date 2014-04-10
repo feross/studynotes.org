@@ -1,6 +1,6 @@
 # [StudyNotes](http://www.apstudynotes.org) [![travis](https://img.shields.io/travis/feross/StudyNotes.svg)](https://travis-ci.org/feross/StudyNotes) [![npm](https://img.shields.io/npm/v/studynotes.svg)](https://npmjs.org/package/studynotes) [![gittip](https://img.shields.io/gittip/feross.svg)](https://www.gittip.com/feross/)
 
-### Helping students learn faster and better!
+#### Helping students learn faster and better!
 
 ## Top notes and essays
 

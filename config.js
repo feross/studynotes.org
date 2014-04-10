@@ -5,7 +5,7 @@ exports.isProd = process.browser
   : (process.env.NODE_ENV === 'production')
 
 exports.ports = {
-  site: exports.isProd ? 7300 : 4000,
+  site: exports.isProd ? 7300 : 4000,
   liveupdater: exports.isProd ? 7301 : 4001,
   admin: 4002
 }
