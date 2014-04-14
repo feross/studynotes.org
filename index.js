@@ -1,29 +1,52 @@
 module.exports = Site
 
-var secret = require('./secret')
-
-var _ = require('underscore')
-var async = require('async')
-var auth = require('./lib/auth')
+/**
+ * Dependencies
+ */
+var _ = require('underscore') // TODO: remove
+var async = require('async') // TODO: remove. use run-auto, run-parallel, run-series
 var bcrypt = require('bcrypt')
 var cluster = require('cluster')
 var cp = require('child_process')
-var config = require('./config')
-var connectSlashes = require('connect-slashes')
 var debug = require('debug')('studynotes:site')
 var express = require('express')
-var flash = require('connect-flash')
 var fs = require('fs')
 var http = require('http')
-var model = require('./model')
 var moment = require('moment')
 var mongoose = require('mongoose')
-var MongoStore = require('connect-mongo')(express)
-var passport = require('passport')
 var path = require('path')
-var pro = require('./lib/pro')
 var url = require('url')
+
+/**
+ * Express middleware dependencies
+ */
+var bodyParser = require('body-parser')
+var compress = require('compression')
+var connectSlashes = require('connect-slashes')
+var cookieParser = require('cookie-parser')
+var csrf = require('csurf')
+var favicon = require('static-favicon')
+var flash = require('connect-flash')
+var passport = require('passport')
+var session = require('express-session')
+// HACK HACK HACK: for Express 4 support
+// See: https://github.com/kcbanner/connect-mongo/issues/109
+var MongoStore = require('connect-mongo')({ session: session })
+
+/**
+ * Keys, passwords, etc.
+ */
+var secret = require('./secret')
+
+/**
+ * Library modules
+ */
+var auth = require('./lib/auth')
+var config = require('./config')
+var model = require('./model')
+var pro = require('./lib/pro')
 var util = require('./util')
+
 
 function Site (opts, cb) {
   var self = this
@@ -72,7 +95,7 @@ Site.prototype.start = function (done) {
 
     // Readable logs that are hidden by default. Enable with DEBUG=*
     self.app.use(util.expressLogger(debug))
-    self.app.use(express.compress())
+    self.app.use(compress())
     self.app.use(self.addHeaders)
 
     if (config.isProd)
@@ -175,7 +198,7 @@ Site.prototype.serveStatic = function () {
   var self = this
 
   // Favicon middleware makes favicon requests fast
-  self.app.use(express.favicon(path.join(config.root, 'static/favicon.ico')))
+  self.app.use(favicon(path.join(config.root, 'static/favicon.ico')))
 
   // Setup static middlewares
   var opts = { maxAge: config.maxAge }
@@ -217,9 +240,9 @@ Site.prototype.serveStatic = function () {
 Site.prototype.setupSessions = function () {
   var self = this
 
-  self.app.use(express.cookieParser(secret.cookieSecret))
-  self.app.use(express.bodyParser())
-  self.app.use(express.session({
+  self.app.use(cookieParser(secret.cookieSecret))
+  self.app.use(bodyParser())
+  self.app.use(session({
     proxy: true, // trust the reverse proxy
     secret: secret.cookieSecret, // prevent cookie tampering
     store: new MongoStore({
@@ -229,7 +252,7 @@ Site.prototype.setupSessions = function () {
       auto_reconnect: true
     })
   }))
-  self.app.use(express.csrf())
+  self.app.use(csrf())
 
   // Passport
   self.app.use(passport.initialize())
