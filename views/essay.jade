@@ -61,7 +61,7 @@ block content
   if (blur)
     .body
       .subscribe-on-blur.unblur
-        h2 Please pay $#{ (config.proPrice / 100) } to read this essay.
+        h2 You must pay $#{ (config.proPrice / 100) } to read this essay.
         p
           form(action='/pro', method='POST')
             input(type='hidden', name='_csrf', value=csrf)
