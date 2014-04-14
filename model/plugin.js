@@ -1,5 +1,5 @@
 var _s = require('underscore.string')
-var async = require('async')
+var async = require('async') // TODO: remove
 var config = require('../config')
 var mongoose = require('mongoose')
 

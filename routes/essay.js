@@ -1,5 +1,5 @@
 var _ = require('underscore')
-var async = require('async')
+var auto = require('run-auto')
 var config = require('../config')
 var debug = require('debug')('studynotes:routes/essay')
 var model = require('../model')
@@ -10,7 +10,7 @@ module.exports = function (app) {
     var college = model.cache.colleges[req.params.collegeId]
     if (!college) return next()
 
-    async.auto({
+    auto({
       essay: function (cb) {
         model.Essay
           .findOne({

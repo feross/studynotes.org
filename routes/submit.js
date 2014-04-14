@@ -1,5 +1,5 @@
 var _ = require('underscore')
-var async = require('async')
+var auto = require('run-auto')
 var auth = require('../lib/auth')
 var email = require('../lib/email')
 var model = require('../model')
@@ -31,7 +31,7 @@ module.exports = function (app) {
     }
     var isEdit = req.body._id
 
-    async.auto({
+    auto({
       essay: function (cb) {
         if (isEdit) {
           model.Essay
@@ -116,7 +116,7 @@ module.exports = function (app) {
     }
     var isEdit = req.body._id
 
-    async.auto({
+    auto({
       note: function (cb) {
         if (isEdit) {
           model.Note

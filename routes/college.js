@@ -1,5 +1,6 @@
 var _ = require('underscore')
-var async = require('async')
+var async = require('async') // TODO: remove
+var auto = require('run-auto')
 var model = require('../model')
 
 module.exports = function (app) {
@@ -9,7 +10,7 @@ module.exports = function (app) {
   ]
 
   app.get('/essays', function (req, res, next) {
-    async.auto({
+    auto({
       essays: function (cb) {
         model.Essay
           .find()
@@ -63,7 +64,7 @@ module.exports = function (app) {
     var college = model.cache.colleges[req.params.collegeId]
     if (!college) return next()
 
-    async.auto({
+    auto({
       essays: function (cb) {
         model.Essay
           .find({ college: college.id })
@@ -91,7 +92,7 @@ module.exports = function (app) {
     var college = model.cache.colleges[req.params.collegeId]
     if (!college) return next()
 
-    async.auto({
+    auto({
       essays: function (cb) {
         model.Essay
           .find({ college: college.id })

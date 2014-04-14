@@ -1,6 +1,6 @@
 var _ = require('underscore')
-var async = require('async')
 var model = require('../model')
+var parallel = require('run-parallel')
 var sort = require('../lib/sort')
 
 module.exports = function (app) {
@@ -14,7 +14,7 @@ module.exports = function (app) {
     })
     if (!notetype) return next()
 
-    async.parallel({
+    parallel({
       notes: function (cb) {
         model.Note
           .find({ course: course.id, notetype: notetype.id })

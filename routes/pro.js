@@ -1,5 +1,5 @@
 var _ = require('underscore')
-var async = require('async')
+var auto = require('run-auto')
 var config = require('../config')
 var debug = require('debug')('studynotes:routes/pro')
 var email = require('../lib/email')
@@ -16,7 +16,7 @@ module.exports = function (app) {
     var amount = config.proPrice
     var user = req.user
 
-    async.auto({
+    auto({
       essay: function (cb) {
         model.Essay
         .findOne({ _id: req.body.referringEssay })

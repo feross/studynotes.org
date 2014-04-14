@@ -1,11 +1,11 @@
 var _ = require('underscore')
-var async = require('async')
+var auto = require('run-auto')
 var model = require('../model')
 var util = require('../util')
 
 module.exports = function (app) {
   app.get('/', function (req, res, next) {
-    async.auto({
+    auto({
       noteCount: function (cb) {
         model.Note.count().exec(cb)
       },
@@ -40,7 +40,7 @@ module.exports = function (app) {
           .exec(cb)
       },
       topUsers: function (cb) {
-        async.auto({
+        auto({
           notes: function (cb2) {
             model.Note
               .find()

@@ -4,7 +4,6 @@ module.exports = Site
  * Dependencies
  */
 var _ = require('underscore') // TODO: remove
-var async = require('async') // TODO: remove. use run-auto, run-parallel, run-series
 var bcrypt = require('bcrypt')
 var cluster = require('cluster')
 var cp = require('child_process')
@@ -15,6 +14,7 @@ var http = require('http')
 var moment = require('moment')
 var mongoose = require('mongoose')
 var path = require('path')
+var series = require('run-series')
 var url = require('url')
 
 /**
@@ -117,7 +117,7 @@ Site.prototype.start = function (done) {
 
     require('./routes')(self.app)
 
-    async.series([
+    series([
       model.connect,
       function (cb) {
         // Start HTTP server -- workers will share TCP connection

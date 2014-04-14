@@ -1,7 +1,7 @@
 module.exports = LiveUpdater
 
 var _ = require('underscore')
-var async = require('async')
+var async = require('async') // TODO: remove
 var config = require('../config')
 var debug = require('debug')('studynotes:liveupdater')
 var fs = require('fs')
@@ -9,6 +9,7 @@ var http = require('http')
 var https = require('https')
 var jsdom = require('jsdom')
 var model = require('../model')
+var series = require('run-series')
 var util = require('../util')
 var ws = require('ws')
 
@@ -44,7 +45,7 @@ function LiveUpdater (opts, done) {
     socket.onSend = self.handleSend.bind(self, socket)
   })
 
-  async.series([
+  series([
     model.connect,
     function (cb) {
       self.getTotalHits(cb)

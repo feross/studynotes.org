@@ -1,10 +1,10 @@
-var async = require('async')
+var auto = require('run-auto')
 var cp = require('child_process')
 var config = require('../config')
 var fs = require('fs')
 var md5 = require('MD5')
 
-async.auto({
+auto({
   MD5_JS_MAIN: function (cb) {
     calculateMd5(config.out + '/main.js', function (err, md5) {
       if (err) throw err

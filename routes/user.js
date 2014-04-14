@@ -1,10 +1,10 @@
 var _ = require('underscore')
-var async = require('async')
+var auto = require('run-auto')
 var model = require('../model')
 
 module.exports = function (app) {
   app.get('/user/:userId', function (req, res, next) {
-    async.auto({
+    auto({
       user: function (cb) {
         model.User
           .findOne({ _id: req.params.userId })

@@ -1,5 +1,5 @@
 var _ = require('underscore')
-var async = require('async')
+var auto = require('run-auto')
 var bcrypt = require('bcrypt')
 var config = require('../config')
 var model = require('./')
@@ -110,7 +110,7 @@ User.virtual('hasGraduated').get(function () {
 
 User.methods.totalHits = function (cb) {
   var user = this
-  async.auto({
+  auto({
     essays: function (cb) {
       model.Essay
         .find({ user: user.id, anon: false })

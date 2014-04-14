@@ -1,5 +1,5 @@
 var _ = require('underscore')
-var async = require('async')
+var auto = require('run-auto')
 var model = require('../model')
 var sort = require('../lib/sort')
 
@@ -13,7 +13,7 @@ module.exports = function (app) {
     })
     if (!notetype) return next()
 
-    async.auto({
+    auto({
       notes: function (cb) {
         var query = model.Note
           .find({ course: course.id, notetype: notetype.id })

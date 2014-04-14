@@ -1,5 +1,5 @@
 var _ = require('underscore')
-var async = require('async')
+var auto = require('run-auto')
 var config = require('../config')
 var fs = require('fs')
 var mongoose = require('mongoose')
@@ -49,7 +49,7 @@ exports.connect = function (cb) {
 
 
 function loadCache (done) {
-  async.auto({
+  auto({
     courses: function (cb) {
       exports.Course
         .find()
