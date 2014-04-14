@@ -1,7 +1,7 @@
 {
   "name": "studynotes",
   "description": "The StudyNotes.org website. AP Notes & College Essays. AP US History Notes.",
-  "version": "0.2.8",
+  "version": "0.3.0",
   "author": "Feross Aboukhadijeh <feross@feross.org> (http://feross.org/)",
   "browser": {
     "ckeditor": "./lib/ckeditor/ckeditor.js",
