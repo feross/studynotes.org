@@ -24,7 +24,7 @@ exports.numFree = 2
  * Price of pro subscription (in cents!)
  * @type {Number}
  */
-exports.proPrice = 500
+exports.proPrice = 1000
 
 /**
  * Number of cores on this CPU
