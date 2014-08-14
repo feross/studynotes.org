@@ -115,22 +115,22 @@
     "url": "https://github.com/feross/StudyNotes.git"
   },
   "scripts": {
-    "build-js-main": "browserify -r ./util-browser -r ./config-browser client/main.js > out/main.js && node ./bin/minify out/main.js",
-    "build-js-extra": "browserify -r ./util-browser -r ./config-browser client/extra.js > out/extra.js && node ./bin/minify out/extra.js",
-    "build-js": "npm run build-js-main & npm run build-js-extra",
-    "build-css": "stylus -u nib stylus/main.styl -o out/ --include-css -c && node ./bin/transform-css.js out/main.css",
-    "build": "npm run build-js && npm run build-css && node ./bin/postbuild.js",
-    "watch-js-main": "watchify -r ./util-browser -r ./config-browser client/main.js -o out/main.js -dv",
-    "watch-js-extra": "watchify -r ./util-browser -r ./config-browser client/extra.js -o out/extra.js -dv",
-    "watch-js": "npm run watch-js-main & npm run watch-js-extra",
-    "watch-css": "stylus -u nib stylus/main.styl -o out/ --include-css -w",
-    "watch": "npm run watch-js & npm run watch-css",
-    "db-tunnel": "ssh -L 27017:localhost:27017 -N feross@athena",
-    "db-local": "mongod",
-    "start": "npm run db-tunnel & npm run watch & (sleep 2 && DEBUG=\"studynotes:*\" nodemon run.js)",
-    "offline": "npm run db-local & npm run watch & (sleep 1 && DEBUG=\"studynotes:*\" nodemon run.js --offline)",
     "admin": "nodemon admin/index.js",
+    "build": "npm run build-js && npm run build-css && node ./bin/postbuild.js",
+    "build-css": "stylus -u nib stylus/main.styl -o out/ --include-css -c && node ./bin/transform-css.js out/main.css",
+    "build-js": "npm run build-js-main & npm run build-js-extra",
+    "build-js-extra": "browserify -r ./util-browser -r ./config-browser client/extra.js > out/extra.js && node ./bin/minify out/extra.js",
+    "build-js-main": "browserify -r ./util-browser -r ./config-browser client/main.js > out/main.js && node ./bin/minify out/main.js",
+    "db-local": "mongod",
+    "db-tunnel": "ssh -L 27017:localhost:27017 -N feross@athena",
+    "offline": "npm run db-local & npm run watch & (sleep 1 && DEBUG=\"studynotes:*\" nodemon run.js --offline)",
+    "push": "npm version patch && git push && npm publish",
+    "start": "npm run db-tunnel & npm run watch & (sleep 2 && DEBUG=\"studynotes:*\" nodemon run.js)",
     "test": "tape test/*.js",
-    "push": "npm version patch && git push && npm publish"
+    "watch": "npm run watch-js & npm run watch-css",
+    "watch-css": "stylus -u nib stylus/main.styl -o out/ --include-css -w",
+    "watch-js": "npm run watch-js-main & npm run watch-js-extra",
+    "watch-js-extra": "watchify -r ./util-browser -r ./config-browser client/extra.js -o out/extra.js -dv",
+    "watch-js-main": "watchify -r ./util-browser -r ./config-browser client/main.js -o out/main.js -dv"
   }
 }
