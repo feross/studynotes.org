@@ -49,7 +49,6 @@
     "browserify": "^3.41.0",
     "browserify-shim": "^3.4.1",
     "bytes": "^0.3.0",
-    "closurecompiler": "^1.3.0",
     "compression": "^1.0.1",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^0.4.0",
@@ -99,6 +98,7 @@
   "devDependencies": {
     "nodemon": "^1.0.17",
     "tape": "^2.12.3",
+    "uglify-js": "^2.4.15",
     "watchify": "^0.6.4"
   },
   "homepage": "http://www.apstudynotes.org",
@@ -119,8 +119,8 @@
     "build": "npm run build-js && npm run build-css && node ./bin/postbuild.js",
     "build-css": "stylus -u nib stylus/main.styl -o out/ --include-css -c && node ./bin/transform-css.js out/main.css",
     "build-js": "npm run build-js-main & npm run build-js-extra",
-    "build-js-extra": "browserify -r ./util-browser -r ./config-browser client/extra.js > out/extra.js && node ./bin/minify out/extra.js",
-    "build-js-main": "browserify -r ./util-browser -r ./config-browser client/main.js > out/main.js && node ./bin/minify out/main.js",
+    "build-js-extra": "browserify -r ./util-browser -r ./config-browser client/extra.js | uglifyjs -c warnings=false -m > out/extra.js",
+    "build-js-main": "browserify -r ./util-browser -r ./config-browser client/main.js | uglifyjs -c warnings=false -m > out/main.js",
     "db-local": "mongod",
     "db-tunnel": "ssh -L 27017:localhost:27017 -N feross@athena",
     "offline": "npm run db-local & npm run watch & (sleep 1 && DEBUG=\"studynotes:*\" nodemon run.js --offline)",
