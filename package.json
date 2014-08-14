@@ -97,7 +97,6 @@
     "ws": "^0.4.31"
   },
   "devDependencies": {
-    "formage": "^2.6.0",
     "nodemon": "^1.0.17",
     "tape": "^2.12.3",
     "watchify": "^0.6.4"
