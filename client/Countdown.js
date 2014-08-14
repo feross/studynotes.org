@@ -1,3 +1,4 @@
+var $ = require('jquery')
 var moment = require('moment')
 
 /**
@@ -5,7 +6,7 @@ var moment = require('moment')
  * @param {String} selector jQuery selector to bind the countdown timer to
  * @param {Date} date     Date to countdown to
  */
-function Countdown(selector, date) {
+function Countdown (selector, date) {
   this.$elem = $(selector)
 
   if (this.$elem.length === 0)

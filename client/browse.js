@@ -1,5 +1,6 @@
 // Browse menu dropdown
 
+var $ = require('jquery')
 var util = require('../util')
 
 /**

@@ -1,3 +1,4 @@
+var $ = require('jquery')
 $('select[name="course"]').on('change', function (e, force) {
   if (!e.added && !force) return
 

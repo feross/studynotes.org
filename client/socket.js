@@ -2,6 +2,7 @@ var socket
 var lastTotalHits
 var stats
 
+var $ = require('jquery')
 var config = require('../config')
 var notify = require('./notify')
 var util = require('../util')

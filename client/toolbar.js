@@ -1,5 +1,6 @@
 // Floating content toolbar
 
+var $ = require('jquery')
 var $window = $(window)
 var $content = $('.content')
 var $toolbar = $('.content .toolbar')

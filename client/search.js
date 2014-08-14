@@ -2,6 +2,7 @@
 
 var config = require('../config')
 
+var $ = require('jquery')
 var $autocomplete = $('.header .autocomplete')
 var $headerLeft = $('.header .left')
 var $headerRight = $('.header .right')
