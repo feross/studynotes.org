@@ -1,0 +1,29 @@
+@media print
+  header, footer, .sidebar, .browseWrapper, .heroImage, .tabs, .toolbar-ghost,
+  .keepStudying, .noteNav, #disqus_thread, video, audio, object, embed
+    display: none
+  body
+    background: none !important
+    font: 12pt Georgia, "Times New Roman", Times, serif
+    line-height: 1.3
+    margin: 3em
+  .wrap
+    margin: 0
+    padding: 0
+  .hero
+    a
+      padding: 20px 0
+    .title
+      color: GRAY_DARKEST !important
+      text-shadow: none !important
+      &:before
+        content: 'StudyNotes.org'
+        color: GRAY_DARKEST
+        font-size: 24px
+        display: block
+  .contentWrapper
+    float: none
+  .content
+    box-shadow: none
+  img
+    max-width: 500px
