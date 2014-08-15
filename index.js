@@ -43,6 +43,7 @@ var secret = require('./secret')
  */
 var auth = require('./lib/auth')
 var config = require('./config')
+var email = require('./lib/email')
 var model = require('./model')
 var pro = require('./lib/pro')
 var util = require('./util')
@@ -126,6 +127,7 @@ Site.prototype.start = function (done) {
     ], function (err) {
       if (!err) {
         debug('StudyNotes listening on ' + self.port)
+        email.notifyAdmin('StudyNotes server started')
         if (!config.isProd) util.triggerLiveReload()
       }
       done(err)
