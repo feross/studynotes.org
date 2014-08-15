@@ -18,9 +18,10 @@
 npm install studynotes
 ```
 
-## awesome dependency visualization!
+## dependencies
 
-Check it out: [Yasiv: studynotes](http://www.yasiv.com/npm#view/studynotes).
+Awesome dependency visualization! Check it out:
+[Yasiv: studynotes](http://www.yasiv.com/npm#view/studynotes).
 
 ## license
 
