@@ -4,7 +4,11 @@ var express = require('express')
 var httpStatus = require('http-status-codes')
 
 module.exports = function (app) {
-  app.use(function(req, res) {
+  app.get('/500', function (req, res, next) {
+    next(new Error('Manually visited /500'))
+  })
+
+  app.use(function (req, res) {
     res.status(404).render('error', {
       title: '404 Page Not Found',
       hero: {
@@ -12,10 +16,6 @@ module.exports = function (app) {
         desc: 'Sorry about that. Here is a cat for you instead.'
       }
     })
-  })
-
-  app.get('/500', function (req, res, next) {
-    next(new Error('Manually visited /500'))
   })
 
   app.use(function (err, req, res, next) {
