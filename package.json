@@ -94,6 +94,7 @@
     "ws": "^0.4.31"
   },
   "devDependencies": {
+    "formage": "^3.2.14",
     "nodemon": "^1.0.17",
     "tape": "^2.12.3",
     "uglify-js": "^2.4.15",
