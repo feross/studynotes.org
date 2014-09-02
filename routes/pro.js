@@ -96,7 +96,7 @@ module.exports = function (app) {
       } else {
         res.redirect('/signup/')
       }
-      email.notifyAdmin('New order for $' + (amount / 100), r.order)
+      // email.notifyAdmin('New order for $' + (amount / 100), r.order)
     })
   })
 }
