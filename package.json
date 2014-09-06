@@ -89,7 +89,7 @@
     "stylus": "^0.43.1",
     "touch": "^0.0.3",
     "transparency": "^0.9.14",
-    "underscore": "^1.5.2",
+    "underscore": "1.5.2",
     "underscore.string": "^2.3.3",
     "ws": "^0.4.31"
   },
