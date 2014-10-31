@@ -121,5 +121,4 @@ module.exports = function (app) {
       college.hit()
     })
   })
-
 }
