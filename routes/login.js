@@ -11,7 +11,7 @@ var model = require('../model')
 var FORT_NIGHT_MS = 14 * 24 * 60 * 60 * 1000
 
 var composeResetMsg = function(params) {
-  var from = params.from || '"Study Notes Admin" <admin@apstudynotes.org>'
+  var from = params.from || '"StudyNotes Admin" <admin@apstudynotes.org>'
   
   var html = util.format(
       'Hey %s,<br /><ul />We recently received a password reset from you.<br /><br />' +
@@ -57,12 +57,10 @@ module.exports = function (app) {
   })
 
   app.get('/login/resetPassword/:resetToken', ssl.ensureSSL, function(req, res, next) {
-    model.ResetToken.findOne({
-      token: req.params.resetToken
-    }, function(err, r) {
+    model.ResetToken.findOne({ token: req.params.resetToken }, function(err, r) {
       if (err) return next(err)
       else if (!r) return res.status(404).send('Invalid or expired token')
-      console.log(req.cookies)
+
       res.render('reset-password', {
         resetToken: r.token,
         csrftoken: req.cookies.csrftoken
@@ -70,20 +68,22 @@ module.exports = function (app) {
     })
   })
 
-  app.post('/login/setPassword/:resetToken/:password', ssl.ensureSSL,
+  app.post('/login/setPassword', ssl.ensureSSL,
   function(req, res, next) {
-    console.log('Cest la vie!', req.params, req.body)
+    console.log('Cest la vie!', req.body)
     model.ResetToken.findOneAndRemove({
-      token: req.params.token, expiryDate: {$gt: Date.now()}
+      token: req.body.token, expiryDate: {$gt: Date.now()}
     }, function(err, r) {
       console.log('token here', req.params)
       if (err) return next(err)
       else if (!r) return res.status(404).send('Invalid token')
 
-      model.User.findOne({ email: req.params.email }, function(err, r) {
+      model.User.findOne({ email: req.body.email }, function(err, r) {
         if (err) return next(err)
         else if (!r) return res.status(404).send('No such user found')
-        r.password = req.params.password // Assumption here is that 'save' method is overwritten
+
+        // Assumption here is that 'save' method does all the hashing
+        r.password = req.body.password
         r.save(function(err) {
           if (err) return next(err)
 
@@ -95,26 +95,27 @@ module.exports = function (app) {
 
   app.get('/login/forgot/:email', ssl.ensureSSL, function (req, res, next) {
     console.log(req.params.email)
-    model.User.findOne({ email: req.params.email }, 'email name',
-    function(err, u) {
-      console.log(u)
+    model.User.findOne({ email: req.params.email }, 'email name', function(err, u) {
+
       if (err) return next(err)
       else if (!u) return res.status(404).send(false)
 
-      // Make sure all other reset tokens are cleared out
-      model.ResetToken.remove({email: u.email}, function(err) {
+      // Make sure all previous reset tokens are cleared out
+      model.ResetToken.findOneAndRemove({ email: u.email }, function(err, r) {
+
         if (err) return res.redirect('/')
 
         // Create for a unique token as well as expiry date
         var rToken = new model.ResetToken({email: u.email})
+
         var fHash = crypto.createHash('sha256')
         fHash.update(rToken._id + 'X' + Math.random() + '^' + rToken._id)
+
         rToken.token = fHash.digest('hex')
         rToken.expiryDate = new Date(Date.now() + FORT_NIGHT_MS)
 
-        // console.log('rToken', rToken, req)
-
         rToken.save(function(err, savedToken) {
+
           if (err) return next(err)
 
           var msg = composeResetMsg({
@@ -124,8 +125,27 @@ module.exports = function (app) {
           })
 
           email.send(msg, function(err, r) {
+            console.log(r, err)
             if (err) return next(err)
-            res.status(200).send("Please check your email address: " + u.email) 
+
+            if (!(r && r.accepted && r.accepted.length >= 1))
+              return res.status(400).send('Emailing got no response back. Please try again!')
+
+            if (r.rejected && r.rejected.length >= 1) {
+              for (var i = 0, len = r.rejected.length; i < len; i++) {
+                if (r.rejected[i] === u.email)
+                  return res.status(400).send('The email you provided got rejected!')
+              }
+            }
+
+            // Potential security hole detected if our records don't match those from emailer!
+            if (r.accepted[0] !== u.email) {
+              return res.status(404).send(
+                              'The accepted email was not the one matching our records!')
+            }
+
+            // Success otherwise!
+            res.status(200).send("Please check your email @: " + u.email)
           })
         })
       })
