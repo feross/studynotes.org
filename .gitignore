@@ -5,3 +5,10 @@ secret/*
 # Built files
 out/*
 !out/placeholder.txt
+
+# Text editor files
+*~
+*.sw[op]
+
+node_modules/
+tmp/
