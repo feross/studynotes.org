@@ -1,6 +1,7 @@
 var bytes = require('bytes')
 var config = require('./config')
 var cp = require('child_process')
+var crypto = require('crypto')
 var debug = require('debug')('util')
 var email = require('./lib/email')
 var express = require('express')
@@ -201,6 +202,19 @@ exports.sanitizeHTML = function (html, elementsWhitelist, attributesWhitelist) {
     doctype: true
   })
   return sanitized
+}
+
+exports.randomBytes = function (length, cb) {
+  if (typeof length === 'function') {
+    cb = length
+    length = 20
+  }
+  if (!cb) throw new Error('argument cb required')
+
+  crypto.randomBytes(length, function (err, buf) {
+    if (err) return cb(err)
+    cb(null, buf.toString('hex'))
+  })
 }
 
 // Make `inherits` from node's "util" module available

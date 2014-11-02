@@ -1,0 +1,26 @@
+extends layouts/form
+
+block content
+  h1 Choose a Password
+  h2 Pick something memorable – don't forget it!
+
+  if (locals.errors.length)
+    .errors
+      each msg in errors
+        div= msg
+
+  form(method='POST')
+    input(type='hidden', name='_csrf', value=csrf)
+    .row
+      input(
+        name='password',
+        type='password',
+        placeholder='password',
+        autofocus=!!email,
+        required
+      )
+    .row.submit
+      button.btn.large(type='submit') Set Password
+
+block footer
+  span Your password will be immediately changed.

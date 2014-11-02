@@ -1,0 +1,27 @@
+extends layouts/form
+
+block content
+  h1 Reset Your Password
+  h2 Regain access to your StudyNotes account.
+
+  if (locals.errors.length)
+    .errors
+      each msg in errors
+        div= msg
+
+  form(method='POST')
+    input(type='hidden', name='_csrf', value=csrf)
+    .row
+      input(
+        name='email',
+        type='email',
+        placeholder='email',
+        value=email,
+        autofocus=!email,
+        required
+      )
+    .row.submit
+      button.btn.large(type='submit') Reset Password
+
+block footer
+  span Looking to <a href="/login/">log in</a> instead?

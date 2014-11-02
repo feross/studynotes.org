@@ -48,7 +48,9 @@ var User = new mongoose.Schema({
     ]
   },
   pro: Boolean,
-  admin: Boolean
+  admin: Boolean,
+  resetPasswordToken: String,
+  resetPasswordExpires: Date
 })
 
 // Trim whitespace
