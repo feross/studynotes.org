@@ -1,5 +1,4 @@
 # Secret files
-secret*
 secret/*
 !secret/index-sample.js
 

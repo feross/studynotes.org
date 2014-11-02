@@ -8,10 +8,6 @@ var mongoose = require('mongoose')
 var plugin = require('./plugin')
 var validate = require('mongoose-validator').validate
 
-var passwordLengths = {
-  min: 6, max: 255
-}
-
 var User = new mongoose.Schema({
   _id: {
     type: String,
@@ -36,8 +32,7 @@ var User = new mongoose.Schema({
   password: {
     type: String,
     validate: [
-      validate({ message: 'Your password must be at least 6 characters.' },
-                            'len', passwordLengths.min, passwordLengths.max),
+      validate({ message: 'Your password must be at least 6 characters.' }, 'len', 6, 255),
       validate({ message: 'You need a password, silly!' }, 'notEmpty')
     ]
   },
@@ -161,10 +156,6 @@ User.methods.getGravatar = function (anon) {
   else
     return this.gravatar
 }
-
-User.virtual('passwordLengths').get(function() {
-  return passwordLengths
-})
 
 // Store hashed version of user's password
 User.pre('save', function (next) {

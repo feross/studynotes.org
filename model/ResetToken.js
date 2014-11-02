@@ -11,6 +11,4 @@ var ResetToken = mongoose.Schema({
 ResetToken.plugin(plugin.createDate)
 ResetToken.plugin(plugin.modifyDate)
 
-ResetToken.plugin(plugin.slug, { model: 'ResetToken' })
-
 module.exports = ResetToken
