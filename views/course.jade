@@ -3,7 +3,13 @@ extends layouts/main-sidebar
 block content
   include includes/toolbar
 
-  include ads/adsense-in-content
+  if (course.shortName === 'APUSH')
+    .da.pull-right
+      a(href='http://instaedu.go2cloud.org/aff_c?offer_id=8&aff_id=1040&url_id=446')
+        img(src='#{ config.cdnOrigin }/images/instaedu-us-history.jpg')
+  else
+    include ads/adsense-in-content
+
 
   if (course.notetypes)
     each notetype in course.notetypes
