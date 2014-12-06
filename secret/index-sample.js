@@ -4,7 +4,7 @@
 
 var config = require('../config')
 
-exports.cookieSecret = ''
+exports.cookieSecret = 'abcdefghijklmnopqrstuvabcdefghi'
 
 exports.netdna = {
   companyAlias: '',

@@ -12,11 +12,10 @@
 - [College Essays](http://www.apstudynotes.org/essays/)
 - [Stanford Essays](http://www.apstudynotes.org/stanford/)
 
-## install
+## Contributing
 
-```
-npm install studynotes
-```
+See [CONTIBUTING.md](/CONTRIBUTING.md) for instructions on how to contribute to the
+StudyNotes project.
 
 ## dependencies
 
