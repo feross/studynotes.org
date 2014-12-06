@@ -5,3 +5,6 @@ secret/*
 # Built files
 out/*
 !out/placeholder.txt
+
+# Modules
+node_modules/
