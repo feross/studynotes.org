@@ -4,15 +4,12 @@ var cp = require('child_process')
 var crypto = require('crypto')
 var debug = require('debug')('util')
 var email = require('./lib/email')
-var express = require('express')
 var fs = require('fs')
 var htmlParser = require('html-parser')
 var truncate = require('html-truncate')
 var mkdirp = require('mkdirp')
 var nodeUtil = require('util')
-var once = require('once')
 var optimist = require('optimist')
-var os = require('os')
 var path = require('path')
 var posix = require('posix')
 var touch = require('touch')
@@ -84,7 +81,7 @@ exports.uuid = function () {
  * Recursively and synchronously delete a folder and all its subfolders.
  * If the folder does not exist, then do nothing.
  *
- * @param {string} folderPath
+ * @param {string} dirPath
  * @param {function(Error)=} cb
  */
 exports.rmdirRecursive = function (dirPath, cb) {
@@ -113,7 +110,7 @@ exports.rmdirRecursive = function (dirPath, cb) {
  * @param  {function(*)} debug instance
  */
 exports.expressLogger = function (debug) {
-  return function(req, res, next) {
+  return function (req, res, next) {
     var status = res.statusCode
     var len = parseInt(res.getHeader('Content-Length'), 10)
     var color = 32
@@ -155,8 +152,8 @@ exports.triggerLiveReload = function () {
  * @return {String}
  */
 
-exports.escapeRegExp = function(str) {
-  return str.replace(/([.*+?^=!:${}()|[\]\/\\])/g, "\\$1")
+exports.escapeRegExp = function (str) {
+  return str.replace(/([.*+?^=!:${}()|[\]\/\\])/g, '\\$1')
 }
 
 exports.hitsPerDay = function (hits, date) {
