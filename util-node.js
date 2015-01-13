@@ -35,23 +35,8 @@ exports.run = function (ServerConstructor) {
   delete opts.$0
   delete opts._
 
-  // When server is started as "root" we can upgrade resource limits
-  if (config.isProd && process.getuid() === 0) {
-
-    // Upgrade resource limits
-    posix.setrlimit('nofile', { soft: 10000, hard: 10000 })
-    var limits = posix.getrlimit('nofile')
-    console.log('Upgraded resource limit to ' + limits.soft)
-
-    // Downgrade server from "root" user for security
-    var oldUid = process.getuid()
-    try {
-      process.setuid('feross')
-      console.log('Set uid to ' + process.getuid() + ' (previously ' + oldUid + ')')
-    } catch (e) {
-      throw new Error('Failed to downgrade uid ' + e)
-    }
-  }
+  exports.upgradeLimits()
+  exports.downgradeUid()
 
   // Create and start the server
   var server = new ServerConstructor(opts, function (err) {
@@ -67,6 +52,22 @@ exports.run = function (ServerConstructor) {
     console.error(err.stack)
     email.notifyOnException({ err: err })
   })
+}
+
+var MAX_SOCKETS = 10000
+
+exports.downgradeUid = function () {
+  if (process.platform === 'linux' && config.isProd) {
+    process.setgid('www-data')
+    process.setuid('www-data')
+    debug('downgraded gid (' + process.getgid() + ') uid (' + process.getuid() + ')')
+  }
+}
+
+exports.upgradeLimits = function () {
+  posix.setrlimit('nofile', { soft: MAX_SOCKETS, hard: MAX_SOCKETS })
+  var limits = posix.getrlimit('nofile')
+  debug('upgraded resource limits to ' + limits.soft)
 }
 
 /**
