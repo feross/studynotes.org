@@ -4,15 +4,11 @@ module.exports = Site
  * Dependencies
  */
 var _ = require('underscore') // TODO: remove
-var bcrypt = require('bcrypt')
 var cluster = require('cluster')
-var cp = require('child_process')
 var debug = require('debug')('studynotes:site')
 var express = require('express')
-var fs = require('fs')
 var http = require('http')
 var moment = require('moment')
-var mongoose = require('mongoose')
 var path = require('path')
 var series = require('run-series')
 var url = require('url')
@@ -76,7 +72,7 @@ Site.prototype.start = function (done) {
     for (var i = 0; i < config.numCpus; i++) {
       cluster.fork()
     }
-    cluster.on('exit', function (worker, code, signal) {
+    cluster.on('exit', function (worker, code) {
       console.error('Worker %s died (%s)', worker.id, code)
     })
     done(null)
