@@ -1,6 +1,6 @@
-var async = require('async') // TODO: remove
 var auto = require('run-auto')
 var model = require('../model')
+var parallel = require('run-parallel')
 
 module.exports = function (app) {
   var tabs = [
@@ -101,9 +101,11 @@ module.exports = function (app) {
           .exec(cb)
       },
       populateColleges: ['essays', function (cb, results) {
-        async.each(results.essays, function (essay, cb2) {
-          essay.user.populate('college', cb2)
-        }, cb)
+        parallel(results.essays.map(function (essay) {
+          return function (cb) {
+            essay.user.populate('college', cb)
+          }
+        }), cb)
       }]
     }, function (err, results) {
       var essays = results.essays

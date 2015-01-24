@@ -1,4 +1,3 @@
-var async = require('async') // TODO: remove
 var config = require('../config')
 var mongoose = require('mongoose')
 var slugify = require('underscore.string/slugify')
@@ -77,30 +76,23 @@ exports.slug = function (schema, opts) {
     }
 
     var num = 0 // number to append to slug to try to make it unique
-    var done = false
-    var potentialSlug = initialSlug
+    checkSlug(initialSlug)
 
-    async.whilst(function () {
-      return !done
-    },
-    function (cb) {
-      // After the first try, append a number to end of slug
-      if (num > 0) {
-        potentialSlug = initialSlug + '-' + num
-      }
-      num += 1
-
+    function checkSlug (potentialSlug) {
       mongoose.model(opts.model)
-        .count({ _id: potentialSlug }, function (err, count) {
-          if (err) return cb(err)
+        .count({ _id: potentialSlug })
+        .exec(function (err, count) {
+          if (err) return next(err)
 
           if (count === 0) {
             doc._id = potentialSlug
-            done = true
+            next()
+          } else {
+            // If slug is taken, try appending a number to end
+            num += 1
+            checkSlug(initialSlug + '-' + num)
           }
-
-          cb()
         })
-    }, next)
+    }
   })
 }
