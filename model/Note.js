@@ -2,7 +2,7 @@ var _ = require('underscore')
 var model = require('./')
 var mongoose = require('mongoose')
 var plugin = require('./plugin')
-var validate = require('mongoose-validator').validate
+var validate = require('mongoose-validator')
 var util = require('../util')
 
 var Note = mongoose.Schema({
@@ -14,13 +14,21 @@ var Note = mongoose.Schema({
     type: String,
     index: true,
     validate: [
-      validate({ message: 'Please give the note a title.' }, 'notEmpty')
+      validate({
+        validator: 'isLength',
+        arguments: 1,
+        message: 'Please give the note a title.'
+      })
     ]
   },
   body: {
     type: String,
     validate: [
-      validate({ message: 'It looks like you forgot to include the actual note.' }, 'notEmpty')
+      validate({
+        validator: 'isLength',
+        arguments: 100,
+        message: 'It looks like you forgot to include the actual note.'
+      })
     ]
   },
   ordering: {

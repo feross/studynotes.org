@@ -1,15 +1,15 @@
-var config = require('../config')
-var model = require('./')
 var mongoose = require('mongoose')
 var plugin = require('./plugin')
-var validate = require('mongoose-validator').validate
+var validate = require('mongoose-validator')
 
 var Order = new mongoose.Schema({
   stripeEmail: {
     type: String,
     validate: [
-      validate({ message: 'Invalid email address' }, 'isEmail'),
-      validate({ message: 'Email address required' }, 'notEmpty')
+      validate({
+        validator: 'isEmail',
+        message: 'Invalid email address'
+      })
     ]
   },
   stripeToken: {

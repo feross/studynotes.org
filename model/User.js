@@ -6,7 +6,7 @@ var model = require('./')
 var md5 = require('MD5')
 var mongoose = require('mongoose')
 var plugin = require('./plugin')
-var validate = require('mongoose-validator').validate
+var validate = require('mongoose-validator')
 
 var User = new mongoose.Schema({
   _id: {
@@ -17,23 +17,36 @@ var User = new mongoose.Schema({
     type: String,
     index: true,
     validate: [
-      validate({ message: 'Please share your entire name - don\'t be shy!' }, 'contains', ' '),
-      validate({ message: 'Please share your name - don\'t be shy!' }, 'notEmpty')
+      validate({
+        validator: 'contains',
+        arguments: ' ',
+        message: 'Please share your full name. Don\'t be shy! :)'
+      }),
+      validate({
+        validator: 'isLength',
+        arguments: 3,
+        message: 'We need a name to create your account.'
+      })
     ]
   },
   email: {
     type: String,
     unique: true,
     validate: [
-      validate({ message: 'Your email address is invalid.' }, 'isEmail'),
-      validate({ message: 'An email address is required.' }, 'notEmpty')
+      validate({
+        validator: 'isEmail',
+        message: 'Your email address is invalid.'
+      })
     ]
   },
   password: {
     type: String,
     validate: [
-      validate({ message: 'Your password must be at least 6 characters.' }, 'len', 6, 255),
-      validate({ message: 'You need a password, silly!' }, 'notEmpty')
+      validate({
+        validator: 'isLength',
+        arguments: [ 6, 255 ],
+        message: 'Your password must be at least 6 characters, silly!'
+      })
     ]
   },
   college: {
@@ -44,7 +57,11 @@ var User = new mongoose.Schema({
   collegeYear: {
     type: String,
     validate: [
-      validate({ passIfEmpty: true, message: 'Only use numbers for your graduation year.' }, 'isNumeric')
+      validate({
+        validator: 'isNumeric',
+        passIfEmpty: true,
+        message: 'Only use numbers for your graduation year.'
+      })
     ]
   },
   pro: Boolean,
@@ -61,7 +78,7 @@ User.pre('validate', function (next) {
   next()
 })
 
-User.virtual('url').get(function() {
+User.virtual('url').get(function () {
   return '/user/' + this._id + '/'
 })
 
@@ -142,7 +159,7 @@ User.methods.totalHits = function (cb) {
  * Returns the URL to the user's Gravatar image, based on their email address.
  * If the user has nothing set, this returns a transparent PNG.
  */
-User.virtual('gravatarBlank').get(function() {
+User.virtual('gravatarBlank').get(function () {
   var hash = md5(this.email.trim().toLowerCase())
   return '//www.gravatar.com/avatar/' + hash + '?size=50&default=blank'
 })

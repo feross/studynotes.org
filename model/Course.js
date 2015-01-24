@@ -1,4 +1,3 @@
-var model = require('./')
 var mongoose = require('mongoose')
 var plugin = require('./plugin')
 
@@ -30,7 +29,7 @@ var Course = mongoose.Schema({
   }]
 })
 
-Course.virtual('url').get(function() {
+Course.virtual('url').get(function () {
   return '/' + this._id + '/'
 })
 

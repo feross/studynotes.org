@@ -1,8 +1,7 @@
-var _ = require('underscore')
 var model = require('./')
 var mongoose = require('mongoose')
 var plugin = require('./plugin')
-var validate = require('mongoose-validator').validate
+var validate = require('mongoose-validator')
 var util = require('../util')
 
 var Essay = mongoose.Schema({
@@ -14,14 +13,22 @@ var Essay = mongoose.Schema({
     type: String,
     index: true,
     validate: [
-      validate({ message: 'Please give the essay a title.' }, 'notEmpty')
+      validate({
+        validator: 'isLength',
+        arguments: 1,
+        message: 'Your essay needs a title, silly!'
+      })
     ]
   },
   prompt: String,
   body: {
     type: String,
     validate: [
-      validate({ message: 'It looks like you forgot to include the actual essay.' }, 'notEmpty')
+      validate({
+        validator: 'isLength',
+        arguments: 100,
+        message: 'It looks like you forgot to include the actual essay.'
+      })
     ]
   },
   college: {

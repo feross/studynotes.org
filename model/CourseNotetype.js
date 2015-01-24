@@ -1,5 +1,3 @@
-var _ = require('underscore')
-var model = require('./')
 var mongoose = require('mongoose')
 var plugin = require('./plugin')
 
@@ -18,7 +16,7 @@ var CourseNotetype = mongoose.Schema({
   }
 })
 
-CourseNotetype.virtual('url').get(function() {
+CourseNotetype.virtual('url').get(function () {
   var courseId = this.populated('course') || this.course
   var notetypeId = this.populated('notetype') || this.notetype
 
