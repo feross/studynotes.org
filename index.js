@@ -221,7 +221,7 @@ Site.prototype.serveStatic = function () {
             if (err) return next(err)
             // If this next() function gets called, the file does not exist, so
             // return 404, and don't proceed to further middlewares/routes.
-            res.send(404)
+            res.status(404).send()
           })
         })
       })
