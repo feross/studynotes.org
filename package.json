@@ -99,7 +99,7 @@
     "nodemon": "^1.0.17",
     "tape": "^2.12.3",
     "uglify-js": "^2.4.15",
-    "watchify": "^0.10.2"
+    "watchify": "^2.2.1"
   },
   "homepage": "http://www.apstudynotes.org",
   "keywords": [
