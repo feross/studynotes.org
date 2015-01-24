@@ -80,8 +80,6 @@ Site.prototype.start = function (done) {
     self.app.set('view engine', 'jade')
     self.addTemplateGlobals()
 
-    // Readable logs that are hidden by default. Enable with DEBUG=*
-    self.app.use(util.expressLogger(debug))
     self.app.use(compress())
     self.app.use(self.addHeaders)
 
@@ -90,6 +88,9 @@ Site.prototype.start = function (done) {
 
     self.serveStatic()
     self.app.use(connectSlashes())
+
+    // Readable logs that are hidden by default. Enable with DEBUG=*
+    self.app.use(util.expressLogger(debug))
 
     self.setupSessions()
     self.app.use(pro.checkPro)
