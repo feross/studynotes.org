@@ -2,6 +2,7 @@ var auto = require('run-auto')
 var countBy = require('lodash.countby')
 var extend = require('extend.js')
 var model = require('../model')
+var sort = require('../lib/sort')
 
 module.exports = function (app) {
   app.get('/', function (req, res, next) {
@@ -72,9 +73,7 @@ module.exports = function (app) {
                   user.submissionCount = counts[user.id]
                 })
 
-                users.sort(function (userA, userB) {
-                  return userB.submissionCount - userA.submissionCount
-                })
+                users.sort(sort.byProp('submissionCount', true))
 
                 cb2(null, users)
               })
