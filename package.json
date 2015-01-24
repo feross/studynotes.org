@@ -59,7 +59,7 @@
     "express": "^4.0.0",
     "express-session": "^1.0.2",
     "extend.js": "0.0.2",
-    "font-awesome": "git://github.com/FortAwesome/Font-Awesome",
+    "font-awesome": "^4.2.0",
     "html-parser": "^0.7.0",
     "html-truncate": "^1.0.3",
     "http-status-codes": "^1.0.2",
