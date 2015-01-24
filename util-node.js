@@ -8,11 +8,8 @@ var extend = require('extend.js')
 var fs = require('fs')
 var htmlParser = require('html-parser')
 var truncate = require('html-truncate')
-var mkdirp = require('mkdirp')
 var optimist = require('optimist')
-var path = require('path')
 var posix = require('posix')
-var touch = require('touch')
 var uuid = require('node-uuid')
 
 /**
@@ -133,14 +130,6 @@ exports.expressLogger = function (debug) {
     debug(str)
     next()
   }
-}
-
-/**
- * Manually trigger LiveReload to refresh the browser (during development)
- */
-exports.triggerLiveReload = function () {
-  mkdirp.sync(config.tmp)
-  touch.sync(path.join(config.tmp, 'reload.txt'))
 }
 
 /**
