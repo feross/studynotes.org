@@ -1,5 +1,3 @@
-var _ = require('underscore')
-var model = require('./')
 var mongoose = require('mongoose')
 var plugin = require('./plugin')
 

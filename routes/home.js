@@ -1,5 +1,5 @@
-var _ = require('underscore')
 var auto = require('run-auto')
+var countBy = require('lodash.countby')
 var extend = require('extend.js')
 var model = require('../model')
 
@@ -44,22 +44,22 @@ module.exports = function (app) {
           notes: function (cb2) {
             model.Note
               .find()
-              .select('user')
+              .select('user -_id')
               .exec(cb2)
           },
 
           essays: function (cb2) {
             model.Essay
               .find()
-              .select('user')
+              .select('user -_id')
               .exec(cb2)
           },
 
           topUsers: ['notes', 'essays', function (cb2, r) {
             var submissions = r.notes.concat(r.essays)
-            var counts = _.countBy(submissions, function (s) { return s.user })
-            var userIds = _.sortBy(Object.keys(counts), function (k) {
-              return -1 * counts[k]
+            var counts = countBy(submissions, function (s) { return s.user })
+            var userIds = Object.keys(counts).sort(function (idA, idB) {
+              return counts[idB] - counts[idA]
             })
             userIds = userIds.slice(0, 10)
 
@@ -67,14 +67,16 @@ module.exports = function (app) {
               .find({ _id: { $in: userIds } })
               .exec(function (err, users) {
                 if (err) return cb2(err)
-                users = _.indexBy(users, '_id')
 
-                var sortedUsers = userIds.map(function (id) {
-                  var user = users[id]
-                  user.submissionCount = counts[id]
-                  return user
+                users.forEach(function (user) {
+                  user.submissionCount = counts[user.id]
                 })
-                cb2(null, sortedUsers)
+
+                users.sort(function (userA, userB) {
+                  return userB.submissionCount - userA.submissionCount
+                })
+
+                cb2(null, users)
               })
           }]
         }, function (err, r) {

@@ -1,4 +1,3 @@
-var _ = require('underscore')
 var auto = require('run-auto')
 var model = require('../model')
 var sort = require('../lib/sort')
@@ -8,9 +7,9 @@ module.exports = function (app) {
     var course = model.cache.courses[req.params.courseId]
     if (!course) return next()
 
-    var notetype = _.find(course.notetypes, function (n) {
+    var notetype = course.notetypes.filter(function (n) {
       return n.id === req.params.notetypeId
-    })
+    })[0]
     if (!notetype) return next()
 
     auto({

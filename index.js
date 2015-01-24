@@ -1,6 +1,5 @@
 module.exports = Site
 
-var _ = require('underscore') // TODO: remove
 var cluster = require('cluster')
 var debug = require('debug')('studynotes:site')
 var express = require('express')
@@ -133,7 +132,6 @@ Site.prototype.start = function (done) {
 Site.prototype.addTemplateGlobals = function () {
   var self = this
 
-  self.app.locals._ = _
   self.app.locals.config = config
   self.app.locals.modelCache = model.cache
   self.app.locals.moment = moment

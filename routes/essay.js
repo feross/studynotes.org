@@ -1,4 +1,3 @@
-var _ = require('underscore')
 var auto = require('run-auto')
 var config = require('../config')
 var debug = require('debug')('studynotes:routes/essay')

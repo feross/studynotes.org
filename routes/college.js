@@ -1,4 +1,3 @@
-var _ = require('underscore')
 var async = require('async') // TODO: remove
 var auto = require('run-auto')
 var model = require('../model')

@@ -1,4 +1,3 @@
-var _ = require('underscore')
 var auto = require('run-auto')
 var model = require('../model')
 
@@ -31,10 +30,10 @@ module.exports = function (app) {
       if (err) return next(err)
       if (!r.user) return next()
 
-      var essayHits = _(r.essays).reduce(function (total, essay) {
+      var essayHits = r.essays.reduce(function (total, essay) {
         return total + essay.hits
       }, 0)
-      var totalHits = _(r.notes).reduce(function (total, note) {
+      var totalHits = r.notes.reduce(function (total, note) {
         return total + note.hits
       }, essayHits)
 

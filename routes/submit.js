@@ -1,11 +1,11 @@
-var _ = require('underscore')
 var auto = require('run-auto')
 var auth = require('../lib/auth')
 var email = require('../lib/email')
 var model = require('../model')
+var values = require('object-values')
 
 module.exports = function (app) {
-  app.get('/submit/essay', auth.ensureAuth, function (req, res, next) {
+  app.get('/submit/essay', auth.ensureAuth, function (req, res) {
     res.render('submit-essay', {
       hero: {
         title: 'Add an essay to StudyNotes',
@@ -67,7 +67,7 @@ module.exports = function (app) {
       }]
     }, function (err, r) {
       if (err && err.name === 'ValidationError') {
-        _(err.errors).map(function (error) {
+        values(err.errors).forEach(function (error) {
           req.flash('error', error.message)
         })
         req.flash('essay', req.body)
@@ -82,7 +82,7 @@ module.exports = function (app) {
     })
   })
 
-    app.get('/submit/note', auth.ensureAuth, function (req, res, next) {
+    app.get('/submit/note', auth.ensureAuth, function (req, res) {
     res.render('submit-note', {
       hero: {
         title: 'Add a note to StudyNotes',
@@ -106,9 +106,9 @@ module.exports = function (app) {
       req.flash('note', req.body)
       return res.redirect('/submit/note/')
     }
-    var notetype = _(course.notetypes).find(function (n) {
+    var notetype = course.notetypes.filter(function (n) {
       return n.id === req.body.notetype
-    })
+    })[0]
     if (!notetype) {
       req.flash('error', 'Please select a note type from the list.')
       req.flash('note', req.body)
@@ -152,7 +152,7 @@ module.exports = function (app) {
       }]
     }, function (err, r) {
       if (err && err.name === 'ValidationError') {
-        _(err.errors).map(function (error) {
+        values(err.errors).forEach(function (error) {
           req.flash('error', error.message)
         })
         req.flash('note', req.body)

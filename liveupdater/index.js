@@ -1,6 +1,5 @@
 module.exports = LiveUpdater
 
-var _ = require('underscore')
 var async = require('async') // TODO: remove
 var config = require('../config')
 var debug = require('debug')('studynotes:liveupdater')
@@ -12,6 +11,7 @@ var jsdom = require('jsdom')
 var model = require('../model')
 var series = require('run-series')
 var util = require('../util')
+var values = require('object-values')
 var ws = require('ws')
 
 function LiveUpdater (opts, done) {
@@ -118,7 +118,7 @@ LiveUpdater.prototype.handleClose = function (socket) {
 
 LiveUpdater.prototype.getTotalHits = function (cb) {
   var self = this
-  async.map(_(model.models).toArray(), function (model, cb) {
+  async.map(values(model.models), function (model, cb) {
     model
       .find()
       .select('hits -_id')

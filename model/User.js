@@ -1,4 +1,3 @@
-var _ = require('underscore')
 var auto = require('run-auto')
 var bcrypt = require('bcrypt')
 var config = require('../config')
@@ -144,10 +143,10 @@ User.methods.totalHits = function (cb) {
     }
   }, function (err, r) {
     if (err) cb(err)
-    var essayHits = _(r.essays).reduce(function (total, essay) {
+    var essayHits = r.essays.reduce(function (total, essay) {
       return total + essay.hits
     }, 0)
-    var totalHits = _(r.notes).reduce(function (total, note) {
+    var totalHits = r.notes.reduce(function (total, note) {
       return total + note.hits
     }, essayHits)
 

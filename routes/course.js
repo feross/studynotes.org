@@ -1,9 +1,9 @@
-var _ = require('underscore')
 var model = require('../model')
+var values = require('object-values')
 
 module.exports = function (app) {
-  app.get('/courses', function (req, res, next) {
-    var courses = _.flatten(model.cache.courses)
+  app.get('/courses', function (req, res) {
+    var courses = values(model.cache.courses)
     res.render('courses', {
       courses: courses,
       title: 'AP Courses',

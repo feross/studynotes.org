@@ -1,11 +1,10 @@
-var _ = require('underscore')
 var auto = require('run-auto')
 var config = require('../config')
 var debug = require('debug')('studynotes:routes/pro')
-var email = require('../lib/email')
 var model = require('../model')
 var ssl = require('../lib/ssl')
 var secret = require('../secret')
+var values = require('object-values')
 
 var stripe = require('stripe')(secret.stripe.secret)
 stripe.setApiVersion('2013-12-03')
@@ -14,7 +13,6 @@ module.exports = function (app) {
 
   app.post('/pro', ssl.ensureSSL, function (req, res, next) {
     var amount = config.proPrice
-    var user = req.user
 
     auto({
       essay: function (cb) {
@@ -26,7 +24,7 @@ module.exports = function (app) {
       stripeCharge: ['essay', function (cb) {
         // wait until after essay task is fetched so that we can redirect back
         // to essay if there is an error
-        var charge = stripe.charges.create({
+        stripe.charges.create({
           amount: amount, // in cents
           currency: 'usd',
           card: req.body.stripeToken,
@@ -64,15 +62,13 @@ module.exports = function (app) {
 
     }, function (err, r) {
       if (err) {
-        console.error(err)
         if (err.type === 'StripeCardError') {
           req.flash('error', 'Your card has been declined. Please try again!')
-          console.error('Card declined')
-          console.error(err)
+          debug('Card declined: %s', err.message)
           return res.redirect((r.essay && r.essay.url) || 'back')
         } else if (err.errors) {
           // errors from mongoose validation
-          _(err.errors).each(function (error) {
+          values(err.errors).forEach(function (error) {
             req.flash('error', error.message)
           })
           return res.redirect((r.essay && r.essay.url) || 'back')
@@ -96,7 +92,6 @@ module.exports = function (app) {
       } else {
         res.redirect('/signup/')
       }
-      // email.notifyAdmin('New order for $' + (amount / 100), r.order)
     })
   })
 }

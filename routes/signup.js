@@ -1,10 +1,7 @@
-var _ = require('underscore')
-var async = require('async')
 var auth = require('../lib/auth')
-var bcrpyt = require('bcrypt')
-var email = require('../lib/email')
 var model = require('../model')
 var ssl = require('../lib/ssl')
+var values = require('object-values')
 
 module.exports = function (app) {
   // Page 1
@@ -34,7 +31,7 @@ module.exports = function (app) {
         req.flash('user', req.body)
         res.redirect('/signup/')
       } else if (err && err.name === 'ValidationError') {
-        _(err.errors).each(function (error) {
+        values(err.errors).forEach(function (error) {
           req.flash('error', error.message)
         })
         req.flash('user', req.body)
@@ -81,7 +78,7 @@ module.exports = function (app) {
 
     user.save(function (err) {
       if (err && err.name === 'ValidationError') {
-        _(err.errors).each(function (error) {
+        values(err.errors).forEach(function (error) {
           req.flash('error', error.message)
         })
         req.flash('user', req.body)

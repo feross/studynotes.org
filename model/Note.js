@@ -1,4 +1,3 @@
-var _ = require('underscore')
 var model = require('./')
 var mongoose = require('mongoose')
 var plugin = require('./plugin')
@@ -78,9 +77,9 @@ Note.virtual('searchDesc').get(function () {
   var courseId = note.populated('course') || note.course
   var course = model.cache.courses[courseId]
   var notetypeId = note.populated('notetype') || note.notetype
-  var notetype = _.find(course.notetypes, function (n) {
+  var notetype = course.notetypes.filter(function (n) {
     return n.id === notetypeId
-  })
+  })[0]
 
   return course.name + ' ' + (notetype.singularName || notetype.name)
 })
