@@ -7,7 +7,6 @@
     "./config-node.js": "./config-browser.js",
     "./util-node.js": "./util-browser.js",
     "ckeditor": "./lib/ckeditor/ckeditor.js",
-    "jquery-placeholder": "./node_modules/jquery-placeholder/jquery.placeholder.js",
     "select2": "./lib/select2/select2.js",
     "transparency": "./node_modules/transparency/dist/transparency.min.js"
   },
@@ -18,11 +17,6 @@
   },
   "browserify-shim": {
     "ckeditor": "CKEDITOR",
-    "jquery-placeholder": {
-      "depends": [
-        "jquery:jQuery"
-      ]
-    },
     "select2": {
       "exports": "Select2",
       "depends": [
@@ -64,7 +58,6 @@
     "humane-js": "^3.1.0",
     "jade": "^1.1.5",
     "jquery": "^2.1.1",
-    "jquery-placeholder": "^2.0.7",
     "jsdom": "^3.0.2",
     "keymaster": "^1.6.2",
     "lodash.throttle": "^2.4.1",

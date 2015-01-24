@@ -1,5 +1,4 @@
 var $ = require('jquery')
-require('jquery-placeholder')
 require('transparency')
 require('select2')
 
@@ -16,7 +15,6 @@ var key = require('keymaster')
 var notify = require('./notify')
 var throttle = require('lodash.throttle')
 var url = require('url')
-var util = require('../util')
 
 var $window = $(window)
 
@@ -89,11 +87,6 @@ key('right', function () {
     window.location = $next.attr('href')
   }
 })
-
-// Polyfill <input placeholder=''> in IE9
-if (!util.hasPlaceholderSupport()) {
-  $('input, textarea').placeholder()
-}
 
 /**
  * Continue to update the search width every 50ms until page is done loading.

@@ -1,8 +1,3 @@
-exports.hasPlaceholderSupport = function () {
-  var i = document.createElement('input')
-  return 'placeholder' in i
-}
-
 /**
  * Avoid `console` errors in browsers that lack a console.
  */
