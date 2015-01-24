@@ -80,10 +80,10 @@
     "run-series": "^1.0.2",
     "run-waterfall": "^1.0.2",
     "serve-favicon": "^2.0.1",
-    "stripe": "^2.3.4",
+    "stripe": "^3.1.0",
     "stylus": "^0.49.3",
     "touch": "^0.0.3",
-    "transparency": "^0.9.14",
+    "transparency": "^0.10.0",
     "underscore": "1.5.2",
     "underscore.string": "^2.3.3",
     "ws": "^0.7.0"
