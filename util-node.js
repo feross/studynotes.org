@@ -4,16 +4,15 @@ var cp = require('child_process')
 var crypto = require('crypto')
 var debug = require('debug')('util')
 var email = require('./lib/email')
+var extend = require('extend.js')
 var fs = require('fs')
 var htmlParser = require('html-parser')
 var truncate = require('html-truncate')
 var mkdirp = require('mkdirp')
-var nodeUtil = require('util')
 var optimist = require('optimist')
 var path = require('path')
 var posix = require('posix')
 var touch = require('touch')
-var util = require('./util') // to access the node+browser util fns
 var uuid = require('node-uuid')
 
 /**
@@ -28,7 +27,7 @@ exports.truncate = truncate
  */
 exports.run = function (ServerConstructor) {
   // Clone the argv object to avoid interfering with other modules
-  var opts = util.extend({}, optimist.argv)
+  var opts = extend({}, optimist.argv)
 
   // Delete all options that are not explicitly passed in like this:
   //   node tracker --port 4000 --dbPort 4001
@@ -214,6 +213,3 @@ exports.randomBytes = function (length, cb) {
     cb(null, buf.toString('hex'))
   })
 }
-
-// Make `inherits` from node's "util" module available
-exports.inherits = nodeUtil.inherits

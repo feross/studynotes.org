@@ -4,6 +4,7 @@ var _ = require('underscore') // TODO: remove
 var cluster = require('cluster')
 var debug = require('debug')('studynotes:site')
 var express = require('express')
+var extend = require('extend.js')
 var http = require('http')
 var moment = require('moment')
 var path = require('path')
@@ -42,7 +43,7 @@ var util = require('./util')
 
 function Site (opts, cb) {
   var self = this
-  if (opts) util.extend(self, opts)
+  if (opts) extend(self, opts)
 
   /** @type {number} port */
   self.port || (self.port = config.ports.site)

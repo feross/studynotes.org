@@ -4,6 +4,8 @@
   "version": "0.3.0",
   "author": "Feross Aboukhadijeh <feross@feross.org> (http://feross.org/)",
   "browser": {
+    "./config-node.js": "./config-browser.js",
+    "./util-node.js": "./util-browser.js",
     "ckeditor": "./lib/ckeditor/ckeditor.js",
     "jquery-placeholder": "./node_modules/jquery-placeholder/jquery.placeholder.js",
     "keymaster": "./node_modules/keymaster/keymaster.js",
@@ -56,6 +58,7 @@
     "debug": "^2.1.1",
     "express": "^4.0.0",
     "express-session": "^1.0.2",
+    "extend.js": "0.0.2",
     "font-awesome": "git://github.com/FortAwesome/Font-Awesome",
     "html-parser": "^0.7.0",
     "html-truncate": "^1.0.3",
@@ -119,8 +122,8 @@
     "build": "npm run build-js && npm run build-css && node ./bin/postbuild.js",
     "build-css": "stylus -u nib stylus/main.styl -o out/ --include-css -c && node ./bin/transform-css.js out/main.css",
     "build-js": "npm run build-js-main & npm run build-js-extra",
-    "build-js-extra": "browserify -r ./util-browser -r ./config-browser client/extra.js | uglifyjs -c warnings=false -m > out/extra.js",
-    "build-js-main": "browserify -r ./util-browser -r ./config-browser client/main.js | uglifyjs -c warnings=false -m > out/main.js",
+    "build-js-extra": "browserify client/extra.js | uglifyjs -c warnings=false -m > out/extra.js",
+    "build-js-main": "browserify client/main.js | uglifyjs -c warnings=false -m > out/main.js",
     "db-local": "mkdir -p tmp/db && mongod --dbpath tmp/db",
     "db-tunnel": "ssh -L 27017:localhost:27017 -N feross@athena",
     "push": "npm version patch && git push && npm publish",
@@ -130,7 +133,7 @@
     "watch-local": "npm run db-local & npm run watch-js & npm run watch-css & (sleep 1 && DEBUG=\"studynotes:*\" nodemon run.js --offline)",
     "watch-css": "stylus -u nib stylus/main.styl -o out/ --include-css -w",
     "watch-js": "npm run watch-js-main & npm run watch-js-extra",
-    "watch-js-extra": "watchify -r ./util-browser -r ./config-browser client/extra.js -o out/extra.js -dv",
-    "watch-js-main": "watchify -r ./util-browser -r ./config-browser client/main.js -o out/main.js -dv"
+    "watch-js-extra": "watchify client/extra.js -o out/extra.js -dv",
+    "watch-js-main": "watchify client/main.js -o out/main.js -dv"
   }
 }

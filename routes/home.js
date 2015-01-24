@@ -1,7 +1,7 @@
 var _ = require('underscore')
 var auto = require('run-auto')
+var extend = require('extend.js')
 var model = require('../model')
-var util = require('../util')
 
 module.exports = function (app) {
   app.get('/', function (req, res, next) {
@@ -98,7 +98,7 @@ module.exports = function (app) {
         },
         url: '/',
       }
-      util.extend(locals, r)
+      extend(locals, r)
 
       res.render('home', locals)
     })

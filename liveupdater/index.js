@@ -4,6 +4,7 @@ var _ = require('underscore')
 var async = require('async') // TODO: remove
 var config = require('../config')
 var debug = require('debug')('studynotes:liveupdater')
+var extend = require('extend.js')
 var fs = require('fs')
 var http = require('http')
 var https = require('https')
@@ -15,7 +16,7 @@ var ws = require('ws')
 
 function LiveUpdater (opts, done) {
   var self = this
-  if (opts) util.extend(self, opts)
+  if (opts) extend(self, opts)
   done || (done = function () {})
 
   /** @type {number} port */
