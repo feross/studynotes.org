@@ -86,7 +86,7 @@
     "stylus": "^0.49.3",
     "touch": "^0.0.3",
     "transparency": "^0.10.0",
-    "underscore.string": "^2.3.3",
+    "underscore.string": "^3.0.1",
     "ws": "^0.7.0"
   },
   "devDependencies": {
