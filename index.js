@@ -25,18 +25,13 @@ var passport = require('passport')
 var session = require('express-session')
 
 /**
- * Keys, passwords, etc.
- */
-var secret = require('./secret')
-
-/**
- * Library modules
+ * Local deps
  */
 var auth = require('./lib/auth')
 var config = require('./config')
-var email = require('./lib/email')
 var model = require('./model')
 var pro = require('./lib/pro')
+var secret = require('./secret')
 var util = require('./util')
 
 
@@ -58,7 +53,7 @@ Site.prototype.start = function (done) {
   done || (done = function () {})
 
   if (cluster.isMaster) {
-    console.log('Master process will spawn ' + config.numCpus + ' workers')
+    debug('Master process will spawn %d workers', config.numCpus)
 
     cluster.setupMaster({
       exec: __filename
@@ -73,7 +68,7 @@ Site.prototype.start = function (done) {
     done(null)
 
   } else {
-    console.log('Worker process %s started', cluster.worker.id)
+    debug('Worker process %s started', cluster.worker.id)
     self.app = express()
     self.server = http.createServer(self.app)
 
@@ -205,25 +200,15 @@ Site.prototype.serveStatic = function () {
     self.app.use('/fonts', express.static(config.root + '/node_modules/font-awesome/fonts', opts))
     self.app.use('/cdn', express.static(config.root + '/lib/select2', opts))
 
-  // Also mount the static files at "/static", without routes. This is so that
+  // Also mount the static files at "/cdn", without routes. This is so that
   // we can point the CDN at this folder and have it mirror ONLY the static
   // files, no other site content.
-  self.app.use('/cdn', function (req, res, next) {
-    static(req, res, function (err) {
-      if (err) return next(err)
-      out(req, res, function (err) {
-        if (err) return next(err)
-        nodeModules(req, res, function (err) {
-          if (err) return next(err)
-          lib(req, res, function (err) {
-            if (err) return next(err)
-            // If this next() function gets called, the file does not exist, so
-            // return 404, and don't proceed to further middlewares/routes.
-            res.status(404).send()
-          })
-        })
-      })
-    })
+  self.app.use('/cdn', static)
+  self.app.use('/cdn', out)
+  self.app.use('/cdn', nodeModules)
+  self.app.use('/cdn', lib)
+  self.app.use('/cdn', function (req, res) {
+    res.status(404).send()
   })
 }
 

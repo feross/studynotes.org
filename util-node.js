@@ -122,7 +122,7 @@ exports.expressLogger = function (debug) {
 
     var str = '\x1B[90m' + req.method
       + ' ' + req.originalUrl + ' '
-      + '\x1B[' + color + 'm' + res.statusCode
+      + '\x1B[' + color + 'm' + status
       + ' \x1B[90m'
       + len
       + '\x1B[0m'
