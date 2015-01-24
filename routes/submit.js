@@ -8,7 +8,7 @@ module.exports = function (app) {
   app.get('/submit/essay', auth.ensureAuth, function (req, res) {
     res.render('submit-essay', {
       hero: {
-        title: 'Add an essay to StudyNotes',
+        title: 'Add an essay to Study Notes',
         desc: 'Help everyone write a powerful essay, regardless of their background.',
         image: 'amjed.jpg',
         url: '#'
@@ -85,7 +85,7 @@ module.exports = function (app) {
     app.get('/submit/note', auth.ensureAuth, function (req, res) {
     res.render('submit-note', {
       hero: {
-        title: 'Add a note to StudyNotes',
+        title: 'Add a note to Study Notes',
         desc: 'Help future generations of AP students. Share your notes.',
         image: 'clouds.jpg',
         url: '#'

@@ -31,7 +31,7 @@
     }
   },
   "bugs": {
-    "url": "https://github.com/feross/StudyNotes/issues"
+    "url": "https://github.com/feross/studynotes/issues"
   },
   "dependencies": {
     "MD5": "^1.2.0",
@@ -104,7 +104,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/feross/StudyNotes.git"
+    "url": "https://github.com/feross/studynotes.git"
   },
   "scripts": {
     "admin": "nodemon admin/index.js",

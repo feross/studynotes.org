@@ -52,7 +52,7 @@ function LiveUpdater (opts, done) {
       self.getTotalHits(cb)
     }
   ], function (err) {
-    if (!err) debug('StudyNotes listening on ' + self.port)
+    if (!err) debug('liveupdater listening on ' + self.port)
     done(err)
   })
 }

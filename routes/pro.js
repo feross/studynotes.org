@@ -28,7 +28,7 @@ module.exports = function (app) {
           amount: amount, // in cents
           currency: 'usd',
           card: req.body.stripeToken,
-          description: 'StudyNotes Pro (' + req.body.stripeEmail + ')'
+          description: 'Study Notes Pro (' + req.body.stripeEmail + ')'
         }, cb)
       }],
 

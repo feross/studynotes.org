@@ -4,7 +4,7 @@ module.exports = function (app) {
       url: '/about',
       title: 'About',
       hero: {
-        title: 'Say Hello to StudyNotes!',
+        title: 'Say Hello to Study Notes!',
         desc: 'Fast, free study tools for AP* students',
         image: 'books.jpg'
       }
@@ -17,7 +17,7 @@ module.exports = function (app) {
       title: 'Anonymity',
       hero: {
         title: 'Anonymity',
-        desc: 'Some content on StudyNotes is anonymous'
+        desc: 'Some content on Study Notes is anonymous'
       }
     })
   })

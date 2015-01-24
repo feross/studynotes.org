@@ -15,7 +15,7 @@
 ## Contributing
 
 See [CONTIBUTING.md](/CONTRIBUTING.md) for instructions on how to contribute to the
-StudyNotes project.
+Study Notes project.
 
 ## dependencies
 

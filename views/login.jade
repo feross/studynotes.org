@@ -3,9 +3,9 @@ extends layouts/form
 block content
   if (req.session.pro)
     h1 You're almost done!
-    h2 Login to your StudyNotes account so we know who you are.
+    h2 Login to your Study Notes account so we know who you are.
   else
-    h1 Log in to StudyNotes
+    h1 Log in to Study Notes
     h2 Provide your email and password.
 
   if (locals.errors.length)

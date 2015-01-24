@@ -71,7 +71,7 @@ block content
               data-key=stripe.publishable,
               data-amount=config.proPrice,
               data-name='50+ Top College Essays',
-              data-description='StudyNotes Pro (one-time payment)',
+              data-description='Study Notes Pro (one-time payment)',
               data-image='#{ config.cdnOrigin }/images/acorn.png',
               data-email=(req.user && req.user.email)
             )
@@ -110,4 +110,4 @@ block content
     })();
 
   h2 How to cite this essay (with MLA)
-  .cite #{ user.getMlaName(essay.anon) }. "#{essay.name}" StudyNotes.org. StudyNotes, Inc., #{moment(essay.createDate).format('DD MMM. YYYY.')} Web. #{moment().format('DD MMM. YYYY.')} &lt;#{essay.absoluteUrl}&gt;.
+  .cite #{ user.getMlaName(essay.anon) }. "#{essay.name}" StudyNotes.org. Study Notes, LLC., #{moment(essay.createDate).format('DD MMM. YYYY.')} Web. #{moment().format('DD MMM. YYYY.')} &lt;#{essay.absoluteUrl}&gt;.

@@ -65,7 +65,7 @@ module.exports = function (app) {
       function (token, user, cb) {
         var message = {}
         message.to = user.email
-        message.subject = 'StudyNotes Password Reset'
+        message.subject = 'Study Notes Password Reset'
 
         message.text = 'You are receiving this because you (or someone else) requested ' +
           'the reset of the password for your account.\n\n' +
@@ -131,10 +131,10 @@ module.exports = function (app) {
       function (user, cb) {
         var message = {}
         message.to = user.email
-        message.subject = 'Your StudyNotes password was changed'
+        message.subject = 'Your Study Notes password was changed'
 
         message.text = 'Hello,\n\n' +
-          'This is a confirmation that the password for your StudyNotes account ' +
+          'This is a confirmation that the password for your Study Notes account ' +
           'with email ' + user.email + ' has just been changed.\n'
 
         email.send(message, function (err) {

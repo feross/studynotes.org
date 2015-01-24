@@ -1,17 +1,17 @@
 # CONTRIBUTING
 
-The StudyNotes project welcomes new contributors. This document will guide you
+The **Study Notes** project welcomes new contributors. This document will guide you
 through the process.
 
 ### FORK
 
-Fork the project [on GitHub](https://github.com/feross/StudyNotes) and check out
+Fork the project [on GitHub](https://github.com/feross/studynotes) and check out
 your copy.
 
 ```sh
-$ git clone git@github.com:username/StudyNotes.git
-$ cd StudyNotes
-$ git remote add upstream git://github.com/feross/StudyNotes.git
+$ git clone git@github.com:username/studynotes.git
+$ cd studynotes
+$ git remote add upstream git://github.com/feross/studynotes.git
 ```
 
 ### BRANCH
@@ -103,7 +103,7 @@ brew install mongodb
 
 ### SETUP
 
-StudyNotes keeps sensitive information like secret keys and passwords in the file
+Study Notes keeps sensitive information like secret keys and passwords in the file
 `secret/index.js` which is not checked into git. There is an example file
 `secret/index-sample.js` that shows what structure this file must take.
 

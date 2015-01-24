@@ -117,7 +117,7 @@ Site.prototype.start = function (done) {
       }
     ], function (err) {
       if (!err) {
-        debug('StudyNotes listening on ' + self.port)
+        debug('studynotes listening on ' + self.port)
       }
       done(err)
     })
