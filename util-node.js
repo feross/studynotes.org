@@ -1,4 +1,3 @@
-var bytes = require('bytes')
 var config = require('./config')
 var cp = require('child_process')
 var crypto = require('crypto')
@@ -108,25 +107,7 @@ exports.rmdirRecursive = function (dirPath, cb) {
  */
 exports.expressLogger = function (debug) {
   return function (req, res, next) {
-    var status = res.statusCode
-    var len = parseInt(res.getHeader('Content-Length'), 10)
-    var color = 32
-
-    if (status >= 500) color = 31
-    else if (status >= 400) color = 33
-    else if (status >= 300) color = 36
-
-    len = isNaN(len)
-      ? ''
-      : len = ' - ' + bytes(len)
-
-    var str = '\x1B[90m' + req.method
-      + ' ' + req.originalUrl + ' '
-      + '\x1B[' + color + 'm' + status
-      + ' \x1B[90m'
-      + len
-      + '\x1B[0m'
-
+    var str = '\x1B[90m' + req.method + ' ' + req.originalUrl + '\x1B[0m'
     debug(str)
     next()
   }

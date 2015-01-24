@@ -39,7 +39,6 @@
     "body-parser": "^1.0.1",
     "browserify": "^8.1.1",
     "browserify-shim": "^3.6.0",
-    "bytes": "^1.0.0",
     "compression": "^1.0.1",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^0.6.0",
