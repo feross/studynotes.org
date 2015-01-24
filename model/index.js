@@ -1,18 +1,17 @@
-var _ = require('underscore')
 var auto = require('run-auto')
 var config = require('../config')
 var fs = require('fs')
 var mongoose = require('mongoose')
 var once = require('once')
 var path = require('path')
-var Schema = mongoose.Schema
 var sort = require('../lib/sort')
+var values = require('object-values')
 
 // Object that contains the exported models, useful for iterating
 // over *only* the models, skipping methods like `connect`.
-exports.models = {}
+var models = exports.models = {}
 
-exports.cache = {}
+var cache = exports.cache = {}
 
 // Set up each Schema in the /model folder
 var files = fs.readdirSync(__dirname)
@@ -28,7 +27,7 @@ files.forEach(function (file) {
   var model = mongoose.model(name, schema)
 
   // Export the Model
-  exports[name] = exports.models[name] = model
+  exports[name] = models[name] = model
 })
 
 exports.connect = function (cb) {
@@ -51,46 +50,37 @@ exports.connect = function (cb) {
 function loadCache (done) {
   auto({
     courses: function (cb) {
-      exports.Course
+      models.Course
         .find()
         .populate('notetypes')
         .exec(cb)
     },
     colleges: function (cb) {
-      exports.College
+      models.College
         .find()
         .exec(cb)
     }
   }, function (err, r) {
     if (err) return done(err)
 
-    exports.cache.courses = {}
+    cache.courses = {}
     r.courses.forEach(function (course) {
-      exports.cache.courses[course._id] = course
+      cache.courses[course._id] = course
     })
 
-    exports.cache.colleges = {}
+    cache.colleges = {}
     r.colleges.forEach(function (college) {
-      exports.cache.colleges[college._id] = college
+      cache.colleges[college._id] = college
     })
-
-    exports.cache.coursesByName = _(exports.cache.courses)
-      .flatten()
-      .sort(sort.byProp('name'))
-    exports.cache.coursesByHits = _(exports.cache.courses)
-      .flatten()
-      .sort(sort.byProp('hits', true))
-    exports.cache.collegesByName = _(exports.cache.colleges)
-      .flatten()
-      .sort(function (a, b) {
-        // force common-app to sort first
-        if (a.id === 'common-app') return -1
-        if (b.id === 'common-app') return 1
-        return sort.byProp('name')(a, b)
-      })
-    exports.cache.collegesByRank = _(exports.cache.colleges)
-      .flatten()
-      .sort(sort.byProp('rank'))
+    cache.coursesByName = values(cache.courses).sort(sort.byProp('name'))
+    cache.coursesByHits = values(cache.courses).sort(sort.byProp('hits', true))
+    cache.collegesByName = values(cache.colleges).sort(function (a, b) {
+      // force common-app to sort first
+      if (a.id === 'common-app') return -1
+      if (b.id === 'common-app') return 1
+      return sort.byProp('name')(a, b)
+    })
+    cache.collegesByRank = values(cache.colleges).sort(sort.byProp('rank'))
 
     done(err)
   })
