@@ -169,7 +169,7 @@ Site.prototype.addHeaders = function (req, res, next) {
 }
 
 Site.prototype.canonicalize = function (req, res, next) {
-  if (req.host !== 'www.apstudynotes.org') {
+  if (req.hostname !== 'www.apstudynotes.org') {
     // redirect alternate domains to homepage
     res.redirect(301, req.protocol + ':' + config.siteOrigin + req.url)
   } else {
