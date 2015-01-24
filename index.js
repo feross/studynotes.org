@@ -1,8 +1,5 @@
 module.exports = Site
 
-/**
- * Dependencies
- */
 var _ = require('underscore') // TODO: remove
 var cluster = require('cluster')
 var debug = require('debug')('studynotes:site')
@@ -14,10 +11,11 @@ var series = require('run-series')
 var url = require('url')
 
 /**
- * Express middleware dependencies
+ * Express middleware
  */
 var bodyParser = require('body-parser')
 var compress = require('compression')
+var connectMongo = require('connect-mongo')
 var connectSlashes = require('connect-slashes')
 var cookieParser = require('cookie-parser')
 var csrf = require('csurf')
@@ -25,9 +23,6 @@ var favicon = require('serve-favicon')
 var flash = require('connect-flash')
 var passport = require('passport')
 var session = require('express-session')
-// HACK HACK HACK: for Express 4 support
-// See: https://github.com/kcbanner/connect-mongo/issues/109
-var MongoStore = require('connect-mongo')({ session: session })
 
 /**
  * Keys, passwords, etc.
@@ -240,14 +235,15 @@ Site.prototype.setupSessions = function () {
 
   self.app.use(cookieParser(secret.cookieSecret))
   self.app.use(bodyParser())
+
+  var MongoStore = connectMongo(session)
   self.app.use(session({
     proxy: true, // trust the reverse proxy
     secret: secret.cookieSecret, // prevent cookie tampering
     store: new MongoStore({
       db: config.mongo.database,
       host: config.mongo.host,
-      port: config.mongo.port,
-      auto_reconnect: true
+      port: config.mongo.port
     })
   }))
   self.app.use(csrf())
