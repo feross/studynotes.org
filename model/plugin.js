@@ -1,7 +1,7 @@
-var _s = require('underscore.string')
 var async = require('async') // TODO: remove
 var config = require('../config')
 var mongoose = require('mongoose')
+var slugify = require('underscore.string/slugify')
 
 /**
  * Mongoose plugins
@@ -33,7 +33,7 @@ exports.createDate = function (schema, opts) {
   }
 }
 
-exports.hits = function (schema, opts) {
+exports.hits = function (schema) {
   schema.add({ hits: { type: Number, default: 0, index: true } })
 
   schema.pre('save', function (next) {
@@ -48,7 +48,7 @@ exports.hits = function (schema, opts) {
   }
 }
 
-exports.absoluteUrl = function (schema, opts) {
+exports.absoluteUrl = function (schema) {
   if (schema.virtualpath('url')) {
     schema.virtual('absoluteUrl').get(function () {
       return config.siteOrigin + this.url
@@ -69,7 +69,7 @@ exports.slug = function (schema, opts) {
     var doc = this
     if (doc._id) return next()
 
-    var initialSlug = _s.slugify(doc.name)
+    var initialSlug = slugify(doc.name)
 
     // Remove words from the end of the slug until the length is okay
     while (initialSlug.length > config.maxSlugLength) {
