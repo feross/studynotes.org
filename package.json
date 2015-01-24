@@ -90,7 +90,7 @@
     "run-waterfall": "^1.0.2",
     "serve-favicon": "^2.0.1",
     "stripe": "^2.3.4",
-    "stylus": "^0.43.1",
+    "stylus": "^0.49.3",
     "touch": "^0.0.3",
     "transparency": "^0.9.14",
     "underscore": "1.5.2",
