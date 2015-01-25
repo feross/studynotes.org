@@ -1,6 +1,17 @@
 var util = require('../util')
 var test = require('tape')
 
+test('util.sanitizeHTML', function (t) {
+  // <script> tag is removed
+  var html = 'Hello<script>alert("hi")</script> world'
+  t.equal(util.sanitizeHTML(html), 'Hello world')
+
+  // <p>, <h1>, <div> are allowed
+  html = '<div><p><h1>Hello world</h1></p></div>'
+  t.equal(util.sanitizeHTML(html), html) // unchanged
+  t.end()
+})
+
 test('util.randomBytes', function (t) {
   t.plan(2)
 
