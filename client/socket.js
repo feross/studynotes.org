@@ -4,7 +4,6 @@ var stats
 
 var $ = require('jquery')
 var config = require('../config')
-var notify = require('./notify')
 var util = require('../util')
 
 function openSocket () {
@@ -95,7 +94,7 @@ function renderStats () {
   $('.stats tbody')
     .render(rows, {
       title: {
-        href: function (params) {
+        href: function () {
           return this.url
         }
       }

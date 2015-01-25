@@ -8,7 +8,7 @@ update-deps:
 
 .PHONY : upload-secret
 upload-secret:
-	rsync -a -O -v --delete -e "ssh -p 44444" secret/ feross@$(APP_SERVER):/home/feross/www/studynotes.org/secret/
+	rsync -a -O -v --delete -e "ssh -p 44444" secret/ feross@$(APP_SERVER):$(APP_DIR)/secret/
 
 .PHONY : download-secret
 download-secret:
@@ -22,7 +22,7 @@ download-db:
 # Trigger a deploy (from remote CI server)
 .PHONY : trigger
 trigger:
-	ssh feross@future.feross.net -p 44444 make -f /home/feross/www/studynotes.org/Makefile deploy
+	ssh feross@future.feross.net -p 44444 make -f $(APP_DIR)/Makefile deploy
 
 # Update code and restart server (from app server)
 .PHONY : deploy
