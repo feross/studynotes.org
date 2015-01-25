@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "MD5": "^1.2.0",
+    "add-commas": "0.0.3",
     "bcrypt": "^0.8.0",
     "body-parser": "^1.0.1",
     "browserify": "^8.1.1",
