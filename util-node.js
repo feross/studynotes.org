@@ -66,7 +66,7 @@ function upgradeLimits () {
  * @return {String}
  */
 
-exports.escapeRegExp = function (str) {
+exports.escapeRegExpString = function (str) {
   return str.replace(/([.*+?^=!:${}()|[\]\/\\])/g, '\\$1')
 }
 
