@@ -3,7 +3,10 @@ extends layouts/main-sidebar
 append sidebar
   .author
     a(href=user.getUrl(essay.anon))
-      img(src=user.getGravatar(essay.anon))
+      if essay.anon
+        img(src=config.cdnOrigin + '/images/anon.jpg')
+      else
+        img(src=user.gravatar(400))
       h2.name= user.getName(essay.anon)
     if (user.collegeMajor)
       h3.accepted= user.collegeMajor

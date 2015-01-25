@@ -156,23 +156,14 @@ User.methods.totalHits = function (cb) {
 
 /**
  * Returns the URL to the user's Gravatar image, based on their email address.
- * If the user has nothing set, this returns a transparent PNG.
+ * @param {number} size
+ * @param {boolean} transparent when no gravatar found, use transparent png
  */
-User.virtual('gravatarBlank').get(function () {
+User.methods.gravatar = function (size, transparent) {
+  size = size || 50
+  var fallback = transparent ? 'blank' : 'mm'
   var hash = md5(this.email.trim().toLowerCase())
-  return '//www.gravatar.com/avatar/' + hash + '?size=50&default=blank'
-})
-
-User.virtual('gravatar').get(function () {
-  var hash = md5(this.email.trim().toLowerCase())
-  return '//www.gravatar.com/avatar/' + hash + '?size=400&default=mm'
-})
-
-User.methods.getGravatar = function (anon) {
-  if (anon)
-    return config.cdnOrigin + '/images/anon.jpg'
-  else
-    return this.gravatar
+  return '//www.gravatar.com/avatar/' + hash + '?size=' + size + '&default=' + fallback
 }
 
 // Store hashed version of user's password

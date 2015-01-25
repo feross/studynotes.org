@@ -28,7 +28,7 @@ header.header
 
       if (req.user)
         li: a(href='#{req.user.url}', title='Manage your account')
-          img.gravatar(src='#{ req.user.gravatarBlank }', width=21, height=21).hide-tablet
+          img.gravatar(src='#{ req.user.gravatar(50, true) }', width=21, height=21).hide-tablet
           i.fa.fa-user.hide-tablet
           span= req.user.firstName
         li: a.logout(href='#logout', title='Logout of StudyNotes')
