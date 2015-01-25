@@ -1,10 +1,8 @@
 var config = require('./config')
-var cp = require('child_process')
 var crypto = require('crypto')
 var debug = require('debug')('util')
 var email = require('./lib/email')
 var extend = require('extend.js')
-var fs = require('fs')
 var htmlParser = require('html-parser')
 var optimist = require('optimist')
 var posix = require('posix')
@@ -60,31 +58,6 @@ function upgradeLimits () {
 }
 
 /**
- * Recursively and synchronously delete a folder and all its subfolders.
- * If the folder does not exist, then do nothing.
- *
- * @param {string} dirPath
- * @param {function(Error)=} cb
- */
-exports.rmdirRecursive = function (dirPath, cb) {
-  cb || (cb = function () {})
-
-  // Verify that folder exists
-  fs.readdir(dirPath, function (err) {
-    if (err) {
-      // Not an error if folder does not exist
-      cb(null)
-    } else {
-      // Ensure that directory ends in a trailing slash
-      if (dirPath[dirPath.length - 1] !== '/') {
-        dirPath += '/'
-      }
-      // Remove the directory
-      cp.exec('rm -r ' + dirPath, cb)
-    }
-  })
-}
-
 /**
  * Express middleware that logs requests using the "debug" module so that the
  * output is hidden by default.
