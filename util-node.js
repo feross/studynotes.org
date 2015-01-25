@@ -70,9 +70,15 @@ exports.escapeRegExp = function (str) {
   return str.replace(/([.*+?^=!:${}()|[\]\/\\])/g, '\\$1')
 }
 
+/**
+ * Returns hits per day, given the total `hits` and the `date` of publication.
+ * @param  {number} hits
+ * @param  {Date|number} date
+ * @return {number}
+ */
 exports.hitsPerDay = function (hits, date) {
   var days = (Date.now() - new Date(date)) / 86400000
-  days = Math.max(days, 0.00001) // To prevent divide by zero
+  days = days || 0.00001 // prevent divide by zero
   return Math.round(hits / days)
 }
 
