@@ -90,7 +90,7 @@ Site.prototype.start = function (done) {
     self.app.use(connectSlashes())
 
     // Readable logs that are hidden by default. Enable with DEBUG=*
-    self.app.use(util.expressLogger(debug))
+    self.app.use(expressLogger)
 
     self.setupSessions()
     self.app.use(pro.checkPro)
@@ -245,6 +245,16 @@ Site.prototype.setupSessions = function () {
 Site.prototype.addTemplateLocals = function (req, res, next) {
   res.locals.req = req
   res.locals.csrf = req.csrfToken()
+  next()
+}
+
+/**
+ * Express middleware that logs requests using the "debug" module so that the
+ * output is hidden by default.
+ */
+function expressLogger (req, res, next) {
+  var str = '\x1B[90m' + req.method + ' ' + req.originalUrl + '\x1B[0m'
+  debug(str)
   next()
 }
 

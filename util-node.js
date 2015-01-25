@@ -58,21 +58,6 @@ function upgradeLimits () {
 }
 
 /**
-/**
- * Express middleware that logs requests using the "debug" module so that the
- * output is hidden by default.
- *
- * @param  {function(*)} debug instance
- */
-exports.expressLogger = function (debug) {
-  return function (req, res, next) {
-    var str = '\x1B[90m' + req.method + ' ' + req.originalUrl + '\x1B[0m'
-    debug(str)
-    next()
-  }
-}
-
-/**
  * Escape a string to be included in a regular expression.
  *
  * From https://developer.mozilla.org/en-US/docs/JavaScript/Guide/Regular_Expressions
