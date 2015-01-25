@@ -6,7 +6,6 @@ var $ = require('jquery')
 var $autocomplete = $('.header .autocomplete')
 var $headerLeft = $('.header .left')
 var $headerRight = $('.header .right')
-var $html = $('html')
 var $search = $('.header .search')
 var $searchInput = $('.header .search input')
 
@@ -99,12 +98,12 @@ function renderAutocomplete (data) {
     .render(data.results, { // template directives
       name: {
         // don't escape search result name, to show formatting
-        html: function (params) {
+        html: function () {
           return this.name
         }
       },
       icon: {
-        src: function (params) {
+        src: function () {
           if (this.type === 'Course' || this.type === 'College')
             return config.cdnOrigin + '/images/icon/' + this.id + '.png'
           else
@@ -112,10 +111,10 @@ function renderAutocomplete (data) {
         }
       },
       result: {
-        href: function (params) {
+        href: function () {
           return this.url
         },
-        'data-position': function (params) {
+        'data-position': function () {
           return this.position
         },
         'class': function (params) {
@@ -132,7 +131,7 @@ window.hideAutocomplete = function () {
   setAutocompletePosition(0)
 }
 
-$searchInput.on('focus', function (e) {
+$searchInput.on('focus', function () {
   if ($searchInput.val() !== '') {
     $search.addClass('searching')
     $autocomplete.removeClass('off')
@@ -140,7 +139,7 @@ $searchInput.on('focus', function (e) {
 })
 $searchInput.on('keyup', doSearchAutocomplete)
 
-$('.header .autocomplete').on('mouseover', '.result', function (e) {
+$('.header .autocomplete').on('mouseover', '.result', function () {
   var position = Number($(this).attr('data-position'))
   setAutocompletePosition(position)
 })
@@ -193,7 +192,7 @@ $('.header .search form').on('submit', function (e) {
   }
 })
 
-$searchInput.on('blur', function (e) {
+$searchInput.on('blur', function () {
   window.setTimeout(function () {
     $search.removeClass('searching')
     $autocomplete.addClass('off')

@@ -71,7 +71,7 @@ $window.on('scroll', throttle(onScroll, 100))
  * https://github.com/madrobby/keymaster
  */
 var $searchInput = $('.header .search input')
-key.filter = function (event) {
+key.filter = function () {
   return $searchInput.val() === ''
 }
 
