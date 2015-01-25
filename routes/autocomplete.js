@@ -21,8 +21,7 @@ module.exports = function (app) {
 }
 
 function autocomplete (query, cb) {
-  query || (query = '')
-  query = query.trim()
+  query = (query || '').trim()
 
   if (query.length >= MAX_QUERY_LENGTH) return cb(null, [])
 
