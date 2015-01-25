@@ -1,6 +1,6 @@
 {
   "name": "studynotes",
-  "description": "The StudyNotes.org website. AP Notes & College Essays. AP US History Notes.",
+  "description": "StudyNotes.org. Helping students learn faster and study better!",
   "version": "0.4.0",
   "author": "Feross Aboukhadijeh <feross@feross.org> (http://feross.org/)",
   "browser": {

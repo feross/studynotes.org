@@ -1,6 +1,11 @@
-# [StudyNotes](http://www.apstudynotes.org) [![travis](https://img.shields.io/travis/feross/StudyNotes.svg)](https://travis-ci.org/feross/StudyNotes) [![npm](https://img.shields.io/npm/v/studynotes.svg)](https://npmjs.org/package/studynotes) [![gittip](https://img.shields.io/gittip/feross.svg)](https://www.gittip.com/feross/)
+# [StudyNotes](http://www.apstudynotes.org) [![travis][travis-image]][travis-url] [![npm][npm-image]][npm-url]
 
-#### Helping students learn faster and better!
+[travis-image]: https://img.shields.io/travis/feross/StudyNotes.svg?style=flat
+[travis-url]: https://travis-ci.org/feross/StudyNotes
+[npm-image]: https://img.shields.io/npm/v/studynotes.svg?style=flat
+[npm-url]: https://npmjs.org/package/studynotes
+
+#### Helping students learn faster and study better!
 
 ## Top notes and essays
 
@@ -17,11 +22,11 @@
 See [CONTIBUTING.md](/CONTRIBUTING.md) for instructions on how to contribute to the
 Study Notes project.
 
-## dependencies
+## Dependencies
 
 Awesome dependency visualization! Check it out:
 [Yasiv: studynotes](http://www.yasiv.com/npm#view/studynotes).
 
-## license
+## License
 
 GPLv3. Copyright (C) [Feross Aboukhadijeh](http://feross.org).
