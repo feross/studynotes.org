@@ -35,9 +35,12 @@ exports.run = function (ServerConstructor) {
   })
 
   process.on('uncaughtException', function (err) {
-    console.error('\nUNCAUGHT EXCEPTION')
+    console.error('[UNCAUGHT EXCEPTION]')
     console.error(err.stack)
-    email.notifyOnException({ err: err })
+    email.send({
+      subject: '[UNCAUGHT EXCEPTION] ' + err.message,
+      text: err.stack.toString()
+    })
   })
 }
 

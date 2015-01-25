@@ -1,6 +1,5 @@
-var config = require('../config')
+var debug = require('debug')('studynotes:error')
 var email = require('../lib/email')
-var express = require('express')
 var httpStatus = require('http-status-codes')
 
 module.exports = function (app) {
@@ -19,24 +18,40 @@ module.exports = function (app) {
   })
 
   app.use(function (err, req, res, next) {
-    console.error('\n[UNCAUGHT EXCEPTION] ' + req.method + ': ' + req.url + '\n')
-    console.error(err.stack)
-    console.error('\nHTTP HEADERS:')
-    console.dir(req.headers)
-    if (req.params) {
-      console.error('\nHTTP GET PARAMETERS:')
-      console.dir(req.params)
-    }
-    if (req.body) {
-      console.error('\nHTTP BODY:')
-      console.dir(req.body)
-    }
+    var text = '\n=== EXCEPTION ===\n' +
+      req.method + ': ' + req.url + '\n' +
+      err.stack + '\n' +
+      'Headers:' + '\n' +
+      JSON.stringify(req.headers, undefined, 4) + '\n' +
+      (req.params && Object.keys(req.params).length
+        ? 'GET Params:' + '\n' +
+          JSON.stringify(req.params, undefined, 4) + '\n'
+        : '') +
+      (req.body && Object.keys(req.body).length
+        ? 'Body:' + '\n' +
+          JSON.stringify(req.body, undefined, 4) + '\n'
+        : '')
 
-    email.notifyOnException({ err: err, req: req })
+    console.error(text)
 
     var code = 500
     if (typeof err.status === 'number') {
       code = err.status
+    }
+
+    if (code === 400)
+      debug('No notify for 400 error (client fault)')
+    else if (code === 403)
+      debug('No notify for 403 error (ignore PROPFIND, POST without CSRF, ...)')
+    else if (/trackback/.test(req.url))
+      debug('No notify for /trackback/ bots')
+    else if (req.url === '/robots.txt')
+      debug('No notify for robots.txt errors')
+    else {
+      email.send({
+        subject: err.message,
+        text: text
+      })
     }
 
     res.status(code).render('error', {

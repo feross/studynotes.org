@@ -92,6 +92,11 @@ Site.prototype.start = function (done) {
     // Readable logs that are hidden by default. Enable with DEBUG=*
     self.app.use(expressLogger)
 
+    self.app.use(function (req, res, next) {
+      res.locals.req = req
+      next()
+    })
+
     self.setupSessions()
     self.app.use(pro.checkPro)
 
@@ -100,8 +105,6 @@ Site.prototype.start = function (done) {
 
     // Errors are propogated using `req.flash`
     self.app.use(flash())
-
-    self.app.use(self.addTemplateLocals)
 
     require('./routes')(self.app)
 
@@ -242,15 +245,11 @@ Site.prototype.setupSessions = function () {
   passport.serializeUser(auth.serializeUser)
   passport.deserializeUser(auth.deserializeUser)
   passport.use(auth.passportStrategy)
-}
 
-/**
- * Make certain variables available to templates on this request.
- */
-Site.prototype.addTemplateLocals = function (req, res, next) {
-  res.locals.req = req
-  res.locals.csrf = req.csrfToken()
-  next()
+  self.app.use(function (req, res, next) {
+    res.locals.csrf = req.csrfToken()
+    next()
+  })
 }
 
 /**
