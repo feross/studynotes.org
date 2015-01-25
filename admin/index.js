@@ -3,7 +3,6 @@ var express = require('express')
 var formage = require('formage')
 var http = require('http')
 var model = require('../model')
-var path = require('path')
 
 var app = express()
 app.set('view options', { layout: false, pretty: true })
@@ -22,7 +21,7 @@ app.use(express.errorHandler())
 model.connect(function (err) {
   if (err) throw err
 
-  var admin = formage.init(app, express, model.models, {
+  formage.init(app, express, model.models, {
     title: 'Formage Admin',
     default_section: 'Main',
     admin_users_gui: true,
@@ -31,8 +30,8 @@ model.connect(function (err) {
   })
 })
 
-app.get('/', function(req, res) {
-  res.redirect('/admin')
+app.get('/', function (req, res) {
+  res.redirect(301, '/admin')
 })
 
 http.createServer(app).listen(config.ports.admin, function () {
