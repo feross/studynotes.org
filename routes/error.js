@@ -1,4 +1,4 @@
-var debug = require('debug')('studynotes:error')
+var debug = require('debug')('studynotes:routes/error')
 var email = require('../lib/email')
 var httpStatus = require('http-status-codes')
 

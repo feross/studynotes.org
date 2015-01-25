@@ -303,7 +303,6 @@ html(class='studynotes #{layout}', lang='en')
         _gaq.push(['_setAccount', 'UA-3898076-4']);
         _gaq.push(['_setDomainName', 'apstudynotes.org']);
         _gaq.push(['_trackPageview']);
-
         (function() {
           var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
           ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
@@ -312,54 +311,34 @@ html(class='studynotes #{layout}', lang='en')
 
       //- Uservoice (async)
       script.
-        // Include the UserVoice JavaScript SDK (only needed once on a page)
         UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/oZKwjGI98y7HmJ5jbPuO7w.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
-
-        //
-        // UserVoice Javascript SDK developer documentation:
-        // https://www.uservoice.com/o/javascript-sdk
-        //
-
-        // Set colors
         UserVoice.push(['set', {
           accent_color: '#448dd6',
           trigger_color: 'white',
           trigger_background_color: 'rgba(46, 49, 51, 0.6)'
         }]);
 
-        // Identify the user and pass traits
-        // To enable, replace sample data with actual user traits and uncomment the line
-        UserVoice.push(['identify', {
-          //email:      'john.doe@example.com', // User’s email address
-          //name:       'John Doe', // User’s real name
-          //created_at: 1364406966, // Unix timestamp for the date the user signed up
-          //id:         123, // Optional: Unique id of the user (if set, this should not change)
-          //type:       'Owner', // Optional: segment your users by type
-          //account: {
-          //  id:           123, // Optional: associate multiple users with a single account
-          //  name:         'Acme, Co.', // Account name
-          //  created_at:   1364406966, // Unix timestamp for the date the account was created
-          //  monthly_rate: 9.99, // Decimal; monthly rate of the account
-          //  ltv:          1495.00, // Decimal; lifetime value of the account
-          //  plan:         'Enhanced' // Plan name for the account
-          //}
-        }]);
-
-        // Add default trigger to the bottom-right corner of the window:
         UserVoice.push(['addTrigger', { mode: 'satisfaction', trigger_position: 'bottom-right' }]);
-
-        // Autoprompt for Satisfaction and SmartVote (only displayed under certain conditions)
         UserVoice.push(['autoprompt', {}]);
 
-      if (config.isProd)
-        //- StatCounter (blocking)
-        script.
-          var sc_project=3533945;
-          var sc_invisible=1;
-          var sc_security="1577ef81";
-          var sc_https=1;
-          var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
-          document.write("<sc"+"ript src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
-        noscript
-          div.statcounter
-            img.statcounter(src='//c.statcounter.com/3533945/0/1577ef81/1/')
+      //- StatCounter (async; hacked it)
+      //- Some variables are required to be global by StatCounter (I assume).
+      script.
+        var sc_project = 3533945;
+        var sc_invisible = 1;
+        var sc_security = '1577ef81';
+        var sc_https = 1;
+        var scJsHost = document.location.protocol === 'https:'
+          ? 'https://secure.'
+          : 'http://www.';
+        (function () {
+          var sc = document.createElement('script');
+          sc.type = 'text/javascript';
+          sc.async = true;
+          sc.src = scJsHost + 'statcounter.com/counter/counter.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(sc, s);
+        })();
+      noscript
+        div.statcounter
+          img.statcounter(src='//c.statcounter.com/3533945/0/1577ef81/1/')
