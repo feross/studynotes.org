@@ -6,16 +6,10 @@ var email = require('./lib/email')
 var extend = require('extend.js')
 var fs = require('fs')
 var htmlParser = require('html-parser')
-var truncate = require('html-truncate')
 var optimist = require('optimist')
 var posix = require('posix')
-var uuid = require('node-uuid')
 
-/**
- * Truncate plaintext or HTML.
- * @type {function(String, Number): String}
- */
-exports.truncate = truncate
+exports.truncate = require('html-truncate')
 
 /**
  * Run the given server, passing in command line options as options.
@@ -30,8 +24,8 @@ exports.run = function (ServerConstructor) {
   delete opts.$0
   delete opts._
 
-  exports.upgradeLimits()
-  exports.downgradeUid()
+  upgradeLimits()
+  downgradeUid()
 
   // Create and start the server
   var server = new ServerConstructor(opts, function (err) {
@@ -51,7 +45,7 @@ exports.run = function (ServerConstructor) {
 
 var MAX_SOCKETS = 10000
 
-exports.downgradeUid = function () {
+function downgradeUid () {
   if (process.platform === 'linux' && config.isProd) {
     process.setgid('www-data')
     process.setuid('www-data')
@@ -59,18 +53,10 @@ exports.downgradeUid = function () {
   }
 }
 
-exports.upgradeLimits = function () {
+function upgradeLimits () {
   posix.setrlimit('nofile', { soft: MAX_SOCKETS, hard: MAX_SOCKETS })
   var limits = posix.getrlimit('nofile')
   debug('upgraded resource limits to ' + limits.soft)
-}
-
-/**
- * Generates a random UUID.
- * @return {string}
- */
-exports.uuid = function () {
-  return uuid.v1()
 }
 
 /**
