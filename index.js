@@ -217,7 +217,12 @@ Site.prototype.setupSessions = function () {
   var self = this
 
   self.app.use(cookieParser(secret.cookieSecret))
-  self.app.use(bodyParser())
+
+  // parse application/x-www-form-urlencoded
+  self.app.use(bodyParser.urlencoded({ extended: false }))
+
+  // parse application/json
+  self.app.use(bodyParser.json())
 
   var MongoStore = connectMongo(session)
   self.app.use(session({
