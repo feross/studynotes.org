@@ -230,6 +230,8 @@ Site.prototype.setupSessions = function () {
   var MongoStore = connectMongo(session)
   self.app.use(session({
     proxy: true, // trust the reverse proxy
+    resave: false, // don't save if session is unmodified
+    saveUninitialized: false, // don't save new/unmodified sessions
     secret: secret.cookieSecret, // prevent cookie tampering
     store: new MongoStore({
       db: config.mongo.database,
