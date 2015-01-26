@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var fs = require('fs')
 
 var css = fs.readFileSync(process.argv[2], 'utf8')

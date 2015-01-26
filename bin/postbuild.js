@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var auto = require('run-auto')
 var cp = require('child_process')
 var config = require('../config')
@@ -34,14 +36,14 @@ auto({
 
   removeOldJS: function (cb) {
     // var command2 = 'rm ' + config.out + '/main-*.css'
-    cp.exec('rm ' + config.out + '/main-*.js ' + config.out + '/extra-*.js', function (err) {
+    cp.exec('rm ' + config.out + '/main-*.js ' + config.out + '/extra-*.js', function () {
       // ignore errors - doesn't matter if no file is found
       cb(null)
     })
   },
 
   removeOldCSS: function (cb) {
-    cp.exec('rm ' + config.out + '/main-*.css', function (err) {
+    cp.exec('rm ' + config.out + '/main-*.css', function () {
       // ignore errors - doesn't matter if no file is found
       cb(null)
     })

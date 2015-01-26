@@ -6,7 +6,7 @@ var config = require('../config')
 
 exports.cookieSecret = 'abcdefghijklmnopqrstuvabcdefghi'
 
-exports.netdna = {
+exports.maxcdn = {
   companyAlias: '',
   consumerKey: '',
   consumerSecret: '',
