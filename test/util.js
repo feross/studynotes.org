@@ -1,5 +1,11 @@
-var util = require('../util')
+var proxyquire = require('proxyquire')
 var test = require('tape')
+var util = proxyquire('../util', {
+  '../secret': {
+    '@noCallThru': true,
+    '@global': true
+  }
+})
 
 test('util.escapeRegExpString', function (t) {
   t.equal(util.escapeRegExpString('hi there'), 'hi there')
