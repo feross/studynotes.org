@@ -1,10 +1,9 @@
-# Secret files
 secret/*
 !secret/index-sample.js
 
-# Built files
 out/*
 !out/placeholder.txt
+bundle.js
+tmp/
 
-# Modules
 node_modules/
