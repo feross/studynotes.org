@@ -1,7 +1,7 @@
 {
   "name": "studynotes",
   "description": "StudyNotes.org. Helping students learn faster and study better!",
-  "version": "0.4.2",
+  "version": "1.0.0",
   "author": "Feross Aboukhadijeh <feross@feross.org> (http://feross.org/)",
   "browser": {
     "./config-node.js": "./config-browser.js",
