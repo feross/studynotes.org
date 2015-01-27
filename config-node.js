@@ -78,7 +78,6 @@ try {
  * Final paths for JS and CSS files. Uniquely named using the MD5 hash of the
  * file contents, for cache busting.
  */
-exports.jsMainPath = '/main' + (MD5_JS_MAIN ? '-' + MD5_JS_MAIN : '') + '.js'
-exports.jsExtraPath = '/extra' + (MD5_JS_EXTRA ? '-' + MD5_JS_EXTRA : '') + '.js'
+exports.jsMainPath = '/main' + (MD5_JS_MAIN ? '-' + MD5_JS_MAIN : '') + '.min.js'
+exports.jsExtraPath = '/extra' + (MD5_JS_EXTRA ? '-' + MD5_JS_EXTRA : '') + '.min.js'
 exports.cssPath = '/main' + (MD5_CSS ? '-' + MD5_CSS : '') + '.css'
-
