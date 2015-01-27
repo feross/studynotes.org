@@ -30,9 +30,6 @@
       ]
     }
   },
-  "standard": {
-    "ignore": ["**/out/**", "**/lib/select2/**", "**/lib/ckeditor/**"]
-  },
   "bugs": {
     "url": "https://github.com/feross/studynotes/issues"
   },
@@ -129,5 +126,12 @@
     "watch-js": "npm run watch-js-main & npm run watch-js-extra",
     "watch-js-extra": "watchify client/extra.js -o out/extra.min.js -dv",
     "watch-js-main": "watchify client/main.js -o out/main.min.js -dv"
+  },
+  "standard": {
+    "ignore": [
+      "**/out/**",
+      "**/lib/select2/**",
+      "**/lib/ckeditor/**"
+    ]
   }
 }
