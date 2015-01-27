@@ -1,6 +1,6 @@
 var auto = require('run-auto')
+var escapeStringRegexp = require('escape-string-regexp')
 var model = require('../model')
-var util = require('../util')
 var values = require('object-values')
 
 var MAX_RESULTS = 8
@@ -127,10 +127,10 @@ function autocomplete (query, cb) {
  */
 function regexForQuery (query) {
   var tokens = query.split(' ')
-  var str = '(^|\\s)[^a-z]*' + util.escapeRegExpString(tokens[0])
+  var str = '(^|\\s)[^a-z]*' + escapeStringRegexp(tokens[0])
 
   for (var i = 1, len = tokens.length; i < len; i++) {
-    str += '.*\\s[^a-z]*' + util.escapeRegExpString(tokens[i])
+    str += '.*\\s[^a-z]*' + escapeStringRegexp(tokens[i])
   }
 
   return new RegExp(str, 'i')
@@ -174,7 +174,7 @@ function weight (result, query) {
   // Word match
   words.forEach(function (word) {
     if (word.length <= 3) return
-    var re = new RegExp('(^|\\s)' + util.escapeRegExpString(word) + '($|\\s)', 'i')
+    var re = new RegExp('(^|\\s)' + escapeStringRegexp(word) + '($|\\s)', 'i')
     if (re.test(result.name)) {
       weight += 100
     }
@@ -200,7 +200,7 @@ function highlight (str, query) {
     if (i !== 0) {
       reStr += '|'
     }
-    reStr += '((^|\\s)[^a-z]*' + util.escapeRegExpString(tokens[i]) + ')'
+    reStr += '((^|\\s)[^a-z]*' + escapeStringRegexp(tokens[i]) + ')'
   })
 
   str = str.replace(new RegExp(reStr, 'gi'), '<strong>$&</strong>')

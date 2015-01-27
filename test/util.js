@@ -7,12 +7,6 @@ var util = proxyquire('../util', {
   }
 })
 
-test('util.escapeRegExpString', function (t) {
-  t.equal(util.escapeRegExpString('hi there'), 'hi there')
-  t.equal(util.escapeRegExpString('hi.there!'), 'hi\\.there\\!')
-  t.end()
-})
-
 test('util.hitsPerDay', function (t) {
   var date = Date.now() - (1000 * 60 * 60 * 24) // 1 day ago
   var hits = 1000

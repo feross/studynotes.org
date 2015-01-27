@@ -61,19 +61,6 @@ function upgradeLimits () {
 }
 
 /**
- * Escape a string to be included in a regular expression.
- *
- * From https://developer.mozilla.org/en-US/docs/JavaScript/Guide/Regular_Expressions
- *
- * @param  {String} str
- * @return {String}
- */
-
-exports.escapeRegExpString = function (str) {
-  return str.replace(/([.*+?^=!:${}()|[\]\/\\])/g, '\\$1')
-}
-
-/**
  * Returns hits per day, given the total `hits` and the `date` of publication.
  * @param  {number} hits
  * @param  {Date|number} date
