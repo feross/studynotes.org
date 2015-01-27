@@ -22,14 +22,14 @@ Countdown.prototype.update = function () {
   var now = moment()
   var diff = moment.duration(this.date.diff(now))
   var obj = {
-      days: Math.floor(diff.asDays()),
-      hours: diff.hours(),
-      minutes: diff.minutes(),
-      seconds: diff.seconds(),
-      date: this.date.format('MMMM Do, YYYY')
-    }
+    days: Math.floor(diff.asDays()),
+    hours: diff.hours(),
+    minutes: diff.minutes(),
+    seconds: diff.seconds(),
+    date: this.date.format('MMMM Do, YYYY')
+  }
 
-    this.$elem.render(obj)
+  this.$elem.render(obj)
 }
 
 Countdown.prototype.stop = function () {
@@ -38,5 +38,5 @@ Countdown.prototype.stop = function () {
 
 // Setup countdown timer, if applicable
 if (window.countdownDate) {
-  new Countdown('.countdown', countdownDate)
+  new Countdown('.countdown', window.countdownDate)
 }

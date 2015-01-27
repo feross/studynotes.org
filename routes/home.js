@@ -97,7 +97,7 @@ module.exports = function (app) {
           // desc: 'Study tools for smart students'
           // desc: 'The secret to getting a 5 on the AP exam'
         },
-        url: '/',
+        url: '/'
       }
       extend(locals, r)
 

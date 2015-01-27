@@ -18,7 +18,7 @@ var Course = mongoose.Schema({
   shortName: {
     type: String,
     required: true,
-    index: true,
+    index: true
   },
   desc: String,
   examDate: Date,

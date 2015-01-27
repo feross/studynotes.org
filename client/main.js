@@ -26,16 +26,16 @@ $.ajaxSetup({
   // Send CSRF token with XHR requests
   beforeSend: function (xhr, settings) {
     if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
-     // Only send the token to relative URLs i.e. locally.
-     xhr.setRequestHeader('X-CSRF-Token', $('input[name="_csrf"]').val())
-   }
+      // Only send the token to relative URLs i.e. locally.
+      xhr.setRequestHeader('X-CSRF-Token', $('input[name="_csrf"]').val())
+    }
   }
 })
 
 // Make external links open in new window
 $('a[href^="http:"], a[href^="https:"]')
   .not('[href*="' + config.siteOrigin + '"]')
-  .attr('target','_blank')
+  .attr('target', '_blank')
 
 // Logout via XHR POST
 $('.logout').click(function (e) {
@@ -51,8 +51,8 @@ $('.logout').click(function (e) {
 })
 
 function onResize () {
-  updateSearchWidth()
-  toolbarOnScroll()
+  window.updateSearchWidth()
+  window.toolbarOnScroll()
 }
 $window.on('resize', throttle(onResize, 100))
 
@@ -60,9 +60,9 @@ $window.on('resize', throttle(onResize, 100))
  * Browser scroll event
  */
 function onScroll () {
-  closeBrowseMenus()
-  hideAutocomplete()
-  toolbarOnScroll()
+  window.closeBrowseMenus()
+  window.hideAutocomplete()
+  window.toolbarOnScroll()
 }
 $window.on('scroll', throttle(onScroll, 100))
 
@@ -93,7 +93,7 @@ key('right', function () {
  */
 var loaded = false
 function updateSearchWidthWhileLoading () {
-  updateSearchWidth()
+  window.updateSearchWidth()
   if (!loaded) {
     setTimeout(updateSearchWidthWhileLoading, 50)
   }

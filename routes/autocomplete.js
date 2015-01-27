@@ -136,7 +136,6 @@ function regexForQuery (query) {
   return new RegExp(str, 'i')
 }
 
-
 /**
  * Calculate the weight of a result, for a given query
  * @param  {Object} result
@@ -144,31 +143,31 @@ function regexForQuery (query) {
  * @return {Number} weight
  */
 function weight (result, query) {
-  var weight = 0
+  var w = 0
   var words = query.split(' ')
 
   // Model-specific weights
   switch (result.constructor.modelName) {
     case 'Course':
-      weight += 20
+      w += 20
       break
     case 'College':
-      weight += 10
+      w += 10
       break
     case 'Note':
-      weight += 2
+      w += 2
       break
     case 'Essay':
-      weight += 1
+      w += 1
       break
     case 'User':
-      weight += 0
+      w += 0
       break
   }
 
   // Exact match
   if (result.name.toLowerCase() === query.toLowerCase()) {
-    weight += 1000
+    w += 1000
   }
 
   // Word match
@@ -176,11 +175,11 @@ function weight (result, query) {
     if (word.length <= 3) return
     var re = new RegExp('(^|\\s)' + escapeStringRegexp(word) + '($|\\s)', 'i')
     if (re.test(result.name)) {
-      weight += 100
+      w += 100
     }
   })
 
-  return weight
+  return w
 }
 
 /**

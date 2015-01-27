@@ -10,7 +10,6 @@ var stripe = require('stripe')(secret.stripe.secret)
 stripe.setApiVersion('2013-12-03')
 
 module.exports = function (app) {
-
   app.post('/pro', ssl.ensureSSL, function (req, res, next) {
     var amount = config.proPrice
 

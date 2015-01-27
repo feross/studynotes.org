@@ -27,7 +27,6 @@ window.updateSearchWidth = function () {
   $search.removeClass('off')
 }
 
-
 // Autocomplete
 
 var lastAutocompleteTime = +(new Date())
@@ -66,12 +65,10 @@ function doSearchAutocomplete () {
   if ($searchInput.val() === lastAutocompleteQuery
       && !$autocomplete.hasClass('off')) {
     return
-
   } else if ($searchInput.val() === '') {
     $search.removeClass('searching')
     $autocomplete.addClass('off')
     setAutocompletePosition(0)
-
   } else {
     $search.addClass('searching')
 
@@ -143,7 +140,6 @@ $('.header .autocomplete').on('mouseover', '.result', function () {
   var position = Number($(this).attr('data-position'))
   setAutocompletePosition(position)
 })
-
 
 // Autocomplete keyboard navigation
 $searchInput.on('keydown', function (e) {

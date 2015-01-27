@@ -82,7 +82,7 @@ module.exports = function (app) {
     })
   })
 
-    app.get('/submit/note', auth.ensureAuth, function (req, res) {
+  app.get('/submit/note', auth.ensureAuth, function (req, res) {
     res.render('submit-note', {
       hero: {
         title: 'Add a note to Study Notes',

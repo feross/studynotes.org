@@ -1,6 +1,5 @@
 var auto = require('run-auto')
 var bcrypt = require('bcrypt')
-var config = require('../config')
 var model = require('./')
 var md5 = require('MD5')
 var mongoose = require('mongoose')
@@ -71,9 +70,9 @@ var User = new mongoose.Schema({
 
 // Trim whitespace
 User.pre('validate', function (next) {
-  var user = this
-  user.email = user.email && user.email.trim()
-  user.name = user.name && user.name.trim()
+  var self = this
+  self.email = self.email && self.email.trim()
+  self.name = self.name && self.name.trim()
   next()
 })
 
@@ -127,17 +126,17 @@ User.virtual('hasGraduated').get(function () {
 })
 
 User.methods.totalHits = function (cb) {
-  var user = this
+  var self = this
   auto({
     essays: function (cb) {
       model.Essay
-        .find({ user: user.id, anon: false })
+        .find({ user: self.id, anon: false })
         .select('-prompt -body')
         .exec(cb)
     },
     notes: function (cb) {
       model.Note
-        .find({ user: user.id, anon: false })
+        .find({ user: self.id, anon: false })
         .select('-body')
         .exec(cb)
     }
@@ -168,13 +167,13 @@ User.methods.gravatar = function (size, transparent) {
 
 // Store hashed version of user's password
 User.pre('save', function (next) {
-  var user = this
-  if (!user.isModified('password')) return next()
+  var self = this
+  if (!self.selfisModified('password')) return next()
 
   // Hash the password and store it
-  bcrypt.hash(user.password, 10, function (err, hash) {
+  bcrypt.hash(self.password, 10, function (err, hash) {
     if (err) return next(err)
-    user.password = hash
+    self.password = hash
     next()
   })
 })

@@ -59,8 +59,8 @@ Note.index({ course: 1, notetype: 1})
 
 // Trim whitespace
 Note.pre('validate', function (next) {
-  var note = this
-  note.name = note.name.trim()
+  var self = this
+  self.name = self.name.trim()
   next()
 })
 
@@ -72,11 +72,11 @@ Note.virtual('url').get(function () {
 })
 
 Note.virtual('searchDesc').get(function () {
-  var note = this
+  var self = this
 
-  var courseId = note.populated('course') || note.course
+  var courseId = self.populated('course') || self.course
   var course = model.cache.courses[courseId]
-  var notetypeId = note.populated('notetype') || note.notetype
+  var notetypeId = self.populated('notetype') || self.notetype
   var notetype = course.notetypes.filter(function (n) {
     return n.id === notetypeId
   })[0]
@@ -86,9 +86,9 @@ Note.virtual('searchDesc').get(function () {
 
 // Sanitize to strip bad html before saving
 Note.pre('save', function (next) {
-  var note = this
-  if (note.isModified('body')) {
-    note.body = util.sanitizeHTML(note.body)
+  var self = this
+  if (self.isModified('body')) {
+    self.body = util.sanitizeHTML(self.body)
   }
   next()
 })

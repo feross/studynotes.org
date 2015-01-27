@@ -65,10 +65,10 @@ exports.absoluteUrl = function (schema) {
  */
 exports.slug = function (schema, opts) {
   schema.pre('save', function (next) {
-    var doc = this
-    if (doc._id) return next()
+    var self = this
+    if (self._id) return next()
 
-    var initialSlug = slugify(doc.name)
+    var initialSlug = slugify(self.name)
 
     // Remove words from the end of the slug until the length is okay
     while (initialSlug.length > config.maxSlugLength) {
@@ -85,7 +85,7 @@ exports.slug = function (schema, opts) {
           if (err) return next(err)
 
           if (count === 0) {
-            doc._id = potentialSlug
+            self._id = potentialSlug
             next()
           } else {
             // If slug is taken, try appending a number to end

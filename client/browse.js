@@ -1,7 +1,6 @@
 // Browse menu dropdown
 
 var $ = require('jquery')
-var util = require('../util')
 
 /**
  * Show or hide the browse menus. If no `menu` parameter is provided, then
@@ -29,6 +28,7 @@ function toggleBrowseMenu (menu, toggle) {
   }
 }
 
+var browseMenus = []
 window.closeBrowseMenus = function () {
   browseMenus.forEach(function (menu) {
     toggleBrowseMenu(menu, false)
@@ -36,7 +36,6 @@ window.closeBrowseMenus = function () {
 }
 
 // Get all the browse menus in the page
-var browseMenus = []
 $('.browse').each(function (i, elem) {
   var $elem = $(elem)
   var name = /browse-(\w+)/.exec($elem.attr('class'))
@@ -61,17 +60,17 @@ $('.browse').each(function (i, elem) {
       }
     }
 
-    menu.$btn.hover(function (e) {
+    menu.$btn.hover(function () {
       menu.btnHover = true
       maybeOpenClose()
-    }, function (e) {
+    }, function () {
       menu.btnHover = false
       maybeOpenClose()
     })
-    menu.$browse.hover(function (e) {
+    menu.$browse.hover(function () {
       menu.browseHover = true
       maybeOpenClose()
-    }, function (e) {
+    }, function () {
       menu.browseHover = false
       maybeOpenClose()
     })
@@ -81,6 +80,6 @@ $('.browse').each(function (i, elem) {
 })
 
 // Close browse menu on search focus
-$('.header .search').on('focusin', function (e) {
-  closeBrowseMenus()
+$('.header .search').on('focusin', function () {
+  window.closeBrowseMenus()
 })

@@ -4,7 +4,6 @@ var sort = require('../lib/sort')
 
 module.exports = function (app) {
   app.get('/:courseId/:notetypeId/:noteId', function (req, res, next) {
-
     var course = model.cache.courses[req.params.courseId]
     if (!course) return next()
 
@@ -72,7 +71,6 @@ module.exports = function (app) {
       })
 
       note.hit()
-
     })
   })
 }

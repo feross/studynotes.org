@@ -30,6 +30,9 @@
       ]
     }
   },
+  "standard": {
+    "ignore": ["**/out/**", "**/lib/select2/**", "**/lib/ckeditor/**"]
+  },
   "bugs": {
     "url": "https://github.com/feross/studynotes/issues"
   },
@@ -90,6 +93,7 @@
     "formage": "^3.2.21",
     "nodemon": "^1.0.17",
     "proxyquire": "^1.3.1",
+    "standard": "^1.0.1",
     "tape": "^3.4.0",
     "uglify-js": "^2.4.15",
     "watchify": "^2.2.1"
@@ -118,7 +122,7 @@
     "db-tunnel": "ssh -L 27017:localhost:27017 -N feross@athena",
     "push": "npm version patch && git push && npm publish",
     "start": "npm run db-tunnel & npm run build & (sleep 2 && DEBUG=\"studynotes:*\" node run.js)",
-    "test": "tape test/*.js",
+    "test": "standard && tape test/*.js",
     "watch": "npm run db-tunnel & npm run watch-js & npm run watch-css & (sleep 2 && DEBUG=\"studynotes:*\" nodemon run.js)",
     "watch-local": "npm run db-local & npm run watch-js & npm run watch-css & (sleep 1 && DEBUG=\"studynotes:*\" nodemon run.js --offline)",
     "watch-css": "stylus -u nib stylus/main.styl -o out/ --include-css -w",

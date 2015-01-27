@@ -51,7 +51,6 @@ module.exports = function (app) {
       })
 
       r.user.hit()
-
     })
   })
 }

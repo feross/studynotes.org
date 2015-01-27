@@ -46,7 +46,6 @@ exports.connect = function (cb) {
   })
 }
 
-
 function loadCache (done) {
   auto({
     courses: function (cb) {

@@ -1,8 +1,5 @@
 var config = require('../config')
-var express = require('express')
-var path = require('path')
 var randomquote = require('../lib/randomquote')
-var util = require('../util')
 
 module.exports = function (app) {
   /*
@@ -42,9 +39,8 @@ module.exports = function (app) {
         title: opts.course.name + ' Notes',
         url: opts.course.url
       }
-    }
-    // If rendering a college-related view
-    else if (opts.college && opts.essays) {
+    } else if (opts.college && opts.essays) {
+      // If rendering a college-related view
       opts.hero = {
         // desc: 'College Essays That Worked',
         image: opts.college.heroImage,
@@ -63,9 +59,8 @@ module.exports = function (app) {
         title: opts.college.shortName + ' Admissions Essays',
         url: opts.college.url
       }
-    }
-    // If rendering any other type of view and heroImage is missing
-    else if (opts.hero && !opts.hero.image) {
+    } else if (opts.hero && !opts.hero.image) {
+      // If rendering any other type of view and heroImage is missing
       opts.hero.image = view + '.jpg'
     }
 

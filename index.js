@@ -34,7 +34,6 @@ var pro = require('./lib/pro')
 var secret = require('./secret')
 var util = require('./util')
 
-
 function Site (opts, cb) {
   var self = this
   if (opts) extend(self, opts)
@@ -66,7 +65,6 @@ Site.prototype.start = function (done) {
       console.error('Worker %s died (%s)', worker.id, code)
     })
     done(null)
-
   } else {
     debug('Worker process %s started', cluster.worker.id)
     self.app = express()
@@ -200,9 +198,10 @@ Site.prototype.serveStatic = function () {
   self.app.use(static)
 
   // HACK: Make CSS relative URLs work in development
-  if (!config.isProd)
+  if (!config.isProd) {
     self.app.use('/fonts', express.static(config.root + '/node_modules/font-awesome/fonts', opts))
     self.app.use('/cdn', express.static(config.root + '/lib/select2', opts))
+  }
 
   // Also mount the static files at "/cdn", without routes. This is so that
   // we can point the CDN at this folder and have it mirror ONLY the static

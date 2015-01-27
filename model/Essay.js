@@ -49,20 +49,20 @@ var Essay = mongoose.Schema({
 
 // Trim whitespace
 Essay.pre('validate', function (next) {
-  var essay = this
-  essay.name = essay.name.trim()
+  var self = this
+  self.name = self.name.trim()
   next()
 })
 
 Essay.virtual('url').get(function () {
-  var essay = this
-  var collegeSlug = essay.populated('college') || essay.college
-  return '/' + collegeSlug + '/' + essay._id + '/'
+  var self = this
+  var collegeSlug = self.populated('college') || self.college
+  return '/' + collegeSlug + '/' + self._id + '/'
 })
 
 Essay.virtual('searchDesc').get(function () {
-  var essay = this
-  var collegeSlug = essay.populated('college') || essay.college
+  var self = this
+  var collegeSlug = self.populated('college') || self.college
   var college = model.cache.colleges[collegeSlug]
 
   return college.shortName + ' Admissions Essay'
@@ -70,12 +70,12 @@ Essay.virtual('searchDesc').get(function () {
 
 // Sanitize essay to strip bad html before saving
 Essay.pre('save', function (next) {
-  var essay = this
-  if (essay.isModified('body')) {
-    essay.body = util.sanitizeHTML(essay.body)
+  var self = this
+  if (self.isModified('body')) {
+    self.body = util.sanitizeHTML(self.body)
   }
-  if (essay.isModified('prompt')) {
-    essay.prompt = util.sanitizeHTML(essay.prompt)
+  if (self.isModified('prompt')) {
+    self.prompt = util.sanitizeHTML(self.prompt)
   }
   next()
 })
