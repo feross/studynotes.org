@@ -11,7 +11,7 @@ app.use(express.favicon())
 app.use(express.bodyParser())
 app.use(express.methodOverride())
 app.use(express.cookieParser('magical secret admin'))
-app.use(express.cookieSession({cookie: { maxAge: 1000 * 60 * 60 *  24 }}))
+app.use(express.cookieSession({cookie: { maxAge: 1000 * 60 * 60 * 24 }}))
 formage.serve_static(app, express)
 
 app.locals('pretty', true)

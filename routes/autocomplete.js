@@ -160,8 +160,7 @@ function weight (result, query) {
     case 'Essay':
       w += 1
       break
-    case 'User':
-      w += 0
+    default:
       break
   }
 

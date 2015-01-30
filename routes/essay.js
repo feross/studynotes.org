@@ -85,7 +85,7 @@ module.exports = function (app) {
       r.college = college
       r.title = [r.essay.name, college.shortName + ' Essay'].join(' - ')
       r.forceTitle = true
-      r.url = r.essay.url,
+      r.url = r.essay.url
       r.user = r.essay.user
 
       res.render('essay', r)

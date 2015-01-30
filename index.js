@@ -189,13 +189,13 @@ Site.prototype.serveStatic = function () {
 
   // Setup static middlewares
   var opts = { maxAge: config.maxAge }
-  var static = express.static(config.root + '/static', opts)
+  var stat = express.static(config.root + '/static', opts)
   var out = express.static(config.root + '/out', opts)
   var nodeModules = express.static(config.root + '/node_modules', opts)
   var lib = express.static(config.root + '/lib', opts)
 
   // Serve static files, they take precedence over the routes.
-  self.app.use(static)
+  self.app.use(stat)
 
   // HACK: Make CSS relative URLs work in development
   if (!config.isProd) {
@@ -206,7 +206,7 @@ Site.prototype.serveStatic = function () {
   // Also mount the static files at "/cdn", without routes. This is so that
   // we can point the CDN at this folder and have it mirror ONLY the static
   // files, no other site content.
-  self.app.use('/cdn', static)
+  self.app.use('/cdn', stat)
   self.app.use('/cdn', out)
   self.app.use('/cdn', nodeModules)
   self.app.use('/cdn', lib)
