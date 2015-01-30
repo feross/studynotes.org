@@ -41,28 +41,31 @@ module.exports = function (app) {
       code = err.status
     }
 
-    if (code === 400)
+    res.status(code)
+
+    if (code === 400) {
       debug('No notify for 400 error (client fault)')
-    else if (code === 403)
+    } else if (code === 403) {
       debug('No notify for 403 error (ignore PROPFIND, POST without CSRF, ...)')
-    else if (/trackback/.test(req.url))
+    } else if (/trackback/.test(req.url)) {
       debug('No notify for /trackback/ bots')
-    else if (req.url === '/robots.txt')
+    } else if (req.url === '/robots.txt') {
       debug('No notify for robots.txt errors')
-    else {
+    } else {
       email.send({
         subject: err.message,
         text: text
       })
-    }
-
-    res.status(code).render('error', {
-      title: code + ' ' + httpStatus.getStatusText(code),
-      hero: {
+      res.render('error', {
         title: code + ' ' + httpStatus.getStatusText(code),
-        desc: 'Sorry about that. Here is a cat for you instead.'
-      }
-    })
+        hero: {
+          title: code + ' ' + httpStatus.getStatusText(code),
+          desc: 'Sorry about that. Here is a cat for you instead.'
+        }
+      })
+      return
+    }
+    res.send()
   })
 }
 
