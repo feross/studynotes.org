@@ -1,6 +1,6 @@
 var auto = require('run-auto')
 var countBy = require('lodash.countby')
-var extend = require('extend.js')
+var extend = require('xtend/mutable')
 var model = require('../model')
 var sort = require('../lib/sort')
 

@@ -2,7 +2,7 @@ var config = require('./config')
 var crypto = require('crypto')
 var debug = require('debug')('util')
 var email = require('./lib/email')
-var extend = require('extend.js')
+var extend = require('xtend')
 var htmlParser = require('html-parser')
 var optimist = require('optimist')
 var posix = require('posix')
@@ -15,7 +15,7 @@ exports.truncate = require('html-truncate')
  */
 exports.run = function (ServerConstructor) {
   // Clone the argv object to avoid interfering with other modules
-  var opts = extend({}, optimist.argv)
+  var opts = extend(optimist.argv)
 
   // Delete all options that are not explicitly passed in like this:
   //   node tracker --port 4000 --dbPort 4001

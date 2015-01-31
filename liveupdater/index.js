@@ -2,7 +2,7 @@ module.exports = LiveUpdater
 
 var config = require('../config')
 var debug = require('debug')('studynotes:liveupdater')
-var extend = require('extend.js')
+var extend = require('xtend/mutable')
 var fs = require('fs')
 var http = require('http')
 var https = require('https')
@@ -16,11 +16,12 @@ var ws = require('ws')
 
 function LiveUpdater (opts, done) {
   var self = this
-  if (opts) extend(self, opts)
-  done || (done = function () {})
+  if (!done) done = function () {}
 
-  /** @type {number} port */
-  self.port || (self.port = config.ports.liveupdater)
+  extend(self, {
+    port: config.ports.liveupdater
+  }, opts)
+
   self.online = {}
   self.titles = {}
 

@@ -1,4 +1,4 @@
-var extend = require('extend.js')
+var extend = require('xtend/mutable')
 
 var isProd = exports.isProd = process.browser
   ? !/^local/.test(window.location.hostname)
