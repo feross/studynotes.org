@@ -168,7 +168,7 @@ User.methods.gravatar = function (size, transparent) {
 // Store hashed version of user's password
 User.pre('save', function (next) {
   var self = this
-  if (!self.selfisModified('password')) return next()
+  if (!self.isModified('password')) return next()
 
   // Hash the password and store it
   bcrypt.hash(self.password, 10, function (err, hash) {
