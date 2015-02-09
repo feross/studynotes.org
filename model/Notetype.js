@@ -1,7 +1,7 @@
 var mongoose = require('mongoose')
 var plugin = require('./plugin')
 
-var Notetype = mongoose.Schema({
+var Notetype = new mongoose.Schema({
   _id: {
     type: String,
     unique: true

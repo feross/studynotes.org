@@ -4,7 +4,7 @@ var plugin = require('./plugin')
 var validate = require('mongoose-validator')
 var util = require('../util')
 
-var Note = mongoose.Schema({
+var Note = new mongoose.Schema({
   _id: {
     type: String,
     unique: true

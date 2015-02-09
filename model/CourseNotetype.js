@@ -1,7 +1,7 @@
 var mongoose = require('mongoose')
 var plugin = require('./plugin')
 
-var CourseNotetype = mongoose.Schema({
+var CourseNotetype = new mongoose.Schema({
   course: {
     type: String,
     ref: 'Course',
