@@ -73,7 +73,7 @@
     "optimist": "^0.6.0",
     "passport": "^0.2.0",
     "passport-local": "^1.0.0",
-    "posix": "^1.0.2",
+    "posix": "^2.0.0",
     "run-auto": "^1.0.0",
     "run-parallel": "^1.0.0",
     "run-series": "^1.0.2",
