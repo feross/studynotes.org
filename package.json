@@ -80,7 +80,7 @@
     "run-waterfall": "^1.0.2",
     "serve-favicon": "^2.0.1",
     "stripe": "^3.1.0",
-    "stylus": "^0.49.3",
+    "stylus": "^0.50.0",
     "transparency": "^0.10.0",
     "underscore.string": "^3.0.1",
     "ws": "^0.7.0",
