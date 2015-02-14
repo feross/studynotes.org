@@ -60,7 +60,7 @@
     "jsdom": "^3.0.2",
     "keymaster": "^1.6.2",
     "lodash.countby": "^2.4.1",
-    "lodash.throttle": "^2.4.1",
+    "lodash.throttle": "^3.0.1",
     "maxcdn": "^0.1.5",
     "moment": "^2.5.1",
     "mongoose": "~3.8.0",
