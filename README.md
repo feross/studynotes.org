@@ -19,6 +19,8 @@
 
 ## Contributing
 
+[![js-standard-style](https://raw.githubusercontent.com/feross/standard/master/badge.png)](https://github.com/feross/standard)
+
 See [CONTIBUTING.md](/CONTRIBUTING.md) for instructions on how to contribute to the
 Study Notes project.
 
