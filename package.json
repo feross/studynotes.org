@@ -79,6 +79,7 @@
     "run-series": "^1.0.2",
     "run-waterfall": "^1.0.2",
     "serve-favicon": "^2.0.1",
+    "simple-websocket": "^1.0.4",
     "stripe": "^3.1.0",
     "stylus": "^0.50.0",
     "transparency": "^0.10.0",

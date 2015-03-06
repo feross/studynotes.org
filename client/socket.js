@@ -1,38 +1,29 @@
+var $ = require('jquery')
+var config = require('../config')
+var Socket = require('simple-websocket')
+var util = require('../util')
+
 var socket
 var lastTotalHits
 var stats
 
-var $ = require('jquery')
-var config = require('../config')
-var util = require('../util')
-
 function openSocket () {
-  socket = new WebSocket(config.wsEndpoint)
-  socket.onopen = function () {
-    socket.onmessage = onMessage
-    socket.onclose = onClose
-
+  socket = new Socket(config.wsEndpoint)
+  socket.on('ready', function () {
     socket.send(JSON.stringify({
       type: 'online',
       url: window.location.pathname
     }))
-  }
+  })
+  socket.on('message', onMessage)
 }
 
-if (typeof WebSocket === 'function' && !$('html').hasClass('isMobile')) {
+if (typeof global.WebSocket === 'function' && !$('html').hasClass('isMobile')) {
   openSocket()
 }
 
-function onMessage (event) {
-  var message
-  try {
-    // console.log('Received message: ' + event.data)
-    message = JSON.parse(event.data)
-  } catch (e) {
-    // console.log('Discarding non-JSON message: ' + message)
-    return
-  }
-
+function onMessage (message) {
+  // console.log('Received message: ' + message)
   if (message.type === 'update') {
     if (message.count) {
       // Set a phrase with live visitor count
@@ -69,11 +60,6 @@ function onMessage (event) {
       stats[message.url] = message
     renderStats()
   }
-}
-
-function onClose () {
-  // console.log('Lost socket to server, reconnecting in ' + config.socketReconnectTimeout)
-  setTimeout(openSocket, config.socketReconnectTimeout)
 }
 
 function renderStats () {
