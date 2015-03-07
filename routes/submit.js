@@ -76,8 +76,7 @@ module.exports = function (app) {
         next(err)
       } else {
         res.redirect(r.essay.url)
-        if (!isEdit)
-          email.notifyAdmin('New essay', r.essay)
+        if (!isEdit) email.notifyAdmin('New essay', r.essay)
       }
     })
   })

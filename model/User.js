@@ -81,18 +81,15 @@ User.virtual('url').get(function () {
 })
 
 User.methods.getUrl = function (anon) {
-  if (anon)
-    return '/anon/'
-  else
-    return this.url
+  return anon
+    ? '/anon/'
+    : this.url
 }
 
 User.methods.getName = function (anon) {
-  if (anon) {
-    return 'Anonymous Student'
-  } else {
-    return this.name
-  }
+  return anon
+    ? 'Anonymous Student'
+    : this.name
 }
 
 User.virtual('firstName').get(function () {

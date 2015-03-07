@@ -78,8 +78,7 @@ Site.prototype.start = function (done) {
     self.app.use(compress())
     self.app.use(self.addHeaders)
 
-    if (config.isProd)
-      self.app.use(self.canonicalize)
+    if (config.isProd) self.app.use(self.canonicalize)
 
     self.serveStatic()
     self.app.use(connectSlashes())
@@ -95,8 +94,7 @@ Site.prototype.start = function (done) {
     self.setupSessions()
     self.app.use(pro.checkPro)
 
-    if (config.isProd)
-      self.app.use(self.sslForAuthedUsers)
+    if (config.isProd) self.app.use(self.sslForAuthedUsers)
 
     // Errors are propogated using `req.flash`
     self.app.use(flash())

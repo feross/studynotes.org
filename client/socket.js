@@ -52,12 +52,11 @@ function onMessage (message) {
     stats = message.stats
     renderStats()
   } else if (message.type === 'statsUpdate') {
-    if (!stats)
-      return
-    if (message.count === 0)
-      delete stats[message.url]
-    else
-      stats[message.url] = message
+    if (!stats) return
+
+    if (message.count === 0) delete stats[message.url]
+    else stats[message.url] = message
+
     renderStats()
   }
 }

@@ -56,8 +56,9 @@ module.exports = function (app) {
               || (referrer && referrer.search(config.siteHost) === -1)) {
             req.session.free.push(r.essay.id)
           } else {
-            if (config.isProd && req.protocol !== 'https')
+            if (config.isProd && req.protocol !== 'https') {
               return res.redirect(config.secureSiteOrigin + req.url)
+            }
             r.blur = true
           }
         }
@@ -73,10 +74,8 @@ module.exports = function (app) {
         if (e.id === r.essay.id) index = i
       })
 
-      if (index > 0)
-        r.prev = r.essays[index - 1]
-      if (index < r.essays.length - 1)
-        r.next = r.essays[index + 1]
+      if (index > 0) r.prev = r.essays[index - 1]
+      if (index < r.essays.length - 1) r.next = r.essays[index + 1]
 
       r.breadcrumbs = [
         { name: 'College Essays', url: '/essays/' },

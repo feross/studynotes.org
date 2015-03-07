@@ -101,10 +101,11 @@ function renderAutocomplete (data) {
       },
       icon: {
         src: function () {
-          if (this.type === 'Course' || this.type === 'College')
+          if (this.type === 'Course' || this.type === 'College') {
             return config.cdnOrigin + '/images/icon/' + this.id + '.png'
-          else
+          } else {
             return config.cdnOrigin + '/images/icon/transparent.png'
+          }
         }
       },
       result: {

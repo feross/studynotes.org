@@ -9,8 +9,7 @@ var moment = require('moment')
 function countdown (selector, date) {
   var $elem = $(selector)
 
-  if ($elem.length === 0)
-    return
+  if ($elem.length === 0) return
 
   date = moment(date)
 

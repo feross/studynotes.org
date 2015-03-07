@@ -28,8 +28,7 @@ module.exports = function (app) {
 
   app.post('/logout', ssl.ensureSSL, function (req, res) {
     // Give Pro users their "first click, free" back when they logout
-    if (req.isAuthenticated() && req.user.pro)
-      delete req.session.free
+    if (req.isAuthenticated() && req.user.pro) delete req.session.free
 
     req.logout()
     res.send(200) // redirect happens on client-side

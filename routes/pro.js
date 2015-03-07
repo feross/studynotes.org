@@ -51,8 +51,7 @@ module.exports = function (app) {
       // redirecting to login page. They are still free to sign up for a new
       // account if they want.
       linkedUser: ['order', function (cb, r) {
-        if (req.isAuthenticated())
-          return cb(null, req.user)
+        if (req.isAuthenticated()) return cb(null, req.user)
 
         model.User
           .findOne({ email: r.order.stripeEmail })

@@ -71,8 +71,7 @@ LiveUpdater.prototype.handleMessage = function (socket, data) {
 
   if (message.type === 'online') {
     // Only accept the first 'online' message
-    if (socket.url)
-      return
+    if (socket.url) return
 
     var url = socket.url = message.url
 
@@ -182,8 +181,7 @@ LiveUpdater.prototype.sendUpdates = function (url) {
   self.sendStatsUpdates(url)
 
   // Early return if there are no updates to send
-  if (!sockets || sockets.length === 0)
-    return
+  if (!sockets || sockets.length === 0) return
 
   var update = {
     type: 'update',
@@ -208,8 +206,7 @@ LiveUpdater.prototype.sendHomeUpdates = function () {
   var sockets = self.online['/']
 
   // Early return if there are no updates to send
-  if (!sockets || sockets.length === 0)
-    return
+  if (!sockets || sockets.length === 0) return
 
   var update = {
     type: 'update',
@@ -232,8 +229,7 @@ LiveUpdater.prototype.sendStatsUpdates = function (url) {
   var sockets = self.online['/stats/']
 
   // Early return if there are no updates to send
-  if (!sockets || sockets.length === 0)
-    return
+  if (!sockets || sockets.length === 0) return
 
   var update = {
     type: 'statsUpdate',
@@ -266,11 +262,9 @@ LiveUpdater.prototype.getTitle = function (url) {
         if (err) return console.error('ERROR: getTitle: ' + err.message)
         title = window.$('title').text()
 
-        if (title === 'Site is under maintenance!')
-          return
+        if (title === 'Site is under maintenance!') return
         var index = title.indexOf('- Study Notes')
-        if (index !== -1)
-          title = title.substring(0, index)
+        if (index !== -1) title = title.substring(0, index)
 
         self.titles[url] = title
         self.sendStatsUpdates(url)
