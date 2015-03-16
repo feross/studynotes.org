@@ -126,8 +126,6 @@ function Site (opts, done) {
     self.setupSessions()
     self.app.use(pro.checkPro)
 
-    if (config.isProd) self.app.use(self.sslForAuthedUsers)
-
     // Errors are propogated using `req.flash`
     self.app.use(flash())
 
