@@ -110,6 +110,13 @@ function Site (opts, done) {
       } else {
         next()
       }
+
+      // Strict transport security for 1 year (to force HTTPS and prevent MITM attacks)
+      if (config.isProd) {
+        res.header('Strict-Transport-Security', 'max-age=31536000')
+      }
+
+      next()
     })
 
     self.serveStatic()
