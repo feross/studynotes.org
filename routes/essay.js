@@ -52,13 +52,10 @@ module.exports = function (app) {
 
         if (req.session.free.indexOf(r.essay.id) === -1) {
           var referrer = url.parse(req.get('referer') || '').host
-          if (req.session.free.length < config.numFree
-              || (referrer && referrer.search(config.siteHost) === -1)) {
+          if (req.session.free.length < config.numFree ||
+              (referrer && referrer.search(config.siteHost) === -1)) {
             req.session.free.push(r.essay.id)
           } else {
-            if (config.isProd && req.protocol !== 'https') {
-              return res.redirect(config.secureSiteOrigin + req.url)
-            }
             r.blur = true
           }
         }

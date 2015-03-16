@@ -42,8 +42,8 @@ $('.logout').click(function (e) {
   e.preventDefault()
   $.post('/logout/')
     .done(function () {
-      window.location = window.encodeURI('http:' + config.siteOrigin +
-          window.location.pathname + '?info=You are logged out!')
+      window.location = config.siteOrigin + window.location.pathname +
+        '?info=You%20are%20logged%20out!'
     })
     .fail(function () {
       notify.big.error('Error contacting the server!')

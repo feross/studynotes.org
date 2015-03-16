@@ -5,7 +5,8 @@ block vars
 
 block body
   .content.clearfix
-    a.corner(href='http:#{ config.siteOrigin }'): img(src='#{ config.cdnOrigin }/images/S.png')
+    a.corner(href='#{ config.siteOrigin }')
+      img(src=config.cdnOrigin + '/images/S.png')
     block content
       p This page has no content.
 

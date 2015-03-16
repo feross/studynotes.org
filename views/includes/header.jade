@@ -35,11 +35,11 @@ header.header
           i.fa.fa-sign-out.hide-tablet
           span Logout
       else
-        - var signupUrl = config.secureSiteOrigin + '/signup/' + (locals.url ? '?returnTo=' + url : '')
+        - var signupUrl = '/signup/' + (locals.url ? '?returnTo=' + url : '')
         li: a(href=signupUrl, title='Create a Study Notes Account')
           i.fa.fa-check-square-o.hide-tablet
           span Sign Up
-        - var loginUrl = config.secureSiteOrigin + '/login/' + (locals.url ? '?returnTo=' + url : '')
+        - var loginUrl = '/login/' + (locals.url ? '?returnTo=' + url : '')
         li: a(href=loginUrl, title='Login to Study Notes')
           i.fa.fa-sign-in.hide-tablet
           span Log In

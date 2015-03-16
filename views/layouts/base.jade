@@ -49,9 +49,9 @@ html(class='studynotes #{layout}', lang='en')
 
     meta(property='og:type', content='website')
     if (locals.hero && hero.image)
-      meta(property='og:image', content='#{ config.cdnOrigin }/images/hero/#{ hero.image }')
+      meta(property='og:image', content=config.cdnOrigin + '/images/hero/#{ hero.image }')
     else
-      meta(property='og:image', content='#{ config.cdnOrigin }/images/S.png')
+      meta(property='og:image', content=config.cdnOrigin + '/images/S.png')
 
     //- TODO: markup the author
     //- meta(property='article:author', content='')
@@ -67,8 +67,8 @@ html(class='studynotes #{layout}', lang='en')
     meta(property='fb:app_id', content='466476846723021')
 
     if (locals.url)
-      meta(property='og:url', content='http:#{locals.url}')
-      link(rel='canonical', href='http:#{locals.url}')
+      meta(property='og:url', content=locals.url)
+      link(rel='canonical', href=locals.url)
 
     //- TODO: add rss support
     //- <link rel='alternate' type='application/atom+xml' title=' href=' />
@@ -81,7 +81,7 @@ html(class='studynotes #{layout}', lang='en')
 
 
     <!--[if ! lte IE 8]><!-->
-    link(rel='stylesheet', href='#{ config.cdnOrigin }#{ config.cssPath }')
+    link(rel='stylesheet', href=config.cdnOrigin + config.cssPath)
     <!--<![endif]-->
 
     //- Inline AdSense
@@ -189,10 +189,10 @@ html(class='studynotes #{layout}', lang='en')
     block stylesheets
 
     <!--[if lte IE 9]>
-    link(rel='stylesheet', href='#{ config.cdnOrigin }/css/ie9.css')
+    link(rel='stylesheet', href=config.cdnOrigin + '/css/ie9.css')
     <![endif]-->
     <!--[if lte IE 8]>
-    link(rel='stylesheet', href='#{ config.cdnOrigin }/css/ie8.css')
+    link(rel='stylesheet', href=config.cdnOrigin + '/css/ie8.css')
     <![endif]-->
 
     if (!locals.offline)
@@ -254,10 +254,10 @@ html(class='studynotes #{layout}', lang='en')
         window.countdownDate = new Date('#{course.examDate}')
 
     if (typeof extraJS !== 'undefined' && !!extraJS)
-      script(src='#{ config.cdnOrigin }#{ config.jsMainPath }')
-      script(src='#{ config.cdnOrigin }#{ config.jsExtraPath }')
+      script(src=config.cdnOrigin + config.jsMainPath)
+      script(src=config.cdnOrigin + config.jsExtraPath)
     else
-      script(async, src='#{ config.cdnOrigin }#{ config.jsMainPath }')
+      script(async, src=config.cdnOrigin + config.jsMainPath)
 
     block scripts
 

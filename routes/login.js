@@ -3,12 +3,11 @@ var config = require('../config')
 var email = require('../lib/email')
 var model = require('../model')
 var passport = require('passport')
-var ssl = require('../lib/ssl')
 var util = require('../util')
 var waterfall = require('run-waterfall')
 
 module.exports = function (app) {
-  app.get('/login', ssl.ensureSSL, auth.returnTo, function (req, res) {
+  app.get('/login', auth.returnTo, function (req, res) {
     if (req.user) return res.redirect(req.session.returnTo || '/')
     res.render('login', {
       title: 'Login',
@@ -19,14 +18,14 @@ module.exports = function (app) {
     })
   })
 
-  app.post('/login', ssl.ensureSSL, passport.authenticate('local', {
+  app.post('/login', passport.authenticate('local', {
     failureRedirect: '/login/',
     successReturnToOrRedirect: '/',
     failureFlash: 'Wrong email or password.',
     successFlash: 'You are logged in!'
   }))
 
-  app.post('/logout', ssl.ensureSSL, function (req, res) {
+  app.post('/logout', function (req, res) {
     // Give Pro users their "first click, free" back when they logout
     if (req.isAuthenticated() && req.user.pro) delete req.session.free
 
@@ -34,7 +33,7 @@ module.exports = function (app) {
     res.send(200) // redirect happens on client-side
   })
 
-  app.get('/login/forgot', ssl.ensureSSL, function (req, res) {
+  app.get('/login/forgot', function (req, res) {
     if (req.user) return res.redirect(req.session.returnTo || '/')
     res.render('login-forgot', {
       title: 'Forgot Password',
@@ -70,7 +69,7 @@ module.exports = function (app) {
           'the reset of the password for your account.\n\n' +
           'Please click on the following link, or paste this into your browser to ' +
           'complete the process:\n\n' +
-          config.secureSiteOrigin + '/login/reset/' + token + '\n\n' +
+          config.siteOrigin + '/login/reset/' + token + '\n\n' +
           'If you did not request this, please ignore this email and your password ' +
           'will remain unchanged.\n'
 

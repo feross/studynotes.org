@@ -2,7 +2,6 @@ var auto = require('run-auto')
 var config = require('../config')
 var debug = require('debug')('studynotes:routes/pro')
 var model = require('../model')
-var ssl = require('../lib/ssl')
 var secret = require('../secret')
 var values = require('object-values')
 
@@ -10,7 +9,7 @@ var stripe = require('stripe')(secret.stripe.secret)
 stripe.setApiVersion('2013-12-03')
 
 module.exports = function (app) {
-  app.post('/pro', ssl.ensureSSL, function (req, res, next) {
+  app.post('/pro', function (req, res, next) {
     var amount = config.proPrice
 
     auto({

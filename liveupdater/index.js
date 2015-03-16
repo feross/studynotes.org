@@ -16,7 +16,6 @@ var ws = require('ws')
 
 function LiveUpdater (opts, done) {
   var self = this
-  if (!done) done = function () {}
 
   extend(self, {
     port: config.ports.liveupdater
@@ -256,7 +255,7 @@ LiveUpdater.prototype.getTitle = function (url) {
   } else {
     debug('getTitle: Fetching page title for ' + url)
     jsdom.env({
-      url: 'http:' + config.siteOrigin + url,
+      url: config.siteOrigin + url,
       src: [self.jquery],
       done: function (err, window) {
         if (err) return console.error('ERROR: getTitle: ' + err.message)

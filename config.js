@@ -14,18 +14,11 @@ exports.siteHost = isProd
   ? 'www.apstudynotes.org'
   : 'localhost:' + exports.ports.site
 
-exports.siteOrigin = '//' + exports.siteHost
-
-exports.secureSiteOrigin = (isProd
-  ? 'https:'
-  : 'http:'
-) + exports.siteOrigin
+exports.siteOrigin = (isProd ? 'https' : 'http') + '://' + exports.siteHost
 
 exports.cdnOrigin = isProd
-  ? '//cdn.apstudynotes.org'
-  : '/cdn'
-
-exports.secureCdnOrigin = (isProd ? 'https:' : '') + exports.cdnOrigin
+  ? 'https://cdn.apstudynotes.org'
+  : exports.siteOrigin + '/cdn'
 
 var config = require('./config-node')
 extend(exports, config)

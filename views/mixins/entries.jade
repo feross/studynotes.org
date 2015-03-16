@@ -11,7 +11,7 @@ mixin entries(entries)
         if (entry.populated('college'))
           .collegeLogo
             a(href=entry.college.url, title=entry.college.name)
-              img(src='#{ config.cdnOrigin }/images/icon/#{ entry.college.id }.png')
+              img(src=config.cdnOrigin + '/images/icon/#{ entry.college.id }.png')
 
         if (entry.populated('user'))
           .author.hide-phone

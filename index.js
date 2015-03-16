@@ -10,9 +10,7 @@ var path = require('path')
 var series = require('run-series')
 var url = require('url')
 
-/**
- * Express middleware
- */
+// Express middleware
 var bodyParser = require('body-parser')
 var compress = require('compression')
 var connectMongo = require('connect-mongo')
@@ -24,9 +22,7 @@ var flash = require('connect-flash')
 var passport = require('passport')
 var session = require('express-session')
 
-/**
- * Local deps
- */
+// Local dependencies
 var auth = require('./lib/auth')
 var config = require('./config')
 var model = require('./model')
@@ -34,26 +30,17 @@ var pro = require('./lib/pro')
 var secret = require('./secret')
 var util = require('./util')
 
-function Site (opts, cb) {
+function Site (opts, done) {
   var self = this
+
   extend(self, {
     port: config.ports.site,
     offline: false
   }, opts)
 
-  self.start(cb)
-}
-
-Site.prototype.start = function (done) {
-  var self = this
-  done || (done = function () {})
-
   if (cluster.isMaster) {
+    cluster.setupMaster({ exec: __filename })
     debug('Master process will spawn %d workers', config.numCpus)
-
-    cluster.setupMaster({
-      exec: __filename
-    })
 
     for (var i = 0; i < config.numCpus; i++) {
       cluster.fork()
@@ -70,15 +57,60 @@ Site.prototype.start = function (done) {
     // Trust the X-Forwarded-* headers from nginx
     self.app.enable('trust proxy')
 
-    // Templating
+    // Use Jade templates
     self.app.set('views', path.join(__dirname, 'views'))
     self.app.set('view engine', 'jade')
-    self.addTemplateGlobals()
 
+    // Make variables and functions available to Jade templates
+    self.app.locals.config = config
+    self.app.locals.modelCache = model.cache
+    self.app.locals.moment = moment
+    self.app.locals.offline = self.offline
+    self.app.locals.pretty = true
+    self.app.locals.random = Math.random
+    self.app.locals.stripe = { publishable: secret.stripe.publishable }
+    self.app.locals.util = util
+
+    // Gzip responses
     self.app.use(compress())
-    self.app.use(self.addHeaders)
 
-    if (config.isProd) self.app.use(self.canonicalize)
+    self.app.use(function (req, res, next) {
+      var extname = path.extname(url.parse(req.url).pathname)
+
+      // Add cross-domain header for fonts, required by spec, Firefox, and IE.
+      if (['.eot', '.ttf', '.otf', '.woff'].indexOf(extname) >= 0) {
+        res.header('Access-Control-Allow-Origin', '*')
+      }
+
+      // Prevents IE and Chrome from MIME-sniffing a response. Reduces exposure to
+      // drive-by download attacks on sites serving user uploaded content.
+      res.header('X-Content-Type-Options', 'nosniff')
+
+      // Prevent rendering of site within a frame.
+      res.header('X-Frame-Options', 'DENY')
+
+      // Enable the XSS filter built into most recent web browsers. It's usually
+      // enabled by default anyway, so role of this headers is to re-enable for this
+      // particular website if it was disabled by the user.
+      res.header('X-XSS-Protection', '1; mode=block')
+
+      // Force IE to use latest rendering engine or Chrome Frame
+      res.header('X-UA-Compatible', 'IE=Edge,chrome=1')
+
+      if (config.isProd && req.method === 'GET') {
+        if (req.hostname !== 'www.apstudynotes.org') {
+          debug('Redirecting alternate domain: ' + req.hostname)
+          res.redirect(301, config.siteOrigin + req.url)
+        } else if (req.protocol !== 'https') {
+          debug('Forcing https: ' + req.url)
+          res.redirect(301, config.siteOrigin + req.url)
+        } else {
+          next()
+        }
+      } else {
+        next()
+      }
+    })
 
     self.serveStatic()
     self.app.use(connectSlashes())
@@ -108,71 +140,9 @@ Site.prototype.start = function (done) {
         self.server.listen(self.port, cb)
       }
     ], function (err) {
-      if (!err) {
-        debug('studynotes listening on ' + self.port)
-      }
+      if (!err) debug('studynotes listening on ' + self.port)
       done(err)
     })
-  }
-}
-
-/**
- * Make variables and functions available to Jade templates.
- */
-Site.prototype.addTemplateGlobals = function () {
-  var self = this
-
-  self.app.locals.config = config
-  self.app.locals.modelCache = model.cache
-  self.app.locals.moment = moment
-  self.app.locals.offline = self.offline
-  self.app.locals.pretty = true
-  self.app.locals.random = Math.random
-  self.app.locals.stripe = { publishable: secret.stripe.publishable }
-  self.app.locals.util = util
-}
-
-Site.prototype.addHeaders = function (req, res, next) {
-  var extname = path.extname(url.parse(req.url).pathname)
-
-  // Add cross-domain header for fonts, required by spec, Firefox, and IE.
-  if (['.eot', '.ttf', '.otf', '.woff'].indexOf(extname) >= 0) {
-    res.header('Access-Control-Allow-Origin', '*')
-  }
-
-  // Prevents IE and Chrome from MIME-sniffing a response. Reduces exposure to
-  // drive-by download attacks on sites serving user uploaded content.
-  res.header('X-Content-Type-Options', 'nosniff')
-
-  // Prevent rendering of site within a frame.
-  res.header('X-Frame-Options', 'DENY')
-
-  // Enable the XSS filter built into most recent web browsers. It's usually
-  // enabled by default anyway, so role of this headers is to re-enable for this
-  // particular website if it was disabled by the user.
-  res.header('X-XSS-Protection', '1; mode=block')
-
-  // Force IE to use latest rendering engine or Chrome Frame
-  res.header('X-UA-Compatible', 'IE=Edge,chrome=1')
-
-  next()
-}
-
-Site.prototype.canonicalize = function (req, res, next) {
-  if (req.hostname !== 'www.apstudynotes.org') {
-    // redirect alternate domains to homepage
-    res.redirect(301, req.protocol + ':' + config.siteOrigin + req.url)
-  } else {
-    next()
-  }
-}
-
-// Redirect HTTP to HTTPS for authenticated users
-Site.prototype.sslForAuthedUsers = function (req, res, next) {
-  if (req.isAuthenticated() && req.protocol !== 'https') {
-    res.redirect(config.secureSiteOrigin + req.url)
-  } else {
-    next()
   }
 }
 
