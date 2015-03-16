@@ -97,18 +97,15 @@ function Site (opts, done) {
       // Force IE to use latest rendering engine or Chrome Frame
       res.header('X-UA-Compatible', 'IE=Edge,chrome=1')
 
+      // Redirect to canonical urls
       if (config.isProd && req.method === 'GET') {
         if (req.hostname !== 'www.apstudynotes.org') {
-          debug('Redirecting alternate domain: ' + req.hostname)
-          res.redirect(301, config.siteOrigin + req.url)
+          debug('Redirecting %s to canonical domain', req.hostname + req.url)
+          return res.redirect(301, config.siteOrigin + req.url)
         } else if (req.protocol !== 'https') {
-          debug('Forcing https: ' + req.url)
-          res.redirect(301, config.siteOrigin + req.url)
-        } else {
-          next()
+          debug('Redirecting %s to https domain', req.hostname + req.url)
+          return res.redirect(301, config.siteOrigin + req.url)
         }
-      } else {
-        next()
       }
 
       // Strict transport security for 1 year (to force HTTPS and prevent MITM attacks)
