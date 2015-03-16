@@ -1,7 +1,7 @@
 /*global caches, fetch, Request */
 
 var OFFLINE_CACHE = 'offline'
-var OFFLINE_URL = 'offline.html'
+var OFFLINE_URL = '/offline.html'
 
 self.addEventListener('install', function (event) {
   var offlineRequest = new Request(OFFLINE_URL)
