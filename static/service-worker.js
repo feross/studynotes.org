@@ -1,4 +1,4 @@
-/*global caches, fetch, Request */
+/*global self, caches, fetch, Request */
 
 var OFFLINE_CACHE = 'offline'
 var OFFLINE_URL = '/offline.html'
