@@ -1,9 +1,7 @@
 secret/*
 !secret/index-sample.js
 
-out/*
-!out/placeholder.txt
 bundle.js
-tmp/
-
 node_modules/
+out/*
+tmp/

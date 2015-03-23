@@ -114,7 +114,7 @@
   },
   "scripts": {
     "admin": "nodemon admin/index.js",
-    "build": "npm run build-js && npm run build-css && node ./bin/postbuild.js",
+    "build": "mkdir -p out && npm run build-js && npm run build-css && node ./bin/postbuild.js",
     "build-css": "stylus -u nib stylus/main.styl -o out/ --include-css -c && node ./bin/transform-css.js out/main.css",
     "build-js": "npm run build-js-main & npm run build-js-extra",
     "build-js-extra": "browserify client/extra.js | uglifyjs -c warnings=false -m > out/extra.min.js",
