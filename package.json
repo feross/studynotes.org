@@ -90,11 +90,11 @@
     "browserify": "^9.0.3",
     "browserify-shim": "^3.6.0",
     "formage": "^3.2.21",
-    "stylus": "^0.50.0",
+    "nib": "^1.0.1",
     "nodemon": "^1.0.17",
     "proxyquire": "^1.3.1",
     "standard": "^2.1.1",
-    "nib": "^1.0.1",
+    "stylus": "^0.50.0",
     "tape": "^3.4.0",
     "uglify-js": "^2.4.15",
     "watchify": "^2.2.1"
@@ -108,6 +108,7 @@
   ],
   "license": "GPLv3",
   "main": "index.js",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/feross/studynotes.git"
@@ -121,7 +122,6 @@
     "build-js-main": "browserify client/main.js | uglifyjs -c warnings=false -m > out/main.min.js",
     "db-local": "mkdir -p tmp/db && mongod --dbpath tmp/db",
     "db-tunnel": "ssh -L 27017:localhost:27017 -N feross@athena",
-    "push": "npm version patch && git push && npm publish",
     "secret-download": "rsync -a -O -v --delete -e \"ssh -p 44444\" feross@future.feross.net:\"/home/feross/www/studynotes.org/secret/\" secret/",
     "secret-upload": "rsync -a -O -v --delete -e \"ssh -p 44444\" secret/ feross@future.feross.net:\"/home/feross/www/studynotes.org/secret/\"",
     "start": "npm run db-tunnel & npm run build & (sleep 2 && DEBUG=\"studynotes:*\" node run.js)",
