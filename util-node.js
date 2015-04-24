@@ -1,6 +1,6 @@
 var config = require('./config')
 var crypto = require('crypto')
-var debug = require('debug')('util')
+var debug = require('debug')('studynotes:util-node')
 var email = require('./lib/email')
 var extend = require('xtend')
 var htmlParser = require('html-parser')

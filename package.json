@@ -79,7 +79,7 @@
     "run-series": "^1.0.2",
     "run-waterfall": "^1.0.2",
     "serve-favicon": "^2.0.1",
-    "simple-websocket": "^1.0.4",
+    "simple-websocket": "^2.0.0",
     "stripe": "^3.1.0",
     "transparency": "^0.10.0",
     "underscore.string": "^3.0.1",

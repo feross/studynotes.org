@@ -1,7 +1,13 @@
+/* global WebSocket */
+
 var $ = require('jquery')
 var config = require('../config')
+var debug = require('debug')('studynotes:socket')
 var Socket = require('simple-websocket')
 var util = require('../util')
+
+var RECONNECT_TIMEOUT_VARIANCE = 30 * 1000
+var MINIMUM_RECONNECT_TIMEOUT = 5 * 1000
 
 var socket
 var lastTotalHits
@@ -9,21 +15,31 @@ var stats
 
 function openSocket () {
   socket = new Socket(config.wsEndpoint)
-  socket.on('ready', function () {
+  socket.on('connect', function () {
     socket.send(JSON.stringify({
       type: 'online',
       url: window.location.pathname
     }))
   })
-  socket.on('message', onMessage)
+  socket.on('data', onMessage)
+  socket.on('close', openSocketAfterTimeout)
+  socket.on('error', function (err) {
+    debug('socket error: %s', err.message || err)
+  })
 }
 
-if (typeof global.WebSocket === 'function' && !$('html').hasClass('isMobile')) {
+function openSocketAfterTimeout () {
+  var reconnectTimeout = Math.floor(Math.random() * RECONNECT_TIMEOUT_VARIANCE) +
+    MINIMUM_RECONNECT_TIMEOUT
+  setTimeout(openSocket, reconnectTimeout)
+  debug('reconnecting socket in %s ms', reconnectTimeout)
+}
+
+if (typeof WebSocket === 'function' && !$('html').hasClass('isMobile')) {
   openSocket()
 }
 
 function onMessage (message) {
-  // console.log('Received message: ' + message)
   if (message.type === 'update') {
     if (message.count) {
       // Set a phrase with live visitor count
