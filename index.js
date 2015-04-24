@@ -128,7 +128,6 @@ function Site (opts, done) {
   self.serveStatic()
   self.app.use(connectSlashes())
 
-
   // Express middleware that logs requests using the "debug" module so that the
   // output is hidden by default. Enable with DEBUG=* environment variable.
   self.app.use(function (req, res, next) {
