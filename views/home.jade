@@ -5,14 +5,28 @@ block head
     {
       "@context": "http://schema.org",
       "@type": "WebSite",
-      "name": "Study Notes",
       "alternateName": "StudyNotes",
-      "url": "#{ locals.url }",
+      "name": "Study Notes",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "#{ locals.url }search/?q={query}",
+        "target": "#{ config.siteOrigin }/search/?q={query}",
         "query-input": "required name=query"
-      }
+      },
+      "url": "#{ config.siteOrigin }/"
+    }
+
+  script(type='application/ld+json').
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "logo": "#{ config.cdnOrigin }/images/logo-birdy.png"
+      "name": "Study Notes",
+      "sameAs": [
+        "https://www.facebook.com/StudyNotesApp",
+        "https://twitter.com/StudyNotesApp",
+        "https://plus.google.com/+ApstudynotesOrg1"
+      ]
+      "url": "#{ config.siteOrigin }/",
     }
 
 append sidebar
