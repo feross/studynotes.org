@@ -44,7 +44,7 @@
     "body-parser": "^1.0.1",
     "compression": "^1.0.1",
     "connect-flash": "^0.1.1",
-    "connect-mongo": "^0.7.0",
+    "connect-mongo": "^0.8.1",
     "connect-slashes": "^1.2.0",
     "cookie-parser": "^1.0.1",
     "csurf": "^1.1.0",
