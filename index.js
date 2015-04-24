@@ -49,103 +49,104 @@ function Site (opts, done) {
       console.error('Worker %s died (%s)', worker.id, code)
     })
     done(null)
-  } else {
-    debug('Worker process %s started', cluster.worker.id)
-    self.app = express()
-    self.server = http.createServer(self.app)
-
-    // Trust the X-Forwarded-* headers from nginx
-    self.app.enable('trust proxy')
-
-    // Use Jade templates
-    self.app.set('views', path.join(__dirname, 'views'))
-    self.app.set('view engine', 'jade')
-
-    // Make variables and functions available to Jade templates
-    self.app.locals.config = config
-    self.app.locals.modelCache = model.cache
-    self.app.locals.moment = moment
-    self.app.locals.offline = self.offline
-    self.app.locals.pretty = true
-    self.app.locals.random = Math.random
-    self.app.locals.stripe = { publishable: secret.stripe.publishable }
-    self.app.locals.util = util
-
-    // Gzip responses
-    self.app.use(compress())
-
-    self.app.use(function (req, res, next) {
-      var extname = path.extname(url.parse(req.url).pathname)
-
-      // Add cross-domain header for fonts, required by spec, Firefox, and IE.
-      if (['.eot', '.ttf', '.otf', '.woff', '.woff2'].indexOf(extname) >= 0) {
-        res.header('Access-Control-Allow-Origin', '*')
-      }
-
-      // Prevents IE and Chrome from MIME-sniffing a response. Reduces exposure to
-      // drive-by download attacks on sites serving user uploaded content.
-      res.header('X-Content-Type-Options', 'nosniff')
-
-      // Prevent rendering of site within a frame.
-      res.header('X-Frame-Options', 'DENY')
-
-      // Enable the XSS filter built into most recent web browsers. It's usually
-      // enabled by default anyway, so role of this headers is to re-enable for this
-      // particular website if it was disabled by the user.
-      res.header('X-XSS-Protection', '1; mode=block')
-
-      // Force IE to use latest rendering engine or Chrome Frame
-      res.header('X-UA-Compatible', 'IE=Edge,chrome=1')
-
-      // Redirect to canonical urls
-      if (config.isProd && req.method === 'GET') {
-        if (req.hostname !== 'www.apstudynotes.org') {
-          debug('Redirecting %s to canonical domain', req.hostname + req.url)
-          return res.redirect(301, config.siteOrigin + req.url)
-        } else if (req.protocol !== 'https') {
-          debug('Redirecting %s to https domain', req.hostname + req.url)
-          return res.redirect(301, config.siteOrigin + req.url)
-        }
-      }
-
-      // Strict transport security for 1 year (to force HTTPS and prevent MITM attacks)
-      if (config.isProd) {
-        res.header('Strict-Transport-Security', 'max-age=31536000')
-      }
-
-      next()
-    })
-
-    self.serveStatic()
-    self.app.use(connectSlashes())
-
-    // Readable logs that are hidden by default. Enable with DEBUG=*
-    self.app.use(expressLogger)
-
-    self.app.use(function (req, res, next) {
-      res.locals.req = req
-      next()
-    })
-
-    self.setupSessions()
-    self.app.use(pro.checkPro)
-
-    // Errors are propogated using `req.flash`
-    self.app.use(flash())
-
-    require('./routes')(self.app)
-
-    series([
-      model.connect,
-      function (cb) {
-        // Start HTTP server -- workers will share TCP connection
-        self.server.listen(self.port, cb)
-      }
-    ], function (err) {
-      if (!err) debug('studynotes listening on ' + self.port)
-      done(err)
-    })
+    return
   }
+
+  debug('Worker process %s started', cluster.worker.id)
+  self.app = express()
+  self.server = http.createServer(self.app)
+
+  // Trust the X-Forwarded-* headers from nginx
+  self.app.enable('trust proxy')
+
+  // Use Jade templates
+  self.app.set('views', path.join(__dirname, 'views'))
+  self.app.set('view engine', 'jade')
+
+  // Make variables and functions available to Jade templates
+  self.app.locals.config = config
+  self.app.locals.modelCache = model.cache
+  self.app.locals.moment = moment
+  self.app.locals.offline = self.offline
+  self.app.locals.pretty = true
+  self.app.locals.random = Math.random
+  self.app.locals.stripe = { publishable: secret.stripe.publishable }
+  self.app.locals.util = util
+
+  // Gzip responses
+  self.app.use(compress())
+
+  self.app.use(function (req, res, next) {
+    var extname = path.extname(url.parse(req.url).pathname)
+
+    // Add cross-domain header for fonts, required by spec, Firefox, and IE.
+    if (['.eot', '.ttf', '.otf', '.woff', '.woff2'].indexOf(extname) >= 0) {
+      res.header('Access-Control-Allow-Origin', '*')
+    }
+
+    // Prevents IE and Chrome from MIME-sniffing a response. Reduces exposure to
+    // drive-by download attacks on sites serving user uploaded content.
+    res.header('X-Content-Type-Options', 'nosniff')
+
+    // Prevent rendering of site within a frame.
+    res.header('X-Frame-Options', 'DENY')
+
+    // Enable the XSS filter built into most recent web browsers. It's usually
+    // enabled by default anyway, so role of this headers is to re-enable for this
+    // particular website if it was disabled by the user.
+    res.header('X-XSS-Protection', '1; mode=block')
+
+    // Force IE to use latest rendering engine or Chrome Frame
+    res.header('X-UA-Compatible', 'IE=Edge,chrome=1')
+
+    // Redirect to canonical urls
+    if (config.isProd && req.method === 'GET') {
+      if (req.hostname !== 'www.apstudynotes.org') {
+        debug('Redirecting %s to canonical domain', req.hostname + req.url)
+        return res.redirect(301, config.siteOrigin + req.url)
+      } else if (req.protocol !== 'https') {
+        debug('Redirecting %s to https domain', req.hostname + req.url)
+        return res.redirect(301, config.siteOrigin + req.url)
+      }
+    }
+
+    // Strict transport security for 1 year (to force HTTPS and prevent MITM attacks)
+    if (config.isProd) {
+      res.header('Strict-Transport-Security', 'max-age=31536000')
+    }
+
+    next()
+  })
+
+  self.serveStatic()
+  self.app.use(connectSlashes())
+
+  // Readable logs that are hidden by default. Enable with DEBUG=*
+  self.app.use(expressLogger)
+
+  self.app.use(function (req, res, next) {
+    res.locals.req = req
+    next()
+  })
+
+  self.setupSessions()
+  self.app.use(pro.checkPro)
+
+  // Errors are propogated using `req.flash`
+  self.app.use(flash())
+
+  require('./routes')(self.app)
+
+  series([
+    model.connect,
+    function (cb) {
+      // Start HTTP server -- workers will share TCP connection
+      self.server.listen(self.port, cb)
+    }
+  ], function (err) {
+    if (!err) debug('studynotes listening on ' + self.port)
+    done(err)
+  })
 }
 
 Site.prototype.serveStatic = function () {
