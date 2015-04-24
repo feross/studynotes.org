@@ -1,6 +1,6 @@
 var config = require('./config')
 var crypto = require('crypto')
-var debug = require('debug')('studynotes:util-node')
+var debug = require('debug')('studynotes:util')
 var email = require('./lib/email')
 var extend = require('xtend')
 var htmlParser = require('html-parser')
@@ -23,7 +23,6 @@ exports.run = function (ServerConstructor) {
   delete opts._
 
   upgradeLimits()
-  downgradeUid()
 
   // Create and start the server
   var server = new ServerConstructor(opts, function (err) {
@@ -32,6 +31,7 @@ exports.run = function (ServerConstructor) {
       console.error(err.stack)
       process.exit(1)
     }
+    downgradeUid()
   })
 
   process.on('uncaughtException', function (err) {
@@ -51,6 +51,8 @@ function downgradeUid () {
     process.setgid('www-data')
     process.setuid('www-data')
     debug('downgraded gid (' + process.getgid() + ') uid (' + process.getuid() + ')')
+  } else {
+    debug('skipping downgradeUid')
   }
 }
 

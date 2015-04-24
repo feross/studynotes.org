@@ -38,21 +38,28 @@ function Site (opts, done) {
     offline: false
   }, opts)
 
+  self.id = cluster.isMaster ? 'master' : 'worker ' + cluster.worker.id
+  self.debug('started')
+
   if (cluster.isMaster) {
     cluster.setupMaster({ exec: __filename })
-    debug('Master process will spawn %d workers', config.numCpus)
+    self.debug('Master process will spawn %d workers', config.numCpus)
 
     for (var i = 0; i < config.numCpus; i++) {
       cluster.fork()
     }
     cluster.on('exit', function (worker, code) {
-      console.error('Worker %s died (%s)', worker.id, code)
+      console.error('worker %s died: %s', worker.id, code)
     })
-    done(null)
+
+    var remaining = config.numCpus
+    cluster.on('listening', function (worker, address) {
+      remaining -= 1
+      if (remaining === 0) done(null)
+    })
     return
   }
 
-  debug('Worker process %s started', cluster.worker.id)
   self.app = express()
   self.server = http.createServer(self.app)
 
@@ -102,10 +109,10 @@ function Site (opts, done) {
     // Redirect to canonical urls
     if (config.isProd && req.method === 'GET') {
       if (req.hostname !== 'www.apstudynotes.org') {
-        debug('Redirecting %s to canonical domain', req.hostname + req.url)
+        self.debug('Redirecting %s to canonical domain', req.hostname + req.url)
         return res.redirect(301, config.siteOrigin + req.url)
       } else if (req.protocol !== 'https') {
-        debug('Redirecting %s to https domain', req.hostname + req.url)
+        self.debug('Redirecting %s to https domain', req.hostname + req.url)
         return res.redirect(301, config.siteOrigin + req.url)
       }
     }
@@ -121,8 +128,15 @@ function Site (opts, done) {
   self.serveStatic()
   self.app.use(connectSlashes())
 
-  // Readable logs that are hidden by default. Enable with DEBUG=*
-  self.app.use(expressLogger)
+
+  // Express middleware that logs requests using the "debug" module so that the
+  // output is hidden by default. Enable with DEBUG=* environment variable.
+  self.app.use(function (req, res, next) {
+    var self = this
+    var str = '\x1B[90m' + req.method + ' ' + req.originalUrl + '\x1B[0m'
+    self.debug(str)
+    next()
+  })
 
   self.app.use(function (req, res, next) {
     res.locals.req = req
@@ -144,9 +158,16 @@ function Site (opts, done) {
       self.server.listen(self.port, cb)
     }
   ], function (err) {
-    if (!err) debug('studynotes listening on ' + self.port)
+    if (!err) self.debug('listening on ' + self.port)
     done(err)
   })
+}
+
+Site.prototype.debug = function () {
+  var self = this
+  var args = [].slice.call(arguments)
+  args[0] = '[' + self.id + '] ' + args[0]
+  debug.apply(null, args)
 }
 
 Site.prototype.serveStatic = function () {
@@ -219,16 +240,6 @@ Site.prototype.setupSessions = function () {
     res.locals.csrf = req.csrfToken()
     next()
   })
-}
-
-/**
- * Express middleware that logs requests using the "debug" module so that the
- * output is hidden by default.
- */
-function expressLogger (req, res, next) {
-  var str = '\x1B[90m' + req.method + ' ' + req.originalUrl + '\x1B[0m'
-  debug(str)
-  next()
 }
 
 if (!module.parent) util.run(Site)
