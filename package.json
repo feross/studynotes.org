@@ -97,7 +97,7 @@
     "stylus": "^0.51.0",
     "tape": "^4.0.0",
     "uglify-js": "^2.4.15",
-    "watchify": "^2.2.1"
+    "watchify": "^3.1.2"
   },
   "homepage": "https://www.apstudynotes.org",
   "keywords": [
