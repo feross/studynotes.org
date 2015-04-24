@@ -1,5 +1,20 @@
 extends layouts/main-sidebar
 
+block head
+  script(type='application/ld+json').
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": "Study Notes",
+      "alternateName": "StudyNotes",
+      "url": "#{ locals.url }",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "#{ locals.url }search/?q={query}",
+        "query-input": "required name=query"
+      }
+    }
+
 append sidebar
   .top-row.hide-phone.hide-tablet
     .fb-home
@@ -29,7 +44,6 @@ append sidebar
     li.onlineNum
       span
       | #{ ' students online now (whole site)' }
-
 
 block content
   h2 Free AP Notes and Study Tools
