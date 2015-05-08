@@ -40,10 +40,25 @@ function LiveUpdater (opts, done) {
   self.server = new ws.Server({ server: httpServer })
 
   self.server.on('connection', function (socket) {
-    socket.on('message', self.handleMessage.bind(self, socket))
-    socket.on('error', self.handleClose.bind(self, socket))
-    socket.on('close', self.handleClose.bind(self, socket))
-    socket.onSend = self.handleSend.bind(self, socket)
+    socket.destroyed = false
+    socket.url = null
+
+    function handleMessage (message) {
+      self.handleMessage(socket, message)
+    }
+
+    function handleClose () {
+      if (socket.destroyed) return
+      socket.destroyed = true
+      socket.removeListener('message', handleMessage)
+      socket.removeListener('error', handleClose)
+      socket.removeListener('close', handleClose)
+      self.handleClose(socket)
+    }
+
+    socket.on('message', handleMessage)
+    socket.on('error', handleClose)
+    socket.on('close', handleClose)
   })
 
   series([
@@ -72,20 +87,19 @@ LiveUpdater.prototype.handleMessage = function (socket, data) {
     // Only accept the first 'online' message
     if (socket.url) return
 
+    // Reject messages without a url
+    if (!message.url) return
+
     var url = socket.url = message.url
 
     // If this is a new path, create new array
-    if (self.online[url] === undefined) {
-      self.online[url] = []
-    }
+    if (self.online[url] == null) self.online[url] = []
 
     self.online[url].push(socket)
     self.totalHits += 1
 
     // If this is the stats page, send the initial stats
-    if (url === '/stats/') {
-      self.sendStats(socket)
-    }
+    if (url === '/stats/') self.sendStats(socket)
 
     // Send updates to other users
     self.sendUpdates(url)
@@ -95,23 +109,13 @@ LiveUpdater.prototype.handleMessage = function (socket, data) {
   }
 }
 
-LiveUpdater.prototype.handleSend = function (socket, err) {
-  var self = this
-  if (err) {
-    console.error('Socket error: ' + err.message)
-    self.handleClose(socket)
-  }
-}
-
 LiveUpdater.prototype.handleClose = function (socket) {
   var self = this
-  var url = socket.url
-  var sockets = self.online[url]
-
+  var sockets = self.online[socket.url]
   if (sockets) {
     var index = sockets.indexOf(socket)
     sockets.splice(index, 1)
-    self.sendUpdates(url)
+    self.sendUpdates(socket.url)
   }
 }
 
@@ -166,7 +170,7 @@ LiveUpdater.prototype.sendStats = function (socket) {
     type: 'stats',
     stats: stats
   }
-  socket.send(JSON.stringify(update), socket.onSend)
+  socket.send(JSON.stringify(update))
 }
 
 /**
@@ -191,7 +195,7 @@ LiveUpdater.prototype.sendUpdates = function (url) {
 
   var message = JSON.stringify(update)
   sockets.forEach(function (socket) {
-    socket.send(message, socket.onSend)
+    socket.send(message)
   })
 }
 
@@ -214,7 +218,7 @@ LiveUpdater.prototype.sendHomeUpdates = function () {
 
   var message = JSON.stringify(update)
   sockets.forEach(function (socket) {
-    socket.send(message, socket.onSend)
+    socket.send(message)
   })
 }
 
@@ -241,7 +245,7 @@ LiveUpdater.prototype.sendStatsUpdates = function (url) {
 
   var message = JSON.stringify(update)
   sockets.forEach(function (socket) {
-    socket.send(message, socket.onSend)
+    socket.send(message)
   })
 }
 
@@ -250,7 +254,6 @@ LiveUpdater.prototype.getTitle = function (url) {
 
   var title = self.titles[url]
   if (title) {
-    debug('getTitle: Using cached title for ' + url)
     return title
   } else {
     debug('getTitle: Fetching page title for ' + url)
