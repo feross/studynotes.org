@@ -10,9 +10,12 @@ var jsdom = require('jsdom')
 var model = require('../model')
 var parallel = require('run-parallel')
 var series = require('run-series')
+var throttle = require('lodash.throttle')
 var util = require('../util')
 var values = require('object-values')
 var ws = require('ws')
+
+var HOME_UPDATE_THROTTLE = 10000
 
 function LiveUpdater (opts, done) {
   var self = this
@@ -192,6 +195,7 @@ LiveUpdater.prototype.sendUpdates = function (url) {
       ? self.getTotalOnline()
       : self.online[url].length
   }
+  if (url === '/') update.totalHits = self.totalHits
 
   var message = JSON.stringify(update)
   sockets.forEach(function (socket) {
@@ -203,7 +207,7 @@ LiveUpdater.prototype.sendUpdates = function (url) {
  * Send a special update message to visitors on "/" with `totalHit` value,
  * whenever any visitor (across the site) arrives/leaves.
  */
-LiveUpdater.prototype.sendHomeUpdates = function () {
+LiveUpdater.prototype.sendHomeUpdates = throttle(function () {
   var self = this
 
   var sockets = self.online['/']
@@ -220,7 +224,7 @@ LiveUpdater.prototype.sendHomeUpdates = function () {
   sockets.forEach(function (socket) {
     socket.send(message)
   })
-}
+}, HOME_UPDATE_THROTTLE)
 
 /**
  * Send a special update message to visitors on "/stats/" pages, whenever any
