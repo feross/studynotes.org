@@ -173,7 +173,7 @@ LiveUpdater.prototype.sendStats = function (socket) {
     type: 'stats',
     stats: stats
   }
-  socket.send(JSON.stringify(update))
+  send(socket, JSON.stringify(update))
 }
 
 /**
@@ -199,7 +199,7 @@ LiveUpdater.prototype.sendUpdates = function (url) {
 
   var message = JSON.stringify(update)
   sockets.forEach(function (socket) {
-    socket.send(message)
+    send(socket, message)
   })
 }
 
@@ -222,7 +222,7 @@ LiveUpdater.prototype.sendHomeUpdates = throttle(function () {
 
   var message = JSON.stringify(update)
   sockets.forEach(function (socket) {
-    socket.send(message)
+    send(socket, message)
   })
 }, HOME_UPDATE_THROTTLE)
 
@@ -249,8 +249,12 @@ LiveUpdater.prototype.sendStatsUpdates = function (url) {
 
   var message = JSON.stringify(update)
   sockets.forEach(function (socket) {
-    socket.send(message)
+    send(socket, message)
   })
+}
+
+function send (socket, message) {
+  if (socket.readyState === ws.OPEN) socket.send(message)
 }
 
 LiveUpdater.prototype.getTitle = function (url) {
