@@ -40,7 +40,7 @@ function LiveUpdater (opts, done) {
     : http.createServer()
 
   httpServer.listen(self.port)
-  self.server = new ws.Server({ server: httpServer })
+  self.server = new ws.Server({ server: httpServer, perMessageDeflate: false })
 
   self.server.on('connection', function (socket) {
     socket.destroyed = false
@@ -56,6 +56,7 @@ function LiveUpdater (opts, done) {
       socket.removeListener('message', handleMessage)
       socket.removeListener('error', handleClose)
       socket.removeListener('close', handleClose)
+      socket.close()
       self.handleClose(socket)
     }
 
