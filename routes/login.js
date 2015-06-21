@@ -4,6 +4,7 @@ var email = require('../lib/email')
 var model = require('../model')
 var passport = require('passport')
 var util = require('../util')
+var values = require('object-values')
 var waterfall = require('run-waterfall')
 
 module.exports = function (app) {
@@ -103,47 +104,58 @@ module.exports = function (app) {
   })
 
   app.post('/login/reset/:token', function (req, res, next) {
-    waterfall([
-      function (cb) {
-        model.User.findOne({
-          resetPasswordToken: req.params.token,
-          resetPasswordExpires: { $gt: Date.now() }
-        }, function (err, user) {
-          if (err || !user) {
-            req.flash('error', 'Password reset token is invalid or has expired.')
-            return res.redirect('/login/forgot')
-          }
+    model.User.findOne({
+      resetPasswordToken: req.params.token,
+      resetPasswordExpires: { $gt: Date.now() }
+    }, setUserPassword)
 
-          user.password = req.body.password
-          user.resetPasswordToken = undefined
-          user.resetPasswordExpires = undefined
-
-          user.save(function (err) {
-            if (err) return cb(err)
-            req.login(user, function (err) {
-              cb(err, user)
-            })
-          })
-        })
-      },
-      function (user, cb) {
-        var message = {}
-        message.to = user.email
-        message.subject = 'Your Study Notes password was changed'
-
-        message.text = 'Hello,\n\n' +
-          'This is a confirmation that the password for your Study Notes account ' +
-          'with email ' + user.email + ' has just been changed.\n'
-
-        email.send(message, function (err) {
-          if (err) return cb(err)
-          req.flash('success', 'Success! Your password has been changed.')
-          cb(null)
-        })
+    function setUserPassword (err, user) {
+      if (err || !user) {
+        req.flash('error', 'Password reset token is invalid or has expired.')
+        return res.redirect('/login/forgot')
       }
-    ], function (err) {
+
+      user.password = req.body.password
+      user.resetPasswordToken = undefined
+      user.resetPasswordExpires = undefined
+
+      user.save(function (err) {
+        if (err && err.name === 'ValidationError') {
+          values(err.errors).forEach(function (error) {
+            req.flash('error', error.message)
+          })
+          res.redirect('/login/reset/' + req.params.token)
+        } else if (err) {
+          next(err)
+        } else {
+          // Automatically login the user
+          req.login(user, sendEmail)
+        }
+      })
+    }
+
+    function sendEmail (err, user) {
+      if (err) return fatalError(err)
+
+      var message = {}
+      message.to = user.email
+      message.subject = 'Your Study Notes password was changed'
+
+      message.text = 'Hello,\n\n' +
+        'This is a confirmation that the password for your Study Notes account ' +
+        'with email ' + user.email + ' has just been changed.\n'
+
+      email.send(message, onSentEmail)
+    }
+
+    function onSentEmail (err) {
+      if (err) return fatalError(err)
+      req.flash('success', 'Success! Your password has been changed.')
+    }
+
+    function fatalError (err) {
       if (err) return next(err)
       res.redirect('/')
-    })
+    }
   })
 }
