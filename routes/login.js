@@ -109,7 +109,9 @@ module.exports = function (app) {
       resetPasswordExpires: { $gt: Date.now() }
     }, setUserPassword)
 
-    function setUserPassword (err, user) {
+    var user
+    function setUserPassword (err, _user) {
+      user = _user
       if (err || !user) {
         req.flash('error', 'Password reset token is invalid or has expired.')
         return res.redirect('/login/forgot')
@@ -134,7 +136,7 @@ module.exports = function (app) {
       })
     }
 
-    function sendEmail (err, user) {
+    function sendEmail (err) {
       if (err) return fatalError(err)
 
       var message = {}
@@ -151,6 +153,7 @@ module.exports = function (app) {
     function onSentEmail (err) {
       if (err) return fatalError(err)
       req.flash('success', 'Success! Your password has been changed.')
+      res.redirect('/')
     }
 
     function fatalError (err) {
