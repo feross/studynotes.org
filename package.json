@@ -87,7 +87,7 @@
     "xtend": "^4.0.0"
   },
   "devDependencies": {
-    "browserify": "^9.0.3",
+    "browserify": "^10.2.4",
     "browserify-shim": "^3.6.0",
     "formage": "^3.2.21",
     "nib": "^1.0.1",
