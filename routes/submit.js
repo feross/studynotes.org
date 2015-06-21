@@ -44,9 +44,9 @@ module.exports = function (app) {
       permission: ['essay', function (cb, r) {
         if (!r.essay) return cb(new Error('No essay with id ' + req.body._id))
 
-        if (!r.essay.user // new note, no permission needed
-            || r.essay.user.id === req.user.id // same user
-            || req.user.admin) { // admin
+        if (!r.essay.user || // new note, no permission needed
+            r.essay.user.id === req.user.id || // same user
+            req.user.admin) { // admin
           cb(null)
         } else {
           cb(new Error('Cannot edit another user\'s essay'))
@@ -128,9 +128,9 @@ module.exports = function (app) {
       permission: ['note', function (cb, r) {
         if (!r.note) return cb(new Error('No note with id ' + req.body._id))
 
-        if (!r.note.user // new note, no permission needed
-            || r.note.user.id === req.user.id // same user
-            || req.user.admin) { // admin
+        if (!r.note.user || // new note, no permission needed
+            r.note.user.id === req.user.id || // same user
+            req.user.admin) { // admin
           cb(null)
         } else {
           cb(new Error('Cannot edit another user\'s note'))
