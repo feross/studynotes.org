@@ -6,8 +6,7 @@ var isProd = exports.isProd = process.browser
 
 exports.ports = {
   site: isProd ? 7300 : 4000,
-  liveupdater: isProd ? 7301 : 4001,
-  admin: 4002
+  liveupdater: isProd ? 7301 : 4001
 }
 
 exports.siteHost = isProd
