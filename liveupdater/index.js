@@ -120,6 +120,7 @@ LiveUpdater.prototype.handleClose = function (socket) {
     var index = sockets.indexOf(socket)
     sockets.splice(index, 1)
     self.sendUpdates(socket.url)
+    self.sendHomeUpdates()
   }
 }
 
