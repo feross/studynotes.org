@@ -206,7 +206,8 @@ LiveUpdater.prototype.sendUpdates = function (url) {
 
 /**
  * Send a special update message to visitors on "/" with `totalHit` value,
- * whenever any visitor (across the site) arrives/leaves.
+ * whenever any visitor (across the site) arrives/leaves, throttled for
+ * performance.
  */
 LiveUpdater.prototype.sendHomeUpdates = throttle(function () {
   var self = this
@@ -218,6 +219,7 @@ LiveUpdater.prototype.sendHomeUpdates = throttle(function () {
 
   var update = {
     type: 'update',
+    count: self.getTotalOnline(),
     totalHits: self.totalHits
   }
 
