@@ -9,7 +9,6 @@ var $ = require('jquery')
  * @param {boolean=} toggle  force the menu open?
  */
 function toggleBrowseMenu (menu, toggle) {
-  /*jshint eqnull:true */
   if (toggle == null) toggle = !menu.$browse.hasClass('on')
 
   menu.$btn.toggleClass('on', toggle)

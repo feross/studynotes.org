@@ -1,5 +1,3 @@
-/* jshint -W098 */
-
 var debug = require('debug')('studynotes:routes/error')
 var email = require('../lib/email')
 var httpStatus = require('http-status-codes')
@@ -68,5 +66,3 @@ module.exports = function (app) {
     res.send()
   })
 }
-
-/* jshint +W098 */
