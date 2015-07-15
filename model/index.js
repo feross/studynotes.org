@@ -35,11 +35,12 @@ exports.connect = function (cb) {
   cb = once(cb)
   mongoose.set('debug', !config.isProd)
 
-  mongoose.connect('mongodb://' +
+  mongoose.connect(
+    'mongodb://' +
     config.mongo.user + '@' + config.mongo.host + ':' +
-    config.mongo.port + '/' + config.mongo.database, {
-      server: { poolSize: 20 }
-  })
+    config.mongo.port + '/' + config.mongo.database,
+    { server: { poolSize: 20 } }
+  )
   mongoose.connection.on('error', cb)
   mongoose.connection.on('open', function () {
     loadCache(cb)
