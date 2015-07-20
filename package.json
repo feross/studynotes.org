@@ -49,6 +49,7 @@
     "cookie-parser": "^1.0.1",
     "csurf": "^1.1.0",
     "debug": "^2.1.1",
+    "downgrade": "^1.0.0",
     "escape-string-regexp": "^1.0.2",
     "express": "^4.0.0",
     "express-session": "^1.0.2",
@@ -73,7 +74,6 @@
     "optimist": "^0.6.0",
     "passport": "^0.2.0",
     "passport-local": "^1.0.0",
-    "posix": "^2.0.0",
     "run-auto": "^1.0.0",
     "run-parallel": "^1.0.0",
     "run-series": "^1.0.2",
@@ -83,6 +83,7 @@
     "stripe": "^3.1.0",
     "transparency": "^0.10.0",
     "underscore.string": "^3.0.1",
+    "unlimited": "^1.1.0",
     "ws": "^0.7.0",
     "xtend": "^4.0.0"
   },

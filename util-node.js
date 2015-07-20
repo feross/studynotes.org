@@ -1,11 +1,10 @@
-var config = require('./config')
 var crypto = require('crypto')
-var debug = require('debug')('studynotes:util')
+var downgrade = require('downgrade')
 var email = require('./lib/email')
 var extend = require('xtend')
 var htmlParser = require('html-parser')
 var optimist = require('optimist')
-var posix = require('posix')
+var unlimited = require('unlimited')
 
 exports.truncate = require('html-truncate')
 
@@ -22,7 +21,7 @@ exports.run = function (ServerConstructor) {
   delete opts.$0
   delete opts._
 
-  upgradeLimits()
+  unlimited()
 
   // Create and start the server
   var server = new ServerConstructor(opts, function (err) {
@@ -31,7 +30,7 @@ exports.run = function (ServerConstructor) {
       console.error(err.stack)
       process.exit(1)
     }
-    downgradeUid()
+    downgrade()
   })
 
   process.on('uncaughtException', function (err) {
@@ -42,24 +41,6 @@ exports.run = function (ServerConstructor) {
       text: err.stack.toString()
     })
   })
-}
-
-var MAX_SOCKETS = 10000
-
-function downgradeUid () {
-  if (process.platform === 'linux' && config.isProd) {
-    process.setgid('www-data')
-    process.setuid('www-data')
-    debug('downgraded gid (' + process.getgid() + ') uid (' + process.getuid() + ')')
-  } else {
-    debug('skipping downgradeUid')
-  }
-}
-
-function upgradeLimits () {
-  posix.setrlimit('nofile', { soft: MAX_SOCKETS, hard: MAX_SOCKETS })
-  var limits = posix.getrlimit('nofile')
-  debug('upgraded resource limits to ' + limits.soft)
 }
 
 /**
