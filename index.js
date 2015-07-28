@@ -9,6 +9,7 @@ var moment = require('moment')
 var path = require('path')
 var series = require('run-series')
 var url = require('url')
+var supportsColor = require('supports-color')
 
 // Express middleware
 var bodyParser = require('body-parser')
@@ -131,8 +132,10 @@ function Site (opts, done) {
   // Express middleware that logs requests using the "debug" module so that the
   // output is hidden by default. Enable with DEBUG=* environment variable.
   self.app.use(function (req, res, next) {
-    var str = '\x1B[90m' + req.method + ' ' + req.originalUrl + '\x1B[0m'
-    self.debug(str)
+    self.debug(
+      (supportsColor ? '\x1B[90m' : '') + req.method + ' ' + req.originalUrl +
+      (supportsColor ? '\x1B[0m' : '')
+    )
     next()
   })
 

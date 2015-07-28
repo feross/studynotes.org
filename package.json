@@ -81,6 +81,7 @@
     "serve-favicon": "^2.0.1",
     "simple-websocket": "^2.0.0",
     "stripe": "^3.1.0",
+    "supports-color": "^3.1.0",
     "transparency": "^0.10.0",
     "underscore.string": "^3.0.1",
     "unlimited": "^1.1.0",
