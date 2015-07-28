@@ -55,7 +55,7 @@ var Note = new mongoose.Schema({
   anon: Boolean
 })
 
-Note.index({ course: 1, notetype: 1})
+Note.index({ course: 1, notetype: 1 })
 
 // Trim whitespace
 Note.pre('validate', function (next) {

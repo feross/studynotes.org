@@ -13,8 +13,8 @@ var College = new mongoose.Schema({
   inStateTuition: { type: Number },
   enrollment: { type: Number },
   acceptRate: { type: Number },
-  location: {type: String },
-  rank: {type: Number, index: true }
+  location: { type: String },
+  rank: { type: Number, index: true }
 })
 
 College.virtual('url').get(function () {
