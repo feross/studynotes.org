@@ -89,7 +89,7 @@
     "xtend": "^4.0.0"
   },
   "devDependencies": {
-    "browserify": "^10.2.4",
+    "browserify": "^11.0.1",
     "browserify-shim": "^3.6.0",
     "nib": "^1.0.1",
     "nodemon": "^1.0.17",
