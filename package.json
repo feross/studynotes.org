@@ -85,7 +85,7 @@
     "transparency": "^0.10.0",
     "underscore.string": "^3.0.1",
     "unlimited": "^1.1.0",
-    "ws": "^0.7.0",
+    "ws": "^0.8.0",
     "xtend": "^4.0.0"
   },
   "devDependencies": {
