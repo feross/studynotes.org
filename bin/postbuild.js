@@ -4,7 +4,7 @@ var auto = require('run-auto')
 var cp = require('child_process')
 var config = require('../config')
 var fs = require('fs')
-var md5 = require('MD5')
+var md5 = require('md5')
 
 auto({
   MD5_JS_MAIN: function (cb) {
