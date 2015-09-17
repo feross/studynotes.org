@@ -38,7 +38,7 @@
     "url": "https://github.com/feross/studynotes/issues"
   },
   "dependencies": {
-    "MD5": "^1.2.0",
+    "md5": "^2.0.0",
     "add-commas": "0.0.4",
     "bcrypt": "^0.8.0",
     "body-parser": "^1.0.1",
