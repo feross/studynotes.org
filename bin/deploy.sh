@@ -1,8 +1,6 @@
 #!/bin/sh
 # Update code and restart server (run from app server)
 set -e
-sudo supervisorctl reload
-sleep 3
 
 if [ -d "/home/feross/www/studynotes.org-build" ]; then
   echo "ERROR: Build folder already exists. Is another build in progress?"
