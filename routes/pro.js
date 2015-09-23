@@ -6,7 +6,6 @@ var secret = require('../secret')
 var values = require('object-values')
 
 var stripe = require('stripe')(secret.stripe.secret)
-stripe.setApiVersion('2013-12-03')
 
 module.exports = function (app) {
   app.post('/pro', function (req, res, next) {
