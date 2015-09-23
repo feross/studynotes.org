@@ -73,12 +73,10 @@ html(class='studynotes #{layout}', lang='en')
     //- TODO: add rss support
     //- <link rel='alternate' type='application/atom+xml' title=' href=' />
 
-    //- TODO: add search service?, see: https://github.com/opensearch.xml
-    //- <link rel='search' type='application/opensearchdescription+xml' href='/opensearch.xml' title='StudyNotes' />
-
     //- TODO: add print stylesheet. should this be a media query in main file?
     //- link(rel='stylesheet', href='/stylesheets/print.css', media='print')
 
+    link(rel='search', href='/opensearch.xml', title='Study Notes', type='application/opensearchdescription+xml')
 
     <!--[if ! lte IE 8]><!-->
     link(rel='stylesheet', href=config.cdnOrigin + config.cssPath)
