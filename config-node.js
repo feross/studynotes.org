@@ -63,13 +63,11 @@ exports.mongo = {
   database: 'studynotes'
 }
 
-var MD5_JS_MAIN
-var MD5_JS_EXTRA
+var MD5_JS
 var MD5_CSS
 try {
   if (config.isProd) {
-    MD5_JS_MAIN = fs.readFileSync(exports.out + '/MD5_JS_MAIN').toString()
-    MD5_JS_EXTRA = fs.readFileSync(exports.out + '/MD5_JS_EXTRA').toString()
+    MD5_JS = fs.readFileSync(exports.out + '/MD5_JS').toString()
     MD5_CSS = fs.readFileSync(exports.out + '/MD5_CSS').toString()
   }
 } catch (e) {}
@@ -78,6 +76,5 @@ try {
  * Final paths for JS and CSS files. Uniquely named using the MD5 hash of the
  * file contents, for cache busting.
  */
-exports.jsMainPath = '/main' + (MD5_JS_MAIN ? '-' + MD5_JS_MAIN : '') + '.min.js'
-exports.jsExtraPath = '/extra' + (MD5_JS_EXTRA ? '-' + MD5_JS_EXTRA : '') + '.min.js'
+exports.jsPath = '/main' + (MD5_JS ? '-' + MD5_JS : '') + '.min.js'
 exports.cssPath = '/main' + (MD5_CSS ? '-' + MD5_CSS : '') + '.css'

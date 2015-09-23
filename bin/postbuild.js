@@ -16,15 +16,6 @@ auto({
     })
   },
 
-  MD5_JS_EXTRA: function (cb) {
-    calculateMd5(config.out + '/extra.min.js', function (err, md5) {
-      if (err) throw err
-      fs.writeFile(config.out + '/MD5_JS_EXTRA', md5, function (err) {
-        cb(err, md5)
-      })
-    })
-  },
-
   MD5_CSS: function (cb) {
     calculateMd5(config.out + '/main.css', function (err, md5) {
       if (err) throw err
@@ -35,8 +26,7 @@ auto({
   },
 
   removeOldJS: function (cb) {
-    // var command2 = 'rm ' + config.out + '/main-*.css'
-    cp.exec('rm ' + config.out + '/main-*.js ' + config.out + '/extra-*.js', function () {
+    cp.exec('rm ' + config.out + '/main-*.js', function () {
       // ignore errors - doesn't matter if no file is found
       cb(null)
     })
@@ -50,15 +40,9 @@ auto({
   },
 
   // Copy the JS file to a file with a unique name, based on the MD5
-  jsRenameMain: ['MD5_JS_MAIN', 'removeOldJS', function (cb, r) {
+  jsRename: ['MD5_JS_MAIN', 'removeOldJS', function (cb, r) {
     var src = config.out + '/main.min.js'
     var dest = config.out + '/main-' + r.MD5_JS_MAIN + '.min.js'
-    cp.exec('cp ' + src + ' ' + dest, cb)
-  }],
-
-  jsRenameExtra: ['MD5_JS_EXTRA', 'removeOldJS', function (cb, r) {
-    var src = config.out + '/extra.min.js'
-    var dest = config.out + '/extra-' + r.MD5_JS_EXTRA + '.min.js'
     cp.exec('cp ' + src + ' ' + dest, cb)
   }],
 

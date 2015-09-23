@@ -253,11 +253,13 @@ html(class='studynotes #{layout}', lang='en')
       script.
         window.countdownDate = new Date('#{course.examDate}')
 
-    if (typeof extraJS !== 'undefined' && !!extraJS)
-      script(src=config.cdnOrigin + config.jsMainPath)
-      script(src=config.cdnOrigin + config.jsExtraPath)
+    if (typeof editorJS !== 'undefined' && !!editorJS)
+      script(src=config.cdnOrigin + config.jsPath)
+      script.
+        window.CKEDITOR_BASEPATH = config.cdnOrigin + '/ckeditor/'
+      script(src=config.cdnOrigin + '/ckeditor/ckeditor.js')
     else
-      script(async, src=config.cdnOrigin + config.jsMainPath)
+      script(async, src=config.cdnOrigin + config.jsPath)
 
     block scripts
 
