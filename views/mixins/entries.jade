@@ -15,11 +15,8 @@ mixin entries(entries)
 
         if (entry.populated('user'))
           .author.hide-phone
-            a(href=entry.user.getUrl(entry.anon))
-              span by #{ entry.user.getName(entry.anon) }
-              if entry.anon
-                img(src=config.cdnOrigin + '/images/anon.jpg')
-              else
+            if !entry.anon
+              a(href=entry.user.getUrl())
                 img(src=entry.user.gravatar(80))
 
       - var body = util.truncate(util.sanitizeHTML(entry.body, ['p']), 300).trim()
