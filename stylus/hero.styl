@@ -47,7 +47,7 @@ TAB_HEIGHT = 33px
       padding-left: CONTENT_PADDING_DESKTOP
 
   .title, .desc
-    hero_font()
+    heading_font()
     margin: 0
 
   .title
@@ -71,6 +71,7 @@ TAB_HEIGHT = 33px
       display: none
 
 ul.tabs
+  heading_font()
   height: TAB_HEIGHT
   font-size: 16px
   list-style: none
@@ -91,7 +92,6 @@ ul.tabs
         display: block
         height: TAB_HEIGHT
         padding: 4px 10px 0 10px
-        font-weight: bold
 
       {HOVER}
         background: rgba(GRAY_LIGHTER,1)
