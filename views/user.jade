@@ -1,7 +1,7 @@
 include mixins/entries
 extends layouts/main-sidebar
 
-append sidebar
+block sidebar
   .author
     a(href=user.url)
       img(src=user.gravatar(400))

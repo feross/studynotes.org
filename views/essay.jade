@@ -1,6 +1,6 @@
 extends layouts/main-sidebar
 
-append sidebar
+block sidebar
   .author
     a(href=user.getUrl(essay.anon))
       if essay.anon

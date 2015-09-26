@@ -11,7 +11,7 @@ block content
       each college in colleges
         li: a(href='#{college.url}')= college.rank + '. ' + college.name
 
-append sidebar
+block sidebar
   include ads/adsense-sidebar
 
   .center

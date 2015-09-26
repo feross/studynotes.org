@@ -12,7 +12,7 @@ block content
       - var desc = (notetype.shortDesc || notetype.desc).replace(/COURSE_SHORTNAME/g, course.shortName).replace(/COURSE_TEXTBOOK/g, course.textbook).replace(/COURSE/g, course.name)
       p.desc!= desc
 
-append sidebar
+block sidebar
   include ads/adsense-sidebar
   include includes/countdown
   include ads/adsense-sidebar
