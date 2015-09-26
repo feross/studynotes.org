@@ -60,8 +60,13 @@ html(class='studynotes #{layout}', lang='en')
     link(rel='search', href='/opensearch.xml', title='Study Notes', type='application/opensearchdescription+xml')
 
     <!--[if ! lte IE 8]><!-->
-    link(rel='stylesheet', href=config.cdnOrigin + config.cssPath)
+    if (config.isProd)
+      style.
+        !{ config.cssContent }
+    else
+      link(rel='stylesheet', href=config.cdnOrigin + config.cssPath)
     <!--<![endif]-->
+
 
     //- Inline AdSense
     if (locals.random() > 0.50)

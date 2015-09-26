@@ -65,12 +65,10 @@ exports.mongo = {
 
 var MD5_JS
 var MD5_CSS
-try {
-  if (config.isProd) {
-    MD5_JS = fs.readFileSync(exports.out + '/MD5_JS').toString()
-    MD5_CSS = fs.readFileSync(exports.out + '/MD5_CSS').toString()
-  }
-} catch (e) {}
+if (config.isProd) {
+  MD5_JS = fs.readFileSync(exports.out + '/MD5_JS', 'utf8')
+  MD5_CSS = fs.readFileSync(exports.out + '/MD5_CSS', 'utf8')
+}
 
 /**
  * Final paths for JS and CSS files. Uniquely named using the MD5 hash of the
@@ -78,3 +76,5 @@ try {
  */
 exports.jsPath = '/main' + (MD5_JS ? '-' + MD5_JS : '') + '.min.js'
 exports.cssPath = '/main' + (MD5_CSS ? '-' + MD5_CSS : '') + '.css'
+
+if (config.isProd) exports.cssContent = fs.readFileSync(exports.out + exports.cssPath, 'utf8')
