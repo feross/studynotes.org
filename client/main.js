@@ -88,7 +88,8 @@ key('right', function () {
   }
 })
 
-$(window).load(function () {
+$window.load(function () {
+  onResize()
   // if (navigator.serviceWorker) {
   //   navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
   //     .then(function (registration) {
