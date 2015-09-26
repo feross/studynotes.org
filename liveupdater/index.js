@@ -15,7 +15,7 @@ var util = require('../util')
 var values = require('object-values')
 var ws = require('ws')
 
-var HOME_UPDATE_THROTTLE = 5000
+var HOME_UPDATE_THROTTLE = 3000
 
 function LiveUpdater (opts, done) {
   var self = this
