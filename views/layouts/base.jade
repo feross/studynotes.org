@@ -174,16 +174,8 @@ html(class='studynotes #{layout}', lang='en')
     link(rel='stylesheet', href=config.cdnOrigin + '/css/ie8.css')
     <![endif]-->
 
-    if (!locals.offline)
-      //- TypeKit
-      script.
-        (function () {
-          var config = {
-            kitId: 'djj4afz',
-            scriptTimeout: 1500
-          };
-          var h=document.getElementsByTagName("html")[0];h.className+=" wf-loading";var t=setTimeout(function(){h.className=h.className.replace(/(\s|^)wf-loading(\s|$)/g," ");h.className+=" wf-inactive"},config.scriptTimeout);var tk=document.createElement("script"),d=false;tk.src='//use.typekit.net/'+config.kitId+'.js';tk.type="text/javascript";tk.async="true";tk.onload=tk.onreadystatechange=function(){var a=this.readyState;if(d||a&&a!="complete"&&a!="loaded")return;d=true;clearTimeout(t);try{Typekit.load(config)}catch(b){}};var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(tk,s)
-        })();
+    //- TypeKit
+    script(async, src='//use.typekit.net/djj4afz.js', onload='Typekit.load()')
 
     //- Detect mobile browsers. Inlined to avoid a reflow by setting class later
     //- in page-load process.
