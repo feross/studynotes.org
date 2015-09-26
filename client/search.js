@@ -11,7 +11,7 @@ var $searchInput = $('.header .search input')
 
 /**
  * Set search bar's width so it fills the header correctly.
- * (Need to ensure this gets called after Typekit fonts are loaded.)
+ * (Need to ensure this gets called after web fonts are loaded.)
  */
 window.updateSearchWidth = function () {
   var headerLeftWidth = $headerLeft.width()

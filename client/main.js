@@ -90,6 +90,7 @@ key('right', function () {
 
 /**
  * Continue to update the search width every 50ms until page is done loading.
+ * TODO: This causes multiple reflows and is terrible. Fix!
  */
 var loaded = false
 function updateSearchWidthWhileLoading () {
