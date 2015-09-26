@@ -88,22 +88,7 @@ key('right', function () {
   }
 })
 
-/**
- * Continue to update the search width every 50ms until page is done loading.
- * TODO: This causes multiple reflows and is terrible. Fix!
- */
-var loaded = false
-function updateSearchWidthWhileLoading () {
-  window.updateSearchWidth()
-  if (!loaded) {
-    setTimeout(updateSearchWidthWhileLoading, 50)
-  }
-}
-updateSearchWidthWhileLoading()
-
 $(window).load(function () {
-  loaded = true
-
   // if (navigator.serviceWorker) {
   //   navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
   //     .then(function (registration) {
