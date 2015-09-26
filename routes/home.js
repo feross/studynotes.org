@@ -1,8 +1,6 @@
 var auto = require('run-auto')
-var countBy = require('lodash.countby')
 var extend = require('xtend/mutable')
 var model = require('../model')
-var sort = require('../lib/sort')
 
 module.exports = function (app) {
   app.get('/', function (req, res, next) {
@@ -39,49 +37,6 @@ module.exports = function (app) {
           .select('-body -prompt')
           .populate('college')
           .exec(cb)
-      },
-      topUsers: function (cb) {
-        auto({
-          notes: function (cb2) {
-            model.Note
-              .find()
-              .select('user -_id')
-              .exec(cb2)
-          },
-
-          essays: function (cb2) {
-            model.Essay
-              .find()
-              .select('user -_id')
-              .exec(cb2)
-          },
-
-          topUsers: ['notes', 'essays', function (cb2, r) {
-            var submissions = r.notes.concat(r.essays)
-            var counts = countBy(submissions, function (s) { return s.user })
-            var userIds = Object.keys(counts).sort(function (idA, idB) {
-              return counts[idB] - counts[idA]
-            })
-            userIds = userIds.slice(0, 10)
-
-            model.User
-              .find({ _id: { $in: userIds } })
-              .exec(function (err, users) {
-                if (err) return cb2(err)
-
-                users.forEach(function (user) {
-                  user.submissionCount = counts[user.id]
-                })
-
-                users.sort(sort.byProp('submissionCount', true))
-
-                cb2(null, users)
-              })
-          }]
-        }, function (err, r) {
-          if (err) return cb(err)
-          cb(null, r.topUsers)
-        })
       }
     }, function (err, r) {
       if (err) return next(err)

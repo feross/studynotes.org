@@ -107,23 +107,6 @@ block content
             a(href=essay.url)= ' ' + essay.name
             small.gray: em= ' ' + moment(essay.createDate).fromNow()
 
-  .topUsers
-    h2 Top Users
-    .row
-      each user in topUsers.slice(0, 4)
-        .col4.author
-          a(href=user.url)
-            img(src=user.gravatar(200))
-            span= user.name
-          .gray #{ user.submissionCount } submissions
-    .row
-      each user in topUsers.slice(4, 8)
-        .col4.author
-          a(href=user.url)
-            img(src=user.gravatar(200))
-            span= user.name
-          .gray #{ user.submissionCount } submissions
-
   .row
     .col2
       h2 Our <strong>free AP notes</strong> include
