@@ -59,6 +59,7 @@
     "jquery": "^2.1.1",
     "jsdom": "^6.1.0",
     "keymaster": "^1.6.2",
+    "load-script": "^1.0.0",
     "lodash.countby": "^3.0.0",
     "lodash.throttle": "^3.0.1",
     "maxcdn": "^0.1.5",
