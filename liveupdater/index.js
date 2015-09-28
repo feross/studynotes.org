@@ -2,7 +2,6 @@ module.exports = LiveUpdater
 
 var config = require('../config')
 var debug = require('debug')('studynotes:liveupdater')
-var extend = require('xtend/mutable')
 var fs = require('fs')
 var http = require('http')
 var https = require('https')
@@ -19,10 +18,7 @@ var HOME_UPDATE_THROTTLE = 3000
 
 function LiveUpdater (opts, done) {
   var self = this
-
-  extend(self, {
-    port: config.ports.liveupdater
-  }, opts)
+  self.port = opts.port || config.ports.liveupdater
 
   self.online = {}
   self.titles = {}

@@ -3,28 +3,22 @@ var downgrade = require('downgrade')
 var email = require('./lib/email')
 var extend = require('xtend')
 var htmlParser = require('html-parser')
-var optimist = require('optimist')
+var minimist = require('minimist')
 var unlimited = require('unlimited')
 
 exports.truncate = require('html-truncate')
+
+var argv = minimist(process.argv.slice(2))
 
 /**
  * Run the given server, passing in command line options as options.
  * @param  {function(*)} ServerConstructor
  */
 exports.run = function (ServerConstructor) {
-  // Clone the argv object to avoid interfering with other modules
-  var opts = extend(optimist.argv)
-
-  // Delete all options that are not explicitly passed in like this:
-  //   node tracker --port 4000 --dbPort 4001
-  delete opts.$0
-  delete opts._
-
   unlimited()
 
   // Create and start the server
-  var server = new ServerConstructor(opts, function (err) {
+  var server = new ServerConstructor(extend(argv), function (err) {
     if (err) {
       console.error('Error during ' + server.serverName + ' startup. Abort.')
       console.error(err.stack)

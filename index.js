@@ -3,7 +3,6 @@ module.exports = Site
 var cluster = require('cluster')
 var debug = require('debug')('studynotes:site')
 var express = require('express')
-var extend = require('xtend/mutable')
 var http = require('http')
 var moment = require('moment')
 var path = require('path')
@@ -33,10 +32,7 @@ var util = require('./util')
 
 function Site (opts, done) {
   var self = this
-
-  extend(self, {
-    port: config.ports.site
-  }, opts)
+  self.port = opts.port || config.ports.site
 
   self.id = cluster.isMaster ? 'master' : 'worker ' + cluster.worker.id
   self.debug('started')
