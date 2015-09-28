@@ -183,6 +183,7 @@ html(class='studynotes #{layout}', lang='en')
     script.
       (function () {
         if ((/iPhone|iPod|iPad|Android|BlackBerry/).test(navigator.userAgent)) {
+          window.isMobile = true
           var html = document.getElementsByTagName("html")[0]
           html.className = html.className + ' isMobile'
         }
