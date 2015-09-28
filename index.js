@@ -35,8 +35,7 @@ function Site (opts, done) {
   var self = this
 
   extend(self, {
-    port: config.ports.site,
-    offline: false
+    port: config.ports.site
   }, opts)
 
   self.id = cluster.isMaster ? 'master' : 'worker ' + cluster.worker.id
@@ -75,7 +74,6 @@ function Site (opts, done) {
   self.app.locals.config = config
   self.app.locals.modelCache = model.cache
   self.app.locals.moment = moment
-  self.app.locals.offline = self.offline
   self.app.locals.pretty = !config.isProd
   self.app.locals.random = Math.random
   self.app.locals.stripe = { publishable: secret.stripe.publishable }
