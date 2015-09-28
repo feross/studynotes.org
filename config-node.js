@@ -77,4 +77,9 @@ if (config.isProd) {
 exports.jsPath = '/main' + (MD5_JS ? '-' + MD5_JS : '') + '.min.js'
 exports.cssPath = '/main' + (MD5_CSS ? '-' + MD5_CSS : '') + '.css'
 
-if (config.isProd) exports.cssContent = fs.readFileSync(exports.out + exports.cssPath, 'utf8')
+if (config.isProd) {
+  exports.inline = {
+    css: fs.readFileSync(exports.out + exports.cssPath, 'utf8'),
+    heroBodyMask: 'data:image/png;base64,' + fs.readFileSync(exports.root + '/static/images/hero-body-mask.png', 'base64')
+  }
+}
