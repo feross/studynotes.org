@@ -16,7 +16,7 @@ block sidebar
   include ads/adsense-sidebar
   include includes/countdown
   include ads/adsense-sidebar
-  h2 #{ course.shortName } Stats
+  h2 #{ course.shortName }
   ul
     li Exam Date: #{ moment(course.examDate).format("MMMM Do, YYYY") }
     li #{ util.addCommas(course.hits) } views

@@ -3,11 +3,6 @@ extends layouts/main-sidebar
 block sidebar
   include ads/adsense-sidebar
 
-  h2 Note Stats
-  ul
-    li #{ util.addCommas(note.hits) } views
-    li.online
-
   if locals.relatedNotes
     h2 More #{course.shortName} #{notetype.name}
     ul.more
@@ -15,6 +10,11 @@ block sidebar
         li: a(href='#{note.url}')= note.name
 
   include ads/adsense-sidebar
+
+  ul
+    li #{ util.addCommas(note.hits) } views (#{ util.addCommas(util.hitsPerDay(note.hits, note.createDate)) } views per day)
+    li.online
+    li Posted <span title='#{ moment(note.createDate).format("MMMM Do, YYYY, h:mm:ss a") }'>#{ moment(note.createDate).fromNow() }</span>
 
 append toolbar
   if req.user && req.user.admin

@@ -30,12 +30,10 @@ block sidebar
 
   include ads/adsense-sidebar
 
-  h2 Essay Stats
   ul
-    li Posted <span title='#{ moment(essay.createDate).format("MMMM Do, YYYY, h:mm:ss a") }'>#{ moment(essay.createDate).fromNow() }</span>
-    li #{ util.addCommas(essay.hits) } views
-    li Averaging #{ util.addCommas(util.hitsPerDay(essay.hits, essay.createDate)) } views per day
+    li #{ util.addCommas(essay.hits) } views (#{ util.addCommas(util.hitsPerDay(essay.hits, essay.createDate)) } views per day)
     li.online
+    li Posted <span title='#{ moment(essay.createDate).format("MMMM Do, YYYY, h:mm:ss a") }'>#{ moment(essay.createDate).fromNow() }</span>
 
 
 append toolbar

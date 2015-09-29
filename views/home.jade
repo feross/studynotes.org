@@ -47,15 +47,15 @@ block sidebar
 
   h3.hide-phone.hide-tablet Study Notes In Numbers
   ul.hide-phone.hide-tablet
-    li #{ util.addCommas(noteCount) } notes for #{ courseCount } <a href='/courses/'>AP courses</a>
-    li #{ util.addCommas(essayCount) } admissions essays for #{ collegeCount } <a href='/colleges/'>universities</a>
-    li #{ util.addCommas(userCount) } registered users
     li
       span.totalHits Lots of
-      | #{ ' views (whole site) ' }
+      | #{ ' total views' }
     li.onlineNum
       span
-      | #{ ' students online now (whole site)' }
+      | #{ ' students online (whole site)' }
+    li #{ util.addCommas(noteCount) } notes for <a href='/courses/'>#{ courseCount } AP courses</a>
+    li #{ util.addCommas(essayCount) } admissions essays for <a href='/colleges/'>#{ collegeCount } colleges</a>
+    li #{ util.addCommas(userCount) } registered users
 
 block content
   h2 Free AP Notes and Study Tools

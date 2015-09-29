@@ -45,7 +45,7 @@ function onMessage (message) {
       // Set a phrase with live visitor count
       var studentsStr = (message.count === 1) ? 'student' : 'students'
       $('.online')
-        .text(message.count + ' ' + studentsStr + ' online now (this page)')
+        .text(message.count + ' ' + studentsStr + ' online (this page)')
         .show()
 
       // Set just the visitor count number, no other words

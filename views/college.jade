@@ -60,7 +60,6 @@ block sidebar
       a(href='about/')
         img(src='//maps.googleapis.com/maps/api/staticmap?center=#{ encodeURIComponent(college.location) }&zoom=8&size=336x200&scale=2&maptype=roadmap&sensor=false&visual_refresh=true')
 
-  h2 Page Stats
   ul
     li #{ util.addCommas(college.hits) } views
     li.online
