@@ -1,7 +1,7 @@
 extends layouts/main
 
-block vars
-  - var editorJS = true
+append vars
+  - var editorAssets = true
 
 block content
   if (locals.errors.length)

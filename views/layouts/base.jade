@@ -59,6 +59,9 @@ html(class='studynotes #{layout}', lang='en')
 
     link(rel='search', href='/opensearch.xml', title='Study Notes', type='application/opensearchdescription+xml')
 
+    if (editorAssets)
+      link(rel='stylesheet', href=config.cdnOrigin + '/select2/select2.min.css')
+
     <!--[if ! lte IE 8]><!-->
     if (config.isProd)
       style.
@@ -66,7 +69,6 @@ html(class='studynotes #{layout}', lang='en')
     else
       link(rel='stylesheet', href=config.cdnOrigin + config.cssPath)
     <!--<![endif]-->
-
 
     //- Inline AdSense
     if (locals.random() > 0.50)
@@ -217,7 +219,7 @@ html(class='studynotes #{layout}', lang='en')
       script.
         window.countdownDate = new Date('#{course.examDate}')
 
-    if (typeof editorJS !== 'undefined' && !!editorJS)
+    if (editorAssets)
       script(src=config.cdnOrigin + config.jsPath)
       script.
         window.CKEDITOR_BASEPATH = '#{ config.cdnOrigin }/ckeditor/'
