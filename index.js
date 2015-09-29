@@ -183,7 +183,6 @@ Site.prototype.serveStatic = function () {
 
   // HACK: Make CSS relative URLs work in development
   if (!config.isProd) {
-    self.app.use('/fonts', express.static(config.root + '/node_modules/font-awesome/fonts', opts))
     self.app.use('/cdn', express.static(config.root + '/lib/select2', opts))
   }
 

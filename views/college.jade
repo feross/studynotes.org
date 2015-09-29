@@ -21,8 +21,8 @@ block content
   .entry
     | !{ util.truncate(college.desc, 300) }
     a(href='about/')
-      | #{ 'Read more ' }
-      i.fa.fa-double-angle-right
+      | !{ 'Read&nbsp;more' }
+      i.icon-angle-double-right
 
   hr
 
@@ -32,7 +32,7 @@ block content
 
   p.center
     a.btn.large(href='/submit/essay/')
-      i.fa.fa-cloud-upload
+      i.icon-upload-cloud
       | Submit an essay
 
   p We want to level the playing field so that any qualified student can <strong>write a powerful application</strong>, regardless of their background. Please support our efforts!
@@ -43,7 +43,7 @@ block sidebar
 
   p.center
     a.btn.large(href='/submit/essay/')
-      i.fa.fa-cloud-upload
+      i.icon-upload-cloud
       | Submit an essay
 
   if (college.acceptRate)

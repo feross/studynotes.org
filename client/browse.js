@@ -18,12 +18,12 @@ function toggleBrowseMenu (menu, toggle) {
   var icon = menu.$btn.find('i')
   if (toggle) {
     icon
-      .removeClass('fa-chevron-down')
-      .addClass('fa-chevron-up')
+      .removeClass('icon-down-open')
+      .addClass('icon-up-open')
   } else {
     icon
-      .addClass('fa-chevron-down')
-      .removeClass('fa-chevron-up')
+      .addClass('icon-down-open')
+      .removeClass('icon-up-open')
   }
 }
 

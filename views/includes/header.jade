@@ -3,12 +3,12 @@ header.header
     ul.left
       li.home
         a(href='/', title='Go to the front page of StudyNotes', class='home')
-          i.fa.fa-home.hide-tablet
+          i.icon-home.hide-tablet
           span Study Notes
 
     //- "off" class gets removed after search bar is positioned in JS
     .search.off
-      i.fa.fa-search
+      i.icon-search
       form(action='/search/', method='GET')
         input(autocorrect='off', autocomplete='off', spellcheck='false', name='q', placeholder='Search for AP Courses, Topics, and more...', type='text', value='#{locals.searchTerm}', autofocus=(searchFocus === false ? undefined : 'autofocus'))
 
@@ -20,26 +20,26 @@ header.header
 
     ul.right
       li: a.courses(href='/courses/', title='Browse all AP study notes')
-        i.fa.fa-chevron-down.hide-mobile
+        i.icon-down-open.hide-mobile
         span AP Notes
       li: a.colleges(href='/essays/', title='Browse all admissions essays')
-        i.fa.fa-chevron-down.hide-mobile
+        i.icon-down-open.hide-mobile
         span College Essays
 
       if (req.user)
         li: a(href='#{req.user.url}', title='Manage your account')
           img.gravatar(src='#{ req.user.gravatar(50, true) }', width=21, height=21).hide-tablet
-          i.fa.fa-user.hide-tablet
+          i.icon-user.hide-tablet
           span= req.user.firstName
         li: a.logout(href='#logout', title='Logout of StudyNotes')
-          i.fa.fa-sign-out.hide-tablet
+          i.icon-logout.hide-tablet
           span Logout
       else
         - var signupUrl = '/signup/' + (locals.url ? '?returnTo=' + url : '')
         li: a(href=signupUrl, title='Create a Study Notes Account')
-          i.fa.fa-check-square-o.hide-tablet
+          i.icon-check.hide-tablet
           span Sign Up
         - var loginUrl = '/login/' + (locals.url ? '?returnTo=' + url : '')
         li: a(href=loginUrl, title='Login to Study Notes')
-          i.fa.fa-sign-in.hide-tablet
+          i.icon-login.hide-tablet
           span Log In

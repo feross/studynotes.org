@@ -50,7 +50,6 @@
     "escape-string-regexp": "^1.0.2",
     "express": "^4.0.0",
     "express-session": "^1.0.2",
-    "font-awesome": "^4.2.0",
     "html-parser": "^0.8.0",
     "html-truncate": "^1.0.3",
     "http-status-codes": "^1.0.2",
