@@ -220,7 +220,7 @@ html(class='studynotes #{layout}', lang='en')
     if (typeof editorJS !== 'undefined' && !!editorJS)
       script(src=config.cdnOrigin + config.jsPath)
       script.
-        window.CKEDITOR_BASEPATH = config.cdnOrigin + '/ckeditor/'
+        window.CKEDITOR_BASEPATH = '#{ config.cdnOrigin }/ckeditor/'
       script(src=config.cdnOrigin + '/ckeditor/ckeditor.js')
     else
       script(async, src=config.cdnOrigin + config.jsPath)
