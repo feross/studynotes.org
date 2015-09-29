@@ -117,7 +117,7 @@
   "scripts": {
     "build": "mkdir -p out && npm run build-js && npm run build-css && node ./bin/postbuild.js",
     "build-css": "stylus -u nib stylus/main.styl -o out/ --include-css -c && node ./bin/transform-css.js out/main.css",
-    "build-js": "browserify client/main.js | uglifyjs -c warnings=false -m > out/main.min.js",
+    "build-js": "browserify client/main.js | uglifyjs -c warnings=false -m > out/main.js",
     "db-local": "mkdir -p tmp/db && mongod --dbpath tmp/db",
     "db-tunnel": "ssh -L 27017:localhost:27017 -N feross@athena",
     "secret-download": "rsync -a -O -v --delete -e \"ssh -p 44444\" feross@future.feross.net:\"/home/feross/www/studynotes.org/secret/\" secret/",
@@ -125,9 +125,9 @@
     "start": "npm run db-tunnel & npm run build & (sleep 2 && DEBUG=\"studynotes:*\" node run.js)",
     "test": "standard && tape test/*.js",
     "watch": "npm run db-tunnel & npm run watch-js & npm run watch-css & (sleep 2 && DEBUG=\"studynotes:*\" nodemon run.js)",
-    "watch-local": "npm run db-local & npm run watch-js & npm run watch-css & (sleep 1 && DEBUG=\"studynotes:*\" nodemon run.js)",
     "watch-css": "stylus -u nib stylus/main.styl -o out/ --include-css -w",
-    "watch-js": "watchify client/main.js -o out/main.min.js -dv"
+    "watch-js": "watchify client/main.js -o out/main.js -dv",
+    "watch-local": "npm run db-local & npm run watch-js & npm run watch-css & (sleep 1 && DEBUG=\"studynotes:*\" nodemon run.js)"
   },
   "standard": {
     "ignore": [

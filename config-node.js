@@ -74,7 +74,7 @@ if (config.isProd) {
  * Final paths for JS and CSS files. Uniquely named using the MD5 hash of the
  * file contents, for cache busting.
  */
-exports.jsPath = '/main' + (MD5_JS ? '-' + MD5_JS : '') + '.min.js'
+exports.jsPath = '/main' + (MD5_JS ? '-' + MD5_JS : '') + '.js'
 exports.cssPath = '/main' + (MD5_CSS ? '-' + MD5_CSS : '') + '.css'
 
 if (config.isProd) {

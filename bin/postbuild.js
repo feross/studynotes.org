@@ -8,7 +8,7 @@ var md5 = require('md5')
 
 auto({
   MD5_JS: function (cb) {
-    calculateMd5(config.out + '/main.min.js', function (err, md5) {
+    calculateMd5(config.out + '/main.js', function (err, md5) {
       if (err) throw err
       fs.writeFile(config.out + '/MD5_JS', md5, function (err) {
         cb(err, md5)
@@ -41,8 +41,8 @@ auto({
 
   // Copy the JS file to a file with a unique name, based on the MD5
   jsRename: ['MD5_JS', 'removeOldJS', function (cb, r) {
-    var src = config.out + '/main.min.js'
-    var dest = config.out + '/main-' + r.MD5_JS + '.min.js'
+    var src = config.out + '/main.js'
+    var dest = config.out + '/main-' + r.MD5_JS + '.js'
     cp.exec('cp ' + src + ' ' + dest, cb)
   }],
 
