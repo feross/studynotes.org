@@ -1,4 +1,5 @@
 var $ = require('jquery')
+
 require('transparency')
 require('select2')
 
@@ -11,10 +12,14 @@ require('./submit-note')
 require('./toolbar')
 
 var config = require('../config')
+var fastclick = require('fastclick')
 var key = require('keymaster')
 var notify = require('./notify')
 var throttle = require('lodash.throttle')
 var url = require('url')
+
+// Remove 300ms tap delay on iOS
+fastclick(document.body)
 
 var $window = $(window)
 
