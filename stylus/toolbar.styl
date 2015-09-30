@@ -28,3 +28,34 @@
     float: right
     margin-top: 7px
     margin-left: 12px
+
+.share
+  display: inline-block
+  padding: 11px 0
+  font-size: 16px
+
+  :first-child:before
+    padding-left: 0
+    margin-left: 0
+
+a.icon-facebook-squared
+  color: #3b5998
+
+a.icon-twitter
+  color: #00aced
+
+a.icon-tumblr
+  color: #32506d
+  &:before
+    font-size: 90%
+
+a.icon-facebook-squared, a.icon-twitter, a.icon-tumblr
+  margin-right: 15px
+  margin-left: 0
+  &:before
+    font-size: 150%
+    position: relative
+    top: 3px
+  &:hover, &:active
+    opacity: 0.7
+    text-decoration: none

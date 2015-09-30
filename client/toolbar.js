@@ -10,9 +10,9 @@ window.toolbarOnScroll = function () {
   var toolbarTop = $toolbarGhost.length
     ? $toolbarGhost.offset().top
     : null
-  var contentWidth = $content.width()
 
   if (toolbarTop) {
+    var contentWidth = $content.width()
     var scrollTop = $window.scrollTop() // current vertical position from the top
 
     var contentBottom = $content.length

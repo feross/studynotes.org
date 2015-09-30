@@ -65,6 +65,24 @@
       "css": "check",
       "code": 59400,
       "src": "fontawesome"
+    },
+    {
+      "uid": "4743b088aa95d6f3b6b990e770d3b647",
+      "css": "facebook-squared",
+      "code": 59396,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "43fcf807461234935e65261328e1dff6",
+      "css": "tumblr",
+      "code": 59404,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "627abcdb627cb1789e009c08e2678ef9",
+      "css": "twitter",
+      "code": 59403,
+      "src": "fontawesome"
     }
   ]
 }

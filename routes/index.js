@@ -16,6 +16,7 @@ module.exports = function (app) {
     if (opts.url) {
       // Make URL absolute
       opts.url = config.siteOrigin + opts.url
+      opts.encodedUrl = encodeURIComponent(opts.url)
 
       // Force trailing slashes in URL
       if (opts.url[opts.url.length - 1] !== '/') {

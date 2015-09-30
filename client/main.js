@@ -7,6 +7,7 @@ require('./browse')
 require('./Countdown')
 require('./editor')
 require('./search')
+require('./share')
 require('./socket')
 require('./submit-note')
 require('./toolbar')
@@ -64,12 +65,15 @@ $window.on('resize', throttle(onResize, 100))
 /**
  * Browser scroll event
  */
-function onScroll () {
+function onScrollThrottled () {
   window.closeBrowseMenus()
   window.hideAutocomplete()
-  window.toolbarOnScroll()
 }
-$window.on('scroll', throttle(onScroll, 100))
+$window.on('scroll', throttle(onScrollThrottled, 100))
+
+$window.on('scroll', function () {
+  window.toolbarOnScroll()
+})
 
 /**
  * Filter keystrokes from keymaster when user is searching.
