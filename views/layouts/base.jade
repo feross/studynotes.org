@@ -232,11 +232,15 @@ html(class='studynotes #{layout}', lang='en')
 
       //- Google Analytics
       script.
-        var _gaq = _gaq || []
-        _gaq.push(['_setAccount', 'UA-3898076-4'])
-        _gaq.push(['_setDomainName', 'apstudynotes.org'])
-        _gaq.push(['_trackPageview'])
-      script(async, src='//ssl.google-analytics.com/ga.js')
+        window.GoogleAnalyticsObject = 'ga'
+        window.ga = window.ga || function () {
+          (window.ga.q = window.ga.q || []).push(arguments)
+        }
+        window.ga.l = 1 * new Date()
+
+        ga('create', 'UA-3898076-4', 'auto')
+        ga('send', 'pageview')
+      script(async, src='//www.google-analytics.com/analytics.js')
 
       //- Quantcast
       script.
