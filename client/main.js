@@ -65,15 +65,12 @@ $window.on('resize', throttle(onResize, 100))
 /**
  * Browser scroll event
  */
-function onScrollThrottled () {
+function onScroll () {
+  window.toolbarOnScroll()
   window.closeBrowseMenus()
   window.hideAutocomplete()
 }
-$window.on('scroll', throttle(onScrollThrottled, 100))
-
-$window.on('scroll', function () {
-  window.toolbarOnScroll()
-})
+$window.on('scroll', throttle(onScroll, 100))
 
 /**
  * Filter keystrokes from keymaster when user is searching.
