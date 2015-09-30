@@ -23,8 +23,26 @@ HEADER_BORDER_FOCUS = 3px solid #FFF
 SOLID_HEADER_BORDER_FOCUS = 3px solid #000
 
 PHONE = 'only screen and (max-width: 699px)'
-TABLET = 'only screen and (min-width: 700px) and (max-width: 1024px)'
-DESKTOP = 'only screen and (min-width: 1025px)'
+TABLET = 'only screen and (min-width: 700px) and (max-width: 1199px)'
+DESKTOP = 'only screen and (min-width: 1200px)'
+
+DESKTOP_TIGHT = 'only screen and (min-width: 1300px)'
+TABLET_TIGHT = 'only screen and (min-width: 700px) and (max-width: 999px)'
+PHONE_TIGHT = 'only screen and (max-width: 549px)'
+
+.hide-tablet-tight
+  @media TABLET_TIGHT
+    display: none
+
+.hide-phone-tight
+  @media PHONE_TIGHT
+    display: none
+
+.hide-tight
+  @media TABLET_TIGHT
+    display: none
+  @media PHONE_TIGHT
+    display: none
 
 PHONE_FONT_SIZE = 16px
 TABLET_FONT_SIZE = 17px

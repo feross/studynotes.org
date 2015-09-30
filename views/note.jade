@@ -20,9 +20,9 @@ append toolbar
   if req.user && req.user.admin
     a.btn.red.edit(href='?edit=1') Edit
   if locals.next
-    a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next #{ notetype.hasChapters ? 'Chapter' : notetype.singularName }
+    a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next<span class="hide-tight"> #{ notetype.hasChapters ? 'Chapter' : notetype.singularName }</span>
   if !locals.next && locals.prev
-    a.btn.prev(href='#{prev.url}', title='Prev: #{prev.name}') Prev #{ notetype.hasChapters ? 'Chapter' : notetype.singularName }
+    a.btn.prev(href='#{prev.url}', title='Prev: #{prev.name}') Prev<span class="hide-tight"> #{ notetype.hasChapters ? 'Chapter' : notetype.singularName }</span>
     .navigate-msg Last note in this set
 
 block content
