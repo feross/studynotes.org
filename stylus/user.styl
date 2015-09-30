@@ -3,7 +3,8 @@
   margin-bottom: 2.5em
   text-align: center
 
-  a:hover img, a:active img
+  a:hover, a:active
+    text-decoration: none
     -webkit-filter: brightness(0.8)
     filter: brightness(0.8)
 
@@ -13,6 +14,11 @@
     height: 200px
     margin-bottom: 0.9em
     width: 200px
+
+    @media TABLET
+      border-radius: 70px
+      height: 140px
+      width: 140px
 
   .name
     color: #000
