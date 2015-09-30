@@ -41,7 +41,6 @@ append toolbar
     a.btn.red.edit(href='?edit=1') Edit
   if locals.next
     a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next Essay
-    .navigate-msg Use ← → keys to navigate
   if !locals.next && locals.prev
     a.btn.prev(href='#{prev.url}', title='Prev: #{prev.name}') Prev Essay
     .navigate-msg Last note in this set
@@ -95,6 +94,8 @@ block content
           | #{ '(or, study ' }
           a.prev(href='#{prev.url}', title='Previous: #{prev.name}') previous essay
           | )
+
+  p.keepStudying: em Use ← → keys to navigate!
 
   hr
 
