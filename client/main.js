@@ -13,10 +13,10 @@ require('./submit-note')
 require('./toolbar')
 
 var config = require('../config')
+var debounce = require('debounce')
 var fastclick = require('fastclick')
 var key = require('keymaster')
 var notify = require('./notify')
-var throttle = require('lodash.throttle')
 var url = require('url')
 
 // Remove 300ms tap delay on iOS
@@ -60,7 +60,7 @@ function onResize () {
   window.updateSearchWidth()
   window.toolbarOnScroll()
 }
-$window.on('resize', throttle(onResize, 100))
+$window.on('resize', debounce(onResize, 100))
 
 /**
  * Browser scroll event
@@ -70,7 +70,7 @@ function onScroll () {
   window.closeBrowseMenus()
   window.hideAutocomplete()
 }
-$window.on('scroll', throttle(onScroll, 100))
+$window.on('scroll', debounce(onScroll, 100))
 
 /**
  * Filter keystrokes from keymaster when user is searching.
