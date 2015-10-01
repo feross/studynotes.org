@@ -1,5 +1,3 @@
-/* global WebSocket */
-
 var $ = require('jquery')
 var config = require('../config')
 var debug = require('debug')('studynotes:socket')
@@ -35,7 +33,7 @@ function openSocketAfterTimeout () {
   debug('reconnecting socket in %s ms', reconnectTimeout)
 }
 
-if (typeof WebSocket === 'function' && !$('html').hasClass('isMobile')) {
+if (Socket.WEBSOCKET_SUPPORT && !$('html').hasClass('isMobile')) {
   openSocket()
 }
 
