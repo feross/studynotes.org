@@ -12,12 +12,12 @@ $('.icon-facebook-squared').on('click', function (e) {
 $('.icon-twitter').on('click', function (e) {
   e.preventDefault()
   var text = encodeURIComponent('Retweet to save a life!')
-  window.open('https://twitter.com/intent/tweet?text=' + text + '&url=' + encodedUrl + '&original_referer=' + encodedUrl, 'twitter-share', 'width=550,height=260')
+  window.open('https://twitter.com/intent/tweet?text=' + text + '&url=' + encodedUrl + '&original_referer=' + encodedUrl, 'twitter-share', 'width=550,height=300')
   window.ga('send', 'social', 'Twitter', 'Share', url)
 })
 
 $('.icon-tumblr').on('click', function (e) {
   e.preventDefault()
-  window.open('https://tumblr.com/widgets/share/tool?canonicalUrl=' + encodedUrl, 'tumblr-share', 'width=540,height=740')
+  window.open('https://tumblr.com/widgets/share/tool?canonicalUrl=' + encodedUrl, 'tumblr-share', 'width=540,height=670')
   window.ga('send', 'social', 'Tumblr', 'Share', url)
 })
