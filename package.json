@@ -135,9 +135,9 @@
   },
   "standard": {
     "ignore": [
-      "**/out/**",
-      "**/lib/select2/**",
-      "**/lib/ckeditor/**"
+      "/out",
+      "/lib/select2",
+      "/lib/ckeditor"
     ]
   }
 }
