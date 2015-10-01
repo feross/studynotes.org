@@ -16,5 +16,5 @@ $('.icon-twitter').on('click', function (e) {
 
 $('.icon-tumblr').on('click', function (e) {
   e.preventDefault()
-  window.open('https://www.tumblr.com/share/link?url=' + url + '&name=&description=', 'sharer', 'width=540,height=635')
+  window.open('https://tumblr.com/widgets/share/tool?canonicalUrl=' + encodedUrl, 'tumblr-share', 'width=540,height=740')
 })
