@@ -70,9 +70,9 @@ block content
               class='stripe-button',
               data-key=stripe.publishable,
               data-amount=config.proPrice,
-              data-name='50+ Top College Essays',
               data-description='Study Notes Pro (one-time payment)',
               data-image='#{ config.cdnOrigin }/images/acorn.png',
+              data-description='100+ Top College Essays',
               data-email=(req.user && req.user.email)
             )
         h4 Your <strong>one-time payment of $#{ (config.proPrice / 100) }</strong> also gives you <strong>lifetime access to #{ essayCount } essays</strong> that worked at universities like Stanford, Harvard, and MIT.
