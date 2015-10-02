@@ -390,46 +390,6 @@ hr
     @media PHONE
       text-align: center
 
-body.signup, body.signup2
-  background: center center url('https://cdn.apstudynotes.org/images/hero/colleges.jpg') no-repeat fixed
-  background-size: cover
-
-body.login, body.login-forgot, body.login-reset
-  background: center center url('https://cdn.apstudynotes.org/images/hero/amjed-full.jpg') no-repeat fixed
-  background-size: cover
-
-body.home
-  .hero .totalHits
-    display: inline-block
-    @media TABLET
-      min-width: 185px
-    @media DESKTOP
-      min-width: 195px
-
-  .content .row
-    h3
-      ellipsis()
-    li
-      margin-bottom: 0
-
-.da
-  .content &
-    @media PHONE
-      margin-left: -1 * CONTENT_PADDING_PHONE
-      margin-right: -1 * CONTENT_PADDING_PHONE
-      margin-bottom: 10px
-      text-align: center
-  .sidebar &
-    text-align: center
-    margin: 0 0 1em 0
-    @media PHONE
-      margin-bottom: 20px
-  img
-    margin-bottom: 0
-  *
-    margin-left: auto
-    margin-right: auto
-
 // Attention animation
 
 @keyframes pulse
@@ -450,7 +410,6 @@ body.home
 @import 'sidebar'
 @import 'note'
 @import 'user'
-@import 'essay'
 @import 'footer'
 @import 'form'
 @import 'editor'
@@ -458,3 +417,4 @@ body.home
 @import 'notify-libnotify'
 @import 'print'
 @import 'birdy'
+@import 'view'
