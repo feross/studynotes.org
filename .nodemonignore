@@ -1,5 +1,4 @@
 .DS_Store
-tmp/reload.txt
 
 /out/*
 /.git/*

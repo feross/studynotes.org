@@ -9,7 +9,6 @@ var path = require('path')
  * @type {String}
  */
 exports.root = __dirname
-exports.tmp = path.join(exports.root, 'tmp')
 exports.out = path.join(exports.root, 'out')
 
 /**

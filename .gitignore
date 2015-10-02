@@ -3,5 +3,5 @@ secret/*
 
 bundle.js
 node_modules/
-out/*
-tmp/
+out/
+db/
