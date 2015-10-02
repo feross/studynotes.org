@@ -5,9 +5,8 @@ append vars
 
 block body
   .content.clearfix
-    a.birdy(href='#{ config.siteOrigin }')
-      img.birdy-bird(src=config.cdnOrigin + '/images/birdy-bird.png')
-      img.birdy-shadow(src=config.cdnOrigin + '/images/birdy-shadow.png')
+    a(href='#{ config.siteOrigin }')
+      include ../includes/birdy
     block content
       p This page has no content.
 
