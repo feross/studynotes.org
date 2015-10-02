@@ -54,10 +54,10 @@ function onMessage (message) {
     // Set the total hits number, no other words
     if (message.totalHits) {
       if (lastTotalHits !== message.totalHits) {
-        $('.totalHits').text(util.addCommas(message.totalHits)).removeClass('pulse animated')
+        $('.totalHits').text(util.addCommas(message.totalHits)).removeClass('pulse')
 
         setTimeout(function () {
-          $('.totalHits').addClass('pulse animated')
+          $('.totalHits').addClass('pulse')
         }, 10)
       }
       lastTotalHits = message.totalHits

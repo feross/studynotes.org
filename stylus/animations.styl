@@ -1,28 +1,8 @@
-@css {
-  .animated{-webkit-animation-fill-mode:both;-moz-animation-fill-mode:both;-ms-animation-fill-mode:both;-o-animation-fill-mode:both;animation-fill-mode:both;-webkit-animation-duration:0.5s;-moz-animation-duration:0.5s;-ms-animation-duration:0.5s;-o-animation-duration:0.5s;animation-duration:0.5s;}@-webkit-keyframes pulse {
-      0% { -webkit-transform: scale(1); } 50% { -webkit-transform: scale(1.1); }
-      100% { -webkit-transform: scale(1); }
-  }
-  @-moz-keyframes pulse {
-      0% { -moz-transform: scale(1); }
-    50% { -moz-transform: scale(1.1); }
-      100% { -moz-transform: scale(1); }
-  }
-  @-o-keyframes pulse {
-      0% { -o-transform: scale(1); }
-    50% { -o-transform: scale(1.1); }
-      100% { -o-transform: scale(1); }
-  }
-  @keyframes pulse {
-      0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
-  }
+@keyframes pulse
+  0%
+    transform: scale(1)
+  50%
+    transform: scale(1.1)
+.pulse
+  animation: pulse both 0.5s
 
-  .pulse {
-    -webkit-animation-name: pulse;
-    -moz-animation-name: pulse;
-    -o-animation-name: pulse;
-    animation-name: pulse;
-  }
-}
