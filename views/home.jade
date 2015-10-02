@@ -5,6 +5,13 @@ block preconnect
   link(rel='preconnect', href='https://cdn.api.twitter.com')
   link(rel='preconnect', href='https://p.twitter.com')
 
+block style
+  :style
+    .birdy
+      float: left
+      margin-right: 40px
+      zoom: 0.8
+
 block head
   script(type='application/ld+json').
     {
@@ -56,6 +63,7 @@ block sidebar
   include ads/adsense-sidebar
 
 block content
+  include includes/birdy
   h2 Free AP Notes and Study Tools
   p We have the best <strong>AP notes, chapter outlines, and study guides</strong> on the web — contributed by students and teachers like yourself. This site is used by <strong>millions across the U.S.</strong> to prepare for AP exams.
 
