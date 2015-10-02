@@ -1,34 +1,45 @@
 module.exports = Site
 
-var cluster = require('cluster')
-var debug = require('debug')('studynotes:site')
-var express = require('express')
-var http = require('http')
-var moment = require('moment')
-var path = require('path')
-var series = require('run-series')
-var url = require('url')
-var supportsColor = require('supports-color')
-
-// Express middleware
 var bodyParser = require('body-parser')
+var cluster = require('cluster')
 var compress = require('compression')
 var connectMongo = require('connect-mongo')
 var connectSlashes = require('connect-slashes')
 var cookieParser = require('cookie-parser')
 var csrf = require('csurf')
+var debug = require('debug')('studynotes:site')
+var express = require('express')
 var favicon = require('serve-favicon')
 var flash = require('connect-flash')
+var http = require('http')
+var jade = require('jade')
+var moment = require('moment')
+var nib = require('nib')
 var passport = require('passport')
+var path = require('path')
+var series = require('run-series')
 var session = require('express-session')
+var stylus = require('stylus')
+var supportsColor = require('supports-color')
+var url = require('url')
 
-// Local dependencies
 var auth = require('./lib/auth')
 var config = require('./config')
 var model = require('./model')
 var pro = require('./lib/pro')
 var secret = require('./secret')
 var util = require('./util')
+
+jade.filters.style = function (str) {
+  var ret
+  stylus(str, { compress: config.isProd })
+    .use(nib())
+    .render(function (err, css) { // sync
+      if (err) throw err
+      ret = css
+    })
+  return '<style>' + ret + '</style>'
+}
 
 function Site (opts, done) {
   var self = this
@@ -65,6 +76,7 @@ function Site (opts, done) {
   // Use Jade templates
   self.app.set('views', path.join(__dirname, 'views'))
   self.app.set('view engine', 'jade')
+  self.app.engine('jade', jade.renderFile)
 
   // Make variables and functions available to Jade templates
   self.app.locals.config = config
