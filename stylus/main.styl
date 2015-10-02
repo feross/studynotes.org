@@ -2,7 +2,6 @@
 
 @import 'nib'
 @import 'colors'
-@import 'dataurls'
 
 heading_font()
   font-family: -apple-system-headline, -apple-system, Futura, 'Trebuchet MS', Arial, sans-serif
@@ -210,6 +209,9 @@ body
   min-height: 100%
   padding: 0
   -webkit-font-smoothing: antialiased
+
+  &:not(.cke_editable)
+    background: #F0F0F0
 
   @media PHONE
     font-size: PHONE_FONT_SIZE

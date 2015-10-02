@@ -161,8 +161,8 @@ html(class='studynotes #{layout}', lang='en')
         .heroImage {
           background: url("#{ config.cdnOrigin }/images/hero/#{ hero.image }");
           background-size: cover;
-          background: bottom left url("#{ config.isProd ? config.inline.heroBodyMask : config.cdnOrigin + '/images/hero-body-mask.png' }") repeat-x, center center linear-gradient(to right, rgba(0,0,0,0.2), rgba(0,0,0,0.05)) repeat, center center url("#{ config.cdnOrigin }/images/hero/#{ hero.image }") no-repeat;
-          background-size: auto auto, 100% 100%, cover;
+          background: bottom left url("#{ config.isProd ? config.inline.heroBodyMask : config.cdnOrigin + '/images/hero-body-mask.png' }") repeat-x, center center url("#{ config.cdnOrigin }/images/hero/#{ hero.image }") no-repeat;
+          background-size: 50px 50px, cover;
         }
 
     block stylesheets
