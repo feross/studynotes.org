@@ -74,11 +74,7 @@ block content
             a(href=note.url, title='#{ note.course.shortName } #{ note.notetype.singularName }: #{ note.name }')= note.name
             small.gray: em= ' ' + moment(note.createDate).fromNow()
 
-  h2
-    | Free Sample Admissions Essays
-    a.btn.hide-phone(href='/submit/essay/')
-      i.icon-upload-cloud
-      | Submit an essay
+  h2 Free Sample Admissions Essays
 
   p Learn how to write a powerful college application by studying <a href='/essays/'>our database</a> of <strong>#{ essayCount } successful admissions essays</strong>. The secrets aren't secret anymore — see what actually worked for top students.
   .row
