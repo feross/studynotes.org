@@ -54,11 +54,13 @@ function onMessage (message) {
     // Set the total hits number, no other words
     if (message.totalHits) {
       if (lastTotalHits !== message.totalHits) {
-        $('.totalHits').text(util.addCommas(message.totalHits)).removeClass('pulse')
+        $('.totalHits')
+          .text(util.addCommas(message.totalHits))
+          .addClass('pulse')
 
         setTimeout(function () {
-          $('.totalHits').addClass('pulse')
-        }, 10)
+          $('.totalHits').removeClass('pulse')
+        }, 500)
       }
       lastTotalHits = message.totalHits
     }

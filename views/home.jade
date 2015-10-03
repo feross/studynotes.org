@@ -46,10 +46,11 @@ block sidebar
     p.onlineNum
       span
       | #{ ' students online' }
-    p #{ util.addCommas(userCount) } registered users
     p
       span.totalHits Lots of
       | #{ ' total views' }
+
+    p #{ util.addCommas(userCount) } registered users
     p #{ util.addCommas(noteCount) } notes for <a href='/courses/'>#{ courseCount } AP courses</a>
     p #{ util.addCommas(essayCount) } admissions essays for <a href='/colleges/'>#{ collegeCount } colleges</a>
 
