@@ -1,4 +1,5 @@
 extends layouts/main-sidebar
+include mixins/comments
 
 block sidebar
   include ads/adsense-sidebar
@@ -53,19 +54,7 @@ block content
 
   p.keepStudying: em Use ← → keys to navigate!
 
-  hr
-
-  #disqus_thread
-  script.
-    var disqus_shortname = 'studynotesapp';
-    var disqus_identifier = '#{ note.id }';
-    var disqus_title = '#{ title }';
-    var disqus_url = '#{ url }';
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
+  +comments(note.id, title, url)
 
   h2 How to cite this note (with MLA)
   .cite Aboukhadijeh, Feross. "#{note.name}" StudyNotes.org. Study Notes, LLC., #{moment(note.createDate).format('DD MMM. YYYY.')} Web. #{moment().format('DD MMM. YYYY.')} &lt;#{url}&gt;.

@@ -1,0 +1,8 @@
+mixin comments(id, title, url)
+  #disqus_thread
+  script.
+    var disqus_shortname = 'studynotesapp'
+    var disqus_identifier = '#{ id }'
+    var disqus_title = '#{ title }'
+    var disqus_url = '#{ url }'
+  script(async, src='//studynotesapp.disqus.com/embed.js')

@@ -1,4 +1,5 @@
 extends layouts/main-sidebar
+include mixins/comments
 
 block sidebar
   .author
@@ -99,19 +100,7 @@ block content
 
   p.keepStudying: em Use ← → keys to navigate!
 
-  hr
-
-  #disqus_thread
-  script.
-    var disqus_shortname = 'studynotesapp';
-    var disqus_identifier = '#{ essay.id }';
-    var disqus_title = '#{ title }';
-    var disqus_url = '#{ url }';
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
+  +comments(essay.id, title, url)
 
   h2 How to cite this essay (with MLA)
   .cite #{ user.getMlaName(essay.anon) }. "#{essay.name}" StudyNotes.org. Study Notes, LLC., #{moment(essay.createDate).format('DD MMM. YYYY.')} Web. #{moment().format('DD MMM. YYYY.')} &lt;#{url}&gt;.
