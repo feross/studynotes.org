@@ -40,6 +40,8 @@ block content
   .keepStudying
     p You just finished <strong>#{note.name}</strong>. Nice&nbsp;work!
     //- p Go back to <a href="#{ course.notetypeUrl(notetype) }">all #{ notetype.name.toLowerCase() }</a>.
+    include includes/birdy-happy
+
   .noteNav.clearfix
     if next
       p: a.btn.large.next(href='#{next.url}', title='Next: #{next.name}') Study Next #{ notetype.hasChapters ? 'Chapter' : notetype.singularName }

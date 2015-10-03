@@ -11,9 +11,7 @@
     transform: scale(1.3)
 
 .birdy
-  width: (387 / 2)px
-  height: (285 / 2)px
-  margin-bottom: 35px
+  margin-bottom: 50px
 
   .bird
     animation: birdy-bird both 3s infinite
@@ -22,5 +20,17 @@
     animation: birdy-shadow both 3s infinite
     height: 20px
     width: 80px
-    margin-left: 42px
     margin-top: 4px
+
+  &.birdy-point
+    width: (387 / 2)px
+    height: (285 / 2)px
+    .shadow
+      margin-left: 41px
+
+  &.birdy-happy
+    width: (459 / 2)px
+    height: (420 / 2)px
+    .shadow
+      margin-left: 2px
+
