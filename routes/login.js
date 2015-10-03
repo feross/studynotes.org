@@ -47,7 +47,9 @@ module.exports = function (app) {
     waterfall([
       util.randomBytes,
       function (token, cb) {
-        model.User.findOne({ email: req.body.email }, function (err, user) {
+        model.User.findOne({
+          emailLowerCase: req.body.email && req.body.email.toLowerCase()
+        }, function (err, user) {
           if (err || !user) {
             req.flash('error', 'No account with that email address exists.')
             return res.redirect('/login/forgot')

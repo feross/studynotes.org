@@ -18,7 +18,7 @@ var User = new mongoose.Schema({
       validate({
         validator: 'contains',
         arguments: ' ',
-        message: 'Please share your full name. Don\'t be shy! :)'
+        message: 'Please share your full name. Don\'t be shy :)'
       }),
       validate({
         validator: 'isLength',
@@ -36,6 +36,10 @@ var User = new mongoose.Schema({
         message: 'Your email address is invalid.'
       })
     ]
+  },
+  emailLowerCase: {
+    type: String,
+    unique: true
   },
   password: {
     type: String,
@@ -158,21 +162,24 @@ User.methods.totalHits = function (cb) {
 User.methods.gravatar = function (size, transparent) {
   size = size || 50
   var fallback = transparent ? 'blank' : 'mm'
-  var hash = md5(this.email.trim().toLowerCase())
+  var hash = md5(this.emailLowerCase)
   return '//www.gravatar.com/avatar/' + hash + '?size=' + size + '&default=' + fallback
 }
 
-// Store hashed version of user's password
 User.pre('save', function (next) {
   var self = this
-  if (!self.isModified('password')) return next()
+  if (self.isModified('email')) self.emailLowerCase = self.email.toLowerCase()
 
-  // Hash the password and store it
-  bcrypt.hash(self.password, 10, function (err, hash) {
-    if (err) return next(err)
-    self.password = hash
+  if (self.isModified('password')) {
+    // Store hashed version of user's password
+    bcrypt.hash(self.password, 10, function (err, hash) {
+      if (err) return next(err)
+      self.password = hash
+      next()
+    })
+  } else {
     next()
-  })
+  }
 })
 
 User.methods.comparePassword = function (password, cb) {
