@@ -24,3 +24,8 @@ trackFormSubmit('form.signup2', 'user', 'signup2')
 trackFormSubmit('form.login', 'user', 'login')
 trackFormSubmit('form.login-forgot', 'user', 'login-forgot')
 trackFormSubmit('form.login-forgot', 'user', 'login-reset')
+
+if ($('.subscribe-on-blur').length) {
+  window.ga('send', 'event', 'pro', 'paywall')
+}
+
