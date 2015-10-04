@@ -8,7 +8,7 @@ block content
     .errors
       each msg in errors
         div= msg
-  form(method='POST')
+  form.submit-note(method='POST')
     input(type='hidden', name='_csrf', value=csrf)
     if note && note._id
       input(type='hidden', name='_id', value=note._id)

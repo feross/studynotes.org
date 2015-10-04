@@ -53,6 +53,7 @@
     "express": "^4.0.0",
     "express-session": "^1.0.2",
     "fastclick": "^1.0.6",
+    "function-with-timeout": "^1.0.0",
     "html-parser": "^0.8.0",
     "html-truncate": "^1.0.3",
     "http-status-codes": "^1.0.2",

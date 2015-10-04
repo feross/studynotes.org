@@ -9,7 +9,7 @@ require('./editor')
 require('./search')
 require('./share')
 require('./socket')
-require('./submit-note')
+require('./submit')
 require('./toolbar')
 
 var config = require('../config')

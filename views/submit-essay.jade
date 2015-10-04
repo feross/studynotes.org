@@ -8,7 +8,7 @@ block content
     .errors
       each msg in errors
         div= msg
-  form(method='POST')
+  form.submit-essay(method='POST')
     input(type='hidden', name='_csrf', value=csrf)
     if essay && essay._id
       input(type='hidden', name='_id', value=essay._id)
