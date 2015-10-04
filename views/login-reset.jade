@@ -9,7 +9,7 @@ block content
       each msg in errors
         div= msg
 
-  form(method='POST')
+  form.login-reset(method='POST')
     input(type='hidden', name='_csrf', value=csrf)
     .row
       input(

@@ -12,7 +12,7 @@ block content
       each msg in errors
         div= msg
 
-  form(method='POST')
+  form.signup2(method='POST')
     input(type='hidden', name='_csrf', value=csrf)
     .row
       select.select2(name='college', data-placeholder='What university do/did you attend?')

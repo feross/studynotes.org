@@ -20,7 +20,7 @@ block content
       each msg in errors
         div= msg
 
-  form(method='POST')
+  form.signup(method='POST')
     input(type='hidden', name='_csrf', value=csrf)
     .row
       input(
