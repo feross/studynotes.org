@@ -84,6 +84,8 @@ block content
   hr
 
   p.keepStudying Keep&nbsp;reading more <a href="#{ college.url }">#{ college.shortName } admissions essays</a> — you can't be too prepared!
+    if (!blur)
+      include includes/birdy-happy
 
   p.noteNav.clearfix
     a.btn.large.prev(href='#{prev.url}', title='Prev: #{prev.name}') Previous Essay
