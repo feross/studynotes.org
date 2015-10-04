@@ -76,9 +76,9 @@ $window.on('scroll', debounce(onScroll, 100))
  * Filter keystrokes from keymaster when user is searching.
  * https://github.com/madrobby/keymaster
  */
-var $searchInput = $('.header .search input')
+var $search = $('.header .search')
 key.filter = function () {
-  return $searchInput.val() === ''
+  return !$search.hasClass('searching')
 }
 
 key('left', function () {
