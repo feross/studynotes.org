@@ -58,6 +58,7 @@ block content
   if (blur)
     .body
       .subscribe-on-blur.unblur
+        include includes/birdy-stop
         h2 You must pay $#{ (config.proPrice / 100) } to read this essay.
         p
           form(action='/pro', method='POST')
@@ -75,7 +76,6 @@ block content
               data-email=(req.user && req.user.email)
             )
         h4 Your <strong>one-time payment of $#{ (config.proPrice / 100) }</strong> also gives you <strong>lifetime access to #{ essayCount } essays</strong> that worked at universities like Stanford, Harvard, and MIT.
-        //- h4: em Get into the college of your dreams!
 
       .blur !{essay.body}
   else
