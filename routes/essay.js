@@ -70,9 +70,10 @@ module.exports = function (app) {
       r.essays.forEach(function (e, i) {
         if (e.id === r.essay.id) index = i
       })
+      var len = r.essays.length
 
-      if (index > 0) r.prev = r.essays[index - 1]
-      if (index < r.essays.length - 1) r.next = r.essays[index + 1]
+      r.prev = r.essays[ index === 0 ? len - 1 : index - 1 ]
+      r.next = r.essays[ index === len - 1 ? 0 : index + 1 ]
 
       r.breadcrumbs = [
         { name: 'College Essays', url: '/essays/' },

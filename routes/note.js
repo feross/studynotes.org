@@ -29,48 +29,38 @@ module.exports = function (app) {
           })
           .exec(cb)
       }
-    }, function (err, results) {
-      var notes = results.notes
-      var note = results.note
-
+    }, function (err, r) {
       if (err) return next(err)
-      if (!note) return next()
+      if (!r.note) return next()
 
       if (req.query.edit) {
-        req.flash('note', note)
+        req.flash('note', r.note)
         return res.redirect('/submit/note/')
       }
 
       if (notetype.hasChapters) {
-        notes.sort(sort.sortChapters)
+        r.notes.sort(sort.sortChapters)
       }
 
       var index
-      notes.forEach(function (n, i) {
-        if (n.id === note.id) index = i
+      r.notes.forEach(function (n, i) {
+        if (n.id === r.note.id) index = i
       })
+      var len = r.notes.length
 
-      var prevNote
-      var nextNote
-      if (index > 0) {
-        prevNote = notes[index - 1]
-      }
-      if (index < notes.length - 1) {
-        nextNote = notes[index + 1]
-      }
+      r.prev = r.notes[ index === 0 ? len - 1 : index - 1 ]
+      r.next = r.notes[ index === len - 1 ? 0 : index + 1 ]
 
-      res.render('note', {
-        course: course,
-        note: note,
-        next: nextNote,
-        prev: prevNote,
-        notetype: notetype,
-        relatedNotes: notes,
-        title: [note.name, course.name + ' ' + notetype.name].join(' - '),
-        url: note.url
-      })
+      r.course = course
+      r.notetype = notetype
+      r.title = [
+        r.note.name,
+        course.name + ' ' + notetype.name
+      ].join(' - ')
+      r.url = r.note.url
 
-      note.hit()
+      res.render('note', r)
+      r.note.hit()
     })
   })
 }

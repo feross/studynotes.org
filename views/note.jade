@@ -4,10 +4,10 @@ include mixins/comments
 block sidebar
   include ads/adsense-sidebar
 
-  if locals.relatedNotes
+  if notes
     h2 More #{course.shortName} #{notetype.name}
     ul.more
-      each note in relatedNotes
+      each note in notes
         li: a(href='#{note.url}')= note.name
 
   include ads/adsense-sidebar
@@ -20,11 +20,7 @@ block sidebar
 append toolbar
   if req.user && req.user.admin
     a.btn.red.edit(href='?edit=1') Edit
-  if locals.next
-    a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next<span class="hide-tight"> #{ notetype.hasChapters ? 'Chapter' : notetype.singularName }</span>
-  if !locals.next && locals.prev
-    a.btn.prev(href='#{prev.url}', title='Prev: #{prev.name}') Prev<span class="hide-tight"> #{ notetype.hasChapters ? 'Chapter' : notetype.singularName }</span>
-    .navigate-msg Last note in this set
+  a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next<span class="hide-tight"> #{ notetype.hasChapters ? 'Chapter' : notetype.singularName }</span>
 
 block content
   include includes/breadcrumbs
@@ -40,17 +36,11 @@ block content
 
   .keepStudying
     p You just finished <strong>#{note.name}</strong>. Nice&nbsp;work!
-    //- p Go back to <a href="#{ course.notetypeUrl(notetype) }">all #{ notetype.name.toLowerCase() }</a>.
     include includes/birdy-happy
 
-  .noteNav.clearfix
-    if next
-      p: a.btn.large.next(href='#{next.url}', title='Next: #{next.name}') Study Next #{ notetype.hasChapters ? 'Chapter' : notetype.singularName }
-      if prev
-        p
-          | #{ '(or, study ' }
-          a.prev(href='#{prev.url}', title='Previous: #{prev.name}') previous #{ notetype.hasChapters ? 'chapter' : notetype.singularName.toLowerCase() }
-          | )
+  p.noteNav.clearfix
+    a.btn.large.prev(href='#{prev.url}', title='Prev: #{prev.name}') Previous #{ notetype.hasChapters ? 'Chapter' : notetype.singularName }
+    a.btn.large.next(href='#{next.url}', title='Next: #{next.name}') Next #{ notetype.hasChapters ? 'Chapter' : notetype.singularName }
 
   p.keepStudying: em Use ← → keys to navigate!
 
