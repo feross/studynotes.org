@@ -29,7 +29,7 @@ header.header
         li: a(href='#{req.user.url}', title='Manage your account')
           img.gravatar(src='#{ req.user.gravatar(50, true) }', width=21, height=21).hide-tablet
           i.icon-user.hide-tablet
-          span= req.user.firstName
+          span= req.user.firstName + (req.user.pro ? ' (Pro)' : '')
         li: a.logout(href='#logout', title='Logout of StudyNotes')
           i.icon-logout.hide-tablet
           span Logout
