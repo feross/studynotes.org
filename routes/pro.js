@@ -84,9 +84,9 @@ module.exports = function (app) {
 
       if (r.linkedUser) {
         // Already logged in users will go straight to the essay via `returnTo`
-        res.redirect('/login/')
+        res.redirect('/login/?ga=pro.order')
       } else {
-        res.redirect('/signup/')
+        res.redirect('/signup/?ga=pro.order')
       }
     })
   })

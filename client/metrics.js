@@ -29,3 +29,13 @@ if ($('.subscribe-on-blur').length) {
   window.ga('send', 'event', 'pro', 'paywall')
 }
 
+var query = querystring.parse(
+  window.location.search.replace(/^\?/, '')
+)
+if (query.ga) {
+  var e = query.ga.split('.')
+  if (e.length === 2) {
+    window.ga('send', 'event', e[0], e[1])
+    window.history.replaceState(null, null, window.location.pathname)
+  }
+}
