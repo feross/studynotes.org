@@ -3,6 +3,8 @@ var downgrade = require('downgrade')
 var email = require('./lib/email')
 var extend = require('xtend')
 var htmlParser = require('html-parser')
+var jsdom = require('jsdom')
+var loremIpsum = require('lorem-ipsum')
 var minimist = require('minimist')
 var unlimited = require('unlimited')
 
@@ -99,4 +101,27 @@ exports.randomBytes = function (length, cb) {
     if (err) return cb(err)
     cb(null, buf.toString('hex'))
   })
+}
+
+exports.convertToPaywallText = function (html, numPreview, cb) {
+  jsdom.env(html, function (err, window) {
+    if (err) return cb(err)
+    var document = window.document
+    var nodes = document.querySelectorAll(
+      'body > :not(:first-child):not(:nth-child(2))'
+    )
+
+    Array.from(nodes).forEach(function (node) {
+      var words = node.innerHTML.split(' ').length
+      var sentences = node.innerHTML.split('. ').length
+      node.innerHTML = loremIpsum({
+        count: sentences,
+        sentenceLowerBound: Math.floor((words / sentences) / 1.5),
+        sentenceUpperBound: Math.ceil(words / sentences)
+      })
+    })
+
+    cb(null, document.querySelector('body').innerHTML)
+  })
+  return html
 }

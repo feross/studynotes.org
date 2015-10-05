@@ -31,6 +31,9 @@ var Essay = new mongoose.Schema({
       })
     ]
   },
+  bodyPaywall: {
+    type: String
+  },
   college: {
     type: 'String',
     ref: 'College',
@@ -71,13 +74,18 @@ Essay.virtual('searchDesc').get(function () {
 // Sanitize essay to strip bad html before saving
 Essay.pre('save', function (next) {
   var self = this
+  if (self.isModified('prompt')) self.prompt = util.sanitizeHTML(self.prompt)
+
   if (self.isModified('body')) {
     self.body = util.sanitizeHTML(self.body)
+    util.convertToPaywallText(self.body, 2, function (err, html) {
+      if (err) return next(err)
+      self.bodyPaywall = html
+      next()
+    })
+  } else {
+    next()
   }
-  if (self.isModified('prompt')) {
-    self.prompt = util.sanitizeHTML(self.prompt)
-  }
-  next()
 })
 
 Essay.plugin(plugin.modifyDate)
