@@ -4,14 +4,18 @@ var querystring = require('querystring')
 
 function trackFormSubmit (selector, eventCategory, eventAction) {
   var form = $(selector)
-  form.on('submit', function (e) {
+
+  function onSubmit (e) {
     e.preventDefault()
+    form.off('submit', onSubmit)
     window.ga('send', 'event', eventCategory, eventAction, {
       hitCallback: functionWithTimeout(function () {
         form.submit()
       })
     })
-  })
+  }
+
+  form.on('submit', onSubmit)
 }
 
 // Submit category
