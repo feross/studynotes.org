@@ -295,7 +295,8 @@ html(class='studynotes #{layout}', lang='en')
       //- Facebook Ad Pixel
       script.
         window.fbq = window._fbq = function () {
-          n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+          if (fbq.callMethod) fbq.callMethod.apply(fbq, arguments)
+          else fbq.queue.push(arguments)
         }
         fbq.push = fbq
         fbq.loaded = true
