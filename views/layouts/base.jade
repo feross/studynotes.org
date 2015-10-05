@@ -292,6 +292,21 @@ html(class='studynotes #{layout}', lang='en')
         }]);
       script(async, src='//widget.uservoice.com/oZKwjGI98y7HmJ5jbPuO7w.js')
 
+      //- Facebook Ad Pixel
+      script.
+        window.fbq = window._fbq = function () {
+          n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+        }
+        fbq.push = fbq
+        fbq.loaded = true
+        fbq.version = '2.0'
+        fbq.queue = []
+        fbq('init', '1696013757293784')
+        fbq('track', 'PageView')
+      script(async, src='//connect.facebook.net/en_US/fbevents.js')
+      noscript
+        img(height='1', width='1', style='display:none', src='//www.facebook.com/tr?id=1696013757293784&ev=PageView&noscript=1')
+
     else
       script.
         window.ga = console.log.bind(console)
