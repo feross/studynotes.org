@@ -36,10 +36,23 @@ if ($('.subscribe-on-blur').length) {
 var query = querystring.parse(
   window.location.search.replace(/^\?/, '')
 )
+var e
 if (query.ga) {
-  var e = query.ga.split('.')
+  e = query.ga.split('.')
   if (e.length === 2) {
     window.ga('send', 'event', e[0], e[1])
-    window.history.replaceState(null, null, window.location.pathname)
   }
+}
+
+if (query.fbq) {
+  e = query.fbq.split('.')
+  if (e.length === 1) {
+    window.fbq('track', e[0])
+  } else if (e.length === 2) {
+    window.fbq('track', e[0], { value: Number(e[1]) / 100, currency: 'USD' })
+  }
+}
+
+if (query.ga || query.fbq) {
+  window.history.replaceState(null, null, window.location.pathname)
 }

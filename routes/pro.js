@@ -82,11 +82,12 @@ module.exports = function (app) {
       // Redirect to original essay after signup/login
       req.session.returnTo = r.essay.url
 
+      var tracking = '?ga=pro.order&fbq=Purchase.' + amount
       if (r.linkedUser) {
         // Already logged in users will go straight to the essay via `returnTo`
-        res.redirect('/login/?ga=pro.order')
+        res.redirect('/login/' + tracking)
       } else {
-        res.redirect('/signup/?ga=pro.order')
+        res.redirect('/signup/' + tracking)
       }
     })
   })
