@@ -17,10 +17,11 @@ cd /home/feross/www/studynotes.org-build && npm run build
 sudo supervisorctl stop studynotes-site
 sudo supervisorctl stop studynotes-liveupdater
 
-cd /home/feross/www && rm -rf studynotes.org
+cd /home/feross/www && mv studynotes.org studynotes.org-old
 cd /home/feross/www && mv studynotes.org-build studynotes.org
 
 sudo supervisorctl start studynotes-site
 sudo supervisorctl start studynotes-liveupdater
 
+cd /home/feross/www && rm -rf studynotes.org-old
 cd /home/feross/www/studynotes.org && ./bin/purge-maxcdn.js
