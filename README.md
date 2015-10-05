@@ -19,15 +19,10 @@
 
 ## Contributing
 
-[![js-standard-style](https://raw.githubusercontent.com/feross/standard/master/badge.png)](https://github.com/feross/standard)
+[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
 See [CONTIBUTING.md](/CONTRIBUTING.md) for instructions on how to contribute to the
 Study Notes project.
-
-## Dependencies
-
-Awesome dependency visualization! Check it out:
-[Yasiv: studynotes](http://www.yasiv.com/npm#view/studynotes).
 
 ## License
 
