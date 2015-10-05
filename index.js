@@ -196,6 +196,7 @@ Site.prototype.serveStatic = function () {
   // HACK: Make CSS relative URLs work in development
   if (!config.isProd) {
     self.app.use('/cdn', express.static(config.root + '/lib/select2', opts))
+    self.app.use('/font', express.static(config.root + '/lib/fontello/font', opts))
   }
 
   // Also mount the static files at "/cdn", without routes. This is so that
