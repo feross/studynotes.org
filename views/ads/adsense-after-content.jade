@@ -1,0 +1,9 @@
+if (!req.isAuthenticated() || !req.user.pro)
+  .adsense-after-content
+    if config.isProd
+      <!-- StudyNotes After-Content -->
+      ins(class='adsbygoogle', style='display:block', data-ad-client='ca-pub-7826623632932605', data-ad-slot='3961755508', data-ad-format='auto')
+      script.
+        (adsbygoogle = window.adsbygoogle || []).push({})
+    else
+      div(style='border: 5px solid red; min-height: 300px')

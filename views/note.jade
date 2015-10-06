@@ -30,8 +30,6 @@ block sidebar
       each note in notes
         li: a(href='#{note.url}')= note.name
 
-  include ads/adsense-sidebar
-
   ul
     li #{ util.addCommas(note.hits) } views (#{ util.addCommas(util.hitsPerDay(note.hits, note.createDate)) } views per day)
     li.online
@@ -50,6 +48,8 @@ block content
 
   script(type='text/javascript').
     try { _402_Show(); } catch(e) {}
+
+  include ads/adsense-after-content
 
   hr
 
