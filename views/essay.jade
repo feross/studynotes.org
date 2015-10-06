@@ -1,22 +1,6 @@
 extends layouts/main-sidebar
 include mixins/comments
 
-append scripts
-  if (blur)
-    //- Google Surveys
-    script(type='text/javascript').
-      (function() {
-        var ARTICLE_URL = window.location.href;
-        var CONTENT_ID = 'everything';
-        document.write(
-          '<scr'+'ipt '+
-          'src="//survey.g.doubleclick.net/survey?site=_yunmfp5etxnk7nsn7ndg4ttdyy'+
-          '&amp;url='+encodeURIComponent(ARTICLE_URL)+
-          (CONTENT_ID ? '&amp;cid='+encodeURIComponent(CONTENT_ID) : '')+
-          '&amp;random='+(new Date).getTime()+
-          '" type="text/javascript">'+'\x3C/scr'+'ipt>');
-      })();
-
 append toolbar
   if req.user && req.user.admin
     a.btn.red.edit(href='?edit=1') Edit
@@ -71,31 +55,27 @@ block content
     hr
 
   if (blur)
-    .p402_premium
-      .body !{essay.body}
-    script.
-      try { _402_Show(); } catch(e) {}
-    //- .body
-    //-   .subscribe-on-blur.unblur
-    //-     include includes/birdy-stop
-    //-     h2 You must pay $#{ (config.proPrice / 100) } to read this essay.
-    //-     p
-    //-       form(action='/pro', method='POST')
-    //-         input(type='hidden', name='_csrf', value=csrf)
-    //-         input(type='hidden', name='referringEssay', value=essay.id)
-    //-         script(src='https://checkout.stripe.com/checkout.js',
-    //-           class='stripe-button',
-    //-           data-key=stripe.publishable,
-    //-           data-amount=config.proPrice,
-    //-           data-name='Study Notes',
-    //-           data-description='100+ Top College Essays',
-    //-           data-image='#{ config.cdnOrigin }/images/stripe-image.png',
-    //-           data-alipay='auto',
-    //-           data-bitcoin=true,
-    //-           data-email=(req.user && req.user.email)
-    //-         )
-    //-     h4 Your <strong>one-time payment of $#{ (config.proPrice / 100) }</strong> also gives you <strong>lifetime access to #{ essayCount } essays</strong> that worked at universities like Stanford, Harvard, and MIT.
-    //-   .blur !{essay.bodyPaywall}
+    .body
+      .subscribe-on-blur.unblur
+        include includes/birdy-stop
+        h2 You must pay $#{ (config.proPrice / 100) } to read this essay.
+        p
+          form(action='/pro', method='POST')
+            input(type='hidden', name='_csrf', value=csrf)
+            input(type='hidden', name='referringEssay', value=essay.id)
+            script(src='https://checkout.stripe.com/checkout.js',
+              class='stripe-button',
+              data-key=stripe.publishable,
+              data-amount=config.proPrice,
+              data-name='Study Notes',
+              data-description='100+ Top College Essays',
+              data-image='#{ config.cdnOrigin }/images/stripe-image.png',
+              data-alipay='auto',
+              data-bitcoin=true,
+              data-email=(req.user && req.user.email)
+            )
+        h4 Your <strong>one-time payment of $#{ (config.proPrice / 100) }</strong> also gives you <strong>lifetime access to #{ essayCount } essays</strong> that worked at universities like Stanford, Harvard, and MIT.
+      .blur !{essay.bodyPaywall}
   else
     .body !{essay.body}
 

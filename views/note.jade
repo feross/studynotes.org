@@ -1,6 +1,26 @@
 extends layouts/main-sidebar
 include mixins/comments
 
+append scripts
+  //- Google Surveys
+  script(type='text/javascript').
+    (function() {
+      var ARTICLE_URL = window.location.href;
+      var CONTENT_ID = 'everything';
+      document.write(
+        '<scr'+'ipt '+
+        'src="//survey.g.doubleclick.net/survey?site=_zgv7myx62mjtxzsj4g3vvulzky'+
+        '&amp;url='+encodeURIComponent(ARTICLE_URL)+
+        (CONTENT_ID ? '&amp;cid='+encodeURIComponent(CONTENT_ID) : '')+
+        '&amp;random='+(new Date).getTime()+
+        '" type="text/javascript">'+'\x3C/scr'+'ipt>');
+    })();
+
+append toolbar
+  if req.user && req.user.admin
+    a.btn.red.edit(href='?edit=1') Edit
+  a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next<span class="hide-tight"> #{ notetype.hasChapters ? 'Chapter' : notetype.singularName }</span>
+
 block sidebar
   include ads/adsense-sidebar
 
@@ -17,11 +37,6 @@ block sidebar
     li.online
     li Posted <span title='#{ moment(note.createDate).format("MMMM Do, YYYY, h:mm:ss a") }'>#{ moment(note.createDate).fromNow() }</span>
 
-append toolbar
-  if req.user && req.user.admin
-    a.btn.red.edit(href='?edit=1') Edit
-  a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next<span class="hide-tight"> #{ notetype.hasChapters ? 'Chapter' : notetype.singularName }</span>
-
 block content
   include includes/breadcrumbs
   h1= note.name
@@ -30,7 +45,11 @@ block content
 
   include ads/adsense-in-content
 
-  | !{note.body}
+  .p402_premium
+    .body !{note.body}
+
+  script(type='text/javascript').
+    try { _402_Show(); } catch(e) {}
 
   hr
 
