@@ -6,4 +6,4 @@ if (!req.isAuthenticated() || !req.user.pro)
       script.
         (adsbygoogle = window.adsbygoogle || []).push({})
     else
-      img(src=config.cdnOrigin + '/images/placeholder-ad.png')
+      div(style='border: 5px solid red; min-height: 300px')

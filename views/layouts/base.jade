@@ -12,28 +12,28 @@ html(class='studynotes #{layout}', lang='en')
 
     block preconnect
 
-    - if (locals.forceTitle)
+    if locals.forceTitle
       - pageTitle = title
-    - else if (locals.title)
+    else if locals.title
       - pageTitle = title + ' - Study Notes'
-    - else
+    else
       - pageTitle = 'Study Notes - Free AP Notes'
     title= pageTitle
     meta(property='og:title', content='#{pageTitle}')
 
     meta(name='robots', content='index, follow')
 
-    if (!locals.desc)
+    if !locals.desc
       - desc = '100% Free AP Test Prep website that offers study material to high school students seeking to prepare for AP exams. Enterprising students use this website to learn AP class material, study for class quizzes and tests, and to brush up on course material before the big exam day.'
     meta(name='description', content='#{desc}')
     meta(property='og:description', content='#{desc}')
 
-    if (!locals.keywords)
+    if !locals.keywords
       - keywords = 'ap study notes, ap, advanced placement, ap notes, AP US History, ap u.s. history, apush, american pageant, the american pageant, AP US Government and Politics, ap government, ap gov, AP World History, AP English, AP Psychology, AP Economics, AP Calculus, AP Statistics, AP Physics, AP Biology, AP Environmental Science, AP Chemistry, course guides, chapter outlines, chapter notes, topic outlines, vocabulary words, key terms, important historical documents, ap practice quizzes, ap practice tests, ap cram sheets, course notes'
     meta(name='keywords', content='#{keywords}')
 
     meta(property='og:type', content='website')
-    if (locals.hero && hero.image)
+    if locals.hero && hero.image
       meta(property='og:image', content=config.cdnOrigin + '/images/hero/#{ hero.image }')
     else
       meta(property='og:image', content=config.cdnOrigin + '/images/logo-birdy.png')
@@ -70,24 +70,24 @@ html(class='studynotes #{layout}', lang='en')
     meta(property='fb:admins', content='1347524341')
     meta(property='fb:app_id', content='466476846723021')
 
-    if (locals.url)
+    if locals.url
       meta(property='og:url', content=locals.url)
       link(rel='canonical', href=locals.url)
 
     link(rel='search', href='/opensearch.xml', title='Study Notes', type='application/opensearchdescription+xml')
 
-    if (editorAssets)
+    if editorAssets
       link(rel='stylesheet', href=config.cdnOrigin + '/select2/select2.min.css')
 
     <!--[if ! lte IE 8]><!-->
-    if (config.isProd)
+    if config.isProd
       style.
         !{ config.inline.css }
     else
       link(rel='stylesheet', href=config.cdnOrigin + config.cssPath)
     <!--<![endif]-->
 
-    if (locals.hero && hero.image)
+    if locals.hero && hero.image
       style(id='heroStyle').
         .heroImage {
           background: url("#{ config.cdnOrigin }/images/hero/#{ hero.image }");
@@ -143,11 +143,11 @@ html(class='studynotes #{layout}', lang='en')
     //- Google+ verification
     a(href='https://plus.google.com/106052504873007659547', rel='publisher', style='display: none') Google+
 
-    if (locals.course)
+    if locals.course
       script.
         window.countdownDate = new Date('#{course.examDate}')
 
-    if (config.isProd)
+    if config.isProd
       //- Google Analytics
       script.
         window.ga = window.ga || function () {
@@ -177,7 +177,7 @@ html(class='studynotes #{layout}', lang='en')
         window.ga = console.log.bind(console, 'ga')
         window.fbq = console.log.bind(console, 'fbq')
 
-    if (editorAssets)
+    if editorAssets
       script(src=config.cdnOrigin + config.jsPath)
       script.
         window.CKEDITOR_BASEPATH = '#{ config.cdnOrigin }/ckeditor/'
@@ -187,7 +187,7 @@ html(class='studynotes #{layout}', lang='en')
 
     block scripts
 
-    if (config.isProd)
+    if config.isProd
       //- Adsense (responsive ads)
       script(async, src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')
 
