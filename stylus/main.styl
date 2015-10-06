@@ -375,20 +375,21 @@ hr
   @media DESKTOP
     padding: CONTENT_PADDING_DESKTOP
 
-  .pull-left
-    margin: 20px 20px 10px 0
-    float: left
-
-  .pull-right
-    margin: 0 0 5px 20px
-    float: right
-    @media PHONE
-      float: none
-      margin: 0
 
   h1
     @media PHONE
       text-align: center
+
+.pull-left
+  margin: 20px 20px 10px 0
+  float: left
+
+.pull-right
+  margin: 0 0 5px 20px
+  float: right
+  @media PHONE
+    float: none
+    margin-left: 0
 
 // Attention animation
 
@@ -401,6 +402,7 @@ hr
 .pulse
   animation: pulse both 0.4s
 
+@import 'ads'
 @import 'birdy'
 @import 'browseMenus'
 @import 'buttons'
