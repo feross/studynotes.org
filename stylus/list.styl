@@ -125,3 +125,55 @@ ol
   p
     display: inline
     margin-right: 5px
+
+ul.bigList
+  margin-left: 0
+
+  li
+    ellipsis()
+    list-style: none
+
+    a
+      heading_font()
+      background-color: rgb(42, 42, 43)
+      border-radius: 5px
+      display: block
+      font-size: 1.2em
+      height: 80px
+      margin-bottom: 15px
+      padding: 28px 20px
+
+      @media PHONE
+        font-size: 1.5em
+      @media TABLET_TIGHT
+        font-size: 1.3em
+
+      {LINK}
+        color: #FFF
+      {HOVER}
+        text-decoration: none
+        -webkit-filter: brightness(1.2)
+        filter: brightness(1.2)
+
+  // Google Material Design Colors
+  .english
+    background: #FF9800 top 10px right 20px url('/images/list/english.svg') no-repeat
+    background-size: auto 70px
+  .european-history
+    background: #00BCD4 top 10px right 20px url('/images/list/european-history.svg') no-repeat
+    background-size: auto 69px
+  .microeconomics
+    background: #4CAF50 top 10px right 20px url('/images/list/microeconomics.svg') no-repeat
+    background-size: auto 72px
+  .psychology
+    background: #E91E63 top 10px right 20px url('/images/list/psychology.svg') no-repeat
+    background-size: auto 70px
+  .us-government
+    background: #F44336 top 10px right 20px url('/images/list/us-government.svg') no-repeat
+    background-size: auto 70px
+  .us-history
+    background: #3F51B5 top 10px right -5px url('/images/list/us-history.svg') no-repeat
+    background-size: auto 70px
+  .world-history
+    background: #FF5722 top 10px right 20px url('/images/list/world-history.svg') no-repeat
+    background-size: auto 72px

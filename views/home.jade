@@ -62,18 +62,22 @@ block content
   p We have the best <strong>AP notes, chapter outlines, and study guides</strong> — contributed by students and teachers like yourself. This site is used by <strong>millions across the U.S.</strong> to prepare for AP exams.
 
   .row
-    .col2(style='width: 35%')
-      h2 Pick an AP Class
-      ul.tight
-        each course in modelCache.coursesByName
-          li: strong: a(href=course.url, title=course.shortName)= course.name
-    .col2(style='width: 65%')
-      h2 New Notes
-      ul.tight
-        each note in newNotes
-          li
-            a(href=note.url, title='#{ note.course.shortName } #{ note.notetype.singularName }: #{ note.name }')= note.name
-            small.gray: em= ' ' + moment(note.createDate).fromNow()
+    .col2
+      ul.bigList
+        each course in modelCache.coursesByName.slice(0, 4)
+          li: a(href=course.url, title=course.shortName, class=course.id)= course.name
+    .col2
+      ul.bigList
+        each course in modelCache.coursesByName.slice(4)
+          li: a(href=course.url, title=course.shortName, class=course.id)= course.name
+
+  //- h2 New Notes
+  //- .row
+  //-   ul.tight
+  //-     each note in newNotes
+  //-       li
+  //-         a(href=note.url, title='#{ note.course.shortName } #{ note.notetype.singularName }: #{ note.name }')= note.name
+  //-         small.gray: em= ' ' + moment(note.createDate).fromNow()
 
   h2 Free Sample Admissions Essays
 

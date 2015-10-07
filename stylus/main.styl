@@ -26,7 +26,7 @@ TABLET = 'only screen and (min-width: 700px) and (max-width: 1199px)'
 DESKTOP = 'only screen and (min-width: 1200px)'
 
 DESKTOP_TIGHT = 'only screen and (min-width: 1300px)'
-TABLET_TIGHT = 'only screen and (min-width: 700px) and (max-width: 999px)'
+TABLET_TIGHT = 'only screen and (min-width: 700px) and (max-width: 899px)'
 PHONE_TIGHT = 'only screen and (max-width: 549px)'
 
 .hide-tablet-tight
@@ -118,6 +118,9 @@ ellipsis()
   @media PHONE
     float: none
     width: 100% !important
+  @media TABLET_TIGHT
+    float: none
+    width: 100% !important
 
 .col2
   @extend .col
@@ -127,10 +130,21 @@ ellipsis()
     padding-right: 7px
     @media PHONE
       padding-right: 0
+    @media TABLET_TIGHT
+      padding-right: 0
   &:last-child
     padding-left: 7px
     @media PHONE
       padding-left: 0
+    @media TABLET_TIGHT
+      padding-left: 0
+
+  @media PHONE
+    ul:first-child
+      margin-bottom: 0
+  @media TABLET_TIGHT
+    ul:first-child
+      margin-bottom: 0
 
 .col3
   @extend .col
@@ -139,15 +153,22 @@ ellipsis()
     padding-right: 10px
     @media PHONE
       padding-right: 0
+    @media TABLET_TIGHT
+      padding-right: 0
   &:nth-child(2)
     padding-left: 5px
     padding-right: 5px
     @media PHONE
       padding-left: 0
       padding-right: 0
+    @media TABLET_TIGHT
+      padding-left: 0
+      padding-right: 0
   &:last-child
     padding-left: 10px
     @media PHONE
+      padding-left: 0
+    @media TABLET_TIGHT
       padding-left: 0
 
 .col4
@@ -157,17 +178,23 @@ ellipsis()
     padding-right: 10px
     @media PHONE
       padding-right: 0
+    @media TABLET_TIGHT
+      padding-right: 0
   &:nth-child(2), &:nth-child(3)
     padding-left: 5px
     padding-right: 5px
     @media PHONE
       padding-left: 0
       padding-right: 0
+    @media TABLET_TIGHT
+      padding-left: 0
+      padding-right: 0
   &:last-child
     padding-left: 10px
     @media PHONE
       padding-left: 0
-
+    @media TABLET_TIGHT
+      padding-left: 0
 .hide-phone
   @media PHONE
     display: none !important
