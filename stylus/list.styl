@@ -133,47 +133,74 @@ ul.bigList
     ellipsis()
     list-style: none
 
-    a
-      heading_font()
-      background-color: rgb(42, 42, 43)
-      border-radius: 5px
-      display: block
-      font-size: 1.2em
-      height: 80px
-      margin-bottom: 15px
-      padding: 28px 20px
+  a
+    heading_font()
+    background-color: rgb(42, 42, 43)
+    border-radius: 5px
+    display: block
+    font-size: 1.2em
+    height: 80px
+    margin-bottom: 15px
+    padding: 28px 0 0 20px
 
-      @media PHONE
-        font-size: 1.4em
-      @media TABLET_TIGHT
-        font-size: 1.3em
+    @media PHONE
+      font-size: 1.4em
+    @media TABLET_TIGHT
+      font-size: 1.3em
 
-      {LINK}
-        color: #FFF
-      {HOVER}
-        text-decoration: none
-        -webkit-filter: brightness(1.2)
-        filter: brightness(1.2)
+    {LINK}
+      color: #FFF
+    {HOVER}
+      text-decoration: none
+      -webkit-filter: brightness(1.2)
+      filter: brightness(1.2)
+
+  i
+    float: right
+    display: none
+    @media PHONE
+      display: inline
 
   // Google Material Design Colors
   .english
-    background: #FF9800 top 10px right 20px url('https://cdn.apstudynotes.org/images/list/english.svg') no-repeat
+    background: #FF9800 url('https://cdn.apstudynotes.org/images/list/english.svg') no-repeat
     background-size: auto 70px
+    background-position: top 10px right 20px
+    @media PHONE
+      background-position: top 10px right 50px
   .european-history
-    background: #00BCD4 top 10px right 20px url('https://cdn.apstudynotes.org/images/list/european-history.svg') no-repeat
+    background: #00BCD4 url('https://cdn.apstudynotes.org/images/list/european-history.svg') no-repeat
     background-size: auto 69px
+    background-position: top 10px right 20px
+    @media PHONE
+      background-position: top 10px right 50px
   .microeconomics
-    background: #4CAF50 top 10px right 20px url('https://cdn.apstudynotes.org/images/list/microeconomics.svg') no-repeat
+    background: #4CAF50 url('https://cdn.apstudynotes.org/images/list/microeconomics.svg') no-repeat
     background-size: auto 72px
+    background-position: top 10px right 20px
+    @media PHONE
+      background-position: top 10px right 50px
   .psychology
-    background: #E91E63 top 10px right 20px url('https://cdn.apstudynotes.org/images/list/psychology.svg') no-repeat
+    background: #E91E63 url('https://cdn.apstudynotes.org/images/list/psychology.svg') no-repeat
     background-size: auto 70px
+    background-position: top 10px right 20px
+    @media PHONE
+      background-position: top 10px right 50px
   .us-government
-    background: #F44336 top 10px right 20px url('https://cdn.apstudynotes.org/images/list/us-government.svg') no-repeat
+    background: #F44336 url('https://cdn.apstudynotes.org/images/list/us-government.svg') no-repeat
     background-size: auto 70px
+    background-position: top 10px right 20px
+    @media PHONE
+      background-position: top 10px right 50px
   .us-history
-    background: #3F51B5 top 10px right -5px url('https://cdn.apstudynotes.org/images/list/us-history.svg') no-repeat
+    background: #3F51B5 url('https://cdn.apstudynotes.org/images/list/us-history.svg') no-repeat
     background-size: auto 70px
+    background-position: top 10px right -5px
+    @media PHONE
+      background-position: top 10px right 10px
   .world-history
-    background: #FF5722 top 10px right 20px url('https://cdn.apstudynotes.org/images/list/world-history.svg') no-repeat
+    background: #FF5722 url('https://cdn.apstudynotes.org/images/list/world-history.svg') no-repeat
     background-size: auto 72px
+    background-position: top 10px right 20px
+    @media PHONE
+      background-position: top 10px right 50px

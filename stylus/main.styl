@@ -29,20 +29,6 @@ DESKTOP_TIGHT = 'only screen and (min-width: 1300px)'
 TABLET_TIGHT = 'only screen and (min-width: 700px) and (max-width: 899px)'
 PHONE_TIGHT = 'only screen and (max-width: 549px)'
 
-.hide-tablet-tight
-  @media TABLET_TIGHT
-    display: none
-
-.hide-phone-tight
-  @media PHONE_TIGHT
-    display: none
-
-.hide-tight
-  @media TABLET_TIGHT
-    display: none
-  @media PHONE_TIGHT
-    display: none
-
 PHONE_FONT_SIZE = 16px
 TABLET_FONT_SIZE = 17px
 DESKTOP_FONT_SIZE = 18px
@@ -195,11 +181,27 @@ ellipsis()
       padding-left: 0
     @media TABLET_TIGHT
       padding-left: 0
+
 .hide-phone
   @media PHONE
     display: none !important
+.hide-phone-tight
+  @media PHONE_TIGHT
+    display: none !important
 .hide-tablet
   @media TABLET
+    display: none !important
+.hide-tablet-tight
+  @media TABLET_TIGHT
+    display: none !important
+.hide-desktop
+  @media DESKTOP
+    display: none !important
+
+.hide-tight
+  @media TABLET_TIGHT
+    display: none !important
+  @media PHONE_TIGHT
     display: none !important
 
 .phone

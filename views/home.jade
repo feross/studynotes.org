@@ -65,11 +65,15 @@ block content
     .col2
       ul.bigList
         each course in modelCache.coursesByName.slice(0, 4)
-          li: a(href=course.url, title=course.shortName, class=course.id)= course.name
+          li: a(href=course.url, title=course.shortName, class=course.id)
+            span= course.name
+            i.hide-desktop.icon-right-open
     .col2
       ul.bigList
         each course in modelCache.coursesByName.slice(4)
-          li: a(href=course.url, title=course.shortName, class=course.id)= course.name
+          li: a(href=course.url, title=course.shortName, class=course.id)
+            span= course.name
+            i.hide-desktop.icon-right-open
 
   //- h2 New Notes
   //- .row
