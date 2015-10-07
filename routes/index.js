@@ -9,7 +9,7 @@ module.exports = function (app) {
   app.render = function (view, opts, fn) {
     // Set default template local variables
     opts.view = view
-    opts.cls || (opts.cls = '')
+    if (!opts.cls) opts.cls = ''
     opts.randomquote || (opts.randomquote = randomquote())
     opts.searchTerm || (opts.searchTerm = '')
 
