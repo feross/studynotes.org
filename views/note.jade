@@ -4,7 +4,7 @@ include mixins/comments
 append toolbar
   if req.user && req.user.admin
     a.btn.red.edit(href='?edit=1') Edit
-  a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next<span class="hide-tight"> #{ notetype.hasChapters ? 'Chapter' : notetype.singularName }</span>
+  a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next<span class="hide-tight-tablet"> #{ notetype.hasChapters ? 'Chapter' : notetype.singularName }</span>
 
 block sidebar
   include ads/adsense-sidebar

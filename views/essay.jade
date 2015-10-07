@@ -4,7 +4,7 @@ include mixins/comments
 append toolbar
   if req.user && req.user.admin
     a.btn.red.edit(href='?edit=1') Edit
-  a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next<span class="hide-tight"> Essay</span>
+  a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next<span class="hide-tight-tablet"> Essay</span>
 
 block sidebar
   .author
