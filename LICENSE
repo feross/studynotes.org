@@ -1,5 +1,6 @@
 StudyNotes.org Web Application
-Copyright (C) 2007-2015 Study Notes, LLC and Feross Aboukhadijeh
+
+Copyright (C) 2007-2015 Study Notes, LLC
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -14,5 +15,8 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-NOTE: All site content (essays, notes, study guides, outlines, etc.) is copyright to the
-respective owner and not part of this open source license grant. All rights reserved.
+---
+
+NOTE: All site content (essays, notes, study guides, outlines, etc.)
+is copyright to the respective owner and not part of this open
+source license grant. All rights reserved.
