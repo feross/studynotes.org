@@ -15,8 +15,6 @@ block sidebar
       each note in notes
         li: a(href='#{note.url}')= note.name
 
-  include ads/adsense-sidebar
-
   ul
     li #{ util.addCommas(note.hits) } views (#{ util.addCommas(util.hitsPerDay(note.hits, note.createDate)) } views per day)
     li.online
@@ -42,9 +40,7 @@ block content
 
   include includes/toolbar
 
-  //- Temporarily replaced this with an extra sidebar ad while
-  //- we test Google Surveys
-  //- include ads/adsense-in-content
+  include ads/adsense-in-content
 
   .p402_premium
     .body !{note.body}
