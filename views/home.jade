@@ -67,37 +67,41 @@ block content
         each course in modelCache.coursesByName.slice(0, 4)
           li: a(href=course.url, title=course.shortName, class=course.id)
             span= course.name
-            i.hide-desktop.icon-right-open
+            i.icon-right-open
     .col2
       ul.bigList
         each course in modelCache.coursesByName.slice(4)
           li: a(href=course.url, title=course.shortName, class=course.id)
             span= course.name
-            i.hide-desktop.icon-right-open
-
-  //- h2 New Notes
-  //- .row
-  //-   ul.tight
-  //-     each note in newNotes
-  //-       li
-  //-         a(href=note.url, title='#{ note.course.shortName } #{ note.notetype.singularName }: #{ note.name }')= note.name
-  //-         small.gray: em= ' ' + moment(note.createDate).fromNow()
+            i.icon-right-open
 
   h2 Free Sample Admissions Essays
 
   p Learn how to write a powerful college application by studying <a href='/essays/'>our database</a> of <strong>#{ essayCount } successful admissions essays</strong>. The secrets aren't secret anymore — see what actually worked for top students.
   .row
     .col2
-      h2 Pick a College
-      .row
-        .col2
-          ul.tight
-            each college in modelCache.collegesByName.slice(0, 13)
-              li: strong: a(href=college.url)= college.shortName
-        .col2
-          ul.tight
-            each college in modelCache.collegesByName.slice(13, 26)
-              li: strong: a(href=college.url)= college.shortName
+      ul.bigList
+        each college in modelCache.collegesByName.slice(0, 13)
+          li: a(href=college.url, title=college.name, class=college.id)
+            span= college.shortName + ' Essays'
+            i.icon-right-open
+    .col2
+      ul.bigList
+        each college in modelCache.collegesByName.slice(13, 26)
+          li: a(href=college.url, title=college.name, class=college.id)
+            span= college.shortName + ' Essays'
+            i.icon-right-open
+
+  include ads/adsense-link-units
+
+  .row
+    .col2
+      h2 New Notes
+      ul.tight
+        each note in newNotes
+          li
+            a(href=note.url, title='#{ note.course.shortName } #{ note.notetype.singularName }: #{ note.name }')= note.name
+            small.gray: em= ' ' + moment(note.createDate).fromNow()
     .col2
       h2 New College Essays
       ul.tight
@@ -105,8 +109,6 @@ block content
           li
             a(href=essay.url)= ' ' + essay.name
             small.gray: em= ' ' + moment(essay.createDate).fromNow()
-
-  include ads/adsense-link-units
 
   .row
     .col2

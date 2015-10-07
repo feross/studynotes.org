@@ -24,7 +24,7 @@ module.exports = function (app) {
         model.Note
           .find()
           .sort('-createDate')
-          .limit(Object.keys(model.cache.courses).length)
+          .limit(5)
           .select('-body')
           .populate('course notetype')
           .exec(cb)
@@ -33,7 +33,7 @@ module.exports = function (app) {
         model.Essay
           .find()
           .sort('-createDate')
-          .limit(Object.keys(model.cache.collegesByName).length / 2)
+          .limit(5)
           .select('-body -prompt')
           .populate('college')
           .exec(cb)
