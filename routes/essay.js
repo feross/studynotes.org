@@ -76,8 +76,7 @@ module.exports = function (app) {
       r.next = r.essays[ index === len - 1 ? 0 : index + 1 ]
 
       r.breadcrumbs = [
-        { name: 'College Essays', url: '/essays/' },
-        college
+        { name: 'College Essays', url: '/essays/' }
       ]
       r.college = college
       r.title = [r.essay.name, college.shortName + ' Essay'].join(' - ')
