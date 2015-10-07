@@ -80,6 +80,12 @@ function loadCache (done) {
       if (b.id === 'common-app') return 1
       return sort.byProp('name')(a, b)
     })
+    cache.collegesByShortName = values(cache.colleges).sort(function (a, b) {
+      // force common-app to sort first
+      if (a.id === 'common-app') return -1
+      if (b.id === 'common-app') return 1
+      return sort.byProp('shortName')(a, b)
+    })
     cache.collegesByRank = values(cache.colleges).sort(sort.byProp('rank'))
 
     done(err)

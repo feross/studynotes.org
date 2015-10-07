@@ -36,19 +36,19 @@
       .col4
         h2: a(href='/essays/') Admissions Essays
         ul
-          each college in modelCache.collegesByName.slice(0, 7)
+          each college in modelCache.collegesByShortName.slice(0, 7)
             li: a(href=college.url) #{ college.shortName } Essays
       .col4
         ul
-          each college in modelCache.collegesByName.slice(7, 15)
+          each college in modelCache.collegesByShortName.slice(7, 15)
             li: a(href=college.url) #{ college.shortName } Essays
       .col4
         ul
-          each college in modelCache.collegesByName.slice(15, 23)
+          each college in modelCache.collegesByShortName.slice(15, 23)
             li: a(href=college.url) #{ college.shortName } Essays
       .col4
         ul
-          each college in modelCache.collegesByName.slice(23)
+          each college in modelCache.collegesByShortName.slice(23)
             li: a(href=college.url) #{ college.shortName } Essays
 
         a.btn(href='/submit/essay/')
