@@ -1,9 +1,7 @@
-# [StudyNotes](https://www.apstudynotes.org) [![travis][travis-image]][travis-url] [![npm][npm-image]][npm-url]
+# [StudyNotes](https://www.apstudynotes.org) [![travis][travis-image]][travis-url]
 
-[travis-image]: https://img.shields.io/travis/feross/StudyNotes.svg?style=flat
-[travis-url]: https://travis-ci.org/feross/StudyNotes
-[npm-image]: https://img.shields.io/npm/v/studynotes.svg?style=flat
-[npm-url]: https://npmjs.org/package/studynotes
+[travis-image]: https://img.shields.io/travis/feross/studynotes.svg?style=flat
+[travis-url]: https://travis-ci.org/feross/studynotes
 
 #### Helping students learn faster and study better!
 
