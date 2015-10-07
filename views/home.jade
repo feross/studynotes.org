@@ -63,13 +63,13 @@ block content
 
   .row
     .col2
-      ul.bigList
+      ul.buttonList
         each course in modelCache.coursesByName.slice(0, 4)
           li: a(href=course.url, title=course.shortName, class=course.id)
             span= course.name
             i.icon-right-open
     .col2
-      ul.bigList
+      ul.buttonList
         each course in modelCache.coursesByName.slice(4)
           li: a(href=course.url, title=course.shortName, class=course.id)
             span= course.name
@@ -80,13 +80,13 @@ block content
   p Learn how to write a powerful college application by studying <a href='/essays/'>our database</a> of <strong>#{ essayCount } successful admissions essays</strong>. The secrets aren't secret anymore — see what actually worked for top students.
   .row
     .col2
-      ul.bigList
+      ul.buttonList.tight
         each college in modelCache.collegesByShortName.slice(0, 13)
           li: a(href=college.url, title=college.name, class=college.id)
             span= college.shortName + ' Essays'
             i.icon-right-open
     .col2
-      ul.bigList
+      ul.buttonList.tight
         each college in modelCache.collegesByShortName.slice(13, 26)
           li: a(href=college.url, title=college.name, class=college.id)
             span= college.shortName + ' Essays'
