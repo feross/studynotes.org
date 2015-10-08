@@ -1,7 +1,6 @@
 .btn
   &, &:link, &:visited
     heading_font()
-    position: relative
     background: BLUE
     border-radius: 5px
     border: 0
@@ -19,13 +18,11 @@
 
   {HOVER}
     text-decoration: none
-    -webkit-filter: brightness(1.2)
-    filter: brightness(1.2)
+    background: BLUE_DARK
+    box-shadow: 0 1px BLUE_DARKER
 
-  &:hover, &:focus
-    box-shadow: 0 2px BLUE_DARK
-    top: -1px
   &:active
+    position: relative
     box-shadow: 0 0 #000
     top: 1px
 
