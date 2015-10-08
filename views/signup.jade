@@ -1,6 +1,8 @@
 extends layouts/form
 
 block content
+  a(href=config.siteOrigin)
+    include includes/birdy-point
   if (req.session.pro)
     h1 You're almost done!
     h2 We just need to know a few more things to <strong>create your account</strong>.
