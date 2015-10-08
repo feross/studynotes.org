@@ -49,7 +49,7 @@ function autocomplete (query, cb) {
 
     users: function (cb) {
       model.User
-        .find({ name: regexForQuery(query) })
+        .find({ name: regexForQuery(query), hits: { $gte: 1000 } })
         .sort('-hits')
         .limit(MAX_RESULTS)
         .select('name hits')
