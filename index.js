@@ -187,7 +187,6 @@ Site.prototype.serveStatic = function () {
   var opts = { maxAge: config.maxAge }
   var stat = express.static(config.root + '/static', opts)
   var out = express.static(config.root + '/out', opts)
-  var nodeModules = express.static(config.root + '/node_modules', opts)
   var lib = express.static(config.root + '/lib', opts)
 
   // Serve static files, they take precedence over the routes.
@@ -204,7 +203,6 @@ Site.prototype.serveStatic = function () {
   // files, no other site content.
   self.app.use('/cdn', stat)
   self.app.use('/cdn', out)
-  self.app.use('/cdn', nodeModules)
   self.app.use('/cdn', lib)
   self.app.use('/cdn', function (req, res) {
     res.status(404).send()
