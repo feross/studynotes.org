@@ -133,6 +133,7 @@ ul.buttonList
     ellipsis()
     list-style: none
 
+  // TODO: Unify with .btn class
   a
     heading_font()
     background-color: #607D8B
@@ -158,6 +159,10 @@ ul.buttonList
       text-decoration: none
       -webkit-filter: brightness(1.2)
       filter: brightness(1.2)
+
+    &:active
+      position: relative
+      top: 2px
 
   &.tight a
     height: 60px
