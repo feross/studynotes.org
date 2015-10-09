@@ -83,13 +83,13 @@ key.filter = function () {
 }
 
 key('left', function () {
-  var $prev = $('.noteNav .prev')
+  var $prev = $('.after-content .prev')
   if ($prev.length) {
     window.location = $prev.attr('href')
   }
 })
 key('right', function () {
-  var $next = $('.noteNav .next')
+  var $next = $('.after-content .next')
   if ($next.length) {
     window.location = $next.attr('href')
   }

@@ -52,15 +52,13 @@ block content
 
   hr
 
-  .keepStudying
+  .after-content
     p You just finished <strong>#{note.name}</strong>. Nice&nbsp;work!
     include includes/birdy-happy
-
-  p.noteNav.clearfix
-    a.btn.large.prev(href='#{prev.url}', title='Prev: #{prev.name}') Previous #{ notetype.hasChapters ? 'Chapter' : notetype.singularName }
-    a.btn.large.next(href='#{next.url}', title='Next: #{next.name}') Next #{ notetype.hasChapters ? 'Chapter' : notetype.singularName }
-
-  p.keepStudying: em Use ← → keys to navigate!
+    p
+      a.btn.large.prev(href='#{prev.url}', title='Prev: #{prev.name}') Previous #{ notetype.hasChapters ? 'Chapter' : notetype.singularName }
+      a.btn.large.next(href='#{next.url}', title='Next: #{next.name}') Next #{ notetype.hasChapters ? 'Chapter' : notetype.singularName }
+    p: em Use ← → keys to navigate!
 
   include ads/adsense-link-units
 
