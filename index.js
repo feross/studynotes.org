@@ -6,11 +6,13 @@ var compress = require('compression')
 var connectMongo = require('connect-mongo')
 var connectSlashes = require('connect-slashes')
 var cookieParser = require('cookie-parser')
+var cors = require('cors')
 var csrf = require('csurf')
 var debug = require('debug')('studynotes:site')
 var express = require('express')
 var favicon = require('serve-favicon')
 var flash = require('connect-flash')
+var fs = require('fs')
 var http = require('http')
 var jade = require('jade')
 var moment = require('moment')
@@ -29,6 +31,10 @@ var model = require('./model')
 var pro = require('./lib/pro')
 var secret = require('./secret')
 var util = require('./util')
+
+var CORS_WHITELIST = [
+  'https://www.apstudynotes.org'
+]
 
 jade.filters.style = function (str) {
   var ret
@@ -182,6 +188,18 @@ Site.prototype.serveStatic = function () {
 
   // Favicon middleware makes favicon requests fast
   self.app.use(favicon(path.join(config.root, 'static/favicon.ico')))
+
+  var manifest = fs.readFileSync(path.join(config.root, 'static/manifest.json'))
+  self.app.get('/manifest.json', cors({
+    origin: function (origin, cb) {
+      var allowed = CORS_WHITELIST.indexOf(origin) >= 0 ||
+        /https?:\/\/localhost(:|$)/.test(origin) ||
+        /https?:\/\/[^.\/]+\.localtunnel\.me$/.test(origin)
+      cb(null, allowed)
+    }
+  }), function (req, res) {
+    res.end(manifest)
+  })
 
   // Setup static middlewares
   var opts = { maxAge: config.maxAge }
