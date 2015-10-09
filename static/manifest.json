@@ -39,7 +39,7 @@
       "density": "4.0"
     }
   ],
-  "start_url": "/?homescreen=1",
+  "start_url": "./?homescreen=1",
   "display": "standalone",
   "background_color": "#009EF6",
   "theme_color": "#2196F3"
