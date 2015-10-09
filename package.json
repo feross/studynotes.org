@@ -46,7 +46,6 @@
     "connect-mongo": "^0.8.1",
     "connect-slashes": "^1.2.0",
     "cookie-parser": "^1.0.1",
-    "cors": "^2.7.1",
     "csurf": "^1.1.0",
     "debounce": "^1.0.0",
     "debug": "^2.1.1",
