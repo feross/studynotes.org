@@ -101,6 +101,8 @@ First, install homebrew (if you don't already have it). Follow the intructions
 brew install mongodb
 ```
 
+Be sure to check the [MongoDB Installation Guides][] for any post-installation instructions relevant to your operating system. You may need that knowledge to run the mongod process at your system prompt prior to running this app.
+
 ### SETUP
 
 Study Notes keeps sensitive information like secret keys and passwords in the file
@@ -138,4 +140,5 @@ Now, just open the site in a web browser:
 That's it! If you have problems, open a GitHub issue.
 
 [MongoDB]: http://www.mongodb.org/
+[MongoDB Installation Guides]: http://docs.mongodb.org/manual/installation/#installation-guides
 [Homebrew]: http://brew.sh/
