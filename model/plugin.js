@@ -1,6 +1,16 @@
 var config = require('../config')
 var mongoose = require('mongoose')
-var slugify = require('underscore.string/slugify')
+var slug = require('slug')
+
+slug.defaults.mode = 'studynotes'
+slug.defaults.modes['studynotes'] = {
+  replacement: '-',
+  symbols: true,
+  remove: /[.]/g,
+  lower: true,
+  charmap: slug.charmap,
+  multicharmap: slug.multicharmap
+}
 
 /**
  * Mongoose plugins
@@ -68,7 +78,8 @@ exports.slug = function (schema, opts) {
     var self = this
     if (self._id) return next()
 
-    var initialSlug = slugify(self.name)
+    var initialSlug = slug(self.name)
+    if (initialSlug.length === 0) initialSlug = 'unicode'
 
     // Remove words from the end of the slug until the length is okay
     while (initialSlug.length > config.maxSlugLength) {
