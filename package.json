@@ -120,7 +120,7 @@
   },
   "scripts": {
     "build": "mkdir -p out && npm run build-js && npm run build-css && node ./bin/postbuild.js",
-    "build-css": "stylus -u nib stylus/main.styl -o out/ --include-css -c && node ./bin/transform-css.js out/main.css",
+    "build-css": "stylus -u nib stylus/main.styl -o out/ --include-css && node ./bin/transform-css.js out/main.css",
     "build-js": "browserify client/main.js | uglifyjs -c warnings=false -m > out/main.js",
     "db-download": "rsync -a -O -v --exclude \"sessions.bson\" --exclude \"sessions.metadata.json\" -e \"ssh -p 44444\" feross@athena:\"/home/feross/backups/mongo/daily/studynotes/\" db/dump && (mongod --dbpath db & (sleep 2 && mongorestore --drop --host 127.0.0.1:27017 --db studynotes db/dump))",
     "db-local": "mongod --dbpath db",
