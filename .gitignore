@@ -5,3 +5,4 @@ bundle.js
 node_modules/
 out/
 db/
+npm-debug.log
