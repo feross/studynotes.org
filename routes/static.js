@@ -4,8 +4,8 @@ module.exports = function (app) {
       url: '/about',
       title: 'About',
       hero: {
-        title: 'Say Hello to Study Notes!',
-        desc: 'Fast, free study tools for AP* students',
+        title: 'About Study Notes',
+        desc: 'Helping students learn faster and better',
         image: 'books.jpg'
       }
     })
