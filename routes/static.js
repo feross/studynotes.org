@@ -11,6 +11,18 @@ module.exports = function (app) {
     })
   })
 
+  app.get('/advertise', function (req, res) {
+    res.render('advertise', {
+      url: '/advertise',
+      title: 'Advertise',
+      hero: {
+        title: 'Advertise on Study Notes',
+        desc: 'Reach millions of engaged and passionate students',
+        image: 'advertise.jpg'
+      }
+    })
+  })
+
   app.get('/anon', function (req, res) {
     res.render('anon', {
       url: '/anon',
