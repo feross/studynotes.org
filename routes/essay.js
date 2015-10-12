@@ -16,6 +16,7 @@ module.exports = function (app) {
             college: college.id,
             _id: req.params.essayId
           })
+          .select('-bodyTruncate')
           .populate('user')
           .exec(cb)
       },
@@ -34,7 +35,7 @@ module.exports = function (app) {
         model.Essay
           .find({ college: college.id })
           .sort('-hits')
-          .select('-body -prompt')
+          .select('-prompt -body -bodyPaywall -bodyTruncate')
           .exec(cb)
       }
     }, function (err, r) {

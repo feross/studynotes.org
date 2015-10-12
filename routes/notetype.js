@@ -17,11 +17,12 @@ module.exports = function (app) {
         var query = model.Note
           .find({ course: course.id, notetype: notetype.id })
           .sort('ordering -hits')
+          .select('-body')
 
         if (notetype.id === 'sample-essays') {
           query.populate('user')
         } else {
-          query.select('-body')
+          query.select('-bodyTruncate')
         }
 
         query.exec(cb)

@@ -25,7 +25,7 @@ module.exports = function (app) {
           .find()
           .sort('-createDate')
           .limit(5)
-          .select('-body')
+          .select('-body -bodyTruncate')
           .populate('course notetype')
           .exec(cb)
       },
@@ -34,7 +34,7 @@ module.exports = function (app) {
           .find()
           .sort('-createDate')
           .limit(5)
-          .select('-body -prompt')
+          .select('-prompt -body -bodyPaywall -bodyTruncate')
           .populate('college')
           .exec(cb)
       }

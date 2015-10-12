@@ -13,9 +13,9 @@ module.exports = function (app) {
       essays: function (cb) {
         model.Essay
           .find()
-          .select('-prompt')
+          .select('-prompt -body -bodyPaywall')
           .sort('-hits')
-          .populate('user college')
+          .populate('college')
           .exec(cb)
       },
       collegeCount: function (cb) {
@@ -67,7 +67,7 @@ module.exports = function (app) {
       essays: function (cb) {
         model.Essay
           .find({ college: college.id })
-          .select('-body -prompt')
+          .select('-prompt -body -bodyPaywall -bodyTruncate')
           .sort('-hits')
           .exec(cb)
       }
@@ -95,7 +95,7 @@ module.exports = function (app) {
       essays: function (cb) {
         model.Essay
           .find({ college: college.id })
-          .select('-prompt')
+          .select('-prompt -body -bodyPaywall')
           .sort('-hits')
           .populate('user')
           .exec(cb)

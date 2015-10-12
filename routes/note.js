@@ -17,7 +17,7 @@ module.exports = function (app) {
         model.Note
           .find({ course: course.id, notetype: notetype.id })
           .sort('ordering -hits')
-          .select('-body')
+          .select('-body -bodyTruncate')
           .exec(cb)
       },
       note: function (cb) {
