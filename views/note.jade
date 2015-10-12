@@ -52,10 +52,9 @@ block content
 
   hr
 
-  include ads/medianet-906x200
-
   .after-content
     p You just finished <strong>#{note.name}</strong>. Nice&nbsp;work!
+    include ads/medianet-after-content
     include includes/birdy-happy
     p
       a.btn.large.prev(href='#{prev.url}', title='Prev: #{prev.name}') Previous #{ notetype.hasChapters ? 'Chapter' : notetype.singularName }
