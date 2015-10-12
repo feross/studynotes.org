@@ -30,6 +30,9 @@ var Note = new mongoose.Schema({
       })
     ]
   },
+  bodyTruncate: {
+    type: String
+  },
   ordering: {
     type: Number,
     index: true
@@ -89,6 +92,7 @@ Note.pre('save', function (next) {
   var self = this
   if (self.isModified('body')) {
     self.body = util.sanitizeHTML(self.body)
+    self.bodyTruncate = util.truncate(util.sanitizeHTML(self.body, ['p']), 300).trim()
   }
   next()
 })

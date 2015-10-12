@@ -21,10 +21,9 @@ mixin entries(entries)
               a(href=entry.user.getUrl())
                 img(src=entry.user.gravatar(80))
 
-      - var body = util.truncate(util.sanitizeHTML(entry.body, ['p']), 300).trim()
       .body
-        if (body)
-          | !{ body }
+        if entry.bodyTruncate
+          | !{ entry.bodyTruncate }
         else
           p Preview unavailable, click to read
 

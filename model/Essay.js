@@ -34,6 +34,9 @@ var Essay = new mongoose.Schema({
   bodyPaywall: {
     type: String
   },
+  bodyTruncate: {
+    type: String
+  },
   college: {
     type: 'String',
     ref: 'College',
@@ -78,6 +81,7 @@ Essay.pre('save', function (next) {
 
   if (self.isModified('body')) {
     self.body = util.sanitizeHTML(self.body)
+    self.bodyTruncate = util.truncate(util.sanitizeHTML(self.body, ['p']), 300).trim()
     util.convertToPaywallText(self.body, 2, function (err, html) {
       if (err) return next(err)
       self.bodyPaywall = html
