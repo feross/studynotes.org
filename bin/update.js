@@ -11,16 +11,16 @@ var runParallelLimit = require('run-parallel-limit')
 
 model.connect(function (err) {
   if (err) throw err
-  model.Essay
+  model.Note
     .find()
-    .exec(function (err, users) {
+    .exec(function (err, items) {
       if (err) throw err
-      console.log(users.length)
+      console.log(items.length)
 
-      runParallelLimit(users.map(function (user) {
+      runParallelLimit(items.map(function (item) {
         return function (cb) {
-          console.log('id', user._id)
-          user.save(cb)
+          console.log('id', item._id)
+          item.save(cb)
         }
       }), 1, function (err) {
         if (err) {
