@@ -57,7 +57,7 @@ block content
   if (blur)
     .body
       .subscribe-on-blur.unblur
-        include includes/birdy-stop
+        include includes/birdy/stop
         h2 You must pay $#{ (config.proPrice / 100) } to read this essay.
         p
           form(action='/pro', method='POST')
@@ -86,7 +86,7 @@ block content
     if (!blur)
       include ads/medianet-after-content
     if (!blur)
-      include includes/birdy-happy
+      include includes/birdy/happy
     p
       a.btn.large.prev(href='#{prev.url}', title='Prev: #{prev.name}') Previous Essay
       a.btn.large.next(href='#{next.url}', title='Next: #{next.name}') Next Essay

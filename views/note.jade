@@ -55,7 +55,7 @@ block content
   .after-content
     p You just finished <strong>#{note.name}</strong>. Nice&nbsp;work!
     include ads/medianet-after-content
-    include includes/birdy-happy
+    include includes/birdy/happy
     p
       a.btn.large.prev(href='#{prev.url}', title='Prev: #{prev.name}') Previous #{ notetype.hasChapters ? 'Chapter' : notetype.singularName }
       a.btn.large.next(href='#{next.url}', title='Next: #{next.name}') Next #{ notetype.hasChapters ? 'Chapter' : notetype.singularName }
