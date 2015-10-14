@@ -55,13 +55,14 @@ block sidebar
       li ##{ college.rank } in US News &amp; World Report
 
   if (college.location)
-    h2 Located in #{ college.location }
+    h3 Located in #{ college.location }
     .map
       a(href='about/')
         img(src='//maps.googleapis.com/maps/api/staticmap?center=#{ encodeURIComponent(college.location) }&zoom=8&size=336x200&scale=2&maptype=roadmap&sensor=false&visual_refresh=true')
+
+  include ads/adsense-sidebar
 
   ul
     li #{ util.addCommas(college.hits) } views
     li.online
 
-  include ads/adsense-sidebar
