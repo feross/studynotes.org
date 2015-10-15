@@ -83,7 +83,6 @@ function Site (opts, done) {
   self.app.locals.modelCache = model.cache
   self.app.locals.moment = moment
   self.app.locals.pretty = !config.isProd
-  self.app.locals.random = Math.random
   self.app.locals.stripe = { publishable: secret.stripe.publishable }
   self.app.locals.util = util
 
@@ -132,21 +131,17 @@ function Site (opts, done) {
     next()
   })
 
-  self.serveStatic()
+  self.setupStatic()
   self.app.use(connectSlashes())
 
-  // Express middleware that logs requests using the "debug" module so that the
-  // output is hidden by default. Enable with DEBUG=* environment variable.
   self.app.use(function (req, res, next) {
+    // Log requests using the "debug" module so that the output is hidden by default.
+    // Enable with DEBUG=* environment variable.
     self.debug(
-      (supportsColor ? '\x1B[90m' : '') + req.method + ' ' + req.originalUrl +
+      (supportsColor ? '\x1B[90m' : '') +
+      req.method + ' ' + req.originalUrl + ' ' + req.ip +
       (supportsColor ? '\x1B[0m' : '')
     )
-    next()
-  })
-
-  self.app.use(function (req, res, next) {
-    res.locals.req = req
     next()
   })
 
@@ -155,6 +150,17 @@ function Site (opts, done) {
 
   // Errors are propogated using `req.flash`
   self.app.use(flash())
+
+  self.app.use(function (req, res, next) {
+    res.locals.req = req
+    res.locals.csrf = req.csrfToken()
+    res.locals.ads = req.query.ads ||
+      (
+        (!req.isAuthenticated() || !req.user.pro) &&
+        [ '71.202.21.18' ].indexOf(req.ip) === -1
+      )
+    next()
+  })
 
   require('./routes')(self.app)
 
@@ -177,7 +183,7 @@ Site.prototype.debug = function () {
   debug.apply(null, args)
 }
 
-Site.prototype.serveStatic = function () {
+Site.prototype.setupStatic = function () {
   var self = this
 
   // Favicon middleware makes favicon requests fast
@@ -240,11 +246,6 @@ Site.prototype.setupSessions = function () {
   passport.serializeUser(auth.serializeUser)
   passport.deserializeUser(auth.deserializeUser)
   passport.use(auth.passportStrategy)
-
-  self.app.use(function (req, res, next) {
-    res.locals.csrf = req.csrfToken()
-    next()
-  })
 }
 
 if (!module.parent) util.run(Site)
