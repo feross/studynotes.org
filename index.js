@@ -193,23 +193,23 @@ Site.prototype.setupStatic = function () {
   var opts = { maxAge: config.maxAge }
   var stat = express.static(config.root + '/static', opts)
   var out = express.static(config.root + '/out', opts)
-  var lib = express.static(config.root + '/lib', opts)
+  var vendor = express.static(config.root + '/vendor', opts)
 
-  // Serve static files, they take precedence over the routes.
   self.app.use(stat)
-
-  // HACK: Make CSS relative URLs work in development
-  if (!config.isProd) {
-    self.app.use('/cdn', express.static(config.root + '/lib/select2', opts))
-    self.app.use('/font', express.static(config.root + '/lib/fontello/font', opts))
-  }
 
   // Also mount the static files at "/cdn", without routes. This is so that
   // we can point the CDN at this folder and have it mirror ONLY the static
   // files, no other site content.
   self.app.use('/cdn', stat)
   self.app.use('/cdn', out)
-  self.app.use('/cdn', lib)
+  self.app.use('/cdn', vendor)
+
+  // HACK: Make CSS relative URLs work in development
+  if (!config.isProd) {
+    self.app.use('/cdn', express.static(config.root + '/vendor/select2', opts))
+    self.app.use('/font', express.static(config.root + '/vendor/fontello/font', opts))
+  }
+
   self.app.use('/cdn', function (req, res) {
     res.status(404).send()
   })
