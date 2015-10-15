@@ -1,12 +1,12 @@
 footer.footer
   block footer
-    .row.hide-phone
+    .row.quote.hide-phone
       p.randomquote
         q= randomquote.text
         | #{ ' ' }
         span.quote-attribution!= randomquote.author.replace(' ', '&nbsp;')
 
-    .row
+    .row.links
       .col
         h3 AP Courses
         ul
@@ -26,11 +26,11 @@ footer.footer
       .col
         h3 Site Links
         ul
-          li: a(href='/about/') About Study Notes
+          li: a(href='/about/') About
           li: a(href='/advertise/') Advertise
           li: a(href='/plagiarism/') Anti-Plagiarism
           li: a(href='/study-guides/') Book Store
-          li: a(href='/contact/') Contact Us
+          li: a(href='/contact/') Contact
           li: a(href='/stats/') Live Stats
           li: a(href='/open-source/') Open Source
           li: a(href='/login/'): strong Log In
@@ -39,11 +39,11 @@ footer.footer
       .col.about-this-site.hide-phone
         h3 What is Study Notes?
         ul
-          li That's easy &mdash; it's the best way to study for AP classes and AP exams! StudyNotes offers <strong>fast, free study tools for AP students</strong>. Our AP study guides, practice tests, and notes are the best on the web because they're contributed by students and teachers like yourself. Always 100% free.
-          li Follow <a href="https://twitter.com/StudyNotesApp">@StudyNotesApp</a> on Twitter!
+          li
+            p That's easy &mdash; it's the best way to study for AP classes and AP exams! StudyNotes offers <strong>fast, free study tools for AP students</strong>. Our AP study guides, practice tests, and notes are the best on the web because they're contributed by students and teachers like yourself. Always 100% free.
+          p Follow <a href="https://twitter.com/StudyNotesApp">@StudyNotesApp</a> on Twitter!
 
-    .row
-      small.hide-phone: i With a commitment to quality education tools for students and teachers.
+    .row.fine-print
       small Copyright © 2006-2015 <a href="/">Study Notes, LLC</a>. <a href="/privacy/">Privacy</a>. <a href="/terms/">Terms</a>. <a href="/photo-credits/">Photo Credits</a>. Made in Stanford, California.
       small
         if (college)
