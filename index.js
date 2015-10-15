@@ -154,7 +154,6 @@ function Site (opts, done) {
   self.app.use(function (req, res, next) {
     res.locals.req = req
     res.locals.csrf = req.csrfToken()
-    console.log(req.headers, req.ips, req.ip)
     res.locals.ads = req.query.ads ||
       (
         (!req.isAuthenticated() || !req.user.pro) &&
