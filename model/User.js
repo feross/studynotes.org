@@ -75,8 +75,8 @@ var User = new mongoose.Schema({
 // Trim whitespace
 User.pre('validate', function (next) {
   var self = this
-  self.email = self.email && self.email.trim()
-  self.name = self.name && self.name.trim()
+  if (typeof self.email === 'string') self.email = self.email.trim()
+  if (typeof self.name === 'string') self.name = self.name.trim()
   next()
 })
 

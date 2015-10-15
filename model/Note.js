@@ -63,7 +63,7 @@ Note.index({ course: 1, notetype: 1 })
 // Trim whitespace
 Note.pre('validate', function (next) {
   var self = this
-  self.name = self.name.trim()
+  if (typeof self.name === 'string') self.name = self.name.trim()
   next()
 })
 
