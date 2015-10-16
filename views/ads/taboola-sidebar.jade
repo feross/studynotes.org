@@ -1,0 +1,16 @@
+if locals.ads
+  .taboola-sidebar
+    if config.isProd
+      #taboola-right-rail-thumbnails
+      script.
+        window._taboola = window._taboola || []
+        _taboola.push({ article: 'auto' })
+        _taboola.push({
+          mode: 'thumbnails-rr',
+          container: 'taboola-right-rail-thumbnails',
+          placement: 'Right Rail Thumbnails',
+          target_type: 'mix'
+        })
+      script(async, src='//cdn.taboola.com/libtrc/apstudynotes/loader.js')
+    else
+      div(style='border: 5px solid red; min-height: 550px; width: 100%') taboola-sidebar
