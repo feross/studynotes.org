@@ -49,8 +49,10 @@ $('.logout').click(function (e) {
   e.preventDefault()
   $.post('/logout/')
     .done(function () {
-      window.location = config.siteOrigin + window.location.pathname +
-        '?info=You%20are%20logged%20out!'
+      var u = url.parse(window.location.href, true)
+      u.query.info = 'You are logged out!'
+      u.search = null
+      window.location = url.format(u)
     })
     .fail(function () {
       notify.big.error('Error contacting the server!')
