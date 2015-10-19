@@ -28,11 +28,11 @@ module.exports = function (app) {
       }
     }, function (err, r) {
       if (err) return next(err)
-      var title = college
+      var heroTitle = college
         ? college.shortName + ' Essays that Worked'
         : 'College Essays that Worked'
 
-      var image = college
+      var heroImage = college
         ? college.id + '.jpg'
         : 'amjed.jpg'
 
@@ -59,12 +59,16 @@ module.exports = function (app) {
         collegeListAnd = college.shortName + ', Stanford, and Harvard'
       }
 
+      var title = college
+        ? college.shortName + ' Essays that Worked'
+        : 'College Essays that Worked'
+
       res.render('pro', {
-        title: 'Study Notes Pro - Real College Essays',
+        title: title,
         url: '/pro/' + (college ? college.id : ''),
         hero: {
-          title: title,
-          image: image
+          title: heroTitle,
+          image: heroImage
         },
         college: college,
         collegeEssays: collegeEssays,
