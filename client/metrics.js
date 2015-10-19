@@ -44,6 +44,9 @@ if (query.ga) {
   }
 }
 
+window.fbq('init', '1696013757293784')
+window.fbq('track', 'PageView')
+
 if (query.fbq) {
   e = query.fbq.split('.')
   if (e.length === 1) {
