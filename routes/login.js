@@ -31,7 +31,7 @@ module.exports = function (app) {
     if (req.isAuthenticated() && req.user.pro) delete req.session.free
 
     req.logout()
-    res.send(200) // redirect happens on client-side
+    res.sendStatus(200) // redirect happens on client-side
   })
 
   app.get('/login/forgot', function (req, res) {
