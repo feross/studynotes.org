@@ -2,6 +2,7 @@ var $ = require('jquery')
 var config = require('../config')
 var notify = require('./notify')
 var url = require('url')
+var util = require('../util')
 
 if (window.StripeCheckout) {
   var query = url.parse(window.location.href, true).query
@@ -21,7 +22,12 @@ if (window.StripeCheckout) {
       token.referringEssay = referringEssay
       $.post('/pro/', token)
         .done(function () {
-          window.location = referringEssay
+          window.location = util.addQueryParams(referringEssay, {
+            ga: 'pro.order',
+            fbq: 'Purchase.' + config.proPrice
+            // TODO
+            // success: 'Thanks for purchasing Study Notes Pro!'
+          })
         })
         .fail(function () {
           notify.big.error('Error contacting the server!')
