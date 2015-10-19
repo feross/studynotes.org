@@ -55,13 +55,20 @@ module.exports = function (app) {
             view: ['college', 'essay']
           },
           {
-            name: 'About ' + opts.college.shortName,
+            name: opts.college.shortName + ' Facts',
             url: opts.college.url + 'about/',
             view: 'college-about'
           }
         ],
         title: opts.college.shortName + ' Admissions Essays',
         url: opts.college.url
+      }
+
+      if (!opts._locals.req.isAuthenticated() || !opts._locals.req.user.pro) {
+        opts.hero.tabs.push({
+          name: 'Unlock All Essays',
+          url: '/pro/' + opts.college.id + '/'
+        })
       }
     } else if (opts.hero && !opts.hero.image) {
       // If rendering any other type of view and heroImage is missing

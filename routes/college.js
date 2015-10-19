@@ -5,7 +5,8 @@ var parallel = require('run-parallel')
 module.exports = function (app) {
   var tabs = [
     { name: 'Top College Essays', url: '/essays/', view: 'essays' },
-    { name: 'Top Universities', url: '/colleges/', view: 'colleges' }
+    { name: 'Top Universities', url: '/colleges/', view: 'colleges' },
+    { name: 'Unlock All Essays', url: '/pro/' }
   ]
 
   app.get('/essays', function (req, res, next) {
