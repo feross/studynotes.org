@@ -1,5 +1,6 @@
 var config = require('../config')
 var randomquote = require('../lib/randomquote')
+var url = require('url')
 
 module.exports = function (app) {
   /*
@@ -19,8 +20,10 @@ module.exports = function (app) {
       opts.encodedUrl = encodeURIComponent(opts.url)
 
       // Force trailing slashes in URL
-      if (opts.url[opts.url.length - 1] !== '/') {
-        opts.url += '/'
+      var u = url.parse(opts.url)
+      if (u.pathname[u.pathname.length - 1] !== '/') {
+        u.pathname += '/'
+        opts.url = url.format(u)
       }
     }
 
@@ -40,7 +43,7 @@ module.exports = function (app) {
         title: opts.course.name + ' Notes',
         url: opts.course.url
       }
-    } else if (opts.college && opts.essays) {
+    } else if ([ 'college', 'college-about', 'essay' ].indexOf(view) !== -1) {
       // If rendering a college-related view
       opts.hero = {
         // desc: 'College Essays That Worked',

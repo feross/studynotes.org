@@ -5,36 +5,97 @@ var model = require('../model')
 var secret = require('../secret')
 var values = require('object-values')
 
-var stripe = require('stripe')(secret.stripe.secret)
+var stripe = require('stripe')(secret.stripe)
 
 module.exports = function (app) {
+  app.get('/pro/:collegeId?', function (req, res, next) {
+    // Send pro users to the essays page
+    if (req.isAuthenticated() && req.user.pro) {
+      return res.redirect('/essays/')
+    }
+
+    var college = model.cache.colleges[req.params.collegeId]
+    if (!college && req.params.collegeId) return next()
+
+    auto({
+      essays: function (cb) {
+        model.Essay
+          .find()
+          .select('-prompt -body -bodyPaywall -bodyTruncate')
+          .populate('college')
+          .sort('-hits')
+          .exec(cb)
+      }
+    }, function (err, r) {
+      if (err) return next(err)
+      var title = college
+        ? college.shortName + ' Essays that Worked'
+        : 'College Essays that Worked'
+
+      var image = college
+        ? college.id + '.jpg'
+        : 'amjed.jpg'
+
+      var collegeEssays = college
+        ? r.essays.filter(e => e.college.id === college.id)
+        : r.essays
+      var otherEssays = college
+        ? r.essays.filter(e => e.college.id !== college.id)
+        : r.essays
+
+      var otherColleges = college
+        ? model.cache.collegesByRank.filter(c => c.id !== college.id)
+        : model.cache.collegesByRank
+
+      var collegeList, collegeListAnd
+      if (!college || college.id === 'stanford') {
+        collegeList = 'Stanford, Harvard, Princeton'
+        collegeListAnd = 'Stanford, Harvard, and Princeton'
+      } else if (college.id === 'harvard') {
+        collegeList = 'Harvard, Stanford, Princeton'
+        collegeListAnd = 'Harvard, Stanford, and Princeton'
+      } else {
+        collegeList = college.shortName + ', Stanford, Harvard'
+        collegeListAnd = college.shortName + ', Stanford, and Harvard'
+      }
+
+      res.render('pro', {
+        title: 'Study Notes Pro - Real College Essays',
+        url: '/pro/' + (college ? college.id : ''),
+        hero: {
+          title: title,
+          image: image
+        },
+        college: college,
+        collegeEssays: collegeEssays,
+        collegeList: collegeList,
+        collegeListAnd: collegeListAnd,
+        essays: r.essays,
+        otherColleges: otherColleges,
+        otherEssays: otherEssays
+      })
+    })
+  })
+
   app.post('/pro', function (req, res, next) {
     var amount = config.proPrice
 
     auto({
-      essay: function (cb) {
-        model.Essay
-        .findOne({ _id: req.body.referringEssay })
-        .exec(cb)
-      },
-
-      stripeCharge: ['essay', function (cb) {
-        // wait until after essay task is fetched so that we can redirect back
-        // to essay if there is an error
+      stripeCharge: function (cb) {
         stripe.charges.create({
           amount: amount, // in cents
           currency: 'usd',
-          card: req.body.stripeToken,
-          description: 'Study Notes Pro (' + req.body.stripeEmail + ')'
+          card: req.body.id,
+          description: 'Study Notes Pro (' + req.body.email + ')'
         }, cb)
-      }],
+      },
 
       order: ['stripeCharge', function (cb, r) {
         var order = new model.Order({
-          stripeEmail: req.body.stripeEmail,
-          stripeToken: req.body.stripeToken,
+          stripeEmail: req.body.email,
+          stripeToken: req.body.id,
           amount: amount,
-          referringEssay: r.essay,
+          referringEssay: req.body.referringEssay,
           freeEssays: req.session.free,
           stripeCharge: JSON.stringify(r.stripeCharge)
         })
@@ -42,18 +103,6 @@ module.exports = function (app) {
         order.save(function (err, order) {
           cb(err, order)
         })
-      }],
-
-      // Is there a registered user with the same email used for Stripe?
-      // If so, we want them to encourage them to link their account by
-      // redirecting to login page. They are still free to sign up for a new
-      // account if they want.
-      linkedUser: ['order', function (cb, r) {
-        if (req.isAuthenticated()) return cb(null, req.user)
-
-        model.User
-          .findOne({ email: r.order.stripeEmail })
-          .exec(cb)
       }]
 
     }, function (err, r) {
@@ -61,13 +110,13 @@ module.exports = function (app) {
         if (err.type === 'StripeCardError') {
           req.flash('error', 'Your card has been declined. Please try again!')
           debug('Card declined: %s', err.message)
-          return res.redirect((r.essay && r.essay.url) || 'back')
+          return res.redirect(req.body.referringEssay || 'back')
         } else if (err.errors) {
           // errors from mongoose validation
           values(err.errors).forEach(function (error) {
             req.flash('error', error.message)
           })
-          return res.redirect((r.essay && r.essay.url) || 'back')
+          return res.redirect(req.body.referringEssay || 'back')
         } else {
           return next(err)
         }
@@ -80,15 +129,8 @@ module.exports = function (app) {
       }
 
       // Redirect to original essay after signup/login
-      req.session.returnTo = r.essay.url
-
-      var tracking = '?ga=pro.order&fbq=Purchase.' + amount
-      if (r.linkedUser) {
-        // Already logged in users will go straight to the essay via `returnTo`
-        res.redirect('/login/' + tracking)
-      } else {
-        res.redirect('/signup/' + tracking)
-      }
+      req.session.returnTo = req.body.referringEssay
+      res.sendStatus(200)
     })
   })
 }

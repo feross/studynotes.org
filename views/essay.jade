@@ -1,5 +1,6 @@
 extends layouts/main-sidebar
 include mixins/comments
+include mixins/pro-btn
 
 append toolbar
   if req.user && req.user.admin
@@ -59,22 +60,14 @@ block content
       .subscribe-on-blur.unblur
         include includes/birdy/stop
         h2 You must pay $#{ (config.proPrice / 100) } to read this essay.
+
         p
-          form(action='/pro', method='POST')
-            input(type='hidden', name='_csrf', value=csrf)
-            input(type='hidden', name='referringEssay', value=essay.id)
-            script(src='https://checkout.stripe.com/checkout.js',
-              class='stripe-button',
-              data-key=stripe.publishable,
-              data-amount=config.proPrice,
-              data-name='Study Notes',
-              data-description='100+ Top College Essays',
-              data-image='#{ config.cdnOrigin }/images/stripe-image.png',
-              data-alipay='auto',
-              data-email=(req.user && req.user.email)
-            )
-        h4 Your <strong>one-time $#{ (config.proPrice / 100) } payment</strong> also gives you <strong>lifetime access to #{ essayCount } essays</strong> that worked at Stanford, Harvard, MIT, and more.
+          +pro-btn('Unlock Essays', 'large')
+
+        h4 For just $#{ (config.proPrice / 100) } (one-time payment) you get <strong>lifetime access to #{ essayCount } essays</strong> that worked at Stanford, Harvard, and more. <a href="/pro/?college=#{ college.id }&amp;referringEssay=#{ encodeURIComponent(essay.url) }">Learn more.</a>
+
         h4 Questions? Call 1 (530) 633-7677
+
       .blur !{essay.bodyPaywall}
   else
     .body !{essay.body}

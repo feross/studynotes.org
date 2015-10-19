@@ -83,7 +83,6 @@ function Site (opts, done) {
   self.app.locals.modelCache = model.cache
   self.app.locals.moment = moment
   self.app.locals.pretty = !config.isProd
-  self.app.locals.stripe = { publishable: secret.stripe.publishable }
   self.app.locals.util = util
 
   // Gzip responses

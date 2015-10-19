@@ -34,11 +34,15 @@ header.header
           i.icon-logout.hide-tablet
           span Logout
       else
-        - var signupUrl = '/signup/' + (locals.url ? '?returnTo=' + url : '')
+        //- - var signupUrl = '/signup/' + (locals.url ? '?returnTo=' + encodeURIComponent(url) : '')
+        //- HACK: direct sign up button to Pro landing page.
+        //- TODO: link should go to page asking users if they're high school
+        //-       or college students and direct to appropriate page
+        - var signupUrl = '/pro/' + (locals.url ? '?referringEssay=' + encodeURIComponent(url) : '')
         li: a(href=signupUrl, title='Create a Study Notes Account')
           i.icon-check.hide-tablet
           span Sign Up
-        - var loginUrl = '/login/' + (locals.url ? '?returnTo=' + url : '')
+        - var loginUrl = '/login/' + (locals.url ? '?returnTo=' + encodeURIComponent(url) : '')
         li: a(href=loginUrl, title='Login to Study Notes')
           i.icon-login.hide-tablet
           span Log In

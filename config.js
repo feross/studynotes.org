@@ -39,5 +39,19 @@ exports.cdnOrigin = isProd
   ? 'https://cdn.apstudynotes.org'
   : exports.siteOrigin + '/cdn'
 
+/**
+ * Price of pro subscription (in cents!)
+ * @type {Number}
+ */
+exports.proPrice = 1400
+
+/**
+ * Stripe publishable token
+ * @type {string}
+ */
+exports.stripe = isProd
+  ? 'pk_live_uQgfjT84EYgqyXWasBY0xuOE'
+  : 'pk_test_7PVccMkybStuChGcJD0HAi40'
+
 var config = require('./config-node')
 extend(exports, config)

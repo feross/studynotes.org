@@ -1,0 +1,85 @@
+extends layouts/main
+include mixins/pro-btn
+
+block content
+  h1.center Read Top #{ college ? college.shortName : 'College' } Essays
+
+  p We've collected the <strong>best #{ college ? college.shortName : 'college' } essays</strong> from students who got accepted. Read real college essays that worked, get inspiration for your own essays, and <strong>win over the admissions counselor</strong>.
+
+  .row
+    .col3
+      h2 Learn From The Best
+      img(src=config.cdnOrigin + '/images/letter.svg')
+      p See how students like you were accepted to their dream schools!
+    .col3
+      h2 Essays That Worked
+      img(src=config.cdnOrigin + '/images/crest.svg')
+      p Read the best college essays from real admitted students.
+    .col3
+      h2 Trusted by Thousands
+      img(src=config.cdnOrigin + '/images/check.svg')
+      p Get into top universities like #{ collegeListAnd }.
+
+  div.center: p
+    +pro-btn('Read Essays', 'huge')
+
+  hr
+
+  h1.center Learn the #{ college ? college.shortName : 'College' } Essay Secrets!
+
+  p This is an <strong>indispensable</strong> resource for learning the qualities and techniques that make excellent #{ college ? college.shortName : 'college' } personal statements. Get the advice and insights you need to <strong>win over the admissions counselor</strong>.
+
+  .row
+    .col2
+      img(src=config.cdnOrigin + '/images/trophy.svg')
+      h2 Get #{ collegeEssays.length } Top #{ college ? college.shortName : 'College' } Essays
+      ul.tight
+        each essay in collegeEssays.slice(0, 4)
+          li= essay.name
+        if collegeEssays.length > 4
+          li and #{ collegeEssays.length - 4 } more #{ college ? college.shortName : 'college' } essays...
+    .col2
+      img(src=config.cdnOrigin + '/images/stars.svg')
+      if college
+        h2 FREE BONUS: #{ otherEssays.length } More Essays
+        ul.tight
+          each college in otherColleges.slice(0, 4)
+            li #{ college.shortName } essays
+          if otherColleges.length >= 4
+            li and #{ otherEssays.length } more essays from #{ otherColleges.length - 4 } top colleges...
+      else
+        h2 Top 25 Schools, plus Common App
+        each college in otherColleges.slice(0, 4)
+          li #{ college.shortName } essays
+        li and #{ otherColleges.length - 4 } more top colleges...
+
+
+  p For just <strong>$#{ (config.proPrice / 100) }</strong> (one-time payment) you get <strong>lifetime access to #{ essays.length } essays</strong> that worked at #{ collegeList }, and more. Don't wait — start getting ahead today!
+
+  div.center: p
+    +pro-btn('Unlock Essays', 'huge')
+
+  hr
+
+  h1.center Listen to What our Users Say
+
+  | <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  .row
+    .col3
+      | <blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/feross">@feross</a> just want to say that your <a href="http://t.co/2GJx4zQI6v">http://t.co/2GJx4zQI6v</a> college essays has been my most shared site to my mentees applying abroad!</p>&mdash; David Ongchoco (@DOitChoco) <a href="https://twitter.com/DOitChoco/status/550080624082419712">December 31, 2014</a></blockquote>
+      | <blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr"><a href="http://t.co/l3TgOUtWaM">http://t.co/l3TgOUtWaM</a> is amazing</p>&mdash; ruby c (@rubeeec) <a href="https://twitter.com/rubeeec/status/643586396578533376">September 15, 2015</a></blockquote>
+    .col3
+      | <blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">No one appreciates <a href="http://t.co/ddwy9fABHZ">http://t.co/ddwy9fABHZ</a> as much as they should</p>&mdash; cath-o-ween (@cathdweeb) <a href="https://twitter.com/cathdweeb/status/644907144370761729">September 18, 2015</a></blockquote>
+      | <blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr"><a href="http://t.co/nbzQ7zo0n4">http://t.co/nbzQ7zo0n4</a> saved my life</p>&mdash; ️ (@stfuhana) <a href="https://twitter.com/stfuhana/status/645751324533895168">September 21, 2015</a></blockquote>
+    .col3
+      | <blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">God bless whoever made <a href="http://t.co/mu4p79s6mX">http://t.co/mu4p79s6mX</a></p>&mdash; Alexis (@abbymaimone) <a href="https://twitter.com/abbymaimone/status/649990404180471808">October 2, 2015</a></blockquote>
+      | <blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr"><a href="http://t.co/VNCH8XNFx7">http://t.co/VNCH8XNFx7</a> saved my life ❤️</p>&mdash; Diego (@westsidest0ry) <a href="https://twitter.com/westsidest0ry/status/638973007403159552">September 2, 2015</a></blockquote>
+
+  div.center: p
+    +pro-btn('Buy Now', 'huge')
+
+  hr
+
+  h1.center Questions? Call us!
+  h2.center 1 (530) 633-7677
+

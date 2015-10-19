@@ -86,3 +86,48 @@ body.signup, body.signup2
 body.login, body.login-forgot, body.login-reset
   background: center center url('https://cdn.apstudynotes.org/images/hero/amjed-full.jpg') no-repeat fixed
   background-size: cover
+
+body.pro
+  .hero
+    min-height: 270px
+    padding-top: 40px
+    text-align: center
+
+  .header
+    border: 0
+    background: none
+    .search
+      display: none
+
+    .left
+      li a
+        {LINK}
+          border-right: 1px solid transparent
+        {HOVER}
+          border-right: HEADER_BORDER_FOCUS
+    .right
+      li
+        &:nth-child(1), &:nth-child(2), &:nth-child(3)
+          display: none
+        a
+          {LINK}
+            border-left: 1px solid transparent
+          {HOVER}
+            border-left: HEADER_BORDER_FOCUS
+
+  .footer
+    .quote, .links
+      display: none
+
+  .row
+    text-align: center
+    img
+      height: 120px
+      margin-bottom: 12px
+    p
+      margin-left: 5px
+      margin-right: 5px
+
+  .twitter-tweet
+    margin-left: auto
+    margin-right: auto

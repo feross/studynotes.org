@@ -19,7 +19,6 @@ exports.gmail = {
 // Keep here, because circular dep
 var config = require('../config')
 
-exports.stripe = {
-  secret: config.isProd ? '' : '',
-  publishable: config.isProd ? '' : ''
-}
+exports.stripe = config.isProd
+  ? ''
+  : ''

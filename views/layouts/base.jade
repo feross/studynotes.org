@@ -173,6 +173,12 @@ html(class='studynotes #{layout}', lang='en')
         window.ga = console.log.bind(console, 'ga')
         window.fbq = console.log.bind(console, 'fbq')
 
+    //- User variables
+    script.
+      var StudyNotes = {
+        user: '#{ req.user && req.user.email }' || null
+      }
+
     if editorAssets
       script(src=config.cdnOrigin + config.jsPath)
       script.

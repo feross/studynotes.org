@@ -17,8 +17,7 @@ module.exports = function (app) {
       title: 'Advertise',
       hero: {
         title: 'Advertise on Study Notes',
-        desc: 'Reach millions of engaged and passionate students',
-        image: 'advertise.jpg'
+        desc: 'Reach millions of engaged and passionate students'
       }
     })
   })
@@ -63,7 +62,6 @@ module.exports = function (app) {
       title: 'Photo Credits',
       hero: {
         title: 'Photo Credits',
-        desc: 'Many thanks for the beautiful photos!',
         image: 'european-history.jpg'
       }
     })
