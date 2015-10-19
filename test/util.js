@@ -38,3 +38,15 @@ test('util.randomBytes', function (t) {
     t.equal(new Buffer(bytes, 'hex').length, 10, 'explicit length')
   })
 })
+
+test('util.addQueryParams', function (t) {
+  t.equal(
+    util.addQueryParams('http://host.com/?a=1', { b: 2 }),
+    'http://host.com/?a=1&b=2'
+  )
+  t.equal(
+    util.addQueryParams('http://host.com/?a=1&b=2', { b: 3 }),
+    'http://host.com/?a=1&b=3'
+  )
+  t.end()
+})

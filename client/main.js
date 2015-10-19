@@ -20,6 +20,7 @@ var fastclick = require('fastclick')
 var key = require('keymaster')
 var notify = require('./notify')
 var url = require('url')
+var util = require('../util')
 
 // Remove 300ms tap delay on iOS
 fastclick(document.body)
@@ -50,10 +51,10 @@ $('.logout').click(function (e) {
   e.preventDefault()
   $.post('/logout/')
     .done(function () {
-      var u = url.parse(window.location.href, true)
-      u.query.info = 'You are logged out!'
-      u.search = null
-      window.location = url.format(u)
+      var url = util.addQueryParams(window.location.href, {
+        info: 'You are logged out!'
+      })
+      window.location = url
     })
     .fail(function () {
       notify.big.error('Error contacting the server!')
