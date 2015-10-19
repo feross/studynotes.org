@@ -79,24 +79,27 @@ block content
   else
     .body !{essay.body}
 
-  hr
 
   .after-content
+    hr
+
     p Keep reading more <a href="#{ college.url }">#{ college.shortName } admissions essays</a> — you can't be too prepared!
 
+    include ads/adsense-link-units
+
     if (!blur)
-      include ads/medianet-after-content
       include includes/birdy/happy
+
     p
       a.btn.large.prev(href='#{prev.url}', title='Prev: #{prev.name}') Previous Essay
       a.btn.large.next(href='#{next.url}', title='Next: #{next.name}') Next Essay
     p: em Tip: Use the ← → keys to navigate!
 
-  hr
+    if (!blur)
+      include ads/medianet-after-content
+      include ads/taboola-after-content
 
-  include ads/adsense-link-units
-  if (!blur)
-    include ads/taboola-after-content
+  hr
 
   //- +comments(essay.id, title, url)
 
