@@ -22,8 +22,6 @@ block sidebar
     li.online
     li Posted <span title='#{ moment(note.createDate).format("MMMM Do, YYYY, h:mm:ss a") }'>#{ moment(note.createDate).fromNow() }</span>
 
-  include ads/taboola-sidebar
-
 block content
   if (locals.ads && config.isProd)
     //- Google Surveys
@@ -68,6 +66,7 @@ block content
     p: em Use ← → keys to navigate!
 
   hr
+    include ads/taboola-after-content
 
   include ads/adsense-link-units
 
