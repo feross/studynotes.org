@@ -150,8 +150,6 @@ html(class='studynotes #{layout}', lang='en')
           (ga.q = ga.q || []).push(arguments)
         }
         ga.l = +new Date
-        ga('create', 'UA-3898076-4', 'auto')
-        ga('send', 'pageview')
       script(async, src='//www.google-analytics.com/analytics.js')
 
       //- Facebook Ad Pixel
@@ -171,6 +169,9 @@ html(class='studynotes #{layout}', lang='en')
       script.
         window.ga = console.log.bind(console, 'ga')
         window.fbq = console.log.bind(console, 'fbq')
+    script.
+      ga('create', 'UA-3898076-4', 'auto')
+      ga('send', 'pageview')
 
     //- User variables
     script.
