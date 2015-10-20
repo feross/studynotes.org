@@ -3,6 +3,7 @@ var $ = require('jquery')
 require('transparency')
 require('select2')
 
+require('./ads')
 require('./browse')
 require('./Countdown')
 require('./editor')
