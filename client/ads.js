@@ -1,15 +1,15 @@
 var $ = require('jquery')
 
 var $ad = $('.adsense-sidebar .adsbygoogle')
-var replaced = false
+var inserted = false
 
 function checkAd () {
-  if (replaced || $ad.length === 0 || $ad.html().trim().length) return
+  if (inserted || $ad.length === 0 || $ad.html().trim().length) return
 
-  var html = '<a class="house" href="/pro/">College Essays that Worked</a>'
-  $($ad.get(0)).replaceWith(html)
+  var house = $('<div class="adsense-sidebar"><a class="house" href="/pro/">College Essays that Worked</a></div>')
+  $ad.parent().after(house)
 
-  replaced = true
+  inserted = true
 }
 
-setTimeout(checkAd, 5000)
+setTimeout(checkAd, 3000)
