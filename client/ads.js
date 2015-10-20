@@ -1,6 +1,6 @@
 var $ = require('jquery')
 
-var $ad = $('.adsbygoogle')
+var $ad = $('.adsense-sidebar .adsbygoogle')
 var replaced = false
 
 function checkAd () {
