@@ -12,6 +12,4 @@ function checkAd () {
   replaced = true
 }
 
-checkAd()
-setTimeout(checkAd, 2000)
 setTimeout(checkAd, 5000)
