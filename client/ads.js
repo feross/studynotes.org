@@ -6,8 +6,9 @@ var inserted = false
 function checkAd () {
   if (inserted || $ad.length === 0 || $ad.html().trim().length) return
 
-  var house = $('<div class="adsense-sidebar"><a class="house" href="/pro/">College Essays that Worked</a></div>')
-  $ad.parent().after(house)
+  var $firstAd = $ad.parent().eq(0)
+  var $houseAd = $('<div class="adsense-sidebar"><a class="house" href="/pro/">College Essays that Worked</a></div>')
+  $firstAd.after($houseAd)
 
   inserted = true
 }
