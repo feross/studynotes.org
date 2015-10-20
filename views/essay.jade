@@ -36,6 +36,7 @@ block sidebar
       li: a(href=essay.url)= essay.name
 
   include ads/adsense-sidebar
+  include ads/studynotes-pro
 
   ul
     li #{ util.addCommas(essay.hits) } views (#{ util.addCommas(util.hitsPerDay(essay.hits, essay.createDate)) } views per day)
@@ -64,7 +65,7 @@ block content
         p
           +pro-btn('Unlock Essays', 'large')
 
-        h4 For just $#{ (config.proPrice / 100) } (one-time payment) you get <strong>lifetime access to #{ essayCount } essays</strong> that worked at Stanford, Harvard, and more. <a href="/pro/#{ college.id }/?referringEssay=#{ encodeURIComponent(essay.url) }">Learn more.</a>
+        h4 For just $#{ (config.proPrice / 100) } (one-time payment) you get <strong>lifetime access to #{ essayCount } essays</strong> that worked at Stanford, Harvard, and more. <a href="/pro/#{ college.id }/?referringEssay=#{ encodeURIComponent(essay.url) }">Learn&nbsp;more.</a>
 
         h4 Questions? Call 1 (530) 633-7677
 

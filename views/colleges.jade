@@ -1,5 +1,14 @@
 extends layouts/main-sidebar
 
+block sidebar
+  include ads/adsense-sidebar
+  include ads/studynotes-pro
+  include ads/adsense-sidebar
+
+  ul
+    li #{ util.addCommas(essayCount) } essays for #{ colleges.length } <a href='/colleges/'>universities</a>
+    li.online
+
 block content
   h1 Top #{ colleges.length } Colleges
   p Learn about these <strong>top univerities</strong> and read college admissions essays that worked.
@@ -11,17 +20,6 @@ block content
       each college in colleges
         li: a(href='#{college.url}')= college.rank + '. ' + college.name
 
-block sidebar
-  include ads/adsense-sidebar
+  hr
 
-  .center
-    a.btn.large(href='/submit/essay/')
-      i.icon-upload-cloud
-      | Submit an essay
-
-  include ads/adsense-sidebar
-
-  h2 Essay Database Stats
-  ul
-    li #{ util.addCommas(essayCount) } essays for #{ colleges.length } <a href='/colleges/'>universities</a>
-    li.online
+  include ads/studynotes-pro

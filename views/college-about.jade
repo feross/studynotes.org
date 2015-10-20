@@ -9,6 +9,7 @@ block sidebar
       li: a(href=essay.url)= essay.name
 
   include ads/adsense-sidebar
+  include ads/studynotes-pro
 
   ul
     li #{ util.addCommas(college.hits) } views
@@ -25,6 +26,7 @@ block content
     .map
       a(href='http://maps.google.com/?q=#{ college.name }')
         img(src='//maps.googleapis.com/maps/api/staticmap?center=#{ encodeURIComponent(college.name) }&markers=#{ encodeURIComponent(college.name) }&zoom=7&size=640x220&scale=2&maptype=roadmap&sensor=false&visual_refresh=true')
+    include ads/adsense-link-units
 
   if (college.acceptRate)
     h2 #{ college.shortName } Stats

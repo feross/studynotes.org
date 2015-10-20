@@ -1,6 +1,21 @@
 extends layouts/main-sidebar
 include mixins/entries
 
+block sidebar
+  include ads/adsense-sidebar
+
+  h2 Top 25 Colleges
+  ul.more
+    each college in modelCache.collegesByRank
+      li: a(href=college.url)= college.name
+
+  include ads/adsense-sidebar
+  include ads/studynotes-pro
+
+  ul
+    li #{ util.addCommas(essays.length) } essays for #{ collegeCount } <a href='/colleges/'>universities</a>
+    li.online
+
 block content
   h1 Top #{ essays.length } Successful College Essays
   p Get into the college of your dreams! <strong>We hope these essays inspire you</strong> as you write your own personal statement. Just remember to be original and creative as you share your story.
@@ -10,22 +25,6 @@ block content
   if (essays.length)
     +entries(essays)
 
-block sidebar
-  include ads/adsense-sidebar
+  hr
 
-  .center
-    a.btn.large(href='/submit/essay/')
-      i.icon-upload-cloud
-      | Submit an essay
-
-  h2 Top 25 Colleges
-  ul.more
-    each college in modelCache.collegesByRank
-      li: a(href=college.url)= college.name
-
-  include ads/adsense-sidebar
-
-  h2 Essay Database Stats
-  ul
-    li #{ util.addCommas(essays.length) } essays for #{ collegeCount } <a href='/colleges/'>universities</a>
-    li.online
+  include ads/studynotes-pro

@@ -1,50 +1,8 @@
 extends layouts/main-sidebar
 include mixins/entries
 
-block content
-  include includes/breadcrumbs
-  if (locals.essays && essays.length)
-    h1 Top #{ essays.length } Successful #{ college.shortName } Essays
-  else
-    h1 #{ college.shortName } Essays
-
-  p These <strong>college essays</strong> are from students who got accepted at <strong>#{ college.name }</strong>. Use them to get inspiration for your own essays and knock the socks off those admissions officers!
-
-  include includes/toolbar
-
-  if (essays.length)
-    +entries(essays)
-
-    hr
-
-  h2 About #{ college.name }
-  .entry
-    | !{ util.truncate(college.desc, 300) }
-    a(href='about/')
-      | !{ 'Read&nbsp;more' }
-      i.icon-angle-double-right
-
-  hr
-
-  h2 #{ college.shortName } admittees, submit your essays!
-
-  p If you were one of the <strong>lucky few #{ college.shortName } admittees</strong>, please submit your essay to help the next generation of students write better admissions essays!
-
-  p.center
-    a.btn.large(href='/submit/essay/')
-      i.icon-upload-cloud
-      | Submit an essay
-
-  p We want to level the playing field so that any qualified student can <strong>write a powerful application</strong>, regardless of their background. Please support our efforts!
-
-
 block sidebar
   include ads/adsense-sidebar
-
-  p.center
-    a.btn.large(href='/submit/essay/')
-      i.icon-upload-cloud
-      | Submit an essay
 
   if (college.acceptRate)
     h2 #{ college.shortName } Stats
@@ -61,8 +19,35 @@ block sidebar
         img(src='//maps.googleapis.com/maps/api/staticmap?center=#{ encodeURIComponent(college.location) }&zoom=8&size=336x200&scale=2&maptype=roadmap&sensor=false&visual_refresh=true')
 
   include ads/adsense-sidebar
+  include ads/studynotes-pro
 
   ul
     li #{ util.addCommas(college.hits) } views
     li.online
 
+block content
+  include includes/breadcrumbs
+  if (locals.essays && essays.length)
+    h1 Top #{ essays.length } Successful #{ college.shortName } Essays
+  else
+    h1 #{ college.shortName } Essays
+
+  p These <strong>college essays</strong> are from students who got accepted at <strong>#{ college.name }</strong>. Use them to get inspiration for your own essays and knock the socks off those admissions officers!
+
+  include includes/toolbar
+
+  if (essays.length)
+    +entries(essays)
+
+    hr
+
+  h2 #{ college.name } Facts
+  .entry
+    | !{ util.truncate(college.desc, 300) }
+    a(href='about/')
+      | !{ 'Read&nbsp;more' }
+      i.icon-angle-double-right
+
+  hr
+
+  include ads/studynotes-pro
