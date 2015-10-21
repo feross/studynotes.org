@@ -5,8 +5,7 @@ var parallel = require('run-parallel')
 module.exports = function (app) {
   var tabs = [
     { name: 'Top College Essays', url: '/essays/', view: 'essays' },
-    { name: 'Top Universities', url: '/colleges/', view: 'colleges' },
-    { name: 'Unlock All Essays', url: '/pro/' }
+    { name: 'Top Universities', url: '/colleges/', view: 'colleges' }
   ]
 
   app.get('/essays', function (req, res, next) {
@@ -34,7 +33,9 @@ module.exports = function (app) {
         hero: {
           title: 'College Admissions Essays',
           image: 'colleges.jpg',
-          tabs: tabs
+          tabs: !req.isAuthenticated() || !req.user.pro
+            ? tabs.concat({ name: 'Unlock All Essays', url: '/pro/' })
+            : tabs
         }
       })
     })
@@ -54,7 +55,9 @@ module.exports = function (app) {
           url: '/colleges/',
           hero: {
             title: 'Top Universities',
-            tabs: tabs
+            tabs: !req.isAuthenticated() || !req.user.pro
+              ? tabs.concat({ name: 'Unlock All Essays', url: '/pro/' })
+              : tabs
           }
         })
       })
