@@ -38,8 +38,8 @@ exports.connect = function (cb) {
 
   mongoose.connect(
     'mongodb://' +
-    secret.mongo.user + '@' + secret.mongo.host + ':' +
-    secret.mongo.port + '/' + secret.mongo.database,
+    secret.mongo.host + ':' + secret.mongo.port + '/' +
+    secret.mongo.database,
     { server: { poolSize: 20 } }
   )
   mongoose.connection.on('error', cb)
