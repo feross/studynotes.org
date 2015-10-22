@@ -1,0 +1,18 @@
+extends layouts/main
+
+block content
+  .row
+    .col2
+      h2 College Essays
+      ul.tight
+        each essay in essays
+          li
+            a(href=essay.url)= ' ' + essay.name
+            small.gray: em= ' ' + moment(essay.createDate).fromNow()
+    .col2
+      h2 AP Notes
+      ul.tight
+        each note in notes
+          li
+            a(href=note.url)= ' ' + note.name
+            small.gray: em= ' ' + moment(note.createDate).fromNow()

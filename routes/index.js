@@ -110,6 +110,9 @@ module.exports = function (app) {
   require('./essay')(app)
   require('./user')(app)
 
+  // Admin
+  require('./admin')(app)
+
   // Error pages
   require('./error')(app)
 }
