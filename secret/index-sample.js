@@ -22,3 +22,9 @@ var config = require('../config')
 exports.stripe = config.isProd
   ? ''
   : ''
+
+exports.mongo = {
+  host: config.isProd ? '' : '',
+  port: '',
+  database: ''
+}

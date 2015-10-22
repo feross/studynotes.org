@@ -4,6 +4,7 @@ var fs = require('fs')
 var mongoose = require('mongoose')
 var once = require('once')
 var path = require('path')
+var secret = require('../config')
 var sort = require('../lib/sort')
 var values = require('object-values')
 
@@ -37,8 +38,8 @@ exports.connect = function (cb) {
 
   mongoose.connect(
     'mongodb://' +
-    config.mongo.user + '@' + config.mongo.host + ':' +
-    config.mongo.port + '/' + config.mongo.database,
+    secret.mongo.user + '@' + secret.mongo.host + ':' +
+    secret.mongo.port + '/' + secret.mongo.database,
     { server: { poolSize: 20 } }
   )
   mongoose.connection.on('error', cb)

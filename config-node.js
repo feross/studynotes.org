@@ -44,18 +44,6 @@ exports.maxAge = config.isProd
  */
 exports.maxSlugLength = 40
 
-/**
- * MongoDB is web scale! (actually, web fail)
- * @type {Object}
- */
-exports.mongo = {
-  host: config.isProd
-    ? 'athena.feross.net'
-    : 'localhost',
-  port: '27017',
-  database: 'studynotes'
-}
-
 var MD5_JS
 var MD5_CSS
 if (config.isProd) {
