@@ -31,4 +31,3 @@ model.connect(function (err) {
       })
     })
 })
-
