@@ -18,6 +18,9 @@ if (window.StripeCheckout) {
     allowRememberMe: false,
     alipay: 'auto',
     email: window.StudyNotes.user,
+    opened: function () {
+      window.ga('send', 'event', 'pro', 'checkout-open')
+    },
     token: function (token) {
       token.referringEssay = referringEssay
       $.post('/pro/', token)
