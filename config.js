@@ -43,7 +43,7 @@ exports.cdnOrigin = isProd
  * Price of pro subscription (in cents!)
  * @type {Number}
  */
-exports.proPrice = 1400
+exports.proPrice = 1900
 
 /**
  * Stripe publishable token
