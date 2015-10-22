@@ -5,7 +5,7 @@ module.exports = function () {
     $(document).on('click', 'a[href="#"]', function (e) {
       e.preventDefault()
 
-      var $elem = $(e.target)
+      var $elem = $(e.currentTarget)
       var body = {
         model: $elem.data('model'),
         action: $elem.data('action'),
