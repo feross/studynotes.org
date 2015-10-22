@@ -15,7 +15,7 @@ module.exports = function (app) {
     auto({
       notes: function (cb) {
         var query = model.Note
-          .find({ course: course.id, notetype: notetype.id })
+          .find({ course: course.id, notetype: notetype.id, published: true })
           .sort('ordering -hits')
           .select('-body')
 

@@ -5,7 +5,8 @@ include mixins/pro-btn
 append toolbar
   if req.user && req.user.admin
     a.btn.red.edit(href='?edit=1') Edit
-  a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next<span class="hide-tight-tablet"> Essay</span>
+  if next
+    a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next<span class="hide-tight-tablet"> Essay</span>
 
 block sidebar
   .author
@@ -85,8 +86,10 @@ block content
       include includes/birdy/happy
 
     p
-      a.btn.large.prev(href='#{prev.url}', title='Prev: #{prev.name}') Previous Essay
-      a.btn.large.next(href='#{next.url}', title='Next: #{next.name}') Next Essay
+      if prev
+        a.btn.large.prev(href='#{prev.url}', title='Prev: #{prev.name}') Previous Essay
+      if next
+        a.btn.large.next(href='#{next.url}', title='Next: #{next.name}') Next Essay
     p: em Tip: Use the ← → keys to navigate!
 
     if (!blur)

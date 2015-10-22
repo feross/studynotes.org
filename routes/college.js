@@ -12,7 +12,7 @@ module.exports = function (app) {
     auto({
       essays: function (cb) {
         model.Essay
-          .find()
+          .find({ published: true })
           .select('-prompt -body -bodyPaywall')
           .sort('-hits')
           .populate('college')
@@ -44,7 +44,7 @@ module.exports = function (app) {
   app.get('/colleges', function (req, res, next) {
     var colleges = model.cache.collegesByRank
     model.Essay
-      .count()
+      .count({ published: true })
       .exec(function (err, essayCount) {
         if (err) return next(err)
 
@@ -70,7 +70,7 @@ module.exports = function (app) {
     auto({
       essays: function (cb) {
         model.Essay
-          .find({ college: college.id })
+          .find({ college: college.id, published: true })
           .select('-prompt -body -bodyPaywall -bodyTruncate')
           .sort('-hits')
           .exec(cb)
@@ -98,7 +98,7 @@ module.exports = function (app) {
     auto({
       essays: function (cb) {
         model.Essay
-          .find({ college: college.id })
+          .find({ college: college.id, published: true })
           .select('-prompt -body -bodyPaywall')
           .sort('-hits')
           .populate('user')

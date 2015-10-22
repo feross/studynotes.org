@@ -20,7 +20,7 @@ module.exports = function (app) {
     auto({
       essays: function (cb) {
         model.Essay
-          .find()
+          .find({ published: true })
           .select('-prompt -body -bodyPaywall -bodyTruncate')
           .populate('college')
           .sort('-hits')

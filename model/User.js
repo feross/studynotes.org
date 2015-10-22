@@ -131,13 +131,13 @@ User.methods.totalHits = function (cb) {
   auto({
     essays: function (cb) {
       model.Essay
-        .find({ user: self.id, anon: false })
+        .find({ user: self.id, anon: false, published: true })
         .select('-prompt -body -bodyPaywall -bodyTruncate')
         .exec(cb)
     },
     notes: function (cb) {
       model.Note
-        .find({ user: self.id, anon: false })
+        .find({ user: self.id, anon: false, published: true })
         .select('-body -bodyTruncate')
         .exec(cb)
     }

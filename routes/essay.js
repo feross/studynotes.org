@@ -29,11 +29,11 @@ module.exports = function (app) {
         }
       }],
       essayCount: function (cb) {
-        model.Essay.count().exec(cb)
+        model.Essay.count({ published: true }).exec(cb)
       },
       essays: function (cb) {
         model.Essay
-          .find({ college: college.id })
+          .find({ college: college.id, published: true })
           .sort('-hits')
           .select('-prompt -body -bodyPaywall -bodyTruncate')
           .exec(cb)

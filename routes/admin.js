@@ -3,7 +3,6 @@ var model = require('../model')
 
 module.exports = function (app) {
   app.get('/admin', function (req, res, next) {
-    // Admin-only page
     if (!req.isAuthenticated() || !req.user.admin) return next()
 
     auto({
@@ -35,5 +34,28 @@ module.exports = function (app) {
         notes: r.notes
       })
     })
+  })
+
+  app.post('/admin', function (req, res, next) {
+    if (!req.isAuthenticated() || !req.user.admin) return next()
+
+    var Model = req.body.model === 'essay'
+      ? model.Essay
+      : model.Note
+
+    Model
+      .findOne({ _id: req.body.id })
+      .exec(function (err, item) {
+        if (err) return next(err)
+        if (!item) return next(new Error('item not found'))
+
+        if (req.body.action === 'publish') item.published = true
+        if (req.body.action === 'unpublish') item.published = false
+
+        item.save(function (err) {
+          if (err) return next(err)
+          res.send({ status: 'ok' })
+        })
+      })
   })
 }

@@ -40,7 +40,7 @@ function autocomplete (query, cb) {
 
     notes: function (cb) {
       model.Note
-        .find({ name: regexForQuery(query) })
+        .find({ name: regexForQuery(query), published: true })
         .sort('-hits')
         .limit(MAX_RESULTS)
         .select('name hits course notetype')
@@ -70,7 +70,7 @@ function autocomplete (query, cb) {
 
     essays: function (cb) {
       model.Essay
-        .find({ name: regexForQuery(query) })
+        .find({ name: regexForQuery(query), published: true })
         .sort('-hits')
         .limit(MAX_RESULTS)
         .select('name hits college')

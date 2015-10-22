@@ -12,7 +12,7 @@ module.exports = function (app) {
       },
       essays: function (cb) {
         model.Essay
-          .find({ user: req.params.userId, anon: false })
+          .find({ user: req.params.userId, anon: false, published: true })
           .select('-prompt -body -bodyPaywall')
           .sort('-hits')
           .populate('college')
@@ -20,7 +20,7 @@ module.exports = function (app) {
       },
       notes: function (cb) {
         model.Note
-          .find({ user: req.params.userId, anon: false })
+          .find({ user: req.params.userId, anon: false, published: true })
           .select('-body -bodyTruncate')
           .sort('-hits')
           .populate('course')

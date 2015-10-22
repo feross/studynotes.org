@@ -4,15 +4,36 @@ block content
   .row
     .col2
       h2 College Essays
+      h3 Needs Review
       ul.tight
-        each essay in essays
+        each essay in essays.filter(e => !e.published)
           li
+            a.publish(href='#', target='_blank', data-model='essay', data-id=essay.id, data-action='publish') ✘
             a(href=essay.url)= ' ' + essay.name
             small.gray: em= ' ' + moment(essay.createDate).fromNow()
+      hr
+      h3 Published
+      ul.tight
+        each essay in essays.filter(e => e.published)
+          li
+            a.unpublish(href='#', target='_blank', data-model='essay', data-id=essay.id, data-action='unpublish') ✔
+            a(href=essay.url)= ' ' + essay.name
+            small.gray: em= ' ' + moment(essay.createDate).fromNow()
+
     .col2
       h2 AP Notes
+      h3 Needs Review
       ul.tight
-        each note in notes
+        each note in notes.filter(e => !e.published)
           li
+            a.publish(href='#', target='_blank', data-model='note', data-id=note.id, data-action='publish') ✘
+            a(href=note.url)= ' ' + note.name
+            small.gray: em= ' ' + moment(note.createDate).fromNow()
+      hr
+      h3 Published
+      ul.tight
+        each note in notes.filter(e => e.published)
+          li
+            a.unpublish(href='#', target='_blank', data-model='note', data-id=note.id, data-action='unpublish') ✔
             a(href=note.url)= ' ' + note.name
             small.gray: em= ' ' + moment(note.createDate).fromNow()

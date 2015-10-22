@@ -55,7 +55,8 @@ var Note = new mongoose.Schema({
     index: true,
     required: true
   },
-  anon: Boolean
+  anon: Boolean,
+  published: Boolean
 })
 
 Note.index({ course: 1, notetype: 1 })

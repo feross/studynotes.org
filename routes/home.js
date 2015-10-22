@@ -6,13 +6,13 @@ module.exports = function (app) {
   app.get('/', function (req, res, next) {
     auto({
       noteCount: function (cb) {
-        model.Note.count().exec(cb)
+        model.Note.count({ published: true }).exec(cb)
       },
       courseCount: function (cb) {
         model.Course.count().exec(cb)
       },
       essayCount: function (cb) {
-        model.Essay.count().exec(cb)
+        model.Essay.count({ published: true }).exec(cb)
       },
       collegeCount: function (cb) {
         model.College.count().exec(cb)
@@ -22,7 +22,7 @@ module.exports = function (app) {
       },
       newNotes: function (cb) {
         model.Note
-          .find()
+          .find({ published: true })
           .sort('-createDate')
           .limit(5)
           .select('-body -bodyTruncate')
@@ -31,7 +31,7 @@ module.exports = function (app) {
       },
       newEssays: function (cb) {
         model.Essay
-          .find()
+          .find({ published: true })
           .sort('-createDate')
           .limit(5)
           .select('-prompt -body -bodyPaywall -bodyTruncate')
