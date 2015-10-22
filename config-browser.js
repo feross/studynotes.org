@@ -1,8 +1,5 @@
 var config = require('./config')
 
-/** @type {number} in milliseconds (10-60s) */
-exports.socketReconnectTimeout = Math.floor(Math.random() * 50000) + 10000
-
 exports.wsEndpoint = config.isProd
   ? 'wss://' + config.siteHost + ':' + config.ports.liveupdater
   : 'ws://' + window.location.hostname + ':' + config.ports.liveupdater
