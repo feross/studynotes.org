@@ -48,7 +48,7 @@ module.exports = function (app) {
         : model.cache.collegesByRank
 
       var collegeList, collegeListAnd
-      if (!college || college.id === 'stanford') {
+      if (!college || college.id === 'stanford' || college.id === 'common-app') {
         collegeList = 'Stanford, Harvard, Princeton'
         collegeListAnd = 'Stanford, Harvard, and Princeton'
       } else if (college.id === 'harvard') {
