@@ -4,7 +4,7 @@ var fs = require('fs')
 var mongoose = require('mongoose')
 var once = require('once')
 var path = require('path')
-var secret = require('../config')
+var secret = require('../secret')
 var sort = require('../lib/sort')
 var values = require('object-values')
 
