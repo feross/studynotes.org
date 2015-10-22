@@ -107,7 +107,7 @@ block content
       ul.tight
         each essay in newEssays.slice(0, 16)
           li
-            a(href=essay.url)= ' ' + essay.name
+            a(href=essay.url)= essay.name
             small.gray: em= ' ' + moment(essay.createDate).fromNow()
 
   .row
