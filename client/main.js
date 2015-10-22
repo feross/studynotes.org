@@ -48,7 +48,7 @@ $('a[href^="http:"], a[href^="https:"]')
   .attr('target', '_blank')
 
 // Logout via XHR POST
-$('.logout').click(function (e) {
+$('.logout').on('click', function (e) {
   e.preventDefault()
   $.post('/logout/')
     .done(function () {

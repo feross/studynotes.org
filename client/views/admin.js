@@ -2,7 +2,7 @@ var $ = require('jquery')
 
 module.exports = function () {
   $(function () {
-    $('a[href="#"]').click(function (e) {
+    $(document).on('click', 'a[href="#"]', function (e) {
       e.preventDefault()
 
       var $elem = $(e.target)
