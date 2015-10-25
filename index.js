@@ -156,7 +156,7 @@ function Site (opts, done) {
     res.locals.ads = req.query.ads ||
       (
         (!req.isAuthenticated() || !req.user.pro) &&
-        [ '173.164.237.162', '71.202.21.18' ].indexOf(req.ip) === -1
+        [ '173.164.237.162', '71.202.21.18', '24.7.142.221' ].indexOf(req.ip) === -1
       )
     next()
   })
