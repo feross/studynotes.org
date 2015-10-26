@@ -89,8 +89,9 @@ module.exports = function (app) {
         stripe.charges.create({
           amount: amount, // in cents
           currency: 'usd',
-          card: req.body.id,
-          description: 'Study Notes Pro (' + req.body.email + ')'
+          source: req.body.id,
+          description: 'Study Notes Pro (' + req.body.email + ')',
+          receipt_email: req.body.email
         }, cb)
       },
 
