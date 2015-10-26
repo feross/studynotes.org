@@ -19,15 +19,15 @@
       "src": "fontawesome"
     },
     {
-      "uid": "d7271d490b71df4311e32cdacae8b331",
-      "css": "home",
-      "code": 59394,
-      "src": "fontawesome"
-    },
-    {
       "uid": "de2fc7a5c986ab8c622f63455d7cf814",
       "css": "upload-cloud",
       "code": 59393,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "85528017f1e6053b2253785c31047f44",
+      "css": "message",
+      "code": 59394,
       "src": "fontawesome"
     },
     {

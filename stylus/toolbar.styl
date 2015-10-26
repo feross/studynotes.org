@@ -49,8 +49,13 @@ a.icon-tumblr
   &:before
     font-size: 90%
 
-a.icon-facebook-squared, a.icon-twitter, a.icon-tumblr
-  margin-right: 15px
+a.icon-message
+  color: palette('Green')
+  html:not(.isMobile) &
+    display: none
+
+a.icon-facebook-squared, a.icon-twitter, a.icon-tumblr, a.icon-message
+  margin-right: 13px
   margin-left: 0
   &:before
     font-size: 150%
@@ -59,3 +64,5 @@ a.icon-facebook-squared, a.icon-twitter, a.icon-tumblr
   &:hover, &:active, &:focus
     opacity: 0.7
     text-decoration: none
+  &:last-child
+    margin-right: 0

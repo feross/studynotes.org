@@ -1,7 +1,8 @@
 .toolbar-ghost
   .toolbar.clearfix
+    .share
+      a.icon-facebook-squared(href='#') <span class="hide-phone-tight">Share</span>
+      a.icon-twitter(href='#') <span class="hide-phone-tight">Tweet</span>
+      a.icon-tumblr(href='#') <span class="hide-phone-tight">Post</span>
+      a.icon-message(href='sms:&body=' + encodeURIComponent('Studying this right now:\n\n' + locals.url)) <span class="hide-phone-tight">Message</span>
     block toolbar
-      .share
-        a.icon-facebook-squared(href='#') <span class="hide-phone-tight">Share</span>
-        a.icon-twitter(href='#') <span class="hide-phone-tight">Tweet</span>
-        a.icon-tumblr(href='#') <span class="hide-phone-tight">Post</span>
