@@ -22,7 +22,7 @@ window.toolbarOnScroll = function () {
     if (toolbarTop < scrollTop && scrollTop < contentBottom) {
       $toolbar
         .addClass('sticky')
-        .css({ width: contentWidth })
+        .css({ width: contentWidth + 40 })
     } else {
       $toolbar
         .removeClass('sticky')
