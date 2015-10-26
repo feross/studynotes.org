@@ -1,4 +1,4 @@
-# [StudyNotes](https://www.apstudynotes.org) [![travis][travis-image]][travis-url]
+# [Study Notes](https://www.apstudynotes.org) [![travis][travis-image]][travis-url]
 
 [travis-image]: https://img.shields.io/travis/feross/studynotes.svg?style=flat
 [travis-url]: https://travis-ci.org/feross/studynotes
