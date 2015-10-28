@@ -220,7 +220,10 @@ ellipsis()
   @media TABLET
     display: none !important
 
-html.isMobile .hide-mobile
+html.mobile .hide-mobile
+  display: none !important
+
+html:not(.mobile) .only-mobile
   display: none !important
 
 *, *:before, *:after
