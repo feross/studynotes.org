@@ -111,20 +111,24 @@ function Site (opts, done) {
     // Force IE to use latest rendering engine or Chrome Frame
     res.header('X-UA-Compatible', 'IE=Edge,chrome=1')
 
-    // Redirect to canonical urls
-    if (config.isProd && req.method === 'GET') {
-      if (req.hostname !== 'www.apstudynotes.org') {
-        self.debug('Redirecting %s to canonical domain', req.hostname + req.url)
-        return res.redirect(301, config.siteOrigin + req.url)
-      } else if (req.protocol !== 'https') {
-        self.debug('Redirecting %s to https domain', req.hostname + req.url)
+    if (config.isProd) {
+      // Redirect http to https
+      if (req.method === 'GET' && req.protocol !== 'https') {
+        self.debug('Redirect to https: %s', req.hostname + req.url)
         return res.redirect(301, config.siteOrigin + req.url)
       }
-    }
 
-    // Strict transport security for 1 year (to force HTTPS and prevent MITM attacks)
-    if (config.isProd) {
-      res.header('Strict-Transport-Security', 'max-age=31536000')
+      // Use HTTP Strict Transport Security
+      // Lasts 1 year, incl. subdomains, allow browser preload list
+      res.header(
+        'Strict-Transport-Security',
+        'max-age=31536000; includeSubDomains; preload'
+      )
+
+      if (req.method === 'GET' && req.hostname !== 'www.apstudynotes.org') {
+        self.debug('Redirect to canonical domain: %s', req.hostname + req.url)
+        return res.redirect(301, config.siteOrigin + req.url)
+      }
     }
 
     next()
