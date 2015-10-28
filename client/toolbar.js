@@ -7,26 +7,22 @@ var $toolbar = $('.content .toolbar')
 var $toolbarGhost = $('.content .toolbar-ghost')
 
 window.toolbarOnScroll = function () {
-  var toolbarTop = $toolbarGhost.length
-    ? $toolbarGhost.offset().top
-    : null
+  if (!$toolbarGhost.length || !$content.length) return
 
-  if (toolbarTop) {
+  var toolbarTop = $toolbarGhost.offset().top
+  var scrollTop = $window.scrollTop()
+  var contentBottom = $content.offset().top + $content.height()
+
+  if (toolbarTop < scrollTop && scrollTop < contentBottom) {
+    console.log('add sticky')
     var contentWidth = $content.width()
-    var scrollTop = $window.scrollTop() // current vertical position from the top
-
-    var contentBottom = $content.length
-      ? $content.offset().top + $content.height()
-      : null
-
-    if (toolbarTop < scrollTop && scrollTop < contentBottom) {
-      $toolbar
-        .addClass('sticky')
-        .css({ width: contentWidth + 40 })
-    } else {
-      $toolbar
-        .removeClass('sticky')
-        .css({ width: '' })
-    }
+    $toolbar
+      .addClass('sticky')
+      .css({ width: contentWidth + 40 })
+  } else {
+    console.log('remove sticky')
+    $toolbar
+      .removeClass('sticky')
+      .css({ width: '' })
   }
 }

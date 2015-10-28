@@ -1,7 +1,6 @@
 module.exports = LiveUpdater
 
 var config = require('../config')
-var debounce = require('debounce')
 var debug = require('debug')('studynotes:liveupdater')
 var fs = require('fs')
 var http = require('http')
@@ -9,6 +8,7 @@ var https = require('https')
 var jsdom = require('jsdom')
 var model = require('../model')
 var parallel = require('run-parallel')
+var throttle = require('throttleit')
 var util = require('../util')
 var values = require('object-values')
 var ws = require('ws')
@@ -204,9 +204,9 @@ LiveUpdater.prototype.sendUpdates = function (url) {
 
 /**
  * Send a special update message to visitors on "/" with `totalHit` value, whenever
- * any visitor (across the site) arrives/leaves, debounced for performance.
+ * any visitor (across the site) arrives/leaves, throttled for performance.
  */
-LiveUpdater.prototype.sendHomeUpdates = debounce(function () {
+LiveUpdater.prototype.sendHomeUpdates = throttle(function () {
   var self = this
 
   var sockets = self.online['/']

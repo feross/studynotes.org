@@ -16,12 +16,14 @@ require('./submit')
 require('./toolbar')
 
 var config = require('../config')
-var debounce = require('debounce')
 var fastclick = require('fastclick')
 var key = require('keymaster')
 var notify = require('./notify')
+var throttle = require('throttleit')
 var url = require('url')
 var util = require('../util')
+
+var EVENT_THROTTLE = 100
 
 // Remove 300ms tap delay on iOS
 fastclick(document.body)
@@ -76,7 +78,7 @@ function onResize () {
   window.updateSearchWidth()
   window.toolbarOnScroll()
 }
-$window.on('resize', debounce(onResize, 100))
+$window.on('resize', throttle(onResize, EVENT_THROTTLE))
 
 /**
  * Browser scroll event
@@ -86,7 +88,7 @@ function onScroll () {
   window.closeBrowseMenus()
   window.hideAutocomplete()
 }
-$window.on('scroll', debounce(onScroll, 100))
+$window.on('scroll', throttle(onScroll, EVENT_THROTTLE))
 
 /**
  * Filter keystrokes from keymaster when user is searching.
