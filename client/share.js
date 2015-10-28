@@ -37,7 +37,7 @@ $('.icon-message').on('click', function (e) {
   e.preventDefault()
   var text = encodeURIComponent('I\'m studying this right now:\n\n' + url)
   var smsUrl = 'sms:&body=' + text
-  window.ga('send', 'social', 'SMS', 'Message', url, {
+  window.ga('send', 'social', 'SMS', 'Share', url, {
     hitCallback: functionWithTimeout(function () {
       window.location = smsUrl
     })
