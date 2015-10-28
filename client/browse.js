@@ -51,7 +51,7 @@ $('.browse').each(function (i, elem) {
     var maybeOpenClose = function () {
       if (menu.btnHover || menu.browseHover) {
         // Only show on larger screens
-        if ($('html').hasClass('isMobile')) return
+        if (window.isMobile) return
         toggleBrowseMenu(menu, true)
       } else if (!menu.btnHover || !menu.browseHover) {
         toggleBrowseMenu(menu, false)

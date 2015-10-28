@@ -33,7 +33,7 @@ function openSocketAfterTimeout () {
   debug('reconnecting socket in %s ms', reconnectTimeout)
 }
 
-if (Socket.WEBSOCKET_SUPPORT && !$('html').hasClass('isMobile')) {
+if (Socket.WEBSOCKET_SUPPORT && !window.isMobile) {
   openSocket()
 }
 

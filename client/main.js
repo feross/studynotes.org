@@ -28,6 +28,8 @@ fastclick(document.body)
 
 var $window = $(window)
 
+window.isMobile = $('html').hasClass('mobile')
+
 $.ajaxSetup({
   // Disable caching of XHR GET responses globally
   // (workaround for jQuery callbacks not firing if the response was cached)
