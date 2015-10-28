@@ -18,7 +18,7 @@ var User = new mongoose.Schema({
       validate({
         validator: 'contains',
         arguments: ' ',
-        message: 'Please share your full name. Don\'t be shy :)'
+        message: 'Please use your full name. Don\'t be shy :)'
       }),
       validate({
         validator: 'isLength',
@@ -47,7 +47,7 @@ var User = new mongoose.Schema({
       validate({
         validator: 'isLength',
         arguments: [ 6, 255 ],
-        message: 'Your password must be at least 6 characters, silly!'
+        message: 'Your password must be at least 6 characters.'
       })
     ]
   },
