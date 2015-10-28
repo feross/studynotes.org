@@ -3,9 +3,36 @@ var randomquote = require('../lib/randomquote')
 var url = require('url')
 
 module.exports = function (app) {
-  /*
-   * Adds variables that all templates will expect.
-   */
+  require('./home')(app)
+  require('./static')(app)
+
+  // Accounts
+  require('./signup')(app)
+  require('./login')(app)
+  require('./pro')(app)
+
+  // Submit
+  require('./submit')(app)
+
+  // Search
+  require('./search')(app)
+  require('./autocomplete')(app)
+
+  // Dynamic
+  require('./course')(app)
+  require('./notetype')(app)
+  require('./note')(app)
+  require('./college')(app)
+  require('./essay')(app)
+  require('./user')(app)
+
+  // Admin
+  require('./admin')(app)
+
+  // Error pages
+  require('./error')(app)
+
+  // Add variables that all templates will expect
   var render = app.render
   app.render = function (view, opts, fn) {
     var req = opts._locals.req
@@ -89,33 +116,4 @@ module.exports = function (app) {
     // Call the original express render function
     return render.call(this, view, opts, fn)
   }
-
-  require('./home')(app)
-  require('./static')(app)
-
-  // Accounts
-  require('./signup')(app)
-  require('./login')(app)
-  require('./pro')(app)
-
-  // Submit
-  require('./submit')(app)
-
-  // Search
-  require('./search')(app)
-  require('./autocomplete')(app)
-
-  // Dynamic
-  require('./course')(app)
-  require('./notetype')(app)
-  require('./note')(app)
-  require('./college')(app)
-  require('./essay')(app)
-  require('./user')(app)
-
-  // Admin
-  require('./admin')(app)
-
-  // Error pages
-  require('./error')(app)
 }
