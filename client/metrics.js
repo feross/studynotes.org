@@ -1,6 +1,6 @@
 var $ = require('jquery')
 var functionWithTimeout = require('function-with-timeout')
-var querystring = require('querystring')
+var url = require('url')
 
 // Initial Facebook tracking
 window.fbq('init', '1696013757293784')
@@ -22,7 +22,7 @@ if ($('.subscribe-on-blur').length) {
   window.ga('send', 'event', 'pro', 'paywall')
 }
 
-var query = querystring.parse(window.location.search.replace(/^\?/, ''))
+var query = url.parse(window.location.href, true).query
 
 // Track iOS standalone web app page views
 if (window.navigator.standalone) {
