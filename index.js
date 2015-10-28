@@ -249,8 +249,23 @@ Site.prototype.setupSessions = function () {
 Site.prototype.setupLocals = function () {
   var self = this
 
+  var mobileFamilies = [
+    'amazon-silk',
+    'android',
+    'blackberry-webkit',
+    'chrome-mobile',
+    'ie-mobile',
+    'mobile-safari',
+    'nokia-browser'
+  ]
+
   self.app.use(function (req, res, next) {
     req.agent = useragent.lookup(req.headers['user-agent'])
+    req.agentCls = req.agent.family.replace(/ /g, '-').toLowerCase()
+
+    if (mobileFamilies.indexOf(req.agentCls) >= 0) {
+      req.agentCls += ' mobile'
+    }
 
     res.locals.req = req
     res.locals.csrf = req.csrfToken()

@@ -106,7 +106,7 @@ module.exports = function (app) {
     opts.cls = opts.cls ? opts.cls + ' ' : ''
 
     // Add view name as class on <body>
-    opts.cls += view + ' ' + req.agent.family.replace(/ /g, '-').toLowerCase()
+    opts.cls += view + ' ' + req.agentCls
 
     // If no hero is on the page, set a special class on <body>
     if (!opts.hero) {
