@@ -35,8 +35,8 @@ $('.icon-tumblr').on('click', function (e) {
 
 $('.icon-message').on('click', function (e) {
   e.preventDefault()
-  var text = encodeURIComponent('Studying this right now:')
-  var smsUrl = 'sms:&body=' + text + '\n\n' + encodedUrl
+  var text = encodeURIComponent('Studying this right now:\n\n' + url)
+  var smsUrl = 'sms:&body=' + text
   window.ga('send', 'social', 'SMS', 'Message', url, {
     hitCallback: functionWithTimeout(function () {
       window.location = smsUrl
