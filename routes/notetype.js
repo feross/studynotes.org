@@ -51,24 +51,14 @@ module.exports = function (app) {
       var notes = results.notes
       var courseNotetype = results.courseNotetype
 
-      var view
-      var cls
-      if (notetype.id === 'sample-essays') {
-        view = 'notetype-sample-essays'
-        cls = 'notetype'
-      } else {
-        view = 'notetype'
-      }
-
       if (notetype.hasChapters) {
         notes.sort(sort.sortChapters)
       }
 
-      res.render(view, {
+      res.render('notetype', {
         course: course,
         notetype: notetype,
         courseNotetype: courseNotetype,
-        cls: cls,
         notes: notes,
         title: course.name + ' ' + notetype.name,
         url: courseNotetype.url

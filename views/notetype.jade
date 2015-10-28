@@ -1,4 +1,5 @@
 extends layouts/main-sidebar
+include mixins/entries
 
 block sidebar
   include sidebars/notetype
@@ -8,14 +9,18 @@ block content
   h1= notetype.name
   include includes/toolbar
 
-  include ads/adsense-in-content
+  if notetype.id !== 'sample-essays'
+    include ads/adsense-in-content
 
   - var desc = (notetype.desc || notetype.shortDesc).replace(/COURSE_SHORTNAME/g, course.shortName).replace(/COURSE_TEXTBOOK/g, course.textbook).replace(/COURSE/g, course.name)
 
   p!= desc
 
-  ul.listing
-    each note in notes
-      li: a(href='#{note.url}')= note.name
+  if notetype.id === 'sample-essays'
+    +entries(notes)
+  else
+    ul.listing
+      each note in notes
+        li: a(href='#{note.url}')= note.name
 
   include ads/adsense-link-units
