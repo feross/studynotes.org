@@ -110,8 +110,8 @@
   "keywords": [
     "AP notes",
     "college essays",
-    "high school",
-    "college prep"
+    "college prep",
+    "high school"
   ],
   "license": "GPLv3",
   "main": "index.js",
