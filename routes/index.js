@@ -8,11 +8,12 @@ module.exports = function (app) {
    */
   var render = app.render
   app.render = function (view, opts, fn) {
+    var req = opts._locals.req
+
     // Set default template local variables
     opts.view = view
-    if (!opts.cls) opts.cls = ''
-    opts.randomquote || (opts.randomquote = randomquote())
-    opts.searchTerm || (opts.searchTerm = '')
+    opts.randomquote = randomquote()
+    if (!opts.searchTerm) opts.searchTerm = ''
 
     if (opts.url) {
       // Make URL absolute
@@ -64,7 +65,7 @@ module.exports = function (app) {
         url: opts.college.url
       }
 
-      if (!opts._locals.req.isAuthenticated() || !opts._locals.req.user.pro) {
+      if (!req.isAuthenticated() || !req.user.pro) {
         opts.hero.tabs.push({
           name: 'Unlock All Essays',
           url: '/pro/' + opts.college.id + '/'
@@ -75,8 +76,10 @@ module.exports = function (app) {
       opts.hero.image = view + '.jpg'
     }
 
+    opts.cls = opts.cls ? opts.cls + ' ' : ''
+
     // Add view name as class on <body>
-    opts.cls += ' ' + view
+    opts.cls += view + ' ' + req.agent.family.toLowerCase()
 
     // If no hero is on the page, set a special class on <body>
     if (!opts.hero) {

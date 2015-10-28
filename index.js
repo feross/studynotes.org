@@ -22,6 +22,7 @@ var session = require('express-session')
 var stylus = require('stylus')
 var supportsColor = require('supports-color')
 var url = require('url')
+var useragent = require('useragent')
 
 var auth = require('./lib/auth')
 var config = require('./config')
@@ -247,7 +248,10 @@ Site.prototype.setupSessions = function () {
 
 Site.prototype.setupLocals = function () {
   var self = this
+
   self.app.use(function (req, res, next) {
+    req.agent = useragent.lookup(req.headers['user-agent'])
+
     res.locals.req = req
     res.locals.csrf = req.csrfToken()
     res.locals.ads = Boolean(req.query.ads) ||
