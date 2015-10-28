@@ -2,7 +2,7 @@ module.exports = Site
 
 var bodyParser = require('body-parser')
 var cluster = require('cluster')
-var compress = require('compression')
+var compression = require('compression')
 var connectMongo = require('connect-mongo')
 var connectSlashes = require('connect-slashes')
 var cookieParser = require('cookie-parser')
@@ -15,9 +15,9 @@ var http = require('http')
 var jade = require('jade')
 var moment = require('moment')
 var nib = require('nib')
+var parallel = require('run-parallel')
 var passport = require('passport')
 var path = require('path')
-var series = require('run-series')
 var session = require('express-session')
 var stylus = require('stylus')
 var supportsColor = require('supports-color')
@@ -27,6 +27,7 @@ var auth = require('./lib/auth')
 var config = require('./config')
 var model = require('./model')
 var pro = require('./lib/pro')
+var routes = require('./routes')
 var secret = require('./secret')
 var util = require('./util')
 
@@ -70,24 +71,55 @@ function Site (opts, done) {
   self.app = express()
   self.server = http.createServer(self.app)
 
-  // Trust the X-Forwarded-* headers from nginx
+  // Trust "X-Forwarded-For" and "X-Forwarded-Proto" nginx headers
   self.app.enable('trust proxy')
 
-  // Use Jade templates
+  // Disable "powered by express" header
+  self.app.disable('x-powered-by')
+
+  // Use Jade for templates
   self.app.set('views', path.join(__dirname, 'views'))
   self.app.set('view engine', 'jade')
   self.app.engine('jade', jade.renderFile)
 
-  // Make variables and functions available to Jade templates
+  // Make some variables and functions available to Jade templates
   self.app.locals.config = config
   self.app.locals.modelCache = model.cache
   self.app.locals.moment = moment
-  self.app.locals.pretty = !config.isProd
+  self.app.locals.pretty = !config.isProd // minify html
   self.app.locals.util = util
 
-  // Gzip responses
-  self.app.use(compress())
+  self.app.use(compression()) // gzip
 
+  self.setupHeaders()
+  self.setupStatic()
+
+  self.app.use(connectSlashes()) // append trailing slash
+
+  self.setupLogger()
+  self.setupSessions()
+
+  self.app.use(pro.checkPro)
+  self.app.use(flash()) // errors are propogated using `req.flash`
+
+  self.setupLocals()
+
+  parallel([
+    model.connect,
+    function (cb) {
+      // Start HTTP server -- workers will share TCP connection
+      self.server.listen(self.port, cb)
+    }
+  ], function (err) {
+    if (err) return done(err)
+    routes(self.app)
+    self.debug('listening on ' + self.port)
+    done(null)
+  })
+}
+
+Site.prototype.setupHeaders = function () {
+  var self = this
   self.app.use(function (req, res, next) {
     var extname = path.extname(url.parse(req.url).pathname)
 
@@ -96,11 +128,11 @@ function Site (opts, done) {
       res.header('Access-Control-Allow-Origin', '*')
     }
 
-    // Prevents IE and Chrome from MIME-sniffing a response. Reduces exposure to
-    // drive-by download attacks on sites serving user uploaded content.
+    // Prevents IE and Chrome from MIME-sniffing a response to reduce exposure to
+    // drive-by download attacks when serving user uploaded content.
     res.header('X-Content-Type-Options', 'nosniff')
 
-    // Prevent rendering of site within a frame.
+    // Prevent rendering of site within a frame
     res.header('X-Frame-Options', 'DENY')
 
     // Enable the XSS filter built into most recent web browsers. It's usually
@@ -133,57 +165,6 @@ function Site (opts, done) {
 
     next()
   })
-
-  self.setupStatic()
-  self.app.use(connectSlashes())
-
-  self.app.use(function (req, res, next) {
-    // Log requests using the "debug" module so that the output is hidden by default.
-    // Enable with DEBUG=* environment variable.
-    self.debug(
-      (supportsColor ? '\x1B[90m' : '') +
-      req.method + ' ' + req.originalUrl + ' ' + req.ip +
-      (supportsColor ? '\x1B[0m' : '')
-    )
-    next()
-  })
-
-  self.setupSessions()
-  self.app.use(pro.checkPro)
-
-  // Errors are propogated using `req.flash`
-  self.app.use(flash())
-
-  self.app.use(function (req, res, next) {
-    res.locals.req = req
-    res.locals.csrf = req.csrfToken()
-    res.locals.ads = req.query.ads ||
-      (
-        (!req.isAuthenticated() || !req.user.pro) &&
-        [ '173.164.237.162', '71.202.21.18', '24.7.142.221' ].indexOf(req.ip) === -1
-      )
-    next()
-  })
-
-  require('./routes')(self.app)
-
-  series([
-    model.connect,
-    function (cb) {
-      // Start HTTP server -- workers will share TCP connection
-      self.server.listen(self.port, cb)
-    }
-  ], function (err) {
-    if (!err) self.debug('listening on ' + self.port)
-    done(err)
-  })
-}
-
-Site.prototype.debug = function () {
-  var self = this
-  var args = [].slice.call(arguments)
-  args[0] = '[' + self.id + '] ' + args[0]
-  debug.apply(null, args)
 }
 
 Site.prototype.setupStatic = function () {
@@ -192,17 +173,16 @@ Site.prototype.setupStatic = function () {
   // Favicon middleware makes favicon requests fast
   self.app.use(favicon(path.join(config.root, 'static/favicon.ico')))
 
-  // Setup static middlewares
+  // Serve static files
   var opts = { maxAge: config.maxAge }
   var stat = express.static(config.root + '/static', opts)
-  var out = express.static(config.root + '/out', opts)
-  var vendor = express.static(config.root + '/vendor', opts)
 
   self.app.use(stat)
 
-  // Also mount the static files at "/cdn", without routes. This is so that
-  // we can point the CDN at this folder and have it mirror ONLY the static
-  // files, no other site content.
+  // Serve static, out (built), and vendor files at "/cdn".
+  var out = express.static(config.root + '/out', opts)
+  var vendor = express.static(config.root + '/vendor', opts)
+
   self.app.use('/cdn', stat)
   self.app.use('/cdn', out)
   self.app.use('/cdn', vendor)
@@ -215,6 +195,20 @@ Site.prototype.setupStatic = function () {
 
   self.app.use('/cdn', function (req, res) {
     res.status(404).send()
+  })
+}
+
+Site.prototype.setupLogger = function () {
+  var self = this
+  self.app.use(function (req, res, next) {
+    // Log requests using the "debug" module so that the output is hidden by default.
+    // Enable with DEBUG=* environment variable.
+    self.debug(
+      (supportsColor ? '\x1B[90m' : '') +
+      req.method + ' ' + req.originalUrl + ' ' + req.ip +
+      (supportsColor ? '\x1B[0m' : '')
+    )
+    next()
   })
 }
 
@@ -249,6 +243,27 @@ Site.prototype.setupSessions = function () {
   passport.serializeUser(auth.serializeUser)
   passport.deserializeUser(auth.deserializeUser)
   passport.use(auth.passportStrategy)
+}
+
+Site.prototype.setupLocals = function () {
+  var self = this
+  self.app.use(function (req, res, next) {
+    res.locals.req = req
+    res.locals.csrf = req.csrfToken()
+    res.locals.ads = Boolean(req.query.ads) ||
+      (
+        (!req.isAuthenticated() || !req.user.pro) &&
+        [ '173.164.237.162', '71.202.21.18', '24.7.142.221' ].indexOf(req.ip) === -1
+      )
+    next()
+  })
+}
+
+Site.prototype.debug = function () {
+  var self = this
+  var args = [].slice.call(arguments)
+  args[0] = '[' + self.id + '] ' + args[0]
+  debug.apply(null, args)
 }
 
 if (!module.parent) util.run(Site)

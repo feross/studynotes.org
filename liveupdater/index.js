@@ -9,7 +9,6 @@ var https = require('https')
 var jsdom = require('jsdom')
 var model = require('../model')
 var parallel = require('run-parallel')
-var series = require('run-series')
 var util = require('../util')
 var values = require('object-values')
 var ws = require('ws')
@@ -35,7 +34,6 @@ function LiveUpdater (opts, done) {
     })
     : http.createServer()
 
-  httpServer.listen(self.port)
   self.server = new ws.Server({ server: httpServer, perMessageDeflate: false })
 
   self.server.on('connection', function (socket) {
@@ -61,10 +59,13 @@ function LiveUpdater (opts, done) {
     socket.on('close', handleClose)
   })
 
-  series([
+  parallel([
     model.connect,
     function (cb) {
       self.getTotalHits(cb)
+    },
+    function (cb) {
+      httpServer.listen(self.port, cb)
     }
   ], function (err) {
     if (!err) debug('liveupdater listening on ' + self.port)
