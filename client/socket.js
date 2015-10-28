@@ -4,8 +4,8 @@ var debug = require('debug')('studynotes:socket')
 var Socket = require('simple-websocket')
 var util = require('../util')
 
-var RECONNECT_TIMEOUT_VARIANCE = 30 * 1000
-var MINIMUM_RECONNECT_TIMEOUT = 5 * 1000
+var RECONNECT_VARIANCE = 30 * 1000
+var MINIMUM_RECONNECT = 5 * 1000
 
 var socket
 var lastTotalHits
@@ -27,8 +27,7 @@ function openSocket () {
 }
 
 function openSocketAfterTimeout () {
-  var reconnectTimeout = Math.floor(Math.random() * RECONNECT_TIMEOUT_VARIANCE) +
-    MINIMUM_RECONNECT_TIMEOUT
+  var reconnectTimeout = util.randomInt(RECONNECT_VARIANCE) + MINIMUM_RECONNECT
   setTimeout(openSocket, reconnectTimeout)
   debug('reconnecting socket in %s ms', reconnectTimeout)
 }

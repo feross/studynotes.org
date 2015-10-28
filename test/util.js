@@ -39,6 +39,15 @@ test('util.randomBytes', function (t) {
   })
 })
 
+test('util.randomInt', function (t) {
+  t.equal(util.randomInt(1), 0)
+
+  var r = util.randomInt(2)
+  t.ok(r === 0 || r === 1)
+
+  t.end()
+})
+
 test('util.addQueryParams', function (t) {
   t.equal(
     util.addQueryParams('http://host.com/?a=1', { b: 2 }),
