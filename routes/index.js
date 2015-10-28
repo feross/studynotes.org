@@ -108,10 +108,8 @@ module.exports = function (app) {
     // Add view name as class on <body>
     opts.cls += view + ' ' + req.agentCls
 
-    // If no hero is on the page, set a special class on <body>
-    if (!opts.hero) {
-      opts.cls += ' solidHeader'
-    }
+    // If no hero is on the page, set a special class on <html>
+    if (!opts.hero) opts.cls += ' solidHeader'
 
     // Call the original express render function
     return render.call(this, view, opts, fn)

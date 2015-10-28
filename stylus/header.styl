@@ -9,14 +9,14 @@
   width: 100%
   z-index: 10
 
-  body.home &
+  html.home &
     @media PHONE
       display: none
 
-  body:not(.solidHeader) &
+  html:not(.solidHeader) &
     background-color: rgba(0,0,0,0.1)
 
-  body.solidHeader &
+  html.solidHeader &
     background-color: #FFF
     border-bottom: SOLID_HEADER_BORDER
 
@@ -53,7 +53,7 @@
             @media PHONE
               padding: 14px 15px 0 15px
 
-          body.solidHeader &
+          html.solidHeader &
             {LINK}
               border-right: SOLID_HEADER_BORDER
               @media PHONE
@@ -81,7 +81,7 @@
           height: HEADER_HEIGHT - 1
           padding: 14px 15px 0 16px
 
-        body.solidHeader &
+        html.solidHeader &
           {LINK}
             border-left: SOLID_HEADER_BORDER
           {HOVER}
@@ -104,7 +104,7 @@
         {HOVER}
           text-decoration: none
 
-        body.solidHeader &
+        html.solidHeader &
           {LINK}
             color: #000
             text-shadow: none
@@ -141,16 +141,16 @@
     @media PHONE
       display: none
 
-    body.solidHeader &
+    html.solidHeader &
       color: #000
 
-    body:not(.solidHeader) &
+    html:not(.solidHeader) &
       background: linear-gradient(top, rgba(255,255,255,0.3), rgba(255,255,255,0.4))
       background-size: 100% 100%
       box-shadow: inset 0 1px 3px rgba(0,0,0,0.4)
       text-shadow: 0 1px rgba(0,0,0,0.7)
 
-    body.solidHeader &
+    html.solidHeader &
       &.searching, &:hover
         border: SOLID_HEADER_BORDER_FOCUS
 
@@ -165,7 +165,7 @@
       width: 100%
       text-shadow: 0 1px rgba(0,0,0,0.7)
 
-      body.solidHeader &
+      html.solidHeader &
         color: #000
         text-shadow: none
 
@@ -192,7 +192,7 @@
       color: #FFF
       text-shadow: 0 1px rgba(0,0,0,0.7)
 
-    body.solidHeader &
+    html.solidHeader &
       ::-webkit-input-placeholder
         color: #000
         text-shadow: none

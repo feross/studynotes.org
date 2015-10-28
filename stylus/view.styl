@@ -1,6 +1,6 @@
 // View-specific styles
 
-body.home
+html.home
   .birdy
     float: left
     margin-top: -10px
@@ -23,7 +23,7 @@ body.home
     h3
       ellipsis()
 
-body.essay
+html.essay
   .prompt
     font-style: italic
 
@@ -64,12 +64,12 @@ body.essay
       &:last-child
         margin-bottom: 0
 
-body.notetype, body.course, body.college
+html.notetype, html.course, html.college
   @media PHONE
     .toolbar-ghost
       display: none
 
-body.note, body.essay
+html.note, html.essay
   .birdy
     margin-left: auto
     margin-right: auto
@@ -77,15 +77,15 @@ body.note, body.essay
   .birdy-stop
     margin-bottom: 30px
 
-body.signup, body.signup2
+html.signup, html.signup2
   background: center center url('https://cdn.apstudynotes.org/images/hero/colleges.jpg') no-repeat fixed
   background-size: cover
 
-body.login, body.login-forgot, body.login-reset
+html.login, html.login-forgot, html.login-reset
   background: center center url('https://cdn.apstudynotes.org/images/hero/amjed-full.jpg') no-repeat fixed
   background-size: cover
 
-body.pro
+html.pro
   .hero
     min-height: 240px
     padding-top: 20px
@@ -135,7 +135,7 @@ body.pro
     margin-left: 20px
     margin-right: 20px
 
-body.admin
+html.admin
   a.publish
     {LINK}
       color: palette('Red')

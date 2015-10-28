@@ -1,6 +1,6 @@
 doctype html
 block vars
-html(class='studynotes #{layout}', lang='en')
+html(class='studynotes #{ layout } #{ cls }', lang='en')
   head
     meta(charset='utf-8')
 
@@ -19,18 +19,18 @@ html(class='studynotes #{layout}', lang='en')
     else
       - pageTitle = 'Study Notes - Free AP Notes'
     title= pageTitle
-    meta(property='og:title', content='#{pageTitle}')
+    meta(property='og:title', content='#{ pageTitle }')
 
     meta(name='robots', content='index, follow')
 
     if !locals.desc
       - desc = '100% Free AP Test Prep website that offers study material to high school students seeking to prepare for AP exams. Enterprising students use this website to learn AP class material, study for class quizzes and tests, and to brush up on course material before the big exam day.'
-    meta(name='description', content='#{desc}')
-    meta(property='og:description', content='#{desc}')
+    meta(name='description', content='#{ desc }')
+    meta(property='og:description', content='#{ desc }')
 
     if !locals.keywords
       - keywords = 'ap study notes, ap, advanced placement, ap notes, AP US History, ap u.s. history, apush, american pageant, the american pageant, AP US Government and Politics, ap government, ap gov, AP World History, AP English, AP Psychology, AP Economics, AP Calculus, AP Statistics, AP Physics, AP Biology, AP Environmental Science, AP Chemistry, course guides, chapter outlines, chapter notes, topic outlines, vocabulary words, key terms, important historical documents, ap practice quizzes, ap practice tests, ap cram sheets, course notes'
-    meta(name='keywords', content='#{keywords}')
+    meta(name='keywords', content='#{ keywords }')
 
     meta(property='og:type', content='website')
     if locals.hero && hero.image
@@ -113,7 +113,7 @@ html(class='studynotes #{layout}', lang='en')
 
     block head
 
-  body(class='#{ locals.cls }')
+  body
     block body
 
     each msg in locals.req.flash('success')
@@ -130,7 +130,7 @@ html(class='studynotes #{layout}', lang='en')
 
     if locals.course
       script.
-        window.countdownDate = new Date('#{course.examDate}')
+        window.countdownDate = new Date('#{ course.examDate }')
 
     if config.isProd
       //- Google Analytics
