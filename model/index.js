@@ -27,6 +27,12 @@ files.forEach(function (file) {
   // Create Model object from Schema
   var model = mongoose.model(name, schema)
 
+  // Print index failures. This is useful when adding a new "unique" index and
+  // there already exist duplicate keys in the database.
+  model.on('index', function (err) {
+    if (err) throw err
+  })
+
   // Export the Model
   exports[name] = models[name] = model
 })
