@@ -38,7 +38,7 @@ header.header
         //- HACK: direct sign up button to Pro landing page.
         //- TODO: link should go to page asking users if they're high school
         //-       or college students and direct to appropriate page
-        - var signupUrl = '/pro/' + (locals.url ? '?referringEssay=' + encodeURIComponent(url) : '')
+        - var signupUrl = '/pro/' + (locals.url ? '?referrer=' + encodeURIComponent(url) : '')
         li: a(href=signupUrl, title='Create a Study Notes Account')
           i.icon-check.hide-tablet
           span Sign Up

@@ -25,16 +25,13 @@ var Order = new mongoose.Schema({
     type: String,
     required: true
   },
-
-  referringEssay: {
-    type: String,
-    ref: 'Essay'
+  referrer: {
+    type: String
   },
   freeEssays: [{
     type: String,
     ref: 'Essay'
   }],
-
   user: {
     type: String,
     ref: 'User'

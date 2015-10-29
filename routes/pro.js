@@ -100,7 +100,7 @@ module.exports = function (app) {
           stripeEmail: req.body.email,
           stripeToken: req.body.id,
           amount: amount,
-          referringEssay: req.body.referringEssay,
+          referrer: req.body.referrer,
           freeEssays: req.session.free,
           stripeCharge: JSON.stringify(r.stripeCharge)
         })
@@ -115,13 +115,13 @@ module.exports = function (app) {
         if (err.type === 'StripeCardError') {
           req.flash('error', 'Your card has been declined. Please try again!')
           debug('Card declined: %s', err.message)
-          return res.redirect(req.body.referringEssay || 'back')
+          return res.redirect(req.body.referrer || 'back')
         } else if (err.errors) {
           // errors from mongoose validation
           values(err.errors).forEach(function (error) {
             req.flash('error', error.message)
           })
-          return res.redirect(req.body.referringEssay || 'back')
+          return res.redirect(req.body.referrer || 'back')
         } else {
           return next(err)
         }
@@ -134,7 +134,7 @@ module.exports = function (app) {
       }
 
       // Redirect to original essay after signup/login
-      req.session.returnTo = req.body.referringEssay
+      req.session.returnTo = req.body.referrer
       res.sendStatus(200)
     })
   })

@@ -6,7 +6,7 @@ var util = require('../util')
 
 if (window.StripeCheckout) {
   var query = url.parse(window.location.href, true).query
-  var referringEssay = query.referringEssay || window.location.href
+  var referrer = query.referrer || window.location.href
 
   var stripeHandler = window.StripeCheckout.configure({
     key: config.stripe,
@@ -22,10 +22,10 @@ if (window.StripeCheckout) {
       window.ga('send', 'event', 'pro', 'checkout-open')
     },
     token: function (token) {
-      token.referringEssay = referringEssay
+      token.referrer = referrer
       $.post('/pro/', token)
         .done(function () {
-          window.location = util.addQueryParams(referringEssay, {
+          window.location = util.addQueryParams(referrer, {
             ga: 'pro.order',
             fbq: 'Purchase.' + config.proPrice
             // TODO
