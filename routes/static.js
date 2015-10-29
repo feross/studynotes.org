@@ -4,9 +4,9 @@ module.exports = function (app) {
       url: '/about',
       title: 'About',
       hero: {
-        title: 'About Study Notes',
+        title: 'Study Notes',
         desc: 'Helping students learn faster and better',
-        image: 'books.jpg'
+        image: 'chalkboard.jpg'
       }
     })
   })
