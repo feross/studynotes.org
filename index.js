@@ -259,6 +259,13 @@ Site.prototype.setupLocals = function () {
     'nokia-browser'
   ]
 
+  var adBlock = [
+    '173.164.237.162',
+    '71.202.21.18',
+    '24.7.142.221',
+    '172.56.38.194'
+  ]
+
   self.app.use(function (req, res, next) {
     req.agent = useragent.lookup(req.headers['user-agent'])
     req.agentCls = req.agent.family.replace(/ /g, '-').toLowerCase()
@@ -272,7 +279,7 @@ Site.prototype.setupLocals = function () {
     res.locals.ads = Boolean(req.query.ads) ||
       (
         (!req.isAuthenticated() || !req.user.pro) &&
-        [ '173.164.237.162', '71.202.21.18', '24.7.142.221' ].indexOf(req.ip) === -1
+        adBlock.indexOf(req.ip) === -1
       )
     next()
   })
