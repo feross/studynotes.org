@@ -117,8 +117,6 @@ $window.load(function () {
   if (navigator.serviceWorker) {
     navigator.serviceWorker.register('/service-worker.js', { scope: './' })
       .then(function (registration) {
-        console.log('service worker registered')
-        console.log(registration)
       })
       .catch(function (err) {
         console.error('service worker failed')

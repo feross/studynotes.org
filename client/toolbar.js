@@ -14,13 +14,11 @@ window.toolbarOnScroll = function () {
   var contentBottom = $content.offset().top + $content.height()
 
   if (toolbarTop < scrollTop && scrollTop < contentBottom) {
-    console.log('add sticky')
     var contentWidth = $content.width()
     $toolbar
       .addClass('sticky')
       .css({ width: contentWidth + 40 })
   } else {
-    console.log('remove sticky')
     $toolbar
       .removeClass('sticky')
       .css({ width: '' })
