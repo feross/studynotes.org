@@ -1,11 +1,11 @@
 {
   "name": "studynotes",
-  "description": "StudyNotes.org. Helping students learn faster and study better!",
-  "version": "1.0.4",
+  "description": "Learn faster. Study better.",
+  "version": "2.0.0",
   "author": {
-    "name": "Feross Aboukhadijeh",
-    "email": "feross@feross.org",
-    "url": "http://feross.org/"
+    "name": "Study Notes, LLC",
+    "email": "contact@studynotes.org",
+    "url": "https://www.apstudynotes.org"
   },
   "browser": {
     "./config-node.js": "./config-browser.js",
