@@ -51,14 +51,6 @@ $('a[href^="http:"], a[href^="https:"]')
   .not('a[href^="' + config.siteOrigin + '"]')
   .attr('target', '_blank')
 
-// Make links in iOS standalone web app open within app instead of Safari
-if (window.navigator.standalone) {
-  $('a[href^="' + config.siteOrigin + '"], a[href^="/"]').on('click', function (e) {
-    e.preventDefault()
-    window.location = $(e.currentTarget).attr('href')
-  })
-}
-
 // Logout via XHR POST
 $('.logout').on('click', function (e) {
   e.preventDefault()
