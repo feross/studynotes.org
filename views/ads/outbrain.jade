@@ -1,0 +1,6 @@
+.outbrain
+  if config.isProd
+    .OUTBRAIN(data­-src='', data­-widget-id='StudyNotes', data­-ob-­template='TF_1')
+    script(async, src='//widgets.outbrain.com/outbrain.js')
+  else
+    div(style='border: 5px solid red; min-height: 200px') outbrain
