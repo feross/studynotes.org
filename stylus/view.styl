@@ -143,3 +143,15 @@ html.admin
   a.unpublish
     {LINK}
       color: palette('Green')
+
+html.search
+  .content
+    @media PHONE
+      padding-top: 0
+    @media TABLET
+      padding-top: 10px
+    @media DESKTOP
+      padding-top: 15px
+
+  .hero h1
+    ellipsis()

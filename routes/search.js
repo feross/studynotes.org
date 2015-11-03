@@ -7,7 +7,7 @@ module.exports = function (app) {
       title: 'Search Results for ' + q,
       searchTerm: q,
       hero: {
-        title: 'Search Results for "' + q + '"',
+        title: 'Results for "' + q + '"',
         image: 'clouds.jpg'
       }
     })
