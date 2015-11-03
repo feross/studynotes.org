@@ -26,8 +26,7 @@ if (window.StripeCheckout) {
       $.post('/pro/', token)
         .done(function () {
           window.location = util.addQueryParams(referrer, {
-            ga: 'pro.order',
-            fbq: 'Purchase.' + config.proPrice
+            ga: 'pro.order'
             // TODO
             // success: 'Thanks for purchasing Study Notes Pro!'
           })
