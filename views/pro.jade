@@ -1,6 +1,9 @@
 extends layouts/main
 include mixins/pro-btn
 
+append scripts
+  script(async, src='//platform.twitter.com/widgets.js')
+
 block content
   h1.center Read Top #{ college ? college.shortName : 'College' } Essays
 
@@ -63,7 +66,6 @@ block content
 
   h1.center Listen to What our Users Say
 
-  | <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
   .row
     .col3
       | <blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr"><a href="http://t.co/l3TgOUtWaM">http://t.co/l3TgOUtWaM</a> is amazing</p>&mdash; ruby c (@rubeeec) <a href="https://twitter.com/rubeeec/status/643586396578533376">September 15, 2015</a></blockquote>
