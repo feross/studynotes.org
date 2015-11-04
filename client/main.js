@@ -1,4 +1,5 @@
 var $ = require('jquery')
+var cookies = require('cookies-js')
 
 require('transparency')
 require('select2')
@@ -22,6 +23,9 @@ var notify = require('./notify')
 var throttle = require('throttleit')
 var url = require('url')
 var util = require('../util')
+
+cookies.defaults.secure = config.isProd
+cookies.defaults.expires = 60 * 60 * 24 * 365
 
 var EVENT_THROTTLE = 100
 
@@ -118,11 +122,11 @@ $window.load(function () {
 })
 
 // "Welcome back" message
-if (document.cookie.match('returning=true') && // this is a returning visitor
+if (cookies.get('returning') && // this is a returning visitor
     url.parse(document.referrer).host !== window.location.host) { // external site
   notify.big.info('Welcome back!', { timeout: 2000 })
 }
-document.cookie = 'returning=true'
+cookies.set('returning', true)
 
 var match = /(success|error|info)=([^?&]+)/g.exec(window.location.search)
 var msgType = match && match[1]

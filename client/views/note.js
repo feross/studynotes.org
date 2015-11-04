@@ -1,15 +1,15 @@
 var $ = require('jquery')
+var cookies = require('cookies-js')
 
 var CHECK_INTERVAL = 2000
 
 module.exports = function () {
-  var seenSurvey = document.cookie.indexOf('seen_survey=1') >= 0
-  if (seenSurvey) return
+  if (cookies.get('seen_survey')) return
 
   var interval = window.setInterval(checkForSurvey, CHECK_INTERVAL)
   function checkForSurvey () {
     if ($('#t402-prompt-iframe').length) {
-      document.cookie = 'seen_survey=1'
+      cookies.set('seen_survey', true)
       clearInterval(interval)
     }
   }
