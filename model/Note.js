@@ -2,7 +2,6 @@ var model = require('./')
 var mongoose = require('mongoose')
 var plugin = require('./plugin')
 var validate = require('mongoose-validator')
-var util = require('../util')
 
 var Note = new mongoose.Schema({
   _id: {
@@ -19,19 +18,6 @@ var Note = new mongoose.Schema({
         message: 'Please give the note a title.'
       })
     ]
-  },
-  body: {
-    type: String,
-    validate: [
-      validate({
-        validator: 'isLength',
-        arguments: 100,
-        message: 'It looks like you forgot to include the actual note.'
-      })
-    ]
-  },
-  bodyTruncate: {
-    type: String
   },
   ordering: {
     type: Number,
@@ -89,15 +75,8 @@ Note.virtual('searchDesc').get(function () {
 })
 
 // Sanitize to strip bad html before saving
-Note.pre('save', function (next) {
-  var self = this
-  if (self.isModified('body')) {
-    self.body = util.sanitizeHTML(self.body)
-    self.bodyTruncate = util.truncate(util.sanitizeHTML(self.body, ['p']), 300).trim()
-  }
-  next()
-})
 
+Note.plugin(plugin.body, { model: 'Note' })
 Note.plugin(plugin.modifyDate)
 Note.plugin(plugin.createDate)
 Note.plugin(plugin.absoluteUrl)

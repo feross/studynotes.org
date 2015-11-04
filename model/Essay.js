@@ -21,20 +21,7 @@ var Essay = new mongoose.Schema({
     ]
   },
   prompt: String,
-  body: {
-    type: String,
-    validate: [
-      validate({
-        validator: 'isLength',
-        arguments: 100,
-        message: 'It looks like you forgot to include the actual essay.'
-      })
-    ]
-  },
   bodyPaywall: {
-    type: String
-  },
-  bodyTruncate: {
     type: String
   },
   college: {
@@ -81,8 +68,6 @@ Essay.pre('save', function (next) {
   if (self.isModified('prompt')) self.prompt = util.sanitizeHTML(self.prompt)
 
   if (self.isModified('body')) {
-    self.body = util.sanitizeHTML(self.body)
-    self.bodyTruncate = util.truncate(util.sanitizeHTML(self.body, ['p']), 300).trim()
     util.convertToPaywallText(self.body, 2, function (err, html) {
       if (err) return next(err)
       self.bodyPaywall = html
@@ -93,6 +78,7 @@ Essay.pre('save', function (next) {
   }
 })
 
+Essay.plugin(plugin.body, { model: 'Essay' })
 Essay.plugin(plugin.modifyDate)
 Essay.plugin(plugin.createDate)
 Essay.plugin(plugin.absoluteUrl)

@@ -1,6 +1,8 @@
 var config = require('../config')
 var mongoose = require('mongoose')
 var slug = require('slug')
+var util = require('../util')
+var validate = require('mongoose-validator')
 
 slug.defaults.mode = 'studynotes'
 slug.defaults.modes['studynotes'] = {
@@ -74,6 +76,7 @@ exports.absoluteUrl = function (schema) {
  * time, we automatically generate one which acts as the slug.
  */
 exports.slug = function (schema, opts) {
+  if (!opts || !opts.model) throw new Error('missing `model` option')
   schema.pre('save', function (next) {
     var self = this
     if (self._id) return next()
@@ -105,5 +108,30 @@ exports.slug = function (schema, opts) {
           }
         })
     }
+  })
+}
+
+exports.body = function (schema, opts) {
+  if (!opts || !opts.model) throw new Error('missing `model` option')
+  schema.add({
+    body: {
+      type: String,
+      validate: [
+        validate({
+          validator: 'isLength',
+          arguments: 100,
+          message: 'You forgot to include the ' + opts.model.toLowerCase() + '.'
+        })
+      ]
+    }
+  })
+  schema.add({ bodyTruncate: String })
+
+  schema.pre('save', function (next) {
+    if (this.isModified('body')) {
+      this.body = util.sanitizeHTML(this.body)
+      this.bodyTruncate = util.truncate(util.sanitizeHTML(this.body, ['p']), 300).trim()
+    }
+    next()
   })
 }
