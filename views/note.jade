@@ -44,7 +44,8 @@ block content
 
   include includes/toolbar
 
-  include ads/adsense-in-content
+  if (seenSurvey)
+    include ads/adsense-in-content
 
   .p402_premium
     .body !{note.body}

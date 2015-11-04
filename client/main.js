@@ -146,6 +146,7 @@ $(function () {
 })
 
 // View-specific code
-var pathname = window.location.pathname
-if (pathname === '/') require('./views/home')()
-if (pathname === '/admin/') require('./views/admin')()
+var className = $('html').attr('class').split(' ')
+if (className.indexOf('home') >= 0) require('./views/home')()
+if (className.indexOf('admin') >= 0) require('./views/admin')()
+if (className.indexOf('note') >= 0) require('./views/note')()

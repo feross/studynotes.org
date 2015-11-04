@@ -53,11 +53,9 @@ module.exports = function (app) {
 
       r.course = course
       r.notetype = notetype
-      r.title = [
-        r.note.name,
-        course.name + ' ' + notetype.name
-      ].join(' - ')
+      r.title = [ r.note.name, course.name + ' ' + notetype.name ].join(' - ')
       r.url = r.note.url
+      r.seenSurvey = req.cookies.seen_survey
 
       res.render('note', r)
       r.note.hit()
