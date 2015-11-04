@@ -25,7 +25,7 @@ var url = require('url')
 var util = require('../util')
 
 cookies.defaults.secure = config.isProd
-cookies.defaults.expires = 60 * 60 * 24 * 365
+cookies.defaults.expires = 60 * 60 * 24 * 365 // 1 year
 
 var EVENT_THROTTLE = 100
 
