@@ -145,12 +145,6 @@ Site.prototype.setupHeaders = function () {
     res.header('X-UA-Compatible', 'IE=Edge,chrome=1')
 
     if (config.isProd) {
-      // Redirect http to https
-      if (req.method === 'GET' && req.protocol !== 'https') {
-        self.debug('Redirect to https: %s', req.hostname + req.url)
-        return res.redirect(301, config.siteOrigin + req.url)
-      }
-
       // Use HTTP Strict Transport Security
       // Lasts 1 year, incl. subdomains, allow browser preload list
       res.header(
@@ -158,8 +152,10 @@ Site.prototype.setupHeaders = function () {
         'max-age=31536000; includeSubDomains; preload'
       )
 
-      if (req.method === 'GET' && req.hostname !== 'www.apstudynotes.org') {
-        self.debug('Redirect to canonical domain: %s', req.hostname + req.url)
+      // Redirect to main site url, over https
+      if (req.method === 'GET' &&
+          (req.protocol !== 'https' || req.hostname !== 'www.apstudynotes.org')) {
+        self.debug('Redirect to canonical url: %s', req.hostname + req.url)
         return res.redirect(301, config.siteOrigin + req.url)
       }
     }
