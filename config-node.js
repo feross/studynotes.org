@@ -58,6 +58,11 @@ if (config.isProd) {
 exports.jsPath = '/main' + (MD5_JS ? '-' + MD5_JS : '') + '.js'
 exports.cssPath = '/main' + (MD5_CSS ? '-' + MD5_CSS : '') + '.css'
 
+/**
+ * String to append to the end of all emails
+ */
+exports.emailFooter = 'Study Notes LLC, PO Box 19678, Stanford, CA 94305'
+
 if (config.isProd) {
   exports.inline = {
     css: fs.readFileSync(exports.out + exports.cssPath, 'utf8'),
