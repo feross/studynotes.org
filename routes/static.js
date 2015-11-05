@@ -105,8 +105,8 @@ module.exports = function (app) {
       url: '/testimonials',
       title: 'Testimonials',
       hero: {
-        title: 'Testimonials',
-        desc: 'What Our Users Say',
+        title: 'What Our Users Say',
+        desc: 'Real testimonials from real users',
         image: 'students.jpg'
       }
     })
