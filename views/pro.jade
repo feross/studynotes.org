@@ -52,9 +52,10 @@ block content
             li and #{ otherEssays.length } more essays from #{ otherColleges.length - 4 } top colleges...
       else
         h2 Top 25 Schools, plus Common App
-        each college in otherColleges.slice(0, 4)
-          li #{ college.shortName } essays
-        li and #{ otherColleges.length - 4 } more top colleges...
+        ul.tight
+          each college in otherColleges.slice(0, 4)
+            li #{ college.shortName } essays
+          li and #{ otherColleges.length - 4 } more top colleges...
 
 
   p For just <strong>$#{ (config.proPrice / 100) }</strong> (one-time payment) you get <strong>lifetime access to #{ essays.length } essays</strong> that worked at #{ collegeList }, and more. Don't wait — start getting ahead today!
