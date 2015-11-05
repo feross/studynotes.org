@@ -100,6 +100,18 @@ module.exports = function (app) {
     })
   })
 
+  app.get('/testimonials', function (req, res) {
+    res.render('testimonials', {
+      url: '/testimonials',
+      title: 'Testimonials',
+      hero: {
+        title: 'Testimonials',
+        desc: 'What Our Users Say',
+        image: 'students.jpg'
+      }
+    })
+  })
+
   app.get('/terms', function (req, res) {
     res.render('terms', {
       url: '/terms',
