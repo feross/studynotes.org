@@ -74,13 +74,13 @@ block content
   else
     .body !{essay.body}
 
-
   .after-content
+    include ads/adsense-link-units
+
     hr
 
     p Keep reading more <a href="#{ college.url }">#{ college.shortName } admissions essays</a> — you can't be too prepared!
 
-    include ads/adsense-link-units
     if (!blur)
       include ads/medianet-after-content
       include includes/birdy/happy
