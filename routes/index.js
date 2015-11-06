@@ -5,6 +5,7 @@ var url = require('url')
 module.exports = function (app) {
   require('./home')(app)
   require('./static')(app)
+  require('./redirects')(app)
 
   // Accounts
   require('./signup')(app)
