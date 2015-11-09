@@ -123,28 +123,3 @@ module.exports = function (app) {
     })
   })
 }
-
-// TODO: add users to Mailchimp
-// module.exports = function () {
-//   app.post('/subscribe', function (req, res) {
-//     try {
-//       var api = new MailChimpAPI(secret.mailchimp.key, { version : '2.0' })
-//     } catch (e) {
-//       console.error(e)
-//     }
-
-//     var email = req.body.email
-
-//     api.call('lists', 'subscribe', {
-//       email: { email: email },
-//       id: secret.mailchimp.listId
-//     }, function (err, data) {
-//       if (err) {
-//         console.error(err)
-//         res.send({ status: 'error' })
-//       } else {
-//         res.send({ status: 'ok' })
-//       }
-//     })
-//   })
-// }
