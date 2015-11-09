@@ -1,7 +1,7 @@
 if locals.ads
   .outbrain-content
     if config.isProd
-      .OUTBRAIN(data-src='', data-widget-id='StudyNotes', data-ob-template='TF_1')
+      .OUTBRAIN(data-src='', data-widget-id='TF_1', data-ob-template='studynotes')
       script(type='text/javascript', async='async', src='https://widgets.outbrain.com/outbrain.js')
     else
       div(style='border: 5px solid red; min-height: 200px') outbrain
