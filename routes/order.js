@@ -84,14 +84,7 @@ module.exports = function (app) {
 
           '- The Study Notes team'
 
-        parallel([
-          function (cb) {
-            mail.send(message, cb)
-          },
-          function (cb) {
-            mail.notifyAdmin('New Pro order', r.order, cb)
-          }
-        ], onSentEmail)
+        mail.send(message, onSentEmail)
       }
 
       if (product === 'review-proofreading' ||
