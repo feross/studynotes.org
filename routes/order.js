@@ -97,7 +97,7 @@ module.exports = function (app) {
           product === 'review-premium') {
         message.to = email
         message.subject = 'Thanks for buying ' + desc + '!'
-        message.text = 'Congratulations! You purchased ' + desc + '.\n\n' +
+        message.text = 'Congratulations! You purchased ' + desc + ' from Study Notes.\n\n' +
 
           'A tutor will be in touch with you shortly to discuss your customized ' +
           'coaching plan.\n\n' +
@@ -107,18 +107,19 @@ module.exports = function (app) {
           '- Your full name\n' +
           '- Your phone number\n' +
           '- Universities you plan to apply to\n' +
-          '- Your essays (please attach them to the email)\n' +
+          '- Your essays (please attach them to the email)\n\n' +
 
           (
             product === 'review-premium'
-              ? 'If you haven\'t started on your essays yet, just let us know that.'
+              ? 'If you haven\'t started on your essays yet, just let us know that.\n\n'
               : ''
-          ) + '\n\n' +
+          ) +
 
-          'If you have any other questions, you can include them in your response' +
+          'If you have any other questions, you can include them in your response ' +
           'to this email.\n\n' +
 
-          '- The Study Notes team'
+          '- The Study Notes team\n' +
+          config.siteOrigin
 
         parallel([
           function (cb) {
