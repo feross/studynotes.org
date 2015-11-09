@@ -17,7 +17,8 @@ module.exports = function (app) {
       title: 'Advertise',
       hero: {
         title: 'Advertise on Study Notes',
-        desc: 'Reach millions of engaged and passionate students'
+        desc: 'Reach millions of engaged and passionate students',
+        image: 'diversity.jpg'
       }
     })
   })
