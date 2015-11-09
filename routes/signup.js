@@ -1,6 +1,6 @@
 var auth = require('../lib/auth')
 var config = require('../config')
-var email = require('../lib/email')
+var mail = require('../lib/mail')
 var model = require('../model')
 var values = require('object-values')
 
@@ -116,7 +116,7 @@ module.exports = function (app) {
 
           '- Feross and the Study Notes team'
 
-        email.send(message, function (err) {
+        mail.send(message, function (err) {
           if (err) throw err
         })
       }

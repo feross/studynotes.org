@@ -1,6 +1,6 @@
 extends layouts/main-sidebar
 include mixins/comments
-include mixins/pro-btn
+include mixins/order-btn
 
 append toolbar
   if req.user && req.user.admin
@@ -61,12 +61,12 @@ block content
     .body
       .subscribe-on-blur.unblur
         include includes/birdy/stop
-        h2 You must pay $#{ (config.proPrice / 100) } to read this essay.
+        h2 You must pay $#{ (config.product.pro.price / 100) } to read this essay.
 
         p
-          +pro-btn('Unlock Essays', 'large')
+          +order-btn('pro', 'Unlock Essays', 'large')
 
-        h4 For just $#{ (config.proPrice / 100) } (one-time payment) you get <strong>lifetime access to #{ essayCount } essays</strong> that worked at Stanford, Harvard, and more. <a href="/pro/#{ college.id }/?referrer=#{ encodeURIComponent(essay.url) }">Learn&nbsp;more.</a>
+        h4 For just $#{ (config.product.pro.price / 100) } (one-time payment) you get <strong>lifetime access to #{ essayCount } essays</strong> that worked at Stanford, Harvard, and more. <a href="/pro/#{ college.id }/?referrer=#{ encodeURIComponent(essay.url) }">Learn&nbsp;more.</a>
 
         h4 Questions? Call 1 (530) 633-7677
 

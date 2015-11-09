@@ -25,9 +25,11 @@ var Order = new mongoose.Schema({
     type: String,
     required: true
   },
-  referrer: {
-    type: String
+  product: {
+    type: String,
+    required: true
   },
+  referrer: String,
   freeEssays: [{
     type: String,
     ref: 'Essay'

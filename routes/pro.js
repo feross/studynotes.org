@@ -1,11 +1,5 @@
 var auto = require('run-auto')
-var config = require('../config')
-var debug = require('debug')('studynotes:routes/pro')
 var model = require('../model')
-var secret = require('../secret')
-var values = require('object-values')
-
-var stripe = require('stripe')(secret.stripe)
 
 module.exports = function (app) {
   app.get('/pro/:collegeId?', function (req, res, next) {
@@ -70,6 +64,7 @@ module.exports = function (app) {
           title: heroTitle,
           image: heroImage
         },
+        cls: 'landing-page',
         college: college,
         collegeEssays: collegeEssays,
         collegeList: collegeList,
@@ -78,64 +73,6 @@ module.exports = function (app) {
         otherColleges: otherColleges,
         otherEssays: otherEssays
       })
-    })
-  })
-
-  app.post('/pro', function (req, res, next) {
-    var amount = config.proPrice
-
-    auto({
-      stripeCharge: function (cb) {
-        stripe.charges.create({
-          amount: amount, // in cents
-          currency: 'usd',
-          source: req.body.id,
-          description: 'Study Notes Pro (' + req.body.email + ')',
-          receipt_email: req.body.email
-        }, cb)
-      },
-
-      order: ['stripeCharge', function (cb, r) {
-        var order = new model.Order({
-          stripeEmail: req.body.email,
-          stripeToken: req.body.id,
-          amount: amount,
-          referrer: req.body.referrer,
-          freeEssays: req.session.free,
-          stripeCharge: JSON.stringify(r.stripeCharge)
-        })
-
-        order.save(function (err, order) {
-          cb(err, order)
-        })
-      }]
-
-    }, function (err, r) {
-      if (err) {
-        if (err.type === 'StripeCardError') {
-          req.flash('error', 'Your card has been declined. Please try again!')
-          debug('Card declined: %s', err.message)
-          return res.redirect(req.body.referrer || 'back')
-        } else if (err.errors) {
-          // errors from mongoose validation
-          values(err.errors).forEach(function (error) {
-            req.flash('error', error.message)
-          })
-          return res.redirect(req.body.referrer || 'back')
-        } else {
-          return next(err)
-        }
-      }
-
-      // User is officially Pro now
-      req.session.pro = {
-        email: r.order.stripeEmail,
-        orderId: r.order.id
-      }
-
-      // Redirect to original essay after signup/login
-      req.session.returnTo = req.body.referrer
-      res.sendStatus(200)
     })
   })
 }

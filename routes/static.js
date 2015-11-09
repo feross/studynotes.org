@@ -90,6 +90,17 @@ module.exports = function (app) {
     })
   })
 
+  app.get('/stats', function (req, res) {
+    res.render('stats', {
+      url: '/stats',
+      title: 'Live Study Stats',
+      hero: {
+        title: 'Live Study Stats',
+        image: 'books.jpg'
+      }
+    })
+  })
+
   app.get('/study-guides', function (req, res) {
     res.render('study-guides', {
       url: '/study-guides',
@@ -119,17 +130,6 @@ module.exports = function (app) {
       title: 'Terms and Conditions',
       hero: {
         title: 'Terms and Conditions',
-        image: 'books.jpg'
-      }
-    })
-  })
-
-  app.get('/stats', function (req, res) {
-    res.render('stats', {
-      url: '/stats',
-      title: 'Live Study Stats',
-      hero: {
-        title: 'Live Study Stats',
         image: 'books.jpg'
       }
     })

@@ -1,0 +1,69 @@
+extends layouts/main
+include mixins/order-btn
+
+block content
+  h1.center Premium Essay Review Services
+
+  p <strong>Application essays are one of the most important parts of your college application.</strong> The essays are your chance to convince admissions officers that you're special and deserve one of the coveted spots in next year's freshman class.
+
+  p <strong>Enlist the expert help of one of our Ivy-League editors</strong>, including Harvard and Stanford graduates, and get individual coaching to make your essay stand out among the crow, and make the best possible impression on the admissions officers.
+
+  div.center: p
+    .btn.huge.see-pricing See Pricing
+
+  br
+
+  .row
+    .col3
+      h2 Ivy-League Editors
+      img(src=config.cdnOrigin + '/images/icon/trust.svg')
+      p We only hire Ivy-League graduates from Harvard or Stanford — they know what it takes to get in
+    .col3
+      h2 Learn From The Best
+      img(src=config.cdnOrigin + '/images/icon/crest.svg')
+      p Proven track record – we edit hundreds of essays and our customers are pleased with the results
+    .col3
+      h2 Perfect Grammar
+      img(src=config.cdnOrigin + '/images/icon/check.svg')
+      p Essay edits are 100% free of grammar and spelling errors – guaranteed
+
+  h1.center.pricing-heading Ready to start? Pick a plan:
+
+  .row.pricing
+    .col3
+      h2 Proofreading
+      ul
+        li <strong>100% typo-free</strong> and correct grammar guaranteed
+        li <strong>Email follow-up</strong> with your editor
+        li <strong>48-hour</strong> turn around
+        li <strong>$99</strong> price (1,500 words max)
+      +order-btn('review-proofreading', 'Buy Now', 'large')
+    .col3.featured
+      h2 Standard <br><small>Most popular plan!</small>
+      ul
+        li <strong>Proofreading package, plus:</strong>
+        li <strong>Detailed essay critique</strong> to help your writing
+        li <strong>Content &amp; tone</strong> improvements
+        li <strong>A more compelling and relevant essay</strong>
+        li <strong>48-hour</strong> turn around
+        li <strong>$199</strong> price (1,500 words max)
+      +order-btn('review-standard', 'Buy Now', 'large')
+    .col3
+      h2 Premium
+      ul
+        li <strong>Standard package, plus:</strong>
+        li <strong>Brainstorm session</strong> with your editor
+        li <strong>Two phone sessions</strong>
+        li <strong>14 days of email support</strong> from your editor
+        li <strong>Two rounds of critiques</strong>
+        li <strong>$399</strong> price (1,500 words max)
+      +order-btn('review-premium', 'Buy Now', 'large')
+
+  p.center Your essay will be <strong>100% free of typos and grammar errors</strong> guaranteed or you don’t pay a dime!
+
+  div.center
+    img.credit-card-logos(src=config.cdnOrigin + '/images/credit-card-logos.png')
+
+  h1.center Questions? Call us!
+  h2.center 1 (530) 633-7677
+

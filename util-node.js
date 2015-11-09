@@ -1,10 +1,10 @@
 var crypto = require('crypto')
 var downgrade = require('downgrade')
-var email = require('./lib/email')
 var extend = require('xtend')
 var htmlParser = require('html-parser')
 var jsdom = require('jsdom')
 var loremIpsum = require('lorem-ipsum')
+var mail = require('./lib/mail')
 var minimist = require('minimist')
 var unlimited = require('unlimited')
 
@@ -32,7 +32,7 @@ exports.run = function (ServerConstructor) {
   process.on('uncaughtException', function (err) {
     console.error('[UNCAUGHT EXCEPTION]')
     console.error(err.stack)
-    email.send({
+    mail.send({
       subject: '[UNCAUGHT EXCEPTION] ' + err.message,
       text: err.stack.toString()
     })

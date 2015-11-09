@@ -1,5 +1,5 @@
 extends layouts/main
-include mixins/pro-btn
+include mixins/order-btn
 
 append scripts
   script(async, src='//platform.twitter.com/widgets.js')
@@ -12,19 +12,19 @@ block content
   .row
     .col3
       h2 Learn From The Best
-      img(src=config.cdnOrigin + '/images/letter.svg')
+      img(src=config.cdnOrigin + '/images/icon/letter.svg')
       p See how students like you were accepted to their dream schools!
     .col3
       h2 Essays That Worked
-      img(src=config.cdnOrigin + '/images/crest.svg')
+      img(src=config.cdnOrigin + '/images/icon/crest.svg')
       p Read the best college essays from real admitted students.
     .col3
       h2 Trusted by Thousands
-      img(src=config.cdnOrigin + '/images/check.svg')
+      img(src=config.cdnOrigin + '/images/icon/check.svg')
       p Get into top universities like #{ collegeListAnd }.
 
   div.center: p
-    +pro-btn('Read College Essays', 'huge')
+    +order-btn('pro', 'Read College Essays', 'huge')
 
   hr
 
@@ -34,7 +34,7 @@ block content
 
   .row
     .col2
-      img(src=config.cdnOrigin + '/images/trophy.svg')
+      img(src=config.cdnOrigin + '/images/icon/trophy.svg')
       h2 Get #{ collegeEssays.length } Top #{ college ? college.shortName : 'College' } Essays
       ul.tight
         each essay in collegeEssays.slice(0, 4)
@@ -42,7 +42,7 @@ block content
         if collegeEssays.length > 4
           li and #{ collegeEssays.length - 4 } more #{ college ? college.shortName : 'college' } essays...
     .col2
-      img(src=config.cdnOrigin + '/images/stars.svg')
+      img(src=config.cdnOrigin + '/images/icon/stars.svg')
       if college
         h2 FREE BONUS: #{ otherEssays.length } More Essays
         ul.tight
@@ -58,10 +58,10 @@ block content
           li and #{ otherColleges.length - 4 } more top colleges...
 
 
-  p For just <strong>$#{ (config.proPrice / 100) }</strong> (one-time payment) you get <strong>lifetime access to #{ essays.length } essays</strong> that worked at #{ collegeList }, and more. Don't wait — start getting ahead today!
+  p For just <strong>$#{ (config.product.pro.price / 100) }</strong> (one-time payment) you get <strong>lifetime access to #{ essays.length } essays</strong> that worked at #{ collegeList }, and more. Don't wait — start getting ahead today!
 
   div.center: p
-    +pro-btn('Unlock Essays', 'huge')
+    +order-btn('pro', 'Unlock Essays', 'huge')
 
   hr
 
@@ -79,7 +79,7 @@ block content
       | <blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">if you’re applying at one of the Ivy league colleges and want to write your essay, you should consider this website. <a href="http://t.co/1NW27gBBbh">http://t.co/1NW27gBBbh</a></p>&mdash; Basmah.. (@BaSmah_) <a href="https://twitter.com/BaSmah_/status/488323106746810370">July 13, 2014</a></blockquote>
 
   div.center: p
-    +pro-btn('Buy Now', 'huge')
+    +order-btn('pro', 'Buy Now', 'huge')
     img.credit-card-logos(src=config.cdnOrigin + '/images/credit-card-logos.png')
 
   hr

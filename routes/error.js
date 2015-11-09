@@ -1,6 +1,6 @@
 var debug = require('debug')('studynotes:routes/error')
-var email = require('../lib/email')
 var httpStatus = require('http-status-codes')
+var mail = require('../lib/mail')
 
 module.exports = function (app) {
   app.get('/500', function (req, res, next) {
@@ -50,7 +50,7 @@ module.exports = function (app) {
     } else if (req.url === '/robots.txt') {
       debug('No notify for robots.txt errors')
     } else {
-      email.send({
+      mail.send({
         subject: err.message,
         text: text
       })

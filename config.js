@@ -33,17 +33,34 @@ exports.siteOrigin = (isProd ? 'https' : 'http') + '://' + exports.siteHost
 
 /**
  * Origin of the CDN server
- * @type {[type]}
+ * @type {string}
  */
 exports.cdnOrigin = isProd
   ? 'https://cdn.apstudynotes.org'
   : exports.siteOrigin + '/cdn'
 
 /**
- * Price of pro subscription (in cents!)
- * @type {Number}
+ * Price of paid products (in cents!)
+ * @type {Object}
  */
-exports.proPrice = 1400
+exports.product = {
+  pro: {
+    price: 1400,
+    desc: '100+ Top College Essays'
+  },
+  'review-proofreading': {
+    price: 9900,
+    desc: 'Essay Review (Proofreading)'
+  },
+  'review-standard': {
+    price: 19900,
+    desc: 'Essay Review (Standard)'
+  },
+  'review-premium': {
+    price: 39900,
+    desc: 'Essay Review (Premium)'
+  }
+}
 
 /**
  * Stripe publishable token

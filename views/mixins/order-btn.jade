@@ -1,0 +1,6 @@
+mixin order-btn(product, text, cls)
+  if (!locals.stripeScriptIncluded)
+    - locals.stripeScriptIncluded = true
+    script(src='https://checkout.stripe.com/checkout.js')
+  if (!cls)
+  .order-btn.btn(class=product + ' ' + cls)= text

@@ -3,34 +3,26 @@ var randomquote = require('../lib/randomquote')
 var url = require('url')
 
 module.exports = function (app) {
-  require('./home')(app)
-  require('./static')(app)
-  require('./redirects')(app)
-
-  // Accounts
-  require('./signup')(app)
-  require('./login')(app)
-  require('./pro')(app)
-
-  // Submit
-  require('./submit')(app)
-
-  // Search
-  require('./search')(app)
+  require('./admin')(app)
   require('./autocomplete')(app)
-
-  // Dynamic
-  require('./course')(app)
-  require('./notetype')(app)
-  require('./note')(app)
   require('./college')(app)
+  require('./course')(app)
   require('./essay')(app)
+  require('./essay-review')(app)
+  require('./home')(app)
+  require('./login')(app)
+  require('./note')(app)
+  require('./notetype')(app)
+  require('./order')(app)
+  require('./pro')(app)
+  require('./redirects')(app)
+  require('./search')(app)
+  require('./signup')(app)
+  require('./static')(app)
+  require('./submit')(app)
   require('./user')(app)
 
-  // Admin
-  require('./admin')(app)
-
-  // Error pages
+  // Error pages -- must be last
   require('./error')(app)
 
   // Add variables that all templates will expect

@@ -1,6 +1,6 @@
 var auth = require('../lib/auth')
 var config = require('../config')
-var email = require('../lib/email')
+var mail = require('../lib/mail')
 var model = require('../model')
 var passport = require('passport')
 var util = require('../util')
@@ -76,7 +76,7 @@ module.exports = function (app) {
           'If you did not request this, please ignore this email and your password ' +
           'will remain unchanged.\n'
 
-        email.send(message, function (err) {
+        mail.send(message, function (err) {
           if (err) return cb(err)
           req.flash('success', 'An e-mail has been sent to ' + user.email + ' with further instructions.')
           cb(null)
@@ -139,7 +139,7 @@ module.exports = function (app) {
     }
 
     function sendEmail (err) {
-      if (err) return fatalError(err)
+      if (err) return next(err)
 
       var message = {}
       message.to = user.email
@@ -149,17 +149,12 @@ module.exports = function (app) {
         'This is a confirmation that the password for your Study Notes account ' +
         'with email ' + user.email + ' has just been changed.\n'
 
-      email.send(message, onSentEmail)
+      mail.send(message, onSentEmail)
     }
 
     function onSentEmail (err) {
-      if (err) return fatalError(err)
-      req.flash('success', 'Success! Your password has been changed.')
-      res.redirect('/')
-    }
-
-    function fatalError (err) {
       if (err) return next(err)
+      req.flash('success', 'Success! Your password has been changed.')
       res.redirect('/')
     }
   })

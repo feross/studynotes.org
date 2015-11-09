@@ -1,6 +1,6 @@
-var auto = require('run-auto')
 var auth = require('../lib/auth')
-var email = require('../lib/email')
+var auto = require('run-auto')
+var mail = require('../lib/mail')
 var model = require('../model')
 var values = require('object-values')
 
@@ -76,7 +76,7 @@ module.exports = function (app) {
         next(err)
       } else {
         res.redirect(r.essay.url)
-        if (!isEdit) email.notifyAdmin('New essay', r.essay)
+        if (!isEdit) mail.notifyAdmin('New essay', r.essay)
       }
     })
   })
@@ -167,7 +167,7 @@ module.exports = function (app) {
             notetype: r.note.notetype
           })
           res.redirect('/submit/note/')
-          email.notifyAdmin('New note', r.note)
+          mail.notifyAdmin('New note', r.note)
         }
       }
     })
