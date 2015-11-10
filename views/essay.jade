@@ -37,7 +37,7 @@ block sidebar
       li: a(href=essay.url)= essay.name
 
   include ads/adsense-sidebar
-  include ads/studynotes-pro
+  include ads/upsell
 
   ul
     li #{ util.addCommas(essay.hits) } views (#{ util.addCommas(util.hitsPerDay(essay.hits, essay.createDate)) } views per day)

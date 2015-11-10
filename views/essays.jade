@@ -10,7 +10,7 @@ block sidebar
       li: a(href=college.url)= college.name
 
   include ads/adsense-sidebar
-  include ads/studynotes-pro
+  include ads/upsell
 
   ul
     li #{ util.addCommas(essays.length) } essays for #{ collegeCount } <a href='/colleges/'>universities</a>
@@ -27,4 +27,4 @@ block content
 
   hr
 
-  include ads/studynotes-pro
+  include ads/upsell

@@ -1,9 +1,0 @@
-if locals.ads
-  if college
-    - var proUrl = '/pro/' + college.id + '/?referrer=' + encodeURIComponent(url)
-  else
-    - var proUrl = '/pro/?referrer=' + encodeURIComponent(url)
-
-  h2 Get Study Notes Pro
-  p For just $#{ (config.product.pro.price / 100) }, get <strong>lifetime access to #{ essayCount || essays.length }&nbsp;college essays</strong> that worked at #{ college ? college.shortName : 'Stanford, Harvard, Princeton,' } and more. <a href="#{ proUrl }">Learn&nbsp;more.</a>
-  .center: a.btn.large.red(href=proUrl) Buy Now

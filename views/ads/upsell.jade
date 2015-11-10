@@ -1,0 +1,20 @@
+if locals.ads
+  if college
+    - var proUrl = '/pro/' + college.id + '/?referrer=' + encodeURIComponent(url)
+  else
+    - var proUrl = '/pro/?referrer=' + encodeURIComponent(url)
+
+  .center
+    h2 Essays That&nbsp;Worked
+
+    p <strong>Read #{ essayCount || essays.length }&nbsp;college essays</strong> that worked</strong> at #{ college ? college.shortName : 'Stanford, Harvard, Princeton,' } and more. <a href='#{ proUrl }'>Learn&nbsp;more.</a>
+
+    a.btn.large(href=proUrl) Get Sample Essays
+
+    hr
+
+    h2 College Essay&nbsp;Editing
+
+    p <strong>Enlist the expert help of one of our Ivy-League editors.</strong> Get individual coaching to make your essay stand out among the crowd. <a href='/essay-review/'>Learn&nbsp;more.</a>
+
+    a.btn.large.red(href='/essay-review/') Edit My Essays

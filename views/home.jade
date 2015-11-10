@@ -94,9 +94,17 @@ block content
 
   include ads/adsense-link-units
 
+  h2 College Application Essay&nbsp;Editing
+
+  p <strong>Enlist the expert help of one of our Ivy-League editors</strong>, including Harvard and Stanford graduates, and get individual coaching to make your essay stand out among the crowd, and make the best possible impression on the admissions officers.
+
+  p.center: a.btn.huge(href='/essay-review/') Edit My Paper Now!
+
+  hr
+
   .row
     .col2
-      h2 New Notes
+      h2 New AP Notes
       ul.tight
         each note in newNotes
           li
@@ -109,6 +117,8 @@ block content
           li
             a(href=essay.url)= essay.name
             small.gray: em= ' ' + moment(essay.createDate).fromNow()
+
+  hr
 
   .row
     .col2

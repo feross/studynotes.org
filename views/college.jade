@@ -19,7 +19,7 @@ block sidebar
         img(src='//maps.googleapis.com/maps/api/staticmap?center=#{ encodeURIComponent(college.location) }&zoom=8&size=336x200&scale=2&maptype=roadmap&sensor=false&visual_refresh=true')
 
   include ads/adsense-sidebar
-  include ads/studynotes-pro
+  include ads/upsell
 
   ul
     li #{ util.addCommas(college.hits) } views
@@ -50,4 +50,4 @@ block content
 
   hr
 
-  include ads/studynotes-pro
+  include ads/upsell
