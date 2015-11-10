@@ -3,6 +3,7 @@ var cookies = require('cookies-js')
 
 var CHECK_INTERVAL = 2000
 
+// TODO: remove this
 module.exports = function () {
   if (cookies.get('seen_survey')) return
 
