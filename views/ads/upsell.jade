@@ -5,11 +5,16 @@ if locals.ads
     - var proUrl = '/pro/?referrer=' + encodeURIComponent(url)
 
   .center
-    h2 Essays That&nbsp;Worked
+    .row
+      .col2
+        h2 Essays That&nbsp;Worked
+        p <strong>Read #{ essayCount || essays.length }&nbsp;college essays</strong> that worked</strong> at #{ college ? college.shortName : 'Stanford, Harvard, Princeton,' } and more. <a href='#{ proUrl }'>Learn&nbsp;more.</a>
 
-    p <strong>Read #{ essayCount || essays.length }&nbsp;college essays</strong> that worked</strong> at #{ college ? college.shortName : 'Stanford, Harvard, Princeton,' } and more. <a href='#{ proUrl }'>Learn&nbsp;more.</a>
+        a.btn.large.red(href=proUrl) Get Sample Essays
 
-    a.btn.large(href=proUrl) Get Sample Essays
+      .col2
+        | <blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">If this gets 1000 retweets, we&#39;ll make *ALL* sample college essays on Study Notes available for FREE until January! <a href="https://t.co/xeOOkbS6Bl">https://t.co/xeOOkbS6Bl</a></p>&mdash; Study Notes (@StudyNotesApp) <a href="https://twitter.com/StudyNotesApp/status/664581024437813248">November 11, 2015</a></blockquote>
+        | <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
     hr
 
