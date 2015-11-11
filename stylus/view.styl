@@ -187,12 +187,21 @@ html.search
 
 html.testimonials
   blockquote
-    font-family: 'Indie Flower', cursive
     border-left: 0
     padding: 0
     margin: 0 20px 70px 20px
-    font-size: 140%
-    line-height: 130%
+    div
+      margin-left: 55px
+      position: relative
+      &:before
+        content: '\201C'
+        display: block
+        color: GRAY_LIGHTER
+        position: absolute
+        left: -65px
+        top: 35px
+        font-size: 140px
 
   cite
-    margin-top: 10px
+    margin-top: 15px
+    margin-left: 55px
