@@ -55,8 +55,7 @@ module.exports = function (app) {
       r.notetype = notetype
       r.title = [ r.note.name, course.name + ' ' + notetype.name ].join(' - ')
       r.url = r.note.url
-      // TODO: remove this
-      // r.seenSurvey = Boolean(req.cookies.seen_survey)
+      r.seenSurvey = Boolean(req.cookies.seen_survey)
 
       res.render('note', r)
       r.note.hit()
