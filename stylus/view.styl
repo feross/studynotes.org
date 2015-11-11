@@ -154,8 +154,11 @@ html.essay-review
       position: relative
       border: 1px solid GRAY
       border-bottom: none
-      margin-top: -20px
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5)
+      margin-top: -20px
+      @media PHONE
+        box-shadow: none
+        margin-top: 0
       h2
         background-color: palette('Orange')
         color: white
