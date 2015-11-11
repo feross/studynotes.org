@@ -68,7 +68,9 @@ block content
 
         h4 For just $#{ (config.product.pro.price / 100) } (one-time payment) you get <strong>lifetime access to #{ essayCount } essays</strong> that worked at Stanford, Harvard, and more. <a href="/pro/#{ college.id }/?referrer=#{ encodeURIComponent(essay.url) }">Learn&nbsp;more.</a>
 
-        h4 Questions? Call 1 (530) 633-7677
+        h4 <strong>Questions?</strong> Call 1 (530) 633-7677
+
+        small Existing users: <a href="#{ loginUrl }">Log in here</a>
 
       .blur !{essay.bodyPaywall}
   else

@@ -35,6 +35,9 @@ module.exports = function (app) {
     opts.randomquote = randomquote()
     if (!opts.searchTerm) opts.searchTerm = ''
 
+    opts.loginUrl = '/login/'
+    opts.signupUrl = '/signup/'
+
     if (opts.url) {
       // Make URL absolute
       opts.url = config.siteOrigin + opts.url
@@ -46,6 +49,10 @@ module.exports = function (app) {
         u.pathname += '/'
         opts.url = url.format(u)
       }
+
+      var returnTo = '?returnTo=' + encodeURIComponent(opts.url)
+      opts.loginUrl += returnTo
+      opts.signupUrl += returnTo
     }
 
     // If rendering a course-related view
