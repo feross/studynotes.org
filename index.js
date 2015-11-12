@@ -264,11 +264,11 @@ Site.prototype.setupLocals = function () {
   ]
 
   self.app.use(function (req, res, next) {
-    req.agent = useragent.lookup(req.headers['user-agent'])
-    req.agentCls = req.agent.family.replace(/ /g, '-').toLowerCase()
+    var agent = useragent.lookup(req.headers['user-agent'])
+    req.agent = agent.family.replace(/ /g, '-').toLowerCase()
 
-    if (mobileFamilies.indexOf(req.agentCls) >= 0) {
-      req.agentCls += ' mobile'
+    if (mobileFamilies.indexOf(req.agent) >= 0) {
+      req.agent += ' mobile'
     }
 
     res.locals.req = req

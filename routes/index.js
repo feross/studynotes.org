@@ -106,7 +106,7 @@ module.exports = function (app) {
     opts.cls = opts.cls ? opts.cls + ' ' : ''
 
     // Add view name as class on <body>
-    opts.cls += view + ' ' + req.agentCls
+    opts.cls += view + ' ' + req.agent
 
     // If no hero is on the page, set a special class on <html>
     if (!opts.hero) opts.cls += ' solidHeader'
