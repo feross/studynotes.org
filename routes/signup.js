@@ -1,6 +1,4 @@
 var auth = require('../lib/auth')
-var config = require('../config')
-var mail = require('../lib/mail')
 var model = require('../model')
 var values = require('object-values')
 
@@ -91,34 +89,6 @@ module.exports = function (app) {
         } else {
           res.redirect('/submit/essay/')
         }
-
-        // Send signup email
-        var message = {}
-        message.to = user.email
-        message.subject = 'Welcome to Study Notes'
-
-        message.text = 'Hi ' + user.name.split(' ')[0] + ',\n\n' +
-
-          'Thanks for signing up for Study Notes <' + config.siteOrigin + '>.\n\n' +
-
-          'I\'m the founder and CEO of Study Notes, and I wanted to personally ' +
-          'reach out to welcome you to the product.\n\n' +
-
-          'We are building the best and simplest learning tools to empower ' +
-          'students to accelerate their learning – i.e. to learn more ' +
-          'effectively, in a shorter time, and with better long-term recall.\n\n' +
-
-          'Study Notes is used by millions of students in all 50 U.S. states to ' +
-          'prepare for AP exams and college admissions.\n\n' +
-
-          'If you have any questions about the site, you can reply to this ' +
-          'email.\n\n' +
-
-          '- Feross and the Study Notes team'
-
-        mail.send(message, function (err) {
-          if (err) throw err
-        })
       }
     })
   })

@@ -1,9 +1,7 @@
 var auto = require('run-auto')
 var config = require('../config')
 var debug = require('debug')('studynotes:routes/order')
-var mail = require('../lib/mail')
 var model = require('../model')
-var parallel = require('run-parallel')
 var secret = require('../secret')
 var values = require('object-values')
 
@@ -60,78 +58,18 @@ module.exports = function (app) {
         }
       }
 
-      var message = {}
-
       if (product === 'pro') {
         // User is officially Pro now
         req.session.pro = {
           email: email,
           orderId: r.order.id
         }
-
-        message.to = email
-        message.subject = 'Thanks for buying ' + desc + '!'
-        message.text = 'Congratulations! You now have access to ' + desc + '.\n\n' +
-
-          'You can read the sample college essays by visiting: ' +
-          config.siteOrigin + '/essays/\n\n' +
-
-          'If you want to access the sample college essays on another device -- ' +
-          'like a phone, tablet, or another computer -- you will need to login ' +
-          'with the email and password you created.\n\n' +
-
-          'If you have any questions, you can reply to this email.\n\n' +
-
-          '- The Study Notes team'
-
-        mail.send(message, onSentEmail)
       }
 
-      if (product === 'review-proofreading' ||
-          product === 'review-standard' ||
-          product === 'review-premium') {
-        message.to = email
-        message.subject = 'Thanks for buying ' + desc + '!'
-        message.text = 'Congratulations! You purchased ' + desc + ' from Study Notes.\n\n' +
+      // Redirect back to referrer after signup/login
+      req.session.returnTo = referrer
 
-          'A tutor will be in touch with you shortly to discuss your customized ' +
-          'coaching plan.\n\n' +
-
-          'Please reply to this email with the following information:\n\n' +
-
-          '- Your full name\n' +
-          '- Your phone number\n' +
-          '- Universities you plan to apply to\n' +
-          '- Your essays (please attach them to the email)\n\n' +
-
-          (
-            product === 'review-premium'
-              ? 'If you haven\'t started on your essays yet, just let us know that.\n\n'
-              : ''
-          ) +
-
-          'If you have any other questions, you can include them in your response ' +
-          'to this email.\n\n' +
-
-          '- The Study Notes team\n' +
-          config.siteOrigin
-
-        parallel([
-          function (cb) {
-            mail.send(message, cb)
-          },
-          function (cb) {
-            mail.notifyAdmin('New Essay Review order', r.order, cb)
-          }
-        ], onSentEmail)
-      }
-
-      function onSentEmail (err) {
-        if (err) return next(err)
-        // Redirect to original essay after signup/login
-        req.session.returnTo = referrer
-        res.sendStatus(200)
-      }
+      res.sendStatus(200)
     })
   })
 }
