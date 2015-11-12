@@ -44,6 +44,7 @@ var Order = new mongoose.Schema({
 
 Order.pre('save', function (next) {
   this.wasNew = this.isNew // for post-save
+  next()
 })
 
 Order.post('save', function (order) {
