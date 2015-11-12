@@ -5,4 +5,9 @@ mixin comments(id, title, url)
     var disqus_identifier = '#{ id }'
     var disqus_title = '#{ title }'
     var disqus_url = '#{ url }'
+
+    window.addEventListener('orientationchange', function () {
+      DISQUS.reset({ reload: true })
+    }, false)
+
   script(async, src='//studynotesapp.disqus.com/embed.js')
