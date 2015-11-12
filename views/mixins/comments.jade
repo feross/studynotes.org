@@ -1,13 +1,16 @@
 mixin comments(id, title, url)
-  #disqus_thread
-  script.
-    var disqus_shortname = 'studynotesapp'
-    var disqus_identifier = '#{ id }'
-    var disqus_title = '#{ title }'
-    var disqus_url = '#{ url }'
+  if config.isProd
+    #disqus_thread
+    script.
+      var disqus_shortname = 'studynotesapp'
+      var disqus_identifier = '#{ id }'
+      var disqus_title = '#{ title }'
+      var disqus_url = '#{ url }'
 
-    window.addEventListener('orientationchange', function () {
-      DISQUS.reset({ reload: true })
-    }, false)
+      window.addEventListener('orientationchange', function () {
+        DISQUS.reset({ reload: true })
+      }, false)
 
-  script(async, src='//studynotesapp.disqus.com/embed.js')
+    script(async, src='//studynotesapp.disqus.com/embed.js')
+  else
+    div(style='border: 5px solid red; min-height: 200px; margin-bottom: 20px') disqus
