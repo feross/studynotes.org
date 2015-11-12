@@ -200,10 +200,10 @@ User.post('save', function (user) {
 
   message.text = 'Hi ' + user.name.split(' ')[0] + ',\n\n' +
 
-    'Thanks for signing up for Study Notes <' + config.siteOrigin + '>.\n\n' +
+    'Thanks for signing up for Study Notes (' + config.siteOrigin + ').\n\n' +
 
-    'I\'m the founder and CEO of Study Notes, and I wanted to personally ' +
-    'reach out to welcome you to the product.\n\n' +
+    'I\'m Feross, the founder and CEO of Study Notes. I wanted to personally ' +
+    'reach out to welcome you to Study Notes.\n\n' +
 
     'We are building the best and simplest learning tools to empower ' +
     'students to accelerate their learning – i.e. to learn more ' +
@@ -215,7 +215,7 @@ User.post('save', function (user) {
     'If you have any questions about the site, you can reply to this ' +
     'email.\n\n' +
 
-    '- Feross and the Study Notes team'
+    '— Feross'
 
   mail.send(message, function (err) {
     if (err) throw err
