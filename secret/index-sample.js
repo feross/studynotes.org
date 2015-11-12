@@ -28,3 +28,8 @@ exports.mongo = {
   port: '',
   database: ''
 }
+
+exports.mailchimp = {
+  key: '',
+  list: ''
+}

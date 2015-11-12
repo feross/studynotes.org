@@ -1,11 +1,5 @@
-var proxyquire = require('proxyquire')
 var test = require('tape')
-var util = proxyquire('../util', {
-  '../secret': {
-    '@noCallThru': true,
-    '@global': true
-  }
-})
+var util = require('../util')
 
 test('util.hitsPerDay', function (t) {
   var date = Date.now() - (1000 * 60 * 60 * 24) // 1 day ago

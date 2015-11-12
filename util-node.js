@@ -1,43 +1,9 @@
 var crypto = require('crypto')
-var downgrade = require('downgrade')
-var extend = require('xtend')
 var htmlParser = require('html-parser')
 var jsdom = require('jsdom')
 var loremIpsum = require('lorem-ipsum')
-var mail = require('./lib/mail')
-var minimist = require('minimist')
-var unlimited = require('unlimited')
 
 exports.truncate = require('html-truncate')
-
-var argv = minimist(process.argv.slice(2))
-
-/**
- * Run the given server, passing in command line options as options.
- * @param  {function(*)} ServerConstructor
- */
-exports.run = function (ServerConstructor) {
-  unlimited()
-
-  // Create and start the server
-  var server = new ServerConstructor(extend(argv), function (err) {
-    if (err) {
-      console.error('Error during ' + server.serverName + ' startup. Abort.')
-      console.error(err.stack)
-      process.exit(1)
-    }
-    downgrade()
-  })
-
-  process.on('uncaughtException', function (err) {
-    console.error('[UNCAUGHT EXCEPTION]')
-    console.error(err.stack)
-    mail.send({
-      subject: '[UNCAUGHT EXCEPTION] ' + err.message,
-      text: err.stack.toString()
-    })
-  })
-}
 
 /**
  * Returns hits per day, given the total `hits` and the `date` of publication.

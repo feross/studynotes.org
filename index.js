@@ -18,6 +18,7 @@ var nib = require('nib')
 var parallel = require('run-parallel')
 var passport = require('passport')
 var path = require('path')
+var run = require('./run')
 var session = require('express-session')
 var stylus = require('stylus')
 var supportsColor = require('supports-color')
@@ -288,4 +289,4 @@ Site.prototype.debug = function () {
   debug.apply(null, args)
 }
 
-if (!module.parent) util.run(Site)
+if (!module.parent) run(Site)

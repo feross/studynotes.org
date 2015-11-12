@@ -8,8 +8,8 @@ var https = require('https')
 var jsdom = require('jsdom')
 var model = require('../model')
 var parallel = require('run-parallel')
+var run = require('../run')
 var throttle = require('throttleit')
-var util = require('../util')
 var values = require('object-values')
 var ws = require('ws')
 
@@ -284,4 +284,4 @@ LiveUpdater.prototype.getTitle = function (url) {
   }
 }
 
-if (!module.parent) util.run(LiveUpdater)
+if (!module.parent) run(LiveUpdater)

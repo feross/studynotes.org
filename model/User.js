@@ -1,7 +1,8 @@
 var auto = require('run-auto')
 var bcrypt = require('bcrypt')
-var model = require('./')
+var mail = require('../lib/mail')
 var md5 = require('md5')
+var model = require('./')
 var mongoose = require('mongoose')
 var plugin = require('./plugin')
 var validate = require('mongoose-validator')
@@ -100,6 +101,10 @@ User.virtual('firstName').get(function () {
   return this.name.split(' ')[0]
 })
 
+User.virtual('lastName').get(function () {
+  return this.name.split(' ').slice(1).join(' ')
+})
+
 User.virtual('mlaName').get(function () {
   var split = this.name.split(' ')
   if (split.length >= 2) {
@@ -168,6 +173,8 @@ User.methods.gravatar = function (size, transparent) {
 
 User.pre('save', function (next) {
   var self = this
+  self.wasNew = self.isNew // for post-save
+
   if (self.isModified('email')) self.emailLowerCase = self.email.toLowerCase()
 
   if (self.isModified('password')) {
@@ -180,6 +187,13 @@ User.pre('save', function (next) {
   } else {
     next()
   }
+})
+
+User.post('save', function (user) {
+  if (!user.wasNew) return
+  mail.subscribeUser(user, function (err) {
+    if (err) throw err
+  })
 })
 
 User.methods.comparePassword = function (password, cb) {
