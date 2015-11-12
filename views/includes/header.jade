@@ -34,7 +34,7 @@ header.header
           i.icon-logout.hide-tablet
           span Logout
       else
-        li: a(href=locals.signupUrl, title='Create a Study Notes Account')
+        li: a(href='/pro/?referrer=' + encodeURIComponent(url), title='Create a Study Notes Account')
           i.icon-check.hide-tablet
           span Sign Up
         li: a(href=locals.loginUrl, title='Login to Study Notes')
