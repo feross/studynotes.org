@@ -273,11 +273,7 @@ Site.prototype.setupLocals = function () {
 
     res.locals.req = req
     res.locals.csrf = req.csrfToken()
-    res.locals.ads = Boolean(req.query.ads) ||
-      (
-        (!req.isAuthenticated() || !req.user.pro) &&
-        adBlock.indexOf(req.ip) === -1
-      )
+    res.locals.ads = Boolean(req.query.ads) || adBlock.indexOf(req.ip) === -1
     next()
   })
 }

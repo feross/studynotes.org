@@ -1,4 +1,4 @@
-if locals.ads
+if !req.isAuthenticated() || !req.user.pro
   if college
     - var proUrl = '/pro/' + college.id + '/?referrer=' + encodeURIComponent(url)
   else
