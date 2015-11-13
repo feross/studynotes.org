@@ -54,7 +54,7 @@ module.exports = function (app) {
 
         item.save(function (err) {
           if (err) return next(err)
-          res.send({ status: 'ok' })
+          res.send({ err: null })
         })
       })
   })

@@ -44,15 +44,15 @@ module.exports = function (app) {
     }, function (err, r) {
       if (err) {
         if (err.type === 'StripeCardError') {
-          req.flash('error', 'Your card has been declined. Please try again!')
           debug('Card declined: %s', err.message)
-          return res.redirect(referrer || 'back')
-        } else if (err.errors) {
-          // errors from mongoose validation
-          values(err.errors).forEach(function (error) {
-            req.flash('error', error.message)
+          return res.send({
+            err: 'Your card was declined.'
           })
-          return res.redirect(referrer || 'back')
+        } else if (err.errors) {
+          var errors = values(err.errors).map(err => err.message)
+          return res.send({
+            err: errors.join('. ')
+          })
         } else {
           return next(err)
         }

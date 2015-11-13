@@ -1,6 +1,5 @@
 var $ = require('jquery')
 var config = require('../config')
-var notify = require('./notify')
 var url = require('url')
 var util = require('../util')
 
@@ -62,15 +61,18 @@ function openCheckout (opts) {
     token.product = opts.product
 
     $.post('/order/', token)
-      .done(function () {
-        window.location = util.addQueryParams(referrer, {
-          ga: opts.product + '.order'
-          // TODO
-          // success: 'Thanks for purchasing ' + opts.description
-        })
-      })
-      .fail(function () {
-        notify.big.error('Error contacting the server!')
+      .done(function (data) {
+        if (data.err) {
+          window.location = util.addQueryParams(window.location.href, {
+            error: data.err
+          })
+        } else {
+          window.location = util.addQueryParams(referrer, {
+            ga: opts.product + '.order'
+            // TODO
+            // success: 'Thanks for purchasing ' + opts.description
+          })
+        }
       })
   }
   stripeHandler.open(opts)

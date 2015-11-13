@@ -50,6 +50,10 @@ $.ajaxSetup({
   }
 })
 
+$(document).ajaxError(function () {
+  notify.big.error('Error contacting the server. Please try again!')
+})
+
 // Make external links open in new window
 $('a[href^="http:"], a[href^="https:"]')
   .not('a[href^="' + config.siteOrigin + '"]')
@@ -64,9 +68,6 @@ $('.logout').on('click', function (e) {
         info: 'You are logged out!'
       })
       window.location = url
-    })
-    .fail(function () {
-      notify.big.error('Error contacting the server!')
     })
 })
 

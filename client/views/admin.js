@@ -16,9 +16,6 @@ module.exports = function () {
         .done(function () {
           window.location = window.location
         })
-        .fail(function () {
-          window.alert('Failed to complete action')
-        })
     })
   })
 }
