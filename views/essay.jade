@@ -37,7 +37,6 @@ block sidebar
       li: a(href=essay.url)= essay.name
 
   include ads/adsense-sidebar
-  include ads/upsell
 
   ul
     li #{ util.addCommas(essay.hits) } views (#{ util.addCommas(util.hitsPerDay(essay.hits, essay.createDate)) } views per day)
@@ -80,12 +79,14 @@ block content
     include ads/adsense-link-units
 
     hr
-
-    p Keep reading more <a href="#{ college.url }">#{ college.shortName } admissions essays</a> — you can't be too prepared!
+    include ads/essay-review
+    hr
 
     if (!blur)
       include ads/medianet-after-content
       include includes/birdy/happy
+
+    p Keep reading more <a href="#{ college.url }">#{ college.shortName } admissions essays</a> — you can't be too prepared!
 
     p
       if prev
@@ -93,9 +94,6 @@ block content
       if next
         a.btn.large.next(href='#{next.url}', title='Next: #{next.name}') Next Essay
     p: em Tip: Use the ← → keys to navigate!
-
-    hr
-    include ads/upsell
 
     +comments(essay.id, title, url)
 

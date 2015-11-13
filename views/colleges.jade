@@ -2,7 +2,6 @@ extends layouts/main-sidebar
 
 block sidebar
   include ads/adsense-sidebar
-  include ads/upsell
   include ads/adsense-sidebar
 
   ul
@@ -15,11 +14,13 @@ block content
 
   include includes/toolbar
 
+  include ads/essay-review
+  hr
+
   if (locals.colleges)
     ul.listing
       each college in colleges
         li: a(href='#{college.url}')= college.rank + '. ' + college.name
 
   hr
-
-  include ads/upsell
+  include ads/pro

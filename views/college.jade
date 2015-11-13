@@ -19,7 +19,6 @@ block sidebar
         img(src='//maps.googleapis.com/maps/api/staticmap?center=#{ encodeURIComponent(college.location) }&zoom=8&size=336x200&scale=2&maptype=roadmap&sensor=false&visual_refresh=true')
 
   include ads/adsense-sidebar
-  include ads/upsell
 
   ul
     li #{ util.addCommas(college.hits) } views
@@ -36,10 +35,16 @@ block content
 
   include includes/toolbar
 
+  include ads/essay-review
+  hr
+
   if (essays.length)
     +entries(essays)
 
     hr
+
+  include ads/pro
+  hr
 
   h2 #{ college.name } Facts
   .entry
@@ -47,7 +52,3 @@ block content
     a(href='about/')
       | !{ 'Read&nbsp;more' }
       i.icon-angle-double-right
-
-  hr
-
-  include ads/upsell

@@ -9,7 +9,6 @@ block sidebar
       li: a(href=essay.url)= essay.name
 
   include ads/adsense-sidebar
-  include ads/upsell
 
   ul
     li #{ util.addCommas(college.hits) } views
@@ -20,6 +19,9 @@ block content
 
   h1 About #{ college.name }
   include includes/toolbar
+
+  include ads/essay-review
+  hr
 
   if (college.location)
     h2 #{ college.shortName } is Located in #{ college.location }
@@ -40,3 +42,4 @@ block content
   | !{ college.desc }
 
   include ads/adsense-link-units
+  include ads/pro
