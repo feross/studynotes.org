@@ -1,0 +1,8 @@
+if locals.ads
+  .adsense-link-unit-200
+    if config.isProd
+      ins(class='adsbygoogle', style='display:inline-block;width:200px;height:90px', data-ad-client='ca-pub-7826623632932605', data-ad-slot='5098897107')
+      script.
+        (adsbygoogle = window.adsbygoogle || []).push({})
+    else
+      div(style='border: 5px solid red; display: inline-block; width:200px; height:90px') adsense-link-unit-200

@@ -2,8 +2,10 @@ mixin entries(entries)
   - var num = 0
   each entry in entries
     - num += 1
-    if num === 7 || num === 14
-      include ../ads/adsense-link-units
+    if num === 7
+      include ../ads/adsense-link-unit-in-content
+    if num === 14
+      include ../ads/adsense-link-unit-728
     .entry
       .heading
         h3

@@ -29,11 +29,17 @@
     width: 100%
     margin-bottom: 20px
 
-.adsense-link-units
+.adsense-link-unit-in-content
+  clearfix()
+  .adsense-link-unit-200
+    float: left
+    width: 50%
+    @media PHONE_TIGHT
+      float: none
+
+.adsense-link-unit-728, .adsense-link-unit-200
   display: inline-block
-  width: 728px
   max-width: 100%
-  min-height: 15px
   margin-bottom: 1.5em
   overflow: hidden
 
