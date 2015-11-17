@@ -68,7 +68,8 @@ function openCheckout (opts) {
           })
         } else {
           window.location = util.addQueryParams(referrer, {
-            ga: opts.product + '.order'
+            ga: opts.product + '.order',
+            fbq: 'Purchase.' + opts.amount
             // TODO
             // success: 'Thanks for purchasing ' + opts.description
           })

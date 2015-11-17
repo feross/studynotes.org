@@ -2,6 +2,10 @@ var $ = require('jquery')
 var functionWithTimeout = require('function-with-timeout')
 var url = require('url')
 
+// Initial Facebook tracking
+window.fbq('init', '1696013757293784')
+window.fbq('track', 'PageView')
+
 // Track note and essay submissions
 trackFormSubmit('form.submit-essay', 'submit', 'essay')
 trackFormSubmit('form.submit-note', 'submit', 'note')
@@ -37,6 +41,18 @@ if (query.ga) {
   if (e.length === 2) {
     window.ga('send', 'event', e[0], e[1])
   }
+}
+
+if (query.fbq) {
+  e = query.fbq.split('.')
+  if (e.length === 1) {
+    window.fbq('track', e[0])
+  } else if (e.length === 2) {
+    window.fbq('track', e[0], { value: Number(e[1]) / 100, currency: 'USD' })
+  }
+}
+
+if (query.ga || query.fbq) {
   window.history.replaceState(null, null, window.location.pathname)
 }
 
