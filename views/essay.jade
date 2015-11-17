@@ -26,7 +26,7 @@ block sidebar
         a(href=user.college.url)= user.college.shortName
         | #{ ' \'' + user.collegeYear.toString().substring(2) }
 
-  if (essay.admitsphere)
+  if essay.admitsphere
     p This essay comes from AdmitSphere who kindly allowed it to be republished here.
 
   include ads/adsense-sidebar
@@ -76,7 +76,7 @@ block content
     .body !{essay.body}
 
   .after-content
-    include ads/adsense-link-unit-728
+    include ads/adsense-link-unit-after-content
 
     hr
     include ads/essay-review
