@@ -1,16 +1,19 @@
 var $ = require('jquery')
 
-var $ad = $('.adsense-sidebar .adsbygoogle')
-var inserted = false
+if (window.adsbygoogle) {
+  window.addEventListener('load', function () {
+    if (!window.adsbygoogle.loaded) {
+      showHouseAd()
+      window.ga('send', 'event', 'AdSense', 'AdBlock', { nonInteraction: 1 })
+    }
+  }, false)
+}
 
-function checkAd () {
-  if (inserted || $ad.length === 0 || $ad.html().trim().length) return
+function showHouseAd () {
+  var $ad = $('.adsense-sidebar .adsbygoogle')
+  if ($ad.length === 0) return
 
   var $firstAd = $ad.parent().eq(0)
   var $houseAd = $('<div class="adsense-sidebar"><a class="house" href="/pro/">College Essays that Worked</a></div>')
   $firstAd.after($houseAd)
-
-  inserted = true
 }
-
-setTimeout(checkAd, 3000)
