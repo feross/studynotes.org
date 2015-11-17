@@ -2,10 +2,6 @@ var $ = require('jquery')
 var functionWithTimeout = require('function-with-timeout')
 var url = require('url')
 
-// Initial Facebook tracking
-window.fbq('init', '1696013757293784')
-window.fbq('track', 'PageView')
-
 // Track note and essay submissions
 trackFormSubmit('form.submit-essay', 'submit', 'essay')
 trackFormSubmit('form.submit-note', 'submit', 'note')
