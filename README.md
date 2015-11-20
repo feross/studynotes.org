@@ -25,7 +25,7 @@ We are building the best and simplest learning tools to empower students to acce
 
 ## Contributing
 
-[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
+[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](http://standardjs.com)
 
 See [CONTIBUTING.md](/CONTRIBUTING.md) for instructions on how to contribute to the
 Study Notes project.
