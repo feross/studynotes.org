@@ -9,7 +9,7 @@ module.exports = function () {
   var interval = window.setInterval(checkForSurvey, CHECK_INTERVAL)
   function checkForSurvey () {
     if ($('#t402-prompt-iframe').length) {
-      cookies.set('seen_survey', true, { expires: 60 * 60 * 24 }) // 24 hours
+      cookies.set('seen_survey', true, { expires: 60 * 60 * 20 }) // 20 hours
       clearInterval(interval)
     }
   }
