@@ -42,7 +42,7 @@ module.exports = function (app) {
       if (err) return next(err)
       if (!r.essay) return next()
 
-      if (!(req.user && req.user.pro)) {
+      if (!(req.user && req.user.pro) && !req.query.free) {
         // They're a "first click free" user
         if (req.session.free === undefined) {
           debug('No first click free object, creating one')
