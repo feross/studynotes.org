@@ -3,15 +3,17 @@
   font-size: 0.85em
   line-height: (1.5 / 0.85)em
 
-  @media PHONE
-    padding: CONTENT_PADDING_PHONE + 10px
-    padding-bottom: 10px
-  @media TABLET
-    padding: CONTENT_PADDING_TABLET
-    padding-bottom: 20px
   @media DESKTOP
     padding: CONTENT_PADDING_DESKTOP
     padding-bottom: 20px
+  @media TABLET
+    padding: CONTENT_PADDING_TABLET
+    padding-bottom: 20px
+  @media PHONE
+    font-size: 1.2em
+    padding: CONTENT_PADDING_PHONE + 10px
+    padding-bottom: 10px
+
 
   p.randomquote
     color: GRAY
@@ -39,9 +41,15 @@
   .col
     min-width: 140px
     width: 22%
-
     &.about-this-site
       width: 30%
+
+    // override normal vertical stacking behavior in footer
+    @media TABLET_TIGHT
+      float: left
+      width: 22% !important
+      &.about-this-site
+        width: 30% !important
 
   a
     {LINK}
