@@ -1,6 +1,8 @@
 if locals.ads
   .adsense-link-unit-single
-    if req.isMobile
-      include adsense-link-unit-200
+    if config.isProd
+      ins.adsbygoogle(style='display: inline-block', data-ad-client='ca-pub-7826623632932605', data-ad-slot='5098897107')
+      script.
+        (adsbygoogle = window.adsbygoogle || []).push({})
     else
-      include adsense-link-unit-728
+      ins.adsbygoogle(style='border: 5px solid red; display: inline-block; min-height: 35px') adsense-link-unit-single

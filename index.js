@@ -269,7 +269,6 @@ Site.prototype.setupLocals = function () {
 
     if (mobileFamilies.indexOf(req.agent) >= 0) {
       req.agent += ' mobile'
-      req.isMobile = true
     }
 
     res.locals.req = req
