@@ -1,8 +1,8 @@
 if locals.ads
   .adsense-link-unit-728
     if config.isProd
-      ins(class='adsbygoogle', style='display:inline-block;width:728px;height:15px', data-ad-client='ca-pub-7826623632932605', data-ad-slot='9089959105')
+      ins.adsbygoogle(style='display: inline-block; width: 728px; height: 15px', data-ad-client='ca-pub-7826623632932605', data-ad-slot='9089959105')
       script.
         (adsbygoogle = window.adsbygoogle || []).push({})
     else
-      div(style='border: 5px solid red; display: inline-block; width: 728px; height: 35px') adsense-link-unit-728
+      ins.adsbygoogle(style='border: 5px solid red; display: inline-block; width: 728px; height: 35px') adsense-link-unit-728

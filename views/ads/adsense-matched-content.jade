@@ -1,7 +1,7 @@
 .adsense-matched-content
   if config.isProd
-    ins(class='adsbygoogle', style='display:block', data-ad-client='ca-pub-7826623632932605', data-ad-slot='4400467108', data-ad-format='autorelaxed')
+    ins.adsbygoogle(style='display: block', data-ad-client='ca-pub-7826623632932605', data-ad-slot='4400467108', data-ad-format='autorelaxed')
     script.
       (adsbygoogle = window.adsbygoogle || []).push({})
   else
-    div(style='border: 5px solid red; min-height: 200px') adsense-matched-content
+    ins.adsbygoogle(style='border: 5px solid red; display: block; height: 200px') adsense-matched-content
