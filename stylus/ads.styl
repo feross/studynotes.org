@@ -1,6 +1,6 @@
 .adsense-in-content
   width: 100%
-  margin-bottom: 25px
+  margin-bottom: 1.5em
   text-align: center
 
   @media PHONE
@@ -32,6 +32,9 @@
     width: 100%
     margin-bottom: 20px
 
+.adsense-link-unit-single
+  text-align: center
+
 .adsense-link-unit-double
   clearfix()
   .adsense-link-unit-200
@@ -40,14 +43,15 @@
     @media PHONE_TIGHT
       float: none
 
+.adsense-link-unit-single, .adsense-link-unit-double
+  &:last-child, .after-content &
+    margin-bottom: 0
+
 .adsense-link-unit-728, .adsense-link-unit-200
   display: inline-block
   max-width: 100%
   margin-bottom: 1.5em
   overflow: hidden
-
-  &:last-child, .after-content &
-    margin-bottom: 0
 
 a.house
   display: block
