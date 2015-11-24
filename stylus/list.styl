@@ -136,7 +136,10 @@ ul.buttonList
     margin-bottom: 0
 
     &:last-child a
-      margin-bottom: 0
+      @media DESKTOP
+        margin-bottom: 0
+      @media TABLET
+        margin-bottom: 0
 
   // TODO: Unify with .btn class
   a
