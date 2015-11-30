@@ -1,12 +1,12 @@
 mixin comments(id, title, url)
-  if config.isProd
+  if true || config.isProd
     #disqus_thread
     script.
-      var disqus_shortname = 'studynotesapp'
-      var disqus_identifier = '#{ id }'
-      var disqus_title = '#{ title }'
-      var disqus_url = '#{ url }'
-
+      var disqus_config = function () {
+        this.page.url = '#{ url }'
+        this.page.identifier = '#{ id }'
+        this.page.title = '#{ title }'
+      }
       window.addEventListener('orientationchange', function () {
         DISQUS.reset({ reload: true })
       }, false)
