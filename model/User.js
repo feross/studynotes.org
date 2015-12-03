@@ -36,6 +36,11 @@ var User = new mongoose.Schema({
       validate({
         validator: 'isEmail',
         message: 'Your email address is invalid.'
+      }),
+      validate({
+        validator: 'isLength',
+        arguments: 3,
+        message: 'We need an email address to create your account.'
       })
     ]
   },
@@ -72,14 +77,6 @@ var User = new mongoose.Schema({
   admin: Boolean,
   resetPasswordToken: String,
   resetPasswordExpires: Date
-})
-
-// Trim whitespace
-User.pre('validate', function (next) {
-  var self = this
-  if (typeof self.email === 'string') self.email = self.email.trim()
-  if (typeof self.name === 'string') self.name = self.name.trim()
-  next()
 })
 
 User.virtual('url').get(function () {
@@ -171,6 +168,14 @@ User.methods.gravatar = function (size, transparent) {
   var hash = md5(this.emailLowerCase)
   return '//www.gravatar.com/avatar/' + hash + '?size=' + size + '&default=' + fallback
 }
+
+// Trim whitespace
+User.pre('validate', function (next) {
+  var self = this
+  if (typeof self.email === 'string') self.email = self.email.trim()
+  if (typeof self.name === 'string') self.name = self.name.trim()
+  next()
+})
 
 User.pre('save', function (next) {
   var self = this
