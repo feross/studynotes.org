@@ -7,6 +7,7 @@ var validate = require('mongoose-validator')
 var Order = new mongoose.Schema({
   stripeEmail: {
     type: String,
+    required: true,
     validate: [
       validate({
         validator: 'isEmail',

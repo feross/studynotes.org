@@ -11,13 +11,13 @@ var Course = new mongoose.Schema({
     required: true,
     index: true
   },
-  searchName: {
-    type: String,
-    index: true
-  },
   shortName: {
     type: String,
     required: true,
+    index: true
+  },
+  searchName: {
+    type: String,
     index: true
   },
   desc: String,

@@ -16,6 +16,7 @@ var User = new mongoose.Schema({
   name: {
     type: String,
     index: true,
+    required: 'We need a name to create your account.',
     validate: [
       validate({
         validator: 'contains',
@@ -32,6 +33,7 @@ var User = new mongoose.Schema({
   email: {
     type: String,
     unique: true,
+    required: 'We need an email address to create your account.',
     validate: [
       validate({
         validator: 'isEmail',
@@ -46,10 +48,12 @@ var User = new mongoose.Schema({
   },
   emailLowerCase: {
     type: String,
+    required: true,
     unique: true
   },
   password: {
     type: String,
+    required: true,
     validate: [
       validate({
         validator: 'isLength',
@@ -174,14 +178,13 @@ User.pre('validate', function (next) {
   var self = this
   if (typeof self.email === 'string') self.email = self.email.trim()
   if (typeof self.name === 'string') self.name = self.name.trim()
+  if (self.isModified('email')) self.emailLowerCase = self.email.toLowerCase()
   next()
 })
 
 User.pre('save', function (next) {
   var self = this
   self.wasNew = self.isNew // for post-save
-
-  if (self.isModified('email')) self.emailLowerCase = self.email.toLowerCase()
 
   if (self.isModified('password')) {
     // Store hashed version of user's password

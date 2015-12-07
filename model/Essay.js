@@ -12,6 +12,7 @@ var Essay = new mongoose.Schema({
   name: {
     type: String,
     index: true,
+    required: 'Your essay needs a title, silly!',
     validate: [
       validate({
         validator: 'isLength',
@@ -21,9 +22,7 @@ var Essay = new mongoose.Schema({
     ]
   },
   prompt: String,
-  bodyPaywall: {
-    type: String
-  },
+  bodyPaywall: String,
   college: {
     type: 'String',
     ref: 'College',

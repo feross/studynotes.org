@@ -11,6 +11,7 @@ var Note = new mongoose.Schema({
   name: {
     type: String,
     index: true,
+    required: 'Please give the note a title.',
     validate: [
       validate({
         validator: 'isLength',
