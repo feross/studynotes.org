@@ -49,13 +49,22 @@ module.exports = function (app) {
         if (err) return next(err)
         if (!item) return next(new Error('item not found'))
 
-        if (req.body.action === 'publish') item.published = true
-        if (req.body.action === 'unpublish') item.published = false
+        var action = req.body.action
 
-        item.save(function (err) {
-          if (err) return next(err)
-          res.send({ err: null })
-        })
+        if (action === 'publish' || action === 'unpublish') {
+          item.published = (action === 'publish')
+          item.save(function (err) {
+            if (err) return next(err)
+            res.send({ err: null })
+          })
+        } else if (action === 'remove') {
+          item.remove(function (err) {
+            if (err) return next(err)
+            res.send({ err: null })
+          })
+        } else {
+          return next(new Error('Invalid action'))
+        }
       })
   })
 }

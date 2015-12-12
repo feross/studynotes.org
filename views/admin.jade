@@ -8,7 +8,9 @@ block content
       ul.tight
         each essay in essays.filter(e => !e.published)
           li
-            a.publish(href='#', target='_blank', data-model='essay', data-id=essay.id, data-action='publish') ✘
+            a.publish(href='#', target='_blank', data-model='essay', data-id=essay.id, data-action='publish') ✔
+            | #{ ' ' }
+            a.remove(href='#', target='_blank', data-model='essay', data-id=essay.id, data-action='remove') ✘
             | #{ ' ' }
             a(href=essay.url)= essay.name
             small.gray: em= ' ' + moment(essay.createDate).fromNow()
@@ -28,7 +30,9 @@ block content
       ul.tight
         each note in notes.filter(e => !e.published)
           li
-            a.publish(href='#', target='_blank', data-model='note', data-id=note.id, data-action='publish') ✘
+            a.publish(href='#', target='_blank', data-model='note', data-id=note.id, data-action='publish') ✔
+            | #{ ' ' }
+            a.remove(href='#', target='_blank', data-model='essay', data-id=note.id, data-action='remove') ✘
             | #{ ' ' }
             a(href=note.url)= note.name
             small.gray: em= ' ' + moment(note.createDate).fromNow()
