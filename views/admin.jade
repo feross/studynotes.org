@@ -8,20 +8,20 @@ block content
       ul.tight
         each essay in essays.filter(e => !e.published)
           li
-            a.publish(href='#', target='_blank', data-model='essay', data-id=essay.id, data-action='publish') ✔
+            a.publish(href='#', data-model='essay', data-id=essay.id, data-action='publish') ✔
             | #{ ' ' }
-            a.remove(href='#', target='_blank', data-model='essay', data-id=essay.id, data-action='remove') ✘
+            a.remove(href='#', data-model='essay', data-id=essay.id, data-action='remove') ✘
             | #{ ' ' }
-            a(href=essay.url)= essay.name
+            a(href=essay.url, target='_blank')= essay.name
             small.gray: em= ' ' + moment(essay.createDate).fromNow()
       hr
       h3 Published
       ul.tight
         each essay in essays.filter(e => e.published)
           li
-            a.unpublish(href='#', target='_blank', data-model='essay', data-id=essay.id, data-action='unpublish') ✔
+            a.unpublish(href='#', data-model='essay', data-id=essay.id, data-action='unpublish') ✔
             | #{ ' ' }
-            a(href=essay.url)= essay.name
+            a(href=essay.url, target='_blank')= essay.name
             small.gray: em= ' ' + moment(essay.createDate).fromNow()
 
     .col2
@@ -30,18 +30,18 @@ block content
       ul.tight
         each note in notes.filter(e => !e.published)
           li
-            a.publish(href='#', target='_blank', data-model='note', data-id=note.id, data-action='publish') ✔
+            a.publish(href='#', data-model='note', data-id=note.id, data-action='publish') ✔
             | #{ ' ' }
-            a.remove(href='#', target='_blank', data-model='essay', data-id=note.id, data-action='remove') ✘
+            a.remove(href='#', data-model='essay', data-id=note.id, data-action='remove') ✘
             | #{ ' ' }
-            a(href=note.url)= note.name
+            a(href=note.url, target='_blank')= note.name
             small.gray: em= ' ' + moment(note.createDate).fromNow()
       hr
       h3 Published
       ul.tight
         each note in notes.filter(e => e.published)
           li
-            a.unpublish(href='#', target='_blank', data-model='note', data-id=note.id, data-action='unpublish') ✔
+            a.unpublish(href='#', data-model='note', data-id=note.id, data-action='unpublish') ✔
             | #{ ' ' }
-            a(href=note.url)= note.name
+            a(href=note.url, target='_blank')= note.name
             small.gray: em= ' ' + moment(note.createDate).fromNow()
