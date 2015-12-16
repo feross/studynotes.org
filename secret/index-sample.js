@@ -29,7 +29,7 @@ exports.mongo = {
   database: ''
 }
 
-// exports.mailchimp = {
-//   key: '',
-//   list: ''
-// }
+exports.mailchimp = {
+  key: '',
+  list: ''
+}
