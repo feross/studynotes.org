@@ -230,9 +230,9 @@ User.post('save', function (user) {
   })
 
   // subscribe the user to MailChimp "Study Notes Users" list
-  mail.subscribeUser(user, function (err) {
-    if (err) throw err
-  })
+  // mail.subscribeUser(user, function (err) {
+  //   if (err) throw err
+  // })
 })
 
 User.methods.comparePassword = function (password, cb) {
