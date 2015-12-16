@@ -33,3 +33,9 @@ exports.mailchimp = {
   key: '',
   list: ''
 }
+
+exports.opbeat = {
+  organizationId: '',
+  appId: '',
+  secretToken: ''
+}

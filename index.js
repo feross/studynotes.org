@@ -33,6 +33,8 @@ var routes = require('./routes')
 var secret = require('./secret')
 var util = require('./util')
 
+require('opbeat').start(secret.opbeat)
+
 jade.filters.style = function (str) {
   var ret
   stylus(str, { compress: config.isProd })
