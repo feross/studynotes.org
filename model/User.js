@@ -176,9 +176,11 @@ User.methods.gravatar = function (size, transparent) {
 // Trim whitespace
 User.pre('validate', function (next) {
   var self = this
-  if (typeof self.email === 'string') self.email = self.email.trim()
+  if (typeof self.email === 'string') {
+    self.email = self.email.trim()
+    if (self.isModified('email')) self.emailLowerCase = self.email.toLowerCase()
+  }
   if (typeof self.name === 'string') self.name = self.name.trim()
-  if (self.isModified('email')) self.emailLowerCase = self.email.toLowerCase()
   next()
 })
 
