@@ -30,6 +30,10 @@ module.exports = function (app) {
       (req.body && Object.keys(req.body).length
         ? 'Body:' + '\n' +
           JSON.stringify(req.body, undefined, 4) + '\n'
+        : '') +
+      (req.session && Object.keys(req.session).length
+        ? 'Session:' + '\n' +
+          JSON.stringify(req.session, undefined, 4) + '\n'
         : '')
 
     console.error(text)
