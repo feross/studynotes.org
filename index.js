@@ -1,5 +1,8 @@
 module.exports = Site
 
+var secret = require('./secret')
+require('opbeat').start(secret.opbeat)
+
 var bodyParser = require('body-parser')
 var cluster = require('cluster')
 var compression = require('compression')
@@ -18,7 +21,6 @@ var nib = require('nib')
 var parallel = require('run-parallel')
 var passport = require('passport')
 var path = require('path')
-var run = require('./run')
 var session = require('express-session')
 var stylus = require('stylus')
 var supportsColor = require('supports-color')
@@ -30,10 +32,8 @@ var config = require('./config')
 var model = require('./model')
 var pro = require('./lib/pro')
 var routes = require('./routes')
-var secret = require('./secret')
+var run = require('./run')
 var util = require('./util')
-
-require('opbeat').start(secret.opbeat)
 
 jade.filters.style = function (str) {
   var ret
