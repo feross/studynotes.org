@@ -11,7 +11,7 @@ cp -R /home/feross/www/studynotes.org /home/feross/www/studynotes.org-build
 
 cd /home/feross/www/studynotes.org-build && git pull
 cd /home/feross/www/studynotes.org-build && rm -rf node_modules
-cd /home/feross/www/studynotes.org-build && npm install --quiet
+cd /home/feross/www/studynotes.org-build && npm install --production --quiet
 cd /home/feross/www/studynotes.org-build && npm run build
 
 sudo supervisorctl stop studynotes-site
