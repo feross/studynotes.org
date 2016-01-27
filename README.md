@@ -1,6 +1,6 @@
 # [Study Notes](https://www.apstudynotes.org) [![travis][travis-image]][travis-url]
 
-[travis-image]: https://img.shields.io/travis/feross/studynotes/master.svg?style=flat
+[travis-image]: https://img.shields.io/travis/feross/studynotes/master.svg
 [travis-url]: https://travis-ci.org/feross/studynotes
 
 ### Learn faster. Study better.
