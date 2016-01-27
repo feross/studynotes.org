@@ -50,7 +50,10 @@ block content
   include includes/toolbar
 
   if (!blur)
-    include ads/adsense-in-content
+    if req.mobile
+      include ads/fbad-native
+    else
+      include ads/adsense-in-content
 
   if essay.prompt
     .prompt <strong>Prompt: </strong> !{essay.prompt}

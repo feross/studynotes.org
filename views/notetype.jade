@@ -11,7 +11,10 @@ block content
   .hide-phone
     include includes/toolbar
 
-  include ads/adsense-in-content
+  if req.mobile
+    include ads/fbad-native
+  else
+    include ads/adsense-in-content
 
   - var desc = (notetype.desc || notetype.shortDesc).replace(/COURSE_SHORTNAME/g, course.shortName).replace(/COURSE_TEXTBOOK/g, course.textbook).replace(/COURSE/g, course.name)
 
