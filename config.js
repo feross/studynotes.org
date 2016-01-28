@@ -70,5 +70,11 @@ exports.stripe = isProd
   ? 'pk_live_uQgfjT84EYgqyXWasBY0xuOE'
   : 'pk_test_7PVccMkybStuChGcJD0HAi40'
 
+/**
+ * Is it college essay season? Used to determine whether to show in-house ads for
+ * essay editing services vs. third-party ads.
+ */
+exports.essaySeason = new Date().getMonth() >= 5
+
 var config = require('./config-node')
 extend(exports, config)

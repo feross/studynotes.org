@@ -80,12 +80,16 @@ block content
 
   .after-content
     include ads/adsense-link-unit-double
-
-    hr
-    include ads/essay-review
     hr
 
-    if (!blur)
+    if config.essaySeason
+      include ads/essay-review
+      hr
+
+    if !blur
+      if !config.essaySeason
+        include ads/pro
+        hr
       include ads/medianet-after-content
       include includes/birdy/happy
 

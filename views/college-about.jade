@@ -20,8 +20,11 @@ block content
   h1 About #{ college.name }
   include includes/toolbar
 
-  include ads/essay-review
-  hr
+  if config.essaySeason
+    include ads/essay-review
+    hr
+  else
+    include ads/adsense-in-content
 
   if (college.location)
     h2 #{ college.shortName } is Located in #{ college.location }

@@ -38,8 +38,11 @@ block content
   .phone
     hr
 
-  include ads/essay-review
-  hr
+  if config.essaySeason
+    include ads/essay-review
+    hr
+  else
+    include ads/adsense-in-content
 
   if (essays.length)
     +entries(essays)
