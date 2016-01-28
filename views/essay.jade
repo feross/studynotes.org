@@ -59,7 +59,7 @@ block content
     .prompt <strong>Prompt: </strong> !{essay.prompt}
     hr
 
-  if (blur)
+  if blur
     .body
       .subscribe-on-blur.unblur
         include includes/birdy/stop
@@ -72,7 +72,7 @@ block content
 
         h4 <strong>Questions?</strong> Call 1 (530) 633-7677
 
-        small Existing users: <a href="#{ loginUrl }">Log in here</a>
+        small Already have an account? <a href="#{ loginUrl }">Log in to read essays.</a>
 
       .blur !{essay.bodyPaywall}
   else
