@@ -1,5 +1,5 @@
 mixin comments(id, title, url)
-  if true || config.isProd
+  if config.isProd
     #disqus_thread
     script.
       var disqus_config = function () {
