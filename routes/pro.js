@@ -31,14 +31,14 @@ module.exports = function (app) {
         : 'amjed.jpg'
 
       var collegeEssays = college
-        ? r.essays.filter(e => e.college.id === college.id)
+        ? r.essays.filter((e) => e.college.id === college.id)
         : r.essays
       var otherEssays = college
-        ? r.essays.filter(e => e.college.id !== college.id)
+        ? r.essays.filter((e) => e.college.id !== college.id)
         : r.essays
 
       var otherColleges = college
-        ? model.cache.collegesByRank.filter(c => c.id !== college.id)
+        ? model.cache.collegesByRank.filter((c) => c.id !== college.id)
         : model.cache.collegesByRank
 
       var collegeList, collegeListAnd

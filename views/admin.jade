@@ -6,7 +6,7 @@ block content
       h2 College Essays
       h3 Needs Review
       ul.tight
-        each essay in essays.filter(e => !e.published)
+        each essay in essays.filter((e) => !e.published)
           li
             a.publish(href='#', data-model='essay', data-id=essay.id, data-action='publish') ✔
             | #{ ' ' }
@@ -17,7 +17,7 @@ block content
       hr
       h3 Published
       ul.tight
-        each essay in essays.filter(e => e.published)
+        each essay in essays.filter((e) => e.published)
           li
             a.unpublish(href='#', data-model='essay', data-id=essay.id, data-action='unpublish') ✔
             | #{ ' ' }
@@ -28,7 +28,7 @@ block content
       h2 AP Notes
       h3 Needs Review
       ul.tight
-        each note in notes.filter(e => !e.published)
+        each note in notes.filter((e) => !e.published)
           li
             a.publish(href='#', data-model='note', data-id=note.id, data-action='publish') ✔
             | #{ ' ' }
@@ -39,7 +39,7 @@ block content
       hr
       h3 Published
       ul.tight
-        each note in notes.filter(e => e.published)
+        each note in notes.filter((e) => e.published)
           li
             a.unpublish(href='#', data-model='note', data-id=note.id, data-action='unpublish') ✔
             | #{ ' ' }

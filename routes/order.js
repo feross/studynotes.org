@@ -49,7 +49,7 @@ module.exports = function (app) {
             err: 'Your card was declined.'
           })
         } else if (err.errors) {
-          var errors = values(err.errors).map(err => err.message)
+          var errors = values(err.errors).map((err) => err.message)
           return res.send({
             err: errors.join('. ')
           })
