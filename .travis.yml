@@ -1,16 +1,15 @@
+sudo: false
 language: node_js
-
-env:
-  - CXX=g++-4.8
-
 node_js:
   - "4"
-
+compiler: clang-3.6
+env:
+  - CXX=clang-3.6
 addons:
   apt:
     sources:
-    - ubuntu-toolchain-r-test
+      - llvm-toolchain-precise-3.6
+      - ubuntu-toolchain-r-test
     packages:
-    - g++-4.8
-
-sudo: false
+      - clang-3.6
+      - g++-4.8
