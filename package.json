@@ -109,12 +109,6 @@
     "watchify": "^3.1.2"
   },
   "homepage": "https://www.apstudynotes.org",
-  "keywords": [
-    "AP notes",
-    "college essays",
-    "college prep",
-    "high school"
-  ],
   "license": "GPLv3",
   "main": "index.js",
   "private": true,
