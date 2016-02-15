@@ -1,7 +1,7 @@
 module.exports = Site
 
 var secret = require('./secret')
-require('opbeat').start(secret.opbeat)
+// require('opbeat').start(secret.opbeat)
 
 var bodyParser = require('body-parser')
 var cluster = require('cluster')
