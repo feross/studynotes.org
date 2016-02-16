@@ -37,6 +37,13 @@ if (Socket.WEBSOCKET_SUPPORT && !window.isMobile) {
 }
 
 function onMessage (message) {
+  try {
+    message = JSON.parse(message)
+  } catch (err) {
+    debug('discarding invalid socket message: %s', message)
+    return
+  }
+
   if (message.type === 'update') {
     if (message.count) {
       // Set a phrase with live visitor count
