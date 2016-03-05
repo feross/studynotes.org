@@ -90,7 +90,7 @@
     "simple-websocket": "^4.0.0",
     "slug": "^0.9.1",
     "stripe": "^4.0.0",
-    "stylus": "^0.53.0",
+    "stylus": "^0.54.0",
     "supports-color": "^3.1.0",
     "throttleit": "^1.0.0",
     "transparency": "^1.0.0",
