@@ -104,6 +104,17 @@ html(class='studynotes #{ layout } #{ cls } #{ seenSurvey ? "seen-survey" : "" }
         document.documentElement.className+=' ie' + document.documentMode;
       }
 
+    if config.isProd
+      //- Adsense (responsive ads)
+      script(async, src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')
+
+      //- Adsense Page-level ads
+      script.
+        (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-7826623632932605",
+          enable_page_level_ads: true
+        })
+
     block head
 
   body
@@ -170,9 +181,6 @@ html(class='studynotes #{ layout } #{ cls } #{ seenSurvey ? "seen-survey" : "" }
     block scripts
 
     if config.isProd
-      //- Adsense (responsive ads)
-      script(async, src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')
-
       //- Quantcast
       script.
         var _qevents = _qevents || []
