@@ -44,10 +44,7 @@ block content
 
   include includes/toolbar
 
-  if req.mobile
-    include ads/fbad-banner
-  else
-    include ads/adsense-in-content
+  include ads/adsense-in-content
 
   .p402_premium
     .body !{note.body}
