@@ -104,7 +104,7 @@
     "nodemon": "^1.0.17",
     "pre-commit": "^1.0.10",
     "run-parallel-limit": "^1.0.2",
-    "standard": "^6.0.5",
+    "standard": "^7.0.0",
     "tape": "^4.0.0",
     "watchify": "^3.1.2"
   },
