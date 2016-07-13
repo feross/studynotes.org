@@ -15,7 +15,7 @@ var express = require('express')
 var favicon = require('serve-favicon')
 var flash = require('connect-flash')
 var http = require('http')
-var jade = require('jade')
+var pug = require('pug')
 var moment = require('moment')
 var nib = require('nib')
 var parallel = require('run-parallel')
@@ -35,7 +35,7 @@ var routes = require('./routes')
 var run = require('./run')
 var util = require('./util')
 
-jade.filters.style = function (str) {
+pug.filters.style = function (str) {
   var ret
   stylus(str, { compress: config.isProd })
     .use(nib())
@@ -81,12 +81,12 @@ function Site (opts, done) {
   // Disable "powered by express" header
   self.app.disable('x-powered-by')
 
-  // Use Jade for templates
+  // Use Pug for templates
   self.app.set('views', path.join(__dirname, 'views'))
-  self.app.set('view engine', 'jade')
-  self.app.engine('jade', jade.renderFile)
+  self.app.set('view engine', 'pug')
+  self.app.engine('pug', pug.renderFile)
 
-  // Make some variables and functions available to Jade templates
+  // Make some variables and functions available to Pug templates
   self.app.locals.config = config
   self.app.locals.modelCache = model.cache
   self.app.locals.moment = moment
