@@ -32,7 +32,7 @@ block content
           li
             a.publish(href='#', data-model='note', data-id=note_.id, data-action='publish') ✔
             | #{' '}
-            a.remove(href='#', data-model='essay', data-id=note_.id, data-action='remove') ✘
+            a.remove(href='#', data-model='note', data-id=note_.id, data-action='remove') ✘
             | #{' '}
             a(href=note_.url, target='_blank')= note_.name
             small.gray: em= ' ' + moment(note_.createDate).fromNow()
