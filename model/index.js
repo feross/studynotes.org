@@ -8,6 +8,9 @@ var secret = require('../secret')
 var sort = require('../lib/sort')
 var values = require('object-values')
 
+// Tell Mongoose to use ES6 native promises
+mongoose.Promise = global.Promise
+
 // Object that contains the exported models, useful for iterating
 // over *only* the models, skipping methods like `connect`.
 var models = exports.models = {}
