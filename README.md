@@ -32,4 +32,4 @@ Study Notes project.
 
 ## License
 
-GPLv3. Copyright (C) 2007-2015 [Study Notes, LLC](https://www.apstudynotes.org)
+GPLv3. Copyright (C) 2007-2016 [Study Notes, LLC](https://www.apstudynotes.org)
