@@ -230,9 +230,10 @@ Site.prototype.setupSessions = function () {
     saveUninitialized: false, // don't save new/unmodified sessions
     secret: secret.cookieSecret, // prevent cookie tampering
     store: new MongoStore({
-      db: secret.mongo.database,
-      host: secret.mongo.host,
-      port: secret.mongo.port
+      url: 'mongodb://' +
+        secret.mongo.host + ':' +
+        secret.mongo.port + '/' +
+        secret.mongo.database
     })
   }))
   self.app.use(csrf())
