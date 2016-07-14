@@ -21,13 +21,13 @@ module.exports = function (app) {
       collegeCount: function (cb) {
         model.College.count().exec(cb)
       }
-    }, function (err, results) {
+    }, function (err, r) {
       if (err) return next(err)
 
       res.render('essays', {
-        collegeCount: results.collegeCount,
-        essays: results.essays,
-        title: 'College Essays - Top ' + results.essays.length + ' Essays That Worked',
+        collegeCount: r.collegeCount,
+        essays: r.essays,
+        title: 'College Essays - Top ' + r.essays.length + ' Essays That Worked',
         forceTitle: true,
         url: '/essays/',
         hero: {
@@ -75,8 +75,8 @@ module.exports = function (app) {
           .sort('-hits')
           .exec(cb)
       }
-    }, function (err, results) {
-      var essays = results.essays
+    }, function (err, r) {
+      var essays = r.essays
       if (err) return next(err)
 
       res.render('college-about', {
@@ -104,15 +104,15 @@ module.exports = function (app) {
           .populate('user')
           .exec(cb)
       },
-      populateColleges: ['essays', function (cb, results) {
-        parallel(results.essays.map(function (essay) {
+      populateColleges: ['essays', function (r, cb) {
+        parallel(r.essays.map(function (essay) {
           return function (cb) {
             essay.user.populate('college', cb)
           }
         }), cb)
       }]
-    }, function (err, results) {
-      var essays = results.essays
+    }, function (err, r) {
+      var essays = r.essays
       if (err) return next(err)
 
       res.render('college', {

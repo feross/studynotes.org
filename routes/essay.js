@@ -20,8 +20,8 @@ module.exports = function (app) {
           .populate('user')
           .exec(cb)
       },
-      populateCollege: ['essay', function (cb, results) {
-        var user = results.essay && results.essay.user
+      populateCollege: ['essay', function (r, cb) {
+        var user = r.essay && r.essay.user
         if (user) {
           user.populate('college', cb)
         } else {

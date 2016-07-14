@@ -26,7 +26,7 @@ module.exports = function (app) {
         }, cb)
       },
 
-      order: ['stripeCharge', function (cb, r) {
+      order: ['stripeCharge', function (r, cb) {
         var order = new model.Order({
           stripeEmail: email,
           stripeToken: req.body.id,

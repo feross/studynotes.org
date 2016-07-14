@@ -130,10 +130,10 @@ LiveUpdater.prototype.getTotalHits = function (cb) {
         .select('hits -_id')
         .exec(cb)
     }
-  }), function (err, results) {
+  }), function (err, r) {
     if (err) return cb(err)
 
-    self.totalHits = results.reduce(function (acc, docs) {
+    self.totalHits = r.reduce(function (acc, docs) {
       return acc + docs.reduce(function (acc2, doc) {
         return acc2 + (doc.hits || 0)
       }, 0)

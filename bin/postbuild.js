@@ -40,13 +40,13 @@ auto({
   },
 
   // Copy the JS file to a file with a unique name, based on the MD5
-  jsRename: ['MD5_JS', 'removeOldJS', function (cb, r) {
+  jsRename: ['MD5_JS', 'removeOldJS', function (r, cb) {
     var src = config.out + '/main.js'
     var dest = config.out + '/main-' + r.MD5_JS + '.js'
     cp.exec('cp ' + src + ' ' + dest, cb)
   }],
 
-  cssRename: ['MD5_CSS', 'removeOldCSS', function (cb, r) {
+  cssRename: ['MD5_CSS', 'removeOldCSS', function (r, cb) {
     var src = config.out + '/main.css'
     var dest = config.out + '/main-' + r.MD5_CSS + '.css'
     cp.exec('cp ' + src + ' ' + dest, cb)

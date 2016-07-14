@@ -41,7 +41,7 @@ module.exports = function (app) {
           cb(null, new model.Essay())
         }
       },
-      permission: ['essay', function (cb, r) {
+      permission: ['essay', function (r, cb) {
         if (!r.essay) return cb(new Error('No essay with id ' + req.body._id))
 
         if (!r.essay.user || // new note, no permission needed
@@ -52,7 +52,7 @@ module.exports = function (app) {
           cb(new Error('Cannot edit another user\'s essay'))
         }
       }],
-      save: ['permission', function (cb, r) {
+      save: ['permission', function (r, cb) {
         var essay = r.essay
 
         essay.name = req.body.name
@@ -125,7 +125,7 @@ module.exports = function (app) {
           cb(null, new model.Note())
         }
       },
-      permission: ['note', function (cb, r) {
+      permission: ['note', function (r, cb) {
         if (!r.note) return cb(new Error('No note with id ' + req.body._id))
 
         if (!r.note.user || // new note, no permission needed
@@ -136,7 +136,7 @@ module.exports = function (app) {
           cb(new Error('Cannot edit another user\'s note'))
         }
       }],
-      save: ['permission', function (cb, r) {
+      save: ['permission', function (r, cb) {
         var note = r.note
 
         note.name = req.body.name

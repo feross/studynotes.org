@@ -46,10 +46,10 @@ module.exports = function (app) {
             }
           })
       }
-    }, function (err, results) {
+    }, function (err, r) {
       if (err) return next(err)
-      var notes = results.notes
-      var courseNotetype = results.courseNotetype
+      var notes = r.notes
+      var courseNotetype = r.courseNotetype
 
       if (notetype.hasChapters) {
         notes.sort(sort.sortChapters)
