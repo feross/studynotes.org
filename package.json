@@ -61,7 +61,7 @@
     "html-truncate": "^1.0.3",
     "http-status-codes": "^1.0.2",
     "humane-js": "^3.1.0",
-    "jquery": "^2.1.1",
+    "jquery": "^3.1.0",
     "jsdom": "^8.0.4",
     "keymaster": "^1.6.2",
     "load-script": "^1.0.0",
