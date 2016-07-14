@@ -45,7 +45,7 @@
     "clean-css": "^3.4.5",
     "compression": "^1.0.1",
     "connect-flash": "^0.1.1",
-    "connect-mongo": "^0.8.1",
+    "connect-mongo": "^1.2.1",
     "connect-slashes": "^1.2.0",
     "cookie-parser": "^1.0.1",
     "cookies-js": "^1.2.2",
