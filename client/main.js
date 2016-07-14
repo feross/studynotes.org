@@ -109,7 +109,7 @@ key('right', function () {
   }
 })
 
-$window.load(function () {
+$window.on('load', function () {
   onResize()
   if (navigator.serviceWorker) {
     navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
