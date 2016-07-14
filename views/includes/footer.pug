@@ -3,15 +3,15 @@ footer.footer
     .row.quote.hide-phone
       p.randomquote
         q= randomquote.text
-        | #{ ' ' }
+        | #{' '}
         span.quote-attribution!= randomquote.author.replace(' ', '&nbsp;')
 
     .row.links
       .col
         h3 AP Courses
         ul
-          each course in modelCache.coursesByName
-            li: a(href='#{course.url}') #{ course.name } Notes
+          each course_ in modelCache.coursesByName
+            li: a(href=course_.url) #{course_.name} Notes
           li: a(href='/submit/note/'): strong Submit Notes
 
       .col
@@ -48,7 +48,7 @@ footer.footer
     .row.fine-print
       small Copyright © 2006-2015 <a href="/">Study Notes, LLC</a>. Made in Stanford, California. <a href="/privacy/">Privacy</a> / <a href="/terms/">Terms</a> / <a href="/photo-credits/">Photo Credits</a>
       small
-        if (college)
-          | "#{ college.shortName }" is a registered trademark of #{ college.name }, which was not involved in the production of, and does not endorse this web site.
-          | #{ ' ' }
+        if college
+          | "#{college.shortName}" is a registered trademark of #{college.name}, which was not involved in the production of, and does not endorse this web site.
+          | #{' '}
         | Advanced Placement, AP, and SAT are registered trademarks of the CollegeBoard, which was not involved in the production of, and does not endorse this web site.

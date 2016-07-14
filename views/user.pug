@@ -1,47 +1,48 @@
 extends layouts/main-sidebar
 include mixins/entries
+include mixins/toolbar
 
 block sidebar
   .author
     a(href=user.url)
       img(src=user.gravatar(400))
       h2.name= user.name
-    if (user.collegeMajor)
+    if user.collegeMajor
       h3.accepted= user.collegeMajor
-    if (user.college)
+    if user.college
       h3.accepted
-        | #{ user.hasGraduated ? 'Graduated ' : 'Attending ' }
+        | #{user.hasGraduated ? 'Graduated ' : 'Attending '}
         a(href=user.college.url)= user.college.shortName
-        if (user.collegeYear)
-          | #{ ' \'' + user.collegeYear.toString().substring(2) }
+        if user.collegeYear
+          | #{' \'' + user.collegeYear.toString().substring(2)}
 
   include ads/adsense-sidebar
 
   h3 User Stats
   ul
-    li #{ util.addCommas(totalHits) } views (all submissions)
-    li #{ util.addCommas(user.hits) } profile views
+    li #{util.addCommas(totalHits)} views (all submissions)
+    li #{util.addCommas(user.hits)} profile views
     li.online
 
 
 block content
-  include includes/toolbar
+  +toolbar()
 
-  if (!essays.length && !notes.length)
-    if (req.user && req.user.id === user.id)
+  if !essays.length && !notes.length
+    if req.user && req.user.id === user.id
       h2 You haven't posted anything yet! <a href="/submit/essay/">Share your college admissions essay</a>!
     else
       p Nothing to see here yet!
 
-  if (essays.length)
-    h2 #{ user.firstName }'s College Essays
+  if essays.length
+    h2 #{user.firstName}'s College Essays
     +entries(essays)
 
-  if (notes.length)
-    h2 #{ user.firstName }'s AP Notes
+  if notes.length
+    h2 #{user.firstName}'s AP Notes
     ul.listing
       each note in notes
         li
           a(href=note.course.url)= note.course.name + ':'
-          | #{ ' ' }
+          | #{' '}
           a(href=note.url)= note.name

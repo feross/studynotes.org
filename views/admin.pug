@@ -6,42 +6,42 @@ block content
       h2 College Essays
       h3 Needs Review
       ul.tight
-        each essay in essays.filter((e) => !e.published)
+        each essay_ in essays.filter((e) => !e.published)
           li
-            a.publish(href='#', data-model='essay', data-id=essay.id, data-action='publish') ✔
-            | #{ ' ' }
-            a.remove(href='#', data-model='essay', data-id=essay.id, data-action='remove') ✘
-            | #{ ' ' }
-            a(href=essay.url, target='_blank')= essay.name
-            small.gray: em= ' ' + moment(essay.createDate).fromNow()
+            a.publish(href='#', data-model='essay', data-id=essay_.id, data-action='publish') ✔
+            | #{' '}
+            a.remove(href='#', data-model='essay', data-id=essay_.id, data-action='remove') ✘
+            | #{' '}
+            a(href=essay_.url, target='_blank')= essay_.name
+            small.gray: em= ' ' + moment(essay_.createDate).fromNow()
       hr
       h3 Published
       ul.tight
-        each essay in essays.filter((e) => e.published)
+        each essay_ in essays.filter((e) => e.published)
           li
-            a.unpublish(href='#', data-model='essay', data-id=essay.id, data-action='unpublish') ✔
-            | #{ ' ' }
-            a(href=essay.url, target='_blank')= essay.name
-            small.gray: em= ' ' + moment(essay.createDate).fromNow()
+            a.unpublish(href='#', data-model='essay', data-id=essay_.id, data-action='unpublish') ✔
+            | #{' '}
+            a(href=essay_.url, target='_blank')= essay_.name
+            small.gray: em= ' ' + moment(essay_.createDate).fromNow()
 
     .col2
       h2 AP Notes
       h3 Needs Review
       ul.tight
-        each note in notes.filter((e) => !e.published)
+        each note_ in notes.filter((e) => !e.published)
           li
-            a.publish(href='#', data-model='note', data-id=note.id, data-action='publish') ✔
-            | #{ ' ' }
-            a.remove(href='#', data-model='essay', data-id=note.id, data-action='remove') ✘
-            | #{ ' ' }
-            a(href=note.url, target='_blank')= note.name
-            small.gray: em= ' ' + moment(note.createDate).fromNow()
+            a.publish(href='#', data-model='note', data-id=note_.id, data-action='publish') ✔
+            | #{' '}
+            a.remove(href='#', data-model='essay', data-id=note_.id, data-action='remove') ✘
+            | #{' '}
+            a(href=note_.url, target='_blank')= note_.name
+            small.gray: em= ' ' + moment(note_.createDate).fromNow()
       hr
       h3 Published
       ul.tight
-        each note in notes.filter((e) => e.published)
+        each note_ in notes.filter((e) => e.published)
           li
-            a.unpublish(href='#', data-model='note', data-id=note.id, data-action='unpublish') ✔
-            | #{ ' ' }
-            a(href=note.url, target='_blank')= note.name
-            small.gray: em= ' ' + moment(note.createDate).fromNow()
+            a.unpublish(href='#', data-model='note', data-id=note_.id, data-action='unpublish') ✔
+            | #{' '}
+            a(href=note_.url, target='_blank')= note_.name
+            small.gray: em= ' ' + moment(note_.createDate).fromNow()

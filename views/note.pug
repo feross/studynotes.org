@@ -1,11 +1,6 @@
 extends layouts/main-sidebar
 include mixins/comments
-
-append toolbar
-  if req.user && req.user.admin
-    a.btn.red.edit(href='?edit=1') Edit
-  if next
-    a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next<span class="hide-tablet-tight hide-phone-tight"> #{ notetype.hasChapters ? 'Chapter' : notetype.singularName }</span>
+include mixins/toolbar
 
 block sidebar
   include ads/adsense-sidebar
@@ -13,18 +8,18 @@ block sidebar
   if notes
     h2 More #{course.shortName} #{notetype.name}
     ul.more
-      each note in notes
-        li: a(href='#{note.url}')= note.name
+      each note_ in notes
+        li: a(href=note_.url)= note_.name
 
   include ads/adsense-sidebar
 
   ul
-    li #{ util.addCommas(note.hits) } views (#{ util.addCommas(util.hitsPerDay(note.hits, note.createDate)) } views per day)
+    li #{util.addCommas(note.hits)} views (#{util.addCommas(util.hitsPerDay(note.hits, note.createDate))} views per day)
     li.online
-    li Posted <span title='#{ moment(note.createDate).format("MMMM Do, YYYY, h:mm:ss a") }'>#{ moment(note.createDate).fromNow() }</span>
+    li Posted <span title='#{moment(note.createDate).format("MMMM Do, YYYY, h:mm:ss a")}'>#{moment(note.createDate).fromNow()}</span>
 
 block content
-  if (locals.ads && config.isProd)
+  if ads && config.isProd
     //- Google Surveys
     script.
       (function() {
@@ -42,7 +37,11 @@ block content
   include includes/breadcrumbs
   h1= note.name
 
-  include includes/toolbar
+  +toolbar()
+    if req.user && req.user.admin
+      a.btn.red.edit(href='?edit=1') Edit
+    if next
+      a.btn.next(href=next.url, title=`Next: ${next.name}`) Next<span class="hide-tablet-tight hide-phone-tight"> #{notetype.hasChapters ? 'Chapter' : notetype.singularName}</span>
 
   include ads/adsense-in-content
 
@@ -66,13 +65,12 @@ block content
 
     p
       if prev
-        a.btn.large.prev(href='#{prev.url}', title='Prev: #{prev.name}') Previous #{ notetype.hasChapters ? 'Chapter' : notetype.singularName }
+        a.btn.large.prev(href=prev.url, title=`Prev: ${prev.name}`) Previous #{notetype.hasChapters ? 'Chapter' : notetype.singularName}
       if next
-        a.btn.large.next(href='#{next.url}', title='Next: #{next.name}') Next #{ notetype.hasChapters ? 'Chapter' : notetype.singularName }
+        a.btn.large.next(href=next.url, title=`Next: ${next.name}`) Next #{notetype.hasChapters ? 'Chapter' : notetype.singularName}
     p: em Tip: Use ← → keys to navigate!
 
     +comments(note.id, title, url)
 
   h3 How to cite this note (MLA)
   .cite Aboukhadijeh, Feross. "#{note.name}" StudyNotes.org. Study Notes, LLC., #{moment(note.createDate).format('DD MMM. YYYY.')} Web. #{moment().format('DD MMM. YYYY.')} &lt;#{url}&gt;.
-

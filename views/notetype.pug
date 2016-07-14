@@ -1,5 +1,6 @@
 extends layouts/main-sidebar
 include mixins/entries
+include mixins/toolbar
 
 block sidebar
   include sidebars/notetype
@@ -9,7 +10,7 @@ block content
   h1= notetype.name
 
   .hide-phone
-    include includes/toolbar
+    +toolbar()
 
   include ads/adsense-in-content
 
@@ -23,6 +24,6 @@ block content
   else
     ul.listing
       each note in notes
-        li: a(href='#{note.url}')= note.name
+        li: a(href=note.url)= note.name
 
     include ads/adsense-link-unit-single

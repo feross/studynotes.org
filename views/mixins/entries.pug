@@ -1,6 +1,6 @@
 mixin entries(entries)
   - var num = 0
-  each entry in entries
+  each entry_ in entries
     if num === 7 || num === 14 || num === 21
       include ../ads/adsense-link-unit-single
     - num += 1
@@ -8,25 +8,25 @@ mixin entries(entries)
       .heading
         h3
           | !{ num + '. ' }
-          a(href=entry.url)= entry.name
+          a(href=entry_.url)= entry_.name
 
-        if (entry.populated('college'))
+        if entry_.populated('college')
           .collegeLogo
-            a(href=entry.college.url, title=entry.college.name)
-              img(src=config.cdnOrigin + '/images/icon/#{ entry.college.id }.png')
+            a(href=entry_.college.url, title=entry_.college.name)
+              img(src=`${config.cdnOrigin}/images/icon/${entry_.college.id}.png`)
 
-        if (entry.populated('user'))
+        if entry_.populated('user')
           .author.hide-phone
-            if !entry.anon
-              a(href=entry.user.getUrl())
-                img(src=entry.user.gravatar(80))
+            if !entry_.anon
+              a(href=entry_.user.getUrl())
+                img(src=entry_.user.gravatar(80))
 
       .body
-        if entry.bodyTruncate
-          | !{ entry.bodyTruncate }
+        if entry_.bodyTruncate
+          | !{ entry_.bodyTruncate }
         else
           p Preview unavailable, click to read
 
-        a.read-more(href=entry.url, title=entry.name)
+        a.read-more(href=entry_.url, title=entry_.name)
           | !{ 'Read&nbsp;more' }
           i.icon-angle-double-right

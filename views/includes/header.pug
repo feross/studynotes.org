@@ -9,7 +9,7 @@ header.header
     .search.off
       i.icon-search
       form(action='/search/', method='GET')
-        input(autocorrect='off', autocomplete='off', spellcheck='false', name='q', placeholder='Search for AP Courses, Topics, and more...', type='text', value='#{locals.searchTerm}', autofocus=(searchFocus === false ? undefined : 'autofocus'))
+        input(autocorrect='off', autocomplete='off', spellcheck='false', name='q', placeholder='Search for AP Courses, Topics, and more...', type='text', value=searchTerm, autofocus=(searchFocus === false ? undefined : 'autofocus'))
 
     .autocomplete.off
       a.result(href='#')
@@ -25,9 +25,9 @@ header.header
         i.icon-down-open.hide-mobile
         span College Essays
 
-      if (req.user)
-        li: a(href='#{req.user.url}', title='Manage your account')
-          img.gravatar(src='#{ req.user.gravatar(50, true) }', width=21, height=21).hide-tablet
+      if req.user
+        li: a(href=req.user.url, title='Manage your account')
+          img.gravatar(src=req.user.gravatar(50, true), width=21, height=21).hide-tablet
           i.icon-user.hide-tablet
           span= req.user.firstName + (req.user.pro ? ' (Pro)' : '')
         li: a.logout(href='#logout', title='Logout of StudyNotes')
@@ -37,6 +37,6 @@ header.header
         li: a(href='/pro/?referrer=' + encodeURIComponent(url), title='Create a Study Notes Account')
           i.icon-check.hide-tablet
           span Sign Up
-        li: a(href=locals.loginUrl, title='Login to Study Notes')
+        li: a(href=loginUrl, title='Login to Study Notes')
           i.icon-login.hide-tablet
           span Log In

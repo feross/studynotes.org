@@ -3,9 +3,9 @@ mixin comments(id, title, url)
     #disqus_thread
     script.
       var disqus_config = function () {
-        this.page.url = '#{ url }'
-        this.page.identifier = '#{ id }'
-        this.page.title = '#{ title }'
+        this.page.url = '#{url}'
+        this.page.identifier = '#{id}'
+        this.page.title = '#{title}'
       }
       window.addEventListener('orientationchange', function () {
         DISQUS.reset({ reload: true })

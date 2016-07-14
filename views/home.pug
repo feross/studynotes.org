@@ -14,24 +14,24 @@ block head
       "name": "Study Notes",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "#{ config.siteOrigin }/search/?q={query}",
+        "target": "#{config.siteOrigin}/search/?q={query}",
         "query-input": "required name=query"
       },
-      "url": "#{ config.siteOrigin }/"
+      "url": "#{config.siteOrigin}/"
     }
 
   script(type='application/ld+json').
     {
       "@context": "http://schema.org",
       "@type": "Organization",
-      "logo": "#{ config.cdnOrigin }/images/logo.png",
+      "logo": "#{config.cdnOrigin}/images/logo.png",
       "name": "Study Notes",
       "sameAs": [
         "https://www.facebook.com/StudyNotesApp",
         "https://twitter.com/StudyNotesApp",
         "https://plus.google.com/+ApstudynotesOrg1"
       ],
-      "url": "#{ config.siteOrigin }/"
+      "url": "#{config.siteOrigin}/"
     }
 
 block sidebar
@@ -45,14 +45,14 @@ block sidebar
   .in-numbers.hide-phone.hide-tablet
     p.onlineNum
       span
-      | #{ ' students online now' }
+      | #{' students online now'}
     p
       span.totalHits Lots of
-      | #{ ' total views' }
+      | #{' total views'}
 
-    p #{ util.addCommas(userCount) } registered users
-    p #{ util.addCommas(noteCount) } notes for <a href='/courses/'>#{ courseCount } AP courses</a>
-    p #{ util.addCommas(essayCount) } admissions essays for <a href='/colleges/'>#{ collegeCount } colleges</a>
+    p #{util.addCommas(userCount)} registered users
+    p #{util.addCommas(noteCount)} notes for <a href='/courses/'>#{courseCount} AP courses</a>
+    p #{util.addCommas(essayCount)} admissions essays for <a href='/colleges/'>#{collegeCount} colleges</a>
 
   include ads/adsense-sidebar
 
@@ -64,32 +64,32 @@ block content
   .row
     .col2
       ul.buttonList
-        each course in modelCache.coursesByName.slice(0, 4)
-          li: a(href=course.url, title=course.shortName, class=course.id)
-            span= course.name
+        each course_ in modelCache.coursesByName.slice(0, 4)
+          li: a(href=course_.url, title=course_.shortName, class=course_.id)
+            span= course_.name
             i.icon-right-open
     .col2
       ul.buttonList
-        each course in modelCache.coursesByName.slice(4)
-          li: a(href=course.url, title=course.shortName, class=course.id)
-            span= course.name
+        each course_ in modelCache.coursesByName.slice(4)
+          li: a(href=course_.url, title=course_.shortName, class=course_.id)
+            span= course_.name
             i.icon-right-open
 
   h2 Admissions Essays That&nbsp;Worked
 
-  p Learn how to write a powerful college application by studying <a href='/essays/'>our database</a> of <strong>#{ essayCount } successful admissions essays</strong>. The secrets aren't secret anymore — see what actually worked for top&nbsp;students.
+  p Learn how to write a powerful college application by studying <a href='/essays/'>our database</a> of <strong>#{essayCount} successful admissions essays</strong>. The secrets aren't secret anymore — see what actually worked for top&nbsp;students.
   .row
     .col2
       ul.buttonList.tight
-        each college in modelCache.collegesByShortName.slice(0, 13)
-          li: a(href=college.url, title=college.name, class=college.id)
-            span= college.shortName + ' Essays'
+        each college_ in modelCache.collegesByShortName.slice(0, 13)
+          li: a(href=college_.url, title=college_.name, class=college_.id)
+            span= college_.shortName + ' Essays'
             i.icon-right-open
     .col2
       ul.buttonList.tight
-        each college in modelCache.collegesByShortName.slice(13, 26)
-          li: a(href=college.url, title=college.name, class=college.id)
-            span= college.shortName + ' Essays'
+        each college_ in modelCache.collegesByShortName.slice(13, 26)
+          li: a(href=college_.url, title=college_.name, class=college_.id)
+            span= college_.shortName + ' Essays'
             i.icon-right-open
 
   include ads/adsense-link-unit-single
@@ -106,17 +106,17 @@ block content
     .col2
       h2 New AP Notes
       ul.tight
-        each note in newNotes
+        each note_ in newNotes
           li
-            a(href=note.url, title='#{ note.course.shortName } #{ note.notetype.singularName }: #{ note.name }')= note.name
-            small.gray: em= ' ' + moment(note.createDate).fromNow()
+            a(href=note_.url, title=`${note_.course.shortName} ${note_.notetype.singularName}: ${note_.name}`)= note_.name
+            small.gray: em= ' ' + moment(note_.createDate).fromNow()
     .col2
       h2 New College Essays
       ul.tight
-        each essay in newEssays.slice(0, 16)
+        each essay_ in newEssays.slice(0, 16)
           li
-            a(href=essay.url)= essay.name
-            small.gray: em= ' ' + moment(essay.createDate).fromNow()
+            a(href=essay_.url)= essay_.name
+            small.gray: em= ' ' + moment(essay_.createDate).fromNow()
 
   hr
 

@@ -1,25 +1,26 @@
 extends layouts/main-sidebar
 include mixins/entries
+include mixins/toolbar
 
 block sidebar
   include ads/adsense-sidebar
 
   h2 Top 25 Colleges
   ul.more
-    each college in modelCache.collegesByRank
-      li: a(href=college.url)= college.name
+    each college_ in modelCache.collegesByRank
+      li: a(href=college_.url)= college_.name
 
   include ads/adsense-sidebar
 
   ul
-    li #{ util.addCommas(essays.length) } essays for #{ collegeCount } <a href='/colleges/'>universities</a>
+    li #{util.addCommas(essays.length)} essays for #{collegeCount} <a href='/colleges/'>universities</a>
     li.online
 
 block content
-  h1 Top #{ essays.length } Successful College Essays
+  h1 Top #{essays.length} Successful College Essays
   p Get into the college of your dreams! <strong>We hope these essays inspire you</strong> as you write your own personal statement. Just remember to be original and creative as you share your story.
 
-  include includes/toolbar
+  +toolbar()
 
   if config.essaySeason
     include ads/essay-review
@@ -27,7 +28,7 @@ block content
   else
     include ads/adsense-in-content
 
-  if (essays.length)
+  if essays.length
     +entries(essays)
 
   hr

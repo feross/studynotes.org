@@ -1,32 +1,32 @@
-if (locals.hero)
+if hero
   .hero
-    a(href='#{hero.url || "."}')
-      if (locals.notetype || locals.note)
+    a(href=hero.url || '.')
+      if notetype || note
         //- notetype and note pages already have a h1 in the content
-        if (hero.titleRaw)
+        if hero.titleRaw
           h2.title!= hero.title
         else
           h2.title= hero.title
-        if (locals.hero.desc)
-          if (hero.descRaw)
+        if hero.desc
+          if hero.descRaw
             h3.desc!= hero.desc
           else
             h3.desc= hero.desc
       else
-        if (hero.titleRaw)
+        if hero.titleRaw
           h1.title!= hero.title
         else
           h1.title= hero.title
-        if (locals.hero.desc)
-          if (hero.descRaw)
+        if hero.desc
+          if hero.descRaw
             h2.desc!= hero.desc
           else
             h2.desc= hero.desc
 
-  if (hero.tabs && hero.tabs.length)
+  if hero.tabs && hero.tabs.length
     ul.tabs.clearfix.hide-phone
-      each tab in hero.tabs
-        li(class='#{(tab.on || tab.view === view || (Array.isArray(tab.view) && (tab.view.indexOf(view) >= 0))) ? "on" : ""}')
-          a(href='#{tab.url}')= tab.name
+      each tab_ in hero.tabs
+        li(class=`${(tab_.on || tab_.view === view || (Array.isArray(tab_.view) && (tab_.view.indexOf(view) >= 0))) ? 'on' : ''}`)
+          a(href=tab_.url)= tab_.name
         //- Force a space between tabs for inline-block spacing
-        | #{ ' ' }
+        | #{' '}

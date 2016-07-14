@@ -1,6 +1,6 @@
 extends layouts/main
 
 block content
-  each course in courses
-    h2: a(href='#{course.url}')= course.name
-    p.desc!= course.desc
+  each course_ in courses
+    h2: a(href=course_.url)= course_.name
+    p.desc!= course_.desc

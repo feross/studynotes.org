@@ -1,17 +1,17 @@
 extends layouts/main-sidebar
+include mixins/toolbar
 
 block content
   .hide-phone
-    include includes/toolbar
+    +toolbar()
 
   include ads/adsense-in-content
 
-  if (course.notetypes)
-    each notetype in course.notetypes
-      h2: a(href=course.notetypeUrl(notetype))= notetype.name
+  if course.notetypes
+    each notetype_ in course.notetypes
+      h2: a(href=course.notetypeUrl(notetype_))= notetype_.name
 
-      - var desc = (notetype.shortDesc || notetype.desc).replace(/COURSE_SHORTNAME/g, course.shortName).replace(/COURSE_TEXTBOOK/g, course.textbook).replace(/COURSE/g, course.name)
-      p.desc!= desc
+      p.desc!= (notetype_.shortDesc || notetype_.desc).replace(/COURSE_SHORTNAME/g, course.shortName).replace(/COURSE_TEXTBOOK/g, course.textbook).replace(/COURSE/g, course.name)
 
   include ads/adsense-link-unit-single
 
@@ -19,8 +19,8 @@ block sidebar
   include ads/adsense-sidebar
   include includes/countdown
   include ads/adsense-sidebar
-  h2 #{ course.shortName }
+  h2 #{course.shortName}
   ul
-    li Exam Date: #{ moment(course.examDate).format("MMMM Do, YYYY") }
-    li #{ util.addCommas(course.hits) } views
+    li Exam Date: #{moment(course.examDate).format("MMMM Do, YYYY")}
+    li #{util.addCommas(course.hits)} views
     li.online

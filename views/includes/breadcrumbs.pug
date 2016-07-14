@@ -1,9 +1,9 @@
-if (locals.breadcrumbs)
+if breadcrumbs
   .breadcrumbs
-    each link, i in locals.breadcrumbs
-      if (link.url)
-        a(href='#{link.url}')= link.name
+    each link_, i in breadcrumbs
+      if link_.url
+        a(href=link_.url)= link_.name
       else
-        span= link.name
-      if (i !== breadcrumbs.length - 1)
+        span= link_.name
+      if i !== breadcrumbs.length - 1
         span.divider

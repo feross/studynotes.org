@@ -26,8 +26,8 @@ block content
 
   p "Advanced Placement", "AP", and "SAT" are registered trademarks of the College Board, which was not involved in the production of, and does not endorse this web site.
 
-  each college in modelCache.collegesByName
-    p "#{ college.shortName }" is a registered trademark of #{ college.name }, which was not involved in the production of, and does not endorse this web site.
+  each college_ in modelCache.collegesByName
+    p "#{college_.shortName}" is a registered trademark of #{college_.name}, which was not involved in the production of, and does not endorse this web site.
 
   p You are permitted to browse this website, reproduce extracts by way of printing, downloading to a hard disk or for the purposes of distribution to other individuals. This is only to be done on the proviso that you keep intact all copyright and other proprietary notices and that the trademark notice below appears on such reproductions. No reproduction of any part of this website may be sold or distributed for commercial gain nor shall it be modified or incorporated in any other work, publication or website.
 

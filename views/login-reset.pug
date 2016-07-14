@@ -4,7 +4,7 @@ block content
   h1 Choose a Password
   h2 Pick something memorable – don't forget it!
 
-  if (locals.errors.length)
+  if errors.length
     .errors
       each msg in errors
         div= msg

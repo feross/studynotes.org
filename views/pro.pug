@@ -5,9 +5,9 @@ append scripts
   script(async, src='//platform.twitter.com/widgets.js')
 
 block content
-  h1.center Read Top #{ college ? college.shortName : 'College' } Essays
+  h1.center Read Top #{college ? college.shortName : 'College'} Essays
 
-  p We've collected the <strong>best #{ college ? college.shortName : 'college' } essays</strong> from students who got accepted. Read real college essays that worked, get inspiration for your own essays, and <strong>win over the admissions counselor</strong>.
+  p We've collected the <strong>best #{college ? college.shortName : 'college'} essays</strong> from students who got accepted. Read real college essays that worked, get inspiration for your own essays, and <strong>win over the admissions counselor</strong>.
 
   .row
     .col3
@@ -21,44 +21,44 @@ block content
     .col3
       h2 Trusted by Thousands
       img(src=config.cdnOrigin + '/images/icon/check.svg')
-      p Get into top universities like #{ collegeListAnd }.
+      p Get into top universities like #{collegeListAnd}.
 
   div.center: p
     +order-btn('pro', 'Read College Essays', 'huge')
 
   hr
 
-  h1.center Learn the #{ college ? college.shortName : 'College' } Essay Secrets!
+  h1.center Learn the #{college ? college.shortName : 'College'} Essay Secrets!
 
-  p This is an <strong>indispensable</strong> resource for learning the qualities and techniques that make excellent #{ college ? college.shortName : 'college' } personal statements. Get the advice and insights you need to <strong>win over the admissions counselor</strong>.
+  p This is an <strong>indispensable</strong> resource for learning the qualities and techniques that make excellent #{college ? college.shortName : 'college'} personal statements. Get the advice and insights you need to <strong>win over the admissions counselor</strong>.
 
   .row
     .col2
       img(src=config.cdnOrigin + '/images/icon/trophy.svg')
-      h2 Get #{ collegeEssays.length } Top #{ college ? college.shortName : 'College' } Essays
+      h2 Get #{collegeEssays.length} Top #{college ? college.shortName : 'College'} Essays
       ul.tight
         each essay in collegeEssays.slice(0, 4)
           li= essay.name
         if collegeEssays.length > 4
-          li and #{ collegeEssays.length - 4 } more #{ college ? college.shortName : 'college' } essays...
+          li and #{collegeEssays.length - 4} more #{college ? college.shortName : 'college'} essays...
     .col2
       img(src=config.cdnOrigin + '/images/icon/stars.svg')
       if college
-        h2 FREE BONUS: #{ otherEssays.length } More Essays
+        h2 FREE BONUS: #{otherEssays.length} More Essays
         ul.tight
           each college in otherColleges.slice(0, 4)
-            li #{ college.shortName } essays
+            li #{college.shortName} essays
           if otherColleges.length >= 4
-            li and #{ otherEssays.length } more essays from #{ otherColleges.length - 4 } top colleges...
+            li and #{otherEssays.length} more essays from #{otherColleges.length - 4} top colleges...
       else
         h2 Top 25 Schools, plus Common App
         ul.tight
           each college in otherColleges.slice(0, 4)
-            li #{ college.shortName } essays
-          li and #{ otherColleges.length - 4 } more top colleges...
+            li #{college.shortName} essays
+          li and #{otherColleges.length - 4} more top colleges...
 
 
-  p For just <strong>$#{ (config.product.pro.price / 100) }</strong> (one-time payment) you get <strong>lifetime access to #{ essays.length } essays</strong> that worked at #{ collegeList }, and more. Don't wait — start getting ahead today!
+  p For just <strong>$#{config.product.pro.price / 100}</strong> (one-time payment) you get <strong>lifetime access to #{essays.length} essays</strong> that worked at #{collegeList}, and more. Don't wait — start getting ahead today!
 
   div.center: p
     +order-btn('pro', 'Unlock Essays', 'huge')

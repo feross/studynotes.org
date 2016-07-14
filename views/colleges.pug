@@ -1,18 +1,19 @@
 extends layouts/main-sidebar
+include mixins/toolbar
 
 block sidebar
   include ads/adsense-sidebar
   include ads/adsense-sidebar
 
   ul
-    li #{ util.addCommas(essayCount) } essays for #{ colleges.length } <a href='/colleges/'>universities</a>
+    li #{util.addCommas(essayCount)} essays for #{colleges.length} <a href='/colleges/'>universities</a>
     li.online
 
 block content
-  h1 Top #{ colleges.length } Colleges
+  h1 Top #{colleges.length} Colleges
   p Learn about these <strong>top univerities</strong> and read college admissions essays that worked.
 
-  include includes/toolbar
+  +toolbar()
 
   if config.essaySeason
     include ads/essay-review
@@ -20,10 +21,10 @@ block content
   else
     include ads/adsense-in-content
 
-  if (locals.colleges)
+  if colleges
     ul.listing
-      each college in colleges
-        li: a(href='#{college.url}')= college.rank + '. ' + college.name
+      each college_ in colleges
+        li: a(href=college_.url)= college_.rank + '. ' + college_.name
 
   hr
   include ads/pro

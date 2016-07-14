@@ -1,24 +1,25 @@
 extends layouts/main-sidebar
+include mixins/toolbar
 
 block sidebar
   include ads/adsense-sidebar
 
-  h2 Top #{ college.shortName } Essays
+  h2 Top #{college.shortName} Essays
   ul.more
-    each essay in essays
-      li: a(href=essay.url)= essay.name
+    each essay_ in essays
+      li: a(href=essay_.url)= essay_.name
 
   include ads/adsense-sidebar
 
   ul
-    li #{ util.addCommas(college.hits) } views
+    li #{util.addCommas(college.hits)} views
     li.online
 
 block content
   include includes/breadcrumbs
 
-  h1 About #{ college.name }
-  include includes/toolbar
+  h1 About #{college.name}
+  +toolbar()
 
   if config.essaySeason
     include ads/essay-review
@@ -26,23 +27,23 @@ block content
   else
     include ads/adsense-in-content
 
-  if (college.location)
-    h2 #{ college.shortName } is Located in #{ college.location }
+  if college.location
+    h2 #{college.shortName} is Located in #{college.location}
     .map
-      a(href='http://maps.google.com/?q=#{ college.name }')
-        img(src='//maps.googleapis.com/maps/api/staticmap?center=#{ encodeURIComponent(college.name) }&markers=#{ encodeURIComponent(college.name) }&zoom=7&size=640x220&scale=2&maptype=roadmap&sensor=false&visual_refresh=true')
+      a(href=`http://maps.google.com/?q=${college.name}`)
+        img(src=`//maps.googleapis.com/maps/api/staticmap?center=${encodeURIComponent(college.name)}&markers=${encodeURIComponent(college.name)}&zoom=7&size=640x220&scale=2&maptype=roadmap&sensor=false&visual_refresh=true`)
     include ads/adsense-link-unit-single
 
-  if (college.acceptRate)
-    h2 #{ college.shortName } Stats
+  if college.acceptRate
+    h2 #{college.shortName} Stats
     ul
-      li #{ college.acceptRate }% acceptance rate
-      li #{ util.addCommas(college.enrollment) } enrolled students
-      li $#{ util.addCommas(college.tuition) } tuition &amp; fees
-      li ##{ college.rank } in US News &amp; World Report
+      li #{college.acceptRate}% acceptance rate
+      li #{util.addCommas(college.enrollment)} enrolled students
+      li $#{util.addCommas(college.tuition)} tuition &amp; fees
+      li ##{college.rank} in US News &amp; World Report
 
-  h2 #{ college.shortName } Facts — you should know this stuff!
-  | !{ college.desc }
+  h2 #{college.shortName} Facts — you should know this stuff!
+  | !{college.desc}
 
   include ads/adsense-link-unit-double
 

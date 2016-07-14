@@ -2,29 +2,29 @@
   nav.browse.browse-courses
     .row
       .col4
-        each course in modelCache.coursesByName.slice(0, 2)
-          h2: a(href=course.url, title=course.shortName)= course.name
+        each course_ in modelCache.coursesByName.slice(0, 2)
+          h2: a(href=course_.url, title=course_.shortName)= course_.name
           ul
-            each notetype in course.notetypes
-              li: a(href=course.notetypeUrl(notetype), title='#{ course.name + " " + notetype.name }')= notetype.name
+            each notetype_ in course_.notetypes
+              li: a(href=course_.notetypeUrl(notetype_), title=`${course_.name} ${notetype_.name}`)= notetype_.name
       .col4
-        each course in modelCache.coursesByName.slice(2, 5)
-          h2: a(href=course.url, title=course.shortName)= course.name
+        each course_ in modelCache.coursesByName.slice(2, 5)
+          h2: a(href=course_.url, title=course_.shortName)= course_.name
           ul
-            each notetype in course.notetypes
-              li: a(href=course.notetypeUrl(notetype), title='#{ course.name + " " + notetype.name }')= notetype.name
+            each notetype_ in course_.notetypes
+              li: a(href=course_.notetypeUrl(notetype_), title=`${course_.name} ${notetype_.name}`)= notetype_.name
       .col4
-        each course in modelCache.coursesByName.slice(5, 6)
-          h2: a(href=course.url, title=course.shortName)= course.name
+        each course_ in modelCache.coursesByName.slice(5, 6)
+          h2: a(href=course_.url, title=course_.shortName)= course_.name
           ul
-            each notetype in course.notetypes
-              li: a(href=course.notetypeUrl(notetype), title='#{ course.name + " " + notetype.name }')= notetype.name
+            each notetype_ in course_.notetypes
+              li: a(href=course_.notetypeUrl(notetype_), title=`${course_.name} ${notetype_.name}`)= notetype_.name
       .col4
-        each course in modelCache.coursesByName.slice(6, 7)
-          h2: a(href=course.url, title=course.shortName)= course.name
+        each course_ in modelCache.coursesByName.slice(6, 7)
+          h2: a(href=course_.url, title=course_.shortName)= course_.name
           ul
-            each notetype in course.notetypes
-              li: a(href=course.notetypeUrl(notetype), title='#{ course.name + " " + notetype.name }')= notetype.name
+            each notetype_ in course_.notetypes
+              li: a(href=course_.notetypeUrl(notetype_), title=`${course_.name} ${notetype_.name}`)= notetype_.name
 
         a.btn(href='/submit/note/')
           i.icon-upload-cloud
@@ -36,20 +36,20 @@
       .col4
         h2: a(href='/essays/') Admissions Essays
         ul
-          each college in modelCache.collegesByShortName.slice(0, 7)
-            li: a(href=college.url) #{ college.shortName } Essays
+          each college_ in modelCache.collegesByShortName.slice(0, 7)
+            li: a(href=college_.url) #{college_.shortName} Essays
       .col4
         ul
-          each college in modelCache.collegesByShortName.slice(7, 15)
-            li: a(href=college.url) #{ college.shortName } Essays
+          each college_ in modelCache.collegesByShortName.slice(7, 15)
+            li: a(href=college_.url) #{college_.shortName} Essays
       .col4
         ul
-          each college in modelCache.collegesByShortName.slice(15, 23)
-            li: a(href=college.url) #{ college.shortName } Essays
+          each college_ in modelCache.collegesByShortName.slice(15, 23)
+            li: a(href=college_.url) #{college_.shortName} Essays
       .col4
         ul
-          each college in modelCache.collegesByShortName.slice(23)
-            li: a(href=college.url) #{ college.shortName } Essays
+          each college_ in modelCache.collegesByShortName.slice(23)
+            li: a(href=college_.url) #{college_.shortName} Essays
 
         a.btn(href='/submit/essay/')
           i.icon-upload-cloud

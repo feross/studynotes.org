@@ -1,12 +1,7 @@
 extends layouts/main-sidebar
 include mixins/comments
 include mixins/order-btn
-
-append toolbar
-  if req.user && req.user.admin
-    a.btn.red.edit(href='?edit=1') Edit
-  if next
-    a.btn.next(href='#{next.url}', title='Next: #{next.name}') Next<span class="hide-tight-tablet"> Essay</span>
+include mixins/toolbar
 
 block sidebar
   .author
@@ -16,40 +11,44 @@ block sidebar
       else
         img(src=user.gravatar(400))
       h2.name= user.getName(essay.anon)
-    if (user.collegeMajor)
+    if user.collegeMajor
       h3.accepted= user.collegeMajor
-    if (!user.college || user.college.id !== college.id)
-      h3.accepted Accepted at <a href='#{ college.url }'>#{ college.shortName }</a>
-    if (user.college && user.collegeYear)
+    if !user.college || user.college.id !== college.id
+      h3.accepted Accepted at <a href='#{college.url}'>#{college.shortName}</a>
+    if user.college && user.collegeYear
       h3.accepted
-        | #{ user.hasGraduated ? 'Graduated ' : 'Attending ' }
+        | #{user.hasGraduated ? 'Graduated ' : 'Attending '}
         a(href=user.college.url)= user.college.shortName
-        | #{ ' \'' + user.collegeYear.toString().substring(2) }
+        | #{' \'' + user.collegeYear.toString().substring(2)}
 
   if essay.admitsphere
     p This essay comes from AdmitSphere who kindly allowed it to be republished here.
 
   include ads/adsense-sidebar
 
-  h2 More #{ college.shortName } Essays
+  h2 More #{college.shortName} Essays
   ul.more
-    each essay in essays
-      li: a(href=essay.url)= essay.name
+    each essay_ in essays
+      li: a(href=essay_.url)= essay_.name
 
   include ads/adsense-sidebar
 
   ul
-    li #{ util.addCommas(essay.hits) } views (#{ util.addCommas(util.hitsPerDay(essay.hits, essay.createDate)) } views per day)
+    li #{util.addCommas(essay.hits)} views (#{util.addCommas(util.hitsPerDay(essay.hits, essay.createDate))} views per day)
     li.online
-    li Posted <span title='#{ moment(essay.createDate).format("MMMM Do, YYYY, h:mm:ss a") }'>#{ moment(essay.createDate).fromNow() }</span>
+    li Posted <span title='#{moment(essay.createDate).format("MMMM Do, YYYY, h:mm:ss a")}'>#{moment(essay.createDate).fromNow()}</span>
 
 block content
   include includes/breadcrumbs
   h1= essay.name
 
-  include includes/toolbar
+  +toolbar()
+    if req.user && req.user.admin
+      a.btn.red.edit(href='?edit=1') Edit
+    if next
+      a.btn.next(href=next.url, title=`Next: ${next.name}`) Next<span class="hide-tight-tablet"> Essay</span>
 
-  if (!blur)
+  if !blur
     include ads/adsense-in-content
 
   if essay.prompt
@@ -60,16 +59,16 @@ block content
     .body
       .subscribe-on-blur.unblur
         include includes/birdy/stop
-        h2 You must pay $#{ (config.product.pro.price / 100) } to read this essay.
+        h2 You must pay $#{config.product.pro.price / 100} to read this essay.
 
         p
           +order-btn('pro', 'Unlock Essays', 'large')
 
-        h4 For just $#{ (config.product.pro.price / 100) } (one-time payment) you get <strong>lifetime access to #{ essayCount } essays</strong> that worked at Stanford, Harvard, and more. <a href="/pro/#{ college.id }/?referrer=#{ encodeURIComponent(essay.url) }">Learn&nbsp;more.</a>
+        h4 For just $#{config.product.pro.price / 100} (one-time payment) you get <strong>lifetime access to #{essayCount} essays</strong> that worked at Stanford, Harvard, and more. <a href="/pro/#{college.id}/?referrer=#{encodeURIComponent(essay.url)}">Learn&nbsp;more.</a>
 
         h4 <strong>Questions?</strong> Call 1 (530) 633-7677
 
-        small Already have an account? <a href="#{ loginUrl }">Log in to read essays.</a>
+        small Already have an account? <a href="#{loginUrl}">Log in to read essays.</a>
 
       .blur !{essay.bodyPaywall}
   else
@@ -90,16 +89,16 @@ block content
       include ads/medianet-after-content
       include includes/birdy/happy
 
-    p Keep reading more <a href="#{ college.url }">#{ college.shortName } admissions essays</a> — you can't be too prepared!
+    p Keep reading more <a href="#{college.url}">#{college.shortName} admissions essays</a> — you can't be too prepared!
 
     p
       if prev
-        a.btn.large.prev(href='#{prev.url}', title='Prev: #{prev.name}') Previous Essay
+        a.btn.large.prev(href=prev.url, title=`Prev: ${prev.name}`) Previous Essay
       if next
-        a.btn.large.next(href='#{next.url}', title='Next: #{next.name}') Next Essay
+        a.btn.large.next(href=next.url, title=`Next: ${next.name}`) Next Essay
     p: em Tip: Use the ← → keys to navigate!
 
     +comments(essay.id, title, url)
 
   h3 How to cite this essay (MLA)
-  .cite #{ user.getMlaName(essay.anon) }. "#{essay.name}" StudyNotes.org. Study Notes, LLC., #{moment(essay.createDate).format('DD MMM. YYYY.')} Web. #{moment().format('DD MMM. YYYY.')} &lt;#{url}&gt;.
+  .cite #{user.getMlaName(essay.anon)}. "#{essay.name}" StudyNotes.org. Study Notes, LLC., #{moment(essay.createDate).format('DD MMM. YYYY.')} Web. #{moment().format('DD MMM. YYYY.')} &lt;#{url}&gt;.
