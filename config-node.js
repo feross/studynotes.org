@@ -11,6 +11,8 @@ var path = require('path')
 exports.root = __dirname
 exports.out = path.join(exports.root, 'out')
 
+var month = new Date().getMonth() + 1
+
 /**
  * Number of "first click, free" essays that a given session can view before
  * requesting that they subscribe. The user can always view if they have
@@ -18,6 +20,11 @@ exports.out = path.join(exports.root, 'out')
  * @type {Number}
  */
 exports.numFree = 1
+/**
+ * Is it college essay season? Used to determine whether to show in-house ads for
+ * essay editing services vs. third-party ads.
+ */
+exports.essaySeason = month >= 9 // September
 
 /**
  * Number of cores on this CPU
