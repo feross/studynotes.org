@@ -19,7 +19,12 @@ var month = new Date().getMonth() + 1
  * a referrer from an external site.
  * @type {Number}
  */
-exports.numFree = 1
+exports.numFree = month === 1 || month === 12
+  ? 1 // Dec-Jan, 1 essay
+  : month <= 9
+    ? 3 // Feb-Sep, 3 essays
+    : 2 // Oct-Nov, 2 essays
+
 /**
  * Is it college essay season? Used to determine whether to show in-house ads for
  * essay editing services vs. third-party ads.
