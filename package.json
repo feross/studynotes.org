@@ -102,7 +102,6 @@
   },
   "devDependencies": {
     "nodemon": "^1.0.17",
-    "pre-commit": "^1.0.10",
     "run-parallel-limit": "^1.0.2",
     "standard": "*",
     "tape": "^4.0.0",
