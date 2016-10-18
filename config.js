@@ -57,7 +57,7 @@ exports.product = {
     desc: 'Essay Review (Standard)'
   },
   'review-premium': {
-    price: 49900,
+    price: 39900,
     desc: 'Essay Review (Premium)'
   }
 }
