@@ -7,7 +7,6 @@ html(class=`studynotes ${layout} ${cls} ${seenSurvey ? 'seen-survey' : ''}`, lan
     link(rel='preconnect', href='https://cdn.apstudynotes.org')
     link(rel='preconnect', href='https://use.typekit.net')
     link(rel='preconnect', href='https://pagead2.googlesyndication.com')
-    link(rel='preconnect', href='https://widget.uservoice.com')
 
     block preconnect
 
@@ -198,17 +197,3 @@ html(class=`studynotes ${layout} ${cls} ${seenSurvey ? 'seen-survey' : ''}`, lan
       script(async, src='//secure.statcounter.com/counter/counter.js')
       noscript
         img(height='1', width='1', style='display:none', src='//c.statcounter.com/3533945/0/1577ef81/1/')
-
-      //- Uservoice
-      script.
-        var UserVoice = UserVoice || []
-        UserVoice.push(['set', {
-          accent_color: '#448dd6',
-          trigger_color: 'white',
-          trigger_background_color: 'rgba(46, 49, 51, 0.6)'
-        }])
-        UserVoice.push(['addTrigger', {
-          mode: 'satisfaction',
-          trigger_position: 'bottom-right'
-        }])
-      script(async, src='//widget.uservoice.com/oZKwjGI98y7HmJ5jbPuO7w.js')
