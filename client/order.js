@@ -9,7 +9,6 @@ if (window.StripeCheckout) {
     image: config.cdnOrigin + '/images/stripe-image.png',
     locale: 'auto',
     allowRememberMe: false,
-    alipay: 'auto',
     email: window.StudyNotes.user,
     opened: function () {
       window.ga('send', 'event', 'pro', 'checkout-open')
