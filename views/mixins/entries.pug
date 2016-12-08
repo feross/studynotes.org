@@ -2,7 +2,7 @@ mixin entries(entries)
   - var num = 0
   each entry_ in entries
     if num === 7 || num === 14 || num === 21
-      include ../ads/adsense-link-unit-single
+      include ../ads/adsense-link-unit
     - num += 1
     .entry
       .heading

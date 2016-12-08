@@ -1,0 +1,8 @@
+if ads
+  .adsense-link-unit
+    if config.isProd
+      ins.adsbygoogle(style='display: block', data-ad-client='ca-pub-7826623632932605', data-ad-slot='7985443106', data-ad-format='link')
+      script.
+        (adsbygoogle = window.adsbygoogle || []).push({})
+    else
+      ins(style='border: 5px solid red; display: block; width: 200px; height: 90px') adsense-link-unit
