@@ -6,6 +6,6 @@ if !req.isAuthenticated() || !req.user.pro
 
   .center
     h2 Essays That&nbsp;Worked
-    p <strong>Read the top #{essayCount || essays.length}&nbsp;college essays</strong> that worked</strong> at #{college ? college.shortName : 'Stanford, Harvard, Princeton,'} and more. <a href=proUrl>Learn&nbsp;more.</a>
+    p <strong>Read the top #{essayCount || essays.length}&nbsp;college essays</strong> that worked</strong> at #{college ? college.shortName : 'Stanford, Harvard, Princeton,'} and more. <a href="#{proUrl}">Learn&nbsp;more.</a>
 
     a.btn.large(href=proUrl) Buy Now
