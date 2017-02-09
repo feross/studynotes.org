@@ -64,7 +64,7 @@ function setAutocompletePosition (position) {
 function doSearchAutocomplete () {
   if ($searchInput.val() === lastAutocompleteQuery &&
       !$autocomplete.hasClass('off')) {
-    return
+    // do nothing
   } else if ($searchInput.val() === '') {
     $search.removeClass('searching')
     $autocomplete.addClass('off')
