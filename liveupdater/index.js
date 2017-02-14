@@ -1,5 +1,6 @@
 module.exports = LiveUpdater
 
+var arrayRemove = require('unordered-array-remove')
 var config = require('../config')
 var debug = require('debug')('studynotes:liveupdater')
 var fs = require('fs')
@@ -114,8 +115,7 @@ LiveUpdater.prototype.handleClose = function (socket) {
   var self = this
   var sockets = self.online[socket.url]
   if (sockets) {
-    var index = sockets.indexOf(socket)
-    sockets.splice(index, 1)
+    arrayRemove(sockets, sockets.indexOf(socket))
     self.sendUpdates(socket.url)
     self.sendHomeUpdates()
   }
