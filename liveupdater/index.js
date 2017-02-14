@@ -35,7 +35,11 @@ function LiveUpdater (opts, done) {
     })
     : http.createServer()
 
-  self.server = new ws.Server({ server: httpServer, perMessageDeflate: false })
+  self.server = new ws.Server({
+    server: httpServer,
+    perMessageDeflate: false,
+    clientTracking: false
+  })
 
   self.server.on('connection', function (socket) {
     socket.destroyed = false
