@@ -24,12 +24,12 @@ test('util.randomBytes', function (t) {
 
   util.randomBytes(function (err, bytes) {
     if (err) throw err
-    t.equal(new Buffer(bytes, 'hex').length, 20, 'default length is 20')
+    t.equal(Buffer.from(bytes, 'hex').length, 20, 'default length is 20')
   })
 
   util.randomBytes(10, function (err, bytes) {
     if (err) throw err
-    t.equal(new Buffer(bytes, 'hex').length, 10, 'explicit length')
+    t.equal(Buffer.from(bytes, 'hex').length, 10, 'explicit length')
   })
 })
 
