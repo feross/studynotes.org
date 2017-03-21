@@ -1,7 +1,9 @@
-# [Study Notes](https://www.apstudynotes.org) [![travis][travis-image]][travis-url]
+# [Study Notes](https://www.apstudynotes.org) [![travis][travis-image]][travis-url] [![javascript style guide][standard-image]][standard-url]
 
 [travis-image]: https://img.shields.io/travis/feross/studynotes/master.svg
 [travis-url]: https://travis-ci.org/feross/studynotes
+[standard-image]: https://img.shields.io/badge/code_style-standard-brightgreen.svg
+[standard-url]: https://standardjs.com
 
 ### Learn faster. Study better.
 
