@@ -115,7 +115,7 @@ function renderAutocomplete (data) {
         'data-position': function () {
           return this.position
         },
-        'class': function (params) {
+        class: function (params) {
           return params.element.className + ' ' + this.type.toLowerCase()
         }
       }
