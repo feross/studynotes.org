@@ -74,6 +74,9 @@ function Site (opts, done) {
     return
   }
 
+  // Also set up 'uncaughtException' listeners in the workers
+  util.registerUncaughtException()
+
   self.app = express()
   self.server = http.createServer(self.app)
 
