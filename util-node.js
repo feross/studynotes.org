@@ -102,6 +102,9 @@ exports.registerUncaughtException = function () {
       text: err.stack.toString()
     }, function (err) {
       if (err) console.error('Email notification failed to send. ' + err.stack)
+
+      // Do not continue processes in undefined state after 'uncaughtException'
+      process.exit(1)
     })
   })
 }
