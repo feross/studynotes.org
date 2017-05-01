@@ -14,13 +14,13 @@ var argv = minimist(process.argv.slice(2))
  * Run the given server, passing in command line options as options.
  * @param  {function(*)} ServerConstructor
  */
-function run (ServerConstructor) {
+function run (Server) {
   unlimited()
 
   // Create and start the server
-  var server = new ServerConstructor(extend(argv), function (err) {
+  Server(extend(argv), function (err) {
     if (err) {
-      console.error('Error during ' + server.serverName + ' startup. Abort.')
+      console.error('Error during startup. Abort.')
       console.error(err.stack)
       process.exit(1)
     }

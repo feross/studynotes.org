@@ -48,6 +48,8 @@ pug.filters.style = function (str) {
 
 function Site (opts, done) {
   var self = this
+  if (!(self instanceof Site)) return new Site(opts, done)
+
   self.port = opts.port || config.ports.site
 
   self.id = cluster.isMaster ? 'master' : 'worker ' + cluster.worker.id

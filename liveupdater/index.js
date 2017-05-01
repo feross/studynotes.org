@@ -18,6 +18,8 @@ var HOME_UPDATE_THROTTLE = 3000
 
 function LiveUpdater (opts, done) {
   var self = this
+  if (!(self instanceof LiveUpdater)) return new LiveUpdater(opts, done)
+
   self.port = opts.port || config.ports.liveupdater
 
   self.online = {}
