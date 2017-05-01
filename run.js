@@ -3,10 +3,10 @@ module.exports = run
 var downgrade = require('downgrade')
 var extend = require('xtend')
 var LiveUpdater = require('./liveupdater')
-var mail = require('./lib/mail')
 var minimist = require('minimist')
 var Site = require('./')
 var unlimited = require('unlimited')
+var util = require('./util')
 
 var argv = minimist(process.argv.slice(2))
 
@@ -15,6 +15,7 @@ var argv = minimist(process.argv.slice(2))
  * @param  {function(*)} ServerConstructor
  */
 function run (Server) {
+  util.registerUncaughtException()
   unlimited()
 
   // Create and start the server
@@ -25,15 +26,6 @@ function run (Server) {
       process.exit(1)
     }
     downgrade()
-  })
-
-  process.on('uncaughtException', function (err) {
-    console.error('[UNCAUGHT EXCEPTION]')
-    console.error(err.stack)
-    mail.send({
-      subject: '[UNCAUGHT EXCEPTION] ' + err.message,
-      text: err.stack.toString()
-    })
   })
 }
 

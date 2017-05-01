@@ -2,6 +2,7 @@ var crypto = require('crypto')
 var htmlParser = require('html-parser')
 var jsdom = require('jsdom')
 var loremIpsum = require('lorem-ipsum')
+var mail = require('./lib/mail')
 
 exports.truncate = require('html-truncate')
 
@@ -90,4 +91,17 @@ exports.convertToPaywallText = function (html, numPreview, cb) {
     cb(null, document.querySelector('body').innerHTML)
   })
   return html
+}
+
+exports.registerUncaughtException = function () {
+  process.on('uncaughtException', function (err) {
+    console.error('[UNCAUGHT EXCEPTION]')
+    console.error(err.stack)
+    mail.send({
+      subject: '[UNCAUGHT EXCEPTION] ' + err.message,
+      text: err.stack.toString()
+    }, function (err) {
+      if (err) console.error('Email notification failed to send. ' + err.stack)
+    })
+  })
 }
