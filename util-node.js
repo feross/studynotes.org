@@ -2,7 +2,6 @@ var crypto = require('crypto')
 var htmlParser = require('html-parser')
 var jsdom = require('jsdom')
 var loremIpsum = require('lorem-ipsum')
-var mail = require('./lib/mail')
 
 exports.truncate = require('html-truncate')
 
@@ -94,6 +93,7 @@ exports.convertToPaywallText = function (html, numPreview, cb) {
 }
 
 exports.registerUncaughtException = function () {
+  var mail = require('./lib/mail') // don't require in tests (secret.js is not available on Travis)
   process.on('uncaughtException', function (err) {
     console.error('[UNCAUGHT EXCEPTION]')
     console.error(err.stack)
