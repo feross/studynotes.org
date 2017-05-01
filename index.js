@@ -59,11 +59,18 @@ function Site (opts, done) {
     cluster.setupMaster({ exec: __filename })
     self.debug('Master process will spawn %d workers', config.numCpus)
 
+    var workers = []
     for (var i = 0; i < config.numCpus; i++) {
-      cluster.fork()
+      var worker = cluster.fork()
+      workers.push(worker)
     }
     cluster.on('exit', function (worker, code) {
-      console.error('worker %s died: %s', worker.id, code)
+      // Force exit on worker exception; rely on supervisor to restart
+      console.error('Worker ' + worker.id + ' exited (with code ' + code + '). Killing master process and all workers.')
+      workers.forEach(function () {
+        worker.kill()
+      })
+      process.exit(1)
     })
 
     var remaining = config.numCpus
