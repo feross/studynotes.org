@@ -33,7 +33,7 @@
     }
   },
   "bugs": {
-    "url": "https://github.com/feross/studynotes/issues"
+    "url": "https://github.com/feross/studynotes.org/issues"
   },
   "dependencies": {
     "add-commas": "0.0.4",
@@ -114,7 +114,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/feross/studynotes.git"
+    "url": "https://github.com/feross/studynotes.org.git"
   },
   "scripts": {
     "build": "mkdir -p out && npm run build-js && npm run build-css && node ./bin/postbuild.js",

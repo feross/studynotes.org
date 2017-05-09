@@ -5,13 +5,13 @@ through the process.
 
 ### FORK
 
-Fork the project [on GitHub](https://github.com/feross/studynotes) and check out
+Fork the project [on GitHub](https://github.com/feross/studynotes.org) and check out
 your copy.
 
 ```sh
 $ git clone git@github.com:username/studynotes.git
 $ cd studynotes
-$ git remote add upstream git://github.com/feross/studynotes.git
+$ git remote add upstream git://github.com/feross/studynotes.org.git
 ```
 
 ### BRANCH
