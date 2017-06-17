@@ -1,7 +1,7 @@
 module.exports = Site
 
 var secret = require('./secret')
-require('opbeat').start(Object.assign({timeout: false}, secret.opbeat))
+global.opbeat = require('opbeat').start(Object.assign({timeout: false}, secret.opbeat))
 
 var bodyParser = require('body-parser')
 var cluster = require('cluster')

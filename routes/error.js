@@ -1,3 +1,5 @@
+/* global opbeat */
+
 var debug = require('debug')('studynotes:routes/error')
 var httpStatus = require('http-status-codes')
 var mail = require('../lib/mail')
@@ -16,6 +18,8 @@ module.exports = function (app) {
       }
     })
   })
+
+  app.use(opbeat.middleware.express())
 
   app.use(function (err, req, res, next) {
     var text = '\n=== EXCEPTION ===\n' +
