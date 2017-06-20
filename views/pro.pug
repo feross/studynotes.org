@@ -2,7 +2,7 @@ extends layouts/main
 include mixins/order-btn
 
 append scripts
-  script(async, src='//platform.twitter.com/widgets.js')
+  script(async, src='https://platform.twitter.com/widgets.js')
 
 block content
   h1.center Read Top #{college ? college.shortName : 'College'} Essays

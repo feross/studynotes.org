@@ -170,7 +170,7 @@ User.methods.gravatar = function (size, transparent) {
   size = size || 50
   var fallback = transparent ? 'blank' : 'mm'
   var hash = md5(this.emailLowerCase)
-  return '//www.gravatar.com/avatar/' + hash + '?size=' + size + '&default=' + fallback
+  return 'https://www.gravatar.com/avatar/' + hash + '?size=' + size + '&default=' + fallback
 }
 
 // Trim whitespace
