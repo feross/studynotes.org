@@ -1,8 +1,14 @@
 if ads && !req.mobile
   .adsense-sidebar
     if config.isProd
-      ins.adsbygoogle(style='display: block', data-ad-client='ca-pub-7826623632932605', data-ad-slot='2128690705', data-ad-format='auto')
+      //- Disabled adsense to test Exponential -- adsense is set up as fallback tag
       script.
-        (adsbygoogle = window.adsbygoogle || []).push({})
+        e9 = new Object()
+        e9.size = '300x250,300x600,160x600'
+      script(src='https://tags.expo9.exponential.com/tags/StudyNotesorg/ROS/tags.js')
+
+      //- ins.adsbygoogle(style='display: block', data-ad-client='ca-pub-7826623632932605', data-ad-slot='2128690705', data-ad-format='auto')
+      //- script.
+      //-   (adsbygoogle = window.adsbygoogle || []).push({})
     else
       ins(style='border: 5px solid red; display: block; height: 300px') adsense-sidebar
