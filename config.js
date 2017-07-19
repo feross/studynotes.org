@@ -45,7 +45,7 @@ exports.cdnOrigin = isProd
  */
 exports.product = {
   pro: {
-    price: 1400,
+    price: 2900,
     desc: '100+ Top College Essays'
   },
   'review-proofreading': {
