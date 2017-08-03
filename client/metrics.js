@@ -39,16 +39,7 @@ if (query.ga) {
   }
 }
 
-if (query.fbq) {
-  e = query.fbq.split('.')
-  if (e.length === 1) {
-    window.fbq('track', e[0])
-  } else if (e.length === 2) {
-    window.fbq('track', e[0], { value: Number(e[1]) / 100, currency: 'USD' })
-  }
-}
-
-if (query.ga || query.fbq) {
+if (query.ga) {
   window.history.replaceState(null, null, window.location.pathname)
 }
 
