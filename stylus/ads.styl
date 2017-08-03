@@ -24,7 +24,7 @@
 
 .adsense-sidebar
   text-align: center
-  min-height: 300px
+
   @media DESKTOP
     width: 336px
   @media TABLET
@@ -32,6 +32,10 @@
 
   &:last-child, .after-content &
     margin-bottom: 0
+
+  // Make sidebar readable when top ad in sidebar is blocked
+  &:first-child
+    min-height: 300px
 
 .adsense-link-unit
   max-width: 100%
