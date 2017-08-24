@@ -1,5 +1,7 @@
-var model = require('../model')
 var parallel = require('run-parallel')
+
+var insertNativeAd = require('../lib/insert-native-ad')
+var model = require('../model')
 var sort = require('../lib/sort')
 
 module.exports = function (app) {
@@ -56,6 +58,8 @@ module.exports = function (app) {
       r.title = [ r.note.name, course.name + ' ' + notetype.name ].join(' - ')
       r.url = r.note.url
       r.seenSurvey = Boolean(req.cookies.seen_survey)
+
+      r.note.body = insertNativeAd(r.note.body, Object.assign({}, res.locals, app.locals))
 
       res.render('note', r)
       r.note.hit()

@@ -1,8 +1,10 @@
 var auto = require('run-auto')
-var config = require('../config')
 var debug = require('debug')('studynotes:routes/essay')
-var model = require('../model')
 var url = require('url')
+
+var config = require('../config')
+var insertNativeAd = require('../lib/insert-native-ad')
+var model = require('../model')
 
 module.exports = function (app) {
   app.get('/:collegeId/:essayId', function (req, res, next) {
@@ -84,6 +86,10 @@ module.exports = function (app) {
       r.forceTitle = true
       r.url = r.essay.url
       r.user = r.essay.user
+
+      if (!r.blur) {
+        r.essay.body = insertNativeAd(r.essay.body, Object.assign({}, res.locals, app.locals))
+      }
 
       res.render('essay', r)
       r.essay.hit()

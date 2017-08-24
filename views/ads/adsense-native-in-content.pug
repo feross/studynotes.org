@@ -1,0 +1,8 @@
+if ads
+  .adsense-native-in-content
+    if config.isProd
+      ins.adsbygoogle(style='display: block; text-align:center', data-ad-layout='in-article', data-ad-client='ca-pub-7826623632932605', data-ad-slot='8244934451', data-ad-format='fluid')
+      script.
+        (adsbygoogle = window.adsbygoogle || []).push({})
+    else
+      ins(style='border: 5px solid red; display: block; height: 90px') adsense-native-in-content
