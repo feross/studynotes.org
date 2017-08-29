@@ -50,7 +50,7 @@ exports.connect = function (cb) {
     secret.mongo.host + ':' +
     secret.mongo.port + '/' +
     secret.mongo.database,
-    { server: { poolSize: 20 } }
+    { poolSize: 20, useMongoClient: true }
   )
   mongoose.connection.on('error', cb)
   mongoose.connection.on('open', function () {
