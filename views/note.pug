@@ -57,7 +57,7 @@ block content
 
     hr
 
-    include ads/adsense-after-content
+    include ads/adsense-matched-content
     //- include ads/medianet-after-content
 
     include includes/birdy/happy
@@ -71,7 +71,7 @@ block content
         a.btn.large.next(href=next.url, title=`Next: ${next.name}`) Next #{notetype.hasChapters ? 'Chapter' : notetype.singularName}
     p: em Tip: Use ← → keys to navigate!
 
-    include ads/adsense-matched-content
+    include ads/adsense-after-content
 
     +comments(note.id, title, url)
 
