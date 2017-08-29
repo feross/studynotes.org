@@ -26,7 +26,8 @@ if (window.navigator.standalone) {
 }
 
 // Track Chrome web app launch
-if (query.homescreen) {
+if (typeof window.matchMedia === 'function' &&
+    window.matchMedia('(display-mode: standalone)').matches) {
   window.ga('send', 'event', 'web-app-homescreen', 'android-launch')
 }
 
