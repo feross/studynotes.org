@@ -58,6 +58,7 @@ $(document).ajaxError(function () {
 $('a[href^="http:"], a[href^="https:"]')
   .not('a[href^="' + config.siteOrigin + '"]')
   .attr('target', '_blank')
+  .attr('rel', 'noopener')
 
 // Logout via XHR POST
 $('.logout').on('click', function (e) {

@@ -12,7 +12,7 @@ block content
             | #{' '}
             a.remove(href='#', data-model='essay', data-id=essay_.id, data-action='remove') ✘
             | #{' '}
-            a(href=essay_.url, target='_blank')= essay_.name
+            a(href=essay_.url, target='_blank', rel='noopener')= essay_.name
             small.gray: em= ' ' + moment(essay_.createDate).fromNow()
       hr
       h3 Published
@@ -21,7 +21,7 @@ block content
           li
             a.unpublish(href='#', data-model='essay', data-id=essay_.id, data-action='unpublish') ✔
             | #{' '}
-            a(href=essay_.url, target='_blank')= essay_.name
+            a(href=essay_.url, target='_blank', rel='noopener')= essay_.name
             small.gray: em= ' ' + moment(essay_.createDate).fromNow()
 
     .col2
@@ -34,7 +34,7 @@ block content
             | #{' '}
             a.remove(href='#', data-model='note', data-id=note_.id, data-action='remove') ✘
             | #{' '}
-            a(href=note_.url, target='_blank')= note_.name
+            a(href=note_.url, target='_blank', rel='noopener')= note_.name
             small.gray: em= ' ' + moment(note_.createDate).fromNow()
       hr
       h3 Published
@@ -43,5 +43,5 @@ block content
           li
             a.unpublish(href='#', data-model='note', data-id=note_.id, data-action='unpublish') ✔
             | #{' '}
-            a(href=note_.url, target='_blank')= note_.name
+            a(href=note_.url, target='_blank', rel='noopener')= note_.name
             small.gray: em= ' ' + moment(note_.createDate).fromNow()
