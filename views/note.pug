@@ -21,7 +21,7 @@ block sidebar
 block content
   if ads && config.isProd
     //- Google Surveys
-    script.
+    script(type='text/javascript').
       (function() {
         var ARTICLE_URL = window.location.href;
         var CONTENT_ID = 'everything';
@@ -48,9 +48,10 @@ block content
   .p402_premium
     .body !{note.body}
 
-  //- Google Surveys
-  script.
-    try { _402_Show() } catch(e) {}
+  if ads && config.isProd
+    //- Google Surveys
+    script(type='text/javascript').
+      try { _402_Show(); } catch(e) {}
 
   .after-content
     include ads/adsense-link-unit
