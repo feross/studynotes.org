@@ -86,8 +86,11 @@ block content
       if !config.essaySeason
         include ads/pro
         hr
-      include ads/adsense-matched-content
+
+      include ads/adsense-after-content
+      //- include ads/adsense-matched-content
       //- include ads/medianet-after-content
+
       include includes/birdy/happy
 
     p Keep reading more <a href="#{college.url}">#{college.shortName} admissions essays</a> — you can't be too prepared!
@@ -98,8 +101,6 @@ block content
       if next
         a.btn.large.next(href=next.url, title=`Next: ${next.name}`) Next Essay
     p: em Tip: Use the ← → keys to navigate!
-
-    include ads/adsense-after-content
 
     +comments(essay.id, title, url)
 
