@@ -75,7 +75,9 @@ block content
     .body !{essay.body}
 
   .after-content
-    include ads/adsense-link-unit
+    if !blur
+      include ads/adsense-link-unit
+
     hr
 
     if config.essaySeason
