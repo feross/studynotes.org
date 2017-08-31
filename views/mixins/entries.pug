@@ -1,9 +1,10 @@
 mixin entries(entries)
   - var num = 0
   each entry_ in entries
-    if num === 5 || num === 12 || num === 19
-      include ../ads/adsense-native-in-feed
-      //- include ../ads/adsense-link-unit
+    if num === 5
+      include ../ads/adsense-native-in-content
+    if num >= 10 && num <= 40 && num % 6 === 0
+      include ../ads/adsense-link-unit
     - num += 1
     .entry
       .heading
