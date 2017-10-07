@@ -29,7 +29,7 @@ exports.numFree = month === 1 || month === 12
  * Is it college essay season? Used to determine whether to show in-house ads for
  * essay editing services vs. third-party ads.
  */
-exports.essaySeason = month >= 9 // September
+exports.essaySeason = false
 
 /**
  * Number of cores on this CPU
