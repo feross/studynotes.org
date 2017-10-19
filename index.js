@@ -274,7 +274,10 @@ Site.prototype.setupLocals = function () {
     'nokia-browser'
   ]
 
-  var adBlock = []
+  var adBlock = [
+    '136.24.8.53',
+    '136.24.8.157'
+  ]
 
   self.app.use(function (req, res, next) {
     var agent = useragent.lookup(req.headers['user-agent'])
