@@ -4,6 +4,7 @@ var cookies = require('cookies-js')
 require('transparency')
 require('select2')
 
+require('./ad-pollfish')
 require('./ads')
 require('./browse')
 require('./Countdown')
@@ -128,7 +129,12 @@ if (cookies.get('returning') && // this is a returning visitor
     url.parse(document.referrer).host !== window.location.host) { // external site
   notify.big.info('Welcome back!', { timeout: 2000 })
 }
+
 cookies.set('returning', true)
+
+// Page view count
+var pageViewCount = Number(cookies.get('page_view_count') || 0)
+cookies.set('page_view_count', pageViewCount + 1)
 
 var match = /(success|error|info)=([^?&]+)/g.exec(window.location.search)
 var msgType = match && match[1]
@@ -155,5 +161,4 @@ $(function () {
 var className = $('html').attr('class').split(' ')
 if (className.indexOf('home') >= 0) require('./views/home')()
 if (className.indexOf('admin') >= 0) require('./views/admin')()
-if (className.indexOf('note') >= 0) require('./views/note')()
 if (className.indexOf('essay-review') >= 0) require('./views/essay-review')()
