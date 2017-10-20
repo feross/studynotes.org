@@ -57,7 +57,6 @@ module.exports = function (app) {
       r.notetype = notetype
       r.title = [ r.note.name, course.name + ' ' + notetype.name ].join(' - ')
       r.url = r.note.url
-      r.seenSurvey = Boolean(req.cookies.seen_survey)
 
       r.note.body = insertNativeAd(r.note.body, Object.assign({}, res.locals, app.locals))
 

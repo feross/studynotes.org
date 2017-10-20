@@ -1,22 +1,18 @@
 .adsense-in-content
-  width: 100%
   margin-bottom: 1.5em
   text-align: center
 
+  @media DESKTOP
+    width: 336px
+  @media DESKTOP_TIGHT
+    width: 100%
+  @media TABLET
+    width: 336px
+    margin-bottom: 1.5em
+  @media TABLET_TIGHT
+    width: 100%
   @media PHONE
-    margin-bottom: 16px
-
-  html.seen-survey &
-    @media DESKTOP
-      width: 336px
-    @media DESKTOP_TIGHT
-      width: 100%
-      margin-bottom: 0
-    @media TABLET
-      width: 336px
-    @media TABLET_TIGHT
-      width: 100%
-      margin-bottom: 0
+    width: 100%
 
 .adsense-after-content, .adsense-matched-content, .medianet-after-content
   width: 100%
