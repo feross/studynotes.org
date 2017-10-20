@@ -27,6 +27,7 @@ function pollfishReady () {
 function customSurveyClosed () {
   console.log('user closed the survey')
   setSeenSurvey()
+  window.Pollfish.showIndicator()
 }
 
 function customUserNotEligible () {
