@@ -26,6 +26,7 @@ function pollfishReady () {
 
 function customSurveyClosed () {
   console.log('user closed the survey')
+  setSeenSurvey()
 }
 
 function customUserNotEligible () {
@@ -34,10 +35,12 @@ function customUserNotEligible () {
 
 function customSurveyFinished () {
   console.log('user finished the survey')
+  setSeenSurvey()
 }
 
 function customCloseAndNoShow () {
   console.log('close and hide the indicator')
+  setSeenSurvey()
 }
 
 function customSurveyAvailable (data) {
@@ -56,8 +59,12 @@ function customSurveyAvailable (data) {
   } else {
     // Otherwise, show the full survey without a prompt
     window.Pollfish.showFullSurvey()
-    cookies.set('seen_survey', true, { expires: 60 * 60 * 6 }) // 6 hours
+    setSeenSurvey()
   }
+}
+
+function setSeenSurvey () {
+  cookies.set('seen_survey', true, { expires: 60 * 60 * 6 }) // 6 hours
 }
 
 function customSurveyNotAvailable () {
