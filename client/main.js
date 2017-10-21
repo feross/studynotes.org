@@ -1,21 +1,8 @@
-var $ = require('jquery')
-var cookies = require('cookies-js')
-
 require('transparency')
 require('select2')
 
-require('./ad-pollfish')
-require('./ads')
-require('./browse')
-require('./Countdown')
-require('./editor')
-require('./metrics')
-require('./order')
-require('./search')
-require('./share')
-require('./socket')
-require('./submit')
-require('./toolbar')
+var $ = require('jquery')
+var cookies = require('cookies-js')
 
 var config = require('../config')
 var fastclick = require('fastclick')
@@ -25,18 +12,11 @@ var throttle = require('throttleit')
 var url = require('url')
 var util = require('../util')
 
+// Configure cookie-js
 cookies.defaults.secure = config.isProd
 cookies.defaults.expires = 60 * 60 * 24 * 365 // 1 year
 
-var EVENT_THROTTLE = 100
-
-// Remove 300ms tap delay on iOS
-fastclick(document.body)
-
-var $window = $(window)
-
-window.isMobile = $('html').hasClass('mobile')
-
+// Configure
 $.ajaxSetup({
   // Disable caching of XHR GET responses globally
   // (workaround for jQuery callbacks not firing if the response was cached)
@@ -54,6 +34,26 @@ $.ajaxSetup({
 $(document).ajaxError(function () {
   notify.big.error('Error contacting the server. Please try again!')
 })
+
+require('./ad-pollfish')
+require('./ads')
+require('./browse')
+require('./Countdown')
+require('./editor')
+require('./metrics')
+require('./order')
+require('./search')
+require('./share')
+require('./socket')
+require('./submit')
+require('./toolbar')
+
+var EVENT_THROTTLE = 100
+
+// Remove 300ms tap delay on iOS
+fastclick(document.body)
+
+var $window = $(window)
 
 // Make external links open in new window
 $('a[href^="http:"], a[href^="https:"]')

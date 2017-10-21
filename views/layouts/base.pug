@@ -144,8 +144,10 @@ html(class=`studynotes ${layout} ${cls}`, lang='en')
 
     //- User variables
     script.
-      var StudyNotes = {
-        user: '#{req.user && req.user.email}' || null
+      window.StudyNotes = {
+        user: '#{req.user && req.user.email}' || null,
+        ads: #{ads},
+        isMobile: document.querySelector('html').classList.contains('mobile')
       }
 
     if editorAssets
@@ -159,11 +161,6 @@ html(class=`studynotes ${layout} ${cls}`, lang='en')
     block scripts
 
     if config.isProd
-
-      if ads
-        //- Pollfish
-        script(async, src='https://storage.googleapis.com/pollfish_production/sdk/webplugin/pollfish.min.js')
-
       //- Quantcast
       script.
         var _qevents = _qevents || []

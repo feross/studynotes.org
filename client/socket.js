@@ -32,7 +32,7 @@ function openSocketAfterTimeout () {
   debug('reconnecting socket in %s ms', reconnectTimeout)
 }
 
-if (Socket.WEBSOCKET_SUPPORT && !window.isMobile) {
+if (Socket.WEBSOCKET_SUPPORT && !window.StudyNotes.isMobile) {
   openSocket()
 }
 

@@ -2,6 +2,7 @@ var $ = require('jquery')
 var cookies = require('cookies-js')
 
 var config = require('../config')
+var util = require('../util')
 
 // Export jQuery because Pollfish relies on it (not newer than jquery 2.x)
 window.jQuery = $
@@ -18,6 +19,10 @@ window.pollfishConfig = {
   surveyCompletedCallback: customSurveyFinished,
   surveyAvailable: customSurveyAvailable,
   surveyNotAvailable: customSurveyNotAvailable
+}
+
+if (window.StudyNotes.ads && !window.StudyNotes.isMobile) {
+  util.insertScript('https://storage.googleapis.com/pollfish_production/sdk/webplugin/pollfish.min.js')
 }
 
 function pollfishReady () {
