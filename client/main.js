@@ -35,7 +35,7 @@ $(document).ajaxError(function () {
   notify.big.error('Error contacting the server. Please try again!')
 })
 
-require('./ad-pollfish')
+// require('./ad-pollfish')
 require('./ads')
 require('./browse')
 require('./Countdown')
