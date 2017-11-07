@@ -13,8 +13,8 @@ var isProd = exports.isProd = process.browser
  * @type {Object}
  */
 exports.ports = {
-  site: isProd ? 7300 : 4000,
-  liveupdater: isProd ? 7301 : 4001
+  site: isProd ? 7030 : 4000,
+  liveupdater: isProd ? 7031 : 4001
 }
 
 /**
