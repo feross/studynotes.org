@@ -12,7 +12,7 @@ var lastTotalHits
 var stats
 
 function openSocket () {
-  socket = new Socket(config.wsEndpoint)
+  socket = new Socket({ url: config.wsEndpoint })
   socket.on('connect', function () {
     socket.send(JSON.stringify({
       type: 'online',
