@@ -277,7 +277,8 @@ Site.prototype.setupLocals = function () {
   var adBlock = [
     '136.24.8.53',
     '136.24.8.157',
-    '67.161.169.40'
+    '67.161.169.40',
+    '73.151.205.54'
   ]
 
   self.app.use(function (req, res, next) {
