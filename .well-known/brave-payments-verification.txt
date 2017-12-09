@@ -1,0 +1,4 @@
+This is a Brave Payments publisher verification file.
+
+Domain: apstudynotes.org
+Token: 6f69f0b2335ef2d0ec38e2804249e6ad393efab4606aab7546a940e0c7b10dac
