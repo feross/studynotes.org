@@ -9,7 +9,7 @@ $('select[name="course"]').on('change', function (e, force) {
   $notetype
     .removeAttr('disabled')
     .children()
-      .remove()
+    .remove()
     .end()
     .append($('<option>'))
 
