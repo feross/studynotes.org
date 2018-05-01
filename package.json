@@ -68,7 +68,7 @@
     "md5": "^2.0.0",
     "minimist": "^1.2.0",
     "moment": "^2.5.1",
-    "mongoose": "^4.0.2",
+    "mongoose": "^5.0.17",
     "mongoose-validator": "^1.0.3",
     "nib": "^1.0.1",
     "nodemailer": "^2.1.0",
