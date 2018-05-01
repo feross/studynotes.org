@@ -36,7 +36,7 @@ module.exports = function (app) {
           freeEssays: req.session.free,
           stripeCharge: JSON.stringify(r.stripeCharge)
         })
-        order.save(function (err, order, numAffected) {
+        order.save(function (err, order) {
           cb(err, order)
         })
       }]
