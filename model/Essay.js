@@ -6,8 +6,7 @@ var util = require('../util')
 
 var Essay = new mongoose.Schema({
   _id: {
-    type: String,
-    unique: true
+    type: String
   },
   name: {
     type: String,

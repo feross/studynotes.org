@@ -3,8 +3,7 @@ var plugin = require('./plugin')
 
 var Course = new mongoose.Schema({
   _id: {
-    type: String,
-    unique: true
+    type: String
   },
   name: {
     type: String,
