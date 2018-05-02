@@ -1,6 +1,5 @@
 var auth = require('../lib/auth')
 var model = require('../model')
-var values = require('object-values')
 
 module.exports = function (app) {
   // Page 1
@@ -29,7 +28,7 @@ module.exports = function (app) {
         req.flash('user', req.body)
         res.redirect('/signup/')
       } else if (err && err.name === 'ValidationError') {
-        values(err.errors).forEach(function (error) {
+        Object.values(err.errors).forEach(function (error) {
           req.flash('error', error.message)
         })
         req.flash('user', req.body)
@@ -74,7 +73,7 @@ module.exports = function (app) {
 
     user.save(function (err) {
       if (err && err.name === 'ValidationError') {
-        values(err.errors).forEach(function (error) {
+        Object.values(err.errors).forEach(function (error) {
           req.flash('error', error.message)
         })
         req.flash('user', req.body)

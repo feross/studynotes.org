@@ -3,7 +3,6 @@ var config = require('../config')
 var debug = require('debug')('studynotes:routes/order')
 var model = require('../model')
 var secret = require('../secret')
-var values = require('object-values')
 
 var stripe = require('stripe')(secret.stripe)
 
@@ -49,7 +48,7 @@ module.exports = function (app) {
             err: 'Your card was declined.'
           })
         } else if (err.errors) {
-          var errors = values(err.errors).map((err) => err.message)
+          var errors = Object.values(err.errors).map((err) => err.message)
           return res.send({
             err: errors.join('. ')
           })

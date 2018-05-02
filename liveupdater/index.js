@@ -11,7 +11,6 @@ var model = require('../model')
 var parallel = require('run-parallel')
 var run = require('../run')
 var throttle = require('throttleit')
-var values = require('object-values')
 var ws = require('ws')
 
 var HOME_UPDATE_THROTTLE = 3000
@@ -129,7 +128,7 @@ LiveUpdater.prototype.handleClose = function (socket) {
 
 LiveUpdater.prototype.getTotalHits = function (cb) {
   var self = this
-  parallel(values(model.models).map(function (model) {
+  parallel(Object.values(model.models).map(function (model) {
     return function (cb) {
       model
         .find()

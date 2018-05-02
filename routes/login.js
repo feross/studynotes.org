@@ -4,7 +4,6 @@ var mail = require('../lib/mail')
 var model = require('../model')
 var passport = require('passport')
 var util = require('../util')
-var values = require('object-values')
 var waterfall = require('run-waterfall')
 
 module.exports = function (app) {
@@ -125,7 +124,7 @@ module.exports = function (app) {
 
       user.save(function (err) {
         if (err && err.name === 'ValidationError') {
-          values(err.errors).forEach(function (error) {
+          Object.values(err.errors).forEach(function (error) {
             req.flash('error', error.message)
           })
           res.redirect('/login/reset/' + req.params.token)

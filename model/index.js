@@ -6,7 +6,6 @@ var once = require('once')
 var path = require('path')
 var secret = require('../secret')
 var sort = require('../lib/sort')
-var values = require('object-values')
 
 // Tell Mongoose to use ES6 native promises
 mongoose.Promise = global.Promise
@@ -83,21 +82,21 @@ function loadCache (done) {
     r.colleges.forEach(function (college) {
       cache.colleges[college._id] = college
     })
-    cache.coursesByName = values(cache.courses).sort(sort.byProp('name'))
-    cache.coursesByHits = values(cache.courses).sort(sort.byProp('hits', true))
-    cache.collegesByName = values(cache.colleges).sort(function (a, b) {
+    cache.coursesByName = Object.values(cache.courses).sort(sort.byProp('name'))
+    cache.coursesByHits = Object.values(cache.courses).sort(sort.byProp('hits', true))
+    cache.collegesByName = Object.values(cache.colleges).sort(function (a, b) {
       // force common-app to sort first
       if (a.id === 'common-app') return -1
       if (b.id === 'common-app') return 1
       return sort.byProp('name')(a, b)
     })
-    cache.collegesByShortName = values(cache.colleges).sort(function (a, b) {
+    cache.collegesByShortName = Object.values(cache.colleges).sort(function (a, b) {
       // force common-app to sort first
       if (a.id === 'common-app') return -1
       if (b.id === 'common-app') return 1
       return sort.byProp('shortName')(a, b)
     })
-    cache.collegesByRank = values(cache.colleges).sort(sort.byProp('rank'))
+    cache.collegesByRank = Object.values(cache.colleges).sort(sort.byProp('rank'))
 
     done(err)
   })
