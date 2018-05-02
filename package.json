@@ -69,7 +69,7 @@
     "minimist": "^1.2.0",
     "moment": "^2.5.1",
     "mongoose": "^5.0.17",
-    "mongoose-validator": "^1.0.3",
+    "mongoose-validator": "^2.0.2",
     "nib": "^1.0.1",
     "nodemailer": "^2.1.0",
     "object-values": "^1.0.0",
