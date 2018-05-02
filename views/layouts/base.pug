@@ -6,7 +6,8 @@ html(class=`studynotes ${layout} ${cls}`, lang='en')
 
     link(rel='preconnect', href='https://cdn.apstudynotes.org')
     link(rel='preconnect', href='https://use.typekit.net')
-    link(rel='preconnect', href='https://pagead2.googlesyndication.com')
+    if config.isProd && ads
+      link(rel='preconnect', href='https://pagead2.googlesyndication.com')
 
     block preconnect
 
