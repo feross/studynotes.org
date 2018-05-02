@@ -82,7 +82,7 @@
     "run-parallel": "^1.0.0",
     "run-waterfall": "^1.0.2",
     "serve-favicon": "^2.0.1",
-    "simple-websocket": "^5.1.0",
+    "simple-websocket": "^7.0.2",
     "slug": "^0.9.1",
     "stripe": "^4.0.0",
     "supports-color": "^3.1.0",
