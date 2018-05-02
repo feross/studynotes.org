@@ -66,14 +66,10 @@ Essay.pre('save', function (next) {
   if (self.isModified('prompt')) self.prompt = util.sanitizeHTML(self.prompt)
 
   if (self.isModified('body')) {
-    util.convertToPaywallText(self.body, 2, function (err, html) {
-      if (err) return next(err)
-      self.bodyPaywall = html
-      next()
-    })
-  } else {
-    next()
+    const html = util.convertToPaywallText(self.body, 2)
+    self.bodyPaywall = html
   }
+  next()
 })
 
 Essay.plugin(plugin.body, { model: 'Essay' })
