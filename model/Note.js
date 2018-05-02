@@ -5,8 +5,7 @@ var validate = require('mongoose-validator')
 
 var Note = new mongoose.Schema({
   _id: {
-    type: String,
-    unique: true
+    type: String
   },
   name: {
     type: String,

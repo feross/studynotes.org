@@ -1,9 +1,8 @@
 var model = require('../model')
-var values = require('object-values')
 
 module.exports = function (app) {
   app.get('/courses', function (req, res) {
-    var courses = values(model.cache.courses)
+    var courses = Object.values(model.cache.courses)
     res.render('courses', {
       courses: courses,
       title: 'AP Courses',

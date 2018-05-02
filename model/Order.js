@@ -17,7 +17,6 @@ var Order = new mongoose.Schema({
   },
   stripeToken: {
     type: String,
-    unique: true,
     required: true
   },
   amount: {

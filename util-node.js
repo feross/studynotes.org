@@ -1,6 +1,6 @@
 var crypto = require('crypto')
 var htmlParser = require('html-parser')
-var jsdom = require('jsdom')
+var { JSDOM } = require('jsdom')
 var loremIpsum = require('lorem-ipsum')
 
 exports.truncate = require('html-truncate')
@@ -69,27 +69,27 @@ exports.randomBytes = function (length, cb) {
   })
 }
 
-exports.convertToPaywallText = function (html, numPreview, cb) {
-  jsdom.env(html, function (err, window) {
-    if (err) return cb(err)
-    var document = window.document
-    var nodes = document.querySelectorAll(
-      'body > :not(:first-child):not(:nth-child(2))'
-    )
+exports.convertToPaywallText = function (html, numPreview) {
+  const { window } = new JSDOM(html)
+  const { document } = window
 
-    Array.from(nodes).forEach(function (node) {
-      var words = node.innerHTML.split(' ').length
-      var sentences = node.innerHTML.split('. ').length
-      node.innerHTML = loremIpsum({
-        count: sentences,
-        sentenceLowerBound: Math.floor((words / sentences) / 1.5),
-        sentenceUpperBound: Math.ceil(words / sentences)
-      })
+  var nodes = document.querySelectorAll(
+    'body > :not(:first-child):not(:nth-child(2))'
+  )
+
+  Array.from(nodes).forEach(function (node) {
+    var words = node.innerHTML.split(' ').length
+    var sentences = node.innerHTML.split('. ').length
+    node.innerHTML = loremIpsum({
+      count: sentences,
+      sentenceLowerBound: Math.floor((words / sentences) / 1.5),
+      sentenceUpperBound: Math.ceil(words / sentences)
     })
-
-    cb(null, document.querySelector('body').innerHTML)
   })
-  return html
+
+  const paywallText = document.querySelector('body').innerHTML
+  window.close()
+  return paywallText
 }
 
 exports.registerUncaughtException = function () {

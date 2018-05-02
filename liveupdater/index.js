@@ -6,12 +6,11 @@ var debug = require('debug')('studynotes:liveupdater')
 var fs = require('fs')
 var http = require('http')
 var https = require('https')
-var jsdom = require('jsdom')
+var { JSDOM } = require('jsdom')
 var model = require('../model')
 var parallel = require('run-parallel')
 var run = require('../run')
 var throttle = require('throttleit')
-var values = require('object-values')
 var ws = require('ws')
 
 var HOME_UPDATE_THROTTLE = 3000
@@ -24,11 +23,6 @@ function LiveUpdater (opts, done) {
 
   self.online = {}
   self.titles = {}
-
-  self.jquery = fs.readFileSync(
-    config.root + '/node_modules/jquery/dist/jquery.min.js',
-    { encoding: 'utf8' }
-  )
 
   var httpServer = config.isProd
     ? https.createServer({
@@ -129,7 +123,7 @@ LiveUpdater.prototype.handleClose = function (socket) {
 
 LiveUpdater.prototype.getTotalHits = function (cb) {
   var self = this
-  parallel(values(model.models).map(function (model) {
+  parallel(Object.values(model.models).map(function (model) {
     return function (cb) {
       model
         .find()
@@ -271,20 +265,20 @@ LiveUpdater.prototype.getTitle = function (url) {
     return title
   } else {
     debug('getTitle: Fetching page title for ' + url)
-    jsdom.env({
-      url: config.siteOrigin + url,
-      src: [self.jquery],
-      done: function (err, window) {
-        if (err) return console.error('ERROR: getTitle: ' + err.message)
-        title = window.$('title').text()
+    JSDOM.fromURL(config.siteOrigin + url).then(dom => {
+      const { window } = dom
+      const { document } = window
 
+      window.addEventListener('load', () => {
+        title = document.querySelector('title').textContent
         if (title === 'Site is under maintenance!') return
         var index = title.indexOf('- Study Notes')
         if (index !== -1) title = title.substring(0, index)
 
         self.titles[url] = title
         self.sendStatsUpdates(url)
-      }
+        window.close()
+      })
     })
     return url
   }

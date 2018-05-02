@@ -2,7 +2,6 @@ var auth = require('../lib/auth')
 var auto = require('run-auto')
 var mail = require('../lib/mail')
 var model = require('../model')
-var values = require('object-values')
 
 module.exports = function (app) {
   app.get('/submit/essay', auth.ensureAuth, function (req, res) {
@@ -67,7 +66,7 @@ module.exports = function (app) {
       }]
     }, function (err, r) {
       if (err && err.name === 'ValidationError') {
-        values(err.errors).forEach(function (error) {
+        Object.values(err.errors).forEach(function (error) {
           req.flash('error', error.message)
         })
         req.flash('essay', req.body)
@@ -151,7 +150,7 @@ module.exports = function (app) {
       }]
     }, function (err, r) {
       if (err && err.name === 'ValidationError') {
-        values(err.errors).forEach(function (error) {
+        Object.values(err.errors).forEach(function (error) {
           req.flash('error', error.message)
         })
         req.flash('note', req.body)

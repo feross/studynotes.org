@@ -10,8 +10,7 @@ var validate = require('mongoose-validator')
 
 var User = new mongoose.Schema({
   _id: {
-    type: String,
-    unique: true
+    type: String
   },
   name: {
     type: String,

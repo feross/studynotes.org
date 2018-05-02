@@ -219,9 +219,9 @@ Site.prototype.setupLogger = function () {
     // Log requests using the "debug" module so that the output is hidden by default.
     // Enable with DEBUG=* environment variable.
     self.debug(
-      (supportsColor ? '\x1B[90m' : '') +
+      (supportsColor.stderr ? '\x1B[90m' : '') +
       req.method + ' ' + req.originalUrl + ' ' + req.ip +
-      (supportsColor ? '\x1B[0m' : '')
+      (supportsColor.stderr ? '\x1B[0m' : '')
     )
     next()
   })
@@ -281,6 +281,24 @@ Site.prototype.setupLocals = function () {
     '73.151.205.54'
   ]
 
+  // Never show ads on urls that start with the following patterns
+  var ignoreUrls = [
+    '/about/',
+    '/advertise/',
+    '/contact/',
+    '/essay-review/',
+    '/login/',
+    '/open-source/',
+    '/photo-credits/',
+    '/plagiarism/',
+    '/privacy/',
+    '/pro/',
+    '/signup/',
+    '/stats/',
+    '/terms/',
+    '/testimonials/'
+  ]
+
   self.app.use(function (req, res, next) {
     var agent = useragent.lookup(req.headers['user-agent'])
     req.agent = agent.family.replace(/ /g, '-').toLowerCase()
@@ -292,7 +310,11 @@ Site.prototype.setupLocals = function () {
 
     res.locals.req = req
     res.locals.csrf = req.csrfToken()
-    res.locals.ads = Boolean(req.query.ads) || adBlock.indexOf(req.ip) === -1
+
+    var isIgnoreUrl = ignoreUrls.some(ignoreUrl => req.url.startsWith(ignoreUrl))
+    res.locals.ads = Boolean(req.query.ads) ||
+      (adBlock.indexOf(req.ip) === -1 && !isIgnoreUrl)
+
     next()
   })
 }

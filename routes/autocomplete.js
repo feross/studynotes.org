@@ -1,7 +1,6 @@
 var auto = require('run-auto')
 var escapeStringRegexp = require('escape-string-regexp')
 var model = require('../model')
-var values = require('object-values')
 
 var MAX_RESULTS = 8
 var MAX_QUERY_LENGTH = 255 // prevent mongoDB exceptions
@@ -81,7 +80,7 @@ function autocomplete (query, cb) {
     if (err) return cb(err)
 
     // Merge result objects into one results array
-    var results = [].concat.apply([], values(r)).map(function (result) {
+    var results = [].concat.apply([], Object.values(r)).map(function (result) {
       return {
         model: result,
         weight: weight(result, query)
