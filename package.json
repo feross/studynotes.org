@@ -105,7 +105,7 @@
     "stylus": "^0.54.0",
     "tape": "^4.0.0",
     "transparency": "^1.0.0",
-    "uglify-js": "^2.4.15",
+    "uglify-js": "^3.3.23",
     "watchify": "^3.1.2"
   },
   "homepage": "https://www.apstudynotes.org",
