@@ -219,9 +219,9 @@ Site.prototype.setupLogger = function () {
     // Log requests using the "debug" module so that the output is hidden by default.
     // Enable with DEBUG=* environment variable.
     self.debug(
-      (supportsColor ? '\x1B[90m' : '') +
+      (supportsColor.stderr ? '\x1B[90m' : '') +
       req.method + ' ' + req.originalUrl + ' ' + req.ip +
-      (supportsColor ? '\x1B[0m' : '')
+      (supportsColor.stderr ? '\x1B[0m' : '')
     )
     next()
   })
