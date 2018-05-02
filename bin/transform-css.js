@@ -10,10 +10,12 @@ css = css.replace(/select2x2\.png/g, 'https://cdn.apstudynotes.org/select2/selec
 css = css.replace(/\.\.\/font/g, 'https://cdn.apstudynotes.org/fontello/font')
 css = new CleanCSS().minify(css).styles
 
-postcss([ autoprefixer ]).process(css).then(function (result) {
-  result.warnings().forEach(function (warn) {
-    console.warn(warn.toString())
+postcss([ autoprefixer ])
+  .process(css, { from: process.argv[2], to: process.argv[2] })
+  .then(function (result) {
+    result.warnings().forEach(function (warn) {
+      console.warn(warn.toString())
+    })
+    css = result.css
+    fs.writeFileSync(process.argv[2], css)
   })
-  css = result.css
-  fs.writeFileSync(process.argv[2], css)
-})
