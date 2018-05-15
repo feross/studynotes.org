@@ -20,7 +20,7 @@ module.exports = function () {
 
       $.post('/admin/', data)
         .done(function () {
-          window.location = window.location
+          window.location.reload(true)
         })
     })
   })
