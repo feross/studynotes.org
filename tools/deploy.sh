@@ -25,4 +25,4 @@ sudo supervisorctl start studynotes-site
 sudo supervisorctl start studynotes-liveupdater
 
 cd /home/feross/www && rm -rf studynotes.org-old
-cd /home/feross/www/studynotes.org && ./bin/purge-maxcdn.js
+cd /home/feross/www/studynotes.org && ./tools/purge-maxcdn.js
