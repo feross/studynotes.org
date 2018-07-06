@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "add-commas": "0.0.4",
-    "bcrypt": "^2.0.1",
+    "bcrypt": "^3.0.0",
     "body-parser": "^1.0.1",
     "compression": "^1.0.1",
     "connect-flash": "^0.1.1",
