@@ -93,7 +93,7 @@
     "xtend": "^4.0.0"
   },
   "devDependencies": {
-    "autoprefixer": "^8.4.1",
+    "autoprefixer": "^9.0.0",
     "browserify": "^16.2.0",
     "browserify-shim": "^3.6.0",
     "clean-css": "^4.1.11",
