@@ -83,7 +83,7 @@
     "serve-favicon": "^2.0.1",
     "simple-websocket": "^7.0.2",
     "slug": "^0.9.1",
-    "stripe": "^6.0.0",
+    "stripe": "^6.4.0",
     "supports-color": "^5.4.0",
     "throttleit": "^1.0.0",
     "unlimited": "^1.1.0",
@@ -93,12 +93,12 @@
     "xtend": "^4.0.0"
   },
   "devDependencies": {
-    "autoprefixer": "^8.4.1",
+    "autoprefixer": "^9.0.0",
     "browserify": "^16.2.0",
     "browserify-shim": "^3.6.0",
     "clean-css": "^4.1.11",
     "nodemon": "^1.18.3",
-    "postcss": "^6.0.22",
+    "postcss": "^7.0.0",
     "run-parallel-limit": "^1.0.2",
     "standard": "*",
     "stylus": "^0.54.0",
