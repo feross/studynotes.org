@@ -30,7 +30,7 @@ function autocomplete (query, cb) {
         .find({ $or: [
           { name: regexForQuery(query) },
           { searchName: regexForQuery(query) }
-        ]})
+        ] })
         .sort('-hits')
         .limit(MAX_RESULTS)
         .select('name hits')
@@ -60,7 +60,7 @@ function autocomplete (query, cb) {
         .find({ $or: [
           { name: regexForQuery(query) },
           { shortName: regexForQuery(query) }
-        ]})
+        ] })
         .sort('-hits')
         .limit(MAX_RESULTS)
         .select('name hits')

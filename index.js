@@ -4,7 +4,7 @@ var config = require('./config')
 var secret = require('./secret')
 
 if (config.isProd) {
-  global.opbeat = require('opbeat').start(Object.assign({timeout: false}, secret.opbeat))
+  global.opbeat = require('opbeat').start(Object.assign({ timeout: false }, secret.opbeat))
 }
 
 var bodyParser = require('body-parser')
