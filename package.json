@@ -97,7 +97,7 @@
     "browserify": "^16.2.0",
     "browserify-shim": "^3.6.0",
     "clean-css": "^4.1.11",
-    "nodemon": "^1.18.3",
+    "nodemon": "^1.18.4",
     "postcss": "^7.0.0",
     "run-parallel-limit": "^1.0.2",
     "standard": "*",
