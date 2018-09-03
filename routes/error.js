@@ -17,7 +17,7 @@ module.exports = function (app) {
     })
   })
 
-  if (global.opbeat) app.use(global.opbeat.middleware.express())
+  if (global.rollbar) app.use(global.rollbar.errorHandler())
 
   app.use(function (err, req, res, next) {
     var text = '\n=== EXCEPTION ===\n' +

@@ -34,8 +34,6 @@ exports.mailchimp = {
   list: ''
 }
 
-exports.opbeat = {
-  organizationId: '',
-  appId: '',
-  secretToken: ''
+exports.rollbar = {
+  accessToken: 'TODO'
 }

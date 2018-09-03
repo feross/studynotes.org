@@ -1,11 +1,6 @@
+require('./rollbar')
+
 module.exports = Site
-
-var config = require('./config')
-var secret = require('./secret')
-
-if (config.isProd) {
-  global.opbeat = require('opbeat').start(Object.assign({ timeout: false }, secret.opbeat))
-}
 
 var bodyParser = require('body-parser')
 var cluster = require('cluster')
@@ -32,10 +27,12 @@ var url = require('url')
 var useragent = require('useragent')
 
 var auth = require('./lib/auth')
+var config = require('./config')
 var model = require('./model')
 var pro = require('./lib/pro')
 var routes = require('./routes')
 var run = require('./run')
+var secret = require('./secret')
 var util = require('./util')
 
 pug.filters.style = function (str) {
