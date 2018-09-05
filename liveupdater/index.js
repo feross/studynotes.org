@@ -279,6 +279,10 @@ LiveUpdater.prototype.getTitle = function (url) {
         self.sendStatsUpdates(url)
         window.close()
       })
+    }, _ => {
+      // Handle error, or 404 page
+      self.titles[url] = '404 Page Not Found'
+      self.sendStatsUpdates(url)
     })
     return url
   }
