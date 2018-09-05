@@ -1,5 +1,3 @@
-require('./rollbar')
-
 module.exports = Site
 
 var bodyParser = require('body-parser')

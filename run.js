@@ -1,3 +1,5 @@
+require('./rollbar')
+
 module.exports = run
 
 var downgrade = require('downgrade')
