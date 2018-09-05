@@ -2,36 +2,36 @@
 // REMEMBER TO MANUALLY UPLOAD THIS TO THE SERVER
 //
 
-exports.cookieSecret = 'abcdefghijklmnopqrstuvabcdefghi'
+exports.cookieSecret = 'TODO'
 
 exports.maxcdn = {
-  companyAlias: '',
-  consumerKey: '',
-  consumerSecret: '',
-  zoneId: ''
+  companyAlias: 'TODO',
+  consumerKey: 'TODO',
+  consumerSecret: 'TODO',
+  zoneId: 'TODO'
 }
 
 exports.gmail = {
-  user: '',
-  pass: ''
+  user: 'TODO',
+  pass: 'TODO'
 }
 
 // Keep here, because circular dep
 var config = require('../config')
 
 exports.stripe = config.isProd
-  ? ''
-  : ''
+  ? 'TODO'
+  : 'TODO'
 
 exports.mongo = {
-  host: config.isProd ? '' : '',
-  port: '',
-  database: ''
+  host: config.isProd ? 'TODO' : 'TODO',
+  port: 'TODO',
+  database: 'TODO'
 }
 
 exports.mailchimp = {
-  key: '',
-  list: ''
+  key: 'TODO',
+  list: 'TODO'
 }
 
 exports.rollbar = {
