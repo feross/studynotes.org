@@ -232,7 +232,7 @@ User.post('save', function (user) {
 
   // subscribe the user to MailChimp "Study Notes Users" list
   mail.subscribeUser(user, function (err) {
-    if (err) throw err
+    if (err) console.error('MailChimp: Failed to subscribe user ' + user.email)
   })
 })
 
