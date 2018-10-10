@@ -5,13 +5,13 @@
 // Incrementing CACHE_VERSION will kick off the install event and force previously cached
 // resources to be cached again.
 const CACHE_VERSION = 1
-let CURRENT_CACHES = {
+const CURRENT_CACHES = {
   offline: 'offline-v' + CACHE_VERSION
 }
 const OFFLINE_URL = 'offline.html'
 
 function createCacheBustedRequest (url) {
-  let request = new Request(url, { cache: 'reload' })
+  const request = new Request(url, { cache: 'reload' })
   // See https://fetch.spec.whatwg.org/#concept-request-mode
   // This is not yet supported in Chrome as of M48, so we need to explicitly check to see
   // if the cache: 'reload' option had any effect.
@@ -20,7 +20,7 @@ function createCacheBustedRequest (url) {
   }
 
   // If {cache: 'reload'} didn't have any effect, append a cache-busting URL parameter instead.
-  let bustedUrl = new URL(url, self.location.href)
+  const bustedUrl = new URL(url, self.location.href)
   bustedUrl.search += (bustedUrl.search ? '&' : '') + 'cachebust=' + Date.now()
   return new Request(bustedUrl)
 }
@@ -41,7 +41,7 @@ self.addEventListener('activate', event => {
   // Delete all caches that aren't named in CURRENT_CACHES.
   // While there is only one cache in this example, the same logic will handle the case where
   // there are multiple versioned caches.
-  let expectedCacheNames = Object.keys(CURRENT_CACHES).map(function (key) {
+  const expectedCacheNames = Object.keys(CURRENT_CACHES).map(function (key) {
     return CURRENT_CACHES[key]
   })
 
