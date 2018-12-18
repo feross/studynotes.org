@@ -103,8 +103,8 @@
     "standard": "*",
     "stylus": "^0.54.0",
     "tape": "^4.0.0",
+    "tinyify": "^2.5.0",
     "transparency": "^1.0.0",
-    "uglify-js": "^3.3.23",
     "watchify": "^3.1.2"
   },
   "homepage": "https://www.apstudynotes.org",
@@ -118,7 +118,7 @@
   "scripts": {
     "build": "mkdir -p out && npm run build-js && npm run build-css && node ./tools/postbuild.js",
     "build-css": "stylus -u nib stylus/main.styl -o out/ --include-css && node ./tools/transform-css.js out/main.css",
-    "build-js": "browserify client/main.js | uglifyjs -c warnings=false -m > out/main.js",
+    "build-js": "browserify --plugin tinyify client/main.js > out/main.js",
     "db-download": "rsync -a -O -v --exclude \"sessions.bson\" --exclude \"sessions.metadata.json\" -e \"ssh -p 44444\" feross@athena:\"/home/feross/backups/mongo/daily/studynotes/\" db/dump && (mongod --dbpath db & (sleep 2 && mongorestore --drop --host 127.0.0.1:27017 --db studynotes db/dump))",
     "db-local": "mongod --dbpath db",
     "db-tunnel": "ssh -L 27017:localhost:27017 -N feross@athena",
