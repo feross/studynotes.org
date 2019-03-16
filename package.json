@@ -62,7 +62,7 @@
     "keymaster": "^1.6.2",
     "load-script": "^1.0.0",
     "lodash.countby": "^4.1.1",
-    "lorem-ipsum": "^1.0.3",
+    "lorem-ipsum": "^2.0.0",
     "mailchimp-api": "^2.0.7",
     "maxcdn": "^0.2.0",
     "md5": "^2.0.0",
