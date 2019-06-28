@@ -83,7 +83,7 @@
     "serve-favicon": "^2.0.1",
     "simple-websocket": "^7.0.2",
     "slug": "^0.9.1",
-    "stripe": "^6.19.0",
+    "stripe": "^7.4.0",
     "supports-color": "^6.1.0",
     "throttleit": "^1.0.0",
     "unlimited": "^1.1.0",
