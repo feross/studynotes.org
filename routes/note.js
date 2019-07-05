@@ -50,8 +50,8 @@ module.exports = function (app) {
       })
       var len = r.notes.length
 
-      r.prev = r.notes[ index === 0 ? len - 1 : index - 1 ]
-      r.next = r.notes[ index === len - 1 ? 0 : index + 1 ]
+      r.prev = r.notes[index === 0 ? len - 1 : index - 1]
+      r.next = r.notes[index === len - 1 ? 0 : index + 1]
 
       r.course = course
       r.notetype = notetype
