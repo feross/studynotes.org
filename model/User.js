@@ -56,7 +56,7 @@ var User = new mongoose.Schema({
     validate: [
       validate({
         validator: 'isLength',
-        arguments: [ 6, 255 ],
+        arguments: [6, 255],
         message: 'Your password must be at least 6 characters.'
       })
     ]

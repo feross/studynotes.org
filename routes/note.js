@@ -55,7 +55,7 @@ module.exports = function (app) {
 
       r.course = course
       r.notetype = notetype
-      r.title = [ r.note.name, course.name + ' ' + notetype.name ].join(' - ')
+      r.title = [r.note.name, course.name + ' ' + notetype.name].join(' - ')
       r.url = r.note.url
 
       r.note.body = insertNativeAd(r.note.body, Object.assign({}, res.locals, app.locals))

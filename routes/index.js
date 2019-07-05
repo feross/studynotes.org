@@ -71,7 +71,7 @@ module.exports = function (app) {
         title: opts.course.name + ' Notes',
         url: opts.course.url
       }
-    } else if ([ 'college', 'college-about', 'essay' ].indexOf(view) !== -1) {
+    } else if (['college', 'college-about', 'essay'].indexOf(view) !== -1) {
       // If rendering a college-related view
       opts.hero = {
         // desc: 'College Essays That Worked',
