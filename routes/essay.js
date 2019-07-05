@@ -54,7 +54,7 @@ module.exports = function (app) {
         }
 
         if (req.session.free.indexOf(r.essay.id) === -1) {
-          var referrer = url.parse(req.get('referer') || '').host
+          var referrer = url.parse(req.get('referer') || '').host // eslint-disable-line node/no-deprecated-api
           if (req.session.free.length < config.numFree ||
               (referrer && referrer.search(config.siteHost) === -1)) {
             req.session.free.push(r.essay.id)

@@ -44,7 +44,7 @@ module.exports = function (app) {
       opts.encodedUrl = encodeURIComponent(opts.url)
 
       // Force trailing slashes in URL
-      var u = url.parse(opts.url)
+      var u = url.parse(opts.url) // eslint-disable-line node/no-deprecated-api
       if (u.pathname[u.pathname.length - 1] !== '/') {
         u.pathname += '/'
         opts.url = url.format(u)
