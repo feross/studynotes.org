@@ -31,7 +31,7 @@ module.exports = function (app) {
         }
       }],
       essayCount: function (cb) {
-        model.Essay.count({ published: true }).exec(cb)
+        model.Essay.countDocuments({ published: true }).exec(cb)
       },
       essays: function (cb) {
         model.Essay

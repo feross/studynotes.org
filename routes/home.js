@@ -6,19 +6,19 @@ module.exports = function (app) {
   app.get('/', function (req, res, next) {
     auto({
       noteCount: function (cb) {
-        model.Note.count({ published: true }).exec(cb)
+        model.Note.countDocuments({ published: true }).exec(cb)
       },
       courseCount: function (cb) {
-        model.Course.count().exec(cb)
+        model.Course.countDocuments().exec(cb)
       },
       essayCount: function (cb) {
-        model.Essay.count({ published: true }).exec(cb)
+        model.Essay.countDocuments({ published: true }).exec(cb)
       },
       collegeCount: function (cb) {
-        model.College.count().exec(cb)
+        model.College.countDocuments().exec(cb)
       },
       userCount: function (cb) {
-        model.User.count().exec(cb)
+        model.User.countDocuments().exec(cb)
       },
       newNotes: function (cb) {
         model.Note

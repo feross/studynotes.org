@@ -19,7 +19,7 @@ module.exports = function (app) {
           .exec(cb)
       },
       collegeCount: function (cb) {
-        model.College.count().exec(cb)
+        model.College.countDocuments().exec(cb)
       }
     }, function (err, r) {
       if (err) return next(err)
@@ -44,7 +44,7 @@ module.exports = function (app) {
   app.get('/colleges', function (req, res, next) {
     var colleges = model.cache.collegesByRank
     model.Essay
-      .count({ published: true })
+      .countDocuments({ published: true })
       .exec(function (err, essayCount) {
         if (err) return next(err)
 

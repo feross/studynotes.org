@@ -94,7 +94,7 @@ exports.slug = function (schema, opts) {
 
     function checkSlug (potentialSlug) {
       mongoose.model(opts.model)
-        .count({ _id: potentialSlug })
+        .countDocuments({ _id: potentialSlug })
         .exec(function (err, count) {
           if (err) return next(err)
 
