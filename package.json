@@ -86,7 +86,6 @@
     "stripe": "^7.4.0",
     "supports-color": "^7.0.0",
     "throttleit": "^1.0.0",
-    "unlimited": "^1.1.0",
     "unordered-array-remove": "^1.0.2",
     "useragent": "^2.1.7",
     "ws": "^7.1.0",

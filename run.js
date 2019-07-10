@@ -7,7 +7,6 @@ var extend = require('xtend')
 var LiveUpdater = require('./liveupdater')
 var minimist = require('minimist')
 var Site = require('./')
-var unlimited = require('unlimited')
 // var util = require('./util')
 
 var argv = minimist(process.argv.slice(2))
@@ -18,7 +17,6 @@ var argv = minimist(process.argv.slice(2))
  */
 function run (Server) {
   // util.registerUncaughtException()
-  unlimited()
 
   // Create and start the server
   Server(extend(argv), function (err) {
