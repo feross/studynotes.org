@@ -80,7 +80,7 @@ function Site (opts, done) {
   }
 
   // Also set up 'uncaughtException' listeners in the workers
-  util.registerUncaughtException()
+  // util.registerUncaughtException()
 
   self.app = express()
   self.server = http.createServer(self.app)
@@ -135,7 +135,7 @@ function Site (opts, done) {
 Site.prototype.setupHeaders = function () {
   var self = this
   self.app.use(function (req, res, next) {
-    var extname = path.extname(url.parse(req.url).pathname)
+    var extname = path.extname(url.parse(req.url).pathname) // eslint-disable-line node/no-deprecated-api
 
     // Add cross-domain header for fonts, required by spec, Firefox, and IE.
     if (['.eot', '.ttf', '.otf', '.woff', '.woff2'].indexOf(extname) >= 0) {

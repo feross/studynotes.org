@@ -23,7 +23,7 @@ exports.randomInt = function (max) {
  * @param {Object} params
  */
 exports.addQueryParams = function (u, params) {
-  u = url.parse(u, true)
+  u = url.parse(u, true) // eslint-disable-line node/no-deprecated-api
   extend(u.query, params)
   u.search = null
   return url.format(u)

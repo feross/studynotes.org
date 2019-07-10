@@ -48,7 +48,7 @@ if (window.StripeCheckout) {
 }
 
 function openCheckout (opts) {
-  var query = url.parse(window.location.href, true).query
+  var query = url.parse(window.location.href, true).query // eslint-disable-line node/no-deprecated-api
   var referrer = query.referrer || opts.referrer || window.location.href
 
   opts.amount = config.product[opts.product].price

@@ -50,12 +50,12 @@ module.exports = function (app) {
       })
       var len = r.notes.length
 
-      r.prev = r.notes[ index === 0 ? len - 1 : index - 1 ]
-      r.next = r.notes[ index === len - 1 ? 0 : index + 1 ]
+      r.prev = r.notes[index === 0 ? len - 1 : index - 1]
+      r.next = r.notes[index === len - 1 ? 0 : index + 1]
 
       r.course = course
       r.notetype = notetype
-      r.title = [ r.note.name, course.name + ' ' + notetype.name ].join(' - ')
+      r.title = [r.note.name, course.name + ' ' + notetype.name].join(' - ')
       r.url = r.note.url
 
       r.note.body = insertNativeAd(r.note.body, Object.assign({}, res.locals, app.locals))

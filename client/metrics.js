@@ -18,7 +18,7 @@ if ($('.subscribe-on-blur').length) {
   window.ga('send', 'event', 'pro', 'paywall')
 }
 
-var query = url.parse(window.location.href, true).query
+var query = url.parse(window.location.href, true).query // eslint-disable-line node/no-deprecated-api
 
 // Track iOS standalone web app page views
 if (window.navigator.standalone) {

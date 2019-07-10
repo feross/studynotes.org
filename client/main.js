@@ -126,7 +126,7 @@ $window.on('load', function () {
 
 // "Welcome back" message
 if (cookies.get('returning') && // this is a returning visitor
-    url.parse(document.referrer).host !== window.location.host) { // external site
+    url.parse(document.referrer).host !== window.location.host) { // eslint-disable-line node/no-deprecated-api
   notify.big.info('Welcome back!', { timeout: 2000 })
 }
 

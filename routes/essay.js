@@ -54,7 +54,7 @@ module.exports = function (app) {
         }
 
         if (req.session.free.indexOf(r.essay.id) === -1) {
-          var referrer = url.parse(req.get('referer') || '').host
+          var referrer = url.parse(req.get('referer') || '').host // eslint-disable-line node/no-deprecated-api
           if (req.session.free.length < config.numFree ||
               (referrer && referrer.search(config.siteHost) === -1)) {
             req.session.free.push(r.essay.id)
@@ -75,8 +75,8 @@ module.exports = function (app) {
       })
       var len = r.essays.length
 
-      r.prev = r.essays[ index === 0 ? len - 1 : index - 1 ]
-      r.next = r.essays[ index === len - 1 ? 0 : index + 1 ]
+      r.prev = r.essays[index === 0 ? len - 1 : index - 1]
+      r.next = r.essays[index === len - 1 ? 0 : index + 1]
 
       r.breadcrumbs = [
         { name: 'College Essays', url: '/essays/' }

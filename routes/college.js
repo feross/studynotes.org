@@ -80,7 +80,7 @@ module.exports = function (app) {
       if (err) return next(err)
 
       res.render('college-about', {
-        breadcrumbs: [ { name: 'College Essays', url: '/essays/' } ],
+        breadcrumbs: [{ name: 'College Essays', url: '/essays/' }],
         college: college,
         essays: essays,
         title: 'About ' + college.name,
@@ -116,7 +116,7 @@ module.exports = function (app) {
       if (err) return next(err)
 
       res.render('college', {
-        breadcrumbs: [ { name: 'College Essays', url: '/essays/' } ],
+        breadcrumbs: [{ name: 'College Essays', url: '/essays/' }],
         college: college,
         essays: essays,
         title: 'Top ' + essays.length + ' ' + college.shortName + ' Admissions Essays',
