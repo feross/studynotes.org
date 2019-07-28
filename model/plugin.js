@@ -5,7 +5,7 @@ var util = require('../util')
 var validate = require('mongoose-validator')
 
 slug.defaults.mode = 'studynotes'
-slug.defaults.modes['studynotes'] = {
+slug.defaults.modes.studynotes = {
   replacement: '-',
   symbols: true,
   remove: /[.]/g,
