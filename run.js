@@ -15,11 +15,11 @@ var argv = minimist(process.argv.slice(2))
  * Run the given server, passing in command line options as options.
  * @param  {function(*)} ServerConstructor
  */
-function run (Server) {
+function run (runServer) {
   // util.registerUncaughtException()
 
   // Create and start the server
-  Server(extend(argv), function (err) {
+  runServer(extend(argv), function (err) {
     if (err) {
       console.error('Error during startup. Abort.')
       console.error(err.stack)
