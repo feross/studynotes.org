@@ -27,10 +27,12 @@ function autocomplete (query, cb) {
   auto({
     courses: function (cb) {
       model.Course
-        .find({ $or: [
-          { name: regexForQuery(query) },
-          { searchName: regexForQuery(query) }
-        ] })
+        .find({
+          $or: [
+            { name: regexForQuery(query) },
+            { searchName: regexForQuery(query) }
+          ]
+        })
         .sort('-hits')
         .limit(MAX_RESULTS)
         .select('name hits')
@@ -57,10 +59,12 @@ function autocomplete (query, cb) {
 
     colleges: function (cb) {
       model.College
-        .find({ $or: [
-          { name: regexForQuery(query) },
-          { shortName: regexForQuery(query) }
-        ] })
+        .find({
+          $or: [
+            { name: regexForQuery(query) },
+            { shortName: regexForQuery(query) }
+          ]
+        })
         .sort('-hits')
         .limit(MAX_RESULTS)
         .select('name hits')
