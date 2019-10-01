@@ -1,7 +1,7 @@
 var crypto = require('crypto')
 var htmlParser = require('html-parser')
 var { JSDOM } = require('jsdom')
-var loremIpsum = require('lorem-ipsum')
+var { loremIpsum } = require('lorem-ipsum')
 
 exports.truncate = require('html-truncate')
 
