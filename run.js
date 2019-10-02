@@ -2,7 +2,6 @@ require('./rollbar')
 
 module.exports = run
 
-var downgrade = require('downgrade')
 var extend = require('xtend')
 var LiveUpdater = require('./liveupdater')
 var minimist = require('minimist')
@@ -25,7 +24,6 @@ function run (runServer) {
       console.error(err.stack)
       process.exit(1)
     }
-    downgrade()
   })
 }
 
