@@ -4,13 +4,6 @@
 
 exports.cookieSecret = 'TODO'
 
-exports.maxcdn = {
-  companyAlias: 'TODO',
-  consumerKey: 'TODO',
-  consumerSecret: 'TODO',
-  zoneId: 'TODO'
-}
-
 exports.gmail = {
   user: 'TODO',
   pass: 'TODO'

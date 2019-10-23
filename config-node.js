@@ -41,8 +41,7 @@ exports.numCpus = config.isProd
 
 /**
  * Maximum time to cache static resources (in milliseconds). This value is
- * sent in the HTTP cache-control header. MaxCDN will obey it, caching
- * the file for this length of time as well as passing it along to clients.
+ * sent in the HTTP cache-control header.
  *
  * @type {number}
  */

@@ -189,23 +189,19 @@ Site.prototype.setupStatic = function () {
 
   self.app.use(stat)
 
-  // Serve static, out (built), and vendor files at "/cdn".
+  // Serve static, out (built), and vendor files
   var out = express.static(config.root + '/out', opts)
   var vendor = express.static(config.root + '/vendor', opts)
 
-  self.app.use('/cdn', stat)
-  self.app.use('/cdn', out)
-  self.app.use('/cdn', vendor)
+  self.app.use(stat)
+  self.app.use(out)
+  self.app.use(vendor)
 
   // HACK: Make CSS relative URLs work in development
   if (!config.isProd) {
-    self.app.use('/cdn', express.static(config.root + '/vendor/select2', opts))
+    self.app.use(express.static(config.root + '/vendor/select2', opts))
     self.app.use('/font', express.static(config.root + '/vendor/fontello/font', opts))
   }
-
-  self.app.use('/cdn', function (req, res) {
-    res.status(404).send()
-  })
 }
 
 Site.prototype.setupLogger = function () {

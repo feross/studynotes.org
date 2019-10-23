@@ -35,9 +35,7 @@ exports.siteOrigin = (isProd ? 'https' : 'http') + '://' + exports.siteHost
  * Origin of the CDN server
  * @type {string}
  */
-exports.cdnOrigin = isProd
-  ? 'https://cdn.apstudynotes.org'
-  : exports.siteOrigin + '/cdn'
+exports.cdnOrigin = exports.siteOrigin
 
 /**
  * Price of paid products (in cents!)
