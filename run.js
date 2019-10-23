@@ -6,7 +6,6 @@ var extend = require('xtend')
 var LiveUpdater = require('./liveupdater')
 var minimist = require('minimist')
 var Site = require('./')
-// var util = require('./util')
 
 var argv = minimist(process.argv.slice(2))
 

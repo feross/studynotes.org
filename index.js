@@ -1,7 +1,6 @@
 module.exports = Site
 
 var bodyParser = require('body-parser')
-var cluster = require('cluster')
 var compression = require('compression')
 var connectMongo = require('connect-mongo')
 var connectSlashes = require('connect-slashes')
@@ -48,36 +47,9 @@ function Site (opts, done) {
   var self = this
   if (!(self instanceof Site)) return new Site(opts, done)
 
-  self.port = opts.port || config.ports.site
+  self.port = opts.port || 4000
 
-  self.id = cluster.isMaster ? 'master' : 'worker ' + cluster.worker.id
   self.debug('started')
-
-  if (cluster.isMaster) {
-    cluster.setupMaster({ exec: __filename })
-    self.debug('Master process will spawn %d workers', config.numCpus)
-
-    var workers = []
-    for (var i = 0; i < config.numCpus; i++) {
-      var worker = cluster.fork()
-      workers.push(worker)
-    }
-    cluster.on('exit', function (worker, code) {
-      // Force exit on worker exception; rely on supervisor to restart
-      console.error('Worker ' + worker.id + ' exited (with code ' + code + '). Killing master process and all workers.')
-      workers.forEach(function () {
-        worker.kill()
-      })
-      process.exit(1)
-    })
-
-    var remaining = config.numCpus
-    cluster.on('listening', function (worker, address) {
-      remaining -= 1
-      if (remaining === 0) done(null)
-    })
-    return
-  }
 
   self.app = express()
   self.server = http.createServer(self.app)
@@ -118,7 +90,6 @@ function Site (opts, done) {
   parallel([
     model.connect,
     function (cb) {
-      // Start HTTP server -- workers will share TCP connection
       self.server.listen(self.port, cb)
     }
   ], function (err) {
@@ -307,9 +278,7 @@ Site.prototype.setupLocals = function () {
 }
 
 Site.prototype.debug = function () {
-  var self = this
   var args = [].slice.call(arguments)
-  args[0] = '[' + self.id + '] ' + args[0]
   debug.apply(null, args)
 }
 

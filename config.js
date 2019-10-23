@@ -9,13 +9,10 @@ var isProd = exports.isProd = process.browser
   : process.env.NODE_ENV === 'production'
 
 /**
- * Server listening ports
+ * Liveupdater server listening port
  * @type {Object}
  */
-exports.ports = {
-  site: isProd ? 7030 : 4000,
-  liveupdater: isProd ? 7031 : 4001
-}
+exports.liveupdaterPort = 7040
 
 /**
  * Website hostname
@@ -23,7 +20,7 @@ exports.ports = {
  */
 exports.siteHost = isProd
   ? 'www.apstudynotes.org'
-  : 'localhost:' + exports.ports.site
+  : 'localhost:4000'
 
 /**
  * Origin of the website

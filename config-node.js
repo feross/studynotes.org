@@ -1,6 +1,5 @@
 var config = require('./config')
 var fs = require('fs')
-var os = require('os')
 var path = require('path')
 
 /**
@@ -30,14 +29,6 @@ exports.numFree = month === 1 || month === 12
  * essay editing services vs. third-party ads.
  */
 exports.essaySeason = false
-
-/**
- * Number of cores on this CPU
- * @type {Number}
- */
-exports.numCpus = config.isProd
-  ? os.cpus().length
-  : 1
 
 /**
  * Maximum time to cache static resources (in milliseconds). This value is

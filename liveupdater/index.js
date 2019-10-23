@@ -19,7 +19,7 @@ function LiveUpdater (opts, done) {
   var self = this
   if (!(self instanceof LiveUpdater)) return new LiveUpdater(opts, done)
 
-  self.port = opts.port || config.ports.liveupdater
+  self.port = opts.port || config.liveupdaterPort
 
   self.online = {}
   self.titles = {}
