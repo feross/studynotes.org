@@ -32,18 +32,18 @@ html(class=`studynotes ${layout} ${cls}`, lang='en')
 
     meta(property='og:type', content='website')
     if hero && hero.image
-      meta(property='og:image', content=`${config.cdnOrigin}/images/hero/${hero.image}`)
+      meta(property='og:image', content=`${config.siteOrigin}/images/hero/${hero.image}`)
     else
-      meta(property='og:image', content=`${config.cdnOrigin}/images/logo.png`)
+      meta(property='og:image', content=`${config.siteOrigin}/images/logo.png`)
 
     //- Support homescreen launch experience on mobile
     meta(name='viewport', content='width=device-width, initial-scale=1')
 
-    link(rel='apple-touch-icon', sizes='180x180', href=`${config.cdnOrigin}/apple-touch-icon.png`)
-    link(rel='icon', type='image/png', sizes='32x32', href=`${config.cdnOrigin}/favicon-32x32.png`)
-    link(rel='icon', type='image/png', sizes='16x16', href=`${config.cdnOrigin}/favicon-16x16.png`)
+    link(rel='apple-touch-icon', sizes='180x180', href=`${config.siteOrigin}/apple-touch-icon.png`)
+    link(rel='icon', type='image/png', sizes='32x32', href=`${config.siteOrigin}/favicon-32x32.png`)
+    link(rel='icon', type='image/png', sizes='16x16', href=`${config.siteOrigin}/favicon-16x16.png`)
     link(rel='manifest', href='/manifest.json')
-    link(rel='mask-icon', href=`${config.cdnOrigin}/safari-pinned-tab.svg', color='#0099ef`)
+    link(rel='mask-icon', href=`${config.siteOrigin}/safari-pinned-tab.svg', color='#0099ef`)
     meta(name='apple-mobile-web-app-title', content='Study Notes')
     meta(name='application-name', content='Study Notes')
     meta(name='theme-color', content='#f4922b')
@@ -58,32 +58,32 @@ html(class=`studynotes ${layout} ${cls}`, lang='en')
     link(rel='search', href='/opensearch.xml', title='Study Notes', type='application/opensearchdescription+xml')
 
     if editorAssets
-      link(rel='stylesheet', href=`${config.cdnOrigin}/select2/select2.min.css`)
+      link(rel='stylesheet', href=`${config.siteOrigin}/select2/select2.min.css`)
 
     <!--[if ! lte IE 8]><!-->
     if config.isProd
       style.
         !{ config.inline.css }
     else
-      link(rel='stylesheet', href=config.cdnOrigin + config.cssPath)
+      link(rel='stylesheet', href=config.siteOrigin + config.cssPath)
     <!--<![endif]-->
 
     if hero && hero.image
       style(id='heroStyle').
         .heroImage {
-          background: url("#{config.cdnOrigin}/images/hero/#{hero.image}");
+          background: url("#{config.siteOrigin}/images/hero/#{hero.image}");
           background-size: cover;
-          background: bottom left url("#{config.isProd ? config.inline.heroBodyMask : config.cdnOrigin + '/images/hero-body-mask.png'}") repeat-x, center center url("#{config.cdnOrigin}/images/hero/#{hero.image}") no-repeat;
+          background: bottom left url("#{config.isProd ? config.inline.heroBodyMask : config.siteOrigin + '/images/hero-body-mask.png'}") repeat-x, center center url("#{config.siteOrigin}/images/hero/#{hero.image}") no-repeat;
           background-size: 50px 50px, cover;
         }
 
     block styles
 
     <!--[if lte IE 9]>
-    link(rel='stylesheet', href=config.cdnOrigin + '/css/ie9.css')
+    link(rel='stylesheet', href=config.siteOrigin + '/css/ie9.css')
     <![endif]-->
     <!--[if lte IE 8]>
-    link(rel='stylesheet', href=config.cdnOrigin + '/css/ie8.css')
+    link(rel='stylesheet', href=config.siteOrigin + '/css/ie8.css')
     <![endif]-->
 
     //- TypeKit
@@ -151,12 +151,12 @@ html(class=`studynotes ${layout} ${cls}`, lang='en')
       }
 
     if editorAssets
-      script(src=config.cdnOrigin + config.jsPath)
+      script(src=config.siteOrigin + config.jsPath)
       script.
-        window.CKEDITOR_BASEPATH = `${config.cdnOrigin}/ckeditor/`
-      script(src=config.cdnOrigin + '/ckeditor/ckeditor.js')
+        window.CKEDITOR_BASEPATH = `${config.siteOrigin}/ckeditor/`
+      script(src=config.siteOrigin + '/ckeditor/ckeditor.js')
     else
-      script(src=config.cdnOrigin + config.jsPath)
+      script(src=config.siteOrigin + config.jsPath)
 
     block scripts
 

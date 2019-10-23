@@ -8,7 +8,7 @@ exports.simpleEditor = {
   allowedContent: 'p strong b em i u ol ul li sub sup',
   autoGrow_minHeight: 100,
   autoGrow_onStartup: true,
-  contentsCss: config.cdnOrigin + '/main.css',
+  contentsCss: config.siteOrigin + '/main.css',
   customConfig: '', // no external config file
   removePlugins: 'toolbar'
 }
@@ -18,7 +18,7 @@ exports.richEditor = {
   autoGrow_minHeight: 200,
   autoGrow_maxHeight: 400,
   autoGrow_onStartup: true,
-  contentsCss: config.cdnOrigin + '/main.css',
+  contentsCss: config.siteOrigin + '/main.css',
   customConfig: '', // no external config file
   toolbarGroups: [
     { name: 'clipboard', groups: ['clipboard', 'undo'] },

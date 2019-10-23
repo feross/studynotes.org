@@ -3,7 +3,7 @@ var config = require('../config')
 
 function formatSelect2 (option) {
   var $elem = $(option.element)
-  return '<img class="select2-icon" src="' + config.cdnOrigin + '/images/icon/' + $elem.val() + '.png"/>' + option.text
+  return '<img class="select2-icon" src="' + config.siteOrigin + '/images/icon/' + $elem.val() + '.png"/>' + option.text
 }
 
 // Initialize select2 on <select> elements

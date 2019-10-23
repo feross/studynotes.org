@@ -6,7 +6,7 @@ var util = require('../util')
 if (window.StripeCheckout) {
   var stripeHandler = window.StripeCheckout.configure({
     key: config.stripe,
-    image: config.cdnOrigin + '/images/stripe-image.png',
+    image: config.siteOrigin + '/images/stripe-image.png',
     locale: 'auto',
     allowRememberMe: false,
     email: window.StudyNotes.user,

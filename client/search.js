@@ -102,9 +102,9 @@ function renderAutocomplete (data) {
       icon: {
         src: function () {
           if (this.type === 'Course' || this.type === 'College') {
-            return config.cdnOrigin + '/images/icon/' + this.id + '.png'
+            return config.siteOrigin + '/images/icon/' + this.id + '.png'
           } else {
-            return config.cdnOrigin + '/images/icon/transparent.png'
+            return config.siteOrigin + '/images/icon/transparent.png'
           }
         }
       },

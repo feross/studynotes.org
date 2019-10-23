@@ -184,12 +184,10 @@ Site.prototype.setupStatic = function () {
   self.app.use(favicon(path.join(config.root, 'static/favicon.ico')))
 
   // Serve static files
-  var opts = { maxAge: config.maxAge }
+  var opts = {
+    maxAge: config.maxAge
+  }
   var stat = express.static(config.root + '/static', opts)
-
-  self.app.use(stat)
-
-  // Serve static, out (built), and vendor files
   var out = express.static(config.root + '/out', opts)
   var vendor = express.static(config.root + '/vendor', opts)
 

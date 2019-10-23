@@ -12,15 +12,15 @@ block content
   .row
     .col3
       h2 Learn From The Best
-      img(src=config.cdnOrigin + '/images/icon/letter.svg')
+      img(src=config.siteOrigin + '/images/icon/letter.svg')
       p See how students like you were accepted to their dream schools!
     .col3
       h2 Essays That Worked
-      img(src=config.cdnOrigin + '/images/icon/crest.svg')
+      img(src=config.siteOrigin + '/images/icon/crest.svg')
       p Read the best college essays from real admitted students.
     .col3
       h2 Trusted by Thousands
-      img(src=config.cdnOrigin + '/images/icon/check.svg')
+      img(src=config.siteOrigin + '/images/icon/check.svg')
       p Get into top universities like #{collegeListAnd}.
 
   div.center: p
@@ -34,7 +34,7 @@ block content
 
   .row
     .col2
-      img(src=config.cdnOrigin + '/images/icon/trophy.svg')
+      img(src=config.siteOrigin + '/images/icon/trophy.svg')
       h2 Get #{collegeEssays.length} Top #{college ? college.shortName : 'College'} Essays
       ul.tight
         each essay in collegeEssays.slice(0, 4)
@@ -42,7 +42,7 @@ block content
         if collegeEssays.length > 4
           li and #{collegeEssays.length - 4} more #{college ? college.shortName : 'college'} essays...
     .col2
-      img(src=config.cdnOrigin + '/images/icon/stars.svg')
+      img(src=config.siteOrigin + '/images/icon/stars.svg')
       if college
         h2 FREE BONUS: #{otherEssays.length} More Essays
         ul.tight
@@ -80,7 +80,7 @@ block content
 
   div.center: p
     +order-btn('pro', 'Buy Now', 'huge')
-    img.credit-card-logos(src=config.cdnOrigin + '/images/credit-card-logos.png')
+    img.credit-card-logos(src=config.siteOrigin + '/images/credit-card-logos.png')
 
   hr
 

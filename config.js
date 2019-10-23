@@ -32,12 +32,6 @@ exports.siteHost = isProd
 exports.siteOrigin = (isProd ? 'https' : 'http') + '://' + exports.siteHost
 
 /**
- * Origin of the CDN server
- * @type {string}
- */
-exports.cdnOrigin = exports.siteOrigin
-
-/**
  * Price of paid products (in cents!)
  * @type {Object}
  */

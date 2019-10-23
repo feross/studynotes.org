@@ -7,7 +7,7 @@ block sidebar
   .author
     a(href=user.getUrl(essay.anon))
       if essay.anon
-        img(src=config.cdnOrigin + '/images/anon.jpg')
+        img(src=config.siteOrigin + '/images/anon.jpg')
       else
         img(src=user.gravatar(400))
       h2.name= user.getName(essay.anon)

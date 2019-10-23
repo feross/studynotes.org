@@ -13,7 +13,7 @@ mixin entries(entries)
         if entry_.populated('college')
           .collegeLogo
             a(href=entry_.college.url, title=entry_.college.name)
-              img(src=`${config.cdnOrigin}/images/icon/${entry_.college.id}.png`)
+              img(src=`${config.siteOrigin}/images/icon/${entry_.college.id}.png`)
 
         if entry_.populated('user')
           .author.hide-phone
