@@ -91,20 +91,3 @@ exports.convertToPaywallText = function (html, numPreview) {
   window.close()
   return paywallText
 }
-
-// exports.registerUncaughtException = function () {
-//   var mail = require('./lib/mail') // don't require in tests (secret.js is not available on Travis)
-//   process.on('uncaughtException', function (err) {
-//     console.error('[UNCAUGHT EXCEPTION]')
-//     console.error(err.stack)
-//     mail.send({
-//       subject: '[UNCAUGHT EXCEPTION] ' + err.message,
-//       text: err.stack.toString()
-//     }, function (err) {
-//       if (err) console.error('Email notification failed to send. ' + err.stack)
-
-//       // Do not continue processes in undefined state after 'uncaughtException'
-//       process.exit(1)
-//     })
-//   })
-// }

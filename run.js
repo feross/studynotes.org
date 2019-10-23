@@ -15,8 +15,6 @@ var argv = minimist(process.argv.slice(2))
  * @param  {function(*)} ServerConstructor
  */
 function run (runServer) {
-  // util.registerUncaughtException()
-
   // Create and start the server
   runServer(extend(argv), function (err) {
     if (err) {
