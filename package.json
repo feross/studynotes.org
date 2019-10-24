@@ -95,6 +95,7 @@
     "browserify": "^16.2.0",
     "browserify-shim": "^3.6.0",
     "clean-css": "^4.1.11",
+    "figlet": "^1.2.4",
     "husky": "^3.0.0",
     "nodemon": "^1.18.4",
     "postcss": "^7.0.0",
