@@ -15,7 +15,7 @@ cd /home/feross/www/studynotes.org-build && npm install
 cd /home/feross/www/studynotes.org-build && npm run build
 cd /home/feross/www/studynotes.org-build && npm prune --production
 
-sudo supervisorctl stop studynotes-site
+sudo supervisorctl stop studynotes-site:
 sudo supervisorctl stop studynotes-liveupdater
 
 cd /home/feross/www && mv studynotes.org studynotes.org-old
