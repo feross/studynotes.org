@@ -1,5 +1,5 @@
 #!/bin/sh
-# Update code and restart server (run from app server)
+# Update code and restart server (run on server)
 set -e
 
 if [ -d "/home/feross/www/studynotes.org-build" ]; then
