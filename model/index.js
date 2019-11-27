@@ -49,7 +49,7 @@ exports.connect = function (cb) {
     secret.mongo.host + ':' +
     secret.mongo.port + '/' +
     secret.mongo.database,
-    { poolSize: 20, useNewUrlParser: true }
+    { poolSize: 20, useNewUrlParser: true, useUnifiedTopology: true }
   )
   mongoose.connection.on('error', cb)
   mongoose.connection.on('open', function () {
