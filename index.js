@@ -205,11 +205,7 @@ Site.prototype.setupSessions = function () {
       url: 'mongodb://' +
         secret.mongo.host + ':' +
         secret.mongo.port + '/' +
-        secret.mongo.database,
-      mongoOptions: {
-        useNewUrlParser: true,
-        useUnifiedTopology: false
-      }
+        secret.mongo.database
     })
   }))
   self.app.use(csrf())
