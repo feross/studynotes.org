@@ -2,17 +2,10 @@ module.exports = LiveUpdater
 
 // Server is started as 'root' (see supervisor.conf)
 
-// Early requires
-const config = require('../config')
-const fs = require('fs')
-
 // Read in TLS options
-const TLS_KEY = config.isProd
-  ? fs.readFileSync('/etc/letsencrypt/live/apstudynotes.org/privkey.pem')
-  : Buffer.alloc(0)
-const TLS_CERT = config.isProd
-  ? fs.readFileSync('/etc/letsencrypt/live/apstudynotes.org/fullchain.pem')
-  : Buffer.alloc(0)
+const fs = require('fs')
+const TLS_KEY = fs.readFileSync('/etc/letsencrypt/live/apstudynotes.org/privkey.pem')
+const TLS_CERT = fs.readFileSync('/etc/letsencrypt/live/apstudynotes.org/fullchain.pem')
 
 // Downgrade server to www-data before running any other code. Crash server if
 // user cannot be downgraded.
@@ -20,6 +13,7 @@ const downgrade = require('downgrade')
 downgrade()
 
 var arrayRemove = require('unordered-array-remove')
+var config = require('../config')
 var debug = require('debug')('studynotes:liveupdater')
 var http = require('http')
 var https = require('https')

@@ -134,9 +134,9 @@
     "size-js": "npm run build-js && cat out/main.js | gzip | wc -c",
     "start": "npm run db-tunnel & (npm run build && DEBUG=\"studynotes:*\" node run.js)",
     "test": "standard && tape test/*.js",
-    "watch": "npm run db-tunnel & npm run watch-js & npm run watch-css & (sleep 3 && DEBUG=\"studynotes:*\" nodemon --ext js,ejs,mjs,css,pug,styl run.js)",
+    "watch": "npm run db-tunnel & npm run watch-js & npm run watch-css & (sleep 3 && DEBUG=\"studynotes:*\" nodemon run.js)",
     "watch-css": "stylus -u nib stylus/main.styl -o out/ --include-css -w",
     "watch-js": "watchify client/main.js -o out/main.js -dv",
-    "watch-local": "npm run db-local & npm run watch-js & npm run watch-css & (sleep 1 && DEBUG=\"studynotes:*\" nodemon --ext js,ejs,mjs,css,pug,styl run.js)"
+    "watch-local": "npm run db-local & npm run watch-js & npm run watch-css & (sleep 1 && DEBUG=\"studynotes:*\" nodemon run.js)"
   }
 }
