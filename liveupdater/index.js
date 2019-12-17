@@ -26,8 +26,8 @@ function LiveUpdater (opts, done) {
 
   var httpServer = config.isProd
     ? https.createServer({
-      key: fs.readFileSync(config.root + '/secret/apstudynotes.org.key'),
-      cert: fs.readFileSync(config.root + '/secret/apstudynotes.org.chained.crt')
+      key: fs.readFileSync('/etc/letsencrypt/live/apstudynotes.org/privkey.pem'),
+      cert: fs.readFileSync('/etc/letsencrypt/live/apstudynotes.org/fullchain.pem')
     })
     : http.createServer()
 
