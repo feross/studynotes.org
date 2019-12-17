@@ -1,8 +1,8 @@
 var config = require('./config')
 
 exports.wsEndpoint = config.isProd
-  ? 'wss://' + config.siteHost + ':' + config.liveupdaterPort
-  : 'ws://' + window.location.hostname + ':' + config.liveupdaterPort
+  ? 'wss://' + config.siteHost + '/websocket'
+  : 'ws://' + window.location.hostname + ':4001/websocket'
 
 exports.simpleEditor = {
   allowedContent: 'p strong b em i u ol ul li sub sup',

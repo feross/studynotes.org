@@ -9,12 +9,6 @@ var isProd = exports.isProd = process.browser
   : process.env.NODE_ENV === 'production'
 
 /**
- * Liveupdater server listening port
- * @type {Object}
- */
-exports.liveupdaterPort = 7040
-
-/**
  * Website hostname
  * @type {string}
  */

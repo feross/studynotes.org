@@ -3,9 +3,7 @@ module.exports = LiveUpdater
 var arrayRemove = require('unordered-array-remove')
 var config = require('../config')
 var debug = require('debug')('studynotes:liveupdater')
-var fs = require('fs')
 var http = require('http')
-var https = require('https')
 var { JSDOM } = require('jsdom')
 var model = require('../model')
 var parallel = require('run-parallel')
@@ -19,17 +17,12 @@ function LiveUpdater (opts, done) {
   var self = this
   if (!(self instanceof LiveUpdater)) return new LiveUpdater(opts, done)
 
-  self.port = opts.port || config.liveupdaterPort
+  self.port = opts.port || 4001
 
   self.online = {}
   self.titles = {}
 
-  var httpServer = config.isProd
-    ? https.createServer({
-      key: fs.readFileSync('/etc/letsencrypt/live/apstudynotes.org/privkey.pem'),
-      cert: fs.readFileSync('/etc/letsencrypt/live/apstudynotes.org/fullchain.pem')
-    })
-    : http.createServer()
+  var httpServer = http.createServer()
 
   self.server = new ws.Server({
     server: httpServer,
