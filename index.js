@@ -80,12 +80,11 @@ function Site (opts, done) {
   self.app.use(connectSlashes()) // append trailing slash
 
   self.setupLogger()
+  self.setupLocals()
   self.setupSessions()
 
   self.app.use(pro.checkPro)
   self.app.use(flash()) // errors are propogated using `req.flash`
-
-  self.setupLocals()
 
   parallel([
     model.connect,
@@ -209,6 +208,10 @@ Site.prototype.setupSessions = function () {
     })
   }))
   self.app.use(csrf())
+  self.app.use(function (req, res, next) {
+    res.locals.csrf = req.csrfToken()
+    next()
+  })
 
   // Passport
   self.app.use(passport.initialize())
@@ -266,7 +269,6 @@ Site.prototype.setupLocals = function () {
     }
 
     res.locals.req = req
-    res.locals.csrf = req.csrfToken()
 
     var isIgnoreUrl = ignoreUrls.some(ignoreUrl => req.url.startsWith(ignoreUrl))
     res.locals.ads = Boolean(req.query.ads) ||
