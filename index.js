@@ -89,7 +89,7 @@ function Site (opts, done) {
   parallel([
     model.connect,
     function (cb) {
-      self.server.listen(self.port, cb)
+      self.server.listen(self.port, '127.0.0.1', cb)
     }
   ], function (err) {
     if (err) return done(err)

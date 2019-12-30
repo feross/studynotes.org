@@ -59,7 +59,7 @@ function LiveUpdater (opts, done) {
       self.getTotalHits(cb)
     },
     function (cb) {
-      httpServer.listen(self.port, cb)
+      httpServer.listen(self.port, '127.0.0.1', cb)
     }
   ], function (err) {
     if (!err) debug('liveupdater listening on ' + self.port)
