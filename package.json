@@ -80,7 +80,7 @@
     "run-waterfall": "^1.0.2",
     "serve-favicon": "^2.0.1",
     "simple-websocket": "^8.0.0",
-    "slug": "^1.1.0",
+    "slug": "^2.1.0",
     "stripe": "^7.4.0",
     "supports-color": "^7.0.0",
     "throttleit": "^1.0.0",
