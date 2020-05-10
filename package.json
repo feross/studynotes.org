@@ -101,7 +101,7 @@
     "run-parallel-limit": "^1.0.2",
     "standard": "*",
     "stylus": "^0.54.0",
-    "tape": "^4.0.0",
+    "tape": "^5.0.0",
     "transparency": "^1.0.0",
     "watchify": "^3.1.2"
   },
