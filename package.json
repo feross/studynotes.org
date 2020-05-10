@@ -82,6 +82,7 @@
     "simple-websocket": "^8.1.1",
     "slug": "^2.1.1",
     "stripe": "^8.50.0",
+    "stylus": "^0.54.7",
     "supports-color": "^7.1.0",
     "throttleit": "^1.0.0",
     "unordered-array-remove": "^1.0.2",
@@ -100,7 +101,6 @@
     "postcss": "^7.0.29",
     "run-parallel-limit": "^1.0.5",
     "standard": "*",
-    "stylus": "^0.54.7",
     "tape": "^5.0.0",
     "transparency": "^1.0.0",
     "watchify": "^3.11.1"
