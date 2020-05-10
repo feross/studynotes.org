@@ -55,7 +55,7 @@ exports.hits = function (schema) {
   // Update hit count, asyncronously
   schema.methods.hit = function (cb) {
     cb || (cb = function () {})
-    this.update({ $inc: { hits: 1 } }, { upsert: true }, cb)
+    this.updateOne({ $inc: { hits: 1 } }, { upsert: true }, cb)
   }
 }
 

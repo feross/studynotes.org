@@ -4,7 +4,6 @@ html(class=`studynotes ${layout} ${cls}`, lang='en')
   head
     meta(charset='utf-8')
 
-    link(rel='preconnect', href='https://use.typekit.net')
     if config.isProd && ads
       link(rel='preconnect', href='https://pagead2.googlesyndication.com')
 
@@ -85,9 +84,6 @@ html(class=`studynotes ${layout} ${cls}`, lang='en')
     <!--[if lte IE 8]>
     link(rel='stylesheet', href=config.siteOrigin + '/css/ie8.css')
     <![endif]-->
-
-    //- TypeKit
-    script(async, src='https://use.typekit.net/djj4afz.js', onload='Typekit.load()')
 
     //- Add .ie10 and .ie11 classes to <html>, if this is IE
     script.
