@@ -100,7 +100,7 @@
     "nodemon": "^2.0.3",
     "postcss": "^7.0.29",
     "run-parallel-limit": "^1.0.5",
-    "standard": "*",
+    "standard": ">=14.3.4",
     "tape": "^5.0.0",
     "transparency": "^1.0.0",
     "watchify": "^3.11.1"
