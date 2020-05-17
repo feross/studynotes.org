@@ -74,7 +74,7 @@
     "passport": "^0.4.1",
     "passport-local": "1.0.0",
     "pug": "^2.0.4",
-    "rollbar": "^2.15.2",
+    "rollbar": "2.15.2",
     "run-auto": "^2.0.3",
     "run-parallel": "^1.1.9",
     "run-waterfall": "^1.1.6",
