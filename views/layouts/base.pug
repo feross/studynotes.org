@@ -108,12 +108,13 @@ html(class=`studynotes ${layout} ${cls}`, lang='en')
   body
     block body
 
-    each msg in req.flash('success')
-      .notify.notify-success(style='display: none')= msg
-    each msg in req.flash('info')
-      .notify.notify-info(style='display: none')= msg
-    each msg in req.flash('error')
-      .notify.notify-error(style='display: none')= msg
+    if typeof req.flash === 'function'
+      each msg in req.flash('success')
+        .notify.notify-success(style='display: none')= msg
+      each msg in req.flash('info')
+        .notify.notify-info(style='display: none')= msg
+      each msg in req.flash('error')
+        .notify.notify-error(style='display: none')= msg
 
     input(type='hidden', name='_csrf', value=csrf)
 
