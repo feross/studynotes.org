@@ -81,7 +81,7 @@
     "serve-favicon": "^2.5.0",
     "simple-websocket": "^9.0.0",
     "slug": "^2.1.1",
-    "stripe": "^8.52.0",
+    "stripe": "^8.55.0",
     "stylus": "^0.54.7",
     "supports-color": "^7.1.0",
     "throttleit": "^1.0.0",
