@@ -1,11 +1,11 @@
 var httpStatus = require('http-status-codes')
 
 module.exports = function (app) {
-  app.get('/500', function (req, res, next) {
-    const err = new Error('Manually visited /500')
-    err.status = 500
-    next(err)
-  })
+  // app.get('/500', function (req, res, next) {
+  //   const err = new Error('Manually visited /500')
+  //   err.status = 500
+  //   next(err)
+  // })
 
   app.use(function (req, res) {
     res.status(404).render('error', {
