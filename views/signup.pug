@@ -47,4 +47,5 @@ block content
       button.btn.large(type='submit') Sign up
 
 block footer
-  span Looking to <a href="/login/">log in</a> instead?
+  if !req.session.pro
+    span Looking to <a href="/login/">log in</a> instead?
