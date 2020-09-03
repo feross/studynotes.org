@@ -47,9 +47,9 @@ module.exports = function (app) {
 
     res.status(code)
     res.render('error', {
-      title: code + ' ' + httpStatus.getStatusText(code),
+      title: code + ' ' + httpStatus.getReasonPhrase(code),
       hero: {
-        title: code + ' ' + httpStatus.getStatusText(code),
+        title: code + ' ' + httpStatus.getReasonPhrase(code),
         desc: 'Sorry about that. Here is a cat for you instead.'
       }
     })
