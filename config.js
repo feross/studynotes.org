@@ -32,15 +32,15 @@ exports.product = {
     desc: '100+ Top College Essays'
   },
   'review-proofreading': {
-    price: 9900,
+    price: 19900,
     desc: 'Essay Review (Proofreading)'
   },
   'review-standard': {
-    price: 19900,
+    price: 39900,
     desc: 'Essay Review (Standard)'
   },
   'review-premium': {
-    price: 39900,
+    price: 79900,
     desc: 'Essay Review (Premium)'
   }
 }
