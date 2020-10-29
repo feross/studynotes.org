@@ -3,8 +3,9 @@ const config = require('../config')
 const url = require('url')
 const util = require('../util')
 
+let stripeHandler
 if (window.StripeCheckout) {
-  window.StripeCheckout.configure({
+  stripeHandler = window.StripeCheckout.configure({
     key: config.stripe,
     image: config.siteOrigin + '/images/stripe-image.png',
     locale: 'auto',
