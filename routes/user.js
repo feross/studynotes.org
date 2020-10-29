@@ -1,5 +1,5 @@
-var auto = require('run-auto')
-var model = require('../model')
+const auto = require('run-auto')
+const model = require('../model')
 
 module.exports = function (app) {
   app.get('/user/:userId', function (req, res, next) {
@@ -30,10 +30,10 @@ module.exports = function (app) {
       if (err) return next(err)
       if (!r.user) return next()
 
-      var essayHits = r.essays.reduce(function (total, essay) {
+      const essayHits = r.essays.reduce(function (total, essay) {
         return total + essay.hits
       }, 0)
-      var totalHits = r.notes.reduce(function (total, note) {
+      const totalHits = r.notes.reduce(function (total, note) {
         return total + note.hits
       }, essayHits)
 

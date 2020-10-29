@@ -1,15 +1,15 @@
-var $ = require('jquery')
-var config = require('../config')
-var debug = require('debug')('studynotes:socket')
-var Socket = require('simple-websocket')
-var util = require('../util')
+const $ = require('jquery')
+const config = require('../config')
+const debug = require('debug')('studynotes:socket')
+const Socket = require('simple-websocket')
+const util = require('../util')
 
-var RECONNECT_VARIANCE = 30 * 1000
-var MINIMUM_RECONNECT = 5 * 1000
+const RECONNECT_VARIANCE = 30 * 1000
+const MINIMUM_RECONNECT = 5 * 1000
 
-var socket
-var lastTotalHits
-var stats
+let socket
+let lastTotalHits
+let stats
 
 function openSocket () {
   socket = new Socket({ url: config.wsEndpoint })
@@ -27,7 +27,7 @@ function openSocket () {
 }
 
 function openSocketAfterTimeout () {
-  var reconnectTimeout = util.randomInt(RECONNECT_VARIANCE) + MINIMUM_RECONNECT
+  const reconnectTimeout = util.randomInt(RECONNECT_VARIANCE) + MINIMUM_RECONNECT
   setTimeout(openSocket, reconnectTimeout)
   debug('reconnecting socket in %s ms', reconnectTimeout)
 }
@@ -47,7 +47,7 @@ function onMessage (message) {
   if (message.type === 'update') {
     if (message.count) {
       // Set a phrase with live visitor count
-      var studentsStr = (message.count === 1) ? 'student' : 'students'
+      const studentsStr = (message.count === 1) ? 'student' : 'students'
       $('.online')
         .text(message.count + ' ' + studentsStr + ' online (this page)')
         .show()
@@ -87,14 +87,14 @@ function renderStats () {
   $('.loading').hide()
   $('.stats').show()
 
-  var urlsByCount = Object.keys(stats).sort(function (a, b) {
+  const urlsByCount = Object.keys(stats).sort(function (a, b) {
     if (stats[a].count < stats[b].count) return 1
     if (stats[a].count > stats[b].count) return -1
     return 0
   })
-  var rows = []
+  const rows = []
   urlsByCount.forEach(function (url) {
-    var data = stats[url]
+    const data = stats[url]
     rows.push(data)
   })
 

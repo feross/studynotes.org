@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-var auto = require('run-auto')
-var cp = require('child_process')
-var config = require('../config')
-var fs = require('fs')
-var md5 = require('md5')
+const auto = require('run-auto')
+const cp = require('child_process')
+const config = require('../config')
+const fs = require('fs')
+const md5 = require('md5')
 
 auto({
   MD5_JS: function (cb) {
@@ -41,14 +41,14 @@ auto({
 
   // Copy the JS file to a file with a unique name, based on the MD5
   jsRename: ['MD5_JS', 'removeOldJS', function (r, cb) {
-    var src = config.out + '/main.js'
-    var dest = config.out + '/main-' + r.MD5_JS + '.js'
+    const src = config.out + '/main.js'
+    const dest = config.out + '/main-' + r.MD5_JS + '.js'
     cp.exec('cp ' + src + ' ' + dest, cb)
   }],
 
   cssRename: ['MD5_CSS', 'removeOldCSS', function (r, cb) {
-    var src = config.out + '/main.css'
-    var dest = config.out + '/main-' + r.MD5_CSS + '.css'
+    const src = config.out + '/main.css'
+    const dest = config.out + '/main-' + r.MD5_CSS + '.css'
     cp.exec('cp ' + src + ' ' + dest, cb)
   }]
 })

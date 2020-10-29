@@ -1,16 +1,16 @@
 require('transparency')
 require('select2')
 
-var $ = require('jquery')
-var cookies = require('cookies-js')
+const $ = require('jquery')
+const cookies = require('cookies-js')
 
-var config = require('../config')
-var fastclick = require('fastclick')
-var key = require('keymaster')
-var notify = require('./notify')
-var throttle = require('throttleit')
-var url = require('url')
-var util = require('../util')
+const config = require('../config')
+const fastclick = require('fastclick')
+const key = require('keymaster')
+const notify = require('./notify')
+const throttle = require('throttleit')
+const url = require('url')
+const util = require('../util')
 
 // Configure cookie-js
 cookies.defaults.secure = config.isProd
@@ -48,12 +48,12 @@ require('./socket')
 require('./submit')
 require('./toolbar')
 
-var EVENT_THROTTLE = 100
+const EVENT_THROTTLE = 100
 
 // Remove 300ms tap delay on iOS
 fastclick(document.body)
 
-var $window = $(window)
+const $window = $(window)
 
 // Make external links open in new window
 $('a[href^="http:"], a[href^="https:"]')
@@ -66,7 +66,7 @@ $('.logout').on('click', function (e) {
   e.preventDefault()
   $.post('/logout/')
     .done(function () {
-      var url = util.addQueryParams(window.location.href, {
+      const url = util.addQueryParams(window.location.href, {
         info: 'You are logged out!'
       })
       window.location = url
@@ -93,19 +93,19 @@ $window.on('scroll', throttle(onScroll, EVENT_THROTTLE))
  * Filter keystrokes from keymaster when user is searching.
  * https://github.com/madrobby/keymaster
  */
-var $search = $('.header .search')
+const $search = $('.header .search')
 key.filter = function () {
   return !$search.hasClass('searching')
 }
 
 key('left', function () {
-  var $prev = $('.after-content .prev')
+  const $prev = $('.after-content .prev')
   if ($prev.length) {
     window.location = $prev.attr('href')
   }
 })
 key('right', function () {
-  var $next = $('.after-content .next')
+  const $next = $('.after-content .next')
   if ($next.length) {
     window.location = $next.attr('href')
   }
@@ -133,12 +133,12 @@ if (cookies.get('returning') && // this is a returning visitor
 cookies.set('returning', true)
 
 // Page view count
-var pageViewCount = Number(cookies.get('page_view_count') || 0)
+const pageViewCount = Number(cookies.get('page_view_count') || 0)
 cookies.set('page_view_count', pageViewCount + 1)
 
-var match = /(success|error|info)=([^?&]+)/g.exec(window.location.search)
-var msgType = match && match[1]
-var msg = match && match[2]
+const match = /(success|error|info)=([^?&]+)/g.exec(window.location.search)
+const msgType = match && match[1]
+const msg = match && match[2]
 if (msgType && msg) {
   notify.big[msgType](window.decodeURIComponent(msg))
   window.history.replaceState(null, null, window.location.pathname)
@@ -146,7 +146,7 @@ if (msgType && msg) {
 
 $(function () {
   $('.notify').each(function () {
-    var $item = $(this)
+    const $item = $(this)
     if ($item.hasClass('notify-success')) {
       notify.big.success($item.text())
     } else if ($item.hasClass('notify-error')) {
@@ -158,7 +158,7 @@ $(function () {
 })
 
 // View-specific code
-var className = $('html').attr('class').split(' ')
+const className = $('html').attr('class').split(' ')
 if (className.indexOf('home') >= 0) require('./views/home')()
 if (className.indexOf('admin') >= 0) require('./views/admin')()
 if (className.indexOf('essay-review') >= 0) require('./views/essay-review')()

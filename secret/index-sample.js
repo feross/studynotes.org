@@ -10,7 +10,7 @@ exports.gmail = {
 }
 
 // Keep here, because circular dep
-var config = require('../config')
+const config = require('../config')
 
 exports.stripe = config.isProd
   ? 'TODO'

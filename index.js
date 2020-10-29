@@ -1,39 +1,39 @@
 module.exports = Site
 
-var bodyParser = require('body-parser')
-var compression = require('compression')
-var connectMongo = require('connect-mongo')
-var connectSlashes = require('connect-slashes')
-var cookieParser = require('cookie-parser')
-var csrf = require('csurf')
-var debug = require('debug')('studynotes:site')
-var express = require('express')
-var favicon = require('serve-favicon')
-var flash = require('connect-flash')
-var http = require('http')
-var pug = require('pug')
-var moment = require('moment')
-var nib = require('nib')
-var parallel = require('run-parallel')
-var passport = require('passport')
-var path = require('path')
-var session = require('express-session')
-var stylus = require('stylus')
-var supportsColor = require('supports-color')
-var url = require('url')
-var useragent = require('useragent')
+const bodyParser = require('body-parser')
+const compression = require('compression')
+const connectMongo = require('connect-mongo')
+const connectSlashes = require('connect-slashes')
+const cookieParser = require('cookie-parser')
+const csrf = require('csurf')
+const debug = require('debug')('studynotes:site')
+const express = require('express')
+const favicon = require('serve-favicon')
+const flash = require('connect-flash')
+const http = require('http')
+const pug = require('pug')
+const moment = require('moment')
+const nib = require('nib')
+const parallel = require('run-parallel')
+const passport = require('passport')
+const path = require('path')
+const session = require('express-session')
+const stylus = require('stylus')
+const supportsColor = require('supports-color')
+const url = require('url')
+const useragent = require('useragent')
 
-var auth = require('./lib/auth')
-var config = require('./config')
-var model = require('./model')
-var pro = require('./lib/pro')
-var routes = require('./routes')
-var run = require('./run')
-var secret = require('./secret')
-var util = require('./util')
+const auth = require('./lib/auth')
+const config = require('./config')
+const model = require('./model')
+const pro = require('./lib/pro')
+const routes = require('./routes')
+const run = require('./run')
+const secret = require('./secret')
+const util = require('./util')
 
 pug.filters.style = function (str) {
-  var ret
+  let ret
   stylus(str, { compress: config.isProd })
     .use(nib())
     .render(function (err, css) { // sync
@@ -44,7 +44,7 @@ pug.filters.style = function (str) {
 }
 
 function Site (opts, done) {
-  var self = this
+  const self = this
   if (!(self instanceof Site)) return new Site(opts, done)
 
   self.port = opts.port || 4000
@@ -100,9 +100,9 @@ function Site (opts, done) {
 }
 
 Site.prototype.setupHeaders = function () {
-  var self = this
+  const self = this
   self.app.use(function (req, res, next) {
-    var extname = path.extname(url.parse(req.url).pathname) // eslint-disable-line node/no-deprecated-api
+    const extname = path.extname(url.parse(req.url).pathname) // eslint-disable-line node/no-deprecated-api
 
     // Add cross-domain header for fonts, required by spec, Firefox, and IE.
     if (['.eot', '.ttf', '.otf', '.woff', '.woff2'].indexOf(extname) >= 0) {
@@ -145,18 +145,18 @@ Site.prototype.setupHeaders = function () {
 }
 
 Site.prototype.setupStatic = function () {
-  var self = this
+  const self = this
 
   // Favicon middleware makes favicon requests fast
   self.app.use(favicon(path.join(config.root, 'static/favicon.ico')))
 
   // Serve static files
-  var opts = {
+  const opts = {
     maxAge: config.maxAge
   }
-  var stat = express.static(config.root + '/static', opts)
-  var out = express.static(config.root + '/out', opts)
-  var vendor = express.static(config.root + '/vendor', opts)
+  const stat = express.static(config.root + '/static', opts)
+  const out = express.static(config.root + '/out', opts)
+  const vendor = express.static(config.root + '/vendor', opts)
 
   self.app.use(stat)
   self.app.use(out)
@@ -170,7 +170,7 @@ Site.prototype.setupStatic = function () {
 }
 
 Site.prototype.setupLogger = function () {
-  var self = this
+  const self = this
   self.app.use(function (req, res, next) {
     // Log requests using the "debug" module so that the output is hidden by default.
     // Enable with DEBUG=* environment variable.
@@ -184,7 +184,7 @@ Site.prototype.setupLogger = function () {
 }
 
 Site.prototype.setupSessions = function () {
-  var self = this
+  const self = this
 
   self.app.use(cookieParser(secret.cookieSecret))
 
@@ -194,7 +194,7 @@ Site.prototype.setupSessions = function () {
   // parse application/json
   self.app.use(bodyParser.json())
 
-  var MongoStore = connectMongo(session)
+  const MongoStore = connectMongo(session)
   self.app.use(session({
     proxy: true, // trust the reverse proxy
     resave: false, // don't save if session is unmodified
@@ -222,9 +222,9 @@ Site.prototype.setupSessions = function () {
 }
 
 Site.prototype.setupLocals = function () {
-  var self = this
+  const self = this
 
-  var mobileFamilies = [
+  const mobileFamilies = [
     'amazon-silk',
     'android',
     'blackberry-webkit',
@@ -234,7 +234,7 @@ Site.prototype.setupLocals = function () {
     'nokia-browser'
   ]
 
-  var adBlock = [
+  const adBlock = [
     '136.24.8.53',
     '136.24.8.157',
     '67.161.169.40',
@@ -242,7 +242,7 @@ Site.prototype.setupLocals = function () {
   ]
 
   // Never show ads on urls that start with the following patterns
-  var ignoreUrls = [
+  const ignoreUrls = [
     '/about/',
     '/advertise/',
     '/contact/',
@@ -260,7 +260,7 @@ Site.prototype.setupLocals = function () {
   ]
 
   self.app.use(function (req, res, next) {
-    var agent = useragent.lookup(req.headers['user-agent'])
+    const agent = useragent.lookup(req.headers['user-agent'])
     req.agent = agent.family.replace(/ /g, '-').toLowerCase()
 
     if (mobileFamilies.indexOf(req.agent) >= 0) {
@@ -270,7 +270,7 @@ Site.prototype.setupLocals = function () {
 
     res.locals.req = req
 
-    var isIgnoreUrl = ignoreUrls.some(ignoreUrl => req.url.startsWith(ignoreUrl))
+    const isIgnoreUrl = ignoreUrls.some(ignoreUrl => req.url.startsWith(ignoreUrl))
     res.locals.ads = Boolean(req.query.ads) ||
       (adBlock.indexOf(req.ip) === -1 && !isIgnoreUrl)
 
@@ -279,7 +279,7 @@ Site.prototype.setupLocals = function () {
 }
 
 Site.prototype.debug = function () {
-  var args = [].slice.call(arguments)
+  const args = [].slice.call(arguments)
   debug.apply(null, args)
 }
 

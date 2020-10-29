@@ -1,6 +1,6 @@
 // Browse menu dropdown
 
-var $ = require('jquery')
+const $ = require('jquery')
 
 /**
  * Show or hide the browse menus. If no `menu` parameter is provided, then
@@ -15,7 +15,7 @@ function toggleBrowseMenu (menu, toggle) {
   menu.$browse.toggleClass('on', toggle)
 
   // Update chevron icon
-  var icon = menu.$btn.find('i')
+  const icon = menu.$btn.find('i')
   if (toggle) {
     icon
       .removeClass('icon-down-open')
@@ -27,7 +27,7 @@ function toggleBrowseMenu (menu, toggle) {
   }
 }
 
-var browseMenus = []
+const browseMenus = []
 window.closeBrowseMenus = function () {
   browseMenus.forEach(function (menu) {
     toggleBrowseMenu(menu, false)
@@ -36,11 +36,11 @@ window.closeBrowseMenus = function () {
 
 // Get all the browse menus in the page
 $('.browse').each(function (i, elem) {
-  var $elem = $(elem)
-  var name = /browse-(\w+)/.exec($elem.attr('class'))
+  const $elem = $(elem)
+  let name = /browse-(\w+)/.exec($elem.attr('class'))
   if (name) {
     name = name[1]
-    var menu = {
+    const menu = {
       name: name,
       $btn: $('.header .' + name),
       $browse: $elem,
@@ -48,7 +48,7 @@ $('.browse').each(function (i, elem) {
       browseHover: false
     }
 
-    var maybeOpenClose = function () {
+    const maybeOpenClose = function () {
       if (menu.btnHover || menu.browseHover) {
         // Only show on larger screens
         if (window.StudyNotes.isMobile) return

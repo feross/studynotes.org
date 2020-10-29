@@ -1,14 +1,14 @@
-var auto = require('run-auto')
-var debug = require('debug')('studynotes:routes/essay')
-var url = require('url')
+const auto = require('run-auto')
+const debug = require('debug')('studynotes:routes/essay')
+const url = require('url')
 
-var config = require('../config')
-var insertNativeAd = require('../lib/insert-native-ad')
-var model = require('../model')
+const config = require('../config')
+const insertNativeAd = require('../lib/insert-native-ad')
+const model = require('../model')
 
 module.exports = function (app) {
   app.get('/:collegeId/:essayId', function (req, res, next) {
-    var college = model.cache.colleges[req.params.collegeId]
+    const college = model.cache.colleges[req.params.collegeId]
     if (!college) return next()
 
     auto({
@@ -23,7 +23,7 @@ module.exports = function (app) {
           .exec(cb)
       },
       populateCollege: ['essay', function (r, cb) {
-        var user = r.essay && r.essay.user
+        const user = r.essay && r.essay.user
         if (user) {
           user.populate('college', cb)
         } else {
@@ -54,7 +54,7 @@ module.exports = function (app) {
         }
 
         if (req.session.free.indexOf(r.essay.id) === -1) {
-          var referrer = url.parse(req.get('referer') || '').host // eslint-disable-line node/no-deprecated-api
+          const referrer = url.parse(req.get('referer') || '').host // eslint-disable-line node/no-deprecated-api
           if (req.session.free.length < config.numFree ||
               (referrer && referrer.search(config.siteHost) === -1)) {
             req.session.free.push(r.essay.id)
@@ -69,11 +69,11 @@ module.exports = function (app) {
         return res.redirect('/submit/essay/')
       }
 
-      var index
+      let index
       r.essays.forEach(function (e, i) {
         if (e.id === r.essay.id) index = i
       })
-      var len = r.essays.length
+      const len = r.essays.length
 
       r.prev = r.essays[index === 0 ? len - 1 : index - 1]
       r.next = r.essays[index === len - 1 ? 0 : index + 1]

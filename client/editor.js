@@ -1,14 +1,14 @@
-var $ = require('jquery')
-var config = require('../config')
+const $ = require('jquery')
+const config = require('../config')
 
 function formatSelect2 (option) {
-  var $elem = $(option.element)
+  const $elem = $(option.element)
   return '<img class="select2-icon" src="' + config.siteOrigin + '/images/icon/' + $elem.val() + '.png"/>' + option.text
 }
 
 // Initialize select2 on <select> elements
 $(function () {
-  var $select2 = $('.select2')
+  const $select2 = $('.select2')
   if ($select2.length) {
     $select2.select2({
       escapeMarkup: function (m) { return m },
@@ -23,15 +23,15 @@ $(function () {
   }
 })
 
-var $selectCollege = $('select[name="college"]')
-var $style = $('#heroStyle')
-var currentHero = $selectCollege.val() || 'amjed'
+const $selectCollege = $('select[name="college"]')
+const $style = $('#heroStyle')
+let currentHero = $selectCollege.val() || 'amjed'
 
 if ($style.length) {
   $selectCollege.on('change', function () {
-    var newHero = $(this).val()
+    const newHero = $(this).val()
 
-    var html = $style.html()
+    const html = $style.html()
       .replace(new RegExp(currentHero + '\\.jpg', 'g'), newHero + '.jpg')
     $style.html(html)
 

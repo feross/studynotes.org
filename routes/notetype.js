@@ -1,20 +1,20 @@
-var auto = require('run-auto')
-var model = require('../model')
-var sort = require('../lib/sort')
+const auto = require('run-auto')
+const model = require('../model')
+const sort = require('../lib/sort')
 
 module.exports = function (app) {
   app.get('/:courseId/:notetypeId', function (req, res, next) {
-    var course = model.cache.courses[req.params.courseId]
+    const course = model.cache.courses[req.params.courseId]
     if (!course) return next()
 
-    var notetype = course.notetypes.filter(function (n) {
+    const notetype = course.notetypes.filter(function (n) {
       return n.id === req.params.notetypeId
     })[0]
     if (!notetype) return next()
 
     auto({
       notes: function (cb) {
-        var query = model.Note
+        const query = model.Note
           .find({ course: course.id, notetype: notetype.id, published: true })
           .sort('ordering -hits')
           .select('-body')
@@ -48,8 +48,8 @@ module.exports = function (app) {
       }
     }, function (err, r) {
       if (err) return next(err)
-      var notes = r.notes
-      var courseNotetype = r.courseNotetype
+      const notes = r.notes
+      const courseNotetype = r.courseNotetype
 
       if (notetype.hasChapters) {
         notes.sort(sort.sortChapters)

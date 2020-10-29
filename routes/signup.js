@@ -1,5 +1,5 @@
-var auth = require('../lib/auth')
-var model = require('../model')
+const auth = require('../lib/auth')
+const model = require('../model')
 
 module.exports = function (app) {
   // Page 1
@@ -17,7 +17,7 @@ module.exports = function (app) {
   })
 
   app.post('/signup', function (req, res, next) {
-    var user = new model.User({
+    const user = new model.User({
       name: req.body.name,
       email: req.body.email || (req.session.pro && req.session.pro.email),
       password: req.body.password
@@ -40,7 +40,7 @@ module.exports = function (app) {
         req.login(user, function (err) {
           if (err) return next(err)
           if (req.session.pro && req.session && req.session.returnTo) {
-            var url = req.session.returnTo
+            const url = req.session.returnTo
             delete req.session.returnTo
             res.redirect(url)
           } else {
@@ -61,10 +61,10 @@ module.exports = function (app) {
   })
 
   app.post('/signup2', function (req, res, next) {
-    var user = req.user
+    const user = req.user
     if (!user) return next(new Error('No logged in user'))
 
-    var college = model.cache.colleges[req.body.college]
+    let college = model.cache.colleges[req.body.college]
     if (college && college.id === 'common-app') college = null
 
     user.college = college && college.id
@@ -82,7 +82,7 @@ module.exports = function (app) {
         next(err)
       } else {
         if (req.session && req.session.returnTo) {
-          var url = req.session.returnTo
+          const url = req.session.returnTo
           delete req.session.returnTo
           res.redirect(url)
         } else {

@@ -1,10 +1,10 @@
-var model = require('./')
-var mongoose = require('mongoose')
-var plugin = require('./plugin')
-var validate = require('mongoose-validator')
-var util = require('../util')
+const model = require('./')
+const mongoose = require('mongoose')
+const plugin = require('./plugin')
+const validate = require('mongoose-validator')
+const util = require('../util')
 
-var Essay = new mongoose.Schema({
+const Essay = new mongoose.Schema({
   _id: {
     type: String
   },
@@ -41,28 +41,28 @@ var Essay = new mongoose.Schema({
 
 // Trim whitespace
 Essay.pre('validate', function (next) {
-  var self = this
+  const self = this
   if (typeof self.name === 'string') self.name = self.name.trim()
   next()
 })
 
 Essay.virtual('url').get(function () {
-  var self = this
-  var collegeSlug = self.populated('college') || self.college
+  const self = this
+  const collegeSlug = self.populated('college') || self.college
   return '/' + collegeSlug + '/' + self._id + '/'
 })
 
 Essay.virtual('searchDesc').get(function () {
-  var self = this
-  var collegeSlug = self.populated('college') || self.college
-  var college = model.cache.colleges[collegeSlug]
+  const self = this
+  const collegeSlug = self.populated('college') || self.college
+  const college = model.cache.colleges[collegeSlug]
 
   return college.shortName + ' Admissions Essay'
 })
 
 // Sanitize essay to strip bad html before saving
 Essay.pre('save', function (next) {
-  var self = this
+  const self = this
   if (self.isModified('prompt')) self.prompt = util.sanitizeHTML(self.prompt)
 
   if (self.isModified('body')) {

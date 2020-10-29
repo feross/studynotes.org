@@ -1,4 +1,4 @@
-var config = require('./config')
+const config = require('./config')
 
 exports.wsEndpoint = config.isProd
   ? 'wss://' + config.siteHost + '/websocket'

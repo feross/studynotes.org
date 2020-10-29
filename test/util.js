@@ -1,16 +1,16 @@
-var test = require('tape')
-var util = require('../util')
+const test = require('tape')
+const util = require('../util')
 
 test('util.hitsPerDay', function (t) {
-  var date = Date.now() - (1000 * 60 * 60 * 24) // 1 day ago
-  var hits = 1000
+  const date = Date.now() - (1000 * 60 * 60 * 24) // 1 day ago
+  const hits = 1000
   t.equal(util.hitsPerDay(hits, date), 1000)
   t.end()
 })
 
 test('util.sanitizeHTML', function (t) {
   // <script> tag is removed
-  var html = 'Hello<script>alert("hi")</script> world'
+  let html = 'Hello<script>alert("hi")</script> world'
   t.equal(util.sanitizeHTML(html), 'Hello world')
 
   // <p>, <h1>, <div> are allowed
@@ -36,7 +36,7 @@ test('util.randomBytes', function (t) {
 test('util.randomInt', function (t) {
   t.equal(util.randomInt(1), 0)
 
-  var r = util.randomInt(2)
+  const r = util.randomInt(2)
   t.ok(r === 0 || r === 1)
 
   t.end()

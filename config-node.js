@@ -1,6 +1,6 @@
-var config = require('./config')
-var fs = require('fs')
-var path = require('path')
+const config = require('./config')
+const fs = require('fs')
+const path = require('path')
 
 /**
  * Paths to different folders in this project. Used everywhere, so define them
@@ -10,7 +10,7 @@ var path = require('path')
 exports.root = __dirname
 exports.out = path.join(exports.root, 'out')
 
-var month = new Date().getMonth() + 1
+const month = new Date().getMonth() + 1
 
 /**
  * Number of "first click, free" essays that a given session can view before
@@ -46,8 +46,8 @@ exports.maxAge = config.isProd
  */
 exports.maxSlugLength = 40
 
-var MD5_JS
-var MD5_CSS
+let MD5_JS
+let MD5_CSS
 if (config.isProd) {
   MD5_JS = fs.readFileSync(exports.out + '/MD5_JS', 'utf8')
   MD5_CSS = fs.readFileSync(exports.out + '/MD5_CSS', 'utf8')

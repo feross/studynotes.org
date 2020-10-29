@@ -1,13 +1,13 @@
-var auto = require('run-auto')
-var escapeStringRegexp = require('escape-string-regexp')
-var model = require('../model')
+const auto = require('run-auto')
+const escapeStringRegexp = require('escape-string-regexp')
+const model = require('../model')
 
-var MAX_RESULTS = 8
-var MAX_QUERY_LENGTH = 255 // prevent mongoDB exceptions
+const MAX_RESULTS = 8
+const MAX_QUERY_LENGTH = 255 // prevent mongoDB exceptions
 
 module.exports = function (app) {
   app.get('/autocomplete', function (req, res, next) {
-    var q = req.query.q
+    const q = req.query.q
 
     autocomplete(q, function (err, results) {
       if (err) return next(err)
@@ -84,7 +84,7 @@ function autocomplete (query, cb) {
     if (err) return cb(err)
 
     // Merge result objects into one results array
-    var results = [].concat.apply([], Object.values(r)).map(function (result) {
+    let results = [].concat.apply([], Object.values(r)).map(function (result) {
       return {
         model: result,
         weight: weight(result, query)
@@ -129,10 +129,10 @@ function autocomplete (query, cb) {
  * @return {RegExp}
  */
 function regexForQuery (query) {
-  var tokens = query.split(' ')
-  var str = '(^|\\s)[^a-z]*' + escapeStringRegexp(tokens[0])
+  const tokens = query.split(' ')
+  let str = '(^|\\s)[^a-z]*' + escapeStringRegexp(tokens[0])
 
-  for (var i = 1, len = tokens.length; i < len; i++) {
+  for (let i = 1, len = tokens.length; i < len; i++) {
     str += '.*\\s[^a-z]*' + escapeStringRegexp(tokens[i])
   }
 
@@ -146,8 +146,8 @@ function regexForQuery (query) {
  * @return {Number} weight
  */
 function weight (result, query) {
-  var w = 0
-  var words = query.split(' ')
+  let w = 0
+  const words = query.split(' ')
 
   // Model-specific weights
   switch (result.constructor.modelName) {
@@ -175,7 +175,7 @@ function weight (result, query) {
   // Word match
   words.forEach(function (word) {
     if (word.length <= 3) return
-    var re = new RegExp('(^|\\s)' + escapeStringRegexp(word) + '($|\\s)', 'i')
+    const re = new RegExp('(^|\\s)' + escapeStringRegexp(word) + '($|\\s)', 'i')
     if (re.test(result.name)) {
       w += 100
     }
@@ -194,8 +194,8 @@ function weight (result, query) {
  */
 
 function highlight (str, query) {
-  var tokens = query.split(' ')
-  var reStr = ''
+  const tokens = query.split(' ')
+  let reStr = ''
 
   tokens.forEach(function (token, i) {
     if (i !== 0) {

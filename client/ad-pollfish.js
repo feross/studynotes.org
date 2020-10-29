@@ -1,8 +1,8 @@
-var $ = require('jquery')
-var cookies = require('cookies-js')
+const $ = require('jquery')
+const cookies = require('cookies-js')
 
-var config = require('../config')
-var util = require('../util')
+const config = require('../config')
+const util = require('../util')
 
 // Export jQuery because Pollfish relies on it (not newer than jquery 2.x)
 window.jQuery = $
@@ -56,7 +56,7 @@ function customSurveyAvailable (data) {
   // Do not show surveys that do not offer revenue
   if (typeof data.revenue !== 'number' || data.revenue === 0) return
 
-  var pageViewCount = Number(cookies.get('page_view_count') || 0)
+  const pageViewCount = Number(cookies.get('page_view_count') || 0)
 
   if (cookies.get('seen_survey') || pageViewCount < 3) {
     // If user has seen a survey recently or hasn't engaged with the site very much

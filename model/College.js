@@ -1,7 +1,7 @@
-var mongoose = require('mongoose')
-var plugin = require('./plugin')
+const mongoose = require('mongoose')
+const plugin = require('./plugin')
 
-var College = new mongoose.Schema({
+const College = new mongoose.Schema({
   _id: {
     type: String
   },

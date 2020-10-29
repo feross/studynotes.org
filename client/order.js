@@ -1,10 +1,10 @@
-var $ = require('jquery')
-var config = require('../config')
-var url = require('url')
-var util = require('../util')
+const $ = require('jquery')
+const config = require('../config')
+const url = require('url')
+const util = require('../util')
 
 if (window.StripeCheckout) {
-  var stripeHandler = window.StripeCheckout.configure({
+  window.StripeCheckout.configure({
     key: config.stripe,
     image: config.siteOrigin + '/images/stripe-image.png',
     locale: 'auto',
@@ -48,8 +48,8 @@ if (window.StripeCheckout) {
 }
 
 function openCheckout (opts) {
-  var query = url.parse(window.location.href, true).query // eslint-disable-line node/no-deprecated-api
-  var referrer = query.referrer || opts.referrer || window.location.href
+  const query = url.parse(window.location.href, true).query // eslint-disable-line node/no-deprecated-api
+  const referrer = query.referrer || opts.referrer || window.location.href
 
   opts.amount = config.product[opts.product].price
   opts.name = config.product[opts.product].desc

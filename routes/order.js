@@ -1,18 +1,18 @@
-var auto = require('run-auto')
-var config = require('../config')
-var debug = require('debug')('studynotes:routes/order')
-var model = require('../model')
-var secret = require('../secret')
+const auto = require('run-auto')
+const config = require('../config')
+const debug = require('debug')('studynotes:routes/order')
+const model = require('../model')
+const secret = require('../secret')
 
-var stripe = require('stripe')(secret.stripe)
+const stripe = require('stripe')(secret.stripe)
 
 module.exports = function (app) {
   app.post('/order', function (req, res, next) {
-    var product = req.body.product
-    var desc = config.product[product].desc
-    var amount = config.product[product].price
-    var email = req.body.email
-    var referrer = req.body.referrer
+    const product = req.body.product
+    const desc = config.product[product].desc
+    const amount = config.product[product].price
+    const email = req.body.email
+    const referrer = req.body.referrer
 
     auto({
       stripeCharge: function (cb) {
@@ -26,7 +26,7 @@ module.exports = function (app) {
       },
 
       order: ['stripeCharge', function (r, cb) {
-        var order = new model.Order({
+        const order = new model.Order({
           stripeEmail: email,
           stripeToken: req.body.id,
           amount: amount,
@@ -48,7 +48,7 @@ module.exports = function (app) {
             err: 'Your card was declined.'
           })
         } else if (err.errors) {
-          var errors = Object.values(err.errors).map((err) => err.message)
+          const errors = Object.values(err.errors).map((err) => err.message)
           return res.send({
             err: errors.join('. ')
           })

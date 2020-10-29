@@ -1,4 +1,4 @@
-var httpStatus = require('http-status-codes')
+const httpStatus = require('http-status-codes')
 
 module.exports = function (app) {
   // app.get('/500', function (req, res, next) {
@@ -20,7 +20,7 @@ module.exports = function (app) {
   if (global.rollbar) app.use(global.rollbar.errorHandler())
 
   app.use(function (err, req, res, next) {
-    var text = '\n=== EXCEPTION ===\n' +
+    const text = '\n=== EXCEPTION ===\n' +
       req.method + ': ' + req.url + '\n' +
       err.stack + '\n' +
       'Headers:' + '\n' +
@@ -40,7 +40,7 @@ module.exports = function (app) {
 
     console.error(text)
 
-    var code = 500
+    let code = 500
     if (typeof err.status === 'number') {
       code = err.status
     }

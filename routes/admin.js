@@ -1,5 +1,5 @@
-var auto = require('run-auto')
-var model = require('../model')
+const auto = require('run-auto')
+const model = require('../model')
 
 module.exports = function (app) {
   app.get('/admin', function (req, res, next) {
@@ -39,7 +39,7 @@ module.exports = function (app) {
   app.post('/admin', function (req, res, next) {
     if (!req.isAuthenticated() || !req.user.admin) return next()
 
-    var Model = req.body.model === 'essay'
+    const Model = req.body.model === 'essay'
       ? model.Essay
       : model.Note
 
@@ -49,7 +49,7 @@ module.exports = function (app) {
         if (err) return next(err)
         if (!item) return next(new Error('item not found'))
 
-        var action = req.body.action
+        const action = req.body.action
 
         if (action === 'publish' || action === 'unpublish') {
           item.published = (action === 'publish')

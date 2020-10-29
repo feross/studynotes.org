@@ -1,10 +1,10 @@
-var auth = require('../lib/auth')
-var config = require('../config')
-var mail = require('../lib/mail')
-var model = require('../model')
-var passport = require('passport')
-var util = require('../util')
-var waterfall = require('run-waterfall')
+const auth = require('../lib/auth')
+const config = require('../config')
+const mail = require('../lib/mail')
+const model = require('../model')
+const passport = require('passport')
+const util = require('../util')
+const waterfall = require('run-waterfall')
 
 module.exports = function (app) {
   app.get('/login', auth.returnTo, function (req, res) {
@@ -63,7 +63,7 @@ module.exports = function (app) {
         })
       },
       function (token, user, cb) {
-        var message = {}
+        const message = {}
         message.to = user.email
         message.subject = 'Study Notes Password Reset'
 
@@ -110,7 +110,7 @@ module.exports = function (app) {
       resetPasswordExpires: { $gt: Date.now() }
     }, setUserPassword)
 
-    var user
+    let user
     function setUserPassword (err, _user) {
       user = _user
       if (err || !user) {
@@ -140,7 +140,7 @@ module.exports = function (app) {
     function sendEmail (err) {
       if (err) return next(err)
 
-      var message = {}
+      const message = {}
       message.to = user.email
       message.subject = 'Your Study Notes password was changed'
 

@@ -1,14 +1,14 @@
-var auto = require('run-auto')
-var bcrypt = require('bcrypt')
-var config = require('../config')
-var mail = require('../lib/mail')
-var md5 = require('md5')
-var model = require('./')
-var mongoose = require('mongoose')
-var plugin = require('./plugin')
-var validate = require('mongoose-validator')
+const auto = require('run-auto')
+const bcrypt = require('bcrypt')
+const config = require('../config')
+const mail = require('../lib/mail')
+const md5 = require('md5')
+const model = require('./')
+const mongoose = require('mongoose')
+const plugin = require('./plugin')
+const validate = require('mongoose-validator')
 
-var User = new mongoose.Schema({
+const User = new mongoose.Schema({
   _id: {
     type: String
   },
@@ -107,7 +107,7 @@ User.virtual('lastName').get(function () {
 })
 
 User.virtual('mlaName').get(function () {
-  var split = this.name.split(' ')
+  const split = this.name.split(' ')
   if (split.length >= 2) {
     return split[1] + ', ' + split[0]
   } else {
@@ -133,7 +133,7 @@ User.virtual('hasGraduated').get(function () {
 })
 
 User.methods.totalHits = function (cb) {
-  var self = this
+  const self = this
   auto({
     essays: function (cb) {
       model.Essay
@@ -149,10 +149,10 @@ User.methods.totalHits = function (cb) {
     }
   }, function (err, r) {
     if (err) cb(err)
-    var essayHits = r.essays.reduce(function (total, essay) {
+    const essayHits = r.essays.reduce(function (total, essay) {
       return total + essay.hits
     }, 0)
-    var totalHits = r.notes.reduce(function (total, note) {
+    const totalHits = r.notes.reduce(function (total, note) {
       return total + note.hits
     }, essayHits)
 
@@ -167,14 +167,14 @@ User.methods.totalHits = function (cb) {
  */
 User.methods.gravatar = function (size, transparent) {
   size = size || 50
-  var fallback = transparent ? 'blank' : 'mm'
-  var hash = md5(this.emailLowerCase)
+  const fallback = transparent ? 'blank' : 'mm'
+  const hash = md5(this.emailLowerCase)
   return 'https://www.gravatar.com/avatar/' + hash + '?size=' + size + '&default=' + fallback
 }
 
 // Trim whitespace
 User.pre('validate', function (next) {
-  var self = this
+  const self = this
   if (typeof self.email === 'string') {
     self.email = self.email.trim()
     if (self.isModified('email')) self.emailLowerCase = self.email.toLowerCase()
@@ -184,7 +184,7 @@ User.pre('validate', function (next) {
 })
 
 User.pre('save', function (next) {
-  var self = this
+  const self = this
   self.wasNew = self.isNew // for post-save
 
   if (self.isModified('password')) {
@@ -203,7 +203,7 @@ User.post('save', function (user) {
   if (!user.wasNew) return
 
   // Send signup email
-  var message = {}
+  const message = {}
   message.to = user.email
   message.subject = 'Welcome to Study Notes'
 

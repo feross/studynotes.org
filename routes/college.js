@@ -1,9 +1,9 @@
-var auto = require('run-auto')
-var model = require('../model')
-var parallel = require('run-parallel')
+const auto = require('run-auto')
+const model = require('../model')
+const parallel = require('run-parallel')
 
 module.exports = function (app) {
-  var tabs = [
+  const tabs = [
     { name: 'Top College Essays', url: '/essays/', view: 'essays' },
     { name: 'Top Universities', url: '/colleges/', view: 'colleges' }
   ]
@@ -42,7 +42,7 @@ module.exports = function (app) {
   })
 
   app.get('/colleges', function (req, res, next) {
-    var colleges = model.cache.collegesByRank
+    const colleges = model.cache.collegesByRank
     model.Essay
       .countDocuments({ published: true })
       .exec(function (err, essayCount) {
@@ -64,7 +64,7 @@ module.exports = function (app) {
   })
 
   app.get('/:collegeId/about', function (req, res, next) {
-    var college = model.cache.colleges[req.params.collegeId]
+    const college = model.cache.colleges[req.params.collegeId]
     if (!college) return next()
 
     auto({
@@ -76,7 +76,7 @@ module.exports = function (app) {
           .exec(cb)
       }
     }, function (err, r) {
-      var essays = r.essays
+      const essays = r.essays
       if (err) return next(err)
 
       res.render('college-about', {
@@ -92,7 +92,7 @@ module.exports = function (app) {
   })
 
   app.get('/:collegeId', function (req, res, next) {
-    var college = model.cache.colleges[req.params.collegeId]
+    const college = model.cache.colleges[req.params.collegeId]
     if (!college) return next()
 
     auto({
@@ -112,7 +112,7 @@ module.exports = function (app) {
         }), cb)
       }]
     }, function (err, r) {
-      var essays = r.essays
+      const essays = r.essays
       if (err) return next(err)
 
       res.render('college', {

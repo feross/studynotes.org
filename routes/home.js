@@ -1,6 +1,6 @@
-var auto = require('run-auto')
-var extend = require('xtend/mutable')
-var model = require('../model')
+const auto = require('run-auto')
+const extend = require('xtend/mutable')
+const model = require('../model')
 
 module.exports = function (app) {
   app.get('/', function (req, res, next) {
@@ -41,7 +41,7 @@ module.exports = function (app) {
     }, function (err, r) {
       if (err) return next(err)
 
-      var locals = {
+      const locals = {
         hero: {
           title: 'Study Notes',
           desc: 'Fast, free study guides. <span class="hide-mobile">Trusted <span class="totalHits small">millions of</span> times (and&nbsp;counting)</span>',

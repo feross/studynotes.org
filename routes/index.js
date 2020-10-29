@@ -1,6 +1,6 @@
-var config = require('../config')
-var randomquote = require('../lib/randomquote')
-var url = require('url')
+const config = require('../config')
+const randomquote = require('../lib/randomquote')
+const url = require('url')
 
 module.exports = function (app) {
   require('./admin')(app)
@@ -26,9 +26,9 @@ module.exports = function (app) {
   require('./error')(app)
 
   // Add variables that all templates will expect
-  var render = app.render
+  const render = app.render
   app.render = function (view, opts, fn) {
-    var req = opts._locals.req
+    const req = opts._locals.req
 
     // Set default template local variables
     opts.view = view
@@ -44,20 +44,20 @@ module.exports = function (app) {
       opts.encodedUrl = encodeURIComponent(opts.url)
 
       // Force trailing slashes in URL
-      var u = url.parse(opts.url) // eslint-disable-line node/no-deprecated-api
+      const u = url.parse(opts.url) // eslint-disable-line node/no-deprecated-api
       if (u.pathname[u.pathname.length - 1] !== '/') {
         u.pathname += '/'
         opts.url = url.format(u)
       }
 
-      var returnTo = '?returnTo=' + encodeURIComponent(opts.url)
+      const returnTo = '?returnTo=' + encodeURIComponent(opts.url)
       opts.loginUrl += returnTo
       opts.signupUrl += returnTo
     }
 
     // If rendering a course-related view
     if (opts.course) {
-      var tabs = opts.course.notetypes.map(function (notetype) {
+      const tabs = opts.course.notetypes.map(function (notetype) {
         return {
           on: notetype.id === (opts.notetype && opts.notetype.id),
           name: notetype.name,

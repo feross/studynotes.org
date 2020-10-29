@@ -1,11 +1,11 @@
-var humane = require('humane-js')
+const humane = require('humane-js')
 
-var big = humane.create({
+const big = humane.create({
   timeout: 4000,
   baseCls: 'humane-jackedup'
 })
 
-var small = humane.create({
+const small = humane.create({
   clickToClose: true,
   timeout: 4000,
   baseCls: 'humane-libnotify'

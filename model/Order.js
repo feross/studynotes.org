@@ -1,10 +1,10 @@
-var config = require('../config')
-var mail = require('../lib/mail')
-var mongoose = require('mongoose')
-var plugin = require('./plugin')
-var validate = require('mongoose-validator')
+const config = require('../config')
+const mail = require('../lib/mail')
+const mongoose = require('mongoose')
+const plugin = require('./plugin')
+const validate = require('mongoose-validator')
 
-var Order = new mongoose.Schema({
+const Order = new mongoose.Schema({
   stripeEmail: {
     type: String,
     required: true,
@@ -50,9 +50,9 @@ Order.pre('save', function (next) {
 Order.post('save', function (order) {
   if (!order.wasNew) return
 
-  var message = {}
-  var email = order.stripeEmail
-  var desc = config.product[order.product].desc
+  const message = {}
+  const email = order.stripeEmail
+  const desc = config.product[order.product].desc
 
   if (order.product === 'pro') {
     message.to = email
@@ -75,7 +75,7 @@ Order.post('save', function (order) {
     })
   }
 
-  var reviewProducts = [
+  const reviewProducts = [
     'review-proofreading',
     'review-standard',
     'review-premium'

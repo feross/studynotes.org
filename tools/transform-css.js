@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-var autoprefixer = require('autoprefixer')
-var CleanCSS = require('clean-css')
-var fs = require('fs')
-var postcss = require('postcss')
+const autoprefixer = require('autoprefixer')
+const CleanCSS = require('clean-css')
+const fs = require('fs')
+const postcss = require('postcss')
 
-var css = fs.readFileSync(process.argv[2], 'utf8')
+let css = fs.readFileSync(process.argv[2], 'utf8')
 css = css.replace(/select2x2\.png/g, 'https://www.apstudynotes.org/select2/select2x2.png')
 css = css.replace(/\.\.\/font/g, 'https://www.apstudynotes.org/fontello/font')
 css = new CleanCSS().minify(css).styles

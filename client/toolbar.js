@@ -1,20 +1,20 @@
 // Floating content toolbar
 
-var $ = require('jquery')
-var $window = $(window)
-var $content = $('.content')
-var $toolbar = $('.content .toolbar')
-var $toolbarGhost = $('.content .toolbar-ghost')
+const $ = require('jquery')
+const $window = $(window)
+const $content = $('.content')
+const $toolbar = $('.content .toolbar')
+const $toolbarGhost = $('.content .toolbar-ghost')
 
 window.toolbarOnScroll = function () {
   if (!$toolbarGhost.length || !$content.length) return
 
-  var toolbarTop = $toolbarGhost.offset().top
-  var scrollTop = $window.scrollTop()
-  var contentBottom = $content.offset().top + $content.height()
+  const toolbarTop = $toolbarGhost.offset().top
+  const scrollTop = $window.scrollTop()
+  const contentBottom = $content.offset().top + $content.height()
 
   if (toolbarTop < scrollTop && scrollTop < contentBottom) {
-    var contentWidth = $content.width()
+    const contentWidth = $content.width()
     $toolbar
       .addClass('sticky')
       .css({ width: contentWidth + 40 })

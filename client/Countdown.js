@@ -1,5 +1,5 @@
-var $ = require('jquery')
-var moment = require('moment')
+const $ = require('jquery')
+const moment = require('moment')
 
 /**
  * Countdown to a specific date
@@ -7,7 +7,7 @@ var moment = require('moment')
  * @param {Date} date     Date to countdown to
  */
 function countdown (selector, date) {
-  var $elem = $(selector)
+  const $elem = $(selector)
 
   if ($elem.length === 0) return
 
@@ -17,9 +17,9 @@ function countdown (selector, date) {
   update()
 
   function update () {
-    var now = moment()
-    var diff = moment.duration(date.diff(now))
-    var obj = {
+    const now = moment()
+    const diff = moment.duration(date.diff(now))
+    const obj = {
       days: Math.floor(diff.asDays()),
       hours: diff.hours(),
       minutes: diff.minutes(),

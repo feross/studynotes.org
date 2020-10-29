@@ -1,8 +1,8 @@
-var config = require('../config')
-var mongoose = require('mongoose')
-var slug = require('slug')
-var util = require('../util')
-var validate = require('mongoose-validator')
+const config = require('../config')
+const mongoose = require('mongoose')
+const slug = require('slug')
+const util = require('../util')
+const validate = require('mongoose-validator')
 
 slug.defaults.mode = 'studynotes'
 slug.defaults.modes.studynotes = {
@@ -78,10 +78,10 @@ exports.absoluteUrl = function (schema) {
 exports.slug = function (schema, opts) {
   if (!opts || !opts.model) throw new Error('missing `model` option')
   schema.pre('save', function (next) {
-    var self = this
+    const self = this
     if (self._id) return next()
 
-    var initialSlug = slug(self.name)
+    let initialSlug = slug(self.name)
     if (initialSlug.length === 0) initialSlug = 'unicode'
 
     // Remove words from the end of the slug until the length is okay
@@ -89,7 +89,7 @@ exports.slug = function (schema, opts) {
       initialSlug = initialSlug.replace(/-([^-]*)$/, '')
     }
 
-    var num = 0 // number to append to slug to try to make it unique
+    let num = 0 // number to append to slug to try to make it unique
     checkSlug(initialSlug)
 
     function checkSlug (potentialSlug) {

@@ -1,6 +1,6 @@
 module.exports = function (app) {
   app.get('/search', function (req, res) {
-    var q = req.query.q
+    const q = req.query.q
 
     res.render('search', {
       url: '/search',

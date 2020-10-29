@@ -1,33 +1,33 @@
-var auto = require('run-auto')
-var config = require('../config')
-var fs = require('fs')
-var mongoose = require('mongoose')
-var once = require('once')
-var path = require('path')
-var secret = require('../secret')
-var sort = require('../lib/sort')
+const auto = require('run-auto')
+const config = require('../config')
+const fs = require('fs')
+const mongoose = require('mongoose')
+const once = require('once')
+const path = require('path')
+const secret = require('../secret')
+const sort = require('../lib/sort')
 
 // Tell Mongoose to use ES6 native promises
 mongoose.Promise = global.Promise
 
 // Object that contains the exported models, useful for iterating
 // over *only* the models, skipping methods like `connect`.
-var models = exports.models = {}
+const models = exports.models = {}
 
-var cache = exports.cache = {}
+const cache = exports.cache = {}
 
 // Set up each Schema in the /model folder
-var files = fs.readdirSync(__dirname)
+const files = fs.readdirSync(__dirname)
 files.forEach(function (file) {
-  var name = path.basename(file, '.js')
+  const name = path.basename(file, '.js')
   if (name === 'index' || name === 'plugin') return
 
   // Set Schema options
-  var schema = require('./' + name)
+  const schema = require('./' + name)
   schema.set('autoIndex', config.isProd) // no index during dev (slow)
 
   // Create Model object from Schema
-  var model = mongoose.model(name, schema)
+  const model = mongoose.model(name, schema)
 
   // Print index failures. This is useful when adding a new "unique" index and
   // there already exist duplicate keys in the database.

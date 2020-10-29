@@ -1,5 +1,5 @@
-var auto = require('run-auto')
-var model = require('../model')
+const auto = require('run-auto')
+const model = require('../model')
 
 module.exports = function (app) {
   app.get('/pro/:collegeId?', function (req, res, next) {
@@ -8,7 +8,7 @@ module.exports = function (app) {
       return res.redirect('/essays/')
     }
 
-    var college = model.cache.colleges[req.params.collegeId]
+    const college = model.cache.colleges[req.params.collegeId]
     if (!college && req.params.collegeId) return next()
 
     auto({
@@ -22,26 +22,26 @@ module.exports = function (app) {
       }
     }, function (err, r) {
       if (err) return next(err)
-      var heroTitle = college
+      const heroTitle = college
         ? college.shortName + ' Essays that Worked'
         : 'College Essays that Worked'
 
-      var heroImage = college
+      const heroImage = college
         ? college.id + '.jpg'
         : 'amjed.jpg'
 
-      var collegeEssays = college
+      const collegeEssays = college
         ? r.essays.filter((e) => e.college.id === college.id)
         : r.essays
-      var otherEssays = college
+      const otherEssays = college
         ? r.essays.filter((e) => e.college.id !== college.id)
         : r.essays
 
-      var otherColleges = college
+      const otherColleges = college
         ? model.cache.collegesByRank.filter((c) => c.id !== college.id)
         : model.cache.collegesByRank
 
-      var collegeList, collegeListAnd
+      let collegeList, collegeListAnd
       if (!college || college.id === 'stanford' || college.id === 'common-app') {
         collegeList = 'Stanford, Harvard, Princeton'
         collegeListAnd = 'Stanford, Harvard, and Princeton'
@@ -53,7 +53,7 @@ module.exports = function (app) {
         collegeListAnd = college.shortName + ', Stanford, and Harvard'
       }
 
-      var title = college
+      const title = college
         ? college.shortName + ' Essays that Worked'
         : 'College Essays that Worked'
 

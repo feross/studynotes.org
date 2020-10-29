@@ -1,8 +1,8 @@
-var model = require('../model')
+const model = require('../model')
 
 module.exports = function (app) {
   app.get('/courses', function (req, res) {
-    var courses = Object.values(model.cache.courses)
+    const courses = Object.values(model.cache.courses)
     res.render('courses', {
       courses: courses,
       title: 'AP Courses',
@@ -16,7 +16,7 @@ module.exports = function (app) {
   })
 
   app.get('/:courseId', function (req, res, next) {
-    var course = model.cache.courses[req.params.courseId]
+    const course = model.cache.courses[req.params.courseId]
     if (!course) return next()
 
     res.render('course', {

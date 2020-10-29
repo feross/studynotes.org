@@ -2,12 +2,12 @@ require('./rollbar')
 
 module.exports = run
 
-var extend = require('xtend')
-var LiveUpdater = require('./liveupdater')
-var minimist = require('minimist')
-var Site = require('./')
+const extend = require('xtend')
+const LiveUpdater = require('./liveupdater')
+const minimist = require('minimist')
+const Site = require('./')
 
-var argv = minimist(process.argv.slice(2))
+const argv = minimist(process.argv.slice(2))
 
 /**
  * Run the given server, passing in command line options as options.

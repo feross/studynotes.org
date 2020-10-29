@@ -1,10 +1,10 @@
-var extend = require('xtend/mutable')
+const extend = require('xtend/mutable')
 
 /**
  * Is site running in production?
  * @type {Boolean}
  */
-var isProd = exports.isProd = process.browser
+const isProd = exports.isProd = process.browser
   ? !/^local/.test(window.location.hostname)
   : process.env.NODE_ENV === 'production'
 
@@ -53,5 +53,5 @@ exports.stripe = isProd
   ? 'pk_live_uQgfjT84EYgqyXWasBY0xuOE'
   : 'pk_test_7PVccMkybStuChGcJD0HAi40'
 
-var config = require('./config-node')
+const config = require('./config-node')
 extend(exports, config)

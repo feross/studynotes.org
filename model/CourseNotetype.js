@@ -1,7 +1,7 @@
-var mongoose = require('mongoose')
-var plugin = require('./plugin')
+const mongoose = require('mongoose')
+const plugin = require('./plugin')
 
-var CourseNotetype = new mongoose.Schema({
+const CourseNotetype = new mongoose.Schema({
   course: {
     type: String,
     ref: 'Course',
@@ -17,8 +17,8 @@ var CourseNotetype = new mongoose.Schema({
 })
 
 CourseNotetype.virtual('url').get(function () {
-  var courseId = this.populated('course') || this.course
-  var notetypeId = this.populated('notetype') || this.notetype
+  const courseId = this.populated('course') || this.course
+  const notetypeId = this.populated('notetype') || this.notetype
 
   return '/' + courseId + '/' + notetypeId + '/'
 })

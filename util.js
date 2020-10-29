@@ -1,5 +1,5 @@
-var extend = require('xtend/mutable')
-var url = require('url')
+const extend = require('xtend/mutable')
+const url = require('url')
 
 module.exports = exports = require('./util-node')
 

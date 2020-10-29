@@ -1,7 +1,7 @@
-var crypto = require('crypto')
-var htmlParser = require('html-parser')
-var { JSDOM } = require('jsdom')
-var { loremIpsum } = require('lorem-ipsum')
+const crypto = require('crypto')
+const htmlParser = require('html-parser')
+const { JSDOM } = require('jsdom')
+const { loremIpsum } = require('lorem-ipsum')
 
 exports.truncate = require('html-truncate')
 
@@ -12,12 +12,12 @@ exports.truncate = require('html-truncate')
  * @return {number}
  */
 exports.hitsPerDay = function (hits, date) {
-  var days = (Date.now() - new Date(date)) / 86400000
+  let days = (Date.now() - new Date(date)) / 86400000
   days = days || 0.00001 // prevent divide by zero
   return Math.round(hits / days)
 }
 
-var defaultElementsWhitelist = [
+const defaultElementsWhitelist = [
   'p', 'br',
   'strong', 'b', 'em', 'i', 'u',
   'ol', 'ul', 'li',
@@ -26,7 +26,7 @@ var defaultElementsWhitelist = [
   'sub', 'sup'
 ]
 
-var defaultAttributesWhitelist = [
+const defaultAttributesWhitelist = [
 
 ]
 
@@ -43,7 +43,7 @@ exports.sanitizeHTML = function (html, elementsWhitelist, attributesWhitelist) {
   elementsWhitelist || (elementsWhitelist = defaultElementsWhitelist)
   attributesWhitelist || (attributesWhitelist = defaultAttributesWhitelist)
 
-  var sanitized = htmlParser.sanitize(html, {
+  const sanitized = htmlParser.sanitize(html, {
     elements: function (name) {
       return elementsWhitelist.indexOf(name) === -1
     },
@@ -73,13 +73,13 @@ exports.convertToPaywallText = function (html, numPreview) {
   const { window } = new JSDOM(html)
   const { document } = window
 
-  var nodes = document.querySelectorAll(
+  const nodes = document.querySelectorAll(
     'body > :not(:first-child):not(:nth-child(2))'
   )
 
   Array.from(nodes).forEach(function (node) {
-    var words = node.innerHTML.split(' ').length
-    var sentences = node.innerHTML.split('. ').length
+    const words = node.innerHTML.split(' ').length
+    const sentences = node.innerHTML.split('. ').length
     node.innerHTML = loremIpsum({
       count: sentences,
       sentenceLowerBound: Math.floor((words / sentences) / 1.5),

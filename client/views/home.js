@@ -1,5 +1,5 @@
-var $ = require('jquery')
-var loadScript = require('load-script')
+const $ = require('jquery')
+const loadScript = require('load-script')
 
 module.exports = function () {
   // Delay Twitter timeline widget until after onload

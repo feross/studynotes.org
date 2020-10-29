@@ -1,22 +1,22 @@
 // Search and autocomplete
 
-var config = require('../config')
+const config = require('../config')
 
-var $ = require('jquery')
-var $autocomplete = $('.header .autocomplete')
-var $headerLeft = $('.header .left')
-var $headerRight = $('.header .right')
-var $search = $('.header .search')
-var $searchInput = $('.header .search input')
+const $ = require('jquery')
+const $autocomplete = $('.header .autocomplete')
+const $headerLeft = $('.header .left')
+const $headerRight = $('.header .right')
+const $search = $('.header .search')
+const $searchInput = $('.header .search input')
 
 /**
  * Set search bar's width so it fills the header correctly.
  */
 window.updateSearchWidth = function () {
-  var headerLeftWidth = $headerLeft.width()
-  var headerRightWidth = $headerRight.width()
+  const headerLeftWidth = $headerLeft.width()
+  const headerRightWidth = $headerRight.width()
 
-  var styles = {
+  const styles = {
     'margin-left': headerLeftWidth,
     'margin-right': headerRightWidth
   }
@@ -29,9 +29,9 @@ window.updateSearchWidth()
 
 // Autocomplete
 
-var lastAutocompleteTime = +(new Date())
-var lastAutocompleteQuery
-var autocompletePosition = 0 // 0 = nothing selected, 1 = first result
+let lastAutocompleteTime = +(new Date())
+let lastAutocompleteQuery
+let autocompletePosition = 0 // 0 = nothing selected, 1 = first result
 
 /**
  * Set the selected result in the autocomplete view to the item at `position`.
@@ -42,8 +42,8 @@ function setAutocompletePosition (position) {
     ? 1
     : position
 
-  var $results = $('.header .autocomplete .result')
-  var len = $results.length
+  const $results = $('.header .autocomplete .result')
+  const len = $results.length
 
   // Handle numbers that are negative or too big by wrapping around
   if (autocompletePosition < 0) {
@@ -53,7 +53,7 @@ function setAutocompletePosition (position) {
 
   $results.removeClass('selected')
   if (autocompletePosition !== 0) {
-    var result = $results[autocompletePosition - 1]
+    const result = $results[autocompletePosition - 1]
     $(result).addClass('selected')
   }
 }
@@ -72,8 +72,8 @@ function doSearchAutocomplete () {
   } else {
     $search.addClass('searching')
 
-    var params = { q: $searchInput.val() }
-    var time = +(new Date())
+    const params = { q: $searchInput.val() }
+    const time = +(new Date())
     $.get('/autocomplete/', params, function (data) {
       if ($searchInput.val() === '' || time < lastAutocompleteTime) return
 
@@ -138,7 +138,7 @@ $searchInput.on('focus', function () {
 $searchInput.on('keyup', doSearchAutocomplete)
 
 $('.header .autocomplete').on('mouseover', '.result', function () {
-  var position = Number($(this).attr('data-position'))
+  const position = Number($(this).attr('data-position'))
   setAutocompletePosition(position)
 })
 
@@ -183,7 +183,7 @@ $('.header .search form').on('submit', function (e) {
 
   e.preventDefault()
 
-  var $selected = $('.header .autocomplete .result.selected')
+  const $selected = $('.header .autocomplete .result.selected')
   if ($selected.length) {
     window.location = $selected.attr('href')
   }

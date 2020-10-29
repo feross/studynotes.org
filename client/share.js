@@ -1,8 +1,8 @@
-var $ = require('jquery')
-var functionWithTimeout = require('function-with-timeout')
+const $ = require('jquery')
+const functionWithTimeout = require('function-with-timeout')
 
-var url = window.location.href
-var encodedUrl = encodeURIComponent(url)
+const url = window.location.href
+const encodedUrl = encodeURIComponent(url)
 
 $('.icon-facebook-squared').on('click', function (e) {
   e.preventDefault()
@@ -15,7 +15,7 @@ $('.icon-facebook-squared').on('click', function (e) {
 
 $('.icon-twitter').on('click', function (e) {
   e.preventDefault()
-  var text = encodeURIComponent('Retweet to save a life!')
+  const text = encodeURIComponent('Retweet to save a life!')
   window.open(
     'https://twitter.com/intent/tweet?text=' + text + '&url=' + encodedUrl +
     '&original_referer=' + encodedUrl,
@@ -35,8 +35,8 @@ $('.icon-tumblr').on('click', function (e) {
 
 $('.icon-message').on('click', function (e) {
   e.preventDefault()
-  var text = encodeURIComponent('I\'m studying this right now:\n\n' + url)
-  var smsUrl = 'sms:&body=' + text
+  const text = encodeURIComponent('I\'m studying this right now:\n\n' + url)
+  const smsUrl = 'sms:&body=' + text
   window.ga('send', 'social', 'SMS', 'Share', url, {
     hitCallback: functionWithTimeout(function () {
       window.location = smsUrl

@@ -6,8 +6,8 @@
  * when adding new generated fields to the schema.
  */
 
-var model = require('../model')
-var runParallelLimit = require('run-parallel-limit')
+const model = require('../model')
+const runParallelLimit = require('run-parallel-limit')
 
 model.connect(function (err) {
   if (err) throw err

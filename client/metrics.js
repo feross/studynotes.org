@@ -1,6 +1,6 @@
-var $ = require('jquery')
-var functionWithTimeout = require('function-with-timeout')
-var url = require('url')
+const $ = require('jquery')
+const functionWithTimeout = require('function-with-timeout')
+const url = require('url')
 
 // Track note and essay submissions
 trackFormSubmit('form.submit-essay', 'submit', 'essay')
@@ -18,7 +18,7 @@ if ($('.subscribe-on-blur').length) {
   window.ga('send', 'event', 'pro', 'paywall')
 }
 
-var query = url.parse(window.location.href, true).query // eslint-disable-line node/no-deprecated-api
+const query = url.parse(window.location.href, true).query // eslint-disable-line node/no-deprecated-api
 
 // Track iOS standalone web app page views
 if (window.navigator.standalone) {
@@ -32,7 +32,7 @@ if (typeof window.matchMedia === 'function' &&
 }
 
 // Send tracking events from URL query parameters
-var e
+let e
 if (query.ga) {
   e = query.ga.split('.')
   if (e.length === 2) {
@@ -45,7 +45,7 @@ if (query.ga) {
 }
 
 function trackFormSubmit (selector, eventCategory, eventAction) {
-  var form = $(selector)
+  const form = $(selector)
 
   function onSubmit (e) {
     e.preventDefault()

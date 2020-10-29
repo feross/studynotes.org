@@ -1,15 +1,15 @@
-var parallel = require('run-parallel')
+const parallel = require('run-parallel')
 
-var insertNativeAd = require('../lib/insert-native-ad')
-var model = require('../model')
-var sort = require('../lib/sort')
+const insertNativeAd = require('../lib/insert-native-ad')
+const model = require('../model')
+const sort = require('../lib/sort')
 
 module.exports = function (app) {
   app.get('/:courseId/:notetypeId/:noteId', function (req, res, next) {
-    var course = model.cache.courses[req.params.courseId]
+    const course = model.cache.courses[req.params.courseId]
     if (!course) return next()
 
-    var notetype = course.notetypes.filter(function (n) {
+    const notetype = course.notetypes.filter(function (n) {
       return n.id === req.params.notetypeId
     })[0]
     if (!notetype) return next()
@@ -44,11 +44,11 @@ module.exports = function (app) {
         r.notes.sort(sort.sortChapters)
       }
 
-      var index
+      let index
       r.notes.forEach(function (n, i) {
         if (n.id === r.note.id) index = i
       })
-      var len = r.notes.length
+      const len = r.notes.length
 
       r.prev = r.notes[index === 0 ? len - 1 : index - 1]
       r.next = r.notes[index === len - 1 ? 0 : index + 1]

@@ -1,7 +1,7 @@
-var auth = require('../lib/auth')
-var auto = require('run-auto')
-var mail = require('../lib/mail')
-var model = require('../model')
+const auth = require('../lib/auth')
+const auto = require('run-auto')
+const mail = require('../lib/mail')
+const model = require('../model')
 
 module.exports = function (app) {
   app.get('/submit/essay', auth.ensureAuth, function (req, res) {
@@ -22,13 +22,13 @@ module.exports = function (app) {
   })
 
   app.post('/submit/essay', auth.ensureAuth, function (req, res, next) {
-    var college = model.cache.colleges[req.body.college]
+    const college = model.cache.colleges[req.body.college]
     if (!college) {
       req.flash('error', 'Please select a university from the list.')
       req.flash('essay', req.body)
       return res.redirect('/submit/essay/')
     }
-    var isEdit = req.body._id
+    const isEdit = req.body._id
 
     auto({
       essay: function (cb) {
@@ -52,7 +52,7 @@ module.exports = function (app) {
         }
       }],
       save: ['permission', function (r, cb) {
-        var essay = r.essay
+        const essay = r.essay
 
         essay.name = req.body.name
         essay.prompt = req.body.prompt
@@ -98,13 +98,13 @@ module.exports = function (app) {
   })
 
   app.post('/submit/note', auth.ensureAuth, function (req, res, next) {
-    var course = model.cache.courses[req.body.course]
+    const course = model.cache.courses[req.body.course]
     if (!course) {
       req.flash('error', 'Please select a course from the list.')
       req.flash('note', req.body)
       return res.redirect('/submit/note/')
     }
-    var notetype = course.notetypes.filter(function (n) {
+    const notetype = course.notetypes.filter(function (n) {
       return n.id === req.body.notetype
     })[0]
     if (!notetype) {
@@ -112,7 +112,7 @@ module.exports = function (app) {
       req.flash('note', req.body)
       return res.redirect('/submit/note/')
     }
-    var isEdit = req.body._id
+    const isEdit = req.body._id
 
     auto({
       note: function (cb) {
@@ -136,7 +136,7 @@ module.exports = function (app) {
         }
       }],
       save: ['permission', function (r, cb) {
-        var note = r.note
+        const note = r.note
 
         note.name = req.body.name
         note.body = req.body.body
