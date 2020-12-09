@@ -1,7 +1,9 @@
+const $ = require('jquery')
+window.jQuery = window.$ = $
+
 require('transparency')
 require('select2')
 
-const $ = require('jquery')
 const cookies = require('cookies-js')
 
 const config = require('../config')
