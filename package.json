@@ -13,25 +13,6 @@
     "select2": "./vendor/select2/select2.js",
     "transparency": "./node_modules/transparency/dist/transparency.min.js"
   },
-  "browserify": {
-    "transform": [
-      "browserify-shim"
-    ]
-  },
-  "browserify-shim": {
-    "select2": {
-      "exports": "Select2",
-      "depends": [
-        "jquery:jQuery"
-      ]
-    },
-    "transparency": {
-      "exports": "Transparency",
-      "depends": [
-        "jquery:jQuery"
-      ]
-    }
-  },
   "bugs": {
     "url": "https://github.com/feross/studynotes.org/issues"
   },
@@ -93,7 +74,6 @@
   "devDependencies": {
     "autoprefixer": "^9.8.6",
     "browserify": "^16.5.2",
-    "browserify-shim": "^3.8.14",
     "clean-css": "^4.2.3",
     "husky": "^4.3.5",
     "nodemon": "^2.0.6",
