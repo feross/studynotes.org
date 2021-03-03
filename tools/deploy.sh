@@ -3,7 +3,7 @@
 set -e
 
 if [ -d "/home/feross/www/build-studynotes.org" ]; then
-  echo "ERROR: Build folder already exists. Is another build in progress?"
+  echo "ERROR: Build folder exists. Is another build in progress?"
   exit 1
 fi
 
@@ -17,7 +17,7 @@ cp -R /home/feross/www/studynotes.org /home/feross/www/build-studynotes.org
 cd /home/feross/www/build-studynotes.org && git pull
 cd /home/feross/www/build-studynotes.org && rm -rf node_modules
 cd /home/feross/www/build-studynotes.org && npm ci --no-progress
-cd /home/feross/www/build-studynotes.org && npm run build
+cd /home/feross/www/build-studynotes.org && npm run build --if-present
 cd /home/feross/www/build-studynotes.org && npm prune --production --no-progress
 
 sudo supervisorctl stop studynotes-site:
