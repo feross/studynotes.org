@@ -54,6 +54,14 @@ module.exports = function (app) {
             return res.redirect('/login/forgot')
           }
 
+          if (
+            user.resetPasswordExpires &&
+            Date.now() + 300000 < user.resetPasswordExpires
+          ) {
+            req.flash('error', 'Password already reset in the last 5 minutes. Please try again later.')
+            return res.redirect('/login/forgot')
+          }
+
           user.resetPasswordToken = token
           user.resetPasswordExpires = Date.now() + 3600000 // 1 hour
 
