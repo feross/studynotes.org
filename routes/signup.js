@@ -1,6 +1,5 @@
 const auth = require('../lib/auth')
 const model = require('../model')
-const mail = require('../lib/mail')
 
 module.exports = function (app) {
   // Page 1
@@ -37,13 +36,6 @@ module.exports = function (app) {
       } else if (err) {
         next(err)
       } else {
-        mail.notifyAdmin('New User', {
-          user,
-          req
-        }, function (err) {
-          if (err) throw err
-        })
-
         // Automatically login the user
         req.login(user, function (err) {
           if (err) return next(err)

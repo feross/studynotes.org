@@ -226,9 +226,10 @@ User.post('save', function (user) {
 
     '— Feross'
 
-  mail.send(message, function (err) {
-    if (err) throw err
-  })
+  // Temporarily disable signup email
+  // mail.send(message, function (err) {
+  //   if (err) throw err
+  // })
 
   // subscribe the user to MailChimp "Study Notes Users" list
   mail.subscribeUser(user, function (err) {
