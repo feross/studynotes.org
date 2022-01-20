@@ -234,10 +234,6 @@ User.post('save', function (user) {
   mail.subscribeUser(user, function (err) {
     if (err) console.error('MailChimp: Failed to subscribe user ' + user.email)
   })
-
-  mail.notifyAdmin('New User', user, function (err) {
-    if (err) throw err
-  })
 })
 
 User.methods.comparePassword = function (password, cb) {
