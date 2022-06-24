@@ -38,7 +38,7 @@
     "http-status-codes": "^2.1.4",
     "humane-js": "^3.2.2",
     "jquery": "^3.5.1",
-    "jsdom": "^16.4.0",
+    "jsdom": "^16.5.0",
     "keymaster": "^1.6.2",
     "load-script": "^1.0.0",
     "lodash.countby": "^4.6.0",
