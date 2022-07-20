@@ -81,7 +81,7 @@
     "run-parallel-limit": "^1.0.6",
     "standard": "*",
     "tape": "^5.0.1",
-    "terser": "^5.5.1",
+    "terser": "^5.14.2",
     "transparency": "^1.0.0",
     "watchify": "^3.11.1"
   },
