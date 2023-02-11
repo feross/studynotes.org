@@ -76,7 +76,7 @@
     "browserify": "^16.5.2",
     "clean-css": "^4.2.3",
     "husky": "^4.3.5",
-    "nodemon": "^2.0.6",
+    "nodemon": "^2.0.20",
     "postcss": "^7.0.32",
     "run-parallel-limit": "^1.0.6",
     "standard": "*",
