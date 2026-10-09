@@ -63,7 +63,7 @@ exports.cssPath = '/main' + (MD5_CSS ? '-' + MD5_CSS : '') + '.css'
 /**
  * String to append to the end of all emails
  */
-exports.emailFooter = 'Study Notes LLC, PO Box 19678, Stanford, CA 94305'
+exports.emailFooter = 'WebTorrent LLC, PO Box 19678, Stanford, CA 94305'
 
 if (config.isProd) {
   exports.inline = {
