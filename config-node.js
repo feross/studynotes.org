@@ -11,12 +11,6 @@ exports.root = __dirname
 exports.out = path.join(exports.root, 'out')
 
 /**
- * Is it college essay season? Used to determine whether to show in-house ads for
- * essay editing services vs. third-party ads.
- */
-exports.essaySeason = false
-
-/**
  * Maximum time to cache static resources (in milliseconds). This value is
  * sent in the HTTP cache-control header.
  *

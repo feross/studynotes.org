@@ -22,11 +22,7 @@ block content
 
   +toolbar()
 
-  if config.essaySeason
-    include ads/essay-review
-    hr
-  else
-    include ads/adsense-in-content
+  include ads/adsense-in-content
 
   if essays.length
     +entries(essays)
