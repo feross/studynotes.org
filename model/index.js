@@ -1,4 +1,3 @@
-const auto = require('run-auto')
 const config = require('../config')
 const fs = require('fs')
 const mongoose = require('mongoose')
@@ -6,9 +5,6 @@ const once = require('once')
 const path = require('path')
 const secret = require('../secret')
 const sort = require('../lib/sort')
-
-// Tell Mongoose to use ES6 native promises
-mongoose.Promise = global.Promise
 
 // Object that contains the exported models, useful for iterating
 // over *only* the models, skipping methods like `connect`.
@@ -39,65 +35,50 @@ files.forEach(function (file) {
   exports[name] = models[name] = model
 })
 
+exports.mongoUrl = 'mongodb://' +
+  secret.mongo.host + ':' +
+  secret.mongo.port + '/' +
+  secret.mongo.database
+
 exports.connect = function (cb) {
   cb || (cb = function () {})
   cb = once(cb)
   mongoose.set('debug', !config.isProd)
 
-  mongoose.connect(
-    'mongodb://' +
-    secret.mongo.host + ':' +
-    secret.mongo.port + '/' +
-    secret.mongo.database,
-    { poolSize: 20, useNewUrlParser: true, useUnifiedTopology: true }
-  )
   mongoose.connection.on('error', cb)
-  mongoose.connection.on('open', function () {
-    loadCache(cb)
-  })
+  mongoose.connect(exports.mongoUrl, { maxPoolSize: 20 })
+    .then(loadCache)
+    .then(() => cb(null), cb)
 }
 
-function loadCache (done) {
-  auto({
-    courses: function (cb) {
-      models.Course
-        .find()
-        .populate('notetypes')
-        .exec(cb)
-    },
-    colleges: function (cb) {
-      models.College
-        .find()
-        .exec(cb)
-    }
-  }, function (err, r) {
-    if (err) return done(err)
+async function loadCache () {
+  const [courses, colleges] = await Promise.all([
+    models.Course.find().populate('notetypes'),
+    models.College.find()
+  ])
 
-    cache.courses = {}
-    r.courses.forEach(function (course) {
-      cache.courses[course._id] = course
-    })
-
-    cache.colleges = {}
-    r.colleges.forEach(function (college) {
-      cache.colleges[college._id] = college
-    })
-    cache.coursesByName = Object.values(cache.courses).sort(sort.byProp('name'))
-    cache.coursesByHits = Object.values(cache.courses).sort(sort.byProp('hits', true))
-    cache.collegesByName = Object.values(cache.colleges).sort(function (a, b) {
-      // force common-app to sort first
-      if (a.id === 'common-app') return -1
-      if (b.id === 'common-app') return 1
-      return sort.byProp('name')(a, b)
-    })
-    cache.collegesByShortName = Object.values(cache.colleges).sort(function (a, b) {
-      // force common-app to sort first
-      if (a.id === 'common-app') return -1
-      if (b.id === 'common-app') return 1
-      return sort.byProp('shortName')(a, b)
-    })
-    cache.collegesByRank = Object.values(cache.colleges).sort(sort.byProp('rank'))
-
-    done(err)
+  cache.courses = {}
+  courses.forEach(function (course) {
+    cache.courses[course._id] = course
   })
+
+  cache.colleges = {}
+  colleges.forEach(function (college) {
+    cache.colleges[college._id] = college
+  })
+  cache.coursesByName = Object.values(cache.courses).sort(sort.byProp('name'))
+  cache.coursesByHits = Object.values(cache.courses).sort(sort.byProp('hits', true))
+  cache.collegesByName = Object.values(cache.colleges).sort(function (a, b) {
+    // force common-app to sort first
+    if (a.id === 'common-app') return -1
+    if (b.id === 'common-app') return 1
+    return sort.byProp('name')(a, b)
+  })
+  cache.collegesByShortName = Object.values(cache.colleges).sort(function (a, b) {
+    // force common-app to sort first
+    if (a.id === 'common-app') return -1
+    if (b.id === 'common-app') return 1
+    return sort.byProp('shortName')(a, b)
+  })
+  cache.collegesByRank = Object.values(cache.colleges).sort(sort.byProp('rank'))
 }

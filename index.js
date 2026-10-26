@@ -2,7 +2,7 @@ module.exports = Site
 
 const bodyParser = require('body-parser')
 const compression = require('compression')
-const connectMongo = require('connect-mongo')
+const MongoStore = require('connect-mongo')
 const connectSlashes = require('connect-slashes')
 const cookieParser = require('cookie-parser')
 const csrf = require('csurf')
@@ -194,18 +194,12 @@ Site.prototype.setupSessions = function () {
   // parse application/json
   self.app.use(bodyParser.json())
 
-  const MongoStore = connectMongo(session)
   self.app.use(session({
     proxy: true, // trust the reverse proxy
     resave: false, // don't save if session is unmodified
     saveUninitialized: false, // don't save new/unmodified sessions
     secret: secret.cookieSecret, // prevent cookie tampering
-    store: new MongoStore({
-      url: 'mongodb://' +
-        secret.mongo.host + ':' +
-        secret.mongo.port + '/' +
-        secret.mongo.database
-    })
+    store: MongoStore.create({ mongoUrl: model.mongoUrl })
   }))
   self.app.use(csrf())
   self.app.use(function (req, res, next) {

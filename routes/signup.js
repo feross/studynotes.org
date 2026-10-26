@@ -16,37 +16,38 @@ module.exports = function (app) {
     }
   })
 
-  app.post('/signup', function (req, res, next) {
+  app.post('/signup', async function (req, res, next) {
     const user = new model.User({
       name: req.body.name,
       email: req.body.email || (req.session.pro && req.session.pro.email),
       password: req.body.password
     })
-    user.save(function (err) {
-      if (err && err.code === 11000) {
+    try {
+      await user.save()
+    } catch (err) {
+      if (err.code === 11000) {
         req.flash('error', 'A user is already using that email address.')
         req.flash('user', req.body)
-        res.redirect('/signup/')
-      } else if (err && err.name === 'ValidationError') {
+        return res.redirect('/signup/')
+      } else if (err.name === 'ValidationError') {
         Object.values(err.errors).forEach(function (error) {
           req.flash('error', error.message)
         })
         req.flash('user', req.body)
-        res.redirect('/signup/')
-      } else if (err) {
-        next(err)
+        return res.redirect('/signup/')
+      }
+      return next(err)
+    }
+
+    // Automatically login the user
+    req.login(user, function (err) {
+      if (err) return next(err)
+      if (req.session.pro && req.session && req.session.returnTo) {
+        const url = req.session.returnTo
+        delete req.session.returnTo
+        res.redirect(url)
       } else {
-        // Automatically login the user
-        req.login(user, function (err) {
-          if (err) return next(err)
-          if (req.session.pro && req.session && req.session.returnTo) {
-            const url = req.session.returnTo
-            delete req.session.returnTo
-            res.redirect(url)
-          } else {
-            res.redirect('/signup2/')
-          }
-        })
+        res.redirect('/signup2/')
       }
     })
   })
@@ -60,7 +61,7 @@ module.exports = function (app) {
     })
   })
 
-  app.post('/signup2', function (req, res, next) {
+  app.post('/signup2', async function (req, res, next) {
     const user = req.user
     if (!user) return next(new Error('No logged in user'))
 
@@ -71,24 +72,25 @@ module.exports = function (app) {
     user.collegeMajor = req.body.collegeMajor || undefined
     user.collegeYear = req.body.collegeYear || undefined
 
-    user.save(function (err) {
-      if (err && err.name === 'ValidationError') {
+    try {
+      await user.save()
+    } catch (err) {
+      if (err.name === 'ValidationError') {
         Object.values(err.errors).forEach(function (error) {
           req.flash('error', error.message)
         })
         req.flash('user', req.body)
-        res.redirect('/signup2/')
-      } else if (err) {
-        next(err)
-      } else {
-        if (req.session && req.session.returnTo) {
-          const url = req.session.returnTo
-          delete req.session.returnTo
-          res.redirect(url)
-        } else {
-          res.redirect('/submit/essay/')
-        }
+        return res.redirect('/signup2/')
       }
-    })
+      return next(err)
+    }
+
+    if (req.session && req.session.returnTo) {
+      const url = req.session.returnTo
+      delete req.session.returnTo
+      res.redirect(url)
+    } else {
+      res.redirect('/submit/essay/')
+    }
   })
 }

@@ -1,6 +1,4 @@
-const auto = require('run-auto')
 const model = require('../model')
-const parallel = require('run-parallel')
 
 module.exports = function (app) {
   const tabs = [
@@ -8,122 +6,111 @@ module.exports = function (app) {
     { name: 'Top Universities', url: '/colleges/', view: 'colleges' }
   ]
 
-  app.get('/essays', function (req, res, next) {
-    auto({
-      essays: function (cb) {
+  app.get('/essays', async function (req, res, next) {
+    let essays, collegeCount
+    try {
+      [essays, collegeCount] = await Promise.all([
         model.Essay
           .find({ published: true })
           .select('-prompt -body -bodyPaywall')
           .sort('-hits')
-          .populate('college')
-          .exec(cb)
-      },
-      collegeCount: function (cb) {
-        model.College.countDocuments().exec(cb)
-      }
-    }, function (err, r) {
-      if (err) return next(err)
+          .populate('college'),
+        model.College.countDocuments()
+      ])
+    } catch (err) {
+      return next(err)
+    }
 
-      res.render('essays', {
-        collegeCount: r.collegeCount,
-        essays: r.essays,
-        title: 'College Essays - Top ' + r.essays.length + ' Essays That Worked',
-        forceTitle: true,
-        url: '/essays/',
-        hero: {
-          title: 'College Admissions Essays',
-          image: 'colleges.jpg',
-          tabs: !req.isAuthenticated() || !req.user.pro
-            ? tabs.concat({ name: 'Unlock All Essays', url: '/pro/' })
-            : tabs
-        }
-      })
+    res.render('essays', {
+      collegeCount: collegeCount,
+      essays: essays,
+      title: 'College Essays - Top ' + essays.length + ' Essays That Worked',
+      forceTitle: true,
+      url: '/essays/',
+      hero: {
+        title: 'College Admissions Essays',
+        image: 'colleges.jpg',
+        tabs: !req.isAuthenticated() || !req.user.pro
+          ? tabs.concat({ name: 'Unlock All Essays', url: '/pro/' })
+          : tabs
+      }
     })
   })
 
-  app.get('/colleges', function (req, res, next) {
+  app.get('/colleges', async function (req, res, next) {
     const colleges = model.cache.collegesByRank
-    model.Essay
-      .countDocuments({ published: true })
-      .exec(function (err, essayCount) {
-        if (err) return next(err)
+    let essayCount
+    try {
+      essayCount = await model.Essay.countDocuments({ published: true })
+    } catch (err) {
+      return next(err)
+    }
 
-        res.render('colleges', {
-          colleges: colleges,
-          essayCount: essayCount,
-          title: 'Top ' + colleges.length + ' Colleges',
-          url: '/colleges/',
-          hero: {
-            title: 'Top Universities',
-            tabs: !req.isAuthenticated() || !req.user.pro
-              ? tabs.concat({ name: 'Unlock All Essays', url: '/pro/' })
-              : tabs
-          }
-        })
-      })
-  })
-
-  app.get('/:collegeId/about', function (req, res, next) {
-    const college = model.cache.colleges[req.params.collegeId]
-    if (!college) return next()
-
-    auto({
-      essays: function (cb) {
-        model.Essay
-          .find({ college: college.id, published: true })
-          .select('-prompt -body -bodyPaywall -bodyTruncate')
-          .sort('-hits')
-          .exec(cb)
+    res.render('colleges', {
+      colleges: colleges,
+      essayCount: essayCount,
+      title: 'Top ' + colleges.length + ' Colleges',
+      url: '/colleges/',
+      hero: {
+        title: 'Top Universities',
+        tabs: !req.isAuthenticated() || !req.user.pro
+          ? tabs.concat({ name: 'Unlock All Essays', url: '/pro/' })
+          : tabs
       }
-    }, function (err, r) {
-      const essays = r.essays
-      if (err) return next(err)
-
-      res.render('college-about', {
-        breadcrumbs: [{ name: 'College Essays', url: '/essays/' }],
-        college: college,
-        essays: essays,
-        title: 'About ' + college.name,
-        url: college.url + 'about/'
-      })
-
-      college.hit()
     })
   })
 
-  app.get('/:collegeId', function (req, res, next) {
+  app.get('/:collegeId/about', async function (req, res, next) {
     const college = model.cache.colleges[req.params.collegeId]
     if (!college) return next()
 
-    auto({
-      essays: function (cb) {
-        model.Essay
-          .find({ college: college.id, published: true })
-          .select('-prompt -body -bodyPaywall')
-          .sort('-hits')
-          .populate('user')
-          .exec(cb)
-      },
-      populateColleges: ['essays', function (r, cb) {
-        parallel(r.essays.map(function (essay) {
-          return function (cb) {
-            essay.user.populate('college', cb)
-          }
-        }), cb)
-      }]
-    }, function (err, r) {
-      const essays = r.essays
-      if (err) return next(err)
+    let essays
+    try {
+      essays = await model.Essay
+        .find({ college: college.id, published: true })
+        .select('-prompt -body -bodyPaywall -bodyTruncate')
+        .sort('-hits')
+    } catch (err) {
+      return next(err)
+    }
 
-      res.render('college', {
-        breadcrumbs: [{ name: 'College Essays', url: '/essays/' }],
-        college: college,
-        essays: essays,
-        title: 'Top ' + essays.length + ' ' + college.shortName + ' Admissions Essays',
-        url: college.url
-      })
-
-      college.hit()
+    res.render('college-about', {
+      breadcrumbs: [{ name: 'College Essays', url: '/essays/' }],
+      college: college,
+      essays: essays,
+      title: 'About ' + college.name,
+      url: college.url + 'about/'
     })
+
+    college.hit()
+  })
+
+  app.get('/:collegeId', async function (req, res, next) {
+    const college = model.cache.colleges[req.params.collegeId]
+    if (!college) return next()
+
+    let essays
+    try {
+      essays = await model.Essay
+        .find({ college: college.id, published: true })
+        .select('-prompt -body -bodyPaywall')
+        .sort('-hits')
+        .populate('user')
+      await Promise.all(essays.map(function (essay) {
+        return essay.user && essay.user.populate('college')
+      }))
+    } catch (err) {
+      return next(err)
+    }
+
+    res.render('college', {
+      breadcrumbs: [{ name: 'College Essays', url: '/essays/' }],
+      college: college,
+      essays: essays,
+      title: 'Top ' + essays.length + ' ' + college.shortName + ' Admissions Essays',
+      url: college.url
+    })
+
+    college.hit()
   })
 }

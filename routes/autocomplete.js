@@ -1,4 +1,3 @@
-const auto = require('run-auto')
 const escapeStringRegexp = require('escape-string-regexp')
 const model = require('../model')
 
@@ -6,113 +5,96 @@ const MAX_RESULTS = 8
 const MAX_QUERY_LENGTH = 255 // prevent mongoDB exceptions
 
 module.exports = function (app) {
-  app.get('/autocomplete', function (req, res, next) {
+  app.get('/autocomplete', async function (req, res, next) {
     const q = req.query.q
 
-    autocomplete(q, function (err, results) {
-      if (err) return next(err)
-      res.send({
-        q: q,
-        results: results
-      })
+    let results
+    try {
+      results = await autocomplete(q)
+    } catch (err) {
+      return next(err)
+    }
+    res.send({
+      q: q,
+      results: results
     })
   })
 }
 
-function autocomplete (query, cb) {
+async function autocomplete (query) {
   query = (query || '').trim()
 
-  if (query.length >= MAX_QUERY_LENGTH) return cb(null, [])
+  if (query.length >= MAX_QUERY_LENGTH) return []
 
-  auto({
-    courses: function (cb) {
-      model.Course
-        .find({
-          $or: [
-            { name: regexForQuery(query) },
-            { searchName: regexForQuery(query) }
-          ]
-        })
-        .sort('-hits')
-        .limit(MAX_RESULTS)
-        .select('name hits')
-        .exec(cb)
-    },
+  const r = await Promise.all([
+    model.Course
+      .find({
+        $or: [
+          { name: regexForQuery(query) },
+          { searchName: regexForQuery(query) }
+        ]
+      })
+      .sort('-hits')
+      .limit(MAX_RESULTS)
+      .select('name hits'),
 
-    notes: function (cb) {
-      model.Note
-        .find({ name: regexForQuery(query), published: true })
-        .sort('-hits')
-        .limit(MAX_RESULTS)
-        .select('name hits course notetype')
-        .exec(cb)
-    },
+    model.Note
+      .find({ name: regexForQuery(query), published: true })
+      .sort('-hits')
+      .limit(MAX_RESULTS)
+      .select('name hits course notetype'),
 
-    users: function (cb) {
-      model.User
-        .find({ name: regexForQuery(query), hits: { $gte: 1000 } })
-        .sort('-hits')
-        .limit(MAX_RESULTS)
-        .select('name hits')
-        .exec(cb)
-    },
+    model.User
+      .find({ name: regexForQuery(query), hits: { $gte: 1000 } })
+      .sort('-hits')
+      .limit(MAX_RESULTS)
+      .select('name hits'),
 
-    colleges: function (cb) {
-      model.College
-        .find({
-          $or: [
-            { name: regexForQuery(query) },
-            { shortName: regexForQuery(query) }
-          ]
-        })
-        .sort('-hits')
-        .limit(MAX_RESULTS)
-        .select('name hits')
-        .exec(cb)
-    },
+    model.College
+      .find({
+        $or: [
+          { name: regexForQuery(query) },
+          { shortName: regexForQuery(query) }
+        ]
+      })
+      .sort('-hits')
+      .limit(MAX_RESULTS)
+      .select('name hits'),
 
-    essays: function (cb) {
-      model.Essay
-        .find({ name: regexForQuery(query), published: true })
-        .sort('-hits')
-        .limit(MAX_RESULTS)
-        .select('name hits college')
-        .exec(cb)
+    model.Essay
+      .find({ name: regexForQuery(query), published: true })
+      .sort('-hits')
+      .limit(MAX_RESULTS)
+      .select('name hits college')
+  ])
+
+  // Merge result arrays into one results array
+  const results = [].concat.apply([], r).map(function (result) {
+    return {
+      model: result,
+      weight: weight(result, query)
     }
+  })
 
-  }, function (err, r) {
-    if (err) return cb(err)
+  // Sort results by weight
+  results.sort(function (a, b) {
+    return b.weight - a.weight
+  })
 
-    // Merge result objects into one results array
-    let results = [].concat.apply([], Object.values(r)).map(function (result) {
-      return {
-        model: result,
-        weight: weight(result, query)
-      }
-    })
+  // Return small number of results
+  results.splice(MAX_RESULTS)
 
-    // Sort results by weight
-    results.sort(function (a, b) {
-      return b.weight - a.weight
-    })
-
-    // Return small number of results
-    results.splice(MAX_RESULTS)
-
-    // Only return necessary information
-    results = results.map(function (result, i) {
-      return {
-        desc: result.model.searchDesc,
-        id: result.model.id,
-        name: highlight(result.model.name, query),
-        position: i + 1,
-        type: result.model.constructor.modelName,
-        url: result.model.url,
-        weight: result.weight
-      }
-    })
-
-    cb(null, results)
+  // Only return necessary information
+  return results.map(function (result, i) {
+    return {
+      desc: result.model.searchDesc,
+      id: result.model.id,
+      name: highlight(result.model.name, query),
+      position: i + 1,
+      type: result.model.constructor.modelName,
+      url: result.model.url,
+      weight: result.weight
+    }
   })
 }
 
