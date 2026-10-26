@@ -55,7 +55,8 @@ exports.hits = function (schema) {
   // Update hit count, asyncronously
   schema.methods.hit = function (cb) {
     cb || (cb = function () {})
-    this.updateOne({ $inc: { hits: 1 } }, { upsert: true }, cb)
+    this.updateOne({ $inc: { hits: 1 } }, { upsert: true })
+      .then(() => cb(null), cb)
   }
 }
 
@@ -77,11 +78,10 @@ exports.absoluteUrl = function (schema) {
  */
 exports.slug = function (schema, opts) {
   if (!opts || !opts.model) throw new Error('missing `model` option')
-  schema.pre('save', function (next) {
-    const self = this
-    if (self._id) return next()
+  schema.pre('save', async function () {
+    if (this._id) return
 
-    let initialSlug = slug(self.name)
+    let initialSlug = slug(this.name)
     if (initialSlug.length === 0) initialSlug = 'unicode'
 
     // Remove words from the end of the slug until the length is okay
@@ -89,25 +89,14 @@ exports.slug = function (schema, opts) {
       initialSlug = initialSlug.replace(/-([^-]*)$/, '')
     }
 
+    let potentialSlug = initialSlug
     let num = 0 // number to append to slug to try to make it unique
-    checkSlug(initialSlug)
-
-    function checkSlug (potentialSlug) {
-      mongoose.model(opts.model)
-        .countDocuments({ _id: potentialSlug })
-        .exec(function (err, count) {
-          if (err) return next(err)
-
-          if (count === 0) {
-            self._id = potentialSlug
-            next()
-          } else {
-            // If slug is taken, try appending a number to end
-            num += 1
-            checkSlug(initialSlug + '-' + num)
-          }
-        })
+    while (await mongoose.model(opts.model).countDocuments({ _id: potentialSlug }) > 0) {
+      // If slug is taken, try appending a number to end
+      num += 1
+      potentialSlug = initialSlug + '-' + num
     }
+    this._id = potentialSlug
   })
 }
 

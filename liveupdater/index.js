@@ -116,16 +116,11 @@ LiveUpdater.prototype.handleClose = function (socket) {
 
 LiveUpdater.prototype.getTotalHits = function (cb) {
   const self = this
-  parallel(Object.values(model.models).map(function (model) {
-    return function (cb) {
-      model
-        .find()
-        .select('hits -_id')
-        .exec(cb)
-    }
-  }), function (err, r) {
-    if (err) return cb(err)
-
+  Promise.all(Object.values(model.models).map(function (model) {
+    return model
+      .find()
+      .select('hits -_id')
+  })).then(function (r) {
     self.totalHits = r.reduce(function (acc, docs) {
       return acc + docs.reduce(function (acc2, doc) {
         return acc2 + (doc.hits || 0)
@@ -133,7 +128,7 @@ LiveUpdater.prototype.getTotalHits = function (cb) {
     }, 0)
 
     cb(null)
-  })
+  }, cb)
 }
 
 LiveUpdater.prototype.getTotalOnline = function () {

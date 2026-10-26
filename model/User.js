@@ -1,4 +1,3 @@
-const auto = require('run-auto')
 const bcrypt = require('bcrypt')
 const config = require('../config')
 const mail = require('../lib/mail')
@@ -132,32 +131,22 @@ User.virtual('hasGraduated').get(function () {
   return Number(this.collegeYear) <= (new Date()).getFullYear()
 })
 
-User.methods.totalHits = function (cb) {
-  const self = this
-  auto({
-    essays: function (cb) {
-      model.Essay
-        .find({ user: self.id, anon: false, published: true })
-        .select('-prompt -body -bodyPaywall -bodyTruncate')
-        .exec(cb)
-    },
-    notes: function (cb) {
-      model.Note
-        .find({ user: self.id, anon: false, published: true })
-        .select('-body -bodyTruncate')
-        .exec(cb)
-    }
-  }, function (err, r) {
-    if (err) cb(err)
-    const essayHits = r.essays.reduce(function (total, essay) {
-      return total + essay.hits
-    }, 0)
-    const totalHits = r.notes.reduce(function (total, note) {
-      return total + note.hits
-    }, essayHits)
+User.methods.totalHits = async function () {
+  const [essays, notes] = await Promise.all([
+    model.Essay
+      .find({ user: this.id, anon: false, published: true })
+      .select('-prompt -body -bodyPaywall -bodyTruncate'),
+    model.Note
+      .find({ user: this.id, anon: false, published: true })
+      .select('-body -bodyTruncate')
+  ])
 
-    cb(totalHits)
-  })
+  const essayHits = essays.reduce(function (total, essay) {
+    return total + essay.hits
+  }, 0)
+  return notes.reduce(function (total, note) {
+    return total + note.hits
+  }, essayHits)
 }
 
 /**

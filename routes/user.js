@@ -1,56 +1,49 @@
-const auto = require('run-auto')
 const model = require('../model')
 
 module.exports = function (app) {
-  app.get('/user/:userId', function (req, res, next) {
-    auto({
-      user: function (cb) {
+  app.get('/user/:userId', async function (req, res, next) {
+    let user, essays, notes
+    try {
+      [user, essays, notes] = await Promise.all([
         model.User
           .findOne({ _id: req.params.userId })
-          .populate('college')
-          .exec(cb)
-      },
-      essays: function (cb) {
+          .populate('college'),
         model.Essay
           .find({ user: req.params.userId, anon: false, published: true })
           .select('-prompt -body -bodyPaywall')
           .sort('-hits')
-          .populate('college')
-          .exec(cb)
-      },
-      notes: function (cb) {
+          .populate('college'),
         model.Note
           .find({ user: req.params.userId, anon: false, published: true })
           .select('-body -bodyTruncate')
           .sort('-hits')
           .populate('course')
-          .exec(cb)
-      }
-    }, function (err, r) {
-      if (err) return next(err)
-      if (!r.user) return next()
+      ])
+    } catch (err) {
+      return next(err)
+    }
+    if (!user) return next()
 
-      const essayHits = r.essays.reduce(function (total, essay) {
-        return total + essay.hits
-      }, 0)
-      const totalHits = r.notes.reduce(function (total, note) {
-        return total + note.hits
-      }, essayHits)
+    const essayHits = essays.reduce(function (total, essay) {
+      return total + essay.hits
+    }, 0)
+    const totalHits = notes.reduce(function (total, note) {
+      return total + note.hits
+    }, essayHits)
 
-      res.render('user', {
-        essays: r.essays,
-        notes: r.notes,
-        hero: {
-          title: r.user.name,
-          image: 'books.jpg'
-        },
-        title: r.user.name + '\'s Notes and Essays',
-        totalHits: totalHits,
-        url: r.user.url,
-        user: r.user
-      })
-
-      r.user.hit()
+    res.render('user', {
+      essays: essays,
+      notes: notes,
+      hero: {
+        title: user.name,
+        image: 'books.jpg'
+      },
+      title: user.name + '\'s Notes and Essays',
+      totalHits: totalHits,
+      url: user.url,
+      user: user
     })
+
+    user.hit()
   })
 }

@@ -1,5 +1,4 @@
 const auth = require('../lib/auth')
-const auto = require('run-auto')
 const mail = require('../lib/mail')
 const model = require('../model')
 
@@ -21,7 +20,7 @@ module.exports = function (app) {
     })
   })
 
-  app.post('/submit/essay', auth.ensureAuth, function (req, res, next) {
+  app.post('/submit/essay', auth.ensureAuth, async function (req, res, next) {
     const college = model.cache.colleges[req.body.college]
     if (!college) {
       req.flash('error', 'Please select a university from the list.')
@@ -30,54 +29,42 @@ module.exports = function (app) {
     }
     const isEdit = req.body._id
 
-    auto({
-      essay: function (cb) {
-        if (isEdit) {
-          model.Essay
-            .findById(req.body._id)
-            .exec(cb)
-        } else {
-          cb(null, new model.Essay())
-        }
-      },
-      permission: ['essay', function (r, cb) {
-        if (!r.essay) return cb(new Error('No essay with id ' + req.body._id))
+    let essay
+    try {
+      essay = isEdit
+        ? await model.Essay.findById(req.body._id)
+        : new model.Essay()
 
-        if (!r.essay.user || // new note, no permission needed
-            r.essay.user.id === req.user.id || // same user
-            req.user.admin) { // admin
-          cb(null)
-        } else {
-          cb(new Error('Cannot edit another user\'s essay'))
-        }
-      }],
-      save: ['permission', function (r, cb) {
-        const essay = r.essay
+      if (!essay) throw new Error('No essay with id ' + req.body._id)
 
-        essay.name = req.body.name
-        essay.prompt = req.body.prompt
-        essay.body = req.body.body
-        essay.college = college._id
-        essay.anon = !!req.body.anon
+      if (!(!essay.user || // new note, no permission needed
+            essay.user.id === req.user.id || // same user
+            req.user.admin)) { // admin
+        throw new Error('Cannot edit another user\'s essay')
+      }
 
-        essay.user = essay.user || req.user._id
+      essay.name = req.body.name
+      essay.prompt = req.body.prompt
+      essay.body = req.body.body
+      essay.college = college._id
+      essay.anon = !!req.body.anon
 
-        essay.save(cb)
-      }]
-    }, function (err, r) {
-      if (err && err.name === 'ValidationError') {
+      essay.user = essay.user || req.user._id
+
+      await essay.save()
+    } catch (err) {
+      if (err.name === 'ValidationError') {
         Object.values(err.errors).forEach(function (error) {
           req.flash('error', error.message)
         })
         req.flash('essay', req.body)
-        res.redirect('/submit/essay/')
-      } else if (err) {
-        next(err)
-      } else {
-        res.redirect(r.essay.url)
-        if (!isEdit) mail.notifyAdmin('New essay', r.essay)
+        return res.redirect('/submit/essay/')
       }
-    })
+      return next(err)
+    }
+
+    res.redirect(essay.url)
+    if (!isEdit) mail.notifyAdmin('New essay', essay)
   })
 
   app.get('/submit/note', auth.ensureAuth, function (req, res) {
@@ -97,7 +84,7 @@ module.exports = function (app) {
     })
   })
 
-  app.post('/submit/note', auth.ensureAuth, function (req, res, next) {
+  app.post('/submit/note', auth.ensureAuth, async function (req, res, next) {
     const course = model.cache.courses[req.body.course]
     if (!course) {
       req.flash('error', 'Please select a course from the list.')
@@ -114,61 +101,49 @@ module.exports = function (app) {
     }
     const isEdit = req.body._id
 
-    auto({
-      note: function (cb) {
-        if (isEdit) {
-          model.Note
-            .findById(req.body._id)
-            .exec(cb)
-        } else {
-          cb(null, new model.Note())
-        }
-      },
-      permission: ['note', function (r, cb) {
-        if (!r.note) return cb(new Error('No note with id ' + req.body._id))
+    let note
+    try {
+      note = isEdit
+        ? await model.Note.findById(req.body._id)
+        : new model.Note()
 
-        if (!r.note.user || // new note, no permission needed
-            r.note.user.id === req.user.id || // same user
-            req.user.admin) { // admin
-          cb(null)
-        } else {
-          cb(new Error('Cannot edit another user\'s note'))
-        }
-      }],
-      save: ['permission', function (r, cb) {
-        const note = r.note
+      if (!note) throw new Error('No note with id ' + req.body._id)
 
-        note.name = req.body.name
-        note.body = req.body.body
-        note.course = course.id
-        note.notetype = notetype.id
-        note.anon = !!req.body.anon
+      if (!(!note.user || // new note, no permission needed
+            note.user.id === req.user.id || // same user
+            req.user.admin)) { // admin
+        throw new Error('Cannot edit another user\'s note')
+      }
 
-        note.user = note.user || req.user.id
+      note.name = req.body.name
+      note.body = req.body.body
+      note.course = course.id
+      note.notetype = notetype.id
+      note.anon = !!req.body.anon
 
-        note.save(cb)
-      }]
-    }, function (err, r) {
-      if (err && err.name === 'ValidationError') {
+      note.user = note.user || req.user.id
+
+      await note.save()
+    } catch (err) {
+      if (err.name === 'ValidationError') {
         Object.values(err.errors).forEach(function (error) {
           req.flash('error', error.message)
         })
         req.flash('note', req.body)
-        res.redirect('/submit/note/')
-      } else if (err) {
-        next(err)
-      } else {
-        if (isEdit) {
-          res.redirect(r.note.url)
-        } else {
-          req.flash('note', {
-            course: r.note.course,
-            notetype: r.note.notetype
-          })
-          res.redirect('/submit/note/')
-          mail.notifyAdmin('New note', r.note)
-        }
+        return res.redirect('/submit/note/')
       }
-    })
+      return next(err)
+    }
+
+    if (isEdit) {
+      res.redirect(note.url)
+    } else {
+      req.flash('note', {
+        course: note.course,
+        notetype: note.notetype
+      })
+      res.redirect('/submit/note/')
+      mail.notifyAdmin('New note', note)
+    }
   })
 }

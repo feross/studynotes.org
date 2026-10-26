@@ -7,27 +7,15 @@
  */
 
 const model = require('../model')
-const runParallelLimit = require('run-parallel-limit')
 
-model.connect(function (err) {
+model.connect(async function (err) {
   if (err) throw err
-  model.Note
-    .find()
-    .exec(function (err, items) {
-      if (err) throw err
-      console.log(items.length)
+  const items = await model.Note.find()
+  console.log(items.length)
 
-      runParallelLimit(items.map(function (item) {
-        return function (cb) {
-          console.log('id', item._id)
-          item.save(cb)
-        }
-      }), 1, function (err) {
-        if (err) {
-          console.log(err)
-          throw err
-        }
-        console.log('\nDONE')
-      })
-    })
+  for (const item of items) {
+    console.log('id', item._id)
+    await item.save()
+  }
+  console.log('\nDONE')
 })
