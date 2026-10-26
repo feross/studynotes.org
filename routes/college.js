@@ -30,9 +30,7 @@ module.exports = function (app) {
       hero: {
         title: 'College Admissions Essays',
         image: 'colleges.jpg',
-        tabs: !req.isAuthenticated() || !req.user.pro
-          ? tabs.concat({ name: 'Unlock All Essays', url: '/pro/' })
-          : tabs
+        tabs: tabs
       }
     })
   })
@@ -53,9 +51,7 @@ module.exports = function (app) {
       url: '/colleges/',
       hero: {
         title: 'Top Universities',
-        tabs: !req.isAuthenticated() || !req.user.pro
-          ? tabs.concat({ name: 'Unlock All Essays', url: '/pro/' })
-          : tabs
+        tabs: tabs
       }
     })
   })

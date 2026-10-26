@@ -13,11 +13,6 @@ trackFormSubmit('form.login', 'user', 'login')
 trackFormSubmit('form.login-forgot', 'user', 'login-forgot')
 trackFormSubmit('form.login-forgot', 'user', 'login-reset')
 
-// Track paywall displays
-if ($('.subscribe-on-blur').length) {
-  window.ga('send', 'event', 'pro', 'paywall')
-}
-
 const query = url.parse(window.location.href, true).query // eslint-disable-line node/no-deprecated-api
 
 // Track iOS standalone web app page views

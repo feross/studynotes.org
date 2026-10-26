@@ -13,7 +13,6 @@ module.exports = function (app) {
   require('./login')(app)
   require('./note')(app)
   require('./notetype')(app)
-  require('./order')(app)
   require('./pro')(app)
   require('./redirects')(app)
   require('./search')(app)
@@ -90,13 +89,6 @@ module.exports = function (app) {
         ],
         title: opts.college.shortName + ' Admissions Essays',
         url: opts.college.url
-      }
-
-      if (!req.isAuthenticated() || !req.user.pro) {
-        opts.hero.tabs.push({
-          name: 'Unlock All Essays',
-          url: '/pro/' + opts.college.id + '/'
-        })
       }
     } else if (opts.hero && !opts.hero.image) {
       // If rendering any other type of view and heroImage is missing

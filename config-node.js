@@ -10,20 +10,6 @@ const path = require('path')
 exports.root = __dirname
 exports.out = path.join(exports.root, 'out')
 
-const month = new Date().getMonth() + 1
-
-/**
- * Number of "first click, free" essays that a given session can view before
- * requesting that they subscribe. The user can always view if they have
- * a referrer from an external site.
- * @type {Number}
- */
-exports.numFree = month === 1 || month === 12
-  ? 1 // Dec-Jan, 1 essay
-  : month <= 9
-    ? 3 // Feb-Sep, 3 essays
-    : 2 // Oct-Nov, 2 essays
-
 /**
  * Is it college essay season? Used to determine whether to show in-house ads for
  * essay editing services vs. third-party ads.

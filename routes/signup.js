@@ -19,7 +19,7 @@ module.exports = function (app) {
   app.post('/signup', async function (req, res, next) {
     const user = new model.User({
       name: req.body.name,
-      email: req.body.email || (req.session.pro && req.session.pro.email),
+      email: req.body.email,
       password: req.body.password
     })
     try {
@@ -42,13 +42,7 @@ module.exports = function (app) {
     // Automatically login the user
     req.login(user, function (err) {
       if (err) return next(err)
-      if (req.session.pro && req.session && req.session.returnTo) {
-        const url = req.session.returnTo
-        delete req.session.returnTo
-        res.redirect(url)
-      } else {
-        res.redirect('/signup2/')
-      }
+      res.redirect('/signup2/')
     })
   })
 

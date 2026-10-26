@@ -1,7 +1,3 @@
-const debug = require('debug')('studynotes:routes/essay')
-const url = require('url')
-
-const config = require('../config')
 const insertNativeAd = require('../lib/insert-native-ad')
 const model = require('../model')
 
@@ -12,9 +8,8 @@ module.exports = function (app) {
 
     const r = {}
     try {
-      [r.essay, r.essayCount, r.essays] = await Promise.all([
+      [r.essay, r.essays] = await Promise.all([
         getEssay(),
-        model.Essay.countDocuments({ published: true }),
         model.Essay
           .find({ college: college.id, published: true })
           .sort('-hits')
@@ -24,26 +19,6 @@ module.exports = function (app) {
       return next(err)
     }
     if (!r.essay) return next()
-
-    if (!(req.user && req.user.pro) && !req.query.free) {
-      // They're a "first click free" user
-      if (req.session.free === undefined) {
-        debug('No first click free object, creating one')
-        req.session.free = []
-      } else {
-        debug('First click free: ' + req.session.free.join(','))
-      }
-
-      if (req.session.free.indexOf(r.essay.id) === -1) {
-        const referrer = url.parse(req.get('referer') || '').host // eslint-disable-line node/no-deprecated-api
-        if (req.session.free.length < config.numFree ||
-            (referrer && referrer.search(config.siteHost) === -1)) {
-          req.session.free.push(r.essay.id)
-        } else {
-          r.blur = true
-        }
-      }
-    }
 
     if (req.query.edit) {
       req.flash('essay', r.essay)
@@ -68,9 +43,7 @@ module.exports = function (app) {
     r.url = r.essay.url
     r.user = r.essay.user
 
-    if (!r.blur) {
-      r.essay.body = insertNativeAd(r.essay.body, Object.assign({}, res.locals, app.locals))
-    }
+    r.essay.body = insertNativeAd(r.essay.body, Object.assign({}, res.locals, app.locals))
 
     res.render('essay', r)
     r.essay.hit()

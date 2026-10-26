@@ -1,11 +1,13 @@
 extends layouts/main
-include mixins/order-btn
+include mixins/disabled-btn
 
 append scripts
   script(async, src='https://platform.twitter.com/widgets.js')
 
 block content
   h1.center Read Top #{college ? college.shortName : 'College'} Essays
+
+  p.discontinued <strong>We no longer offer this service.</strong> All of our <a href="/essays/">college essays</a> are now free to read.
 
   p We've collected the <strong>best #{college ? college.shortName : 'college'} essays</strong> from students who got accepted. Read real college essays that worked, get inspiration for your own essays, and <strong>win over the admissions counselor</strong>.
 
@@ -24,7 +26,7 @@ block content
       p Get into top universities like #{collegeListAnd}.
 
   div.center: p
-    +order-btn('pro', 'Read College Essays', 'huge')
+    +disabled-btn('Read College Essays', 'huge')
 
   hr
 
@@ -58,10 +60,10 @@ block content
           li and #{otherColleges.length - 4} more top colleges...
 
 
-  p For just <strong>$#{config.product.pro.price / 100}</strong> (one-time payment) you get <strong>lifetime access to #{essays.length} essays</strong> that worked at #{collegeList}, and more. Don't wait — start getting ahead today!
+  p All <strong>#{essays.length} essays</strong> that worked at #{collegeList}, and more, are now <a href="/essays/">free to read</a>.
 
   div.center: p
-    +order-btn('pro', 'Unlock Essays', 'huge')
+    +disabled-btn('Unlock Essays', 'huge')
 
   hr
 
@@ -79,8 +81,7 @@ block content
       | <blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">if you’re applying at one of the Ivy league colleges and want to write your essay, you should consider this website. <a href="http://t.co/1NW27gBBbh">http://t.co/1NW27gBBbh</a></p>&mdash; Basmah.. (@BaSmah_) <a href="https://twitter.com/BaSmah_/status/488323106746810370">July 13, 2014</a></blockquote>
 
   div.center: p
-    +order-btn('pro', 'Buy Now', 'huge')
-    img.credit-card-logos(src=config.siteOrigin + '/images/credit-card-logos.png')
+    +disabled-btn('Buy Now', 'huge')
 
   hr
 

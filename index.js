@@ -26,7 +26,6 @@ const useragent = require('useragent')
 const auth = require('./lib/auth')
 const config = require('./config')
 const model = require('./model')
-const pro = require('./lib/pro')
 const routes = require('./routes')
 const run = require('./run')
 const secret = require('./secret')
@@ -83,7 +82,6 @@ function Site (opts, done) {
   self.setupLocals()
   self.setupSessions()
 
-  self.app.use(pro.checkPro)
   self.app.use(flash()) // errors are propogated using `req.flash`
 
   parallel([

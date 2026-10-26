@@ -32,39 +32,6 @@ html.essay
     position: relative
     user-select: none
 
-    .blur > :not(:first-child):not(:nth-child(2))
-      color: rgba(255, 255, 255, 0)
-      text-shadow: #000 0 0 9px
-
-      .ie10 &, .ie11 &
-        color: rgba(230, 230, 230, 0.6)
-
-  .subscribe-on-blur
-    body_font()
-    background: BLUE_LIGHTER
-    border-radius: 40px
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.8)
-    left: 0
-    margin: 0 7.5%
-    padding: 20px 7.5% 40px 7.5%
-    position: absolute
-    right: 0
-    text-align: center
-    top: 325px
-    z-index: 1 // cover third-party iframes
-
-    @media PHONE
-      border-radius: 15px
-      margin: 0 2.5%
-    @media TABLET
-      border-radius: 30px
-      margin: 0 5%
-
-    h4
-      body_font()
-      &:last-child
-        margin-bottom: 0
-
 html.note, html.essay
   .birdy
     margin-left: auto
@@ -128,10 +95,13 @@ html.landing-page
     margin-left: auto
     margin-right: auto
 
-  .credit-card-logos
-    width: 225px
-    margin-left: 20px
-    margin-right: 20px
+html.pro, html.essay-review
+  .discontinued
+    background: GRAY_LIGHTER
+    border-radius: 5px
+    font-size: 1.2em
+    padding: 15px 20px
+    text-align: center
 
 html.essay-review
   .pricing

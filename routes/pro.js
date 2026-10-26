@@ -2,11 +2,6 @@ const model = require('../model')
 
 module.exports = function (app) {
   app.get('/pro/:collegeId?', async function (req, res, next) {
-    // Send pro users to the essays page
-    if (req.isAuthenticated() && req.user.pro) {
-      return res.redirect('/essays/')
-    }
-
     const college = model.cache.colleges[req.params.collegeId]
     if (!college && req.params.collegeId) return next()
 

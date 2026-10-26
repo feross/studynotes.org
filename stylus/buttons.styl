@@ -46,6 +46,17 @@
       background: RED_DARK
       box-shadow: 0 1px RED_DARKER
 
+  &.disabled
+    &, &:link, &:visited
+      background: GRAY
+      box-shadow: 0 1px GRAY_DARK
+      cursor: not-allowed
+    {HOVER}
+      background: GRAY
+      box-shadow: 0 1px GRAY_DARK
+    &:active
+      top: 0
+
   i:first-child
     margin-right: 10px
 

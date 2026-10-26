@@ -14,6 +14,6 @@ function showHouseAd () {
   if ($ad.length === 0) return
 
   const $firstAd = $ad.parent().eq(0)
-  const $houseAd = $('<div class="adsense-sidebar"><a class="house" href="/pro/">College Essays that Worked</a></div>')
+  const $houseAd = $('<div class="adsense-sidebar"><a class="house" href="/essays/">College Essays that Worked</a></div>')
   $firstAd.after($houseAd)
 }
