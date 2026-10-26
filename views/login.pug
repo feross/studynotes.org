@@ -3,12 +3,8 @@ extends layouts/form
 block content
   a(href=config.siteOrigin)
     include includes/birdy/point
-  if req.session.pro
-    h1 You're almost done!
-    h2 Login to your Study Notes account so we can upgrade it.
-  else
-    h1 Log in to Study Notes
-    h2 Provide your email and password.
+  h1 Log in to Study Notes
+  h2 Provide your email and password.
 
   if errors.length
     .errors
@@ -22,8 +18,7 @@ block content
         name='email',
         type='email',
         placeholder='email',
-        value=email,
-        autofocus=!email,
+        autofocus,
         required
       )
     .row
@@ -31,7 +26,6 @@ block content
         name='password',
         type='password',
         placeholder='password',
-        autofocus=!!email,
         required
       )
     .row.submit

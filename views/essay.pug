@@ -1,6 +1,5 @@
 extends layouts/main-sidebar
 include mixins/comments
-include mixins/order-btn
 include mixins/toolbar
 
 block sidebar
@@ -48,50 +47,22 @@ block content
     if next
       a.btn.next(href=next.url, title=`Next: ${next.name}`) Next<span class="hide-tight-tablet"> Essay</span>
 
-  if !blur
-    include ads/adsense-in-content
+  include ads/adsense-in-content
 
   if essay.prompt
     .prompt <strong>Prompt: </strong> !{essay.prompt}
     hr
 
-  if blur
-    .body
-      .subscribe-on-blur.unblur
-        include includes/birdy/stop
-        h2 You must pay $#{config.product.pro.price / 100} to read this essay.
-
-        p
-          +order-btn('pro', 'Unlock Essays', 'large')
-
-        h4 For just $#{config.product.pro.price / 100} (one-time payment) you get <strong>lifetime access to #{essayCount} essays</strong> that worked at Stanford, Harvard, and more. <a href="/pro/#{college.id}/?referrer=#{encodeURIComponent(essay.url)}">Learn&nbsp;more.</a>
-
-        h4 <strong>Questions?</strong> Call +1 (650) 200-0383
-
-        small Already have an account? <a href="#{loginUrl}">Log in to read essays.</a>
-
-      .blur !{essay.bodyPaywall}
-  else
-    .body !{essay.body}
+  .body !{essay.body}
 
   .after-content
-    if !blur
-      include ads/adsense-link-unit
+    include ads/adsense-link-unit
 
     hr
 
-    if config.essaySeason
-      include ads/essay-review
-      hr
+    //- include ads/adsense-matched-content
 
-    if !blur
-      if !config.essaySeason
-        include ads/pro
-        hr
-
-      //- include ads/adsense-matched-content
-
-      include includes/birdy/happy
+    include includes/birdy/happy
 
     p Keep reading more <a href="#{college.url}">#{college.shortName} admissions essays</a> — you can't be too prepared!
 

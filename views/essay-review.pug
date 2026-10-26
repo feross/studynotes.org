@@ -1,8 +1,10 @@
 extends layouts/main
-include mixins/order-btn
+include mixins/disabled-btn
 
 block content
   h1.center Premium Essay Review Services
+
+  p.discontinued <strong>We no longer offer this service.</strong> Essay review and editing packages are no longer available for purchase.
 
   div.center: p
     .btn.huge.see-pricing See Pricing
@@ -35,7 +37,7 @@ block content
         li <strong>Email follow-up</strong> with your editor
         li <strong>48-hour</strong> turn around
         li <strong>$#{config.product['review-proofreading'].price / 100}</strong> price (1,000 words max)
-      +order-btn('review-proofreading', 'Buy Now', 'large')
+      +disabled-btn('Buy Now', 'large')
     .col3.featured
       h2 Standard <br><small>Most popular plan!</small>
       ul
@@ -45,7 +47,7 @@ block content
         li <strong>A more compelling and relevant essay</strong>
         li <strong>48-hour</strong> turn around
         li <strong>$#{config.product['review-standard'].price / 100}</strong> price (1,000 words max)
-      +order-btn('review-standard', 'Buy Now', 'large')
+      +disabled-btn('Buy Now', 'large')
     .col3
       h2 Premium
       ul
@@ -55,12 +57,9 @@ block content
         li <strong>14 days of email support</strong> from your editor
         li <strong>Two rounds of critiques</strong>
         li <strong>$#{config.product['review-premium'].price / 100}</strong> price (1,000 words max)
-      +order-btn('review-premium', 'Buy Now', 'large')
+      +disabled-btn('Buy Now', 'large')
 
   p.center Your essay will be <strong>100% free of typos and grammar errors</strong> guaranteed or you don’t pay a dime!
-
-  div.center
-    img.credit-card-logos(src=config.siteOrigin + '/images/credit-card-logos.png')
 
   h1.center Questions? Call us!
   h2.center +1 (650) 200-0383

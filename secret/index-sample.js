@@ -12,10 +12,6 @@ exports.gmail = {
 // Keep here, because circular dep
 const config = require('../config')
 
-exports.stripe = config.isProd
-  ? 'TODO'
-  : 'TODO'
-
 exports.mongo = {
   host: config.isProd ? 'TODO' : 'TODO',
   port: 'TODO',

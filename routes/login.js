@@ -16,8 +16,6 @@ module.exports = function (app) {
     res.render('login', {
       title: 'Login',
       url: '/login',
-      // pre-fill for Pro users who haven't linked accounts yet
-      email: req.session.pro && req.session.pro.email,
       errors: req.flash('error')
     })
   })
@@ -30,9 +28,6 @@ module.exports = function (app) {
   }))
 
   app.post('/logout', function (req, res) {
-    // Give Pro users their "first click, free" back when they logout
-    if (req.isAuthenticated() && req.user.pro) delete req.session.free
-
     req.logout()
     res.sendStatus(200) // redirect happens on client-side
   })

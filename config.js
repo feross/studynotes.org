@@ -27,10 +27,6 @@ exports.siteOrigin = (isProd ? 'https' : 'http') + '://' + exports.siteHost
  * @type {Object}
  */
 exports.product = {
-  pro: {
-    price: 2900,
-    desc: '100+ Top College Essays'
-  },
   'review-proofreading': {
     price: 19900,
     desc: 'Essay Review (Proofreading)'
@@ -44,14 +40,6 @@ exports.product = {
     desc: 'Essay Review (Premium)'
   }
 }
-
-/**
- * Stripe publishable token
- * @type {string}
- */
-exports.stripe = isProd
-  ? 'pk_live_uQgfjT84EYgqyXWasBY0xuOE'
-  : 'pk_test_7PVccMkybStuChGcJD0HAi40'
 
 const config = require('./config-node')
 extend(exports, config)
